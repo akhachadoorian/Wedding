@@ -1,0 +1,32 @@
+:root {
+   --cream: #E6E2DA;
+   --cream-5-pos: #E7E3DC;
+   
+   --gold: #A6824A;
+   --gold-5-pos: #AA8853;
+    
+    --black: #101111;
+    --black-5-pos: #191A1A; 
+}
+
+body {
+    background-color: var(--black);
+}
+
+h1 {
+    color: var(--Cream, #E6E2DA);
+    text-align: center;
+    font-family: "Instrument Serif";
+    font-size: 96px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 100%; /* 96px */
+}
+
+/* ////////////////////////////// 
+    HERO
+////////////////////////////// */
+
+.hero-section {
+
+}
