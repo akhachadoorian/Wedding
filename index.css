@@ -26,6 +26,81 @@ h1 {
     line-height: 100%; /* 96px */
 }
 
+.eyebrow {
+    color: var(--Cream, #E6E2DA);
+
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+}
+
+
+/* ////////////////////////////// 
+    NAV
+////////////////////////////// */
+
+.nav-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+
+    padding: 16px 10px;
+    border-bottom: 1px solid rgba(166, 130, 74, 0.20);
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;  
+
+      svg {
+        margin-bottom: 7px;
+      }
+
+      .nav-link {
+        font-family: Inter;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 0.9px;
+        text-transform: uppercase;
+
+        color: var(--Cream, #E6E2DA);
+        text-decoration: none;
+        transition: all ease-in-out 300ms;
+
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        &::after {
+            content: '';
+
+            background-color: var(--gold);
+            height: 1px;
+            width: 0;
+            transition: all ease-in-out 300ms;
+        }
+
+        &:hover {
+            text-decoration-color: var(--gold);
+            color: var(--gold);
+
+            &::after {
+                width: 100%;
+            }
+        }
+      }
+    }
+}
+
+
+
 /* ////////////////////////////// 
     HERO
 ////////////////////////////// */
