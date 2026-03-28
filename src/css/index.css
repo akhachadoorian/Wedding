@@ -1,0 +1,92 @@
+:root {
+    --cream: #e6e2da;
+    --cream-5-pos: #e7e3dc;
+
+    --gold: #a6824a;
+    --gold-5-pos: #aa8853;
+
+    --black: #101111;
+    --black-5-pos: #191a1a;
+}
+
+body {
+    background-color: var(--black);
+}
+
+section {
+    margin: 120px 60px;
+
+    @media all and (max-width: 800px) {
+        margin: 60px 16px;
+    }
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    color: var(--Cream, #e6e2da);
+}
+
+h1 {
+    font-family: "Instrument Serif";
+    font-size: clamp(56px, 6.667vw, 100px);
+    font-weight: 400;
+    line-height: 100%; /* 96px */
+}
+
+/* ////////////////////////////// 
+    EYEBROW
+////////////////////////////// */
+
+.eyebrow {
+    font-family: Inter;
+    font-size: clamp(18px, 1.25vw, 20px);
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+
+    &.centered {
+        text-align: center;
+    }
+
+    &.gold {
+        color: var(--gold)
+    }
+}
+
+.eyebrow-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    width: fit-content;
+
+    &.centered {
+        flex-direction: column;
+    }
+
+    .diamond_underline-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        padding: 0 10px;
+        width: 100%;
+
+        .diamond_underline {
+            height: 1px;
+            width: 100%;
+            background-color: var(--gold);
+        }
+
+        .diamond {
+            flex: 0 0 16px;
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+
+

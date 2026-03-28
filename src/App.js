@@ -1,7 +1,10 @@
 import logo from './logo.svg';
-import './App.css';
+
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Navigation from './components/Navigation';
+import Navigation from './components/globals/Navigation';
+import Wedding from './pages/Wedding';
+
+
 
 function App() {
   return (
@@ -10,7 +13,7 @@ function App() {
         <Navigation />
 
         <Routes>
-          <Route path="/" />
+          <Route path="/" element={<Wedding />} />
         </Routes>
 
         {/* Footer */}

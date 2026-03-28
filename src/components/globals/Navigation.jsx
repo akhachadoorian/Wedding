@@ -1,6 +1,6 @@
 import React from "react";
 
-import Logo from "../assets/Logo.svg";
+import Logo from "../../assets/Logo.svg";
 import { Link } from "react-router-dom";
 
 function Navigation({}) {
@@ -54,7 +54,7 @@ function Navigation({}) {
 
     return (
         <div className="navigation-wrapper">
-            <a href="/" class="">
+            <a href="/" className="">
                 <img src={Logo} alt="M and A separated by an ampersand" />
             </a>
 

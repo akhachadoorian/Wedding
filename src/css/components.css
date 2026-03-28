@@ -1,64 +1,3 @@
-:root {
-    --cream: #e6e2da;
-    --cream-5-pos: #e7e3dc;
-
-    --gold: #a6824a;
-    --gold-5-pos: #aa8853;
-
-    --black: #101111;
-    --black-5-pos: #191a1a;
-}
-
-body {
-    background-color: var(--black);
-}
-
-section {
-    margin: 120px 60px;
-
-    @media all and (max-width: 800px) {
-        margin: 60px 16px;
-    }
-}
-
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    color: var(--Cream, #e6e2da);
-}
-
-h1 {
-    font-family: "Instrument Serif";
-    font-size: clamp(56px, 6.667vw, 100px);
-    font-weight: 400;
-    line-height: 100%; /* 96px */
-}
-
-/* ////////////////////////////// 
-    EYEBROW
-////////////////////////////// */
-
-.eyebrow {
-    color: var(--Cream, #e6e2da);
-
-    font-family: Inter;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-
-    &.centered {
-        text-align: center;
-    }
-
-    &.gold {
-        color: var(--gold)
-    }
-}
-
-
-
 /* ////////////////////////////// 
     NAV
 ////////////////////////////// */
@@ -136,25 +75,52 @@ h1 {
 }
 
 /* ////////////////////////////// 
+    CLIPPED IMAGE
+////////////////////////////// */
+
+.clipped_image {
+
+    img {
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    &.arch {
+        clip-path: shape(nonzero from 50% 0%, curve to 85.36% 12.79% with 63.26% 0% / 75.98% 4.6%, curve to 99.97% 42.22% with 94.34% 20.64% / 99.56% 31.17%, line to 100% 42.22%, line to 100% 100%, line to 0% 100%, line to 0% 42.22%, line to 0.03% 42.22%, curve to 14.64% 12.79% with 0.44% 31.17% / 5.66% 20.64%, curve to 50% 0% with 24.02% 4.6% / 36.74% -0%, close);
+    }
+}
+
+
+/* ////////////////////////////// 
     HERO
 ////////////////////////////// */
 
 .hero-section {
     .hero-wrapper {
         background-color: var(--black-5-pos);
-        /* width: calc(100 + 60px); */
+        padding: 0 30px;
 
         display: flex;
         align-items: center;
-        gap: 24px;
+        justify-content: space-between;
+        gap: 30px;
 
         .hero-img {
-            flex: 0 0 452px;
+            flex: 1 0 452px;
+
+            .clipped_image {
+                aspect-ratio: 452 / 526; 
+                margin: -30px 0;
+            }
         }
 
         .hero-text {
+            flex: 2 1 750px;
             display: flex;
             flex-direction: column;
+            align-items: center;
             gap: 24px;
         }
     }
@@ -164,3 +130,5 @@ h1 {
         font-style: italic;
     }
 }
+
+
