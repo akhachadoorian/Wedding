@@ -21,10 +21,10 @@ function Eyebrow({ variation = "left", color = "gold", text }) {
         return (
             <div className={`eyebrow-wrapper centered ${color}`}>
                 <p className={`eyebrow ${color}`}>{text}</p>
-                <div class="diamond_underline-wrapper">
-                    <div class="diamond_underline"></div>
+                <div className="diamond_underline-wrapper">
+                    <div className="diamond_underline"></div>
                     <Diamond />
-                    <div class="diamond_underline"></div>
+                    <div className="diamond_underline"></div>
                 </div>
 
                 {/* <DiamondUnderline /> */}

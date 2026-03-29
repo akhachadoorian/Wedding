@@ -110,8 +110,7 @@
         .hero-img {
             flex: 1 0 452px;
 
-            .clipped_image {
-                aspect-ratio: 452 / 526; 
+            .img_holder {
                 margin: -30px 0;
             }
         }

@@ -1,15 +1,15 @@
 import React from "react";
 import Eyebrow from "./Eyebrow";
-import HeroImg from "../assets/Max&Alex.jpg"
-import ClippedImage from "./ClippedImage";
+import HeroImg from "../assets/ArchedImage.png";
+
 function Hero({}) {
     return (
         <section className="hero-section">
             <div className="hero-wrapper">
                 <div className="hero-img">
-                    <ClippedImage 
-                        image={HeroImg}
-                    />
+                    <div className="img_holder">
+                        <img src={HeroImg} alt="" />
+                    </div>
                 </div>
                 <div className="hero-text">
                     <Eyebrow variation="centered" color="gold" text="Saturday Oct, 31, 2026 — Halloween" />

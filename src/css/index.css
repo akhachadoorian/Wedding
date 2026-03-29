@@ -21,9 +21,18 @@ section {
     }
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0;
     color: var(--Cream, #e6e2da);
+}
+
+p {
+    margin: 0;
 }
 
 h1 {
@@ -51,7 +60,7 @@ h1 {
     }
 
     &.gold {
-        color: var(--gold)
+        color: var(--gold);
     }
 }
 
@@ -88,5 +97,15 @@ h1 {
     }
 }
 
+/* ////////////////////////////// 
+    IMAGES
+////////////////////////////// */
 
-
+.img_holder {
+    img {
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+    }
+}
