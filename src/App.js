@@ -9,7 +9,7 @@ import Wedding from './pages/Wedding';
 function App() {
   return (
     <main>
-      <Router basename='Wedding'>
+      <Router basename='/Wedding'>
         <Navigation />
 
         <Routes>
