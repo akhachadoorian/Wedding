@@ -1,52 +1,59 @@
-import logo from './logo.svg';
-
+import logo from "./logo.svg";
+import { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Navigation from './components/globals/Navigation';
-import Wedding from './pages/Wedding';
+import Navigation from "./components/globals/Navigation";
+import Wedding from "./pages/Wedding";
 
-import { useEffect } from 'react';
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
 
-import Lenis from 'lenis';
-import 'lenis/dist/lenis.css';
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Footer from "./components/globals/Footer";
 
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { LenisContext } from "./context/LenisContext";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  useEffect(() => {
-  const lenis = new Lenis({
-    // autoRaf: true  ← remove this
-    lerp: 0.1,
-    duration: 1.2,
-  });
+    const [lenisInstance, setLenisInstance] = useState(null);
 
-  // Give GSAP control of the loop
-  lenis.on('scroll', ScrollTrigger.update);
+    useEffect(() => {
+        const lenis = new Lenis({
+            // autoRaf: true  ← remove this
+            lerp: 0.1,
+            duration: 1.2,
+        });
 
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
+        setLenisInstance(lenis);
 
-  gsap.ticker.lagSmoothing(0);
+        // Give GSAP control of the loop
+        lenis.on("scroll", ScrollTrigger.update);
 
-  return () => {
-    lenis.destroy();
-  };
-}, []);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
 
-  return (
-    <main>
-      <Router>
-        <Navigation />
+        gsap.ticker.lagSmoothing(0);
 
-        <Routes>
-          <Route path="/" element={<Wedding />} />
-        </Routes>
+        return () => {
+            lenis.destroy();
+        };
+    }, []);
 
-        {/* Footer */}
-      </Router>
-    </main>
-  );
+    return (
+        <LenisContext.Provider value={lenisInstance}>
+            <Router>
+                <Navigation /> {/* renders <nav> */}
+                <main>
+                    <Routes>
+                        <Route path="/" element={<Wedding />} />
+                    </Routes>
+                </main>
+                <Footer /> {/* renders <footer> */}
+            </Router>
+        </LenisContext.Provider>
+    );
 }
 
 export default App;

@@ -1,11 +1,9 @@
 import React from "react";
-
-import Logo from "../../assets/Logo.svg";
 import { Link } from "react-router-dom";
 import { useLenis } from "../../context/LenisContext";
 import { NAV_ITEMS } from "../../constants/navItems";
 
-function Navigation({}) {
+function Footer({}) {
     const lenis = useLenis();
 
     const scrollToBlockById = (id) => {
@@ -15,33 +13,20 @@ function Navigation({}) {
         lenis ? lenis.scrollTo(element, { offset: 0, duration: 1.4 }) : element.scrollIntoView({ behavior: "smooth" }); // fallback just in case
     };
 
-
-    const DiamondSVG = () => (
-        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
-            <g opacity="0.5" clipPath="url(#clip0_76_517)">
-                <path d="M5 0.5L9.5 5L5 9.5L0.5 5L5 0.5Z" fill="#A6824A" />
-            </g>
-            <defs>
-                <clipPath id="clip0_76_517">
-                    <rect width="10" height="10" fill="white" />
-                </clipPath>
-            </defs>
-        </svg>
-    );
-
     return (
-        <header>
-            <div className="navigation-wrapper">
-                <a href="/" className="">
-                    <img src={Logo} alt="M and A separated by an ampersand" />
-                </a>
-
-                <nav className="">
+        <footer>
+            <div className="footer-wrapper">
+                <div className="footer-left">
+                    <h5 className="heading_xl">
+                        Lets celebrate <span className="gold-italic">together</span>
+                    </h5>
+                </div>
+                <div className="footer-right">
                     {NAV_ITEMS.map((n, idx) => (
                         <React.Fragment key={idx}>
                             <Link
                                 to={n.link || "/"}
-                                className="nav-link"
+                                className="footer-link"
                                 onClick={(e) => {
                                     if (!n.link && n.scrollId) {
                                         e.preventDefault();
@@ -51,13 +36,12 @@ function Navigation({}) {
                             >
                                 <p>{n.text}</p>
                             </Link>
-                            {idx < NAV_ITEMS.length - 1 && <DiamondSVG />}
                         </React.Fragment>
                     ))}
-                </nav>
+                </div>
             </div>
-        </header>
+        </footer>
     );
 }
 
-export default Navigation;
+export default Footer;
