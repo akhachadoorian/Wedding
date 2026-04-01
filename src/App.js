@@ -36,7 +36,7 @@ function App() {
 
   return (
     <main>
-      <Router basename='/Wedding'>
+      <Router>
         <Navigation />
 
         <Routes>

@@ -35,7 +35,8 @@ function Eyebrow({ variation = "left", color = "gold", text }) {
     return (
         <div className={`eyebrow-wrapper left ${color}`}>
             <Diamond />
-            <p className="eyebrow">{text}</p>
+            <p className={`eyebrow ${color}`}>{text}</p>
+            <div className={`diamond_underline ${color}`}></div>
         </div>
     );
 }

@@ -78,6 +78,10 @@ h2 {
     &.gold {
         color: var(--gold);
     }
+
+    &.white {
+        color: var(--cream);
+    }
 }
 
 .eyebrow-wrapper {
@@ -91,26 +95,39 @@ h2 {
         flex-direction: column;
     }
 
+    &.gold {
+        color: var(--gold);
+    }
+
+    .diamond_underline {
+        height: 1px;
+        width: 100px;
+        background-color: var(--gold);
+    }
+
+    .diamond {
+        flex: 0 0 clamp(16px, 1.111vw, 18px);
+        width: clamp(16px, 1.111vw, 18px);
+        height: clamp(16px, 1.111vw, 18px);
+    }
+
     .diamond_underline-wrapper {
         display: flex;
         align-items: center;
         gap: 8px;
 
         padding: 0 10px;
-        width: 100%;
+        width: calc(100% + 40px);
 
         .diamond_underline {
-            height: 1px;
-            width: 100%;
-            background-color: var(--gold);
+           width: 100%;
         }
 
         .diamond {
-            flex: 0 0 16px;
-            width: 16px;
-            height: 16px;
+
         }
     }
+    
 }
 
 /* ////////////////////////////// 

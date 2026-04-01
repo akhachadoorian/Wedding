@@ -9,8 +9,7 @@ function Copy({text, eyebrow, variation = "left" }) {
             {eyebrow ? 
                 <Eyebrow 
                     text={eyebrow}
-                    // style={}
-
+                    variation={variation}
                 />
             :
                 null

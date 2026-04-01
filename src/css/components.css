@@ -2,6 +2,13 @@
     NAV
 ////////////////////////////// */
 
+@keyframes fadeDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .navigation-wrapper {
     display: flex;
     justify-content: space-between;
@@ -12,6 +19,10 @@
     margin: 0 60px;
 
     border-bottom: 1px solid rgba(166, 130, 74, 0.2);
+
+    opacity: 0;
+    transform: translateY(-8px);
+    animation: fadeDown 0.8s 0.2s ease forwards;
 
     nav {
         display: flex;
@@ -74,22 +85,6 @@
     }
 }
 
-/* ////////////////////////////// 
-    CLIPPED IMAGE
-////////////////////////////// */
-
-.clipped_image {
-    img {
-        object-fit: cover;
-        object-position: center;
-        width: 100%;
-        height: 100%;
-    }
-
-    &.arch {
-        clip-path: shape(nonzero from 50% 0%, curve to 85.36% 12.79% with 63.26% 0% / 75.98% 4.6%, curve to 99.97% 42.22% with 94.34% 20.64% / 99.56% 31.17%, line to 100% 42.22%, line to 100% 100%, line to 0% 100%, line to 0% 42.22%, line to 0.03% 42.22%, curve to 14.64% 12.79% with 0.44% 31.17% / 5.66% 20.64%, curve to 50% 0% with 24.02% 4.6% / 36.74% -0%, close);
-    }
-}
 
 /* ////////////////////////////// 
     HERO
@@ -134,6 +129,7 @@
 
 .copy-wrapper {
     display: flex;
+    flex-direction: column;
     gap: 24px;
 
     .copy {
@@ -145,8 +141,9 @@
         }
     }
 
-    &.left {
-        
+    &.centered {
+        align-items: center;
+        text-align: center;
     }
 }
 
@@ -165,3 +162,22 @@
 }
 
 
+/* ////////////////////////////// 
+    LINE SEPARATED CONTENT
+////////////////////////////// */
+
+.line_separated_content-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    .line_separated_content-line {
+        height: 2px;
+        width: 100%;
+        background-color: var(--gold);
+    }
+
+    .eyebrow {
+        white-space: nowrap;
+    }
+}
