@@ -15,21 +15,30 @@
     align-items: center;
     gap: 30px;
 
-    padding: 16px 10px;
+    padding: 0px 10px;
 
-    
     border-bottom: 1px solid rgba(166, 130, 74, 0.2);
 
     opacity: 0;
     transform: translateY(-8px);
     animation: fadeDown 0.8s 0.2s ease forwards;
 
+    @media all and (min-width: 800px) {
+        margin: 0;
+        justify-content: space-between;
+        padding: 16px 10px;
+    }
+
     nav {
-        display: flex;
+        display: none;
         align-items: center;
         justify-content: flex-end;
         flex-wrap: wrap;
         gap: 16px;
+
+        @media all and (min-width: 800px) {
+            display: flex;
+        }
 
         svg {
             margin-bottom: 7px;
@@ -73,14 +82,63 @@
     }
 }
 
-/* TODO: IMPLEMENT MOBILE NAV INSTEAD OF JUST HIDING */
-@media all and (max-width: 800px) {
-    .nav-section {
-        margin: 0 16px;
+.mobile_nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+
+    width: 100vw;
+    height: 100dvh;
+
+    display: flex;
+    justify-content: flex-end;
+
+    opacity: 0;
+    transform: translateX(100%);
+    pointer-events: none;
+    transition:
+        opacity 0.3s ease-in-out,
+        transform 0.3s ease;
+
+    &.open {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: all;
+    }
+
+    .mobile_nav-inner {
+        background-color: var(--gold);
+        position: relative;
+        padding: 24px 16px;
+        width: 75vw;
+
+        display: flex;
+        align-items: center;
         justify-content: center;
 
-        nav {
-            display: none;
+        text-align: center;
+    }
+
+    .close_icon {
+        position: absolute;
+        top: 24px;
+        left: 24px;
+    }
+
+    .mobile_nav {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .nav-link {
+            color: var(--cream);
+            font-family: "Instrument Serif";
+            font-size: 40px;
+            font-style: italic;
+            font-weight: 400;
+            line-height: 120%;
+            text-decoration: none;
         }
     }
 }
@@ -123,7 +181,7 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
-/* 
+            /* 
             &::after {
                 content: "";
 
@@ -155,24 +213,38 @@
         padding: 0 30px;
 
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction: column;
         gap: 30px;
 
-        .hero-img {
-            flex: 1 0 452px;
+        @media all and (min-width: 800px) {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-            .img_holder {
-                margin: -30px 0;
+        .hero-img {
+            @media all and (min-width: 800px) {
+                flex: 1 1 452px;
+                align-self: stretch;
+
+                .img_holder {
+                    margin: -60px 0;
+                }
             }
         }
 
         .hero-text {
-            flex: 2 1 750px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 24px;
+
+            padding: 30px 0;
+
+            @media all and (min-width: 800px) {
+                flex: 2 1 750px;
+                padding: 60px 0;
+            }
         }
     }
 
@@ -211,7 +283,6 @@
         max-width: 72.083vw;
 
         &.left {
-            
         }
 
         &.centered {
@@ -219,7 +290,6 @@
         }
     }
 }
-
 
 /* ////////////////////////////// 
     LINE SEPARATED CONTENT
@@ -244,7 +314,6 @@
 /* ////////////////////////////// 
   TIMELINE & TIMELINE ELEMENT
 ////////////////////////////// */
-
 
 /* ////////////////////////////// 
     

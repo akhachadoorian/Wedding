@@ -9,35 +9,37 @@
     --black-5-pos: #191a1a;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
 
 body {
     background-color: var(--black);
     padding: 30px 0;
 }
 
-main  {
-    max-width: calc(1600px + 120px);
-    margin: auto;
+main {
+    @media all and (min-width: 800px) {
+        max-width: calc(1600px + 120px);
+        margin: auto;
+    }
 }
 
-header, footer {
-    max-width: calc(1600px + 0px);
-    margin: auto;
+header,
+footer {
+    padding: 0px 16px;
 
-    padding: 0px 60px;
+    @media all and (min-width: 800px) {
+        max-width: calc(1600px + 0px);
+        margin: auto;
 
-    @media all and (max-width: 800px) {
-        padding: 0px 16px;
+        padding: 0px 60px;
     }
 }
 
 section {
-    padding: 160px 60px;
+    padding: 60px 16px;
 
-    @media all and (max-width: 800px) {
-        padding: 60px 16px;
+    @media all and (min-width: 800px) {
+        padding: 160px 60px;
     }
 }
 
@@ -75,7 +77,6 @@ p.heading_xl {
     font-weight: 400;
     line-height: 120%;
 }
-
 
 .gold-italic {
     color: var(--gold);
@@ -117,6 +118,7 @@ p.heading_xl {
 
     &.centered {
         flex-direction: column;
+        text-align: center;
     }
 
     &.gold {
@@ -144,14 +146,12 @@ p.heading_xl {
         width: calc(100% + 40px);
 
         .diamond_underline {
-           width: 100%;
+            width: 100%;
         }
 
         .diamond {
-
         }
     }
-    
 }
 
 /* ////////////////////////////// 
