@@ -1,0 +1,29 @@
+@use "../../styles/variables" as *;
+
+.copy-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @media (min-width: $breakpoint-md) {
+        max-width: 72.083vw;
+
+        &.centered {
+            margin: auto;
+        }
+    }
+
+    &.centered {
+        align-items: center;
+        text-align: center;
+    }
+
+    .copy {
+        color: var(--cream);
+
+        .gold {
+            font-style: italic;
+            color: var(--gold);
+        }
+    }
+}

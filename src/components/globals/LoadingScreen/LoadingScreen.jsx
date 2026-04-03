@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../css/components/LoadingScreen.css";
+import "./LoadingScreen.scss";
 
 function LoadingScreen({ onComplete }) {
     const [phase, setPhase] = useState("visible"); // "visible" | "fadeOut" | "done"
@@ -39,7 +39,7 @@ function LoadingScreen({ onComplete }) {
                 <div className="loader-monogram">
                     <p>Max</p>
                     {/* <div className="loader-diamond" /> */}
-                    <p class="loader-and">&</p>
+                    <p className="loader-and">&</p>
                     <p>Alex</p>
                 </div>
                 <div className="loader-bar-wrapper">

@@ -1,0 +1,42 @@
+@use "../../styles/variables" as *;
+
+.eyebrow-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+
+    &.centered {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    &.gold { color: var(--gold); }
+
+    .diamond_underline {
+        height: 1px;
+        width: 100px;
+        background-color: var(--gold);
+    }
+
+    .diamond {
+        $size: clamp(16px, 1.111vw, 18px);
+        flex: 0 0 $size;
+        width: $size;
+        height: $size;
+    }
+
+    .diamond_underline-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 10px;
+        width: 100%;
+
+        @media (min-width: $breakpoint-md) {
+            width: calc(100% + 40px);
+        }
+
+        .diamond_underline { width: 100%; }
+    }
+}

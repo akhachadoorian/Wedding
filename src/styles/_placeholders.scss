@@ -1,0 +1,37 @@
+@use "./variables" as *;
+
+%nav-link-base {
+    color: var(--cream);
+    text-decoration: none;
+    transition: all ease-in-out 300ms;
+
+    &:hover {
+        color: var(--gold);
+    }
+}
+
+%nav-link-uppercase {
+    @extend %nav-link-base;
+
+    font-family: $font-sans;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    &::after {
+        content: "";
+        background-color: var(--gold);
+        height: 1px;
+        width: 0;
+        transition: all ease-in-out 300ms;
+    }
+
+    &:hover::after {
+        width: 100%;
+    }
+}

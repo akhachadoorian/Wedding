@@ -1,22 +1,22 @@
 export const NAV_ITEMS = [
     {
         text: "Details",
-        link: "",
-        scrollId: "details",
+        link: "/details",
+        scrollId: "",
     },
     {
         text: "Accommodations",
-        link: "",
-        scrollId: "accommodations",
+        link: "/accommodations",
+        scrollId: "",
     },
     {
         text: "Registry",
-        link: "",
-        scrollId: "registry",
+        link: "/registry",
+        scrollId: "",
     },
     {
         text: "RSVP",
-        link: "",
-        scrollId: "rsvp",
+        link: "/rsvp",
+        scrollId: "",
     },
 ];

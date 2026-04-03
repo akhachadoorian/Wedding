@@ -1,0 +1,24 @@
+@use "./variables" as *;
+
+body {
+    max-width: 100dvw;
+    overflow-x: hidden;
+    background-color: var(--black);
+    margin: 0;
+}
+
+main {
+    @media (min-width: $breakpoint-md) {
+        margin: auto;
+    }
+}
+
+section.w_padding {
+    padding: 60px 16px;
+
+    @media (min-width: $breakpoint-md) {
+        padding: 160px 60px;
+        max-width: var(--max-width);
+        margin: auto;
+    }
+}

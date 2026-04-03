@@ -1,0 +1,33 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/placeholders" as *;
+
+footer {
+    @media (min-width: $breakpoint-md) {
+        max-width: var(--max-width);
+        margin: 0 auto 60px auto;
+    }
+}
+
+.footer-wrapper {
+    background-color: var(--black-5-pos);
+    padding: 80px;
+
+    display: flex;
+    gap: 15.972vw;
+
+    .footer-left {
+        flex: 1 1 520px;
+    }
+
+    .footer-right {
+        flex: 1 1 378px;
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+
+        .footer-link {
+            @extend %nav-link-uppercase;
+        }
+    }
+}

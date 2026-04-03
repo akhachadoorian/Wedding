@@ -1,0 +1,28 @@
+// Google Fonts
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+// SCSS variables (use in SCSS logic, like mixins/functions)
+$breakpoint-md: 800px;
+$font-serif: "Instrument Serif", serif;
+$font-sans: "Inter", sans-serif;
+
+$gold: #a6824a;
+$cream: #e6e2da;
+$black: #101111;
+
+$overlay-bg: rgba($black, 0.3);
+
+// CSS custom properties (use in your actual styles)
+:root {
+    --cream: #e6e2da;
+    --cream-5-pos: #e7e3dc;
+
+    --gold: #a6824a;
+    --gold-5-pos: #aa8853;
+
+    --black: #101111;
+    --black-5-pos: #191a1a;
+
+    --max-width: 1720px;
+}

@@ -1,14 +1,13 @@
-/* ////////////////////////////// 
-    WEDDING
-////////////////////////////// */
+// _wedding.scss
+@use "../variables" as *;
 
 .wedding {
     .info-section {
         display: flex;
         flex-direction: column;
 
-        @media all and (min-width: 800px) {
-            gap: 120px
+        @media (min-width: $breakpoint-md) {
+            gap: 120px;
         }
 
         .lines {

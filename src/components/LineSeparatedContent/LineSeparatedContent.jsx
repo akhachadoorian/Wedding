@@ -1,4 +1,4 @@
-import React from "react";  
+import './LineSeparatedContent.scss';
 
 function LineSeparatedContent({left_content, right_content}) {
     return (

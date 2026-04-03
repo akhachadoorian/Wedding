@@ -1,0 +1,66 @@
+@use "../../../styles/variables" as *;
+
+.offset_hero {
+    &-section {
+        // empty md breakpoint removed
+    }
+
+    &-wrapper {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &-img-wrapper {
+        aspect-ratio: 588 / 434;
+        overflow: hidden;
+        position: relative;
+
+        @media (min-width: $breakpoint-md) {
+            flex: 1 1 588px;
+        }
+    }
+
+    &-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+
+        .offset_hero-overlay {
+            background: $overlay-bg;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+        }
+
+        .img_holder {
+            width: 100%;
+            height: 100%;
+
+            img {
+                object-position: center 40%;
+                filter: grayscale(1);
+            }
+        }
+    }
+
+    &-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+
+        text-align: center;
+        background-color: var(--black-5-pos);
+
+        @media (min-width: $breakpoint-md) {
+            flex: 1 1 929px;
+        }
+    }
+}

@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useLenis } from "../../context/LenisContext";
-import { NAV_ITEMS } from "../../constants/navItems";
+import { useLenis } from "../../../context/LenisContext";
+import { NAV_ITEMS } from "../../../constants/navItems";
+
+import './Footer.scss';
 
 function Footer({}) {
     const lenis = useLenis();

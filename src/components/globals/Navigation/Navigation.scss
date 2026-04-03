@@ -1,0 +1,176 @@
+@use "../../../styles/variables" as *;
+
+@keyframes fadeDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Shared link style — reused in nav, mobile nav, and footer
+%nav-link-base {
+    color: var(--cream);
+    text-decoration: none;
+    transition: all ease-in-out 300ms;
+
+    &:hover {
+        color: var(--gold);
+    }
+}
+
+%nav-link-uppercase {
+    @extend %nav-link-base;
+
+    font-family: $font-sans;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    &::after {
+        content: "";
+        background-color: var(--gold);
+        height: 1px;
+        width: 0;
+        transition: all ease-in-out 300ms;
+    }
+
+    &:hover::after {
+        width: 100%;
+    }
+}
+
+// ── Header ───────────────────────────────────────────────
+header {
+    width: 100%;
+    border-bottom: 2px solid rgba(166, 130, 74, 0.5);
+
+    &.nav-home {
+        background: rgba(16, 17, 17, 0.67);
+
+        @media (min-width: $breakpoint-md) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 99;
+        }
+    }
+
+    &.nav-default {
+        @media (min-width: $breakpoint-md) {
+            margin-bottom: 56px;
+        }
+    }
+}
+
+// ── Desktop nav wrapper ───────────────────────────────────
+.navigation-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    padding: 8px 16px;
+
+    opacity: 0;
+    transform: translateY(-8px);
+    animation: fadeDown 0.8s 0.2s ease forwards;
+
+    @media (min-width: $breakpoint-md) {
+        max-width: calc(1600px + 0px);
+        margin: auto;
+        padding: 16px 60px;
+
+        #mobile_nav_btn {
+            display: none;
+        }
+    }
+
+    nav {
+        display: none;
+        align-items: center;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        @media (min-width: $breakpoint-md) {
+            display: flex;
+        }
+
+        svg {
+            margin-bottom: 7px;
+        }
+
+        .nav-link {
+            @extend %nav-link-uppercase;
+        }
+    }
+}
+
+// ── Mobile nav ────────────────────────────────────────────
+.mobile_nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+
+    width: 100vw;
+    height: 100dvh;
+
+    display: flex;
+    justify-content: flex-end;
+
+    opacity: 0;
+    transform: translateX(100%);
+    pointer-events: none;
+    transition:
+        opacity 0.3s ease-in-out,
+        transform 0.3s ease;
+
+    @media (min-width: $breakpoint-md) {
+        display: none;
+    }
+
+    &.open {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: all;
+    }
+
+    .mobile_nav-inner {
+        background-color: var(--gold);
+        position: relative;
+        padding: 24px 16px;
+        width: 75vw;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .close_icon {
+        position: absolute;
+        top: 24px;
+        left: 24px;
+    }
+
+    .mobile_nav {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .nav-link {
+            @extend %nav-link-base;
+
+            font-family: $font-serif;
+            font-size: 40px;
+            font-style: italic;
+            font-weight: 400;
+            line-height: 120%;
+        }
+    }
+}

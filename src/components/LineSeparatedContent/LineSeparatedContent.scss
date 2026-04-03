@@ -1,0 +1,17 @@
+@use "../../styles/variables" as *;
+
+.line_separated_content-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    .line_separated_content-line {
+        height: 2px;
+        width: 100%;
+        background-color: var(--gold);
+    }
+
+    .eyebrow {
+        white-space: nowrap;
+    }
+}

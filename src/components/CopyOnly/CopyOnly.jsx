@@ -1,9 +1,7 @@
-import React from "react";
-import Eyebrow from "./Eyebrow";
+import Eyebrow from "../Eyebrow/Eyebrow";
+import './CopyOnly.scss';
 
-function Copy({text, eyebrow, variation = "left" }) {
-
-
+export default function CopyOnly({text, eyebrow, variation = "left" }) {
     return (
         <div className={`copy-wrapper ${variation}`}>
             {eyebrow ? 
@@ -18,5 +16,3 @@ function Copy({text, eyebrow, variation = "left" }) {
         </div>
     )
 }
-
-export default Copy;

@@ -1,0 +1,162 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/typography" as *;
+
+// ── Shared keyframes ──────────────────────────────────────
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes rayFade {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes raysRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes barFill {
+    to {
+        width: 100%;
+    }
+}
+
+// ── Wrapper ───────────────────────────────────────────────
+
+.loader-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    background: var(--black);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease;
+
+    &.loader--out {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+// ── Sunburst rays ─────────────────────────────────────────
+
+.loader-rays {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation: raysRotate 12s linear infinite;
+
+    .loader-ray {
+        position: absolute;
+
+        width: 1px;
+        height: 300px;
+
+        background: linear-gradient(to top, transparent, #c9a96e55, transparent);
+        transform-origin: center center;
+        transform: rotate(calc(var(--i) * 22.5deg)) translateY(-50%);
+        animation: rayFade 1.2s ease forwards;
+        animation-delay: calc(var(--i) * 0.05s);
+        opacity: 0;
+    }
+}
+
+// ── Center content ────────────────────────────────────────
+.loader-content {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+// ── Monogram ──────────────────────────────────────────────
+.loader-monogram {
+    @extend %heading-xl-base;
+
+    color: var(--cream);
+    font-style: italic;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeUp 1s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+    .loader-diamond {
+        width: 6px;
+        height: 6px;
+        background: var(--gold);
+        transform: rotate(45deg);
+    }
+
+    .loader-and {
+        color: var(--gold);
+        font-size: 25px;
+    }
+}
+
+// ── Progress bar ──────────────────────────────────────────
+.loader-bar-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    width: 100%;
+}
+
+.diamond {
+    width: 16px;
+    height: 16px;
+}
+
+.loader-bar {
+    width: 100%;
+    height: 1px;
+    background: var(--black);
+    border-radius: 1px;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 0.6s 0.6s ease forwards;
+}
+
+.loader-bar-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 1px;
+    width: 0%;
+    animation: barFill 1.8s 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+// ── Date label ────────────────────────────────────────────
+.loader-label {
+    color: var(--gold);
+    opacity: 0;
+    animation: fadeIn 0.8s 0.5s ease forwards;
+}
