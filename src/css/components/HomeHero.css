@@ -1,41 +1,58 @@
 .home_hero-wrapper {
     position: relative;
-    height: 220vh;
+
+    @media all and (min-width: 800px) {
+        height: 220vh;
+    }
 }
 
 .home_hero-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
     overflow: hidden;
+
+    @media all and (min-width: 800px) {
+        height: 100vh;
+
+        position: sticky;
+        top: 0;
+    }
 }
 
 .home_hero-text-shell {
     position: relative;
     z-index: 1;
 
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
+    margin: 30px 0 0 0;
+
+    @media all and (min-width: 800px) {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        padding: 0;
+    }
 }
 
 .home_hero-text {
-    position: absolute;
-    top: 0;
-    left: 0px;
-
-    height: 100dvh;
-    width: calc(56.944vw - 120px);
-    will-change: transform, opacity;
-
-    background-color: var(--black-5-pos);
-    padding: 0px 60px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 16px;
+
+    background-color: var(--black-5-pos);
+    padding: 60px 16px;
+
+    @media all and (min-width: 800px) {
+        position: absolute;
+        top: 0;
+        left: 0px;
+
+        height: 100dvh;
+        width: calc(56.944vw - 120px);
+        will-change: transform, opacity;
+
+        
+        padding: 0px 60px;
+    }
 }
 
 .home_hero-title {
@@ -43,21 +60,22 @@
     font-style: italic;
 }
 
-
 .home_hero-media {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 2;
+    position: relative;
 
-    /* height: 100vh; */
-    /* width: 43.056vw; */
-    overflow: hidden;
-    will-change: width;
+    @media all and (min-width: 800px) {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+
+        overflow: hidden;
+        will-change: width;
+    }
 }
 
 .home_hero-overlay {
-    background: rgba(16, 17, 17, 0.30);
+    background: rgba(16, 17, 17, 0.3);
     width: 100%;
     height: 100%;
     position: absolute;
@@ -76,27 +94,16 @@
     filter: grayscale(1);
 }
 
-@media (max-width: 991px) {
-    .home_hero-text {
-        width: min(48%, 30rem);
-    }
+
+.home_hero-wrapper.is-hidden .home_hero-text,
+.home_hero-wrapper.is-hidden .home_hero-image {
+  opacity: 0;
 }
 
-@media (max-width: 767px) {
-    .home_hero-wrapper {
-        height: 180vh;
-    }
+.home_hero-wrapper.is-hidden .home_hero-image {
+  transform: scale(0.94);
+}
 
-    .home_hero-text-shell {
-        /* padding: 0 20px; */
-    }
-
-    .home_hero-text {
-        left: 20px;
-        width: min(78%, 24rem);
-    }
-
-    .home_hero-media {
-        width: 55vw;
-    }
+.home_hero-wrapper.is-hidden .home_hero-text {
+  transform: translateY(16px);
 }

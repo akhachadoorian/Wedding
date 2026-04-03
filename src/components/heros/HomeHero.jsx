@@ -1,12 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import "../css/components/HomeHero.css";
-import HeroImg from "../assets/Max&Alex.jpg";
-import Eyebrow from "./Eyebrow";
+import "../../css/components/HomeHero.css";
+import HeroImg from "../../assets/Max&Alex.jpg";
+import Eyebrow from "../Eyebrow";
 
-export default function HomeHero() {
-    //
+export default function HomeHero({ loaded }) {
+    // Load References
+    const eyebrowRef = useRef(null);
+    const h1Ref = useRef(null);
 
     // Scrolling References
     const sectionRef = useRef(null);
@@ -14,7 +16,45 @@ export default function HomeHero() {
     const mediaRef = useRef(null);
     const imageRef = useRef(null);
 
+    useLayoutEffect(() => {
+        if (!loaded) return;
+
+        const ctx = gsap.context(() => {
+            const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+
+            tl.from(mediaRef.current, {
+                opacity: 0,
+                duration: 0.8,
+            })
+                .from(
+                    eyebrowRef.current,
+                    {
+                        y: 12,
+                        opacity: 0,
+                        duration: 0.8,
+                    },
+                    "-=0.9",
+                )
+                .from(
+                    h1Ref.current,
+                    {
+                        y: 16,
+                        opacity: 0,
+                        duration: 0.8,
+                    },
+                    "-=0.6",
+                );
+        });
+
+        return () => ctx.revert();
+    }, [loaded]);
+
     useEffect(() => {
+        if (!loaded) return;
+
+        const isDesktop = window.innerWidth >= 800;
+        if (!isDesktop) return;
+
         const section = sectionRef.current;
         const text = textRef.current;
         const media = mediaRef.current;
@@ -24,13 +64,10 @@ export default function HomeHero() {
 
         const ctx = gsap.context(() => {
             gsap.set(media, {
-                // top: "14vh",
-                top: '0px',
+                top: "0px",
                 right: "0",
                 width: "43.056vw",
-                // height: "62vh",
                 height: "100vh",
-                borderRadius: "0px", // or 24px if you want rounded first
             });
 
             gsap.set(text, {
@@ -58,7 +95,6 @@ export default function HomeHero() {
                     right: 0,
                     width: "100vw",
                     height: "100vh",
-                    borderRadius: "0px",
                     ease: "none",
                     duration: 0.58,
                 },
@@ -86,15 +122,18 @@ export default function HomeHero() {
         }, section);
 
         return () => ctx.revert();
-    }, []);
+    }, [loaded]);
 
     return (
-        <section ref={sectionRef} className="home_hero-wrapper">
+        <section ref={sectionRef} className={`home_hero-wrapper ${loaded ? "is-loaded" : "is-hidden"}`}>
             <div className="home_hero-sticky">
                 <div className="home_hero-text-shell">
                     <div ref={textRef} className="home_hero-text">
-                        <Eyebrow variation="centered" color="gold" text="Saturday Oct, 31, 2026 — Halloween" />
-                        <h1 className="home_hero-title">
+                        <div ref={eyebrowRef}>
+                            <Eyebrow variation="centered" color="gold" text="Saturday Oct, 31, 2026 — Halloween" />
+                        </div>
+
+                        <h1 ref={h1Ref} className="home_hero-title">
                             Alex Khachadoorian
                             <br />& Max Paulett
                         </h1>

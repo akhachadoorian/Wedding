@@ -1,23 +1,13 @@
 export const NAV_ITEMS = [
     {
-        text: "Timeline",
+        text: "Details",
         link: "",
-        scrollId: "timeline",
+        scrollId: "details",
     },
     {
         text: "Accommodations",
         link: "",
         scrollId: "accommodations",
-    },
-    {
-        text: "FAQs",
-        link: "",
-        scrollId: "faqs",
-    },
-    {
-        text: "Dress Code",
-        link: "",
-        scrollId: "faqs",
     },
     {
         text: "Registry",

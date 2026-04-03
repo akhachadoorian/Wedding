@@ -10,24 +10,16 @@
 }
 
 header {
-    position: absolute;
-    top: 0;
-    /* left: 0; */
-    z-index: 99;
-    
     width: 100%;
-
-    /* padding: 0px 16px; */
 
     background: rgba(16, 17, 17, 0.67);
     border-bottom: 2px solid rgba(166, 130, 74, 0.50);
 
-
     @media all and (min-width: 800px) {
-        /* max-width: calc(1600px + 0px); */
-        /* margin: auto; */
-
-        /* padding: 0px 60px; */
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 99;
     }
 }
 
@@ -37,7 +29,7 @@ header {
     align-items: center;
     gap: 30px;
 
-    /* border-bottom: 1px solid rgba(166, 130, 74, 0.2); */
+    padding: 8px 16px;
 
     opacity: 0;
     transform: translateY(-8px);

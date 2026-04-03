@@ -1,32 +1,28 @@
 import React from "react";
 
-import Hero from "../unused/Hero";
 import Copy from "../components/Copy";
 import LineSeparatedContent from "../components/LineSeparatedContent";
 import Timeline from "../components/Timeline";
 
 import { useFadeInOnScroll } from "../hooks/useFadeInOnScroll";
-import HomeHero from "../components/HomeHero";
-import HeroV2 from "../unused/HeroV2";
+import HomeHero from "../components/heros/HomeHero";
 
-function Wedding() {
+function Wedding({loaded}) {
     const infoRef = useFadeInOnScroll();
-    const timelineRef = useFadeInOnScroll();
+    // const timelineRef = useFadeInOnScroll();
 
-    const timeline = [
-        {
-            time: '4:30 PM',
+    // const timeline = [
+    //     {
+    //         time: '4:30 PM',
 
-        }
-    ]
+    //     }
+    // ]
 
     return (
         <div className="wedding">
-            {/* <Hero /> */}
-            {/* <HeroV2 /> */}
-            <HomeHero />
+            <HomeHero  loaded={loaded} />
 
-            <section ref={infoRef} className="info-section">
+            <section ref={infoRef} className="info-section w_padding">
                 <Copy 
                     text={"<h2>Once upon a time, we found each other, and now we're counting down the days until we say <span class='gold-italic'>I do</span>. We would be thrilled to have you join us in this next chapter.</h2>"}
                 />
@@ -44,14 +40,14 @@ function Wedding() {
                 </div>
             </section>
 
-            <section ref={timelineRef} className="timeline-section" id="timeline">
+            {/* <section ref={timelineRef} className="timeline-section w_padding" id="timeline">
                 <Copy 
                     text={"<h2>From the ceremony to the final farewell, here's what to expect as we share this unforgettable day together.</h2>"}
                     eyebrow={'Timeline'}
                 />
 
                 <Timeline elements={timeline}/>
-            </section>
+            </section> */}
         </div>
     );
 }
