@@ -2,8 +2,9 @@
 import LineSeparatedContent from "../components/LineSeparatedContent/LineSeparatedContent";
 
 import CopyOnly from "../components/CopyOnly/CopyOnly";
-import HomeHero from "../components/heros/HomeHero/HomeHero";
+import OffsetHero from "../components/heros/OffsetHero/OffsetHero";
 import { useFadeInOnScroll } from "../hooks/useFadeInOnScroll";
+import HomeHero from "../components/heros/HomeHero/HomeHero";
 
 function Wedding({loaded}) {
     const infoRef = useFadeInOnScroll();

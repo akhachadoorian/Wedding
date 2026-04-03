@@ -2,7 +2,7 @@
 @use "../../../styles/placeholders" as *;
 
 footer {
-    @media (min-width: $breakpoint-md) {
+    @include big  {
         max-width: var(--max-width);
         margin: 0 auto 60px auto;
     }

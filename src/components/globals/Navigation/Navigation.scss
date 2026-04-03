@@ -52,7 +52,7 @@ header {
     &.nav-home {
         background: rgba(16, 17, 17, 0.67);
 
-        @media (min-width: $breakpoint-md) {
+        @include big  {
             position: absolute;
             top: 0;
             left: 0;
@@ -61,8 +61,10 @@ header {
     }
 
     &.nav-default {
-        @media (min-width: $breakpoint-md) {
-            margin-bottom: 56px;
+        margin-bottom: $pad-s-m;
+
+        @include big {
+            margin-bottom: $pad-s-d;
         }
     }
 }
@@ -79,7 +81,7 @@ header {
     transform: translateY(-8px);
     animation: fadeDown 0.8s 0.2s ease forwards;
 
-    @media (min-width: $breakpoint-md) {
+    @include big  {
         max-width: calc(1600px + 0px);
         margin: auto;
         padding: 16px 60px;
@@ -96,7 +98,7 @@ header {
         flex-wrap: wrap;
         gap: 16px;
 
-        @media (min-width: $breakpoint-md) {
+        @include big  {
             display: flex;
         }
 
@@ -130,7 +132,7 @@ header {
         opacity 0.3s ease-in-out,
         transform 0.3s ease;
 
-    @media (min-width: $breakpoint-md) {
+    @include big  {
         display: none;
     }
 

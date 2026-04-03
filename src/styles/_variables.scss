@@ -1,19 +1,8 @@
-// Google Fonts
+// ── Google Fonts ───────────────────────────────────
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
-// SCSS variables (use in SCSS logic, like mixins/functions)
-$breakpoint-md: 800px;
-$font-serif: "Instrument Serif", serif;
-$font-sans: "Inter", sans-serif;
-
-$gold: #a6824a;
-$cream: #e6e2da;
-$black: #101111;
-
-$overlay-bg: rgba($black, 0.3);
-
-// CSS custom properties (use in your actual styles)
+// ── CSS custom properties  ───────────────────────────────────
 :root {
     --cream: #e6e2da;
     --cream-5-pos: #e7e3dc;
@@ -22,7 +11,95 @@ $overlay-bg: rgba($black, 0.3);
     --gold-5-pos: #aa8853;
 
     --black: #101111;
-    --black-5-pos: #191a1a;
+    --black-5-pos: #1f2121;
 
     --max-width: 1720px;
+}
+
+// ── SCSS variables ───────────────────────────────────
+
+// ──── Font  ───────────────────────────────────
+$font-serif: "Instrument Serif", serif;
+$font-sans: "Inter", sans-serif;
+
+// ──── Colors  ───────────────────────────────────
+
+$gold: #a6824a;
+$cream: #e6e2da;
+$black: #101111;
+
+$overlay-bg: rgba($black, 0.3);
+
+// ──── Breakpoints  ───────────────────────────────────
+
+$break-xs: 500px;
+$break-s: 800px;
+$break-m: 1440px;
+$break-l: 1720px;
+
+// ──── Padding  ───────────────────────────────────
+
+$side-pad-d: 60px;
+$side-pad-m: 16px;
+
+$pad-l-d: 120px;
+$padding-l-m: 48px;
+
+$pad-m-d: 80px;
+$pad-m-m: 48px;
+
+$pad-s-d: 56px;
+$pad-s-m: 32px;
+
+// ── Mixins  ───────────────────────────────────
+@mixin big($breakpoint: $break-s) {
+    @media (min-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin small($breakpoint: $break-s) {
+    @media (max-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin mini($breakpoint: $break-xs) {
+    @media (max-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin breakpx($min, $max) {
+    @media all and (min-width: $min) and (max-width: $max) {
+        @content;
+    }
+}
+
+@mixin set_side_padding($desktop: $side-pad-d, $mobile: $side-pad-m) {
+    padding-left: $mobile;
+    padding-right: $mobile;
+
+    @include big {
+        padding-left: $desktop;
+        padding-right: $desktop;
+    }
+}
+
+@mixin set_vertical_padding($desktop: $pad-l-d, $mobile: $pad-l-m) {
+    padding-top: $desktop;
+    padding-bottom: $desktop;
+
+    @include small {
+        padding-top: $mobile;
+        padding-bottom: $mobile;
+    }
+}
+
+@mixin set_padding($desktop_v: $pad-l-d, $mobile_v: $pad-l-m, $desktop_h: $side-pad-d, $mobile_h: $side-pad-m) {
+    padding: $desktop_v $desktop_h;
+
+    @include small {
+        padding: $mobile_v $mobile_h;
+    }
 }

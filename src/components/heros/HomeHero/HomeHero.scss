@@ -5,7 +5,7 @@
         position: relative;
         height: 125vh;
 
-        @media (min-width: $breakpoint-md) {
+        @include big  {
             height: 220vh;
         }
 
@@ -29,7 +29,7 @@
         top: 0;
         height: 75vh;
 
-        @media (min-width: $breakpoint-md) {
+        @include big  {
             height: 100vh;
         }
     }
@@ -42,7 +42,7 @@
         height: 100%;
         max-width: 100dvw;
 
-        @media (min-width: $breakpoint-md) {
+        @include big  {
             margin: 0 auto;
             padding: 0;
         }
@@ -63,7 +63,7 @@
         left: 0;
         width: 100%;
 
-        @media (min-width: $breakpoint-md) {
+        @include big  {
             height: 100dvh;
             width: calc(56.944vw - 120px);
             padding: 0 60px;
@@ -82,7 +82,7 @@
         overflow: hidden;
         will-change: top, right, bottom, left, width, height, transform;
 
-        @media (min-width: $breakpoint-md) {
+        @include big  {
             top: 0;
             bottom: unset;
             right: 0;

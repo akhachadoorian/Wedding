@@ -4,7 +4,7 @@ import HeroImg from "../../../assets/Max&Alex.jpg";
 import Eyebrow from "../../Eyebrow/Eyebrow";
 import './OffsetHero.scss';
 
-export default function OffsetHero({variation = "left", loaded}) {
+export default function OffsetHero({variation = "right", loaded}) {
     const imgRef = useRef(null);
     const eyebrowRef = useRef(null);
     const h1Ref = useRef(null);
@@ -45,23 +45,22 @@ export default function OffsetHero({variation = "left", loaded}) {
     return (
         <section className={"offset_hero-section"}>
             <div className={`offset_hero-wrapper ${variation}`}>
-                <div className="offset_hero-img-wrapper">
-                <div className="offset_hero-img">
-                    <div className="offset_hero-overlay"></div>
-                    <div className="img_holder">
-                        <img ref={imgRef} src={HeroImg} alt="" />
-                    </div>
-                </div>
-                </div>
                 <div className="offset_hero-text">
                     <div ref={eyebrowRef}>
                         <Eyebrow variation="centered" color="gold" text="Saturday Oct, 31, 2026 — Halloween" />
                     </div>
 
-                    <h1 ref={h1Ref}>
+                    <h1 className="offset_hero-title" ref={h1Ref}>
                         Alex Khachadoorian
                         <br />& Max Paluett
                     </h1>
+                </div>
+
+                <div className="offset_hero-img">
+                    <div className="offset_hero-overlay"></div>
+                    <div className="img_holder">
+                        <img ref={imgRef} src={HeroImg} alt="" />
+                    </div>
                 </div>
             </div>
         </section>

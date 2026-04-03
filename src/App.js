@@ -21,7 +21,7 @@ import Wedding from "./pages/Wedding";
 gsap.registerPlugin(ScrollTrigger);
 
 // FIXME: toggle loader for dev
-const DISABLE_LOADER = false;
+const DISABLE_LOADER = true;
 
 function App() {
     const [lenisInstance, setLenisInstance] = useState(null);

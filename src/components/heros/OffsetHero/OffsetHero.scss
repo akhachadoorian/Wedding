@@ -1,32 +1,24 @@
 @use "../../../styles/variables" as *;
+@use "../../../styles/placeholders" as *;
 
 .offset_hero {
     &-section {
         // empty md breakpoint removed
     }
 
-    &-wrapper {
-        display: flex;
-        align-items: flex-start;
-    }
-
-    &-img-wrapper {
-        aspect-ratio: 588 / 434;
-        overflow: hidden;
-        position: relative;
-
-        @media (min-width: $breakpoint-md) {
-            flex: 1 1 588px;
-        }
-    }
-
     &-img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        position: relative;
         overflow: hidden;
+
+        margin-top: -27px;
+        aspect-ratio: 337 / 236;
+
+        @include big {
+            flex: 1 1 588px;
+
+            aspect-ratio: 588 / 434;
+            margin-top: 94px;
+        }
 
         .offset_hero-overlay {
             background: $overlay-bg;
@@ -58,9 +50,66 @@
 
         text-align: center;
         background-color: var(--black-5-pos);
+        padding: 45px $side-pad-m 60px $side-pad-m;
 
-        @media (min-width: $breakpoint-md) {
+        @include big {
             flex: 1 1 929px;
+            margin: 0;
         }
     }
+
+    &-title {
+        font-style: italic;
+    }
+
+    &-wrapper {
+        @extend %flexbox-rc;
+        
+        @include big {
+            align-items: flex-start;
+        }
+
+        &.left {
+            .offset_hero-text {
+            }
+
+            .offset_hero-img {
+            }
+
+            @include big {
+                .offset_hero-text {
+                    order: 1;
+
+                    padding: 74px 60px 74px 74px;
+                }
+
+                .offset_hero-img {
+                    order: 1;
+                    margin-right: -74px;
+                }
+            }
+        }
+
+        &.right {
+            .offset_hero-text {
+                margin-right: $pad-s-m;
+            }
+
+            .offset_hero-img {
+                margin-left: $pad-s-m;
+            }
+
+            @include big {
+                .offset_hero-img {
+                    margin-left: -74px;
+                }
+
+                .offset_hero-text {
+                    padding: 74px 74px 74px 60px;
+                }
+            }
+        }
+    }
+
+    
 }

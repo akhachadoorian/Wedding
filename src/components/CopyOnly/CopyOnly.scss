@@ -5,7 +5,7 @@
     flex-direction: column;
     gap: 24px;
 
-    @media (min-width: $breakpoint-md) {
+    @include big  {
         max-width: 72.083vw;
 
         &.centered {

@@ -8,7 +8,7 @@ body {
 }
 
 main {
-    @media (min-width: $breakpoint-md) {
+    @include big  {
         margin: auto;
     }
 }
@@ -16,7 +16,7 @@ main {
 section.w_padding {
     padding: 60px 16px;
 
-    @media (min-width: $breakpoint-md) {
+    @include big  {
         padding: 160px 60px;
         max-width: var(--max-width);
         margin: auto;

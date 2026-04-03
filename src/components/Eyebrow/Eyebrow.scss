@@ -33,7 +33,7 @@
         padding: 0 10px;
         width: 100%;
 
-        @media (min-width: $breakpoint-md) {
+        @include big  {
             width: calc(100% + 40px);
         }
 

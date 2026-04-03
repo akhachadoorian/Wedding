@@ -1,11 +1,37 @@
 @use "./variables" as *;
 
-h1, h2, h3, h4, h5, h6 {
+// ── Paragraph ──────────────────────────────────────────────
+
+p {
     margin: 0;
     color: var(--cream);
 }
 
-p { margin: 0; }
+// ── Headings  ──────────────────────────────────────────────
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    color: var(--cream);
+}
+
+%heading-xl-base {
+    font-family: $font-serif;
+    font-size: clamp(60px, 27.778vw, 70px);
+    font-weight: 400;
+    line-height: 120%;
+}
+
+%heading-l-base {
+    font-family: $font-serif;
+    font-size: clamp(60px, 4.444vw, 70px);
+    font-weight: 400;
+    line-height: 120%;
+}
 
 h1 {
     font-family: $font-serif;
@@ -14,16 +40,13 @@ h1 {
     line-height: 100%;
 }
 
-%heading-xl-base {
-    font-family: $font-serif;
-    font-size: clamp(60px, 4.444vw, 70px);
-    font-weight: 400;
-    line-height: 120%;
-}
-
 h2,
-h1.heading_xl, h2.heading_xl, h3.heading_xl,
-h4.heading_xl, h5.heading_xl, h6.heading_xl,
+h1.heading_xl,
+h2.heading_xl,
+h3.heading_xl,
+h4.heading_xl,
+h5.heading_xl,
+h6.heading_xl,
 p.heading_xl {
     @extend %heading-xl-base;
 }
@@ -42,7 +65,13 @@ p.heading_xl {
     letter-spacing: 0.9px;
     text-transform: uppercase;
 
-    &.centered { text-align: center; }
-    &.gold     { color: var(--gold); }
-    &.white    { color: var(--cream); }
+    &.centered {
+        text-align: center;
+    }
+    &.gold {
+        color: var(--gold);
+    }
+    &.white {
+        color: var(--cream);
+    }
 }
