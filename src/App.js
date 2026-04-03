@@ -16,14 +16,27 @@ import LoadingScreen from "./components/LoadingScreen";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// FIXME: toggle loader for dev
+const DISABLE_LOADER = true;
+
+function raf(t) {
+    window.lenis.raf(t);
+    ScrollTrigger.update();
+    requestAnimationFrame(raf);
+}
+
 function App() {
     const [lenisInstance, setLenisInstance] = useState(null);
-    const [loaded, setLoaded] = useState(false);
+    const [loaded, setLoaded] = useState(DISABLE_LOADER);
 
     useEffect(() => {
         const lenis = new Lenis({
             lerp: 0.1,
             duration: 1.2,
+            autoRaf: false,
+            anchors: true,
+            smoothWheel: true,
+            syncTouch: true,
         });
 
         setLenisInstance(lenis);

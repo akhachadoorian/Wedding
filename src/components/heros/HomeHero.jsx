@@ -1,7 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import "../../css/components/HomeHero.css";
 import HeroImg from "../../assets/Max&Alex.jpg";
 import Eyebrow from "../Eyebrow";
 
@@ -49,80 +48,158 @@ export default function HomeHero({ loaded }) {
         return () => ctx.revert();
     }, [loaded]);
 
-    useEffect(() => {
-        if (!loaded) return;
+    useLayoutEffect(() => {
+    if (!loaded) return;
 
-        const isDesktop = window.innerWidth >= 800;
-        if (!isDesktop) return;
+    const section = sectionRef.current;
+    const text = textRef.current;
+    const media = mediaRef.current;
+    const image = imageRef.current;
 
-        const section = sectionRef.current;
-        const text = textRef.current;
-        const media = mediaRef.current;
-        const image = imageRef.current;
+    if (!section || !text || !media || !image) return;
 
-        if (!section || !text || !media || !image) return;
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
 
-        const ctx = gsap.context(() => {
-            gsap.set(media, {
-                top: "0px",
-                right: "0",
-                width: "43.056vw",
-                height: "100vh",
-            });
+      mm.add("(min-width: 800px)", () => {
+        gsap.set(media, {
+          top: "0px",
+          right: "0px",
+          bottom: "auto",
+          left: "auto",
+          width: "43.056vw",
+          height: "100vh",
+          y: 0,
+        });
 
-            gsap.set(text, {
-                x: 0,
-                opacity: 1,
-            });
+        gsap.set(text, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+        });
 
-            gsap.set(image, {
-                scale: 1,
-            });
+        gsap.set(image, {
+          scale: 1,
+        });
 
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top top",
-                    end: "bottom bottom",
-                    scrub: 1,
-                },
-            });
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        });
 
-            tl.to(
-                media,
-                {
-                    top: 0,
-                    right: 0,
-                    width: "100vw",
-                    height: "100vh",
-                    ease: "none",
-                    duration: 0.58,
-                },
-                0,
-            )
-                .to(
-                    image,
-                    {
-                        scale: 1.05,
-                        ease: "none",
-                        duration: 1,
-                    },
-                    0,
-                )
-                .to(
-                    text,
-                    {
-                        x: -80,
-                        opacity: 0,
-                        ease: "none",
-                        duration: 0.2,
-                    },
-                    0.3,
-                );
-        }, section);
+        tl.to(
+          media,
+          {
+            width: "100vw",
+            height: "100vh",
+            top: 0,
+            right: 0,
+            ease: "none",
+            duration: 0.58,
+          },
+          0
+        )
+          .to(
+            image,
+            {
+              scale: 1.05,
+              ease: "none",
+              duration: 1,
+            },
+            0
+          )
+          .to(
+            text,
+            {
+              x: -80,
+              opacity: 0,
+              ease: "none",
+              duration: 0.2,
+            },
+            0.3
+          );
+      });
 
-        return () => ctx.revert();
-    }, [loaded]);
+      mm.add("(max-width: 799px)", () => {
+        gsap.set(media, {
+          top: "auto",
+          right: "0px",
+          bottom: "0px",
+          left: "0px",
+          width: "100vw",
+          height: "38vh",
+          y: 0,
+        });
+
+        gsap.set(text, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+        });
+
+        gsap.set(image, {
+          scale: 1,
+        });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom 70%",
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        tl.to(
+          media,
+          {
+            height: "100vh",
+            bottom: 0,
+            ease: "none",
+            duration: 0.65,
+          },
+          0
+        )
+          .to(
+            image,
+            {
+              scale: 1.06,
+              ease: "none",
+              duration: 1,
+            },
+            0
+          )
+          .to(
+            text,
+            {
+              y: -50,
+              opacity: 0,
+              ease: "none",
+              duration: 0.16,
+            },
+            0.12
+          );
+      });
+
+      return () => mm.revert();
+    }, section);
+
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener("load", refresh);
+    window.addEventListener("resize", refresh);
+
+    return () => {
+      window.removeEventListener("load", refresh);
+      window.removeEventListener("resize", refresh);
+      ctx.revert();
+    };
+  }, [loaded]);
 
     return (
         <section ref={sectionRef} className={`home_hero-wrapper ${loaded ? "is-loaded" : "is-hidden"}`}>

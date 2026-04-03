@@ -1,3 +1,9 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
 :root {
     --cream: #e6e2da;
     --cream-5-pos: #e7e3dc;
@@ -11,9 +17,11 @@
     --max-width: 1720px;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+
 
 body {
+    max-width: 100dvw;
+    overflow-x: hidden;
     background-color: var(--black);
     /* padding: 30px 0; */
     margin: 0;
@@ -25,8 +33,6 @@ main {
         margin: auto;
     }
 }
-
-
 
 
 section.w_padding {
