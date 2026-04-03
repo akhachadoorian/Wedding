@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "../../css/globals/navigation.css"
 import Logo from "../../assets/Logo.svg";
 import { Link } from "react-router-dom";
 import { useLenis } from "../../context/LenisContext";
@@ -65,7 +65,7 @@ function Navigation({}) {
                     ))}
                 </nav>
 
-                <ListIcon size={40} color="var(--cream)" onClick={() => setMobileOpen(true)} style={{ cursor: "pointer" }} />
+                <ListIcon id="mobile_nav_btn" size={40} color="var(--cream)" onClick={() => setMobileOpen(true)} style={{ cursor: "pointer" }} />
             </div>
 
             <div className={mobileOpen ? "mobile_nav-wrapper open" : "mobile_nav-wrapper"}>

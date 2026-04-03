@@ -1,0 +1,137 @@
+.hero-v2 {
+  position: relative;
+  height: 220vh;
+  /* background: #ffffff; */
+}
+
+.hero-v2__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  /* background: #ffffff; */
+}
+
+.hero-v2__text-shell {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1280px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.hero-v2__content {
+  position: absolute;
+  top: 50%;
+  left: 32px;
+  width: min(42%, 34rem);
+  transform: translateY(-50%);
+  will-change: transform, opacity;
+}
+
+.hero-v2__title {
+  margin: 0 0 16px;
+  font-size: clamp(2.75rem, 5vw, 5rem);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.hero-v2__text {
+  max-width: 38rem;
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #5a5a5a;
+}
+
+.hero-v2__buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.hero-v2__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: transform 0.2s ease;
+}
+
+.hero-v2__button:hover {
+  transform: translateY(-2px);
+}
+
+.hero-v2__button--primary {
+  background: #111111;
+  color: #ffffff;
+}
+
+.hero-v2__button--secondary {
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid #d6d6d6;
+}
+
+.hero-v2__media {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  width: 50vw;
+  height: 100vh;
+  overflow: hidden;
+  will-change: width, border-radius;
+}
+
+.hero-v2__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+@media (max-width: 991px) {
+  .hero-v2__content {
+    width: min(48%, 30rem);
+  }
+
+  .hero-v2__text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-v2 {
+    height: 180vh;
+  }
+
+  .hero-v2__text-shell {
+    padding: 0 20px;
+  }
+
+  .hero-v2__content {
+    left: 20px;
+    width: min(78%, 24rem);
+  }
+
+  .hero-v2__buttons {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .hero-v2__button {
+    padding: 12px 18px;
+  }
+
+  .hero-v2__media {
+    width: 55vw;
+  }
+}

@@ -7,23 +7,26 @@
 
     --black: #101111;
     --black-5-pos: #191a1a;
+
+    --max-width: 1600px;
+    --max-width-padding: 1720px;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
 
 body {
     background-color: var(--black);
-    padding: 30px 0;
+    /* padding: 30px 0; */
 }
 
 main {
     @media all and (min-width: 800px) {
-        max-width: calc(1600px + 120px);
+        /* max-width: calc(1600px + 120px); */
         margin: auto;
     }
 }
 
-header,
+/* header,
 footer {
     padding: 0px 16px;
 
@@ -33,9 +36,9 @@ footer {
 
         padding: 0px 60px;
     }
-}
+} */
 
-section {
+section.w_padding {
     padding: 60px 16px;
 
     @media all and (min-width: 800px) {

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import Eyebrow from "./Eyebrow";
+import Eyebrow from "../components/Eyebrow";
 import HeroImg from "../assets/ArchedImage.png";
 import gsap from "gsap";
 

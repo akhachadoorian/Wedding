@@ -1,13 +1,13 @@
 import React from "react";
 
-import Hero from "../components/Hero";
+import Hero from "../unused/Hero";
 import Copy from "../components/Copy";
 import LineSeparatedContent from "../components/LineSeparatedContent";
 import Timeline from "../components/Timeline";
 
 import { useFadeInOnScroll } from "../hooks/useFadeInOnScroll";
-
-
+import HomeHero from "../components/HomeHero";
+import HeroV2 from "../unused/HeroV2";
 
 function Wedding() {
     const infoRef = useFadeInOnScroll();
@@ -22,7 +22,9 @@ function Wedding() {
 
     return (
         <div className="wedding">
-            <Hero />
+            {/* <Hero /> */}
+            {/* <HeroV2 /> */}
+            <HomeHero />
 
             <section ref={infoRef} className="info-section">
                 <Copy 
