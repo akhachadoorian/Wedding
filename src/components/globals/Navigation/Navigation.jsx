@@ -48,8 +48,8 @@ function Navigation({}) {
     );
 
     return (
-        // <header className={navClass}>
-        <header className="nav-default">
+        <header className={navClass}>
+        {/* <header className="nav-default"> */}
             <div className="navigation-wrapper">
                 <a href="/" className="">
                     <img src={Logo} alt="M and A separated by an ampersand" />

@@ -14,7 +14,7 @@ function Wedding({loaded}) {
             <HomeHero  loaded={loaded} />
             {/* <OffsetHero loaded={loaded} /> */}
 
-            <section ref={infoRef} className="info-section w_padding">
+            <section ref={infoRef} className="info-section base_section">
                 <CopyOnly 
                     text={"<h2>Once upon a time, we found each other, and now we're counting down the days until we say <span class='gold-italic'>I do</span>. We would be thrilled to have you join us in this next chapter.</h2>"}
                 />

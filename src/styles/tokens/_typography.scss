@@ -1,69 +1,71 @@
-// :root {
-//   // Mobile (default)
-//   --font-size-heading-xxl: 47px;
-//   --font-size-heading-xl:  40px;
-//   --font-size-heading-l:   33px;
-//   --font-size-heading-m:   28px;
-//   --font-size-heading-s:   23px;
-//   --font-size-heading-xs:  19px;
-//   --font-size-body:        16px;
-//   --font-size-body-s:      13px;
-//   --font-size-body-xs:     11px;
-//   --font-size-eyebrow:     15px;
-// }
-
-// @media (min-width: #{$bp-tablet}) {
-//   :root {
-//     // Tablet
-//     --font-size-heading-xxl: 70px;
-//     --font-size-heading-xl:  55px;
-//     --font-size-heading-l:   44px;
-//     --font-size-heading-m:   35px;
-//     --font-size-heading-s:   28px;
-//     --font-size-heading-xs:  23px;
-//     --font-size-body:        18px;
-//     --font-size-body-s:      14px;
-//     --font-size-body-xs:     12px;
-//     --font-size-eyebrow:     16px;
-//   }
-// }
-
-// @media (min-width: #{$bp-desktop}) {
-//   :root {
-//     // Desktop
-//     --font-size-heading-xxl: 92px;
-//     --font-size-heading-xl:  73px;
-//     --font-size-heading-l:   59px;
-//     --font-size-heading-m:   47px;
-//     --font-size-heading-s:   38px;
-//     --font-size-heading-xs:  30px;
-//     --font-size-body:        24px;
-//     --font-size-body-s:      19px;
-//     --font-size-body-xs:     15px;
-//     --font-size-eyebrow:     18px;
-//   }
-// }
-
-@use 'sass:math';
-
-// Viewport range your type scales across
-$fluid-min-vp: 500;
-$fluid-max-vp: 1440;
-
-@function fluid($min, $max) {
-  $slope: math.div($max - $min, $fluid-max-vp - $fluid-min-vp) * 100;
-  @return clamp(#{$min}px, #{$slope}vw, #{$max}px);
-}
+@use '../mixins' as *;
 
 :root {
-  --font-size-heading-xxl: #{fluid(47, 92)};
-  --font-size-heading-xl:  #{fluid(40, 73)};
-  --font-size-heading-l:   #{fluid(33, 59)};
-  --font-size-heading-m:   #{fluid(28, 47)};
-  --font-size-heading-s:   #{fluid(23, 38)};
-  --font-size-heading-xs:  #{fluid(19, 30)};
-  --font-size-body:        #{fluid(16, 24)};
-  --font-size-body-s:      #{fluid(13, 19)};
-  --font-size-body-xs:     #{fluid(11, 15)};
-  --font-size-eyebrow:     #{fluid(15, 18)};
+  // Mobile (default)
+  --font-size-heading-xxl: 47px;
+  --font-size-heading-xl:  40px;
+  --font-size-heading-l:   33px;
+  --font-size-heading-m:   28px;
+  --font-size-heading-s:   23px;
+  --font-size-heading-xs:  19px;
+  --font-size-body:        16px;
+  --font-size-body-s:      13px;
+  --font-size-body-xs:     11px;
+  --font-size-eyebrow:     15px;
 }
+
+@include big {
+  :root {
+    // Tablet
+    --font-size-heading-xxl: 70px;
+    --font-size-heading-xl:  55px;
+    --font-size-heading-l:   44px;
+    --font-size-heading-m:   35px;
+    --font-size-heading-s:   28px;
+    --font-size-heading-xs:  23px;
+    --font-size-body:        18px;
+    --font-size-body-s:      14px;
+    --font-size-body-xs:     12px;
+    --font-size-eyebrow:     16px;
+  }
+}
+
+@media (min-width: #{$bp-desktop}) {
+  :root {
+    // Desktop
+    --font-size-heading-xxl: 92px;
+    --font-size-heading-xl:  73px;
+    --font-size-heading-l:   59px;
+    --font-size-heading-m:   47px;
+    --font-size-heading-s:   38px;
+    --font-size-heading-xs:  30px;
+    --font-size-body:        24px;
+    --font-size-body-s:      19px;
+    --font-size-body-xs:     15px;
+    --font-size-eyebrow:     18px;
+  }
+}
+
+// @use 'sass:math';
+
+// // Viewport range your type scales across
+// $fluid-min-vp: 500;
+// $fluid-max-vp: 1440;
+
+// @function fluid($min, $max) {
+//   $slope: math.div($max - $min, $fluid-max-vp - $fluid-min-vp) * 100;
+//   @return clamp(#{$min}px, #{$slope}vw, #{$max}px);
+// }
+
+// :root {
+//   --font-size-heading-xxl: #{fluid(47, 92)};
+//   --font-size-heading-xl:  #{fluid(40, 73)};
+//   --font-size-heading-l:   #{fluid(33, 59)};
+//   --font-size-heading-m:   #{fluid(28, 47)};
+//   --font-size-heading-s:   #{fluid(23, 38)};
+//   --font-size-heading-xs:  #{fluid(19, 30)};
+//   --font-size-body:        #{fluid(16, 24)};
+//   --font-size-body-s:      #{fluid(13, 19)};
+//   --font-size-body-xs:     #{fluid(11, 15)};
+//   --font-size-eyebrow:     #{fluid(15, 18)};
+// }

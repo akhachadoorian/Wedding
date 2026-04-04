@@ -7,13 +7,13 @@
         flex-direction: column;
 
         @include big  {
-            gap: 120px;
+            gap: calc(var(--space_1000) * 1.5);
         }
 
         .lines {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: var(--layout-column-gutter);
         }
     }
 }

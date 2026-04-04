@@ -1,14 +1,13 @@
 
 @use '../mixins' as *;
 
-
 :root {
   // Mobile first (default)
   --layout-column-margin:    16px;
   --layout-column-gutter:    16px;
   --layout-section-padding:  64px;
-//   --layout-container-max-width: 1280px;
-//   --layout-content-max-width:   720px;
+  --layout-content-width: calc(var(--max-width) - (var(--layout-column-margin) * 2));
+  --layout-container-max-width: var(--max-width);
 }
 
 @include big {

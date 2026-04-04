@@ -208,8 +208,8 @@ export default function HomeHero({ loaded }) {
             <div className="home_hero-sticky">
                 <div className="home_hero-text-shell">
                     <div ref={textRef} className="home_hero-text">
-                        <div ref={eyebrowRef}>
-                            <Eyebrow variation="centered" color="gold" text="Saturday Oct, 31, 2026 — Halloween" />
+                        <div className="eyebrow_wrapper" ref={eyebrowRef}>
+                            <Eyebrow variation="left" color="gold" text="Saturday Oct, 31, 2026" />
                         </div>
 
                         <h1 ref={h1Ref} className="home_hero-title">
