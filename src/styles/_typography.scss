@@ -1,77 +1,86 @@
 @use "./variables" as *;
 
-// ── Paragraph ──────────────────────────────────────────────
+// ── Base resets ──────────────────────────────────────────────
 
 p {
-    margin: 0;
-    color: var(--cream);
+  margin: 0;
+  color: var(--cream);
 }
 
-// ── Headings  ──────────────────────────────────────────────
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    margin: 0;
-    color: var(--cream);
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  color: var(--cream);
 }
 
-%heading-xl-base {
-    font-family: $font-serif;
-    font-size: clamp(60px, 27.778vw, 70px);
-    font-weight: 400;
-    line-height: 120%;
+// ── Heading placeholders ──────────────────────────────────────
+
+%heading-base {
+  font-family: $font-serif;
+  font-weight: 400;
+  line-height: 120%;
 }
 
-%heading-l-base {
-    font-family: $font-serif;
-    font-size: clamp(60px, 4.444vw, 70px);
-    font-weight: 400;
-    line-height: 120%;
-}
+// ── Heading styles ────────────────────────────────────────────
 
 h1 {
-    font-family: $font-serif;
-    font-size: clamp(56px, 6.667vw, 100px);
-    font-weight: 400;
-    line-height: 100%;
+  @extend %heading-base;
+  font-size: var(--font-size-heading-xxl);
+  line-height: 100%;
 }
 
 h2,
-h1.heading_xl,
-h2.heading_xl,
-h3.heading_xl,
-h4.heading_xl,
-h5.heading_xl,
-h6.heading_xl,
-p.heading_xl {
-    @extend %heading-xl-base;
+.heading-xl {
+  @extend %heading-base;
+  font-size: var(--font-size-heading-xl);
 }
+
+h3,
+.heading-l {
+  @extend %heading-base;
+  font-size: var(--font-size-heading-l);
+}
+
+h4,
+.heading-m {
+  @extend %heading-base;
+  font-size: var(--font-size-heading-m);
+}
+
+h5,
+.heading-s {
+  @extend %heading-base;
+  font-size: var(--font-size-heading-s);
+}
+
+h6,
+.heading-xs {
+  @extend %heading-base;
+  font-size: var(--font-size-heading-xs);
+}
+
+// ── Body ──────────────────────────────────────────────────────
+
+.body-s  { font-size: var(--font-size-body-s); }
+.body-xs { font-size: var(--font-size-body-xs); }
+
+// ── Eyebrow ───────────────────────────────────────────────────
+
+.eyebrow {
+  font-family: $font-sans;
+  font-size: var(--font-size-eyebrow);
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+
+  &.centered { text-align: center; }
+  &.gold  { color: var(--gold); }
+  &.white { color: var(--cream); }
+}
+
+// ── Utilities ─────────────────────────────────────────────────
 
 .gold-italic {
-    color: var(--gold);
-    font-style: italic;
-}
-
-// ── Eyebrow ──────────────────────────────────────────────
-.eyebrow {
-    font-family: $font-sans;
-    font-size: clamp(18px, 1.25vw, 20px);
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-
-    &.centered {
-        text-align: center;
-    }
-    &.gold {
-        color: var(--gold);
-    }
-    &.white {
-        color: var(--cream);
-    }
+  color: var(--gold);
+  font-style: italic;
 }

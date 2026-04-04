@@ -12,13 +12,3 @@ main {
         margin: auto;
     }
 }
-
-section.w_padding {
-    padding: 60px 16px;
-
-    @include big  {
-        padding: 160px 60px;
-        max-width: var(--max-width);
-        margin: auto;
-    }
-}
