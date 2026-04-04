@@ -61,10 +61,10 @@ header {
     }
 
     &.nav-default {
-        margin-bottom: $pad-s-m;
+        margin-bottom: var(--space_600);
 
         @include big {
-            margin-bottom: $pad-s-d;
+            margin-bottom: var(--space_600);
         }
     }
 }

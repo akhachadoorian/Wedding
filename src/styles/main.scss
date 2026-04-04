@@ -5,10 +5,11 @@
 @use "./typography";
 @use "./utilities";
 @use "./placeholders";
-
+@use "./mixins";
 
 // ── Pages ──────────────────────────────────────────────
 
-@use "./pages/wedding"
+@use "./pages/wedding";
+
 
 

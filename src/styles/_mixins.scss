@@ -1,0 +1,32 @@
+
+// ──── Breakpoints  ───────────────────────────────────
+
+$bp-mobile: 500px;
+$bp-tablet: 800px;
+$bp-desktop: 1024px;
+
+// ── Mixins  ───────────────────────────────────
+
+@mixin big($breakpoint: $bp-tablet) {
+    @media (min-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin small($breakpoint: $bp-tablet) {
+    @media (max-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin mini($breakpoint: $bp-mobile) {
+    @media (max-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin breakpx($min, $max) {
+    @media all and (min-width: $min) and (max-width: $max) {
+        @content;
+    }
+}

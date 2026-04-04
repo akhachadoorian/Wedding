@@ -1,3 +1,4 @@
+@forward 'mixins';
 @forward 'tokens/spacing';
 @forward 'tokens/layout';
 @forward 'tokens/typography';
@@ -34,62 +35,3 @@ $black: #101111;
 
 $overlay-bg: rgba($black, 0.3);
 
-// ──── Breakpoints  ───────────────────────────────────
-
-$bp-mobile: 500px;
-$bp-tablet: 800px;
-$bp-desktop: 1024px;
-
-// ── Mixins  ───────────────────────────────────
-
-@mixin big($breakpoint: $bp-tablet) {
-    @media (min-width: $breakpoint) {
-        @content;
-    }
-}
-
-@mixin small($breakpoint: $bp-tablet) {
-    @media (max-width: $breakpoint) {
-        @content;
-    }
-}
-
-@mixin mini($breakpoint: $bp-mobile) {
-    @media (max-width: $breakpoint) {
-        @content;
-    }
-}
-
-@mixin breakpx($min, $max) {
-    @media all and (min-width: $min) and (max-width: $max) {
-        @content;
-    }
-}
-
-// @mixin set_side_padding($desktop: $side-pad-d, $mobile: $side-pad-m) {
-//     padding-left: $mobile;
-//     padding-right: $mobile;
-
-//     @include big {
-//         padding-left: $desktop;
-//         padding-right: $desktop;
-//     }
-// }
-
-// @mixin set_vertical_padding($desktop: $pad-l-d, $mobile: $pad-l-m) {
-//     padding-top: $desktop;
-//     padding-bottom: $desktop;
-
-//     @include small {
-//         padding-top: $mobile;
-//         padding-bottom: $mobile;
-//     }
-// }
-
-// @mixin set_padding($desktop_v: $pad-l-d, $mobile_v: $pad-l-m, $desktop_h: $side-pad-d, $mobile_h: $side-pad-m) {
-//     padding: $desktop_v $desktop_h;
-
-//     @include small {
-//         padding: $mobile_v $mobile_h;
-//     }
-// }

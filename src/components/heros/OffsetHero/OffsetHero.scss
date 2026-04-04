@@ -50,7 +50,7 @@
 
         text-align: center;
         background-color: var(--black-5-pos);
-        padding: 45px $side-pad-m 60px $side-pad-m;
+        padding: 45px var(--layout-column-margin) 60px var(--layout-column-margin);
 
         @include big {
             flex: 1 1 929px;
@@ -92,11 +92,11 @@
 
         &.right {
             .offset_hero-text {
-                margin-right: $pad-s-m;
+                margin-right: var(--layout-column-gutter);
             }
 
             .offset_hero-img {
-                margin-left: $pad-s-m;
+                margin-left: var(--layout-column-gutter);
             }
 
             @include big {
