@@ -1,0 +1,99 @@
+@use "../../styles/variables" as *;
+
+.arrow_box-wrapper {
+    padding: var(--space_025, 2px);
+    border-radius: 4px;
+    border: 1px solid var(--Cream-cream-500, #e6e2da);
+    transition: $transition;
+
+    width: 20px;
+    height: 20px;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .arrow_box-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+
+        transform: translateX(-18px);
+        transition: $transition;
+    }
+
+    .arrow_box-inner {
+        width: 18px;
+        height: 18px;
+        aspect-ratio: 1;
+
+        position: relative;
+    }
+
+    .arrow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 18px;
+        height: 18px;
+        aspect-ratio: 1;
+
+        svg path {
+            transition: $transition;
+        }
+    }
+    .arrow.start {
+        grid-column: 2/2;
+        grid-row: 1/1;
+    }
+
+    .arrow.end {
+        grid-column: 1/1;
+        grid-row: 2/2;
+    }
+
+    // &:hover {
+    //     .arrow_box-grid {
+    //         transform: translate(0, -18px);
+    //     }
+    // }
+}
+
+// .arrow-wrapper {
+//     padding: var(--space_025, 2px);
+//     border-radius: 4px;
+//     border: 1px solid var(--Cream-cream-500, #e6e2da);
+
+//     width: 20px;
+//     height: 20px;
+//     aspect-ratio: 1;
+//     flex-shrink: 0;
+//     overflow: hidden;
+
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+
+// .arrow-inner {
+//     width: 18px;
+//     height: 18px;
+//     aspect-ratio: 1;
+
+//         background-image: url("../../assets/ArrowsCarots/ArrowGrid.svg");
+//         background-position: top right;
+
+//         transition: $transition;
+//     }
+
+// }
+
+// &:hover {
+//         .arrow-wrapper .arrow-inner {
+//             background-position: bottom left;
+//         }
+//     }

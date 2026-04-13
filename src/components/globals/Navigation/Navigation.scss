@@ -66,7 +66,7 @@ header {
     z-index: 100;
 
     @include big {
-        max-width: 60vw;
+        max-width: clamp(800px, 60.417vw, 870px);
         margin: auto;
         padding: var(--space_200, 16px);
 
@@ -211,10 +211,42 @@ header {
                     padding: var(--space_200, 16px);
                     background: var(--Black-black-800, #272828);
                     border-radius: 6px;
+                    text-decoration: none;
 
                     display: flex;
                     flex-direction: column;
                     gap: var(--space_100);
+                    transition: $transition;
+
+                    .dd-text_wrapper {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        gap: var(--layout-column-gutter);
+
+                        .dd-text {
+                            @extend %nav-link-uppercase;
+                            transition: $transition;
+                        }
+                    }
+
+                    &:hover {
+                        .arrow_box-wrapper {
+                            border-color: $gold;
+
+                            .arrow_box-inner .arrow_box-grid {
+                                transform: translate(0, -18px);
+
+                                .arrow svg path {
+                                    fill: $gold;
+                                }
+                            }
+                        }
+
+                        .dd-text {
+                            color: $gold;
+                        }
+                    }
                 }
             }
 

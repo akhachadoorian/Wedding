@@ -19,11 +19,7 @@ export const NAV_ITEMS = [
       { kind: "link" as const, text: "Timeline", link: "/details#timeline" },
     ]
   },
-  { kind: "dropdown" as const, text: "Accommodations", link: "/accommodations",
-    children: [
-      { kind: "link" as const, text: "Hotels", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." ,link: "/accommodations#hotels" },
-    ]
-   },
+  { kind: "link" as const, text: "Accommodations", link: "/accommodations" },
   { kind: "link" as const, text: "Registry", link: "/registry" },
   { kind: "link" as const, text: "RSVP", link: "/rsvp" },
 ] satisfies NavItem[]

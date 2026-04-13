@@ -7,6 +7,7 @@ import type { NavItem, NavDropdown } from "../../../types/navigation";
 import { ListIcon, XIcon } from "@phosphor-icons/react";
 
 import "./Navigation.scss";
+import ArrowBox from "../../ArrowBox/ArrowBox";
 
 function renderNavItem(item: NavItem, onNavigate: () => void, openDropdown: string | null, toggleDropdown: (name: string) => void, closeDropdown: () => void) {
     if (item.kind === "dropdown") {
@@ -38,8 +39,12 @@ function renderDropdown(item: NavDropdown, onNavigate: () => void, isOpen: boole
         <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className={`dropdown ${isOpen ? "open" : ""}`} id={`dd-${item.text}`}>
             <div className="dropdown-inner">
                 {item.children.map((child) => (
-                    <Link key={child.link} to={child.link} className="nav-link dd-link" onClick={onNavigate}>
-                        <p className="nav-text">{child.text}</p>
+                    <Link key={child.link} to={child.link} className="dd-link" onClick={onNavigate}>
+                        <div className="dd-text_wrapper">
+                            <p className="dd-text">{child.text}</p>
+
+                            <ArrowBox />
+                        </div>
 
                         {child.body && <p className="dd-body body-xs">{child.body}</p>}
                     </Link>
