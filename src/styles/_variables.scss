@@ -97,3 +97,10 @@ $black: $black-1000;
 
 // ──── Utility ─────────────────────────────────
 $overlay-bg: rgba(#101111, 0.3);
+$border-radius: 8px;
+$transition: all ease-in-out 300ms;
+
+// ──── Setup ─────────────────────────────────
+body {
+    color: $cream;
+}

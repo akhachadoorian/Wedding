@@ -10,7 +10,7 @@ import { LenisContext } from "./context/LenisContext";
 
 import Footer from "./components/globals/Footer/Footer";
 import LoadingScreen from "./components/globals/LoadingScreen/LoadingScreen";
-import Navigation from "./components/globals/Navigation/Navigation";
+import Navigation from "./components/globals/Navigation/Navigation.tsx";
 
 import Accommodations from "./pages/Accommodations";
 import Details from "./pages/Details";

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLenis } from "../../../context/LenisContext";
-import { NAV_ITEMS } from "../../../constants/navItems";
+// import { NAV_ITEMS } from "../../../constants/navItems";
 
 import './Footer.scss';
 
@@ -24,7 +24,7 @@ function Footer({}) {
                     </h5>
                 </div>
                 <div className="footer-right">
-                    {NAV_ITEMS.map((n, idx) => (
+                    {/* {NAV_ITEMS.map((n, idx) => (
                         <React.Fragment key={idx}>
                             <Link
                                 to={n.link || "/"}
@@ -39,7 +39,7 @@ function Footer({}) {
                                 <p>{n.text}</p>
                             </Link>
                         </React.Fragment>
-                    ))}
+                    ))} */}
                 </div>
             </div>
         </footer>
