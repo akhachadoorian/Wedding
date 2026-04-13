@@ -1,0 +1,20 @@
+@use "../../styles/variables" as *;
+
+
+.diamond-wrapper {
+    width: var(--diamond-mobile-size);
+    height: var(--diamond-mobile-size);
+    flex: 0 0 var(--diamond-mobile-size);
+    aspect-ratio: 1;
+
+    @include big {
+        width: var(--diamond-size);
+        height: var(--diamond-size);
+        flex: 0 0 var(--diamond-size);
+    }
+
+    svg.diamond {
+        width: 100%;
+        height: 100%;
+    }
+}

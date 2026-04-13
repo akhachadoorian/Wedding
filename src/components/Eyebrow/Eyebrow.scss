@@ -19,12 +19,12 @@
         background-color: var(--gold-500);
     }
 
-    .diamond {
-        $size: clamp(16px, 1.111vw, 18px);
-        flex: 0 0 $size;
-        width: $size;
-        height: $size;
-    }
+    // .diamond {
+    //     $size: clamp(16px, 1.111vw, 18px);
+    //     flex: 0 0 $size;
+    //     width: $size;
+    //     height: $size;
+    // }
 
     .diamond_underline-wrapper {
         display: flex;
