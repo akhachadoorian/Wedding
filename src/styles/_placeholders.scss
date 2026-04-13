@@ -1,12 +1,12 @@
 @use "./variables" as *;
 
 %nav-link-base {
-    color: var(--cream);
+    color: var(--cream-500);
     text-decoration: none;
     transition: all ease-in-out 300ms;
 
     &:hover {
-        color: var(--gold);
+        color: var(--gold-500);
     }
 }
 
@@ -25,7 +25,7 @@
 
     &::after {
         content: "";
-        background-color: var(--gold);
+        background-color: var(--gold-500);
         height: 1px;
         width: 0;
         transition: all ease-in-out 300ms;

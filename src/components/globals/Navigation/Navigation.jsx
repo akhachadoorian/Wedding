@@ -75,12 +75,12 @@ function Navigation({}) {
                     ))}
                 </nav>
 
-                <ListIcon id="mobile_nav_btn" size={40} color="var(--cream)" onClick={() => setMobileOpen(true)} style={{ cursor: "pointer" }} />
+                <ListIcon id="mobile_nav_btn" size={40} color="var(--cream-500)" onClick={() => setMobileOpen(true)} style={{ cursor: "pointer" }} />
             </div>
 
             <div className={mobileOpen ? "mobile_nav-wrapper open" : "mobile_nav-wrapper"}>
                 <div className="mobile_nav-inner">
-                    <XIcon className="close_icon" size={40} color="var(--cream)" onClick={() => setMobileOpen(false)} style={{ cursor: "pointer" }} />
+                    <XIcon className="close_icon" size={40} color="var(--cream-500)" onClick={() => setMobileOpen(false)} style={{ cursor: "pointer" }} />
 
                     <nav className="mobile_nav">
                         {NAV_ITEMS.map((n, idx) => (

@@ -6,32 +6,94 @@
 // ── Google Fonts ───────────────────────────────────
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-// ── CSS custom properties  ───────────────────────────────────
+// ── CSS custom properties (primitives) ───────────────────────
 :root {
-    --cream: #e6e2da;
-    --cream-5-pos: #e7e3dc;
+    // Gold scale
+    --gold-100: #F4EFE6;
+    --gold-200: #E8DECF;
+    --gold-250: #DDCFB9;
+    --gold-300: #D2BFA2;
+    --gold-400: #C0A57D;
+    --gold-500: #A6824A;
+    --gold-600: #87693B;
+    --gold-700: #6B532E;
+    --gold-800: #523F22;
+    --gold-850: #41311A;
+    --gold-900: #302413;
+    --gold-1000: #20160B;
 
-    --gold: #a6824a;
-    --gold-5-pos: #aa8853;
+    // Cream scale
+    --cream-100: #F5F2EE;
+    --cream-300: #EDE9E3;
+    --cream-500: #E6E2DA;
+    --cream-700: #CEC9C0;
+    --cream-900: #B0AA9F;
 
-    --black: #101111;
-    --black-5-pos: #1f2121;
+    // Gray scale
+    --gray-300: #B9B3AF;
+    --gray-500: #6E6560;
+    --gray-700: #46423F;
+    --gray-900: #1F1F1E;
+
+    // Black scale
+    --black-800: #4A4542;
+    --black-850: #2E2B2B;
+    --black-900: #1F2121;
+    --black-950: #161818;
+    --black-1000: #101111;
 
     --max-width: 1720px;
 }
 
-// ── SCSS variables ───────────────────────────────────
+// ── SCSS variables ────────────────────────────────────────────
 
-// ──── Font  ───────────────────────────────────
+// ──── Fonts ───────────────────────────────────
 $font-serif: "Instrument Serif", serif;
-$font-sans: "Inter", sans-serif;
+$font-sans:  "Inter", sans-serif;
+$font-mono: "Space Mono", mono;
 
-// ──── Colors  ───────────────────────────────────
+// ──── Color primitives ────────────────────────
+// Gold
+$gold-100:  var(--gold-100);
+$gold-200:  var(--gold-200);
+$gold-250:  var(--gold-250);
+$gold-300:  var(--gold-300);
+$gold-400:  var(--gold-400);
+$gold-500:  var(--gold-500);
+$gold-600:  var(--gold-600);
+$gold-700:  var(--gold-700);
+$gold-800:  var(--gold-800);
+$gold-850:  var(--gold-850);
+$gold-900:  var(--gold-900);
+$gold-1000: var(--gold-1000);
 
-$gold: #a6824a;
-$cream: #e6e2da;
-$black: #101111;
+// Cream
+$cream-100: var(--cream-100);
+$cream-300: var(--cream-300);
+$cream-500: var(--cream-500);
+$cream-700: var(--cream-700);
+$cream-900: var(--cream-900);
 
-$overlay-bg: rgba($black, 0.3);
+// Gray
+$gray-300:  var(--gray-300);
+$gray-500:  var(--gray-500);
+$gray-700:  var(--gray-700);
+$gray-900:  var(--gray-900);
 
+// Black
+$black-800:  var(--black-800);
+$black-850:  var(--black-850);
+$black-900:  var(--black-900);
+$black-950:  var(--black-950);
+$black-1000: var(--black-1000);
+
+// ──── Semantic aliases ────────────────────────
+// Keep these for quick access to your most-used values
+$gold:  $gold-500;
+$cream: $cream-500;
+$black: $black-1000;
+
+// ──── Utility ─────────────────────────────────
+$overlay-bg: rgba(#101111, 0.3);

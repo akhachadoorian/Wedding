@@ -12,7 +12,7 @@
     --gold-5-pos: #aa8853;
 
     --black: #101111;
-    --black-5-pos: #191a1a;
+    --black-900: #191a1a;
 
     --max-width: 1720px;
 }
@@ -22,7 +22,7 @@
 body {
     max-width: 100dvw;
     overflow-x: hidden;
-    background-color: var(--black);
+    background-color: var(--black-1000);
     /* padding: 30px 0; */
     margin: 0;
 }
@@ -81,7 +81,7 @@ p.heading_xl {
 }
 
 .gold-italic {
-    color: var(--gold);
+    color: var(--gold-500);
     font-style: italic;
 }
 
@@ -103,11 +103,11 @@ p.heading_xl {
     }
 
     &.gold {
-        color: var(--gold);
+        color: var(--gold-500);
     }
 
     &.white {
-        color: var(--cream);
+        color: var(--cream-500);
     }
 }
 
@@ -124,13 +124,13 @@ p.heading_xl {
     }
 
     &.gold {
-        color: var(--gold);
+        color: var(--gold-500);
     }
 
     .diamond_underline {
         height: 1px;
         width: 100px;
-        background-color: var(--gold);
+        background-color: var(--gold-500);
     }
 
     .diamond {

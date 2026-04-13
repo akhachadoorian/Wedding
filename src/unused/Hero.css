@@ -4,7 +4,7 @@
 
 .hero-section {
     .hero-wrapper {
-        background-color: var(--black-5-pos);
+        background-color: var(--black-900);
         padding: 0 30px;
 
         display: flex;

@@ -2,47 +2,59 @@
 
 :root {
   // Mobile (default)
-  --font-size-heading-xxl: 47px;
-  --font-size-heading-xl:  40px;
-  --font-size-heading-l:   33px;
-  --font-size-heading-m:   28px;
-  --font-size-heading-s:   23px;
-  --font-size-heading-xs:  19px;
-  --font-size-body:        16px;
-  --font-size-body-s:      13px;
-  --font-size-body-xs:     11px;
-  --font-size-eyebrow:     15px;
+  --heading-xxl: 55px;
+  --heading-xl:  48px;
+  --heading-l:   40px;
+  --heading-m:   36px;
+  --heading-s:   28px;
+  --heading-xs:  22px;
+
+  --body-l:      18px;
+  --body:        16px;
+  --body-s:      15px;
+  --body-xs:     13px;
+
+  --eyebrow:     18px;
+  --button:      18px;
 }
 
 @include big {
   :root {
     // Tablet
-    --font-size-heading-xxl: 70px;
-    --font-size-heading-xl:  55px;
-    --font-size-heading-l:   44px;
-    --font-size-heading-m:   35px;
-    --font-size-heading-s:   28px;
-    --font-size-heading-xs:  23px;
-    --font-size-body:        18px;
-    --font-size-body-s:      14px;
-    --font-size-body-xs:     12px;
-    --font-size-eyebrow:     16px;
+    --heading-xxl: 70px;
+    --heading-xl:  60px;
+    --heading-l:   44px;
+    --heading-m:   35px;
+    --heading-s:   28px;
+    --heading-xs:  23px;
+
+    --body-l:      20px;
+    --body:        18px;
+    --body-s:      16px;
+    --body-xs:     14px;
+
+    --eyebrow:     18px;
+    --button:      18px;
   }
 }
 
 @media (min-width: #{$bp-desktop}) {
   :root {
     // Desktop
-    --font-size-heading-xxl: 92px;
-    --font-size-heading-xl:  73px;
-    --font-size-heading-l:   59px;
-    --font-size-heading-m:   47px;
-    --font-size-heading-s:   38px;
-    --font-size-heading-xs:  30px;
-    --font-size-body:        24px;
-    --font-size-body-s:      19px;
-    --font-size-body-xs:     15px;
-    --font-size-eyebrow:     18px;
+    --heading-xxl: 92px;
+    --heading-xl:  73px;
+    --heading-l:   59px;
+    --heading-m:   47px;
+    --heading-s:   36px;
+    --heading-xs:  24px;
+
+    --body-l:      20px;
+    --body:        18px;
+    --body-s:      16px;
+    --body-xs:     14px;
+
+    --eyebrow:     20px;
+    --button:      20px;
   }
 }
 
@@ -58,14 +70,14 @@
 // }
 
 // :root {
-//   --font-size-heading-xxl: #{fluid(47, 92)};
-//   --font-size-heading-xl:  #{fluid(40, 73)};
-//   --font-size-heading-l:   #{fluid(33, 59)};
-//   --font-size-heading-m:   #{fluid(28, 47)};
-//   --font-size-heading-s:   #{fluid(23, 38)};
-//   --font-size-heading-xs:  #{fluid(19, 30)};
-//   --font-size-body:        #{fluid(16, 24)};
-//   --font-size-body-s:      #{fluid(13, 19)};
-//   --font-size-body-xs:     #{fluid(11, 15)};
-//   --font-size-eyebrow:     #{fluid(15, 18)};
+//   --heading-xxl: #{fluid(47, 92)};
+//   --heading-xl:  #{fluid(40, 73)};
+//   --heading-l:   #{fluid(33, 59)};
+//   --heading-m:   #{fluid(28, 47)};
+//   --heading-s:   #{fluid(23, 38)};
+//   --heading-xs:  #{fluid(19, 30)};
+//   --body:        #{fluid(16, 24)};
+//   --body-s:      #{fluid(13, 19)};
+//   --body-xs:     #{fluid(11, 15)};
+//   --eyebrow:     #{fluid(15, 18)};
 // }

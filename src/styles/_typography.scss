@@ -4,12 +4,12 @@
 
 p {
   margin: 0;
-  color: var(--cream);
+  color: var(--cream-500);
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  color: var(--cream);
+  color: var(--cream-500);
 }
 
 // ── Heading placeholders ──────────────────────────────────────
@@ -24,63 +24,63 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   @extend %heading-base;
-  font-size: var(--font-size-heading-xxl);
+  font-size: var(--heading-xxl);
   line-height: 100%;
 }
 
 h2,
 .heading-xl {
   @extend %heading-base;
-  font-size: var(--font-size-heading-xl);
+  font-size: var(--heading-xl);
 }
 
 h3,
 .heading-l {
   @extend %heading-base;
-  font-size: var(--font-size-heading-l);
+  font-size: var(--heading-l);
 }
 
 h4,
 .heading-m {
   @extend %heading-base;
-  font-size: var(--font-size-heading-m);
+  font-size: var(--heading-m);
 }
 
 h5,
 .heading-s {
   @extend %heading-base;
-  font-size: var(--font-size-heading-s);
+  font-size: var(--heading-s);
 }
 
 h6,
 .heading-xs {
   @extend %heading-base;
-  font-size: var(--font-size-heading-xs);
+  font-size: var(--heading-xs);
 }
 
 // ── Body ──────────────────────────────────────────────────────
 
-.body-s  { font-size: var(--font-size-body-s); }
-.body-xs { font-size: var(--font-size-body-xs); }
+.body-s  { font-size: var(--body-s); }
+.body-xs { font-size: var(--body-xs); }
 
 // ── Eyebrow ───────────────────────────────────────────────────
 
 .eyebrow {
   font-family: $font-sans;
-  font-size: var(--font-size-eyebrow);
+  font-size: var(--eyebrow);
   font-weight: 600;
   line-height: normal;
   letter-spacing: 0.9px;
   text-transform: uppercase;
 
   &.centered { text-align: center; }
-  &.gold  { color: var(--gold); }
-  &.white { color: var(--cream); }
+  &.gold  { color: var(--gold-500); }
+  &.white { color: var(--cream-500); }
 }
 
 // ── Utilities ─────────────────────────────────────────────────
 
 .gold-italic {
-  color: var(--gold);
+  color: var(--gold-500);
   font-style: italic;
 }
