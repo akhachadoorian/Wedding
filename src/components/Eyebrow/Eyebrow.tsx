@@ -5,7 +5,7 @@ import { ColorVariables } from "../../types/colors";
 import Diamond from "../Diamond/Diamond";
 
 type EyebrowProps = {
-    variation: "left" | "centered" | "double"
+    variation: "left" | "centered"
     color: ColorVariables
     text: string;
 };
