@@ -7,7 +7,7 @@
         flex-direction: column;
 
         @include big  {
-            gap: calc(var(--space_1000) * 1.5);
+            gap: calc(var(--space-1000) * 1.5);
         }
 
         .lines {

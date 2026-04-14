@@ -13,7 +13,7 @@
         &.is-hidden {
             .home_hero-text {
                 opacity: 0;
-                transform: translateY(var(--space_200));
+                transform: translateY(var(--space-200));
             }
 
             .home_hero-image {
@@ -37,7 +37,7 @@
     &-text-shell {
         position: relative;
         z-index: 1;
-        margin: var(--space_400) 0 0 0;
+        margin: var(--space-400) 0 0 0;
         width: 100%;
         height: 100%;
         max-width: 100dvw;
@@ -53,10 +53,10 @@
         flex-direction: column;
         // align-items: center;
         justify-content: center;
-        gap: var(--space_200);
+        gap: var(--space-200);
 
         background-color: var(--black-900);
-        padding: var(--space_750) var(--layout-column-margin);
+        padding: var(--space-750) var(--layout-column-margin);
 
         position: absolute;
         top: 0;
@@ -76,6 +76,12 @@
 
 
         .eyebrow_wrapper {
+            max-width: calc(var(--layout-content-width) / 2);
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .btn-wrapper {
             max-width: calc(var(--layout-content-width) / 2);
             margin: 0 auto;
             width: 100%;

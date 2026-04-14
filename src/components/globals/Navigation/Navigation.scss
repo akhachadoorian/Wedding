@@ -42,7 +42,7 @@ header {
 .navigation-wrapper {
     margin: 0 var(--layout-column-margin);
 
-    padding: var(--space_200);
+    padding: var(--space-200);
     border-radius: 10px;
     border: 1px solid var(--Black-black-800, #272828);
     background: var(--Black-black-900, #1f2121);
@@ -65,7 +65,7 @@ header {
         max-width: clamp(800px, 60.417vw, 870px);
         width: 100%;
         margin: auto;
-        padding: var(--space_200, 16px);
+        padding: var(--space-200, 16px);
 
         #mobile_nav_btn {
             display: none;
@@ -97,7 +97,7 @@ header {
         .navigation-left {
             display: flex;
             align-items: center;
-            gap: var(--space_025);
+            gap: var(--space-025);
 
             text-decoration: none;
 
@@ -141,7 +141,7 @@ header {
             .nav-link.has-dropdown {
                 display: flex;
                 align-items: center;
-                gap: var(--space_100);
+                gap: var(--space-100);
 
                 .caret-wrapper {
                     width: 17px;
@@ -197,7 +197,7 @@ header {
             .dropdown-inner {
                 display: flex;
                 flex-wrap: wrap;
-                gap: var(--space_200);
+                gap: var(--space-200);
 
                 overflow: hidden;
                 padding-top: 0;
@@ -205,14 +205,14 @@ header {
 
                 .dd-link {
                     flex: 1 0 232px;
-                    padding: var(--space_200, 16px);
+                    padding: var(--space-200, 16px);
                     background: var(--Black-black-800, #272828);
                     border-radius: 6px;
                     text-decoration: none;
 
                     display: flex;
                     flex-direction: column;
-                    gap: var(--space_100);
+                    gap: var(--space-100);
                     transition: $transition;
 
                     .dd-text_wrapper {
@@ -251,7 +251,7 @@ header {
                 grid-template-rows: 1fr;
 
                 .dropdown-inner {
-                    padding-top: var(--space_300);
+                    padding-top: var(--space-300);
                 }
             }
         }

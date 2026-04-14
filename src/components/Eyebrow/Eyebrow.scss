@@ -3,7 +3,7 @@
 .eyebrow-wrapper {
     display: flex;
     align-items: center;
-    gap: var(--space_100);
+    gap: var(--space-100);
     
     width: fit-content;
 
@@ -13,7 +13,7 @@
     }
 
     &.double {
-        gap: var(--space_150);
+        gap: var(--space-150);
     }
 
     &.gold { color: var(--gold-500); }

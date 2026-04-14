@@ -1,7 +1,7 @@
 @use "../../styles/variables" as *;
 
 .arrow_box-wrapper {
-    padding: var(--space_025, 2px);
+    padding: var(--space-025, 2px);
     border-radius: 4px;
     border: 1px solid var(--Cream-cream-500, #e6e2da);
     transition: $transition;
@@ -66,7 +66,7 @@
 }
 
 // .arrow-wrapper {
-//     padding: var(--space_025, 2px);
+//     padding: var(--space-025, 2px);
 //     border-radius: 4px;
 //     border: 1px solid var(--Cream-cream-500, #e6e2da);
 

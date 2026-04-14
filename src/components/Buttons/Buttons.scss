@@ -4,7 +4,7 @@
     .btn {
         display: flex;
         align-items: center;
-        gap: var(--space_150);
+        gap: var(--space-150);
 
         width: fit-content;
         text-decoration: none;
@@ -21,7 +21,7 @@
     }
 
     .btn.solid {
-        padding: var(--space_150, 12px) var(--space_300, 24px);
+        padding: var(--space-150, 12px) var(--space-300, 24px);
         border-radius: $default-br;
 
         &.gold {
@@ -50,7 +50,7 @@
     }
 
     .btn.outline {
-        padding: var(--space_150, 12px) var(--space_300, 24px);
+        padding: var(--space-150, 12px) var(--space-300, 24px);
         border-radius: $default-br;
         border: 2px solid;
 
@@ -80,8 +80,8 @@
     }
 
     .btn.lines {
-        // gap: var(--space_100);
-        padding: var(--space_100) var(--space_075);
+        // gap: var(--space-100);
+        padding: var(--space-100) var(--space-075);
 
         position: relative;
 

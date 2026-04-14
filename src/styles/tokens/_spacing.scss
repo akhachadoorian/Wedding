@@ -1,20 +1,20 @@
 :root {
-  --space_0:    0;
-  --space_025:  0.125rem;  // 2px
-  --space_050:  0.25rem;   // 4px
-  --space_075:  0.375rem;  // 6px
-  --space_100:  0.5rem;    // 8px
-  --space_150:  0.75rem;   // 12px
-  --space_200:  1rem;      // 16px
-  --space_250:  1.25rem;   // 20px
-  --space_300:  1.5rem;    // 24px
-  --space_400:  2rem;      // 32px
-  --space_500:  2.5rem;    // 40px
-  --space_600:  3rem;      // 48px
-  --space_700:  3.5rem;    // 56px
-  --space_750:  3.75rem;   // 60px
-  --space_800:  4rem;      // 64px
-  --space_1000: 5rem;      // 80px
+  --space-0:    0;
+  --space-025:  0.125rem;  // 2px
+  --space-050:  0.25rem;   // 4px
+  --space-075:  0.375rem;  // 6px
+  --space-100:  0.5rem;    // 8px
+  --space-150:  0.75rem;   // 12px
+  --space-200:  1rem;      // 16px
+  --space-250:  1.25rem;   // 20px
+  --space-300:  1.5rem;    // 24px
+  --space-400:  2rem;      // 32px
+  --space-500:  2.5rem;    // 40px
+  --space-600:  3rem;      // 48px
+  --space-700:  3.5rem;    // 56px
+  --space-750:  3.75rem;   // 60px
+  --space-800:  4rem;      // 64px
+  --space-1000: 5rem;      // 80px
 }
 
-// calc(var(--space_1000) * 1.5) == 120px
+// calc(var(--space-1000) * 1.5) == 120px

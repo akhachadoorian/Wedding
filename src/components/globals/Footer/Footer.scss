@@ -2,21 +2,50 @@
 @use "../../../styles/placeholders" as *;
 
 footer {
-    @include big  {
-        max-width: var(--max-width);
-        margin: 0 auto 60px auto;
+    padding: var(--space-750, 60px) var(--column-margin, 60px) var(--space-400, 32px) var(--column-margin, 60px);
+    background-color: var(--black-900);
+
+    @include big {
+        // max-width: var(--max-width);
+        // margin: 0 auto 60px auto;
     }
 }
 
-.footer-wrapper {
-    background-color: var(--black-900);
-    padding: 80px;
-
+.footer-upper {
     display: flex;
-    gap: 15.972vw;
+    flex-direction: row;
+    // gap: var(--layout-column-gutter);
+
+    @include big {
+        flex-direction: row;
+        gap: var(--space-400);
+
+        max-width: var(--max-width);
+        margin: auto;
+    }
 
     .footer-left {
-        flex: 1 1 520px;
+        @include big {
+            flex: 1 1 594px;
+        }
+
+        h5 {
+            margin-top: var(--space-200);
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-200);
+
+            margin-top: var(--space-400);
+
+            .footer-link {
+                @extend %nav-link-uppercase;
+
+                text-decoration: none;
+            }
+        }
     }
 
     .footer-right {
@@ -25,9 +54,35 @@ footer {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 30px;
-
-        .footer-link {
-            @extend %nav-link-uppercase;
-        }
     }
+}
+
+.footer-lower {
+    padding-top: var(--space-300, 24px);
+    border-top: 1px solid rgba(230, 226, 218, 0.5);
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: var(--space-200);
+
+    @include big {
+        flex-direction: row;
+        gap: var(--space-400);
+
+        max-width: var(--max-width);
+        margin: var(--space-700) auto 0 auto;
+    }
+
+    a, p {
+        font-size: 14px;
+        font-family: $font-sans;
+        font-weight: 600;
+        line-height: 120%; /* 16.8px */
+        letter-spacing: 0.7px;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+
+
 }
