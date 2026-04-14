@@ -4,9 +4,33 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroImg from "../../../assets/Max&Alex.jpg";
 import Eyebrow from "../../Eyebrow/Eyebrow";
+import type { ColorVariables } from "../../../types/colors";
 import "./HomeHero.scss";
+import Buttons from "../../Buttons/Buttons";
 
-export default function HomeHero({ loaded }) {
+type HomeHeroProps = {
+    loaded: boolean
+    heading: {
+        line1: string
+        line2: string
+    }
+    eyebrow?: {
+        variation: "left" | "centered" | "double"
+        text: string
+        doubleText?: string
+    }
+    btn?: {
+        btnText: string
+        link: string
+    }
+    image?: {
+        src: string
+        alt?: string
+    }
+};
+
+
+export default function HomeHero({ loaded, heading, eyebrow, btn, image }:HomeHeroProps) {
     // Load References
     const eyebrowRef = useRef(null);
     const h1Ref = useRef(null);
@@ -208,20 +232,29 @@ export default function HomeHero({ loaded }) {
             <div className="home_hero-sticky">
                 <div className="home_hero-text-shell">
                     <div ref={textRef} className="home_hero-text">
-                        <div className="eyebrow_wrapper" ref={eyebrowRef}>
-                            <Eyebrow variation="left" color="--gold-500" text="Saturday Oct, 31, 2026" />
-                        </div>
+                        {eyebrow && (
+                            <div className="eyebrow_wrapper" ref={eyebrowRef}>
+                                <Eyebrow
+                                    variation={eyebrow.variation}
+                                    color={"--gold-500"}
+                                    text={eyebrow.text}
+                                    doubleText={eyebrow.doubleText}
+                                />
+                            </div>
+                        )}
 
                         <h1 ref={h1Ref} className="home_hero-title">
-                            Alex Khachadoorian
-                            <br />& Max Paulett
+                            {heading.line1}
+                            <br />& {heading.line2}
                         </h1>
+
+                        {btn && <Buttons style="solid" theme="gold" btnText={btn.btnText} link={btn.link}  />}
                     </div>
                 </div>
 
                 <div ref={mediaRef} className="home_hero-media">
                     <div className="home_hero-overlay"></div>
-                    <img ref={imageRef} src={HeroImg} alt="Wedding" className="home_hero-image" />
+                    <img ref={imageRef} src={image?.src ?? HeroImg} alt={image?.alt ?? "Wedding"} className="home_hero-image" />
                 </div>
             </div>
         </section>

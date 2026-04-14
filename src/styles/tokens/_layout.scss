@@ -6,6 +6,7 @@
   --layout-column-margin:    16px;
   --layout-column-gutter:    16px;
   --layout-section-padding:  64px;
+
   --layout-content-width: calc(var(--max-width) - (var(--layout-column-margin) * 2));
   --layout-container-max-width: var(--max-width);
   --layout-column-width: calc(
@@ -14,6 +15,15 @@
 }
 
 @include big {
+  :root {
+    // Desktop overrides
+    --layout-column-margin:   32px;
+    --layout-column-gutter:   24px;
+    --layout-section-padding: 80px;
+  }
+}
+
+@media (min-width: #{$bp-desktop}) {
   :root {
     // Desktop overrides
     --layout-column-margin:   60px;

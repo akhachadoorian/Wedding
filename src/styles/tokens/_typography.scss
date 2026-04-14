@@ -1,83 +1,70 @@
 @use '../mixins' as *;
 
-:root {
-  // Mobile (default)
-  --heading-xxl: 55px;
-  --heading-xl:  48px;
-  --heading-l:   40px;
-  --heading-m:   36px;
-  --heading-s:   28px;
-  --heading-xs:  22px;
+@use 'sass:math';
 
-  --body-l:      18px;
-  --body:        16px;
-  --body-s:      15px;
-  --body-xs:     13px;
+$viewport-width: 1440;
 
-  --eyebrow:     18px;
-  --button:      18px;
+@function calcClamp($min, $val, $max) {
+  $mid: math.div($val, $viewport-width) * 100;
+
+  @return clamp(#{$min}px, #{$mid}vw, #{$max}px);
 }
 
+// Mobile (default)
+:root {
+  --heading-xxl: #{calcClamp(50, 55, 60)};
+  --heading-xl: #{calcClamp(45, 48, 50)};
+  --heading-l: #{calcClamp(38, 40, 45)};
+  --heading-m: #{calcClamp(32, 36, 38)};
+  --heading-s: #{calcClamp(24, 28, 30)};
+  --heading-xs: #{calcClamp(20, 22, 24)};
+
+  --body-l: #{calcClamp(16, 18, 20)};
+  --body: #{calcClamp(15, 16, 18)};
+  --body-s: #{calcClamp(14, 15, 16)};
+  --body-xs: #{calcClamp(12, 13, 14)};
+
+  --eyebrow: #{calcClamp(16, 18, 20)};
+  --button: #{calcClamp(16, 18, 20)};
+}
+
+// Tablet
 @include big {
   :root {
-    // Tablet
-    --heading-xxl: 70px;
-    --heading-xl:  60px;
-    --heading-l:   44px;
-    --heading-m:   35px;
-    --heading-s:   28px;
-    --heading-xs:  23px;
+    --heading-xxl: #{calcClamp(65, 70, 75)};
+    --heading-xl: #{calcClamp(55, 60, 65)};
+    --heading-l: #{calcClamp(40, 44, 50)};
+    --heading-m: #{calcClamp(30, 35, 40)};
+    --heading-s: #{calcClamp(25, 28, 30)};
+    --heading-xs: #{calcClamp(22, 23, 25)};
 
-    --body-l:      20px;
-    --body:        18px;
-    --body-s:      16px;
-    --body-xs:     14px;
+    --body-l: #{calcClamp(18, 20, 22)};
+    --body: #{calcClamp(16, 18, 20)};
+    --body-s: #{calcClamp(15, 16, 18)};
+    --body-xs: #{calcClamp(13, 14, 15)};
 
-    --eyebrow:     18px;
-    --button:      18px;
+    --eyebrow: #{calcClamp(16, 18, 20)};
+    --button: #{calcClamp(16, 18, 20)};
   }
 }
 
+// Desktop
 @media (min-width: #{$bp-desktop}) {
   :root {
-    // Desktop
-    --heading-xxl: 92px;
-    --heading-xl:  73px;
-    --heading-l:   59px;
-    --heading-m:   47px;
-    --heading-s:   36px;
-    --heading-xs:  24px;
+    --heading-xxl: #{calcClamp(75, 92, 100)};
+    --heading-xl: #{calcClamp(65, 73, 75)};
+    --heading-l: #{calcClamp(55, 59, 65)};
+    --heading-m: #{calcClamp(45, 47, 55)};
+    --heading-s: #{calcClamp(30, 36, 45)};
+    --heading-xs: #{calcClamp(22, 24, 30)};
 
-    --body-l:      20px;
-    --body:        18px;
-    --body-s:      16px;
-    --body-xs:     14px;
+    --body-l: #{calcClamp(18, 20, 22)};
+    --body: #{calcClamp(16, 18, 20)};
+    --body-s: #{calcClamp(15, 16, 18)};
+    --body-xs: #{calcClamp(13, 14, 15)};
 
-    --eyebrow:     20px;
-    --button:      20px;
+    --eyebrow: #{calcClamp(18, 20, 22)};
+    --button: #{calcClamp(18, 20, 22)};
   }
 }
 
-// @use 'sass:math';
-
-// // Viewport range your type scales across
-// $fluid-min-vp: 500;
-// $fluid-max-vp: 1440;
-
-// @function fluid($min, $max) {
-//   $slope: math.div($max - $min, $fluid-max-vp - $fluid-min-vp) * 100;
-//   @return clamp(#{$min}px, #{$slope}vw, #{$max}px);
-// }
-
-// :root {
-//   --heading-xxl: #{fluid(47, 92)};
-//   --heading-xl:  #{fluid(40, 73)};
-//   --heading-l:   #{fluid(33, 59)};
-//   --heading-m:   #{fluid(28, 47)};
-//   --heading-s:   #{fluid(23, 38)};
-//   --heading-xs:  #{fluid(19, 30)};
-//   --body:        #{fluid(16, 24)};
-//   --body-s:      #{fluid(13, 19)};
-//   --body-xs:     #{fluid(11, 15)};
-//   --eyebrow:     #{fluid(15, 18)};
-// }

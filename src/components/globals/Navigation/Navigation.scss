@@ -31,7 +31,7 @@
 
 // ── Header ───────────────────────────────────────────────
 header {
-    width: 100%;
+    width: 100dvw;
     position: relative;
 
     display: flex;
@@ -40,13 +40,9 @@ header {
 
 // ── Desktop nav wrapper ───────────────────────────────────
 .navigation-wrapper {
-    width: 100%;
+    margin: 0 var(--layout-column-margin);
 
-    // display: flex;
-    // flex-direction: column;
-    // gap: var(--space_300, 24px);
-
-    padding: var(--space-200);
+    padding: var(--space_200);
     border-radius: 10px;
     border: 1px solid var(--Black-black-800, #272828);
     background: var(--Black-black-900, #1f2121);
@@ -67,6 +63,7 @@ header {
 
     @include big {
         max-width: clamp(800px, 60.417vw, 870px);
+        width: 100%;
         margin: auto;
         padding: var(--space_200, 16px);
 

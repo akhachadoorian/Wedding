@@ -9,9 +9,29 @@ import HomeHero from "../components/heros/HomeHero/HomeHero";
 function Wedding({loaded}) {
     const infoRef = useFadeInOnScroll();
 
+    const heroEyebrow = {
+        variation: "double",
+        text: "Saturday Oct, 31, 2026"
+    }
+
     return (
         <div className="wedding">
-            <HomeHero  loaded={loaded} />
+            <HomeHero  
+                loaded={loaded} 
+                heading={{
+                    line1: "Alex Khachadoorian",
+                    line2: "Max Paulett"}
+                }
+                eyebrow={{
+                    variation: "double",
+                    text: "Saturday Oct, 31, 2026",
+                    doubleText: "The Clay Theatre"
+                }}
+                btn={{
+                    btnText: "RSVP",
+                    link: "/rsvp"
+                }}
+            />
             {/* <OffsetHero loaded={loaded} /> */}
 
             <section ref={infoRef} className="info-section base_section">

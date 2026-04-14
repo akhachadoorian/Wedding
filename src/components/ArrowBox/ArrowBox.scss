@@ -6,10 +6,11 @@
     border: 1px solid var(--Cream-cream-500, #e6e2da);
     transition: $transition;
 
+    box-sizing: border-box;
     width: 20px;
     height: 20px;
     aspect-ratio: 1;
-    flex-shrink: 0;
+    flex: 0 0 20px;
     overflow: hidden;
     position: relative;
 

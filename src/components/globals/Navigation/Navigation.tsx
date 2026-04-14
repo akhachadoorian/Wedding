@@ -97,7 +97,7 @@ function Navigation() {
                         ))}
                     </nav>
 
-                    <ListIcon id="mobile_nav_btn" size={40} color="var(--cream-500)" onClick={() => setMobileOpen(true)} style={{ cursor: "pointer" }} />
+                    <ListIcon id="mobile_nav_btn" size={30} color="var(--cream-500)" onClick={() => setMobileOpen(true)} style={{ cursor: "pointer" }} />
                 </div>
 
                 <div className="dropdowns">

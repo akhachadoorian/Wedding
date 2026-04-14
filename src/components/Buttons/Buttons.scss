@@ -1,0 +1,138 @@
+@use "../../styles/variables" as *;
+
+.btn-wrapper {
+    .btn {
+        display: flex;
+        align-items: center;
+        gap: var(--space_150);
+
+        width: fit-content;
+        text-decoration: none;
+        transition: $transition;
+
+        .btn-text {
+            font-family: $font-sans;
+            font-size: var(--button);
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+    }
+
+    .btn.solid {
+        padding: var(--space_150, 12px) var(--space_300, 24px);
+        border-radius: $default-br;
+
+        &.gold {
+            background-color: var(--gold-500);
+            color: var(--cream-500);
+
+            &:hover {
+                background-color: var(--gold-600);
+            }
+        }
+
+        &.cream {
+            background-color: var(--cream-500);
+            color: var(--gold-500);
+
+            &:hover {
+                background-color: var(--cream-100);
+            }
+        }
+
+        &:hover {
+            .arrow_box-grid {
+                transform: translate(0, -18px);
+            }
+        }
+    }
+
+    .btn.outline {
+        padding: var(--space_150, 12px) var(--space_300, 24px);
+        border-radius: $default-br;
+        border: 2px solid;
+
+        &.gold {
+            border-color: var(--gold-500);
+            color: var(--gold-500);
+
+            &:hover {
+                border-color: var(--cream-500);
+            }
+        }
+
+        &.cream {
+            border-color: var(--cream-500);
+            color: var(--cream-500);
+
+            &:hover {
+                border-color: var(--gold-500);
+            }
+        }
+
+        &:hover {
+            .arrow_box-grid {
+                transform: translate(0, -18px);
+            }
+        }
+    }
+
+    .btn.lines {
+        // gap: var(--space_100);
+        padding: var(--space_100) var(--space_075);
+
+        position: relative;
+
+        &::before,
+        &::after {
+            content: "";
+            height: 1px;
+            width: 0;
+
+            position: absolute;
+
+            transition: $transition;
+        }
+
+        &::before {
+            top: 0;
+            left: 0;
+        }
+
+        &::after {
+            bottom: 0;
+            right: 0;
+        }
+
+        &.gold {
+            color: var(--gold-500);
+
+            &::before,
+            &::after {
+                background-color: var(--gold-500);
+            }
+        }
+
+        &.cream {
+            color: var(--cream-500);
+
+            &::before,
+            &::after {
+                background-color: var(--cream-500);
+            }
+        }
+
+        &:hover {
+            &::before,
+            &::after {
+                width: 100%;
+            }
+
+            .arrow_box-grid {
+                transform: translate(0, -18px);
+            }
+        }
+    }
+}

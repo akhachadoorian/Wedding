@@ -10,15 +10,15 @@ type ArrowBoxProps = {
 
 export default function ArrowBox({ color = "--cream-500" }: ArrowBoxProps) {
     return (
-        <div className="arrow_box-wrapper">
+        <div className="arrow_box-wrapper" style={{borderColor: `var(${color})`}}>
             <div className="arrow_box-inner">
                 <div className="arrow_box-grid">
                 <div className="arrow start">
-                   <ArrowUpRightIcon color={`var(${color})`} size={18} />
+                   <ArrowUpRightIcon color={`var(${color})`} size={16} />
                 </div>
 
                 <div className="arrow end">
-                   <ArrowUpRightIcon fill={`var(${color})`} size={18} />
+                   <ArrowUpRightIcon fill={`var(${color})`} size={16} />
                 </div>
                 </div>
             </div>
