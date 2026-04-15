@@ -48,7 +48,9 @@ function Footer({}) {
                         ))}
                     </div>
                 </div>
-                <div className="footer-right"></div>
+                <div className="footer-right">
+                    
+                </div>
             </div>
 
             <div className="footer-lower">

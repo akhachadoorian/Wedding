@@ -5,6 +5,7 @@ import CopyOnly from "../components/CopyOnly/CopyOnly";
 import OffsetHero from "../components/heros/OffsetHero/OffsetHero";
 import { useFadeInOnScroll } from "../hooks/useFadeInOnScroll";
 import HomeHero from "../components/heros/HomeHero/HomeHero";
+import { homeHeroContent } from "../generated/home.content";
 
 function Wedding({loaded}) {
     const infoRef = useFadeInOnScroll();
@@ -18,19 +19,7 @@ function Wedding({loaded}) {
         <div className="wedding">
             <HomeHero  
                 loaded={loaded} 
-                heading={{
-                    line1: "Alex Khachadoorian",
-                    line2: "Max Paulett"}
-                }
-                eyebrow={{
-                    variation: "double",
-                    text: "Saturday Oct, 31, 2026",
-                    doubleText: "The Clay Theatre"
-                }}
-                btn={{
-                    btnText: "RSVP",
-                    link: "/rsvp"
-                }}
+                {...homeHeroContent}
             />
             {/* <OffsetHero loaded={loaded} /> */}
 

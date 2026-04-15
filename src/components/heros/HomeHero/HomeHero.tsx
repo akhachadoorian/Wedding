@@ -4,18 +4,17 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroImg from "../../../assets/Max&Alex.jpg";
 import Eyebrow from "../../Eyebrow/Eyebrow";
-import type { ColorVariables } from "../../../types/colors";
 import "./HomeHero.scss";
 import Buttons from "../../Buttons/Buttons";
 
-type HomeHeroProps = {
+export type HomeHeroProps = {
     loaded: boolean
     heading: {
         line1: string
         line2: string
     }
     eyebrow?: {
-        variation: "left" | "centered" | "double"
+        variation?: "left" | "centered" | "double"
         text: string
         doubleText?: string
     }
@@ -227,6 +226,9 @@ export default function HomeHero({ loaded, heading, eyebrow, btn, image }:HomeHe
         };
     }, [loaded]);
 
+
+    console.log("heading", heading.line1)
+
     return (
         <section ref={sectionRef} className={`home_hero-wrapper ${loaded ? "is-loaded" : "is-hidden"}`}>
             <div className="home_hero-sticky">
@@ -235,7 +237,7 @@ export default function HomeHero({ loaded, heading, eyebrow, btn, image }:HomeHe
                         {eyebrow && (
                             <div className="eyebrow_wrapper" ref={eyebrowRef}>
                                 <Eyebrow
-                                    variation={eyebrow.variation}
+                                    variation={eyebrow.variation || "double" }
                                     color={"--gold-500"}
                                     text={eyebrow.text}
                                     doubleText={eyebrow.doubleText}
