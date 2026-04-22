@@ -47,7 +47,7 @@
     --black-950: #161818;
     --black-1000: #101111;
 
-    --max-width: 1720px;
+    --max-width: 1600px;
 }
 
 // ── SCSS variables ────────────────────────────────────────────
@@ -103,7 +103,7 @@ $black: $black-1000;
 
 // ──── Utility ─────────────────────────────────
 $overlay-bg: rgba(#101111, 0.3);
-$default-br: 8px;
+$default-br: 0px;
 $transition: all ease-in-out 300ms;
 
 // ──── Setup ─────────────────────────────────

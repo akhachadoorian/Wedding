@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Timeline(loaded: boolean = true) {
+export default function Timeline({ loaded = true }: { loaded?: boolean })  {
     let startTime = new Date(2026, 10, 31, 9, 30);
     let endTime = new Date(2026, 10, 31, 20, 30);
 

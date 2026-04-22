@@ -47,14 +47,16 @@ function writePageOutput(mapping: MappingConfig, props: Record<string, unknown>)
   const varName = mapping.component[0].toLowerCase() + mapping.component.slice(1) + "Content";
   const typeName = mapping.component + "Props";
   const slug = mapping.source.toLowerCase().replace(/\s+/g, "-");
+  const propsImport = mapping.propsImport ? mapping.propsImport : `Partial<${typeName}>`;
 
   const output = `// ⚠️  Auto-generated — do not edit directly.
 // Edit vault/Content/${mapping.source}.md instead, then re-run: npx tsx scripts/generate.ts
 
 import type { ${typeName} } from "${mapping.componentPath}";
 
-export const ${varName}: Partial<${typeName}> = ${formatValue(props)};
+export const ${varName}: ${propsImport} = ${formatValue(props)};
 `;
+
 
   const outPath = path.join(OUTPUT_DIR, `${slug}.content.ts`);
   fs.writeFileSync(outPath, output, "utf-8");

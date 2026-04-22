@@ -1,0 +1,23 @@
+@use "../../styles/variables" as *;
+
+.marquee-wrapper {
+    background-color: var(--gold-600);
+    padding: var(--space-300) var(--space-200);
+
+    .marquee-inner {
+        
+
+        display: flex;
+        align-items: center;
+        gap: var(--space-400);
+
+        // width: fit-content;
+        white-space: nowrap;
+
+        .marquee-text {
+            display: flex;
+            align-items: center;
+            gap: var(--space-400);
+        }
+    }
+}

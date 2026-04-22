@@ -1,19 +1,12 @@
 
 import LineSeparatedContent from "../components/LineSeparatedContent/LineSeparatedContent";
-
-import CopyOnly from "../components/CopyOnly/CopyOnly";
-import OffsetHero from "../components/heros/OffsetHero/OffsetHero";
-import { useFadeInOnScroll } from "../hooks/useFadeInOnScroll";
 import HomeHero from "../components/heros/HomeHero/HomeHero";
 import { homeHeroContent } from "../generated/home.content";
+import { useFadeIn } from "../hooks/useFadeIn";
 
-function Wedding({loaded}) {
-    const infoRef = useFadeInOnScroll();
-
-    const heroEyebrow = {
-        variation: "double",
-        text: "Saturday Oct, 31, 2026"
-    }
+function Wedding({ loaded = true }: { loaded?: boolean }) {
+    // const infoRef = useFadeInOnScroll();
+    const infoRef = useFadeIn<HTMLDivElement>();
 
     return (
         <div className="wedding">
@@ -24,9 +17,9 @@ function Wedding({loaded}) {
             {/* <OffsetHero loaded={loaded} /> */}
 
             <section ref={infoRef} className="info-section base_section">
-                <CopyOnly 
+                {/* <CopyOnly 
                     text={"<h2>Once upon a time, we found each other, and now we're counting down the days until we say <span class='gold-italic'>I do</span>. We would be thrilled to have you join us in this next chapter.</h2>"}
-                />
+                /> */}
 
                 <div className="lines">
                     <LineSeparatedContent 

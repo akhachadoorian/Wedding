@@ -3,7 +3,7 @@
 
 import type { HomeHeroProps } from "../components/heros/HomeHero/HomeHero";
 
-export const homeHeroContent: Partial<HomeHeroProps> = {
+export const homeHeroContent: Omit<HomeHeroProps, "loaded"> = {
   heading: {
     line1: "Alex Khachadoorian",
     line2: "& Max Paluett",

@@ -18,7 +18,7 @@ export default function Diamond({ color = "--gold-500", size = {size: {minSize: 
     const mobileScreenSize = 375;
 
     const desktopSize = size.size;
-    const mobileSize = size.mobileSize? size.mobileSize : size.size;
+    const mobileSize = size.mobileSize ? size.mobileSize : size.size;
 
     // Do view width calculations
     let dVW = (desktopSize.desiredSize / desktopScreenSize) * 100;

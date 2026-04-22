@@ -10,7 +10,7 @@ import { LenisContext } from "./context/LenisContext";
 
 import Footer from "./components/globals/Footer/Footer";
 import LoadingScreen from "./components/globals/LoadingScreen/LoadingScreen";
-import Navigation from "./components/globals/Navigation/Navigation.tsx";
+import Navigation from "./components/globals/Navigation/Navigation";
 
 import Accommodations from "./pages/Accommodations";
 import Details from "./pages/Details";
@@ -25,12 +25,12 @@ gsap.registerPlugin(ScrollTrigger);
 const DISABLE_LOADER = true;
 
 function App() {
-    const [lenisInstance, setLenisInstance] = useState(null);
+    const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
     const [loaded, setLoaded] = useState(DISABLE_LOADER);
 
     useEffect(() => {
         const lenis = new Lenis({
-            lerp: 0.1,
+            // lerp: 0.1,
             duration: 1.2,
             anchors: true,
             smoothWheel: true,
@@ -41,7 +41,7 @@ function App() {
 
         lenis.on("scroll", ScrollTrigger.update);
 
-        const update = (time) => {
+        const update = (time:number) => {
             lenis.raf(time * 1000);
         };
 
@@ -68,7 +68,7 @@ function App() {
         <LenisContext.Provider value={lenisInstance}>
             {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
             <Router>
-                <Navigation /> {/* renders <nav> */}
+                <Navigation />
                 <main>
                     <Routes>
                         <Route path="/" element={<Wedding loaded={loaded} />} />
@@ -79,7 +79,7 @@ function App() {
                         <Route path="/timeline" element={<Timeline loaded={loaded} />} />
                     </Routes>
                 </main>
-                <Footer /> {/* renders <footer> */}
+                <Footer />
             </Router>
         </LenisContext.Provider>
     );

@@ -47,7 +47,9 @@ export type MappingConfig = {
   /** React component name e.g. "HomeHero" */
   component: string;
   /** Path to component file for type import */
-  componentPath?: string;
+  componentPath: string;
+  /** syntax for the props import if needed*/
+  propsImport?: string,
   /** Map of dot-path prop → where to find its value */
   props: Record<string, PropMapping>;
 };

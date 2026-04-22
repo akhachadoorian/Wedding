@@ -2,106 +2,111 @@
 @use "../../../styles/placeholders" as *;
 
 footer {
-    padding: var(--space-750) var(--layout-column-margin) var(--space-400) var(--layout-column-margin);
-    background-color: var(--black-900);
+    
 }
 
-.footer-upper {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-600);
+.footer-wrapper {
+    padding: var(--space-750) var(--layout-column-margin) var(--space-400) var(--layout-column-margin);
+    background-color: var(--black-900);
 
-    @include big {
-        flex-direction: row;
-        justify-content: space-between;
-        gap: var(--space-400);
-
-        max-width: var(--max-width);
-        margin: auto;
-    }
-
-    .footer-left {
-        @include big {
-            flex: 1 1 594px;
-        }
-
-        h5 {
-            margin-top: var(--space-200);
-        }
-
-        .footer-nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-200);
-
-            margin-top: var(--space-400);
-
-            .footer-link {
-                @extend %nav-link-uppercase;
-
-                text-decoration: none;
-            }
-        }
-    }
-
-    .footer-right {
+    .footer-upper {
         display: flex;
         flex-direction: column;
-        gap: var(--space-250);
-
-        margin-left: var(--space-300);
+        gap: var(--space-600);
 
         @include big {
-            margin-left: 0;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-400);
+
+            max-width: var(--max-width);
+            margin: auto;
         }
 
-        .art_deco_div {
+        .footer-left {
+            @include big {
+                flex: 1 1 594px;
+            }
+
+            h5 {
+                margin-top: var(--space-200);
+            }
+
+            .footer-nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: var(--space-200);
+
+                margin-top: var(--space-400);
+
+                .footer-link {
+                    @extend %nav-link-uppercase;
+
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .footer-right {
             display: flex;
-            align-items: center;
-            gap: var(--space-100);
+            flex-direction: column;
+            gap: var(--space-250);
 
-            .div_line {
-                height: 1px;
-                width: 100%;
-                background-color: var(--gold-500);
+            margin-left: var(--space-300);
 
-                @include breakpx(1600px, 2000px) {
-                    height: 1.5px;
+            @include big {
+                margin-left: 0;
+            }
+
+            .art_deco_div {
+                display: flex;
+                align-items: center;
+                gap: var(--space-100);
+
+                .div_line {
+                    height: 1px;
+                    width: 100%;
+                    background-color: var(--gold-500);
+
+                    @include breakpx(1600px, 2000px) {
+                        height: 1.5px;
+                    }
                 }
             }
         }
     }
-}
 
-.footer-lower {
-    padding-top: var(--space-300, 24px);
-    border-top: 1px solid rgba(230, 226, 218, 0.5);
+    .footer-lower {
+        padding-top: var(--space-300, 24px);
+        border-top: 1px solid rgba(230, 226, 218, 0.5);
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-200);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-200);
 
-    margin: var(--space-800) 0 0 0;
+        margin: var(--space-800) 0 0 0;
 
-    @include big {
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: var(--space-400);
+        @include big {
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: var(--space-400);
 
-        max-width: var(--max-width);
-        margin: var(--space-700) auto 0 auto;
-    }
+            max-width: var(--max-width);
+            margin: var(--space-700) auto 0 auto;
+        }
 
-    a,
-    p {
-        font-size: 14px;
-        font-family: $font-sans;
-        font-weight: 600;
-        line-height: 120%; /* 16.8px */
-        letter-spacing: 0.7px;
-        text-transform: uppercase;
-        text-decoration: none;
+        a,
+        p {
+            font-size: 14px;
+            font-family: $font-sans;
+            font-weight: 600;
+            line-height: 120%; /* 16.8px */
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
     }
 }

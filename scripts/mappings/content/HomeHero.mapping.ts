@@ -8,6 +8,8 @@ const HomeHeroMapping: MappingConfig = {
   section: "Hero",
   component: "HomeHero",
   componentPath: "/components/heros/HomeHero/HomeHero",
+  propsImport: 'Omit<HomeHeroProps, "loading">',
+
   props: {
     "heading.line1": {
       field: "Heading",
@@ -50,3 +52,4 @@ const HomeHeroMapping: MappingConfig = {
 };
 
 export default HomeHeroMapping;
+
