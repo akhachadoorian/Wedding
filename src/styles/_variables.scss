@@ -31,13 +31,14 @@
     --cream-700: #CEC9C0;
     --cream-900: #B0AA9F;
 
-    // Gray scale
-    --gray-300: #B9B3AF;
-    --gray-500: #6E6560;
-    --gray-700: #46423F;
-    --gray-900: #1F1F1E;
-
     // Black scale
+    --black-100: #E9E9E8;
+    --black-200: #D0CFCE;
+    --black-300: #ABAAA9;
+    --black-400: #838281;
+    --black-500: #616060;
+    --black-600: #484747;
+    --black-700: #363737;
     --black-800: #4A4542;
     --black-850: #2E2B2B;
     --black-900: #1F2121;
@@ -76,13 +77,14 @@ $cream-500: var(--cream-500);
 $cream-700: var(--cream-700);
 $cream-900: var(--cream-900);
 
-// Gray
-$gray-300:  var(--gray-300);
-$gray-500:  var(--gray-500);
-$gray-700:  var(--gray-700);
-$gray-900:  var(--gray-900);
-
 // Black
+$black-100:  var(--black-100);
+$black-200:  var(--black-200);
+$black-300:  var(--black-300);
+$black-400:  var(--black-400);
+$black-500:  var(--black-500);
+$black-600:  var(--black-600);
+$black-700:  var(--black-700);
 $black-800:  var(--black-800);
 $black-850:  var(--black-850);
 $black-900:  var(--black-900);
