@@ -1,13 +1,13 @@
 // scripts/mappings/HomeHero.mapping.ts
 // Defines how vault content in Home.md > ## Hero maps to HomeHero props
 
-import type { MappingConfig } from "../types";
+import type { MappingConfig } from "../../core/types";
 
 const HomeHeroMapping: MappingConfig = {
   source: "Home",
   section: "Hero",
   component: "HomeHero",
-
+  componentPath: "/components/heros/HomeHero/HomeHero",
   props: {
     "heading.line1": {
       field: "Heading",

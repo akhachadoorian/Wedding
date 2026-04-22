@@ -28,7 +28,9 @@
     --cream-100: #F5F2EE;
     --cream-300: #EDE9E3;
     --cream-500: #E6E2DA;
+    --cream-600: #D8D4CD;
     --cream-700: #CEC9C0;
+    --cream-800: #BDB7AB;
     --cream-900: #B0AA9F;
 
     // Black scale
@@ -74,7 +76,9 @@ $gold-1000: var(--gold-1000);
 $cream-100: var(--cream-100);
 $cream-300: var(--cream-300);
 $cream-500: var(--cream-500);
+$cream-600: var(--cream-600);
 $cream-700: var(--cream-700);
+$cream-800: var(--cream-800);
 $cream-900: var(--cream-900);
 
 // Black
@@ -103,6 +107,8 @@ $default-br: 8px;
 $transition: all ease-in-out 300ms;
 
 // ──── Setup ─────────────────────────────────
-body {
-    color: $cream;
+
+
+.placeholder {
+    min-height: 60dvh;
 }

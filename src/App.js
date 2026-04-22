@@ -17,6 +17,7 @@ import Details from "./pages/Details";
 import RSVP from "./pages/RSVP";
 import Registry from "./pages/Registry";
 import Wedding from "./pages/Wedding";
+import Timeline from "./pages/Timeline";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,6 +76,7 @@ function App() {
                         <Route path="/accommodations" element={<Accommodations loaded={loaded} />} />
                         <Route path="/registry" element={<Registry loaded={loaded} />} />
                         <Route path="/rsvp" element={<RSVP loaded={loaded} />} />
+                        <Route path="/timeline" element={<Timeline loaded={loaded} />} />
                     </Routes>
                 </main>
                 <Footer /> {/* renders <footer> */}

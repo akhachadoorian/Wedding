@@ -11,7 +11,7 @@
   --layout-container-max-width: var(--max-width);
   --layout-column-width: calc(
     (var(--max-width) - (var(--layout-column-margin) * 2) - (var(--layout-column-gutter) * 11)) / 12
-);
+  );
 }
 
 @include big {

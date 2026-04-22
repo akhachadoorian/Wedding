@@ -8,15 +8,16 @@ import Eyebrow from "../../Eyebrow/Eyebrow";
 // import { NAV_ITEMS } from "../../../constants/navItems";
 
 import "./Footer.scss";
+import SmallText from "../../SmallText/SmallText";
+import Diamond from "../../Diamond/Diamond";
 
 function Footer({}) {
+    // Handle scrolling
     const lenis = useLenis();
-
-    const scrollToBlockById = (id) => {
+    const scrollToBlockById = (id: string) => {
         const element = document.getElementById(id);
         if (!element) return;
-
-        lenis ? lenis.scrollTo(element, { offset: 0, duration: 1.4 }) : element.scrollIntoView({ behavior: "smooth" }); // fallback just in case
+        lenis ? lenis.scrollTo(element, { offset: 0, duration: 1.4 }) : element.scrollIntoView({ behavior: "smooth" });
     };
 
     return (
@@ -30,26 +31,38 @@ function Footer({}) {
                     </h5>
 
                     <div className="footer-nav">
-                        {NAV_ITEMS.map((n, idx) => (
-                            <React.Fragment key={idx}>
-                                <Link
-                                    to={n.link || "/"}
-                                    className="footer-link"
-                                    onClick={(e) => {
-                                        if (!n.link && n.scrollId) {
-                                            e.preventDefault();
-                                            scrollToBlockById(n.scrollId);
-                                        }
-                                    }}
-                                >
-                                    <p>{n.text}</p>
+                        {NAV_ITEMS.map((item) => (
+                            <React.Fragment key={item.text}>
+                                <Link to={item.link} className="footer-link">
+                                    <p className="nav-text">{item.text}</p>
                                 </Link>
                             </React.Fragment>
                         ))}
                     </div>
                 </div>
                 <div className="footer-right">
-                    
+                    <SmallText 
+                        eyebrow="Date"
+                        title="October 31st, 2026"
+                        body="Ceremony at 5pm"
+                        variation="right"
+                    />
+
+                    <div className="art_deco_div">
+                        <div className="div_line"></div>
+
+                        <Diamond 
+                            color="--gold-500"
+                            
+                        />
+                    </div>
+
+                    <SmallText 
+                        eyebrow="Location"
+                        title="Clay Theatre"
+                        body="Green Cove Springs, FL"
+                        variation="right"
+                    />
                 </div>
             </div>
 
@@ -58,9 +71,7 @@ function Footer({}) {
                     <p className="">alexmaxwedding.com</p>
                 </Link>
 
-                <p>
-                    Designed & Developed by Alex
-                </p>
+                <p>Designed & Developed by Alex</p>
             </div>
         </footer>
     );

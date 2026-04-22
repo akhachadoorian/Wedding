@@ -25,8 +25,13 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "generate": "tsx scripts/generate.ts",
-    "generate:watch": "tsx scripts/generate.ts --watch"
+    
+    "generate":          "tsx scripts/generate.ts",
+    "generate-content":  "tsx scripts/generate-content.ts",
+    "generate-content:watch":  "tsx scripts/generate-content.ts --watch",
+    "generate-timeline": "tsx scripts/generate-timeline.ts",
+    "generate-timeline:watch": "tsx scripts/generate-timeline.ts --watch",
+    "generate:watch":    "tsx scripts/generate.ts --watch"
   },
   "eslintConfig": {
     "extends": [

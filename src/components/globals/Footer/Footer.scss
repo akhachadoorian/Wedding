@@ -2,22 +2,18 @@
 @use "../../../styles/placeholders" as *;
 
 footer {
-    padding: var(--space-750, 60px) var(--column-margin, 60px) var(--space-400, 32px) var(--column-margin, 60px);
+    padding: var(--space-750) var(--layout-column-margin) var(--space-400) var(--layout-column-margin);
     background-color: var(--black-900);
-
-    @include big {
-        // max-width: var(--max-width);
-        // margin: 0 auto 60px auto;
-    }
 }
 
 .footer-upper {
     display: flex;
-    flex-direction: row;
-    // gap: var(--layout-column-gutter);
+    flex-direction: column;
+    gap: var(--space-600);
 
     @include big {
         flex-direction: row;
+        justify-content: space-between;
         gap: var(--space-400);
 
         max-width: var(--max-width);
@@ -49,11 +45,31 @@ footer {
     }
 
     .footer-right {
-        flex: 1 1 378px;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-250);
 
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
+        margin-left: var(--space-300);
+
+        @include big {
+            margin-left: 0;
+        }
+
+        .art_deco_div {
+            display: flex;
+            align-items: center;
+            gap: var(--space-100);
+
+            .div_line {
+                height: 1px;
+                width: 100%;
+                background-color: var(--gold-500);
+
+                @include breakpx(1600px, 2000px) {
+                    height: 1.5px;
+                }
+            }
+        }
     }
 }
 
@@ -62,19 +78,24 @@ footer {
     border-top: 1px solid rgba(230, 226, 218, 0.5);
 
     display: flex;
-    justify-content: space-between;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
     gap: var(--space-200);
+
+    margin: var(--space-800) 0 0 0;
 
     @include big {
         flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
         gap: var(--space-400);
 
         max-width: var(--max-width);
         margin: var(--space-700) auto 0 auto;
     }
 
-    a, p {
+    a,
+    p {
         font-size: 14px;
         font-family: $font-sans;
         font-weight: 600;
@@ -83,6 +104,4 @@ footer {
         text-transform: uppercase;
         text-decoration: none;
     }
-
-
 }
