@@ -27,9 +27,59 @@ export const Left: Story = {
         variation: "left",
         headingSize: "h2",
         eyebrow: "Lorem ipsum",
-        header: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        header: "**Lorem ipsum** dolor sit amet, consectetur adipiscing elit.",
         subtitle: "Lorem ipsum dolor sit amet",
-        body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
+        body: "**Lorem ipsum** dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus." ,
+        buttons: [
+            {
+                btnText: "B1",
+                link: "/",
+            },
+            {
+                btnText: "B2",
+                link: "/",
+            },
+            {
+                btnText: "B3",
+                link: "/",
+            },
+        ],
+    },
+};
+
+export const Center: Story = {
+    args: {
+        variation: "center",
+        headingSize: "h3",
+        eyebrow: "Lorem ipsum",
+        header: "**Lorem ipsum** dolor sit amet, consectetur adipiscing elit.",
+        subtitle: "Lorem ipsum dolor sit amet",
+        body: "**Lorem ipsum** dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus." ,
+        buttons: [
+            {
+                btnText: "B1",
+                link: "/",
+            },
+            {
+                btnText: "B2",
+                link: "/",
+            },
+            {
+                btnText: "B3",
+                link: "/",
+            },
+        ],
+    },
+};
+
+export const Columns: Story = {
+    args: {
+        variation: "columns",
+        headingSize: "h4",
+        eyebrow: "Lorem ipsum",
+        header: "**Lorem ipsum** dolor sit amet, consectetur adipiscing elit.",
+        subtitle: "Lorem ipsum dolor sit amet",
+        body: "**Lorem ipsum** dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus." ,
         buttons: [
             {
                 btnText: "B1",

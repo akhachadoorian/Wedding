@@ -12,17 +12,7 @@
         gap: var(--space-500);
 
         @include big {
-
-        }
-
-        &.center {
-
-        }
-
-        &.columns {
-            @include big {
-                flex-direction: column;
-            }
+            max-width: 75.833vw;
         }
 
         .copy-text {
@@ -30,11 +20,17 @@
             flex-direction: column;
             gap: var(--space-300);
 
-
             .copy-upper {
                 display: flex;
                 flex-direction: column;
                 gap: var(--space-200);
+
+                .copy-header {
+                    & > strong {
+                        font-weight: 400;
+                        color: $gold;
+                    }
+                }
             }
         }
 
@@ -43,6 +39,65 @@
             flex-wrap: wrap;
             align-items: center;
             gap: var(--space-400);
+        }
+        
+        &.left {
+            @include big {
+                max-width: 75.833vw;
+            }
+        }
+
+        &.center {
+            text-align: center;
+            align-items: center;
+
+            .copy-btns {
+                justify-content: center;
+            }
+
+            .copy-text {
+                align-items: center;
+
+                .copy-upper {
+                    align-items: center;
+                }
+            }
+
+            @include big {
+                max-width: 60.417vw;
+                margin: auto;
+            }
+        }
+
+        &.columns {
+            flex-direction: column;
+            gap: var(--layout-column-gutter);
+
+            @include big {
+                flex-direction: row;
+                align-items: center;
+                max-width: none;
+            }
+
+            .copy-left {
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-200);
+
+                @include big {
+                    flex: 1 1 762px;
+                }
+            }
+
+            .copy-right {
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-300);
+
+                @include big {
+                    flex: 1 1 528px;
+                }
+            }
         }
     }
 }

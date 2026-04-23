@@ -2,7 +2,7 @@
 
 // ── Base resets ──────────────────────────────────────────────
 
-p{
+p {
   margin: 0;
   font-family: $font-sans;
   // color: var(--cream-500);
@@ -26,7 +26,7 @@ h1, h2, h3, h4, h5, h6 {
 %body-base {
   font-family: $font-sans;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 150%;
 }
 
@@ -85,8 +85,26 @@ h6,
 
 // ── Body ──────────────────────────────────────────────────────
 
-.body-s  { font-size: var(--body-s); }
-.body-xs { font-size: var(--body-xs); }
+.body,
+p  { 
+  @extend %body-base;
+  font-size: var(--body); 
+}
+
+.body-l  { 
+  @extend %body-base;
+  font-size: var(--body-l); 
+}
+
+.body-s  { 
+  @extend %body-base;
+  font-size: var(--body-s); 
+}
+
+.body-xs  { 
+  @extend %body-base;
+  font-size: var(--body-xs); 
+}
 
 // ── Eyebrow ───────────────────────────────────────────────────
 
@@ -95,7 +113,7 @@ h6,
   font-size: var(--eyebrow);
   font-weight: 600;
   line-height: normal;
-  letter-spacing: 0.9px;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
 
   &.centered { text-align: center; }
