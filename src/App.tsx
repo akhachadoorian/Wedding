@@ -34,7 +34,8 @@ function App() {
             duration: 1.2,
             anchors: true,
             smoothWheel: true,
-            syncTouch: true,
+            syncTouch: false,
+            // touchMultiplier: 2,
         });
 
         setLenisInstance(lenis);

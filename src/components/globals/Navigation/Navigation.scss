@@ -29,6 +29,10 @@ header {
 
     display: flex;
     justify-content: center;
+
+    position: absolute;
+    top: 16px;
+    z-index: 100;
 }
 
 // ── Caret Wrapper ───────────────────────────────────────────────
@@ -54,6 +58,7 @@ header {
 
 // ── Desktop nav wrapper ───────────────────────────────────
 .navigation-wrapper {
+    width: calc(100dvw - 32px);
     margin: 0 var(--layout-column-margin);
 
     padding: var(--space-200);
@@ -70,9 +75,9 @@ header {
     transform: translateY(-8px);
     animation: fadeDown 0.8s 0.2s ease forwards;
 
-    position: absolute;
-    top: 16px;
-    z-index: 100;
+    position: relative;
+    z-index: 10;
+    
     transition: background-color 300ms ease-in-out;
 
     @include big {
@@ -259,12 +264,75 @@ header {
     }
 }
 
+.mobile_nav_btn {
+    position: relative;
+
+    width: 20px;
+    height: 20px;
+    aspect-ratio: 1;
+    
+
+  .mobile_nav_btn-line {
+    width: 20px;
+    height: 2px;
+    background-color: $cream;
+    position: relative;
+    z-index: 3;
+
+    transition: $transition;
+
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+
+  }  
+
+  .mobile_nav_btn-line::before, .mobile_nav_btn-line::after {
+    content: '';
+
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: $cream;
+    transition: $transition;
+
+    position: absolute;
+    left: 0;
+  }
+
+  .mobile_nav_btn-line::before {
+    top: -8px;
+
+    }
+
+    .mobile_nav_btn-line::after {
+        bottom: -8px;
+    }
+
+  &.mobile_open {
+    .mobile_nav_btn-line {
+        background-color: transparent;
+    }
+
+    .mobile_nav_btn-line::before {
+        top: 0;
+        transform: rotate(45deg) ;
+    }
+
+    .mobile_nav_btn-line::after {
+        bottom: 0;
+        transform: rotate(-45deg) ;
+    }
+  }
+}
+
 // ── Mobile nav ────────────────────────────────────────────
 .mobile_nav-wrapper {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 50;
+    z-index: 5;
 
     width: 100vw;
     height: 100dvh;

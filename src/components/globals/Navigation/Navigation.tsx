@@ -110,8 +110,6 @@ function renderMobileNavItem(item: NavItem, onNavigate: () => void, openAccordio
 }
 
 function Navigation() {
-    const { pathname } = useLocation();
-    const navClass = pathname === "/" ? "nav-home" : "nav-default";
 
     // Handle scrolling
     const lenis = useLenis();
@@ -127,7 +125,7 @@ function Navigation() {
 
     useEffect(() => {
         document.body.classList.toggle("mobile-nav-open", mobileOpen);
-        mobileOpen ? lenis?.stop() : lenis?.start();
+        // mobileOpen ? lenis?.stop() : lenis?.start();
         return () => {
             document.body.classList.remove("mobile-nav-open");
             lenis?.start();
@@ -157,8 +155,8 @@ function Navigation() {
     };
 
     return (
-        <header className={navClass}>
-            <div className={`navigation-wrapper ${mobileOpen ? "mobile_nav_open" : null}`}>
+        <header className="">
+            <div className={`navigation-wrapper ${mobileOpen ? "mobile_nav_open" : ''}`}>
                 <div className="navigation-upper">
                     <Link to={"/"} className="navigation-left">
                         <p className="nav-letter">M</p>
@@ -172,7 +170,11 @@ function Navigation() {
                         ))}
                     </nav>
 
-                    <ListIcon id="mobile_nav_btn" size={20} color="var(--cream-500)" onClick={() => setMobileOpen(!mobileOpen)} style={{ cursor: "pointer" }} />
+                    <div className={`mobile_nav_btn ${mobileOpen ? 'mobile_open': ''}`} id="mobile_nav_btn" onClick={() => setMobileOpen(!mobileOpen)}>
+                        <div className="mobile_nav_btn-line"></div>
+                    </div>
+                    
+                    {/* <ListIcon id="mobile_nav_btn" size={20} color="var(--cream-500)" onClick={() => setMobileOpen(!mobileOpen)} style={{ cursor: "pointer" }} /> */}
                 </div>
 
                 <div className="dropdowns">
