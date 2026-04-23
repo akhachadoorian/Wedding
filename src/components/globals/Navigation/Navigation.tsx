@@ -35,21 +35,27 @@ function renderNavItem(item: NavItem, onNavigate: () => void, openDropdown: stri
 
 function renderDropdown(item: NavDropdown, onNavigate: () => void, isOpen: boolean, onMouseEnter: () => void, onMouseLeave: () => void) {
     return (
-        <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className={`dropdown ${isOpen ? "open" : ""}`} id={`dd-${item.text}`}>
-            <div className="dropdown-inner">
-                {item.children.map((child) => (
-                    <Link key={child.link} to={child.link} className="dd-link" onClick={onNavigate}>
-                        <div className="dd-text_wrapper">
-                            <p className="dd-text">{child.text}</p>
+        <AnimatePresence>
+            {isOpen && (
+                <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4 }}>
+                    <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className={`dropdown ${isOpen ? "open" : ""}`} id={`dd-${item.text}`}>
+                        <div className="dropdown-inner">
+                            {item.children.map((child) => (
+                                <Link key={child.link} to={child.link} className="dd-link" onClick={onNavigate}>
+                                    <div className="dd-text_wrapper">
+                                        <p className="dd-text">{child.text}</p>
 
-                            <ArrowBox />
+                                        <ArrowBox />
+                                    </div>
+
+                                    {child.body && <p className="dd-body body-xs">{child.body}</p>}
+                                </Link>
+                            ))}
                         </div>
-
-                        {child.body && <p className="dd-body body-xs">{child.body}</p>}
-                    </Link>
-                ))}
-            </div>
-        </div>
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
     );
 }
 
@@ -66,34 +72,29 @@ function renderMobileNavItem(item: NavItem, onNavigate: () => void, openAccordio
                     </div>
                 </div>
 
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div 
-                        initial={{ height: 0, opacity: 0 }} 
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4 }}
-                    >
-                        <div className={`mobile_nav-dropdown ${isOpen ? "open" : ""}`}>
-                            <Link to={item.link} className="mobile_nav-view_page" onClick={onNavigate}>
-                                <p className="mobile_nav-text eyebrow">View Page</p>
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4 }}>
+                            <div className={`mobile_nav-dropdown ${isOpen ? "open" : ""}`}>
+                                <Link to={item.link} className="mobile_nav-view_page" onClick={onNavigate}>
+                                    <p className="mobile_nav-text eyebrow">View Page</p>
 
-                                <ArrowBox color="--gold-500" />
-                            </Link>
-
-                            {item.children.map((child) => (
-                                <Link key={child.link} to={child.link} className="mdd-link" onClick={onNavigate}>
-                                    <div className="mdd-text_wrapper">
-                                        <p className="mdd-text eyebrow">{child.text}</p>
-                                        {child.body && <p className="mdd-body body-xs">{child.body}</p>}
-                                    </div>
-
-                                    <ArrowBox />
+                                    <ArrowBox color="--gold-500" />
                                 </Link>
-                            ))}
-                        </div>
-                    </motion.div>
-                )}
+
+                                {item.children.map((child) => (
+                                    <Link key={child.link} to={child.link} className="mdd-link" onClick={onNavigate}>
+                                        <div className="mdd-text_wrapper">
+                                            <p className="mdd-text eyebrow">{child.text}</p>
+                                            {child.body && <p className="mdd-body body-xs">{child.body}</p>}
+                                        </div>
+
+                                        <ArrowBox />
+                                    </Link>
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
                 </AnimatePresence>
             </div>
         );
@@ -122,7 +123,7 @@ function Navigation() {
     };
 
     // Handle mobile menu open and closing
-    const [mobileOpen, setMobileOpen] = useState(false); 
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
         document.body.classList.toggle("mobile-nav-open", mobileOpen);
@@ -155,10 +156,9 @@ function Navigation() {
         setOpenDropdown((prev) => (prev === name ? null : name));
     };
 
-
     return (
         <header className={navClass}>
-            <div className={`navigation-wrapper ${mobileOpen ? 'mobile_nav_open' : null}`}>
+            <div className={`navigation-wrapper ${mobileOpen ? "mobile_nav_open" : null}`}>
                 <div className="navigation-upper">
                     <Link to={"/"} className="navigation-left">
                         <p className="nav-letter">M</p>

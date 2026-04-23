@@ -179,11 +179,11 @@ header {
 
     .dropdowns {
         .dropdown {
-            display: grid;
-            overflow: hidden;
-            grid-template-rows: 0fr;
+            // display: grid;
+            // overflow: hidden;
+            // grid-template-rows: 0fr;
 
-            transition: $transition;
+            // transition: $transition;
 
             .dropdown-inner {
                 display: flex;
@@ -191,7 +191,8 @@ header {
                 gap: var(--space-200);
 
                 overflow: hidden;
-                padding-top: 0;
+                // padding-top: 0;
+                padding-top: var(--space-300);
                 transition: $transition;
 
                 .dd-link {
@@ -220,7 +221,7 @@ header {
 
                     &:hover {
                         .arrow_box-wrapper {
-                            border-color: $gold;
+                            border-color: $gold !important;
 
                             .arrow_box-inner .arrow_box-grid {
                                 transform: translate(0, -18px);
@@ -239,11 +240,11 @@ header {
             }
 
             &.open {
-                grid-template-rows: 1fr;
+                // grid-template-rows: 1fr;
 
-                .dropdown-inner {
-                    padding-top: var(--space-300);
-                }
+                // .dropdown-inner {
+                //     padding-top: var(--space-300);
+                // }
             }
         }
     }
