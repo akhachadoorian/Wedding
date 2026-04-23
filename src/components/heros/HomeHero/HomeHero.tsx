@@ -7,22 +7,20 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "./HomeHero.scss";
+import { ButtonSettingProps } from "../../../types/buttons";
 
 export type HomeHeroProps = {
     loaded: boolean;
     heading: {
         line1: string;
-        line2: string;
+        line2?: string;
     };
     eyebrow?: {
         variation?: "left" | "centered" | "double";
         text: string;
         doubleText?: string;
     };
-    btn?: {
-        btnText: string;
-        link: string;
-    };
+    btn?: ButtonSettingProps;
     image?: {
         src: string;
         alt?: string;
@@ -151,65 +149,65 @@ export default function HomeHero({ loaded, heading, eyebrow, btn, image }: HomeH
             });
 
             mm.add("(max-width: 799px)", () => {
-                gsap.set(media, {
-                    top: "auto",
-                    right: "0px",
-                    bottom: "0px",
-                    left: "0px",
-                    width: "100vw",
-                    height: "38vh",
-                    y: 0,
-                });
+                // gsap.set(media, {
+                //     top: "auto",
+                //     right: "0px",
+                //     bottom: "0px",
+                //     left: "0px",
+                //     width: "100vw",
+                //     height: "38vh",
+                //     y: 0,
+                // });
 
-                gsap.set(text, {
-                    x: 0,
-                    y: 0,
-                    opacity: 1,
-                });
+                // gsap.set(text, {
+                //     x: 0,
+                //     y: 0,
+                //     opacity: 1,
+                // });
 
-                gsap.set(image, {
-                    scale: 1,
-                });
+                // gsap.set(image, {
+                //     scale: 1,
+                // });
 
-                const tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top top",
-                        end: "bottom 70%",
-                        scrub: 1,
-                        invalidateOnRefresh: true,
-                    },
-                });
+                // const tl = gsap.timeline({
+                //     scrollTrigger: {
+                //         trigger: section,
+                //         start: "top top",
+                //         end: "bottom 70%",
+                //         scrub: 1,
+                //         invalidateOnRefresh: true,
+                //     },
+                // });
 
-                tl.to(
-                    media,
-                    {
-                        height: "100vh",
-                        bottom: 0,
-                        ease: "none",
-                        duration: 0.65,
-                    },
-                    0,
-                )
-                    .to(
-                        image,
-                        {
-                            scale: 1.06,
-                            ease: "none",
-                            duration: 1,
-                        },
-                        0,
-                    )
-                    .to(
-                        text,
-                        {
-                            y: -50,
-                            opacity: 0,
-                            ease: "none",
-                            duration: 0.16,
-                        },
-                        0.12,
-                    );
+                // tl.to(
+                //     media,
+                //     {
+                //         height: "100vh",
+                //         bottom: 0,
+                //         ease: "none",
+                //         duration: 0.65,
+                //     },
+                //     0,
+                // )
+                //     .to(
+                //         image,
+                //         {
+                //             scale: 1.06,
+                //             ease: "none",
+                //             duration: 1,
+                //         },
+                //         0,
+                //     )
+                //     .to(
+                //         text,
+                //         {
+                //             y: -50,
+                //             opacity: 0,
+                //             ease: "none",
+                //             duration: 0.16,
+                //         },
+                //         0.12,
+                //     );
             });
 
             return () => mm.revert();
@@ -233,16 +231,19 @@ export default function HomeHero({ loaded, heading, eyebrow, btn, image }: HomeH
             <div className="home_hero-sticky">
                 <div className="home_hero-text-shell">
                     <div ref={textRef} className="home_hero-text">
-                        {eyebrow && (
-                            <div className="eyebrow_wrapper" ref={eyebrowRef}>
-                                <Eyebrow variation={eyebrow.variation || "double"} color={"--gold-500"} text={eyebrow.text} doubleText={eyebrow.doubleText} />
-                            </div>
-                        )}
+                        <div className="home_hero-text_upper">
+                            {eyebrow && (
+                                <div className="eyebrow_wrapper" ref={eyebrowRef}>
+                                    <Eyebrow variation={eyebrow.variation || "double"} color={"--gold-500"} text={eyebrow.text} doubleText={eyebrow.doubleText} />
+                                </div>
+                            )}
 
-                        <h1 ref={h1Ref} className="home_hero-title">
-                            {heading.line1}
-                            <br />& {heading.line2}
-                        </h1>
+                            <h1 ref={h1Ref} className="home_hero-title">
+                                {heading.line1}
+                                {heading.line2 && <><br />{heading.line2 }</>}
+                                
+                            </h1>
+                        </div>
 
                         {btn && (
                             <Buttons

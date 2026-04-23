@@ -1,4 +1,10 @@
 @use "../../../styles/variables" as *;
+@use "../../ArrowBox/ArrowBox.scss" as *;
+
+body.mobile-nav-open {
+    overflow: hidden;
+    height: 100dvh !important;
+}
 
 @keyframes fadeDown {
     to {
@@ -7,20 +13,7 @@
     }
 }
 
-// Shared link style — reused in nav, mobile nav, and footer
-// %nav-link-base {
-//     color: var(--cream-500);
-//     text-decoration: none;
-//     transition: all ease-in-out 300ms;
-
-//     &:hover {
-//         color: var(--gold-500);
-//     }
-// }
-
 %nav-link-uppercase {
-    // @extend %nav-link-base;
-
     font-family: $font-sans;
     font-size: var(--eyebrow);
     font-weight: 600;
@@ -38,14 +31,34 @@ header {
     justify-content: center;
 }
 
+// ── Caret Wrapper ───────────────────────────────────────────────
+.caret-wrapper {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    aspect-ratio: 1/1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: $transition;
+
+    svg {
+        transition: $transition;
+        path {
+            transition: $transition;
+        }
+    }
+}
+
 // ── Desktop nav wrapper ───────────────────────────────────
 .navigation-wrapper {
     margin: 0 var(--layout-column-margin);
 
     padding: var(--space-200);
-    border-radius: 10px;
-    border: 1px solid var(--Black-black-800, #272828);
-    background: var(--Black-black-900, #1f2121);
+    border: 1px solid var(--black-800);
+    background: var(--black-900);
     box-shadow:
         0 65px 18px 0 rgba(16, 17, 17, 0.01),
         0 42px 17px 0 rgba(16, 17, 17, 0.05),
@@ -60,6 +73,7 @@ header {
     position: absolute;
     top: 16px;
     z-index: 100;
+    transition: background-color 300ms ease-in-out;
 
     @include big {
         max-width: clamp(800px, 60.417vw, 870px);
@@ -110,6 +124,8 @@ header {
                 letter-spacing: 1.2px;
                 text-transform: uppercase;
                 text-decoration: none;
+
+                transition: $transition;
             }
 
             .nav-and {
@@ -120,6 +136,8 @@ header {
                 font-weight: 600;
                 letter-spacing: 1.2px;
                 text-transform: uppercase;
+
+                transition: $transition;
             }
         }
 
@@ -134,33 +152,10 @@ header {
                 display: flex;
             }
 
-            // svg {
-            //     margin-bottom: 7px;
-            // }
-
             .nav-link.has-dropdown {
                 display: flex;
                 align-items: center;
                 gap: var(--space-100);
-
-                .caret-wrapper {
-                    width: 17px;
-                    height: 17px;
-                    aspect-ratio: 1/1;
-
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-
-                    transition: $transition;
-
-                    svg {
-                        transition: $transition;
-                        path {
-                            transition: $transition;
-                        }
-                    }
-                }
 
                 &:hover,
                 &.open {
@@ -177,10 +172,6 @@ header {
             }
 
             .dropdowns {
-                // position: absolute;
-                // top: 100%;
-                // z-index: 99;
-
                 width: 100%;
             }
         }
@@ -256,6 +247,15 @@ header {
             }
         }
     }
+
+    &.mobile_nav_open {
+        background-color: var(--gold-500);
+
+        .navigation-upper .navigation-left .nav-letter,
+        .navigation-upper .navigation-left .nav-and {
+            color: $cream;
+        }
+    }
 }
 
 // ── Mobile nav ────────────────────────────────────────────
@@ -267,12 +267,9 @@ header {
 
     width: 100vw;
     height: 100dvh;
-
-    display: flex;
-    justify-content: flex-end;
-
+    background-color: var(--black-850);
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateY(-100%);
     pointer-events: none;
     transition:
         opacity 0.3s ease-in-out,
@@ -284,41 +281,118 @@ header {
 
     &.open {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0);
         pointer-events: all;
     }
 
     .mobile_nav-inner {
-        background-color: var(--gold-500);
-        position: relative;
-        padding: 24px 16px;
-        width: 75vw;
+        padding: var(--space-1000) var(--layout-column-margin);
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .close_icon {
-        position: absolute;
-        top: 24px;
-        left: 24px;
-    }
-
-    .mobile_nav {
         display: flex;
         flex-direction: column;
-        gap: 30px;
 
-        .nav-link {
-            // @extend %nav-link-base;
+        .mobile_nav-link {
+            padding: var(--space-400) var(--space-100);
+            border-bottom: 1px solid $cream;
+            text-decoration: none;
 
-            font-family: $font-serif;
-            font-size: 40px;
-            font-style: italic;
-            font-weight: 400;
-            line-height: 120%;
+            display: flex;
+            justify-content: space-between;
+            gap: var(--space-100);
+        }
+
+        a.mobile_nav-link {
+            &:hover {
+                @each $dir, $t in $arrow-hover-transforms {
+                    .arrow_box-grid.#{$dir} {
+                        transform: $t;
+                    }
+                }
+            }
+        }
+
+        .mobile_nav-dropdown_wrapper {
+            border-bottom: 1px solid $cream;
+            padding: var(--space-400) 0;
+
+            .mobile_nav-link {
+                border-bottom: 0;
+                padding: 0 var(--space-100);
+
+                &.open {
+                    .caret-wrapper {
+                        svg {
+                            transform: rotate(180deg);
+                        }
+                    }
+                }
+            }
+
+            .mobile_nav-dropdown {
+                padding: var(--space-200) var(--space-200) 0 var(--space-200);
+
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-200);
+
+                pointer-events: none;
+
+                .mobile_nav-view_page {
+                    display: flex;
+                    justify-content: center;
+                    gap: var(--space-200);
+
+                    text-decoration: none;
+                    padding: var(--space-075);
+                    border-top: 1px solid var(--gold-500);
+                    border-bottom: 1px solid var(--gold-500);
+
+                    .eyebrow {
+                        color: $gold;
+                    }
+
+                    &:hover {
+                        @each $dir, $t in $arrow-hover-transforms {
+                            .arrow_box-grid.#{$dir} {
+                                transform: $t;
+                            }
+                        }
+                    }
+                }
+
+                .mdd-link {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: var(--space-400);
+
+                    text-decoration: none;
+                    padding: var(--space-200) var(--space-100);
+                    border-bottom: 1px solid $cream;
+
+                    .mdd-text_wrapper {
+                        .mdd-body {
+                            margin-top: var(--space-100);
+                            color: var(--cream-700);
+                        }
+                    }
+
+                    &:last-of-type {
+                        border-bottom: 0;
+                    }
+
+                    &:hover {
+                        @each $dir, $t in $arrow-hover-transforms {
+                            .arrow_box-grid.#{$dir} {
+                                transform: $t;
+                            }
+                        }
+                    }
+                }
+
+                &.open {
+                    pointer-events: all;
+                }
+            }
         }
     }
 }

@@ -7,15 +7,6 @@
     
     width: fit-content;
 
-    &.centered {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    &.double {
-        gap: var(--space-150);
-    }
-
     &.gold { color: var(--gold-500); }
 
     .diamond_underline {
@@ -24,24 +15,49 @@
         background-color: var(--gold-500);
     }
 
-    // .diamond {
-    //     $size: clamp(16px, 1.111vw, 18px);
-    //     flex: 0 0 $size;
-    //     width: $size;
-    //     height: $size;
-    // }
-
     .diamond_underline-wrapper {
         display: flex;
         align-items: center;
-        gap: 8px;
-        padding: 0 10px;
+        gap: var(--space-075);
+        // padding: 0 10px;
         width: 100%;
 
         @include big  {
             width: calc(100% + 40px);
+            gap: var(--space-100);
         }
 
         .diamond_underline { width: 100%; }
+    }
+
+    &.centered {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    &.double {
+        flex-direction: column;
+        gap: var(--space-075);
+
+        @include big {
+            flex-direction: row;
+            gap: var(--space-150);
+
+            .diamond_underline-wrapper {
+                width: fit-content;
+
+                .diamond_underline {
+                    display: none;
+                }
+            }
+        }
+
+        .eyebrow {
+            padding: 0 16px;
+
+            @include big {
+                padding: 0;
+            }
+        }
     }
 }

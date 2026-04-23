@@ -41,16 +41,25 @@ function Eyebrow({ variation = "left", color = "--gold-500", text, doubleText }:
                 <p className="eyebrow" style={{ color: `var(${color})` }}>
                     {text}
                 </p>
-                <Diamond
-                    size={{
-                        size: {
-                            minSize: 16,
-                            desiredSize: 16,
-                            maxSize: 20,
-                        },
-                    }}
-                    color={color}
-                />
+                <div className="diamond_underline-wrapper">
+                    <div className={`diamond_underline`} style={{ backgroundColor: `var(${color})` }}></div>
+                    <Diamond
+                        size={{
+                            size: {
+                                minSize: 16,
+                                desiredSize: 16,
+                                maxSize: 20,
+                            },
+                            mobileSize: {
+                                minSize: 14,
+                                desiredSize: 16,
+                                maxSize: 18,
+                            },
+                        }}
+                        color={color}
+                    />
+                    <div className={`diamond_underline`} style={{ backgroundColor: `var(${color})` }}></div>
+                </div>
                 <p className="eyebrow" style={{ color: `var(${color})` }}>
                     {doubleText}
                 </p>

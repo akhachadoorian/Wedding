@@ -26,7 +26,7 @@ export default function Diamond({ color = "--gold-500", size = {size: {minSize: 
 
     // let sizeVW = `${dVW}dvw`;
     let sizeVW = `clamp(${desktopSize.minSize}px, ${dVW.toFixed(3)}dvw, ${desktopSize.maxSize}px)`;
-    let mobileSizeVW = `clamp(${mobileSize.minSize}px, ${mVW.toFixed(3)}dvw, ${mobileSize}px)`;
+    let mobileSizeVW = `clamp(${mobileSize.minSize}px, ${mVW.toFixed(3)}dvw, ${mobileSize.maxSize}px)`;
 
     const sizeStyle = {
         "--diamond-size": sizeVW,
