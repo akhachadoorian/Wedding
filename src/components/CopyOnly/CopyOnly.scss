@@ -1,29 +1,35 @@
 @use "../../styles/variables" as *;
 
 .copy-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
 
     @include big  {
-        max-width: 72.083vw;
 
-        &.centered {
-            margin: auto;
+    }
+
+    .copy-inner {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-500);
+
+        @include big {
+
         }
-    }
 
-    &.centered {
-        align-items: center;
-        text-align: center;
-    }
+        &.center {
 
-    .copy {
-        color: var(--cream-500);
+        }
 
-        .gold {
-            font-style: italic;
-            color: var(--gold-500);
+        &.columns {
+            @include big {
+                flex-direction: column;
+            }
+        }
+
+        .copy-btns {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: var(--space-400);
         }
     }
 }

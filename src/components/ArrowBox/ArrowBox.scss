@@ -1,5 +1,19 @@
 @use "../../styles/variables" as *;
 
+//
+$arrowWidth: 18px;
+
+$arrow-hover-transforms: (
+    'top-right': translate(0, -$arrowWidth),
+    'top-left': translate(-$arrowWidth, -$arrowWidth),
+    'bottom-right': translate(0, 0),
+    'bottom-left': translate(-$arrowWidth, 0),
+    'right': translate(0, 0),
+    'left': translate(-$arrowWidth, 0),
+    'up': translate(0, -$arrowWidth),
+    'down': translate(0, 0),
+);
+
 .arrow_box-wrapper {
     padding: var(--space-025, 2px);
     border-radius: 4px;
@@ -20,16 +34,12 @@
 
     .arrow_box-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-
-        transform: translateX(-18px);
         transition: $transition;
     }
 
     .arrow_box-inner {
-        width: 18px;
-        height: 18px;
+        width: $arrowWidth;
+        height: $arrowWidth;
         aspect-ratio: 1;
 
         position: relative;
@@ -48,53 +58,56 @@
             transition: $transition;
         }
     }
-    .arrow.start {
-        grid-column: 2/2;
-        grid-row: 1/1;
-    }
-
-    .arrow.end {
-        grid-column: 1/1;
-        grid-row: 2/2;
-    }
-
-    // &:hover {
-    //     .arrow_box-grid {
-    //         transform: translate(0, -18px);
-    //     }
-    // }
 }
 
-// .arrow-wrapper {
-//     padding: var(--space-025, 2px);
-//     border-radius: 4px;
-//     border: 1px solid var(--Cream-cream-500, #e6e2da);
+@mixin arrow-grid($transform, $start-col, $start-row, $end-col, $end-row, $rows: 1) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat($rows, 1fr);
+    transform: $transform;
 
-//     width: 20px;
-//     height: 20px;
-//     aspect-ratio: 1;
-//     flex-shrink: 0;
-//     overflow: hidden;
+    .arrow.start {
+        grid-column: #{$start-col}/#{$start-col};
+        grid-row: #{$start-row}/#{$start-row};
+    }
+    .arrow.end {
+        grid-column: #{$end-col}/#{$end-col};
+        grid-row: #{$end-row}/#{$end-row};
+    }
+}
+////////////////////////////////////
+// DIAGONAL DIRECTIONS
+////////////////////////////////////
+.arrow_box-grid.top-right {
+    @include arrow-grid(translateX(-$arrowWidth), 2, 1, 1, 2, $rows: 2);
+}
 
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
+.arrow_box-grid.top-left {
+    @include arrow-grid(translateX(0), 1, 1, 2, 2, $rows: 2);
+}
 
-// .arrow-inner {
-//     width: 18px;
-//     height: 18px;
-//     aspect-ratio: 1;
+.arrow_box-grid.bottom-right {
+    @include arrow-grid(translate(-$arrowWidth, -$arrowWidth), 1, 1, 2, 2, $rows: 2);
+}
 
-//         background-image: url("../../assets/ArrowsCarots/ArrowGrid.svg");
-//         background-position: top right;
+.arrow_box-grid.bottom-left {
+    @include arrow-grid(translate(0, -$arrowWidth), 2, 1, 1, 2, $rows: 2);
+}
 
-//         transition: $transition;
-//     }
+////////////////////////////////////
+// DEFAULT DIRECTIONS
+////////////////////////////////////
+.arrow_box-grid.right {
+    @include arrow-grid(translateX(-$arrowWidth), 1, 1, 2, 1);
+}
 
-// }
+.arrow_box-grid.left {
+    @include arrow-grid(translateX(0px), 1, 1, 2, 1);
+}
 
-// &:hover {
-//         .arrow-wrapper .arrow-inner {
-//             background-position: bottom left;
-//         }
-//     }
+.arrow_box-grid.up {
+    @include arrow-grid(translateX(0), 1, 1, 1, 2, $rows: 2);
+}
+
+.arrow_box-grid.down {
+    @include arrow-grid(translateY(-$arrowWidth), 1, 1, 1, 2, $rows: 2);
+}

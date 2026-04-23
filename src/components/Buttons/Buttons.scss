@@ -1,4 +1,9 @@
 @use "../../styles/variables" as *;
+@use '../ArrowBox/ArrowBox.scss' as *;
+
+$btnTB: 12px;
+$btnLR: 24px;
+$btnBorderWidth: 2px;
 
 .btn-wrapper {
     .btn {
@@ -18,41 +23,44 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
+
+        &:hover {
+            @each $dir, $t in $arrow-hover-transforms {
+                .arrow_box-grid.#{$dir} { transform: $t; }
+            }
+        }
     }
 
     .btn.solid {
-        padding: var(--space-150, 12px) var(--space-300, 24px);
-        // border-radius: $default-br;
+        padding: $btnTB $btnLR;
+        border: $btnBorderWidth solid;
 
         &.gold {
+            border-color: var(--gold-500);
             background-color: var(--gold-500);
             color: var(--cream-500);
 
             &:hover {
                 background-color: var(--gold-600);
+                border-color: var(--gold-600);
             }
         }
 
         &.cream {
+            border-color: var(--cream-500);
             background-color: var(--cream-500);
             color: var(--gold-500);
 
             &:hover {
                 background-color: var(--cream-100);
-            }
-        }
-
-        &:hover {
-            .arrow_box-grid {
-                transform: translate(0, -18px);
+                border-color: var(--cream-100);
             }
         }
     }
 
     .btn.outline {
-        padding: var(--space-150, 12px) var(--space-300, 24px);
-        border-radius: $default-br;
-        border: 2px solid;
+        padding: $btnTB $btnLR;
+        border: $btnBorderWidth solid;
 
         &.gold {
             border-color: var(--gold-500);
@@ -69,12 +77,6 @@
 
             &:hover {
                 border-color: var(--gold-500);
-            }
-        }
-
-        &:hover {
-            .arrow_box-grid {
-                transform: translate(0, -18px);
             }
         }
     }
@@ -128,10 +130,6 @@
             &::before,
             &::after {
                 width: 100%;
-            }
-
-            .arrow_box-grid {
-                transform: translate(0, -18px);
             }
         }
     }

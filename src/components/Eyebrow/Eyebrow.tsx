@@ -6,8 +6,8 @@ import Diamond from "../Diamond/Diamond";
 import "./Eyebrow.scss";
 
 type EyebrowProps = {
-    variation: "left" | "centered" | "double";
-    color: ColorVariables;
+    variation?: "left" | "centered" | "double";
+    color?: ColorVariables;
     text: string;
     doubleText?: string;
 };

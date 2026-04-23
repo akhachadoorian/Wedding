@@ -1,35 +1,35 @@
 import { useLayoutEffect, useRef } from "react";
 
+import HeroImg from "../../../assets/Max&Alex.jpg";
+import Buttons from "../../Buttons/Buttons";
+import Eyebrow from "../../Eyebrow/Eyebrow";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import HeroImg from "../../../assets/Max&Alex.jpg";
-import Eyebrow from "../../Eyebrow/Eyebrow";
+
 import "./HomeHero.scss";
-import Buttons from "../../Buttons/Buttons";
 
 export type HomeHeroProps = {
-    loaded: boolean
+    loaded: boolean;
     heading: {
-        line1: string
-        line2: string
-    }
+        line1: string;
+        line2: string;
+    };
     eyebrow?: {
-        variation?: "left" | "centered" | "double"
-        text: string
-        doubleText?: string
-    }
+        variation?: "left" | "centered" | "double";
+        text: string;
+        doubleText?: string;
+    };
     btn?: {
-        btnText: string
-        link: string
-    }
+        btnText: string;
+        link: string;
+    };
     image?: {
-        src: string
-        alt?: string
-    }
+        src: string;
+        alt?: string;
+    };
 };
 
-
-export default function HomeHero({ loaded, heading, eyebrow, btn, image }:HomeHeroProps) {
+export default function HomeHero({ loaded, heading, eyebrow, btn, image }: HomeHeroProps) {
     // Load References
     const eyebrowRef = useRef(null);
     const h1Ref = useRef(null);
@@ -226,8 +226,7 @@ export default function HomeHero({ loaded, heading, eyebrow, btn, image }:HomeHe
         };
     }, [loaded]);
 
-
-    console.log("heading", heading.line1)
+    console.log("heading", heading.line1);
 
     return (
         <section ref={sectionRef} className={`home_hero-wrapper ${loaded ? "is-loaded" : "is-hidden"}`}>
@@ -236,12 +235,7 @@ export default function HomeHero({ loaded, heading, eyebrow, btn, image }:HomeHe
                     <div ref={textRef} className="home_hero-text">
                         {eyebrow && (
                             <div className="eyebrow_wrapper" ref={eyebrowRef}>
-                                <Eyebrow
-                                    variation={eyebrow.variation || "double" }
-                                    color={"--gold-500"}
-                                    text={eyebrow.text}
-                                    doubleText={eyebrow.doubleText}
-                                />
+                                <Eyebrow variation={eyebrow.variation || "double"} color={"--gold-500"} text={eyebrow.text} doubleText={eyebrow.doubleText} />
                             </div>
                         )}
 
@@ -250,7 +244,17 @@ export default function HomeHero({ loaded, heading, eyebrow, btn, image }:HomeHe
                             <br />& {heading.line2}
                         </h1>
 
-                        {btn && <Buttons style="solid" theme="gold" btnText={btn.btnText} link={btn.link}  />}
+                        {btn && (
+                            <Buttons
+                                style="solid"
+                                theme="gold"
+                                btnSettings={{
+                                    btnText: btn.btnText,
+                                    link: btn.link,
+                                }}
+                                includeArrow={true}
+                            />
+                        )}
                     </div>
                 </div>
 

@@ -1,31 +1,43 @@
 {
-    "extends": ["react-app"],
-    "plugins": ["import"],
+    "extends": [
+        "react-app",
+        "plugin:storybook/recommended"
+    ],
+    "plugins": [
+        "import"
+    ],
     "rules": {
-        "import/order": ["warn", {
-            "groups": [
-                "builtin",
-                "external",
-                "internal",
-                ["parent", "sibling", "index"]
-            ],
-            "pathGroups": [
-                {
-                    "pattern": "react",
-                    "group": "external",
-                    "position": "before"
-                },
-                {
-                    "pattern": "./**/*.scss",
-                    "group": "sibling",
-                    "position": "after"
+        "import/order": [
+            "warn",
+            {
+                "groups": [
+                    "builtin",
+                    "external",
+                    "internal",
+                    [
+                        "parent",
+                        "sibling",
+                        "index"
+                    ]
+                ],
+                "pathGroups": [
+                    {
+                        "pattern": "react",
+                        "group": "external",
+                        "position": "before"
+                    },
+                    {
+                        "pattern": "./**/*.scss",
+                        "group": "sibling",
+                        "position": "after"
+                    }
+                ],
+                "newlines-between": "always",
+                "alphabetize": {
+                    "order": "asc",
+                    "caseInsensitive": true
                 }
-            ],
-            "newlines-between": "always",
-            "alphabetize": {
-                "order": "asc",
-                "caseInsensitive": true
             }
-        }]
+        ]
     }
 }

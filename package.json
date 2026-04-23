@@ -25,13 +25,14 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    
-    "generate":          "tsx scripts/generate.ts",
-    "generate-content":  "tsx scripts/generate-content.ts",
-    "generate-content:watch":  "tsx scripts/generate-content.ts --watch",
+    "generate": "tsx scripts/generate.ts",
+    "generate-content": "tsx scripts/generate-content.ts",
+    "generate-content:watch": "tsx scripts/generate-content.ts --watch",
     "generate-timeline": "tsx scripts/generate-timeline.ts",
     "generate-timeline:watch": "tsx scripts/generate-timeline.ts --watch",
-    "generate:watch":    "tsx scripts/generate.ts --watch"
+    "generate:watch": "tsx scripts/generate.ts --watch",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "eslintConfig": {
     "extends": [
@@ -52,12 +53,21 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^10.3.5",
+    "@storybook/addon-docs": "^10.3.5",
+    "@storybook/addon-onboarding": "^10.3.5",
+    "@storybook/preset-create-react-app": "^10.3.5",
+    "@storybook/react-webpack5": "^10.3.5",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/node": "^25.6.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-storybook": "^10.3.5",
     "gh-pages": "^6.3.0",
-    "tsx": "^4.21.0"
+    "prop-types": "^15.8.1",
+    "storybook": "^10.3.5",
+    "tsx": "^4.21.0",
+    "webpack": "^5.106.2"
   }
 }

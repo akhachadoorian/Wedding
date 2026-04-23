@@ -1,44 +1,31 @@
 import React from "react";
-import './Buttons.scss';
 import { Link } from "react-router-dom";
-import ArrowBox from "../ArrowBox/ArrowBox";
+
+import { ButtonProps } from "../../types/buttons";
 import { ColorVariables } from "../../types/colors";
+import ArrowBox from "../ArrowBox/ArrowBox";
 
-type ButtonProps = {
-    style: 'solid' | 'outline' | "lines"
-    theme: 'gold' | 'cream'
-    className?: string
-    btnText: string
-    link: string
-}
+import "./Buttons.scss";
 
-export default function Buttons({style = "solid", theme, className, btnText, link}:ButtonProps) {
-    
-    let arrowTheme = "--cream-500" as ColorVariables;
-    if (theme == "cream") {
-        if (style == "solid") {
-            arrowTheme = "--gold-500" as ColorVariables;
-        }
-        else if (style == "outline" || style == "lines") {
-            arrowTheme = "--cream-500" as ColorVariables;
-        }
-    }
-    else if (theme == "gold") {
-        if (style == "solid") {
-            arrowTheme = "--cream-500" as ColorVariables;
-        }
-        else if (style == "outline" || style == "lines") {
-            arrowTheme = "--gold-500" as ColorVariables;
-        }
-    }
+export default function Buttons({ style = "solid", theme, className, btnSettings, includeArrow = true,  arrowSettings}: ButtonProps) {
+
+    const arrowThemeMap: Record<string, Record<string, ColorVariables>> = {
+        cream: { solid: "--gold-500", outline: "--cream-500", lines: "--cream-500" },
+        gold: { solid: "--cream-500", outline: "--gold-500", lines: "--gold-500" },
+    };
+    const arrowTheme = (arrowThemeMap[theme]?.[style] ?? "--cream-500") as ColorVariables;
+
+
 
     return (
         <div className={`btn-wrapper ${className ?? ""}`}>
-            <Link to={link} className={`btn ${style} ${theme}`}>
-                <p className="btn-text">{btnText}</p>
+            <Link to={btnSettings.link} className={`btn ${style} ${theme}`}>
+                {(includeArrow && arrowSettings?.arrowSide === 'left') && <ArrowBox color={arrowTheme} arrowDirection={arrowSettings?.arrowDirection} />}
 
-                <ArrowBox color={arrowTheme} />
+                <p className="btn-text">{btnSettings.btnText}</p>
+
+                {(includeArrow && arrowSettings?.arrowSide != 'left') && <ArrowBox color={arrowTheme} arrowDirection={arrowSettings?.arrowDirection} />}
             </Link>
         </div>
-    )
+    );
 }

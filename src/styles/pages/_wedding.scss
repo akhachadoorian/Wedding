@@ -10,10 +10,10 @@
             gap: calc(var(--space-1000) * 1.5);
         }
 
-        .lines {
-            display: flex;
-            flex-direction: column;
-            gap: var(--layout-column-gutter);
-        }
+        // .lines {
+        //     display: flex;
+        //     flex-direction: column;
+        //     gap: var(--layout-column-gutter);
+        // }
     }
 }
