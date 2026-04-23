@@ -1,6 +1,6 @@
 import path from "path";
 import { OUTPUT_DIR, VAULT_CONTENT_DIR, VAULT_TIMELINE_DIR } from "./config";
-import type {  TimelineMappingConfig, GenerateProps, MappingConfig } from "./types";
+import type {  TimelineMappingConfig, GenerateProps, MappingConfig, OutputEntry } from "./types";
 import fs from "fs";
 import { parseVaultNote } from "./parser";
 import { pathToFileURL } from "url";
@@ -54,7 +54,15 @@ async function loadMappings(mappingDir: string): Promise<(MappingConfig | Timeli
   for (const file of files) {
     const filePath = pathToFileURL(path.join(mappingDir, file)).href;
     const mod = await import(filePath);
-    mappings.push(mod.default);
+    if (!mod.default) {
+      console.warn(`⚠️  ${file} has no default export — skipping`);
+      continue;
+    }
+    if (Array.isArray(mod.default)) {
+      mappings.push(...mod.default);
+    } else {
+      mappings.push(mod.default);
+    }
   }
   return mappings;
 }
@@ -66,11 +74,19 @@ export async function generate({content = true, mappingDir, applyMapping, buildO
   }
 
   const mappings = await loadMappings(mappingDir);
-  
 
+  // Group mappings by source so each vault file is parsed once and all its
+  // exports land in a single output file.
+  const bySource = new Map<string, (MappingConfig | TimelineMappingConfig)[]>();
   for (const mapping of mappings) {
+    const group = bySource.get(mapping.source) ?? [];
+    group.push(mapping);
+    bySource.set(mapping.source, group);
+  }
+
+  for (const [source, group] of Array.from(bySource.entries())) {
     const vaultDir = content ? VAULT_CONTENT_DIR : VAULT_TIMELINE_DIR;
-    const vaultFile = path.join(vaultDir, `${mapping.source}.md`);
+    const vaultFile = path.join(vaultDir, `${source}.md`);
 
     if (!fs.existsSync(vaultFile)) {
       console.warn(`⚠️  Vault file not found: ${vaultFile}`);
@@ -78,15 +94,14 @@ export async function generate({content = true, mappingDir, applyMapping, buildO
     }
 
     const { sections } = parseVaultNote(vaultFile);
-    const props = applyMapping(mapping, sections);
-    if (props) buildOutput(mapping, props);
+    console.log("sections: ", sections);
 
-    // if (content) {
-    //   const props = applyPageMapping(mapping as MappingConfig, sections);
-    //   if (props) writePageOutput(mapping as MappingConfig, props);
-    // } else {
-    //   const props = applyTimelineMapping(mapping, sections);
-    //   if (props) writeTimelineOutput(mapping, props);
-    // }
+    const entries: OutputEntry[] = [];
+    for (const mapping of group) {
+      const props = applyMapping(mapping, sections);
+      if (props) entries.push({ mapping, props });
+    }
+
+    if (entries.length > 0) buildOutput(source, entries);
   }
 }

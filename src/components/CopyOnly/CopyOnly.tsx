@@ -6,7 +6,7 @@ import Eyebrow from "../Eyebrow/Eyebrow";
 
 import "./CopyOnly.scss";
 
-type CopyOnlyProps = {
+export type CopyOnlyProps = {
     eyebrow?: string;
     header: string;
     subtitle?: string;

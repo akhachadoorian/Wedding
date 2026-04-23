@@ -39,11 +39,7 @@ export type PropMapping =
       transform?: never;
     };
 
-export type MappingConfig = {
-  /** Vault file name without extension e.g. "Home" */
-  source: string;
-  /** ## Section heading to read from e.g. "Hero" */
-  section: string;
+export type ComponentMappingProps = {
   /** React component name e.g. "HomeHero" */
   component: string;
   /** Path to component file for type import */
@@ -52,6 +48,24 @@ export type MappingConfig = {
   propsImport?: string,
   /** Map of dot-path prop → where to find its value */
   props: Record<string, PropMapping>;
+} 
+
+export type MappingConfig = {
+  /** Vault file name without extension e.g. "Home" */
+  source: string;
+  /** ## Section heading to read from e.g. "Hero" */
+  section: string;
+  /**  */
+  componentMap: ComponentMappingProps; 
+
+  /** React component name e.g. "HomeHero" */
+  // component: string;
+  /** Path to component file for type import */
+  // componentPath: string;
+  /** syntax for the props import if needed*/
+  // propsImport?: string,
+  /** Map of dot-path prop → where to find its value */
+  // props: Record<string, PropMapping>;
 };
 
 // ─── Timeline mapping types ──────────────────────────────────────────────────
@@ -88,9 +102,14 @@ export type TimelineMappingConfig = {
 };
 
 // ─── Generate Type ──────────────────────────────────────────────────
+export type OutputEntry = {
+  mapping: unknown;
+  props: Record<string, unknown>;
+};
+
 export type GenerateProps = {
-  content: boolean; // whether generate page content
+  content: boolean;
   mappingDir: string;
   applyMapping: (mapping: unknown, sections: Record<string, SectionData>) => Record<string, unknown> | null;
-  buildOutput: (mapping: unknown, props: Record<string, unknown>) => string;
+  buildOutput: (source: string, entries: OutputEntry[]) => void;
 }

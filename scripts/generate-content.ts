@@ -3,24 +3,25 @@
 import fs from "fs";
 import path from "path";
 import { pathToFileURL } from "url";
-import type { GenerateProps, MappingConfig, PropMapping, SectionData } from "./core/types";
+import type { GenerateProps, MappingConfig, OutputEntry, PropMapping, SectionData } from "./core/types";
 import { formatValue, generate, setNested } from "./core/generator";
 import { MAPPINGS_CONTENT_DIR, OUTPUT_DIR, VAULT_CONTENT_DIR } from "./core/config";
 
 // ─── Page content: apply mapping config ─────────────────────────────────────
 function applyPageMapping(
-  mapping: MappingConfig,
+  mapping: unknown,
   sections: Record<string, SectionData>
 ): Record<string, unknown> | null {
-  const section = sections[mapping.section];
+  const { section: sectionKey, source, componentMap } = mapping as MappingConfig;
+  const section = sections[sectionKey];
   if (!section) {
-    console.warn(`⚠️  Section "${mapping.section}" not found in "${mapping.source}.md"`);
+    console.warn(`⚠️  Section "${sectionKey}" not found in "${source}.md"`);
     return null;
   }
 
   const result: Record<string, unknown> = {};
 
-  for (const [propPath, config] of Object.entries(mapping.props) as [string, PropMapping][]) {
+  for (const [propPath, config] of Object.entries(componentMap.props) as [string, PropMapping][]) {
     let value: unknown;
 
     if ("value" in config && config.value !== undefined) {
@@ -43,20 +44,45 @@ function applyPageMapping(
 }
 
 // ─── Page content: write output ──────────────────────────────────────────────
-function writePageOutput(mapping: MappingConfig, props: Record<string, unknown>): void {
-  const varName = mapping.component[0].toLowerCase() + mapping.component.slice(1) + "Content";
-  const typeName = mapping.component + "Props";
-  const slug = mapping.source.toLowerCase().replace(/\s+/g, "-");
-  const propsImport = mapping.propsImport ? mapping.propsImport : `Partial<${typeName}>`;
+function writePageOutput(source: string, entries: OutputEntry[]): void {
+  const slug = source.toLowerCase().replace(/\s+/g, "-");
 
-  const output = `// ⚠️  Auto-generated — do not edit directly.
-// Edit vault/Content/${mapping.source}.md instead, then re-run: npx tsx scripts/generate.ts
+  const toVarName = (mapping: MappingConfig) => {
+    const sectionCamel = mapping.section
+      .split(/\s+/)
+      .map((w, i) => i === 0 ? w[0].toLowerCase() + w.slice(1) : w[0].toUpperCase() + w.slice(1))
+      .join("");
+    return `${sectionCamel}${mapping.componentMap.component}Content`;
+  };
 
-import type { ${typeName} } from "${mapping.componentPath}";
+  // Deduplicate imports (same component can appear in multiple sections)
+  const seen = new Set<string>();
+  const imports = (entries as { mapping: MappingConfig; props: Record<string, unknown> }[])
+    .filter(({ mapping }) => {
+      const key = `${mapping.componentMap.component}|${mapping.componentMap.componentPath}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .map(({ mapping }) => `import type { ${mapping.componentMap.component}Props } from "${mapping.componentMap.componentPath}";`);
 
-export const ${varName}: ${propsImport} = ${formatValue(props)};
-`;
+  const exports = (entries as { mapping: MappingConfig; props: Record<string, unknown> }[])
+    .map(({ mapping, props }) => {
+      const varName = toVarName(mapping);
+      const typeName = `${mapping.componentMap.component}Props`;
+      const propsType = mapping.componentMap.propsImport ?? `Partial<${typeName}>`;
+      return `export const ${varName}: ${propsType} = ${formatValue(props)};`;
+    });
 
+  const output = [
+    `// ⚠️  Auto-generated — do not edit directly.`,
+    `// Edit vault/Content/${source}.md instead, then re-run: npx tsx scripts/generate.ts`,
+    ``,
+    ...imports,
+    ``,
+    exports.join("\n\n"),
+    ``,
+  ].join("\n");
 
   const outPath = path.join(OUTPUT_DIR, `${slug}.content.ts`);
   fs.writeFileSync(outPath, output, "utf-8");
@@ -71,7 +97,7 @@ export function generateContent(isWatch:boolean = false  ) {
         mappingDir: MAPPINGS_CONTENT_DIR,
         applyMapping: applyPageMapping,
         buildOutput: writePageOutput
-    } as GenerateProps;
+    } satisfies GenerateProps;
 
     generate(gProps).then(() => {
         if (isWatch) {
