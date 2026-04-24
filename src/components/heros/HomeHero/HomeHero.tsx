@@ -1,6 +1,4 @@
 import { useLayoutEffect, useRef } from "react";
-
-import HeroImg from "../../../assets/Max&Alex.jpg";
 import Buttons from "../../Buttons/Buttons";
 import Eyebrow from "../../Eyebrow/Eyebrow";
 import gsap from "gsap";
@@ -8,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "./HomeHero.scss";
 import { ButtonSettingProps } from "../../../types/buttons";
+import { ImageProps } from "../../../types/images";
 
 export type HomeHeroProps = {
     loaded: boolean;
@@ -21,10 +20,7 @@ export type HomeHeroProps = {
         doubleText?: string;
     };
     btn?: ButtonSettingProps;
-    image?: {
-        src: string;
-        alt?: string;
-    };
+    image?: ImageProps;
 };
 
 export default function HomeHero({ loaded, heading, eyebrow, btn, image }: HomeHeroProps) {
@@ -224,8 +220,6 @@ export default function HomeHero({ loaded, heading, eyebrow, btn, image }: HomeH
         };
     }, [loaded]);
 
-    console.log("heading", heading.line1);
-
     return (
         <section ref={sectionRef} className={`home_hero-wrapper ${loaded ? "is-loaded" : "is-hidden"}`}>
             <div className="home_hero-sticky">
@@ -241,7 +235,6 @@ export default function HomeHero({ loaded, heading, eyebrow, btn, image }: HomeH
                             <h1 ref={h1Ref} className="home_hero-title">
                                 {heading.line1}
                                 {heading.line2 && <><br />{heading.line2 }</>}
-                                
                             </h1>
                         </div>
 
@@ -261,7 +254,7 @@ export default function HomeHero({ loaded, heading, eyebrow, btn, image }: HomeH
 
                 <div ref={mediaRef} className="home_hero-media">
                     <div className="home_hero-overlay"></div>
-                    <img ref={imageRef} src={image?.src ?? HeroImg} alt={image?.alt ?? "Wedding"} className="home_hero-image" />
+                    <img ref={imageRef} src={image?.src ?? "/images/Max&Alex.jpg"} alt={image?.alt ?? "Max and Alex posed on a bridge."} className="home_hero-image" />
                 </div>
             </div>
         </section>

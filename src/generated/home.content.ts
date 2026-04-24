@@ -8,12 +8,6 @@ import type { HomeHeroProps } from "../components/heros/HomeHero/HomeHero";
 export const welcomeCopyCopyOnlyContent: Omit<CopyOnlyProps, "variation" | "headingSize"> = {
   eyebrow: "We're getting married",
   header: "Once upon a time, we found each other, and now we're counting down the days until we say **I do**. We would be thrilled to have you join us in this next chapter.",
-  buttons: [
-    {
-      btnText: "Button test",
-      link: "/",
-    },
-  ],
 };
 
 export const welcomeInfoDashedCopyGridContent: DashedCopyGridProps = {
@@ -46,5 +40,9 @@ export const heroHomeHeroContent: Omit<HomeHeroProps, "loaded"> = {
   btn: {
     btnText: "RSVP Now",
     link: "/rsvp",
+  },
+  image: {
+    src: "/images/Max&Alex.jpg",
+    alt: "Couple",
   },
 };

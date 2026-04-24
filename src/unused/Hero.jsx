@@ -36,7 +36,7 @@ function Hero({}) {
         <section className="hero-section">
             <div className="hero-wrapper">
                 <div className="hero-img">
-                    <div className="img_holder">
+                    <div className="img-holder">
                         <img ref={imgRef} src={HeroImg} alt="" />
                     </div>
                 </div>

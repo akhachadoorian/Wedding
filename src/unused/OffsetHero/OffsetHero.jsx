@@ -58,7 +58,7 @@ export default function OffsetHero({variation = "right", loaded}) {
 
                 <div className="offset_hero-img">
                     <div className="offset_hero-overlay"></div>
-                    <div className="img_holder">
+                    <div className="img-holder">
                         <img ref={imgRef} src={HeroImg} alt="" />
                     </div>
                 </div>

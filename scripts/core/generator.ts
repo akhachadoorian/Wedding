@@ -103,6 +103,6 @@ export async function generate({content = true, mappingDir, applyMapping, buildO
       if (props) entries.push({ mapping, props });
     }
 
-    // if (entries.length > 0) buildOutput(source, entries);
+    if (entries.length > 0) buildOutput(source, entries);
   }
 }

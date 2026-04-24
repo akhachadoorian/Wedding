@@ -42,7 +42,7 @@ const HomeHeroProps: ComponentMappingProps = {
         },
         "image.alt": {
             field: "Image",
-            column: "link",
+            column: "alt",
         },
     },
 };

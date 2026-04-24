@@ -164,7 +164,7 @@ p.heading_xl {
     IMAGES
 ////////////////////////////// */
 
-.img_holder {
+.img-holder {
     img {
         object-fit: cover;
         object-position: center;

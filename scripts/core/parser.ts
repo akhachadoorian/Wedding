@@ -27,7 +27,7 @@ function cleanCell(val: string): string {
 }
 
 type ParsedTable = {
-  rows: Array<{ field: string; content: string; link: string }>;
+  rows: Array<{ field: string; content: string; link: string; [key: string]: string }>;
   records: Array<Record<string, string>>;
   headers: string[];
 };
@@ -40,7 +40,8 @@ function parseTable(lines: string[]): ParsedTable {
   for (const line of lines) {
     if (!line.startsWith("|")) continue;
 
-    const cells = line.split("|").map((c) => c.trim()).filter(Boolean);
+    // slice(1,-1) strips the empty strings from leading/trailing | without removing empty interior cells
+    const cells = line.split("|").map((c) => c.trim()).slice(1, -1);
 
     // Header row
     if (cells[0].toLowerCase() === "field") {
@@ -49,11 +50,14 @@ function parseTable(lines: string[]): ParsedTable {
     }
     // Separator row
     if (cells[0].startsWith("---") || cells[0].startsWith(":---")) continue;
-
-    console.log("cells ", cells);
-
+    
     const [field = "", content = "", link = ""] = cells;
-    rows.push({ field: cleanCell(field), content: cleanCell(content), link: cleanCell(link) });
+    const extra: Record<string, string> = {};
+    for (let j = 3; j < cells.length; j++) {
+      const val = cleanCell(cells[j]);
+      if (headers[j] && val) extra[headers[j].toLowerCase()] = val;
+    }
+    rows.push({ field: cleanCell(field), content: cleanCell(content), link: cleanCell(link), ...extra });
 
     // Raw record keyed by actual column headers
     const record: Record<string, string> = {};
@@ -67,13 +71,12 @@ function parseTable(lines: string[]): ParsedTable {
 }
 
 // Convert row array into a keyed map for easy lookup
-function rowsToMap(rows: Array<{ field: string; content: string; link: string, target?: "blank" | "self" }>): Record<string, TableRow> {
+function rowsToMap(rows: Array<{ field: string; [key: string]: string }>): Record<string, TableRow> {
   const map: Record<string, TableRow> = {};
   for (const row of rows) {
     if (row.field) {
-      // map[row.field] = { content: row.content, link: row.link };
-      map[row.field] = { content: row.content, link: row.link, ...(row.target ? { target: row.target } : {}) };
-
+      const { field, ...rest } = row;
+      map[field] = rest as TableRow;
     }
   }
   return map;

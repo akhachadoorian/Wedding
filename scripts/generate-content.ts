@@ -25,6 +25,7 @@ function applyPageMapping(mapping: unknown, sections: Record<string, SectionData
         // Strategy 1 — literal: hardcoded in the mapping config, not read from the vault (e.g. `value: true`)
         if ("value" in config && config.value !== undefined) {
             value = config.value;
+            // console.log("=== value ", value);
 
         // Strategy 2 — shape: build an array of objects from vault rows, re-keyed via config.shape
         // (e.g. { btnText: "content", link: "link" } maps vault columns → prop keys).
@@ -34,8 +35,6 @@ function applyPageMapping(mapping: unknown, sections: Record<string, SectionData
             const sourceRows = config.fields
                 ? config.fields.map((f) => section.rows[f]).filter(Boolean) as Array<Record<string, string>>
                 : section.records as Array<Record<string, string>>;
-
-            console.log("=== sourceRows ", sourceRows);
 
             value = sourceRows
                 .map((row) => {
@@ -50,12 +49,13 @@ function applyPageMapping(mapping: unknown, sections: Record<string, SectionData
                 })
                 .filter(Boolean);
 
-            console.log("value ", value);
+            // console.log("value ", value);
             if ((value as unknown[]).length === 0) continue; // skip prop if vault has no data
 
         // Strategy 3 — field: read a single named row, pull one column (default "content"),
         // and optionally transform the raw string (e.g. "true" → boolean, markdown → HTML).
         } else if ("field" in config && config.field) {
+            console.log("section.rows ", section.rows);
             const row = section.rows[config.field];
             if (!row) continue; // row missing in vault — skip prop
 
