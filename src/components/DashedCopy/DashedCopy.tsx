@@ -14,11 +14,11 @@ export type DashedCopyGridProps = {
 export function DashedCopy({leftCopy, rightCopy}: DashedCopyProps) {
     return (
         <div className="dashed_copy-wrapper">
-            {leftCopy && <p className="eyebrow white">{leftCopy}</p>}
+            {leftCopy && <p className="eyebrow white left-copy">{leftCopy}</p>}
 
             <div className="dashed_copy-line"></div>
 
-            {rightCopy && <p className="eyebrow white">{rightCopy}</p>}
+            {rightCopy && <p className="eyebrow white right-copy">{rightCopy}</p>}
         </div>
     )
 }
