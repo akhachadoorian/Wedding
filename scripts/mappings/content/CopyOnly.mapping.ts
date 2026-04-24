@@ -7,21 +7,25 @@ const CopyOnlyProps: ComponentMappingProps  = {
     props: {
         eyebrow: {
             field: "Eyebrow",
+            column: "content",
             transform: (val) => val.split(" & ")[0].trim(),
         },
         header: {
             field: "Heading",
+            column: "content",
             transform: (val) => val.split(" & ")[0].trim(),
         },
         subtitle: {
             field: "Subtitle",
+            column: "content",
             transform: (val) => val.split(" & ")[0].trim(),
         },
-
+        buttons: {
+            fields: ["Button 1", "Button 2"],
+            shape: { btnText: "content", link: "link" },
+        }
     }
 };
-
-
 
 const CopyOnlyMapping: Array<MappingConfig> = [
     {
@@ -33,4 +37,3 @@ const CopyOnlyMapping: Array<MappingConfig> = [
 
 
 export default CopyOnlyMapping;
-

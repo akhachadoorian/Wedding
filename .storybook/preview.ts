@@ -1,3 +1,4 @@
+/// <reference path="../src/declarations.d.ts" />
 import '../src/styles/main.scss';
 import type { Preview } from '@storybook/react-webpack5'
 import gsap from 'gsap';

@@ -1,0 +1,38 @@
+@use "../../styles/variables" as *;
+
+// ── Dashed Copy (singe component) ──────────────────────────────
+
+.dashed_copy-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-400);
+
+    @include big {
+        align-items: center;
+        flex-direction: row;
+            gap: var(--space-400);
+        }
+
+    .dashed_copy-line {
+        height: 2px;
+        width: 100%;
+        background-color: var(--gold-500);
+    }
+
+    .eyebrow {
+        white-space: nowrap;
+    }
+}
+
+// ── Dashed Copy Grid (has Dashed Copy) ──────────────────────────────
+
+.dashed_copy_grid-wrapper {
+    .dashed_copy_grid {
+        display: flex;
+        flex-direction: column;
+
+        @include big {
+            gap: var(--space-300);
+        }
+    }
+}

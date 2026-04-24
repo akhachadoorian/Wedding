@@ -7,11 +7,9 @@
 //   sections: {
 //     "Hero": {
 //       rows: { "Eyebrow": { content: "...", link: "..." }, ... },
-//       subsections: {
-//         "Card 1 — The Day": {
-//           rows: { "Eyebrow": { content: "...", link: "..." }, ... }
-//         }
-//       }
+//       records: [ { Field: "Eyebrow", Content: "...", Link: "..." }, ... ],
+//       headers: ["Field", "Content", "Link"],
+//       subsections: { ... }
 //     }
 //   }
 // }
@@ -28,28 +26,42 @@ function cleanCell(val: string): string {
     .trim();
 }
 
-// Parse markdown table lines into an array of { field, content, link } rows
-function parseTable(lines: string[]): Array<{ field: string; content: string; link: string }> {
-  const rows: Array<{ field: string; content: string; link: string }> = [];
+type ParsedTable = {
+  rows: Array<{ field: string; content: string; link: string }>;
+  records: Array<Record<string, string>>;
+  headers: string[];
+};
+
+function parseTable(lines: string[]): ParsedTable {
+  const rows: ParsedTable["rows"] = [];
+  const records: ParsedTable["records"] = [];
+  let headers: string[] = [];
 
   for (const line of lines) {
     if (!line.startsWith("|")) continue;
 
     const cells = line.split("|").map((c) => c.trim()).filter(Boolean);
 
-    // Skip header and separator rows
-    if (cells[0].toLowerCase() === "field") continue;
+    // Header row
+    if (cells[0].toLowerCase() === "field") {
+      headers = cells;
+      continue;
+    }
+    // Separator row
     if (cells[0].startsWith("---") || cells[0].startsWith(":---")) continue;
 
     const [field = "", content = "", link = ""] = cells;
-    rows.push({
-      field: cleanCell(field),
-      content: cleanCell(content),
-      link: cleanCell(link),
+    rows.push({ field: cleanCell(field), content: cleanCell(content), link: cleanCell(link) });
+
+    // Raw record keyed by actual column headers
+    const record: Record<string, string> = {};
+    cells.forEach((cell, i) => {
+      if (headers[i]) record[headers[i]] = cleanCell(cell);
     });
+    records.push(record);
   }
 
-  return rows;
+  return { rows, records, headers };
 }
 
 // Convert row array into a keyed map for easy lookup
@@ -61,6 +73,10 @@ function rowsToMap(rows: Array<{ field: string; content: string; link: string }>
     }
   }
   return map;
+}
+
+function emptySection(): SectionData {
+  return { rows: {}, records: [], headers: [], subsections: {} };
 }
 
 export function parseVaultNote(filePath: string): ParsedNote {
@@ -94,18 +110,20 @@ export function parseVaultNote(filePath: string): ParsedNote {
   function flushTable(): void {
     if (!tableBuffer.length || !currentSection) return;
 
-    const rows = parseTable(tableBuffer);
+    const { rows, records, headers } = parseTable(tableBuffer);
 
     if (currentSubsection) {
       if (!sections[currentSection].subsections[currentSubsection]) {
-        sections[currentSection].subsections[currentSubsection] = { rows: {} };
+        sections[currentSection].subsections[currentSubsection] = { rows: {}, records: [], headers: [] };
       }
-      Object.assign(
-        sections[currentSection].subsections[currentSubsection].rows,
-        rowsToMap(rows)
-      );
+      const sub = sections[currentSection].subsections[currentSubsection];
+      Object.assign(sub.rows, rowsToMap(rows));
+      sub.records.push(...records);
+      if (!sub.headers.length) sub.headers.push(...headers);
     } else {
       Object.assign(sections[currentSection].rows, rowsToMap(rows));
+      sections[currentSection].records.push(...records);
+      if (!sections[currentSection].headers.length) sections[currentSection].headers.push(...headers);
     }
 
     tableBuffer = [];
@@ -122,7 +140,7 @@ export function parseVaultNote(filePath: string): ParsedNote {
       // Skip the Sections index
       if (name === "Sections") { currentSection = null; continue; }
       currentSection = name;
-      sections[currentSection] = { rows: {}, subsections: {} };
+      sections[currentSection] = emptySection();
       continue;
     }
 

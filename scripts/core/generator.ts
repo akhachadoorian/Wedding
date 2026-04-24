@@ -32,13 +32,13 @@ export function formatValue(val: unknown, indent = 0): string {
     const items = val
       .map((v) => `${innerPad}${formatValue(v, indent + 1)}`)
       .join(",\n");
-    return `[\n${items},\n${pad}]`;
+    return items ? `[\n${items},\n${pad}]` : "[]";
   }
   if (typeof val === "object") {
     const entries = Object.entries(val as Record<string, unknown>)
       .map(([k, v]) => `${innerPad}${k}: ${formatValue(v, indent + 1)}`)
       .join(",\n");
-    return `{\n${entries},\n${pad}}`;
+    return entries ? `{\n${entries},\n${pad}}` : "{}";
   }
   return String(val);
 }

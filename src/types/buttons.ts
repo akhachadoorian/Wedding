@@ -1,4 +1,5 @@
 import { ARROW_DIRECTIONS } from "../components/ArrowBox/ArrowBox";
+import { MaxThree } from "./utility";
 
 /** Text content, destination, and link behavior for a single button */
 export type ButtonSettingProps = {
@@ -36,17 +37,8 @@ export type ButtonProps = {
     arrowSettings?: BtnArrowSettings
 };
 
-/**
- * Generic type to set a maximum number of elements in an array to be 3
- */
-type MaxThree<T> = [] | [T] | [T, T] | [T, T, T];
 
 /**
  * Type to have a three button array
  */
 export type ThreeButtons = MaxThree<ButtonSettingProps>;
-
-
-
-
-

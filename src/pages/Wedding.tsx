@@ -1,8 +1,9 @@
 
 import CopyOnly from "../components/CopyOnly/CopyOnly";
-import LineSeparatedContent from "../components/LineSeparatedContent/LineSeparatedContent";
+import DashedCopyGrid from "../components/DashedCopy/DashedCopy";
+import LineSeparatedContent from "../components/DashedCopy/DashedCopy";
 import HomeHero from "../components/heros/HomeHero/HomeHero";
-import { heroHomeHeroContent, welcomeCopyCopyOnlyContent } from "../generated/home.content";
+import { heroHomeHeroContent, welcomeCopyCopyOnlyContent, welcomeInfoDashedCopyGridContent } from "../generated/home.content";
 import { useFadeIn } from "../hooks/useFadeIn";
 
 function Wedding({ loaded = true }: { loaded?: boolean }) {
@@ -23,17 +24,9 @@ function Wedding({ loaded = true }: { loaded?: boolean }) {
                     {...welcomeCopyCopyOnlyContent}
                 />
 
-                <div className="lines">
-                    <LineSeparatedContent 
-                        left_content={"Saturday Oct, 31, 2026 — Halloween"}
-                        right_content={"Guests arrive at 4:30 PM"}
-                    />
-
-                    <LineSeparatedContent 
-                        left_content={"The Clay Theatre"}
-                        right_content={"Green Cove Springs, Florida"}
-                    />
-                </div>
+                <DashedCopyGrid 
+                    {...welcomeInfoDashedCopyGridContent}
+                />
             </section>
 
         </div>
