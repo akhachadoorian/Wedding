@@ -50,6 +50,8 @@ function parseTable(lines: string[]): ParsedTable {
     // Separator row
     if (cells[0].startsWith("---") || cells[0].startsWith(":---")) continue;
 
+    console.log("cells ", cells);
+
     const [field = "", content = "", link = ""] = cells;
     rows.push({ field: cleanCell(field), content: cleanCell(content), link: cleanCell(link) });
 
@@ -65,11 +67,13 @@ function parseTable(lines: string[]): ParsedTable {
 }
 
 // Convert row array into a keyed map for easy lookup
-function rowsToMap(rows: Array<{ field: string; content: string; link: string }>): Record<string, TableRow> {
+function rowsToMap(rows: Array<{ field: string; content: string; link: string, target?: "blank" | "self" }>): Record<string, TableRow> {
   const map: Record<string, TableRow> = {};
   for (const row of rows) {
     if (row.field) {
-      map[row.field] = { content: row.content, link: row.link };
+      // map[row.field] = { content: row.content, link: row.link };
+      map[row.field] = { content: row.content, link: row.link, ...(row.target ? { target: row.target } : {}) };
+
     }
   }
   return map;
@@ -116,13 +120,16 @@ export function parseVaultNote(filePath: string): ParsedNote {
       if (!sections[currentSection].subsections[currentSubsection]) {
         sections[currentSection].subsections[currentSubsection] = { rows: {}, records: [], headers: [] };
       }
+
       const sub = sections[currentSection].subsections[currentSubsection];
       Object.assign(sub.rows, rowsToMap(rows));
       sub.records.push(...records);
+
       if (!sub.headers.length) sub.headers.push(...headers);
     } else {
       Object.assign(sections[currentSection].rows, rowsToMap(rows));
       sections[currentSection].records.push(...records);
+
       if (!sections[currentSection].headers.length) sections[currentSection].headers.push(...headers);
     }
 
@@ -137,23 +144,28 @@ export function parseVaultNote(filePath: string): ParsedNote {
       flushTable();
       const name = line.replace("## ", "").trim();
       currentSubsection = null;
+
       // Skip the Sections index
       if (name === "Sections") { currentSection = null; continue; }
       currentSection = name;
       sections[currentSection] = emptySection();
+
       continue;
     }
 
     // ### Subsection heading
     if (line.startsWith("### ")) {
       flushTable();
+
       currentSubsection = line.replace("### ", "").trim();
+
       continue;
     }
 
     // Table lines
     if (line.startsWith("|") && currentSection) {
       tableBuffer.push(line);
+      
       continue;
     }
 

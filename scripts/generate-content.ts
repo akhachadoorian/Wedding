@@ -16,39 +16,56 @@ function applyPageMapping(mapping: unknown, sections: Record<string, SectionData
 
     const result: Record<string, unknown> = {};
 
+    // Walk every declared prop for this component
     for (const [propPath, config] of Object.entries(componentMap.props) as [string, PropMapping][]) {
         let value: unknown;
 
-        // console.log("config ", config)
+        // console.log("=== config ", config);
 
+        // Strategy 1 — literal: hardcoded in the mapping config, not read from the vault (e.g. `value: true`)
         if ("value" in config && config.value !== undefined) {
             value = config.value;
+
+        // Strategy 2 — shape: build an array of objects from vault rows, re-keyed via config.shape
+        // (e.g. { btnText: "content", link: "link" } maps vault columns → prop keys).
+        // config.fields picks specific named rows; omitting it uses all records in the section.
+        // Rows where every mapped column is empty are dropped.
         } else if ("shape" in config && config.shape) {
             const sourceRows = config.fields
                 ? config.fields.map((f) => section.rows[f]).filter(Boolean) as Array<Record<string, string>>
                 : section.records as Array<Record<string, string>>;
+
+            console.log("=== sourceRows ", sourceRows);
+
             value = sourceRows
                 .map((row) => {
+                    console.log("row ", row);
                     const item: Record<string, string> = {};
                     for (const [key, col] of Object.entries(config.shape)) {
+
                         const val = row[col];
                         if (val) item[key] = val;
                     }
                     return Object.keys(item).length > 0 ? item : null;
                 })
                 .filter(Boolean);
-            if ((value as unknown[]).length === 0) continue;
+
+            console.log("value ", value);
+            if ((value as unknown[]).length === 0) continue; // skip prop if vault has no data
+
+        // Strategy 3 — field: read a single named row, pull one column (default "content"),
+        // and optionally transform the raw string (e.g. "true" → boolean, markdown → HTML).
         } else if ("field" in config && config.field) {
             const row = section.rows[config.field];
-            if (!row) continue;
+            if (!row) continue; // row missing in vault — skip prop
 
             const column = config.column ?? "content";
             const rawValue = (row as Record<string, string>)[column];
-            if (!rawValue) continue;
+            if (!rawValue) continue; // column empty — skip prop
 
             value = config.transform ? config.transform(rawValue) : rawValue;
         } else {
-            continue;
+            continue; // config matches none of the three strategies — ignore
         }
 
         setNested(result, propPath, value);

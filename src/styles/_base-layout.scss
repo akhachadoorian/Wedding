@@ -16,9 +16,11 @@ main {
 
 section.base_section {
     padding: var(--layout-section-padding) var(--layout-column-margin);
+    
+    margin: var(--layout-section-padding) auto;
 
     @include big {
         max-width: var(--max-width);
-        margin: auto;
+        // margin: var(--layout-section-padding) auto;
     }
 }

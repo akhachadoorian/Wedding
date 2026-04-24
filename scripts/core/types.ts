@@ -6,7 +6,7 @@
 export type TableRow = {
     content: string;
     link: string;
-    target?: "_blank" | "_self";
+    target?: "blank" | "self";
 };
 
 // A raw table row parsed as named columns (used for array-style tables)

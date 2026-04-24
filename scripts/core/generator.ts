@@ -5,6 +5,7 @@ import fs from "fs";
 import { parseVaultNote } from "./parser";
 import { pathToFileURL } from "url";
 
+
 // ─── Utility: set a deeply nested value via dot-path ────────────────────────
 export function setNested(obj: Record<string, unknown>, dotPath: string, value: unknown): void {
   const keys = dotPath.split(".");
@@ -102,6 +103,6 @@ export async function generate({content = true, mappingDir, applyMapping, buildO
       if (props) entries.push({ mapping, props });
     }
 
-    if (entries.length > 0) buildOutput(source, entries);
+    // if (entries.length > 0) buildOutput(source, entries);
   }
 }

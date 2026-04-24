@@ -3,7 +3,7 @@
 .marquee-wrapper {
     background-color: var(--gold-600);
     padding: var(--space-300) var(--space-200);
-
+    overflow: hidden;
     .marquee-inner {
         
 

@@ -21,8 +21,8 @@ const CopyOnlyProps: ComponentMappingProps  = {
             transform: (val) => val.split(" & ")[0].trim(),
         },
         buttons: {
-            fields: ["Button 1", "Button 2"],
-            shape: { btnText: "content", link: "link" },
+            fields: ["Button 1", "Button 2", "Button 3"],
+            shape: { btnText: "content", link: "link", target: "target" },
         }
     }
 };
