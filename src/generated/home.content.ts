@@ -4,6 +4,7 @@
 import type { CopyOnlyProps } from "../components/CopyOnly/CopyOnly";
 import type { DashedCopyGridProps } from "../components/DashedCopy/DashedCopy";
 import type { HomeHeroProps } from "../components/heros/HomeHero/HomeHero";
+import type { ImageGridProps } from "../components/ImageGrid/ImageGrid";
 
 export const welcomeCopyCopyOnlyContent: Omit<CopyOnlyProps, "variation" | "headingSize"> = {
   eyebrow: "We're getting married",
@@ -43,6 +44,17 @@ export const heroHomeHeroContent: Omit<HomeHeroProps, "loaded"> = {
   },
   image: {
     src: "/images/Max&Alex.jpg",
-    alt: "Couple",
+    alt: "Max and Alex posed on a bridge.",
   },
+};
+
+export const photoGalleryImageGridContent: ImageGridProps = {
+  curvedImg: {
+    src: "/images/Max&Alex.jpg",
+  },
+  curvedImgCaption: "Lorem ipsum dolor sit amet",
+  squareImg: {
+    src: "/images/Max&Alex.jpg",
+  },
+  squareImgCaption: "Lorem ipsum dolor sit amet",
 };

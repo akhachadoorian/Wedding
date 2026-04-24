@@ -14,6 +14,8 @@ function applyPageMapping(mapping: unknown, sections: Record<string, SectionData
         return null;
     }
 
+    console.log("✅  Mapping section: ", sectionKey);
+
     const result: Record<string, unknown> = {};
 
     // Walk every declared prop for this component
@@ -38,7 +40,7 @@ function applyPageMapping(mapping: unknown, sections: Record<string, SectionData
 
             value = sourceRows
                 .map((row) => {
-                    console.log("row ", row);
+                    // console.log("row ", row);
                     const item: Record<string, string> = {};
                     for (const [key, col] of Object.entries(config.shape)) {
 
@@ -55,7 +57,7 @@ function applyPageMapping(mapping: unknown, sections: Record<string, SectionData
         // Strategy 3 — field: read a single named row, pull one column (default "content"),
         // and optionally transform the raw string (e.g. "true" → boolean, markdown → HTML).
         } else if ("field" in config && config.field) {
-            console.log("section.rows ", section.rows);
+            // console.log("section.rows ", section.rows);
             const row = section.rows[config.field];
             if (!row) continue; // row missing in vault — skip prop
 

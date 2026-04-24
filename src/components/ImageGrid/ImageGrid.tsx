@@ -1,7 +1,5 @@
-import React, { useLayoutEffect, useRef } from "react";
-
+import React from "react";
 import { ImageProps } from "../../types/images";
-import gsap from "gsap";
 
 import "./ImageGrid.scss";
 
@@ -21,10 +19,6 @@ const FanSVG = () => (
 export default function ImageGrid({ curvedImg, curvedImgCaption, squareImg, squareImgCaption }: ImageGridProps) {
     return (
         <div className="image_grid-wrapper">
-            {/* <div className="image_grid-sun">
-                <FanSVG />
-            </div> */}
-
             <div className="image_grid-inner">
                 <div className="curved_img-wrapper image_grid-img ">
                     <div className="img-wrapper">

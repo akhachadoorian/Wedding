@@ -4,7 +4,7 @@ import DashedCopyGrid from "../components/DashedCopy/DashedCopy";
 import LineSeparatedContent from "../components/DashedCopy/DashedCopy";
 import HomeHero from "../components/heros/HomeHero/HomeHero";
 import ImageGrid from "../components/ImageGrid/ImageGrid";
-import { heroHomeHeroContent, welcomeCopyCopyOnlyContent, welcomeInfoDashedCopyGridContent } from "../generated/home.content";
+import { heroHomeHeroContent, photoGalleryImageGridContent, welcomeCopyCopyOnlyContent, welcomeInfoDashedCopyGridContent } from "../generated/home.content";
 import { useFadeIn } from "../hooks/useFadeIn";
 
 
@@ -33,7 +33,7 @@ function Wedding({ loaded = true }: { loaded?: boolean }) {
             </section>
 
             <section ref={photoGallery} className="photo_gallery-section base_section">
-                <ImageGrid />
+                <ImageGrid {...photoGalleryImageGridContent}/>
                 
             </section>
 
