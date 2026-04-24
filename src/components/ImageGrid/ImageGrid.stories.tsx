@@ -25,3 +25,10 @@ export const Default: Story = {
     }
 }
 
+export const WithCaptions: Story = {
+    args: {
+        curvedImgCaption: "Curved Caption",
+        squareImgCaption: "Square Caption",
+    }
+}
+

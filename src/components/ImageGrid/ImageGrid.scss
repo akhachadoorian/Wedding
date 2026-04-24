@@ -30,17 +30,9 @@
 
         .img-wrapper {
             aspect-ratio: 1;
-            width: 100%;
-            height: 100%;
+            // width: 100%;
+            // height: 100%;
         }
-
-        // 
-
-        svg.svg_path {
-            width: 100%;
-            height: 100%;
-        }
-
 
         &.curved_img-wrapper {
             position: relative;
@@ -48,12 +40,20 @@
             svg {
                 width: 100%;
                 height: 100%;
+                aspect-ratio: 1;
             }
         }
 
         &.square_img-wrapper {
-            border: 2px solid $gold;
+            .img-wrapper {
+                border: 2px solid $gold;
+            }
         }
+    }
+
+    &-caption {
+        text-align: center;
+        margin-top: var(--space-200);
     }
 
     &-sun {

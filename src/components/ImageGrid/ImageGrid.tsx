@@ -46,7 +46,7 @@ export default function ImageGrid({ curvedImg, curvedImgCaption, squareImg, squa
                         <FanSVG />
                     </div>
 
-                    {curvedImgCaption && <p className="eyebrow">{curvedImgCaption}</p>}
+                    {curvedImgCaption && <p className="eyebrow image_grid-caption">{curvedImgCaption}</p>}
                 </div>
 
                 <div className="square_img-wrapper image_grid-img ">
@@ -58,7 +58,7 @@ export default function ImageGrid({ curvedImg, curvedImgCaption, squareImg, squa
                         <div className="img-overlay"></div>
                     </div>
 
-                    {squareImgCaption && <p className="eyebrow">{squareImgCaption}</p>}
+                    {squareImgCaption && <p className="eyebrow image_grid-caption">{squareImgCaption}</p>}
                 </div>
             </div>
         </div>
