@@ -16,12 +16,10 @@ main {
 
 section.base_section {
     padding: var(--layout-section-padding) var(--layout-column-margin);
-
     margin: var(--layout-section-padding) auto;
 
     @include big {
         max-width: var(--max-width);
-        // margin: var(--layout-section-padding) auto;
     }
 }
 
@@ -42,14 +40,12 @@ section.base_section {
 // }
 
 section.full_width {
-    // .section-inner {
-    //     padding: var(--layout-section-padding) var(--layout-column-margin);
+    & > .section-inner {
+        padding: var(--layout-section-padding) var(--layout-column-margin);
+        margin: var(--layout-section-padding) auto;
 
-    //     margin: var(--layout-section-padding) auto;
-
-    //     @include big {
-    //         max-width: var(--max-width);
-    //         // margin: var(--layout-section-padding) auto;
-    //     }
-    // }
+        @include big {
+            max-width: var(--max-width);
+        }
+    }
 }

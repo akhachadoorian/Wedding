@@ -48,15 +48,17 @@ function Footer({}) {
                         </div>
                     </div>
                     <div className="footer-right">
-                        <SmallText eyebrow="Date" title="October 31st, 2026" body="Ceremony at 5pm" variation="right" />
+                        <SmallText eyebrow="Date" title="October 31st, 2026" body="Ceremony at 5pm" variation="right"  mobileVariation="left"/>
 
                         <div className="art_deco_div">
+                            {/* <Diamond className="tablet_only" color="--gold-500" /> */}
+
                             <div className="div_line"></div>
 
                             <Diamond color="--gold-500" />
                         </div>
 
-                        <SmallText eyebrow="Location" title="Clay Theatre" body="Green Cove Springs, FL" variation="right" />
+                        <SmallText eyebrow="Location" title="Clay Theatre" body="Green Cove Springs, FL" variation="right"  mobileVariation="left" />
                     </div>
                 </div>
 

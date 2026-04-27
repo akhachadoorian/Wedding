@@ -44,6 +44,26 @@ const CopyOnlyMapping: Array<MappingConfig> = [
         componentMap: CopyOnlyProps
     },
 
+    {
+        source: "Details",
+        section: "Timeline",
+        componentMap: CopyOnlyProps
+    },
+    {
+        source: "Details",
+        section: "Dress Code",
+        componentMap: CopyOnlyProps
+    },
+    {
+        source: "Details",
+        section: "Wedding Party",
+        componentMap: CopyOnlyProps
+    },
+    {
+        source: "Details",
+        section: "FAQs",
+        componentMap: CopyOnlyProps
+    },
 ]
 
 

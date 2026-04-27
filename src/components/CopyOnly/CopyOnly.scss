@@ -1,9 +1,7 @@
 @use "../../styles/variables" as *;
 
 .copy-wrapper {
-
-    @include big  {
-
+    @include big {
     }
 
     .copy-inner {
@@ -13,6 +11,10 @@
 
         @include big {
             max-width: 75.833vw;
+        }
+
+        @media (min-width: $max-width) {
+            max-width: 60.417vw;
         }
 
         .copy-text {
@@ -40,10 +42,14 @@
             align-items: center;
             gap: var(--space-400);
         }
-        
+
         &.left {
             @include big {
                 max-width: 75.833vw;
+            }
+
+            @media (min-width: $max-width) {
+                max-width: 60.417vw;
             }
         }
 

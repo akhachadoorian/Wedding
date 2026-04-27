@@ -19,8 +19,14 @@ $bp-desktop: 1024px;
     }
 }
 
-@mixin small($min: $bp-mobile, $max: $bp-tablet) {
+@mixin medium($min: $bp-mobile, $max: $bp-tablet) {
     @media all and (min-width: $min) and (max-width: $max) {
+        @content;
+    }
+}
+
+@mixin small($breakpoint: $bp-tablet) {
+    @media (max-width: $breakpoint) {
         @content;
     }
 }

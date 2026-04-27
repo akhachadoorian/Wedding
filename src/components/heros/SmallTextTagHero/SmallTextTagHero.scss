@@ -18,11 +18,11 @@
             max-width: var(--max-width);
         }
         
-        @include small {
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-        }
+        // @include medium {
+        //     flex-direction: row;
+        //     align-items: center;
+        //     justify-content: space-between;
+        // }
 
         // ── Is-hidden states ──────────────────────────────
         &.is-hidden {
@@ -64,7 +64,7 @@
         display: flex;
         flex-direction: column;
         // flex-direction: row;
-        align-items: flex-end;
+        align-items: flex-start;
         gap: var(--space-250);
         
         // @include big {
@@ -84,9 +84,14 @@
         //     flex-shrink: 0;
         // }
 
+        @include big {
+            align-items: flex-end;
+        }
+
         @include mini {
-            width: fit-content;
-            align-self: flex-end;
+            // width: fit-content;
+            // align-self: flex-end;
+            align-items: flex-start;
         }
 
         .art_deco_div {
@@ -105,14 +110,19 @@
 
         .small_text-wrapper {
             width: fit-content;
-
-            @include big {
-                margin-left: var(--space-200);
+            &:last-of-type {
+                @include small {
+                    align-self: flex-end;
+                }
             }
 
-            @include mini {
-                margin-left: var(--space-200);
-            }
+            // @include big {
+            //     margin-left: var(--space-200);
+            // }
+
+            // @include mini {
+            //     margin-left: var(--space-200);
+            // }
 
         }
     }

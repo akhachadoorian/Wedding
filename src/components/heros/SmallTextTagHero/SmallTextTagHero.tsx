@@ -70,9 +70,11 @@ export default function SmallTextTagHero({ loaded, eyebrow, heading, body, butto
             </div>
 
             <div className="small_text_tag_hero-right">
-                <SmallText variation="right" {...smallTextTag1} />
+                <SmallText variation="right" {...smallTextTag1} mobileVariation="left"/>
 
                 <div className="art_deco_div">
+                    <Diamond className="tablet_only" color="--gold-500" />
+
                     <div className="div_line"></div>
 
                     <Diamond color="--gold-500" />

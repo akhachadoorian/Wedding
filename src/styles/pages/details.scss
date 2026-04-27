@@ -1,0 +1,40 @@
+// _wedding.scss
+@use "../variables" as *;
+
+.details {
+    // .welcome-section, .quick_links-section {
+        // display: flex;
+        // flex-direction: column;
+        // gap: var(--space-700);
+
+        // @include big  {
+        //     gap: var(--space-1000);
+        // }
+    // }
+
+    .faqs-section {
+        background-image: url("../../assets/DiamondPattern.svg");
+        padding: var(--layout-section-padding) var(--layout-column-margin);
+
+        @include big {
+            padding: calc(var(--space-1500) + var(--layout-section-padding)) var(--layout-column-margin);
+
+            margin-top: -70px;
+        }
+
+        .section-inner {
+            background-color: rgba(22, 24, 24, .85);
+            padding: var(--space-750);
+
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-700);
+
+            @include big {
+                gap: var(--space-1000);
+                max-width: 76.042vw;
+                margin: 0 auto;
+            }
+        }
+    }
+}

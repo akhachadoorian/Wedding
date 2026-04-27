@@ -1,29 +1,50 @@
 @use "../../styles/variables" as *;
 
+.small_text {
+    &-wrapper {
+    }
 
-.small_text-wrapper {
-    .small_text-inner {
+    &-inner {
         display: flex;
         flex-direction: column;
         gap: var(--space-100);
 
-         &.right {
+        &.right {
             align-items: flex-end;
             text-align: right;
-         }
+        }
 
-         &.center {
+        &.center {
             align-items: center;
-             text-align: center;
-         }
+            text-align: center;
+        }
 
-         &.left {
+        &.left {
             align-items: flex-start;
+        }
+
+        .body-xs {
+            color: var(--cream-700);
+        }
+    }
+
+    &-mobile {
+      @include small {
+         &-left {
+            align-items: flex-start !important;
+            text-align: left !important;
          }
 
-         .body-xs {
-            color: var(--cream-700)
+         &-center {
+            align-items: center !important;
+            text-align: center !important;
          }
+
+         &-right {
+            align-items: flex-end !important;
+            text-align: right !important;
+         }
+      }
+      
     }
 }
-

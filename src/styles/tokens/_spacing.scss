@@ -15,6 +15,7 @@
   --space-750:  3.75rem;   // 60px
   --space-800:  4rem;      // 64px
   --space-1000: 5rem;      // 80px
+  --space-1500: calc(var(--space-1000) * 1.5); //120px
 }
 
 // calc(var(--space-1000) * 1.5) == 120px

@@ -51,7 +51,7 @@
     align-items: center;
     gap: var(--space-100);
 
-    width: 100%;
+    width: calc(100% + var(--space-200));
     
     .div_line {
         height: 1px;
@@ -63,6 +63,37 @@
         }
     }
 }
+
+// ── Art Deco Div ───────────────────────
+
+.mobile_only {
+    @include small {
+        display: none;
+    }
+
+    @include big {
+        display: none;
+    }
+}
+
+.tablet_only {
+    @include big {
+        display: none;
+    }
+}
+
+.desktop_only {
+    @include small {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
 
 // ── Storybook CSS ───────────────────────
 
