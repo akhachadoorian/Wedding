@@ -29,6 +29,10 @@ const config: StorybookConfig = {
     config.plugins = config.plugins?.filter(
       (plugin) => plugin?.constructor?.name !== 'ESLintWebpackPlugin'
     );
+    // react-markdown v10 uses the unified ESM ecosystem which emits this webpack warning
+    config.ignoreWarnings = [
+      /Critical dependency: the request of a dependency is an expression/,
+    ];
     return config;
   },
 };

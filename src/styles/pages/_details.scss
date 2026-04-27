@@ -12,6 +12,14 @@
         // }
     // }
 
+    .venue-section {
+        margin: var(--layout-section-padding) auto;
+        
+        .section-inner {
+            background-color: var(--black-900);
+        }
+    }
+
     .faqs-section {
         background-image: url("../../assets/DiamondPattern.svg");
         padding: var(--layout-section-padding) var(--layout-column-margin);

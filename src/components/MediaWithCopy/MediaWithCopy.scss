@@ -1,0 +1,63 @@
+@use "../../styles/variables" as *;
+
+.media_with_copy {
+    &-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        @include big {
+            flex-direction: row;
+            gap: 7.847vw;
+        }
+
+        // &.right {
+            
+        // }
+
+        &.left {
+          @include big {
+            .media_with_copy-text {
+                order: 2;
+            }
+
+            .media_with_copy-img {
+                order: 1;
+            }
+          }  
+        }
+    }
+
+    &-text {
+        @include big {
+            flex: 1 1 675px;
+            padding: var(--space-200) 0;
+        }
+
+        .eyebrow-wrapper {
+            margin-bottom: var(--space-200);
+        }
+
+        .subtitle, .body {
+            margin-top: var(--space-300);
+        }
+
+        .btns, .note-wrapper {
+           margin-top: var(--space-500); 
+        }
+    }
+
+    &-img {
+        box-shadow: 0 203px 57px 0 rgba(16, 17, 17, 0.01), 0 130px 52px 0 rgba(16, 17, 17, 0.10), 0 73px 44px 0 rgba(16, 17, 17, 0.33), 0 32px 32px 0 rgba(16, 17, 17, 0.55), 0 8px 18px 0 rgba(16, 17, 17, 0.64);
+        
+        @include big {
+            flex: 1 1 532px;
+        }
+
+        .img-holder {
+            height: 100%;
+            width: 100%;
+        }
+
+        
+    }
+}

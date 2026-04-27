@@ -1,0 +1,50 @@
+@use "../../styles/variables" as *;
+
+.note {
+    &-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-200);
+
+        padding: var(--space-300) var(--space-400);
+        background-color: var(--black-900);
+        box-shadow: 0 98px 28px 0 rgba(16, 17, 17, 0.01), 0 63px 25px 0 rgba(16, 17, 17, 0.08), 0 35px 21px 0 rgba(16, 17, 17, 0.28), 0 16px 16px 0 rgba(16, 17, 17, 0.47), 0 4px 9px 0 rgba(16, 17, 17, 0.54);
+        // border-left: 3px solid var(--gold-500);
+
+        &.wout_title {
+            flex-direction: row;
+        }
+    }
+
+    &-left {
+        border-left: 3px solid var(--gold-500);
+    }
+
+    &-center {
+
+        border-top: 3px solid var(--gold-500);
+        text-align: center;
+        align-items: center;
+    }
+
+    &-text_upper {
+        display: flex;
+        // align-items: center;
+        gap: var(--space-100);
+
+        // width: fit-content;
+    }
+
+    &-title {
+        font-family: $font-sans;
+        font-size: var(--body);
+        font-weight: 500;
+        font-style: italic;
+        line-height: 125%;
+        text-transform: uppercase;
+    }
+
+    &-body {
+        font-style: italic;
+    }
+}

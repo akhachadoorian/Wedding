@@ -39,13 +39,20 @@ section.base_section {
 //     justify-content: center;
 // }
 
-section.full_width {
+section.full-width {
     & > .section-inner {
         padding: var(--layout-section-padding) var(--layout-column-margin);
-        margin: var(--layout-section-padding) auto;
+        // margin: var(--layout-section-padding) auto;
 
-        @include big {
-            max-width: var(--max-width);
+        // @include big {
+        //     max-width: var(--max-width);
+        // }
+
+        & > * {
+            @include big {
+                max-width: var(--max-width);
+                margin: auto;
+            }
         }
     }
 }

@@ -64,7 +64,7 @@
     }
 }
 
-// ── Art Deco Div ───────────────────────
+// ── Breakpoint wrapper ───────────────────────
 
 .mobile_only {
     @include small {
@@ -87,12 +87,6 @@
         display: none;
     }
 }
-
-
-
-
-
-
 
 
 // ── Storybook CSS ───────────────────────

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { BtnStyles, BtnThemes, ButtonProps, ThreeButtonsProps } from "../../types/buttons";
+import { BtnStyles, BtnThemes, ButtonProps, ThreeButtonsProps, TwoButtonsProps } from "../../types/buttons";
 import { ColorVariables } from "../../types/colors";
 import ArrowBox from "../ArrowBox/ArrowBox";
 
@@ -16,13 +16,45 @@ export default function Buttons({ style = "solid", theme, className, btnSettings
 
     return (
         <div className={`btn-wrapper ${className ?? ""}`}>
-            <Link to={btnSettings.link} className={`btn ${style} ${theme}`}>
+            <Link to={btnSettings.link} className={`btn ${style} ${theme}`} target={btnSettings.target ?? '_self'}>
                 {includeArrow && arrowSettings?.arrowSide === "left" && <ArrowBox color={arrowTheme} arrowDirection={arrowSettings?.arrowDirection} />}
 
                 <p className="btn-text">{btnSettings.btnText}</p>
 
                 {includeArrow && arrowSettings?.arrowSide != "left" && <ArrowBox color={arrowTheme} arrowDirection={arrowSettings?.arrowDirection} />}
             </Link>
+        </div>
+    );
+}
+
+export function TwoButtons({ buttons, className }: TwoButtonsProps) {
+    if (buttons === undefined || buttons?.length == 0) return;
+
+    const styleMap: Array<BtnStyles> = [
+        'solid', 'lines'
+    ];
+
+    const themeMap: Array<BtnThemes> = [
+        "gold", "cream"
+    ];
+
+    return (
+        <div className={`btns ${className}`}>
+            {buttons?.map((btn, idx) => {
+                return (
+                    <Buttons
+                        className=""
+                        style={styleMap[idx]}
+                        theme={themeMap[idx]}
+                        btnSettings={{
+                            btnText: btn.btnText,
+                            link: btn.link,
+                            target: btn.target ?? "_self",
+                        }}
+                        includeArrow={true}
+                    />
+                );
+            })}
         </div>
     );
 }
