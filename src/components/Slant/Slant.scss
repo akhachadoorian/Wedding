@@ -1,0 +1,49 @@
+@use "../../styles/variables" as *;
+
+.slant {
+    &-wrapper {
+        background-color: $black-bg;
+        display: flex;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &-large {
+        aspect-ratio: 619/95;
+        width: 100%;
+        height: auto;
+    }
+
+    &-small {
+        aspect-ratio: 821/63;
+        width: 100%;
+        height: auto;
+    }
+
+    &-inverse {
+        svg {
+            transform: scaleX(-1);
+        }
+    }
+
+    // &-bottom {
+    //     svg {
+    //         transform: scaleY(-1);
+    //     }
+    // }
+}
+
+.slant-bottom:not(.slant-inverse) {
+    svg {
+        transform: scaleY(-1) scaleX(-1);
+    }
+}
+
+.slant-bottom.slant-inverse {
+    svg {
+        transform: scaleY(-1);
+    }
+}

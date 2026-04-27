@@ -61,7 +61,7 @@ export default function Drinks({ className, size, sizeHeight = true, type = "mar
     } as React.CSSProperties;
 
 
-    let DrinkMap: Record<string, React.ComponentType> = {
+    const DrinkMap: Record<string, React.ComponentType> = {
         cocktail: Cocktail,
         coupe: Coupe,
         glass: Glass,

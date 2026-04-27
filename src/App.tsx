@@ -3,8 +3,11 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowUpRightIcon } from "@phosphor-icons/react";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
+
+import { useCursor } from "./hooks/useCursor";
 
 import { LenisContext } from "./context/LenisContext";
 
@@ -25,6 +28,7 @@ gsap.registerPlugin(ScrollTrigger);
 const DISABLE_LOADER = true;
 
 function App() {
+    // useCursor();
     const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
     const [loaded, setLoaded] = useState(DISABLE_LOADER);
 
@@ -66,6 +70,10 @@ function App() {
     }, [loaded, lenisInstance]);
 
     return (
+        // <>
+        // <div className="cursor">
+        //     <ArrowUpRightIcon size={16} color="var(--cream-500)" />
+        // </div>
         <LenisContext.Provider value={lenisInstance}>
             {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
             <Router>
@@ -83,6 +91,7 @@ function App() {
                 <Footer />
             </Router>
         </LenisContext.Provider>
+        // </>
     );
 }
 

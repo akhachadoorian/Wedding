@@ -210,12 +210,19 @@ export default function HomeHero({ loaded, heading, eyebrow, btn, image }: HomeH
         }, section);
 
         const refresh = () => ScrollTrigger.refresh();
+        let resizeTimer: ReturnType<typeof setTimeout>;
+        const debouncedRefresh = () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(refresh, 150);
+        };
+
         window.addEventListener("load", refresh);
-        window.addEventListener("resize", refresh);
+        window.addEventListener("resize", debouncedRefresh);
 
         return () => {
+            clearTimeout(resizeTimer);
             window.removeEventListener("load", refresh);
-            window.removeEventListener("resize", refresh);
+            window.removeEventListener("resize", debouncedRefresh);
             ctx.revert();
         };
     }, [loaded]);
@@ -254,7 +261,7 @@ export default function HomeHero({ loaded, heading, eyebrow, btn, image }: HomeH
 
                 <div ref={mediaRef} className="home_hero-media">
                     <div className="home_hero-overlay"></div>
-                    <img ref={imageRef} src={image?.src ?? "/images/Max&Alex.jpg"} alt={image?.alt ?? "Max and Alex posed on a bridge."} className="home_hero-image" />
+                    <img ref={imageRef} src={image?.src ?? "/images/Max&Alex.jpg"} alt={image?.alt ?? "Max and Alex posed on a bridge."} className="home_hero-image" decoding="async" />
                 </div>
             </div>
         </section>

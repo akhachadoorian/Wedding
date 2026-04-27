@@ -1,4 +1,3 @@
-import React from "react";
 import { ImageProps } from "../../types/images";
 
 import "./ImageGrid.scss";
@@ -46,7 +45,7 @@ export default function ImageGrid({ curvedImg, curvedImgCaption, squareImg, squa
                 <div className="square_img-wrapper image_grid-img ">
                     <div className="img-wrapper">
                         <div className="img-holder">
-                            <img src={squareImg?.src ?? "/images/Max&Alex.jpg"} alt={squareImg?.alt ?? "Max and Alex posed on a bridge."} className="img-bw" />
+                            <img src={squareImg?.src ?? "/images/Max&Alex.jpg"} alt={squareImg?.alt ?? "Max and Alex posed on a bridge."} className="img-bw" loading="lazy" decoding="async" />
                         </div>
 
                         <div className="img-overlay"></div>

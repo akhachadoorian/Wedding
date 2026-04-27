@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 import gsap from "gsap";
 
@@ -20,23 +20,15 @@ export default function Marquee() {
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.fromTo(
-                marqueeWrapperRef.current,
-                { opacity: 0 },
-                { opacity: 1, duration: 1, ease: "power2.out" }
-            );
-
             gsap.to(marqueeRef.current, {
                 x: "-100%",
                 repeat: -1,
                 duration: speed,
                 ease: "linear",
-                delay: 0.5,
             });
         });
-        
 
-        return () => ctx.kill();
+        return () => ctx.revert();
     }, [speed]);
 
     return (

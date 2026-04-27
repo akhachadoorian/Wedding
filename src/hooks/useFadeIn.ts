@@ -39,7 +39,7 @@ export function useFadeIn<T extends HTMLElement>(options: FadeInOptions = {}) {
             );
         });
 
-        return () => ctx.kill();
+        return () => ctx.revert();
     }, []);
 
     return ref;
@@ -76,7 +76,7 @@ export function useFadeInChildren<T extends HTMLElement>(
             );
         }, el);
 
-        return () => ctx.kill();
+        return () => ctx.revert();
     }, []);
 
     return ref;

@@ -36,7 +36,7 @@ $drink-hover-height: (
 
         min-height: 125px;
         border: 2px solid var(--gold-700);
-        background-color: $bg_color;
+        background-color: $black-bg;
         padding: var(--space-400);
 
         position: relative;
@@ -107,6 +107,7 @@ $drink-hover-height: (
 
 a.drink_card-wrapper {
     &:hover {
+        // cursor: none;
         .drink_card-inner {
             border-color: var(--gold-500);
             box-shadow: 0 22px 76px 0 rgba(166, 130, 74, 0.4);

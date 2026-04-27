@@ -1,26 +1,55 @@
 @use "./variables" as *;
 
 body {
-    // max-width: 100dvw;
-    overflow-x: clip;
+    max-width: 100dvw;
+    // overflow-x: clip;
     background-color: var(--black-1000);
     margin: 0;
     color: $cream;
 }
 
 main {
-    @include big  {
+    @include big {
         margin: auto;
     }
 }
 
 section.base_section {
     padding: var(--layout-section-padding) var(--layout-column-margin);
-    
+
     margin: var(--layout-section-padding) auto;
 
     @include big {
         max-width: var(--max-width);
         // margin: var(--layout-section-padding) auto;
     }
+}
+
+// ── Custom cursor ─────────────────────────────────────────────
+// .cursor {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     pointer-events: none;
+//     z-index: 9999;
+//     width: 20px;
+//     height: 20px;
+//     border: 1px solid var(--cream-500);
+//     background-color: $gold;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
+
+section.full_width {
+    // .section-inner {
+    //     padding: var(--layout-section-padding) var(--layout-column-margin);
+
+    //     margin: var(--layout-section-padding) auto;
+
+    //     @include big {
+    //         max-width: var(--max-width);
+    //         // margin: var(--layout-section-padding) auto;
+    //     }
+    // }
 }

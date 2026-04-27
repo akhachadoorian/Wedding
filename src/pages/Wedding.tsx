@@ -5,6 +5,7 @@ import LineSeparatedContent from "../components/DashedCopy/DashedCopy";
 import DrinkCardGrid from "../components/DrinkCardGrid/DrinkCardGrid";
 import HomeHero from "../components/heros/HomeHero/HomeHero";
 import ImageGrid from "../components/ImageGrid/ImageGrid";
+import Slant from "../components/Slant/Slant";
 import { heroHomeHeroContent, photoGalleryImageGridContent, quickNavigationCardsDrinkCardGridContent, quickNavigationCopyCopyOnlyContent, welcomeCopyCopyOnlyContent, welcomeInfoDashedCopyGridContent } from "../generated/home.content";
 import { useFadeIn } from "../hooks/useFadeIn";
 
@@ -40,8 +41,14 @@ function Wedding({ loaded = true }: { loaded?: boolean }) {
                 <ImageGrid {...photoGalleryImageGridContent}/>
             </section>
 
-            <section ref={ourStoryRef} id="our_story" className="our_story-section ">
+            <section ref={ourStoryRef} id="our_story" className="our_story-section full_width">
+                <Slant size="large" order="top" color="--black-900" />
                 {/* TODO: figure out our story & make sure to fix maxwidth*/}
+                <div className="section-inner">
+                    <CopyOnly variation="center" header="Our Story"/>
+                </div>
+
+                <Slant size="large" order="bottom" color="--black-900" />
             </section>
 
             <section ref={quickLinksRef} id="quick_links" className="quick_links-section base_section">

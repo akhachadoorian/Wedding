@@ -141,8 +141,7 @@
             right: 0;
             z-index: 2;
             aspect-ratio: unset;
-
-            will-change: top, right, bottom, left, width, height, transform;
+            will-change: transform;
         }
     }
 
@@ -161,7 +160,10 @@
         height: 100%;
         object-fit: cover;
         object-position: center 25%;
-        will-change: transform;
         filter: grayscale(1);
+
+        @include big {
+            will-change: transform;
+        }
     }
 }
