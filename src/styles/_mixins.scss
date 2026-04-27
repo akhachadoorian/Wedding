@@ -1,11 +1,17 @@
 
 // ──── Breakpoints  ───────────────────────────────────
 
-$bp-mobile: 500px;
-$bp-tablet: 800px;
+$bp-mobile: 450px;
+$bp-tablet: 750px;
 $bp-desktop: 1024px;
 
 // ── Mixins  ───────────────────────────────────
+
+@mixin desktopOnly($breakpoint: $bp-desktop) {
+    @media (min-width: $breakpoint) {
+        @content;
+    }
+}
 
 @mixin big($breakpoint: $bp-tablet) {
     @media (min-width: $breakpoint) {
@@ -13,8 +19,8 @@ $bp-desktop: 1024px;
     }
 }
 
-@mixin small($breakpoint: $bp-tablet) {
-    @media (max-width: $breakpoint) {
+@mixin small($min: $bp-mobile, $max: $bp-tablet) {
+    @media all and (min-width: $min) and (max-width: $max) {
         @content;
     }
 }

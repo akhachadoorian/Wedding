@@ -1,15 +1,27 @@
 @use "../../../styles/variables" as *;
 
 .small_text_tag_hero {
-    
     &-wrapper {
         display: flex;
         flex-direction: column;
-        // gap: var(--layout-column-margin);
+        gap: var(--space-600);
+
+        padding: var(--layout-section-padding) var(--layout-column-margin);
+        margin: var(--layout-section-padding) auto;
 
         @include big {
             flex-direction: row;
             align-items: center;
+            justify-content: space-between;
+            gap: 9.931vw;
+
+            max-width: var(--max-width);
+        }
+        
+        @include small {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
         }
 
         // ── Is-hidden states ──────────────────────────────
@@ -28,13 +40,80 @@
 
     &-left {
         @include big {
-            flex: 1 1;
+            flex: 1 1 870;
+        }
+
+        .eyebrow-wrapper {
+            margin-bottom: var(--space-200);
+        }
+
+        .small_text_tag_hero-body {
+            margin-top: var(--space-300);
+        }
+
+        .btns {
+            @include big {
+                margin-top: var(--space-500);
+            }
         }
     }
 
     &-right {
-        @include big {
-            flex: 1 1;
+        flex-shrink: 0;
+
+        display: flex;
+        flex-direction: column;
+        // flex-direction: row;
+        align-items: flex-end;
+        gap: var(--space-250);
+        
+        // @include big {
+        //     // flex: 1 1 307px;
+        //     flex-direction: column;
+        //     align-items: flex-end;
+        //     gap: var(--space-250);
+        
+        //     flex-shrink: 0;
+        // }
+
+        // @include breakpx($bp-mobile, $bp-tablet) {
+        //     flex-direction: column;
+        //     align-items: flex-end;
+        //     gap: var(--space-250);
+        
+        //     flex-shrink: 0;
+        // }
+
+        @include mini {
+            width: fit-content;
+            align-self: flex-end;
+        }
+
+        .art_deco_div {
+            width: 100%;
+
+            @include small {
+            //     flex-direction: column;
+            //     width: fit-content;
+
+            //     .div_line {
+            //         width: 1px;
+            //         height: 100%;
+            //     }
+            }
+        }
+
+        .small_text-wrapper {
+            width: fit-content;
+
+            @include big {
+                margin-left: var(--space-200);
+            }
+
+            @include mini {
+                margin-left: var(--space-200);
+            }
+
         }
     }
 }

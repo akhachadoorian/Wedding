@@ -44,6 +44,26 @@
     gap: var(--space-400);
 }
 
+// ── Art Deco Div ───────────────────────
+
+.art_deco_div {
+    display: flex;
+    align-items: center;
+    gap: var(--space-100);
+
+    width: 100%;
+    
+    .div_line {
+        height: 1px;
+        width: 100%;
+        background-color: var(--gold-500);
+
+        @include breakpx(1600px, 2000px) {
+            height: 1.5px;
+        }
+    }
+}
+
 // ── Storybook CSS ───────────────────────
 
 .docs-story {

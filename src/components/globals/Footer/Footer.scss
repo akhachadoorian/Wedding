@@ -2,7 +2,6 @@
 @use "../../../styles/placeholders" as *;
 
 footer {
-    
 }
 
 .footer-wrapper {
@@ -51,27 +50,26 @@ footer {
         .footer-right {
             display: flex;
             flex-direction: column;
+            align-items: flex-end;
             gap: var(--space-250);
 
             margin-left: var(--space-300);
+            width: fit-content;
+            align-self: flex-end;
 
             @include big {
                 margin-left: 0;
             }
 
-            .art_deco_div {
-                display: flex;
-                align-items: center;
-                gap: var(--space-100);
+            .small_text-wrapper {
+                width: fit-content;
 
-                .div_line {
-                    height: 1px;
-                    width: 100%;
-                    background-color: var(--gold-500);
+                @include big {
+                    margin-left: var(--space-200);
+                }
 
-                    @include breakpx(1600px, 2000px) {
-                        height: 1.5px;
-                    }
+                @include mini {
+                    margin-left: var(--space-200);
                 }
             }
         }

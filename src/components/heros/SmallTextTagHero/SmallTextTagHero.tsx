@@ -21,6 +21,7 @@ export type SmallTextTagHeroProps = {
     smallTextTag2: Omit<SmallTextProps, "variation">;
 };
 
+// TODO: Figure out mobile layout
 export default function SmallTextTagHero({ loaded, eyebrow, heading, body, buttons, smallTextTag1, smallTextTag2 }: SmallTextTagHeroProps) {
     const eyebrowRef = useRef<HTMLDivElement>(null);
     const h1Ref = useRef(null);
