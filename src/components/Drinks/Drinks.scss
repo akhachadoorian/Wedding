@@ -1,0 +1,55 @@
+@use "../../styles/variables" as *;
+
+.drinks {
+    &-wrapper {
+        width: var(--drink-size-mobile-width);
+        height: var(--drink-size-mobile-height);
+
+        @include big {
+            width: var(--drink-size-width);
+            height: var(--drink-size-height);
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &-cocktail {
+        aspect-ratio: 65/98;
+    }
+
+    &-coupe {
+        aspect-ratio: 71/120;
+    }
+
+    &-glass {
+        aspect-ratio: 123/200;
+    }
+
+    &-highball {
+        aspect-ratio: 9/20;
+    }
+    
+    &-margarita {
+        aspect-ratio: 71/92;
+    }
+
+    &-martini {
+        aspect-ratio: 65/98;
+    }
+
+    &-shaker {
+        aspect-ratio: 29/75;
+    }
+
+    &-whiskey {
+        // aspect-ratio: 37/50;
+        aspect-ratio: 37/65;
+    }
+
+    &-wine {
+        aspect-ratio: 37/91;
+    }
+}

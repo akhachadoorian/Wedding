@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 
 import { ColorVariables } from "../../types/colors";
 import Diamond from "../Diamond/Diamond";
@@ -10,12 +10,13 @@ type EyebrowProps = {
     color?: ColorVariables;
     text: string;
     doubleText?: string;
+    className?: string;
 };
 
-function Eyebrow({ variation = "left", color = "--gold-500", text, doubleText }: EyebrowProps) {
+const Eyebrow = forwardRef<HTMLDivElement, EyebrowProps>(function Eyebrow({ variation = "left", color = "--gold-500", text, doubleText, className }, ref) {
     if (variation == "centered") {
         return (
-            <div className={`eyebrow-wrapper centered`}>
+            <div ref={ref} className={`eyebrow-wrapper centered ${className}`}>
                 <p className="eyebrow" style={{ color: `var(${color})` }}>
                     {text}
                 </p>
@@ -37,7 +38,7 @@ function Eyebrow({ variation = "left", color = "--gold-500", text, doubleText }:
         );
     } else if (variation == "double" && doubleText != null) {
         return (
-            <div className={`eyebrow-wrapper double`}>
+            <div ref={ref} className={`eyebrow-wrapper double`}>
                 <p className="eyebrow" style={{ color: `var(${color})` }}>
                     {text}
                 </p>
@@ -68,7 +69,7 @@ function Eyebrow({ variation = "left", color = "--gold-500", text, doubleText }:
     }
 
     return (
-        <div className={`eyebrow-wrapper left`}>
+        <div ref={ref} className={`eyebrow-wrapper left`}>
             <Diamond size={{
                             size: {
                                 minSize: 18,
@@ -86,6 +87,6 @@ function Eyebrow({ variation = "left", color = "--gold-500", text, doubleText }:
             </p>
         </div>
     );
-}
+});
 
 export default Eyebrow;

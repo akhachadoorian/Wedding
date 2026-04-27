@@ -2,31 +2,19 @@ import React from "react";
 
 import { ColorVariables } from "../../types/colors";
 import './Diamond.scss';
-import { ResponsiveSize } from "../../types/size";
+import { ResponsiveClampSize } from "../../types/size";
+import { CalculateClamp } from "../../hooks/calculateClamp";
 
 type DiamondProps = {
     color: ColorVariables;
-    size?: ResponsiveSize;
+    size?: ResponsiveClampSize;
     className?: string;
 };
 
-const desktopSize = 1440;
-
 export default function Diamond({ color = "--gold-500", size = {size: {minSize: 16, desiredSize: 16, maxSize: 20}}, className }: DiamondProps) {
-    // Setup consts
-    const desktopScreenSize = 1440;
-    const mobileScreenSize = 375;
-
-    const desktopSize = size.size;
-    const mobileSize = size.mobileSize ? size.mobileSize : size.size;
-
-    // Do view width calculations
-    let dVW = (desktopSize.desiredSize / desktopScreenSize) * 100;
-    let mVW = (mobileSize.desiredSize / mobileScreenSize) * 100 ;
-
-    // let sizeVW = `${dVW}dvw`;
-    let sizeVW = `clamp(${desktopSize.minSize}px, ${dVW.toFixed(3)}dvw, ${desktopSize.maxSize}px)`;
-    let mobileSizeVW = `clamp(${mobileSize.minSize}px, ${mVW.toFixed(3)}dvw, ${mobileSize.maxSize}px)`;
+    // Convert sizes
+    let sizeVW = CalculateClamp({size:size.size, mobile:false});
+    let mobileSizeVW = CalculateClamp({size: size.mobileSize ? size.mobileSize : size.size, mobile: true});
 
     const sizeStyle = {
         "--diamond-size": sizeVW,

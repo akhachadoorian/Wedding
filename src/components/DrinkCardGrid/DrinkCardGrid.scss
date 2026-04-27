@@ -1,0 +1,171 @@
+@use "../../styles/variables" as *;
+@use "../ArrowBox/ArrowBox.scss" as *;
+
+// ── Drink Card (single component) ──────────────────────────────
+
+$drink-rotate: (
+    "small": 16,
+    "medium": 30,
+    "large": 40,
+);
+
+$drink-hover-height: (
+    "low": 40%,
+    "medium": 50%,
+    "high": 60%,
+);
+
+.drink_card {
+    &-wrapper {
+        text-decoration: none;
+        position: relative;
+
+        display: block;
+        
+
+        @include big {
+            margin-top: 100px; //FIXME: remove or figure out something better
+        }
+    }
+
+    &-inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: var(--space-200);
+
+        min-height: 125px;
+        border: 2px solid var(--gold-700);
+        background-color: $bg_color;
+        padding: var(--space-400);
+
+        position: relative;
+        z-index: 3;
+
+        transition: $transition;
+
+        @include big {
+            min-height: 281px;
+        }
+    }
+
+    &-upper {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-200);
+    }
+
+    &-text {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-200);
+    }
+
+    &-drinks {
+        position: absolute;
+        top: var(--space-400);
+        left: 0;
+        z-index: 1; // FIXME: make sure this is less than text
+
+        width: 100%;
+        height: calc(100% - var(--space-400));
+        display: flex;
+        pointer-events: none;
+        transition: $transition;
+
+        @include small {
+            display: none;
+        }
+
+        &-left,
+        &-right {
+            flex: 1;
+            position: relative;
+            overflow: visible;
+
+            display: flex;
+            // align-items: center;
+            justify-content: center;
+
+            .left-drink,
+            .right-drink {
+                transition: $transition;
+            }
+        }
+
+        @each $size, $t in $drink-rotate {
+            .rotate-#{$size} {
+                transform: rotate(-#{$t}deg);
+            }
+
+            .rotate-#{$size}-inverse {
+                transform: rotate(#{$t}deg);
+            }
+        }
+    }
+}
+
+a.drink_card-wrapper {
+    &:hover {
+        .drink_card-inner {
+            border-color: var(--gold-500);
+            box-shadow: 0 22px 76px 0 rgba(166, 130, 74, 0.4);
+        }
+
+        .drink_card-drinks {
+            top: -20px;
+
+            @each $size, $t in $drink-rotate {
+                .rotate-#{$size} {
+                    transform: rotate(#{$t}deg);
+                }
+
+                .rotate-#{$size}-inverse {
+                    transform: rotate(-#{$t}deg);
+                }
+            }
+
+            @each $size, $t in $drink-hover-height {
+                .hover_height-#{$size} {
+                    margin-top: -#{$t};
+                }
+            }
+        }
+    }
+}
+
+// ── Drink Card Grid  ──────────────────────────────
+.drink_card_grid {
+    &-wrapper {
+    }
+
+    // display: flex;
+    // flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-400);
+
+    @include big {
+        grid-template-columns: repeat(12, 1fr);
+        gap: var(--layout-column-gutter);
+        // flex-direction: row;
+        // justify-content: center;
+        // flex-wrap: wrap;
+    }
+
+    @include breakpx(800px, 1000px) {
+        grid-template-columns: repeat(8, 1fr);
+        gap: var(--layout-column-gutter);
+    }
+
+    .drink_card-wrapper {
+        grid-column: span 4;
+        // flex: 1;
+        // width: 100%;
+
+        @include big {
+            grid-column: span 4;
+        //     flex: 0 0 clamp(350px, 30vw, 512px);
+        }
+    }
+}

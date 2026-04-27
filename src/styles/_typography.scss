@@ -140,3 +140,14 @@ p  {
   color: var(--gold-500);
   font-style: italic;
 }
+
+.heading-md > strong {
+  font-weight: 400;
+  font-style: italic;
+  color: $gold;
+}
+
+.body-md > strong {
+    font-weight: 600;
+    color: $gold;
+}

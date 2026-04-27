@@ -43,11 +43,11 @@ function applyPageMapping(mapping: unknown, sections: Record<string, SectionData
                     // console.log("row ", row);
                     const item: Record<string, string> = {};
                     for (const [key, col] of Object.entries(config.shape)) {
-
                         const val = row[col];
                         if (val) item[key] = val;
                     }
-                    return Object.keys(item).length > 0 ? item : null;
+                    if (Object.keys(item).length === 0) return null;
+                    return config.transform ? config.transform(item) : item;
                 })
                 .filter(Boolean);
 

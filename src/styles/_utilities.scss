@@ -36,8 +36,16 @@
     }
 }
 
+// ── Btns ───────────────────────
+.btns {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-400);
+}
+
 // ── Storybook CSS ───────────────────────
 
 .docs-story {
-    background-color: #1a1a1a;
+    background-color: black;
 }

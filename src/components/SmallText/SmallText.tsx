@@ -1,7 +1,7 @@
 import './SmallText.scss';
 import React from 'react';
 
-type SmallTextProps = {
+export type SmallTextProps = {
     eyebrow?: string;
     title?: string;
     body?: string;

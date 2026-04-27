@@ -1,0 +1,40 @@
+@use "../../../styles/variables" as *;
+
+.small_text_tag_hero {
+    
+    &-wrapper {
+        display: flex;
+        flex-direction: column;
+        // gap: var(--layout-column-margin);
+
+        @include big {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        // ── Is-hidden states ──────────────────────────────
+        &.is-hidden {
+            // .home_hero-text {
+            //     opacity: 0;
+            //     transform: translateY(var(--space-200));
+            // }
+
+            // .home_hero-image {
+            //     opacity: 0;
+            //     transform: scale(0.94);
+            // }
+        }
+    }
+
+    &-left {
+        @include big {
+            flex: 1 1;
+        }
+    }
+
+    &-right {
+        @include big {
+            flex: 1 1;
+        }
+    }
+}

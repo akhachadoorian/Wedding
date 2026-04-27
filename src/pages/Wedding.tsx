@@ -2,15 +2,19 @@
 import CopyOnly from "../components/CopyOnly/CopyOnly";
 import DashedCopyGrid from "../components/DashedCopy/DashedCopy";
 import LineSeparatedContent from "../components/DashedCopy/DashedCopy";
+import DrinkCardGrid from "../components/DrinkCardGrid/DrinkCardGrid";
 import HomeHero from "../components/heros/HomeHero/HomeHero";
 import ImageGrid from "../components/ImageGrid/ImageGrid";
-import { heroHomeHeroContent, photoGalleryImageGridContent, welcomeCopyCopyOnlyContent, welcomeInfoDashedCopyGridContent } from "../generated/home.content";
+import { heroHomeHeroContent, photoGalleryImageGridContent, quickNavigationCardsDrinkCardGridContent, quickNavigationCopyCopyOnlyContent, welcomeCopyCopyOnlyContent, welcomeInfoDashedCopyGridContent } from "../generated/home.content";
 import { useFadeIn } from "../hooks/useFadeIn";
 
 
 function Wedding({ loaded = true }: { loaded?: boolean }) {
-    const infoRef = useFadeIn<HTMLDivElement>();
-    const photoGallery = useFadeIn<HTMLDivElement>();
+    // Setup refs for fade in
+    const welcomeRef = useFadeIn<HTMLDivElement>();
+    const photoGalleryRef = useFadeIn<HTMLDivElement>();
+    const ourStoryRef = useFadeIn<HTMLDivElement>();
+    const quickLinksRef = useFadeIn<HTMLDivElement>();
 
     return (
         <div className="wedding">
@@ -19,7 +23,7 @@ function Wedding({ loaded = true }: { loaded?: boolean }) {
                 {...heroHomeHeroContent}
             />
 
-            <section ref={infoRef} className="info-section base_section">
+            <section ref={welcomeRef} id="welcome" className="welcome-section base_section">
 
                 <CopyOnly 
                     variation="left"
@@ -32,9 +36,18 @@ function Wedding({ loaded = true }: { loaded?: boolean }) {
                 />
             </section>
 
-            <section ref={photoGallery} className="photo_gallery-section base_section">
+            <section ref={photoGalleryRef} id="photo_gallery" className="photo_gallery-section base_section">
                 <ImageGrid {...photoGalleryImageGridContent}/>
-                
+            </section>
+
+            <section ref={ourStoryRef} id="our_story" className="our_story-section ">
+                {/* TODO: figure out our story & make sure to fix maxwidth*/}
+            </section>
+
+            <section ref={quickLinksRef} id="quick_links" className="quick_links-section base_section">
+                <CopyOnly variation="center" headingSize="h2" {...quickNavigationCopyCopyOnlyContent} />
+
+                <DrinkCardGrid {...quickNavigationCardsDrinkCardGridContent} />
             </section>
 
         </div>

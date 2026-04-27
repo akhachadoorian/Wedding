@@ -18,6 +18,9 @@ $arrow-hover-transforms: (
 //     .arrow_box-grid.#{$dir} { transform: $t; }
 // }
 
+// @use 'sass:map';
+// transform: map.get($arrow-hover-transforms, 'top-right');
+
 .arrow_box-wrapper {
     padding: var(--space-025);
     border: 1px solid var(--cream-500);

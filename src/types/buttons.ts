@@ -19,6 +19,9 @@ type BtnArrowSettings = {
     arrowDirection: ARROW_DIRECTIONS;
 }
 
+export type BtnStyles = 'solid' | 'outline' | 'lines';
+export type BtnThemes = 'gold' | 'cream' | 'black';
+
 export type ButtonProps = {
     /** Extra CSS class added to the outer wrapper div */
     className?: string
@@ -27,9 +30,9 @@ export type ButtonProps = {
     btnSettings: ButtonSettingProps
 
     /** Visual style variant @default 'solid' */
-    style: 'solid' | 'outline' | 'lines'
+    style: BtnStyles;
     /** Color theme applied to the button and arrow */
-    theme: 'gold' | 'cream' | 'black'
+    theme: BtnThemes;
     
     /** whether to display the arrow @default true */
     includeArrow?: boolean;
@@ -41,4 +44,10 @@ export type ButtonProps = {
 /**
  * Type to have a three button array
  */
-export type ThreeButtons = MaxThree<ButtonSettingProps>;
+export type ThreeButtonsArray = MaxThree<ButtonSettingProps>;
+
+
+export type ThreeButtonsProps = {
+    buttons: ThreeButtonsArray;
+    className?: string;
+}

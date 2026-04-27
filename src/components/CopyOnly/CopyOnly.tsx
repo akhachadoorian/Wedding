@@ -1,7 +1,7 @@
 import ReactMarkdown from "react-markdown";
 
-import { ThreeButtons } from "../../types/buttons";
-import Buttons from "../Buttons/Buttons";
+import { ThreeButtonsArray } from "../../types/buttons";
+import { ThreeButtons } from "../Buttons/Buttons";
 import Eyebrow from "../Eyebrow/Eyebrow";
 
 import "./CopyOnly.scss";
@@ -11,7 +11,7 @@ export type CopyOnlyProps = {
     header: string;
     subtitle?: string;
     body?: string;
-    buttons?: ThreeButtons;
+    buttons?: ThreeButtonsArray;
 
     headingSize?: "h2" | "h3" | "h4";
     variation: "left" | "center" | "columns";
@@ -31,7 +31,7 @@ export default function CopyOnly({ eyebrow, header, subtitle, body, buttons, hea
 
                         <ReactMarkdown
                             components={{
-                                p: ({ children }) => <Heading className="copy-header">{children}</Heading>,
+                                p: ({ children }) => <Heading className="copy-header heading-md">{children}</Heading>,
                             }}
                         >
                             {header}
@@ -41,28 +41,9 @@ export default function CopyOnly({ eyebrow, header, subtitle, body, buttons, hea
                     <div className="copy-right">
                         {subtitle && <h5 className="subtitle">{subtitle}</h5>}
 
-                        {body && <ReactMarkdown components={{ p: ({ children }) => <p className={headingSize === "h2" ? "body-l" : "body"}>{children}</p> }}>{body}</ReactMarkdown>}
+                        {body && <ReactMarkdown components={{ p: ({ children }) => <p className={`body-md ${headingSize === "h2" ? "body-l" : "body"}`}>{children}</p> }}>{body}</ReactMarkdown>}
 
-                        {buttons?.length != 0 && (
-                            <div className="copy-btns">
-                                {buttons?.map((btn, idx) => {
-                                    console.log("btn", btn.btnText);
-                                    return (
-                                        <Buttons
-                                            className=""
-                                            style={idx === 2 ? "lines" : idx === 1 ? "outline" : "solid"}
-                                            theme={idx === 2 ? "cream" : "gold"}
-                                            btnSettings={{
-                                                btnText: btn.btnText,
-                                                link: btn.link,
-                                                target: btn.target ?? "_self",
-                                            }}
-                                            includeArrow={true}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        )}
+                        {buttons && buttons?.length != 0 && <ThreeButtons className="copy-btns" buttons={buttons ?? []} />}
                     </div>
                 </div>
             </div>
@@ -90,26 +71,7 @@ export default function CopyOnly({ eyebrow, header, subtitle, body, buttons, hea
                     {body && <ReactMarkdown components={{ p: ({ children }) => <p className={headingSize === "h2" ? "body-l" : "body"}>{children}</p> }}>{body}</ReactMarkdown>}
                 </div>
 
-                {buttons?.length != 0 && (
-                    <div className="copy-btns">
-                        {buttons?.map((btn, idx) => {
-                            console.log("btn", btn.btnText);
-                            return (
-                                <Buttons
-                                    className=""
-                                    style={idx === 2 ? "lines" : idx === 1 ? "outline" : "solid"}
-                                    theme={idx === 2 ? "cream" : "gold"}
-                                    btnSettings={{
-                                        btnText: btn.btnText,
-                                        link: btn.link,
-                                        target: btn.target ?? "_self",
-                                    }}
-                                    includeArrow={true}
-                                />
-                            );
-                        })}
-                    </div>
-                )}
+                {buttons && buttons?.length != 0 && <ThreeButtons className="copy-btns" buttons={buttons ?? []} />}
             </div>
         </div>
     );

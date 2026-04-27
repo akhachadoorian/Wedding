@@ -32,7 +32,13 @@ const CopyOnlyMapping: Array<MappingConfig> = [
         source: "Home",
         section: "Welcome Copy",
         componentMap: CopyOnlyProps
-    }
+    },
+    {
+        source: "Home",
+        section: "Quick Navigation Copy",
+        componentMap: CopyOnlyProps
+    },
+
 ]
 
 

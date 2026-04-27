@@ -2,7 +2,7 @@
 @use "../variables" as *;
 
 .wedding {
-    .info-section {
+    .welcome-section, .quick_links-section {
         display: flex;
         flex-direction: column;
         gap: var(--space-700);
@@ -10,5 +10,10 @@
         @include big  {
             gap: var(--space-1000);
         }
+    }
+
+    .our_story-section {
+        background-color: var(--black-900);
+        min-height: 50vw;
     }
 }

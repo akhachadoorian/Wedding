@@ -89,6 +89,8 @@
 
             @include big {
                 align-items: flex-start;
+                max-width: calc(var(--layout-content-width) / 2);
+                margin: 0 auto;
             }
 
             .eyebrow_wrapper {
