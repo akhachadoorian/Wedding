@@ -3,20 +3,28 @@
 
 .details {
     // .welcome-section, .quick_links-section {
-        // display: flex;
-        // flex-direction: column;
-        // gap: var(--space-700);
+    // display: flex;
+    // flex-direction: column;
+    // gap: var(--space-700);
 
-        // @include big  {
-        //     gap: var(--space-1000);
-        // }
+    // @include big  {
+    //     gap: var(--space-1000);
+    // }
     // }
 
     .venue-section {
         margin: var(--layout-section-padding) auto;
-        
+
         .section-inner {
             background-color: var(--black-900);
+
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-700);
+
+            @include big {
+                gap: var(--space-1000);
+            }
         }
     }
 
@@ -31,7 +39,7 @@
         }
 
         .section-inner {
-            background-color: rgba(22, 24, 24, .85);
+            background-color: rgba(22, 24, 24, 0.85);
             padding: var(--space-750);
 
             display: flex;
@@ -43,6 +51,28 @@
                 max-width: 76.042vw;
                 margin: 0 auto;
             }
+        }
+    }
+}
+
+// TODO: Remove with component
+.parking_grid {
+    display: flex;
+    gap: var(--layout-column-margin);
+
+    &-card {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+
+        .div_line {
+            width: 100px;
+            height: 3px;
+            background: $gold;
+        }
+
+        .body-s {
+            margin-top: var(--space-200);
         }
     }
 }

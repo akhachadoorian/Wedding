@@ -26,11 +26,28 @@ export default function SmallTextTagHero({ loaded, eyebrow, heading, body, butto
     const eyebrowRef = useRef<HTMLDivElement>(null);
     const h1Ref = useRef(null);
 
+    const textRef = useRef(null);
+
     useLayoutEffect(() => {
         if (!loaded) return;
 
+        // FIXME: the loading in animation is not working
         const ctx = gsap.context(() => {
+            // gsap.set(textRef, {
+            //         x: 0,
+            //         y: 0,
+            //         opacity: 1,
+            //     });
+
             const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+
+                
+
+                // gsap.set(h1Ref, {
+                //     x: 0,
+                //     y: 0,
+                //     opacity: 1,
+                // });
 
                 tl.from(
                     eyebrowRef.current,
@@ -57,7 +74,7 @@ export default function SmallTextTagHero({ loaded, eyebrow, heading, body, butto
 
     return (
         <section className={`small_text_tag_hero-wrapper ${loaded ? "is-loaded" : "is-hidden"}`}>
-            <div className="small_text_tag_hero-left">
+            <div className="small_text_tag_hero-left" ref={textRef}>
                 {eyebrow && <Eyebrow ref={eyebrowRef} className={"small_text_tag_hero-e"} text={eyebrow} color="--gold-500" variation="left"/>}
 
                 <h1 ref={h1Ref} className="small_text_tag_hero-title">{heading}</h1>

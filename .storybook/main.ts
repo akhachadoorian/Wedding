@@ -1,20 +1,17 @@
-import type { StorybookConfig } from '@storybook/react-webpack5';
+import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
-  "stories": [
-    "../src/**/*.mdx",
-    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+  stories: [
+    '../src/**/*.mdx',
+    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
-  "addons": [
-    "@storybook/preset-create-react-app",
-    "@storybook/addon-a11y",
-    "@storybook/addon-docs",
-    "@storybook/addon-onboarding"
+  addons: [
+    '@storybook/addon-a11y',
+    '@storybook/addon-docs',
+    '@storybook/addon-onboarding',
   ],
-  "framework": "@storybook/react-webpack5",
-  "staticDirs": [
-    "..\\public"
-  ],
+  framework: '@storybook/react-vite',
+  staticDirs: ['../public'],
   typescript: {
     reactDocgenTypescriptOptions: {
       propFilter: (prop) => {
@@ -24,16 +21,6 @@ const config: StorybookConfig = {
         return true;
       },
     },
-  },
-  webpackFinal: async (config) => {
-    config.plugins = config.plugins?.filter(
-      (plugin) => plugin?.constructor?.name !== 'ESLintWebpackPlugin'
-    );
-    // react-markdown v10 uses the unified ESM ecosystem which emits this webpack warning
-    config.ignoreWarnings = [
-      /Critical dependency: the request of a dependency is an expression/,
-    ];
-    return config;
   },
 };
 export default config;

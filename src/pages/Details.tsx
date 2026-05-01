@@ -1,4 +1,6 @@
-import React from "react";
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SmallTextTagHero from "../components/heros/SmallTextTagHero/SmallTextTagHero";
 import { dressCodeCopyOnlyContent, fAQsCopyOnlyContent, heroSmallTextTagHeroContent, timelineCopyOnlyContent, venueMediaWithCopyContent, weddingPartyCopyOnlyContent } from "../generated/details.content";
 import Slant from "../components/Slant/Slant";
@@ -6,11 +8,39 @@ import CopyOnly from "../components/CopyOnly/CopyOnly";
 import MediaWithCopy from "../components/MediaWithCopy/MediaWithCopy";
 import { useFadeIn } from "../hooks/useFadeIn";
 
+gsap.registerPlugin(ScrollTrigger);
+
 
 export default function Details({ loaded = true }: { loaded?: boolean })  {
     const venueRef = useFadeIn<HTMLDivElement>();
     const timelineRef = useFadeIn<HTMLDivElement>();
     const dressCodeRef = useFadeIn<HTMLDivElement>();
+    const parkingRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const el = parkingRef.current;
+        if (!el) return;
+
+        const ctx = gsap.context(() => {
+            gsap.fromTo(
+                ".div_line",
+                { width: 0 },
+                {
+                    width: 100,
+                    duration: 0.6,
+                    stagger: 0.2,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 80%",
+                        toggleActions: "play none none none",
+                    },
+                }
+            );
+        }, el);
+
+        return () => ctx.revert();
+    }, []);
 
     return (
         <div className="details">
@@ -27,6 +57,34 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                     />
 
                     {/* TODO: add parking  */}
+                    <div ref={parkingRef} className="parking_grid">
+                        <div className="parking_grid-card">
+                            <div className="div_line"></div>
+                            <div className="parking_grid-text">
+                                <p className="heading-xs">Grass Lot Parking</p>
+
+                                <p className="body-s">Free parking is available in the grass lot connected to Clay Theatre, conveniently located right next to the venue for easy access.</p>
+                            </div>
+                        </div>
+
+                        <div className="parking_grid-card">
+                            <div className="div_line"></div>
+                            <div className="parking_grid-text">
+                                <p className="heading-xs">Grass Lot Parking</p>
+
+                                <p className="body-s">Free parking is available in the grass lot connected to Clay Theatre, conveniently located right next to the venue for easy access.</p>
+                            </div>
+                        </div>
+
+                        <div className="parking_grid-card">
+                            <div className="div_line"></div>
+                            <div className="parking_grid-text">
+                                <p className="heading-xs">Grass Lot Parking</p>
+
+                                <p className="body-s">Free parking is available in the grass lot connected to Clay Theatre, conveniently located right next to the venue for easy access.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <Slant size="small" order="bottom" color="--black-900" />

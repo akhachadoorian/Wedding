@@ -16,17 +16,16 @@
     "react-dom": "^19.2.4",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.13.2",
-    "react-scripts": "^5.0.1",
     "sass": "^1.99.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "vite",
+    "build": "tsc && vite build",
+    "test": "vitest",
+    "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "generate": "tsx scripts/generate.ts",
     "generate-content": "tsx scripts/generate-content.ts",
     "generate-content:watch": "tsx scripts/generate-content.ts --watch",
@@ -35,12 +34,6 @@
     "generate:watch": "tsx scripts/generate.ts --watch",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -58,18 +51,24 @@
     "@storybook/addon-a11y": "^10.3.5",
     "@storybook/addon-docs": "^10.3.5",
     "@storybook/addon-onboarding": "^10.3.5",
-    "@storybook/preset-create-react-app": "^10.3.5",
-    "@storybook/react-webpack5": "^10.3.5",
+    "@storybook/react-vite": "^10.3.6",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/node": "^25.6.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.59.1",
+    "@typescript-eslint/parser": "^8.59.1",
+    "@vitejs/plugin-react": "^6.0.1",
     "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-storybook": "^10.3.5",
     "gh-pages": "^6.3.0",
+    "jsdom": "^29.1.1",
     "prop-types": "^15.8.1",
     "storybook": "^10.3.5",
     "tsx": "^4.21.0",
-    "webpack": "^5.106.2"
+    "vite": "^8.0.10",
+    "vitest": "^4.1.5"
   }
 }
