@@ -7,11 +7,13 @@ export type SmallTextProps = {
     body?: string;
     variation: 'center' | 'left' | 'right';
     mobileVariation? : 'center' | 'left' | 'right';
+
+    ref?: React.Ref<HTMLDivElement>;
 }
 
-export default function SmallText({eyebrow, title, body, variation = 'left', mobileVariation}:SmallTextProps) {
+export default function SmallText({eyebrow, title, body, variation = 'left', mobileVariation, ref}:SmallTextProps) {
     return (
-        <div className='small_text-wrapper'>
+        <div ref={ref} className='small_text-wrapper'>
             <div className={`small_text-inner ${variation} ${mobileVariation ? `small_text-mobile-${mobileVariation}`: ''}`}>
                 {eyebrow && <p className='eyebrow gold'>{eyebrow}</p>}
                 {title && <h5 className='heading-s'>{title}</h5>}
@@ -20,3 +22,5 @@ export default function SmallText({eyebrow, title, body, variation = 'left', mob
         </div>
     )
 }
+
+

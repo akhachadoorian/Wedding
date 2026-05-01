@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { Link } from "react-router-dom";
 
 import { BtnStyles, BtnThemes, ButtonProps, ThreeButtonsProps, TwoButtonsProps } from "../../types/buttons";
@@ -59,7 +59,39 @@ export function TwoButtons({ buttons, className }: TwoButtonsProps) {
     );
 }
 
-export function ThreeButtons({ buttons, className }: ThreeButtonsProps) {
+// export function ThreeButtons({ buttons, className }: ThreeButtonsProps) {
+//     if (buttons === undefined || buttons?.length == 0) return;
+
+//     const styleMap: Array<BtnStyles> = [
+//         'solid', 'outline', 'lines'
+//     ];
+
+//     const themeMap: Array<BtnThemes> = [
+//         "gold", "gold", "cream"
+//     ];
+
+//     return (
+//         <div className={`btns ${className}`}>
+//             {buttons?.map((btn, idx) => {
+//                 return (
+//                     <Buttons
+//                         className=""
+//                         style={styleMap[idx]}
+//                         theme={themeMap[idx]}
+//                         btnSettings={{
+//                             btnText: btn.btnText,
+//                             link: btn.link,
+//                             target: btn.target ?? "_self",
+//                         }}
+//                         includeArrow={true}
+//                     />
+//                 );
+//             })}
+//         </div>
+//     );
+// }
+
+export function ThreeButtons({ buttons, className, ref}: ThreeButtonsProps) {
     if (buttons === undefined || buttons?.length == 0) return;
 
     const styleMap: Array<BtnStyles> = [
@@ -71,7 +103,7 @@ export function ThreeButtons({ buttons, className }: ThreeButtonsProps) {
     ];
 
     return (
-        <div className={`btns ${className}`}>
+        <div ref={ref} className={`btns ${className}`}>
             {buttons?.map((btn, idx) => {
                 return (
                     <Buttons
@@ -89,4 +121,4 @@ export function ThreeButtons({ buttons, className }: ThreeButtonsProps) {
             })}
         </div>
     );
-}
+};

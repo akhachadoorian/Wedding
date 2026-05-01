@@ -11,6 +11,7 @@ import { useCursor } from "./hooks/useCursor";
 
 import { LenisContext } from "./context/LenisContext";
 
+import ScrollToHash from "./components/ScrollToHash";
 import Footer from "./components/globals/Footer/Footer";
 import LoadingScreen from "./components/globals/LoadingScreen/LoadingScreen";
 import Navigation from "./components/globals/Navigation/Navigation";
@@ -78,6 +79,7 @@ function App() {
             {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
             <Router>
                 <Navigation />
+                <ScrollToHash />
                 <main>
                     <Routes>
                         <Route path="/" element={<Wedding loaded={loaded} />} />

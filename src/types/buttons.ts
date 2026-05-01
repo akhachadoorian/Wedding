@@ -57,4 +57,5 @@ export type ThreeButtonsArray = MaxThree<ButtonSettingProps>;
 export type ThreeButtonsProps = {
     buttons: ThreeButtonsArray;
     className?: string;
+    ref?: React.Ref<HTMLDivElement>;
 }

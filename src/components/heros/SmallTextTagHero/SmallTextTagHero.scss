@@ -26,7 +26,7 @@
 
         // ── Is-hidden states ──────────────────────────────
         &.is-hidden {
-            .small_text_tag_hero-text {
+            .small_text_tag_hero-left {
                 opacity: 0;
                 transform: translateY(var(--space-200));
             }

@@ -11,9 +11,10 @@ type EyebrowProps = {
     text: string;
     doubleText?: string;
     className?: string;
+    ref?: React.Ref<HTMLDivElement>;
 };
 
-const Eyebrow = forwardRef<HTMLDivElement, EyebrowProps>(function Eyebrow({ variation = "left", color = "--gold-500", text, doubleText, className }, ref) {
+export default function Eyebrow({ variation = "left", color = "--gold-500", text, doubleText, className, ref}:EyebrowProps) {
     if (variation == "centered") {
         return (
             <div ref={ref} className={`eyebrow-wrapper centered ${className}`}>
@@ -87,6 +88,4 @@ const Eyebrow = forwardRef<HTMLDivElement, EyebrowProps>(function Eyebrow({ vari
             </p>
         </div>
     );
-});
-
-export default Eyebrow;
+};
