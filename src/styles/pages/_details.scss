@@ -48,7 +48,8 @@
 
             @include big {
                 gap: var(--space-1000);
-                max-width: 76.042vw;
+                // max-width: 76.042vw;
+                max-width: calc(60.417vw + var(--space-700));
                 margin: 0 auto;
             }
         }

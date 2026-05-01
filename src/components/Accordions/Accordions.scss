@@ -2,5 +2,56 @@
 
 
 .accordion {
+    padding: var(--space-400);
+    border-bottom: 1px solid var(--gold-700);
+    transition: $transition;
+
+    // display: flex;
+    // flex-direction: column;
+    // gap: var(--space-400);
+    
+
+    &-question {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-100);
+
+        &:hover {
+            
+        }
+    }
+
+    &-answer {
+        color: var(--cream-700);
+        margin-top: var(--space-400);;
+    }
+
+    &-caret {
+        width: 35px;
+        height: 35px;
+        transition: $transition;
+
+        svg {
+            width: 100%;
+            height: 100%;
+
+            path {
+                transition: $transition;
+            }
+        }
+    }
+
+    &-open {
+        border-bottom: 1px solid var(--gold-500);
+
+        .accordion-caret {
+            transform: rotate(90deg)
+
+            svg path {
+                
+            }
+        }
+    }
     
 }

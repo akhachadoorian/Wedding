@@ -8,6 +8,7 @@ import Drinks, { DrinkTypes } from "../Drinks/Drinks";
 
 import "./DrinkCardGrid.scss";
 import { ResponsiveClampSize } from "../../types/size";
+import { LenisLink } from "../../hooks/LenisLink";
 
 type DrinkSettings = {
     type: DrinkTypes;
@@ -44,6 +45,8 @@ const DEFAULT_DRINK_RIGHT = {
     hoverHeight: "low",
 } as DrinkSettings;
 
+
+
 export function DrinkCards({ eyebrow, title, body, link, target, drinks }: DrinkCardProps) {
     const drinkLeft  = drinks?.[0] ?? DEFAULT_DRINK_LEFT;
     const drinkRight = drinks?.[1] ?? DEFAULT_DRINK_RIGHT;
@@ -63,7 +66,7 @@ export function DrinkCards({ eyebrow, title, body, link, target, drinks }: Drink
     } as ResponsiveClampSize;
 
     return (
-        <Link to={link ?? "/"} className="drink_card-wrapper" target={target ?? "_self"}>
+        <LenisLink to={link ?? "/"} className="drink_card-wrapper" target={target ?? "_self"}>
             <div className="drink_card-inner">
                 <div className="drink_card-upper">
                     <div className="drink_card-text">
@@ -86,7 +89,7 @@ export function DrinkCards({ eyebrow, title, body, link, target, drinks }: Drink
                     <Drinks className={`right-drink ${rightRotateClass}  ${rightHoverHeightClass}`} type={drinkRight.type} sizeHeight={true} size={drinkSize} />
                 </div>
             </div>
-        </Link>
+        </LenisLink>
     );
 }
 

@@ -7,6 +7,7 @@ import Slant from "../components/Slant/Slant";
 import CopyOnly from "../components/CopyOnly/CopyOnly";
 import MediaWithCopy from "../components/MediaWithCopy/MediaWithCopy";
 import { useFadeIn } from "../hooks/useFadeIn";
+import { Accordion } from "../components/Accordions/Accordions";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -116,6 +117,7 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                 <div className="section-inner">
                     <CopyOnly variation="center" headingSize="h2" {...fAQsCopyOnlyContent} />
 
+                    <Accordion question="test" answer="answers"/>
                     {/* TODO: add faqs */}
                 </div>
             </section>

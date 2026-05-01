@@ -12,6 +12,7 @@ import SmallText from "../../SmallText/SmallText";
 import "./Footer.scss";
 import Marquee from "../../Marquee/Marquee";
 import { useFadeIn } from "../../../hooks/useFadeIn";
+import { LenisLink } from "../../../hooks/LenisLink";
 
 function Footer({}) {
     const footerRef = useFadeIn<HTMLDivElement>();
@@ -40,9 +41,9 @@ function Footer({}) {
                         <div className="footer-nav">
                             {NAV_ITEMS.map((item) => (
                                 <React.Fragment key={item.text}>
-                                    <Link to={item.link} className="footer-link">
+                                    <LenisLink to={item.link} className="footer-link">
                                         <p className="nav-text">{item.text}</p>
-                                    </Link>
+                                    </LenisLink>
                                 </React.Fragment>
                             ))}
                         </div>
@@ -63,9 +64,9 @@ function Footer({}) {
                 </div>
 
                 <div className="footer-lower">
-                    <Link to={"/"} className="">
+                    <LenisLink to={"/"} className="">
                         <p className="">alexmaxwedding.com</p>
-                    </Link>
+                    </LenisLink>
 
                     <p>Designed & Developed by Alex</p>
                 </div>

@@ -1,5 +1,9 @@
 @use "./variables" as *;
 
+html {
+    height: auto;
+}
+
 body {
     max-width: 100dvw;
     // overflow-x: clip;

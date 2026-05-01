@@ -5,10 +5,11 @@ import { useLenis } from "../../../context/LenisContext";
 import { NAV_ITEMS } from "../../../data/navItems";
 import type { NavItem, NavDropdown } from "../../../types/navigation";
 import ArrowBox from "../../ArrowBox/ArrowBox";
-import { CaretDownIcon, ListIcon } from "@phosphor-icons/react";
+import { CaretDownIcon} from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import "./Navigation.scss";
+import { LenisLink } from "../../../hooks/LenisLink";
 
 function renderNavItem(item: NavItem, onNavigate: () => void, openDropdown: string | null, toggleDropdown: (name: string) => void, closeDropdown: () => void) {
     if (item.kind === "dropdown") {
@@ -16,20 +17,20 @@ function renderNavItem(item: NavItem, onNavigate: () => void, openDropdown: stri
 
         return (
             <div className="nav-dropdown" onMouseEnter={() => toggleDropdown(item.text)} onMouseLeave={closeDropdown}>
-                <Link to={item.link} className={`nav-link has-dropdown ${isOpen ? "open" : ""}`} onClick={onNavigate}>
+                <LenisLink to={item.link} className={`nav-link has-dropdown ${isOpen ? "open" : ""}`} onClick={onNavigate}>
                     <p className="nav-text">{item.text}</p>
                     <div className={`caret-wrapper ${isOpen ? "open" : ""}`}>
                         <CaretDownIcon color="var(--cream-500)" size={16} />
                     </div>
-                </Link>
+                </LenisLink>
             </div>
         );
     }
 
     return (
-        <Link to={item.link} className="nav-link" onClick={onNavigate}>
+        <LenisLink to={item.link} className="nav-link" onClick={onNavigate}>
             <p className="nav-text">{item.text}</p>
-        </Link>
+        </LenisLink>
     );
 }
 
@@ -41,7 +42,7 @@ function renderDropdown(item: NavDropdown, onNavigate: () => void, isOpen: boole
                     <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className={`dropdown ${isOpen ? "open" : ""}`} id={`dd-${item.text}`}>
                         <div className="dropdown-inner">
                             {item.children.map((child) => (
-                                <Link key={child.link} to={child.link} className="dd-link" onClick={onNavigate}>
+                                <LenisLink key={child.link} to={child.link} className="dd-link" onClick={onNavigate}>
                                     <div className="dd-text_wrapper">
                                         <p className="dd-text">{child.text}</p>
 
@@ -49,7 +50,7 @@ function renderDropdown(item: NavDropdown, onNavigate: () => void, isOpen: boole
                                     </div>
 
                                     {child.body && <p className="dd-body body-xs">{child.body}</p>}
-                                </Link>
+                                </LenisLink>
                             ))}
                         </div>
                     </div>
@@ -76,21 +77,21 @@ function renderMobileNavItem(item: NavItem, onNavigate: () => void, openAccordio
                     {isOpen && (
                         <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4 }}>
                             <div className={`mobile_nav-dropdown ${isOpen ? "open" : ""}`}>
-                                <Link to={item.link} className="mobile_nav-view_page" onClick={onNavigate}>
+                                <LenisLink to={item.link} className="mobile_nav-view_page" onClick={onNavigate}>
                                     <p className="mobile_nav-text eyebrow">View Page</p>
 
                                     <ArrowBox color="--gold-500" />
-                                </Link>
+                                </LenisLink>
 
                                 {item.children.map((child) => (
-                                    <Link key={child.link} to={child.link} className="mdd-link" onClick={onNavigate}>
+                                    <LenisLink key={child.link} to={child.link} className="mdd-link" onClick={onNavigate}>
                                         <div className="mdd-text_wrapper">
                                             <p className="mdd-text eyebrow">{child.text}</p>
                                             {child.body && <p className="mdd-body body-xs">{child.body}</p>}
                                         </div>
 
                                         <ArrowBox />
-                                    </Link>
+                                    </LenisLink>
                                 ))}
                             </div>
                         </motion.div>
@@ -101,11 +102,11 @@ function renderMobileNavItem(item: NavItem, onNavigate: () => void, openAccordio
     }
 
     return (
-        <Link to={item.link} className="mobile_nav-link" onClick={onNavigate}>
+        <LenisLink to={item.link} className="mobile_nav-link" onClick={onNavigate}>
             <p className="mobile_nav-text eyebrow">{item.text}</p>
 
             <ArrowBox />
-        </Link>
+        </LenisLink>
     );
 }
 
@@ -158,11 +159,11 @@ function Navigation() {
         <header className="">
             <div className={`navigation-wrapper ${mobileOpen ? "mobile_nav_open" : ''}`}>
                 <div className="navigation-upper">
-                    <Link to={"/"} className="navigation-left">
+                    <LenisLink to={"/"} className="navigation-left">
                         <p className="nav-letter">M</p>
                         <p className="nav-and">&</p>
                         <p className="nav-letter">A</p>
-                    </Link>
+                    </LenisLink>
 
                     <nav className="desktop">
                         {NAV_ITEMS.map((item) => (

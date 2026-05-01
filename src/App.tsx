@@ -1,27 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowUpRightIcon } from "@phosphor-icons/react";
-import Lenis from "lenis";
 import "lenis/dist/lenis.css";
+import { ReactLenis } from "lenis/react";
+import type { LenisRef } from "lenis/react";
 
-import { useCursor } from "./hooks/useCursor";
-
-import { LenisContext } from "./context/LenisContext";
-
-import ScrollToHash from "./components/ScrollToHash";
 import Footer from "./components/globals/Footer/Footer";
 import LoadingScreen from "./components/globals/LoadingScreen/LoadingScreen";
 import Navigation from "./components/globals/Navigation/Navigation";
+import ScrollToHash from "./hooks/ScrollToHash";
 
 import Accommodations from "./pages/Accommodations";
 import Details from "./pages/Details";
 import RSVP from "./pages/RSVP";
 import Registry from "./pages/Registry";
-import Wedding from "./pages/Wedding";
 import Timeline from "./pages/Timeline";
+import Wedding from "./pages/Wedding";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,57 +25,30 @@ gsap.registerPlugin(ScrollTrigger);
 const DISABLE_LOADER = true;
 
 function App() {
-    // useCursor();
-    const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
+
     const [loaded, setLoaded] = useState(DISABLE_LOADER);
 
+
+    const lenisRef = useRef<LenisRef>(null);
+
     useEffect(() => {
-        const lenis = new Lenis({
-            // lerp: 0.1,
-            duration: 1.2,
-            anchors: true,
-            smoothWheel: true,
-            syncTouch: false,
-            // touchMultiplier: 2,
-        });
-
-        setLenisInstance(lenis);
-
-        lenis.on("scroll", ScrollTrigger.update);
-
-        const update = (time:number) => {
-            lenis.raf(time * 1000);
-        };
+        function update(time: number) {
+            lenisRef.current?.lenis?.raf(time * 1000);
+        }
 
         gsap.ticker.add(update);
-        gsap.ticker.lagSmoothing(0);
 
-        return () => {
-            gsap.ticker.remove(update);
-            lenis.destroy();
-        };
+        return () => gsap.ticker.remove(update);
     }, []);
 
-    useEffect(() => {
-        if (!lenisInstance) return;
 
-        if (!loaded) {
-            lenisInstance.stop();
-        } else {
-            lenisInstance.start();
-        }
-    }, [loaded, lenisInstance]);
 
     return (
-        // <>
-        // <div className="cursor">
-        //     <ArrowUpRightIcon size={16} color="var(--cream-500)" />
-        // </div>
-        <LenisContext.Provider value={lenisInstance}>
+        <ReactLenis root options={{ autoRaf: false, duration: 1.2, anchors: true, smoothWheel: true, syncTouch: false, naiveDimensions: true, stopInertiaOnNavigate: true }} ref={lenisRef}>
             {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
             <Router>
+                {/* <ScrollToHash /> */}
                 <Navigation />
-                <ScrollToHash />
                 <main>
                     <Routes>
                         <Route path="/" element={<Wedding loaded={loaded} />} />
@@ -92,8 +61,7 @@ function App() {
                 </main>
                 <Footer />
             </Router>
-        </LenisContext.Provider>
-        // </>
+        </ReactLenis>
     );
 }
 

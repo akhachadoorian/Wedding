@@ -6,6 +6,7 @@ import { ColorVariables } from "../../types/colors";
 import ArrowBox from "../ArrowBox/ArrowBox";
 
 import "./Buttons.scss";
+import { LenisLink } from "../../hooks/LenisLink";
 
 export default function Buttons({ style = "solid", theme, className, btnSettings, includeArrow = true, arrowSettings }: ButtonProps) {
     const arrowThemeMap: Record<string, Record<string, ColorVariables>> = {
@@ -16,13 +17,13 @@ export default function Buttons({ style = "solid", theme, className, btnSettings
 
     return (
         <div className={`btn-wrapper ${className ?? ""}`}>
-            <Link to={btnSettings.link} className={`btn ${style} ${theme}`} target={btnSettings.target ?? '_self'}>
+            <LenisLink to={btnSettings.link} className={`btn ${style} ${theme}`} target={btnSettings.target ?? '_self'}>
                 {includeArrow && arrowSettings?.arrowSide === "left" && <ArrowBox color={arrowTheme} arrowDirection={arrowSettings?.arrowDirection} />}
 
                 <p className="btn-text">{btnSettings.btnText}</p>
 
                 {includeArrow && arrowSettings?.arrowSide != "left" && <ArrowBox color={arrowTheme} arrowDirection={arrowSettings?.arrowDirection} />}
-            </Link>
+            </LenisLink>
         </div>
     );
 }

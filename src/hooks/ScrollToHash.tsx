@@ -1,18 +1,20 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { useLenis } from '../context/LenisContext';
+import { useLenis } from 'lenis/react';
 
 export default function ScrollToHash() {
     const { hash, pathname } = useLocation();
     const lenis = useLenis();
-    const isMounted = useRef(false);
+    // const isMounted = useRef(false);
+
+
 
     useEffect(() => {
-        if (!isMounted.current) {
-            isMounted.current = true;
-            return;
-        }
+        // if (!isMounted.current) {
+        //     isMounted.current = true;
+        //     return;
+        // }
 
         if (!hash) {
             if (lenis) {
