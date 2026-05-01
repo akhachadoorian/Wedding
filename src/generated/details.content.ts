@@ -1,9 +1,23 @@
 // ⚠️  Auto-generated — do not edit directly.
 // Edit vault/Content/Details.md instead, then re-run: npx tsx scripts/generate.ts
 
+import type { AccordionsProps } from "../components/Accordions/Accordions";
 import type { CopyOnlyProps } from "../components/CopyOnly/CopyOnly";
 import type { MediaWithCopyProps } from "../components/MediaWithCopy/MediaWithCopy";
 import type { SmallTextTagHeroProps } from "../components/heros/SmallTextTagHero/SmallTextTagHero";
+
+export const fAQItemsAccordionsContent: Omit<AccordionsProps, 'className'> = {
+  accordions: [
+    {
+      question: "Are children allowed?",
+      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
+    },
+    {
+      question: "Lorem ipsum",
+      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
+    },
+  ],
+};
 
 export const timelineCopyOnlyContent: Omit<CopyOnlyProps, "variation" | "headingSize"> = {
   eyebrow: "Wedding Day",

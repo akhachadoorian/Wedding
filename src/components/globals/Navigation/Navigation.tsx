@@ -38,7 +38,7 @@ function renderDropdown(item: NavDropdown, onNavigate: () => void, isOpen: boole
     return (
         <AnimatePresence>
             {isOpen && (
-                <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4 }}>
+                <motion.div  style={{ overflow: "hidden" }} initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4 }}>
                     <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className={`dropdown ${isOpen ? "open" : ""}`} id={`dd-${item.text}`}>
                         <div className="dropdown-inner">
                             {item.children.map((child) => (

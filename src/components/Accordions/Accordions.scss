@@ -2,7 +2,7 @@
 
 
 .accordion {
-    padding: var(--space-400);
+    
     border-bottom: 1px solid var(--gold-700);
     transition: $transition;
 
@@ -17,14 +17,17 @@
         justify-content: space-between;
         gap: var(--space-100);
 
+        padding: var(--space-400);
+        transition: $transition;
+
         &:hover {
-            
+            cursor: pointer;
         }
     }
 
     &-answer {
         color: var(--cream-700);
-        margin-top: var(--space-400);;
+        padding: 0 var(--space-400) var(--space-400) var(--space-400);
     }
 
     &-caret {
@@ -46,7 +49,7 @@
         border-bottom: 1px solid var(--gold-500);
 
         .accordion-caret {
-            transform: rotate(90deg)
+            transform: rotate(90deg);
 
             svg path {
                 
@@ -54,4 +57,22 @@
         }
     }
     
+    &-closed {
+        .accordion-question:hover {
+            
+            background: var(--black-900);
+
+            .accordion-caret {
+
+            }
+        }
+    }
+}
+
+.accordions {
+    &-inner {
+        display: flex;
+        flex-direction: column;
+        // gap: var(--space-100)
+    }
 }

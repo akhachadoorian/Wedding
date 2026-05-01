@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { AnimatePresence, motion } from "motion/react";
-
+import ReactMarkdown from "react-markdown";
 import "./Accordions.scss";
 
 export type AccordionProps = {
@@ -31,15 +31,20 @@ export function Accordion({ className, question, answer }: AccordionProps) {
             </div>
             <AnimatePresence>
                 {accordionOpen && (
-                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.5 }}>
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ height: { duration: 0.4, ease: "easeInOut" }, opacity: { duration: 0.2 } }}
+                        style={{ overflow: "hidden" }}
+                    >
+                        
                         <div className="accordion-answer">
-                            <p className="body-l">{answer}</p>
+                            <ReactMarkdown components={{ p: ({ children }) => <p className={"body-l"}>{children}</p> }}>{answer}</ReactMarkdown>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
-
-            {/* {body && <ReactMarkdown components={{ p: ({ children }) => <p className={`body-md ${headingSize === "h2" ? "body-l" : "body"}`}>{children}</p> }}>{body}</ReactMarkdown>} */}
         </div>
     );
 }
@@ -51,8 +56,8 @@ export type AccordionsProps = {
 
 export default function Accordions({ className, accordions }: AccordionsProps) {
     return (
-        <div className={`accordions-wrapper ${className ?? ""}`}>
-            <div className="accordions">
+        <div className={`accordions ${className ?? ""}`}>
+            <div className="accordions-inner">
                 {accordions.map((a, idx) => (
                     <Accordion key={idx} question={a.question} answer={a.answer} />
                 ))}

@@ -2,12 +2,12 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SmallTextTagHero from "../components/heros/SmallTextTagHero/SmallTextTagHero";
-import { dressCodeCopyOnlyContent, fAQsCopyOnlyContent, heroSmallTextTagHeroContent, timelineCopyOnlyContent, venueMediaWithCopyContent, weddingPartyCopyOnlyContent } from "../generated/details.content";
+import { dressCodeCopyOnlyContent, fAQItemsAccordionsContent, fAQsCopyOnlyContent, heroSmallTextTagHeroContent, timelineCopyOnlyContent, venueMediaWithCopyContent, weddingPartyCopyOnlyContent } from "../generated/details.content";
 import Slant from "../components/Slant/Slant";
 import CopyOnly from "../components/CopyOnly/CopyOnly";
 import MediaWithCopy from "../components/MediaWithCopy/MediaWithCopy";
 import { useFadeIn } from "../hooks/useFadeIn";
-import { Accordion } from "../components/Accordions/Accordions";
+import Accordions, { Accordion } from "../components/Accordions/Accordions";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -117,8 +117,7 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                 <div className="section-inner">
                     <CopyOnly variation="center" headingSize="h2" {...fAQsCopyOnlyContent} />
 
-                    <Accordion question="test" answer="answers"/>
-                    {/* TODO: add faqs */}
+                    <Accordions {...fAQItemsAccordionsContent} />
                 </div>
             </section>
         </div>

@@ -35,12 +35,12 @@
         @include big {
             padding: calc(var(--space-1500) + var(--layout-section-padding)) var(--layout-column-margin);
 
-            margin-top: -70px;
+            margin-top: -70px; // TODO: Fix the top margin to hug to the previous block
         }
 
         .section-inner {
-            background-color: rgba(22, 24, 24, 0.85);
-            padding: var(--space-750);
+            background-color: rgba(22, 24, 24, 0.90);
+            padding: var(--space-500) var(--space-300);
 
             display: flex;
             flex-direction: column;
@@ -48,7 +48,7 @@
 
             @include big {
                 gap: var(--space-1000);
-                // max-width: 76.042vw;
+                padding: var(--space-750);
                 max-width: calc(60.417vw + var(--space-700));
                 margin: 0 auto;
             }
