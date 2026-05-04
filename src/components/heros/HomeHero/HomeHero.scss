@@ -127,7 +127,7 @@
         font-size: 45px;
 
         @include big {
-            font-size: var(--heading-xxl);
+            font-size: var(--text-5xl);
         }
     }
 

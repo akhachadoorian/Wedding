@@ -50,37 +50,37 @@ h1, h2, h3, h4, h5, h6 {
 h1,
 .heading-xxl {
   @extend %heading-base;
-  font-size: var(--heading-xxl);
+  font-size: var(--text-5xl);
 }
 
 h2,
 .heading-xl {
   @extend %heading-base;
-  font-size: var(--heading-xl);
+  font-size: var(--text-4xl);
 }
 
 h3,
 .heading-l {
   @extend %heading-base;
-  font-size: var(--heading-l);
+  font-size: var(--text-3xl);
 }
 
 h4,
 .heading-m {
   @extend %heading-base;
-  font-size: var(--heading-m);
+  font-size: var(--text-2xl);
 }
 
 h5,
 .heading-s {
   @extend %heading-base;
-  font-size: var(--heading-s);
+  font-size: var(--text-xl);
 }
 
 h6,
 .heading-xs {
   @extend %subheading-base;
-  font-size: var(--heading-xs);
+  font-size: var(--text-lg);
 }
 
 // ── Body ──────────────────────────────────────────────────────
@@ -93,24 +93,24 @@ p  {
 
 .body-l  { 
   @extend %body-base;
-  font-size: var(--body-l); 
+  font-size: var(--text-md); 
 }
 
 .body-s  { 
   @extend %body-base;
-  font-size: var(--body-s); 
+  font-size: var(--text-s); 
 }
 
 .body-xs  { 
   @extend %body-base;
-  font-size: var(--body-xs); 
+  font-size: var(--text-xs); 
 }
 
 // ── Eyebrow ───────────────────────────────────────────────────
 
 .eyebrow {
   font-family: $font-sans;
-  font-size: var(--eyebrow);
+  font-size: var(--text-md);
   font-weight: 600;
   line-height: normal;
   letter-spacing: 0.6px;
@@ -125,7 +125,7 @@ p  {
 
 .subtitle {
   @extend %subheading-base;
-  font-size: var(--heading-xs);
+  font-size: var(--text-lg);
 
   padding: var(--space-100) var(--space-075);
   border-top: 1px solid $gold; 

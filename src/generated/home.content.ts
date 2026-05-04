@@ -117,18 +117,18 @@ export const heroHomeHeroContent: Omit<HomeHeroProps, "loaded"> = {
     link: "/rsvp",
   },
   image: {
-    src: "/images/Max&Alex.jpg",
+    src: "/images/MaxAndAlex.jpg",
     alt: "Max and Alex posed on a bridge.",
   },
 };
 
 export const photoGalleryImageGridContent: ImageGridProps = {
   curvedImg: {
-    src: "/images/Max&Alex.jpg",
+    src: "/images/MaxAndAlex.jpg",
   },
   curvedImgCaption: "Lorem ipsum dolor sit amet",
   squareImg: {
-    src: "/images/Max&Alex.jpg",
+    src: "/images/MaxAndAlex.jpg",
   },
   squareImgCaption: "Lorem ipsum dolor sit amet",
 };

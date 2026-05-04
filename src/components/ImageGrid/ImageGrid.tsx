@@ -27,7 +27,7 @@ export default function ImageGrid({ curvedImg, curvedImgCaption, squareImg, squa
                                     <path d="M0 350C0 156.7 156.7 0 350 0H630V630H0V350Z" />
                                 </clipPath>
                             </defs>
-                            <image href={curvedImg?.src ?? "/images/Max&Alex.jpg"} width="630" height="630" preserveAspectRatio="xMidYMid slice" clipPath="url(#curvedCorner)" className="img-bw" />
+                            <image href={curvedImg?.src ?? "/images/MaxAndAlex.jpg"} width="630" height="630" preserveAspectRatio="xMidYMid slice" clipPath="url(#curvedCorner)" className="img-bw" />
 
                             {/* Overlay inside */}
                             <rect x="0" y="0" width="630" height="630" fill="rgba(16,17,17,0.3)" clipPath="url(#curvedCorner)" />
@@ -45,7 +45,7 @@ export default function ImageGrid({ curvedImg, curvedImgCaption, squareImg, squa
                 <div className="square_img-wrapper image_grid-img ">
                     <div className="img-wrapper">
                         <div className="img-holder">
-                            <img src={squareImg?.src ?? "/images/Max&Alex.jpg"} alt={squareImg?.alt ?? "Max and Alex posed on a bridge."} className="img-bw" loading="lazy" decoding="async" />
+                            <img src={squareImg?.src ?? "/images/MaxAndAlex.jpg"} alt={squareImg?.alt ?? "Max and Alex posed on a bridge."} className="img-bw" loading="lazy" decoding="async" />
                         </div>
 
                         <div className="img-overlay"></div>

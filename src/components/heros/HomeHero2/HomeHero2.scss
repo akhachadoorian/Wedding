@@ -1,0 +1,253 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/tokens/typography" as typo;
+
+// Matches JS constants in HomeHero2.tsx
+$scroll-px: 1200px;
+$half-card: 264.5px; // END_W / 2 = 529 / 2
+$col-gap: 10px;
+
+// ── Nav ────────────────────────────────────────────────────────────────────────
+
+.ch2-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    transition:
+        background 0.35s ease,
+        padding 0.35s ease,
+        left 0.35s ease,
+        right 0.35s ease,
+        top 0.35s ease,
+        border-radius 0.35s ease,
+        box-shadow 0.35s ease;
+
+    //   &.ch2-scrolled {
+    //     // background: rgba(255, 255, 255, 0.95);
+    //     backdrop-filter: blur(12px);
+    //     -webkit-backdrop-filter: blur(12px);
+    //     padding: 0.85rem 1.75rem;
+    //     left: 0.9rem;
+    //     right: 0.9rem;
+    //     top: 0.7rem;
+    //     border-radius: 14px;
+    //     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    //   }
+}
+
+// ── Outer section ──────────────────────────────────────────────────────────────
+
+.ch2-outer {
+    position: relative;
+    height: calc(#{$scroll-px} + 100vh);
+    background: var(--black-1000);
+}
+
+// ── Sticky viewport — overflow:hidden clips off-screen side images ─────────────
+
+.ch2-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+// ── Flex centering shell for the card ─────────────────────────────────────────
+
+.ch2-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// ── Hero card ──────────────────────────────────────────────────────────────────
+
+.ch2-card {
+    position: relative;
+    flex-shrink: 0;
+    overflow: hidden;
+    //   background: #2a2820;
+    will-change: transform, width, height, border-radius;
+
+    .img-overlay.full {
+        background: linear-gradient(180deg, rgba(16, 17, 17, 0) 0%, rgba(16, 17, 17, 0.68) 87.5%);
+    }
+
+    .img-overlay.top {
+        background: linear-gradient(180deg, rgba(16, 17, 17, 0.8) 0%, rgba(16, 17, 17, 0) 18.75%);
+    }
+
+    .img-holder {
+        img {
+            object-position: center 33%;
+        }
+    }
+}
+
+.ch2-card-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.ch2-card-dark {
+    position: absolute;
+    inset: 0;
+    background: var(--black-1000);
+    pointer-events: none;
+    will-change: opacity;
+}
+
+// ── Text overlay (name + scroll hint) ─────────────────────────────────────────
+
+.ch2-text {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    will-change: opacity;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--space-200);
+}
+
+.ch2-name-wrap {
+    //   position: absolute;
+    //   bottom: 7rem;
+    //   left: 0;
+    //   right: 0;
+    padding: 0 var(--space-400);
+    display: flex;
+    justify-content: center;
+}
+
+.ch2-name-text {
+    color: var(--cream-400);
+    font-size: typo.fluid(100, 160);
+}
+
+// ── Scroll hint — rule + row ───────────────────────────────────────────────────
+
+.ch2-hint {
+    //   position: absolute;
+    //   bottom: 0;
+    //   left: 0;
+    //   right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-200);
+    padding: 0 var(--space-250) var(--space-200);
+
+    @include big {
+        max-width: $max-width; // TODO: decide if keeping max-width
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+.ch2-hint-line {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.ch2-hint-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    text-transform: uppercase;
+    color: var(--cream-600);
+}
+
+.ch2-hint-text {
+    color: var(--cream-600);
+}
+
+.ch2-bounce {
+    animation: ch2-bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes ch2-bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+}
+
+// ── Side image layer ───────────────────────────────────────────────────────────
+
+.ch2-side-layer {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+}
+
+.ch2-col-left {
+    position: absolute;
+    right: calc(50% + #{$half-card + $col-gap});
+    top: 31.9px;
+    width: 264.5px;
+    height: 568.752px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: $col-gap;
+}
+
+.ch2-col-right {
+    position: absolute;
+    left: calc(50% + #{$half-card + $col-gap});
+    top: 326.248px;
+    width: 264.5px;
+    height: 568.752px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $col-gap;
+}
+
+.ch2-side-panel {
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    // background: #2a2820;
+    will-change: transform, opacity;
+
+    img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+}
+
+// ── Responsive ────────────────────────────────────────────────────────────────
+
+@media (max-width: 900px) {
+    .ch2-side-layer {
+        display: none;
+    }
+    .ch2-nav-links {
+        display: none;
+    }
+}

@@ -114,6 +114,8 @@ function Navigation() {
 
     // Handle scrolling
     const lenis = useLenis();
+    const location = useLocation();
+    const isHome = location.pathname === "/";
 
     const scrollToBlockById = (id: string) => {
         const element = document.getElementById(id);
@@ -156,8 +158,8 @@ function Navigation() {
     };
 
     return (
-        <header className="">
-            <div className={`navigation-wrapper ${mobileOpen ? "mobile_nav_open" : ''}`}>
+        <header className={isHome ? "is-home" : ""}>
+            <div className={`navigation-wrapper ${mobileOpen ? "mobile_nav_open" : ""}`}>
                 <div className="navigation-upper">
                     <LenisLink to={"/"} className="navigation-left">
                         <p className="nav-letter">M</p>

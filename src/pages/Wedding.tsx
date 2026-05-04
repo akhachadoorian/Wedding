@@ -4,6 +4,7 @@ import DashedCopyGrid from "../components/DashedCopy/DashedCopy";
 import LineSeparatedContent from "../components/DashedCopy/DashedCopy";
 import DrinkCardGrid from "../components/DrinkCardGrid/DrinkCardGrid";
 import HomeHero from "../components/heros/HomeHero/HomeHero";
+import WeddingHero from "../components/heros/HomeHero2/HomeHero2";
 import ImageGrid from "../components/ImageGrid/ImageGrid";
 import Slant from "../components/Slant/Slant";
 import { heroHomeHeroContent, photoGalleryImageGridContent, quickNavigationCardsDrinkCardGridContent, quickNavigationCopyCopyOnlyContent, welcomeCopyCopyOnlyContent, welcomeInfoDashedCopyGridContent } from "../generated/home.content";
@@ -19,10 +20,13 @@ function Wedding({ loaded = true }: { loaded?: boolean }) {
 
     return (
         <div className="wedding">
-            <HomeHero  
+            {/* <HomeHero  
                 loaded={loaded} 
                 {...heroHomeHeroContent}
-            />
+            /> */}
+
+            <WeddingHero />
+            
 
             <section ref={welcomeRef} id="welcome" className="welcome-section base_section">
 

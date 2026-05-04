@@ -261,7 +261,7 @@ export default function HomeHero({ loaded, heading, eyebrow, btn, image }: HomeH
 
                 <div ref={mediaRef} className="home_hero-media">
                     <div className="home_hero-overlay"></div>
-                    <img ref={imageRef} src={image?.src ?? "/images/Max&Alex.jpg"} alt={image?.alt ?? "Max and Alex posed on a bridge."} className="home_hero-image" decoding="async" />
+                    <img ref={imageRef} src={image?.src ?? "/images/MaxAndAlex.jpg"} alt={image?.alt ?? "Max and Alex posed on a bridge."} className="home_hero-image" decoding="async" />
                 </div>
             </div>
         </section>

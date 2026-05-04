@@ -1,70 +1,141 @@
 @use '../mixins' as *;
 
 @use 'sass:math';
+@use "sass:map";
 
-$viewport-width: 1440;
+// breakpoints
+$vp-min: 375;
+$vp-max: 1440;
 
-@function calcClamp($min, $val, $max) {
-  $mid: math.div($val, $viewport-width) * 100;
+// token definitions — min and max in px
+$text-xs: (
+    min: 12,
+    max: 14,
+);
+$text-s: (
+    min: 14,
+    max: 16,
+);
+$text-base: (
+    min: 16,
+    max: 18,
+);
+$text-md: (
+    min: 18,
+    max: 20,
+);
+$text-lg: (
+    min: 24,
+    max: 28,
+);
+$text-xl: (
+    min: 28,
+    max: 36,
+);
+$text-2xl: (
+    min: 36,
+    max: 48,
+);
+$text-3xl: (
+    min: 48,
+    max: 60,
+);
+$text-4xl: (
+    min: 60,
+    max: 72,
+);
+$text-5xl: (
+    min: 72,
+    max: 92,
+);
 
-  @return clamp(#{$min}px, #{$mid}vw, #{$max}px);
+@function fluid($min, $max) {
+    $v: math.div(($max - $min), ($vp-max - $vp-min)) * 100;
+    $r: math.div($min - math.div($v, 100) * $vp-min, 16);
+
+    @return clamp(
+        #{math.div($min, 16)}rem,
+        #{$v}vw + #{$r}rem,
+        #{math.div($max, 16)}rem
+    );
 }
 
-// Mobile (default)
 :root {
-  --heading-xxl: #{calcClamp(50, 55, 60)};
-  --heading-xl: #{calcClamp(44, 48, 50)};
-  --heading-l: #{calcClamp(38, 40, 45)};
-  --heading-m: #{calcClamp(32, 36, 38)};
-  --heading-s: #{calcClamp(28, 29, 30)};
-  --heading-xs: #{calcClamp(22, 24, 26)};
-
-  --body-l: #{calcClamp(16, 18, 20)};
-  --body: #{calcClamp(15, 16, 18)};
-  --body-s: #{calcClamp(14, 15, 16)};
-  --body-xs: #{calcClamp(12, 13, 14)};
-
-  --eyebrow: #{calcClamp(16, 18, 20)};
-  --button: #{calcClamp(16, 18, 20)};
+    --text-xs: #{fluid(map.get($text-xs, min), map.get($text-xs, max))};
+    --text-s: #{fluid(map.get($text-s, min), map.get($text-s, max))};
+    --text-base: #{fluid(map.get($text-base, min), map.get($text-base, max))};
+    --text-md: #{fluid(map.get($text-md, min), map.get($text-md, max))};
+    --text-lg: #{fluid(map.get($text-lg, min), map.get($text-lg, max))};
+    --text-xl: #{fluid(map.get($text-xl, min), map.get($text-xl, max))};
+    --text-2xl: #{fluid(map.get($text-2xl, min), map.get($text-2xl, max))};
+    --text-3xl: #{fluid(map.get($text-3xl, min), map.get($text-3xl, max))};
+    --text-4xl: #{fluid(map.get($text-4xl, min), map.get($text-4xl, max))};
+    --text-5xl: #{fluid(map.get($text-5xl, min), map.get($text-5xl, max))};
 }
 
-// Tablet
-@include big {
-  :root {
-    --heading-xxl: #{calcClamp(65, 70, 75)};
-    --heading-xl: #{calcClamp(55, 60, 65)};
-    --heading-l: #{calcClamp(40, 44, 50)};
-    --heading-m: #{calcClamp(30, 35, 40)};
-    --heading-s: #{calcClamp(30, 32, 35)};
-    --heading-xs: #{calcClamp(26, 28, 30)};
+// $viewport-width: 1440;
 
-    --body-l: #{calcClamp(18, 20, 22)};
-    --body: #{calcClamp(16, 18, 20)};
-    --body-s: #{calcClamp(15, 16, 18)};
-    --body-xs: #{calcClamp(13, 14, 15)};
+// @function calcClamp($min, $val, $max) {
+//   $mid: math.div($val, $viewport-width) * 100;
 
-    --eyebrow: #{calcClamp(18, 19, 20)};
-    --button: #{calcClamp(18, 19, 20)};
-  }
-}
+//   @return clamp(#{$min}px, #{$mid}vw, #{$max}px);
+// }
 
-// Desktop
-@media (min-width: #{$bp-desktop}) {
-  :root {
-    --heading-xxl: #{calcClamp(75, 92, 100)};
-    --heading-xl: #{calcClamp(65, 70, 75)};
-    --heading-l: #{calcClamp(55, 59, 65)};
-    --heading-m: #{calcClamp(45, 47, 55)};
-    --heading-s: #{calcClamp(30, 36, 45)};
-    --heading-xs: #{calcClamp(25, 28, 30)};
+// // Mobile (default)
+// :root {
+//   --text-5xl: #{calcClamp(50, 55, 60)};
+//   --text-4xl: #{calcClamp(44, 48, 50)};
+//   --text-3xl: #{calcClamp(38, 40, 45)};
+//   --text-2xl: #{calcClamp(32, 36, 38)};
+//   --text-xl: #{calcClamp(28, 29, 30)};
+//   --text-lg: #{calcClamp(22, 24, 26)};
 
-    --body-l: #{calcClamp(18, 20, 22)};
-    --body: #{calcClamp(16, 18, 20)};
-    --body-s: #{calcClamp(15, 16, 18)};
-    --body-xs: #{calcClamp(13, 14, 15)};
+//   --text-md: #{calcClamp(16, 18, 20)};
+//   --body: #{calcClamp(15, 16, 18)};
+//   --text-s: #{calcClamp(14, 15, 16)};
+//   --text-xs: #{calcClamp(12, 13, 14)};
 
-    --eyebrow: #{calcClamp(18, 20, 22)};
-    --button: #{calcClamp(18, 20, 22)};
-  }
-}
+//   --text-md: #{calcClamp(16, 18, 20)};
+//   --text-md: #{calcClamp(16, 18, 20)};
+// }
+
+// // Tablet
+// @include big {
+//   :root {
+//     --text-5xl: #{calcClamp(65, 70, 75)};
+//     --text-4xl: #{calcClamp(55, 60, 65)};
+//     --text-3xl: #{calcClamp(40, 44, 50)};
+//     --text-2xl: #{calcClamp(30, 35, 40)};
+//     --text-xl: #{calcClamp(30, 32, 35)};
+//     --text-lg: #{calcClamp(26, 28, 30)};
+
+//     --text-md: #{calcClamp(18, 20, 22)};
+//     --body: #{calcClamp(16, 18, 20)};
+//     --text-s: #{calcClamp(15, 16, 18)};
+//     --text-xs: #{calcClamp(13, 14, 15)};
+
+//     --text-md: #{calcClamp(18, 19, 20)};
+//     --text-md: #{calcClamp(18, 19, 20)};
+//   }
+// }
+
+// // Desktop
+// @media (min-width: #{$bp-desktop}) {
+//   :root {
+//     --text-5xl: #{calcClamp(75, 92, 100)};
+//     --text-4xl: #{calcClamp(65, 70, 75)};
+//     --text-3xl: #{calcClamp(55, 59, 65)};
+//     --text-2xl: #{calcClamp(45, 47, 55)};
+//     --text-xl: #{calcClamp(30, 36, 45)};
+//     --text-lg: #{calcClamp(25, 28, 30)};
+
+//     --text-md: #{calcClamp(18, 20, 22)};
+//     --body: #{calcClamp(16, 18, 20)};
+//     --text-s: #{calcClamp(15, 16, 18)};
+//     --text-xs: #{calcClamp(13, 14, 15)};
+
+//     --text-md: #{calcClamp(18, 20, 22)};
+//     --text-md: #{calcClamp(18, 20, 22)};
+//   }
+// }
 

@@ -51,7 +51,7 @@ export default function MediaWithCopy({ className, mediaSide = 'right', headingS
                 <div className="media_with_copy-img img-wrapper">
                     {/* <div className="img-wrapper"> */}
                         <div className="img-holder">
-                            <img src={img?.src ?? "/images/Max&Alex.jpg"} alt={img?.alt ?? "Max and Alex posed on a bridge."} className="img-bw" loading="lazy" decoding="async" />
+                            <img src={img?.src ?? "/images/MaxAndAlex.jpg"} alt={img?.alt ?? "Max and Alex posed on a bridge."} className="img-bw" loading="lazy" decoding="async" />
                         </div>
 
                         <div className="img-overlay"></div>
