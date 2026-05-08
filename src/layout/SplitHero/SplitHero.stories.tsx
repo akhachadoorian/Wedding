@@ -1,10 +1,10 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import HomeHero from './HomeHero';
+import SplitHero from './SplitHero';
 
-const meta: Meta<typeof HomeHero> = {
-    component: HomeHero,
+const meta: Meta<typeof SplitHero> = {
+    component: SplitHero,
     tags: ['autodocs'],
     parameters: {
         layout: 'fullscreen',
@@ -19,7 +19,7 @@ const meta: Meta<typeof HomeHero> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof HomeHero>;
+type Story = StoryObj<typeof SplitHero>;
 
 export const Hero: Story = {
     args: {

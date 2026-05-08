@@ -247,25 +247,34 @@ $col-gap: 10px;
     }
 }
 
-.ch2-side-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 4;
-    padding: var(--space-300) var(--space-200) var(--space-150);
-    background: linear-gradient(to top, rgba(16, 17, 17, 0.8) 0%, transparent 100%);
-    color: var(--cream-500);
-    font-size: 0.7rem;
-    letter-spacing: 0.04em;
-    line-height: 1.4;
-    text-transform: uppercase;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+.ch2-tooltip {
+    position: fixed;
+    z-index: 9999;
     pointer-events: none;
+    background: var(--black-900);
+    color: var(--cream-400);
+    font-family: $font-sans;
+    font-size: 0.65rem;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    animation: ch2-tooltip-in 0.12s ease;
+}
 
-    .ch2-side-panel:hover & {
+@keyframes ch2-tooltip-in {
+    from {
+        opacity: 0;
+        transform: translateY(3px);
+    }
+    to {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 

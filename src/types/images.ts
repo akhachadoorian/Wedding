@@ -4,3 +4,4 @@ export type ImageProps = {
     alt?: string;
     caption?: string;
 }
+

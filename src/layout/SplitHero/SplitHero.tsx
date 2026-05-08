@@ -4,11 +4,11 @@ import Eyebrow from "../../components/Eyebrow/Eyebrow";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import "./HomeHero.scss";
+import "./SplitHero.scss";
 import { ButtonSettingProps } from "../../types/buttons";
 import { ImageProps } from "../../types/images";
 
-export type HomeHeroProps = {
+export type SplitHeroProps = {
     loaded: boolean;
     heading: {
         line1: string;
@@ -23,7 +23,7 @@ export type HomeHeroProps = {
     image?: ImageProps;
 };
 
-export default function HomeHero({ loaded, heading, eyebrow, btn, image }: HomeHeroProps) {
+export default function SplitHero({ loaded, heading, eyebrow, btn, image }: SplitHeroProps) {
     // Load References
     const eyebrowRef = useRef(null);
     const h1Ref = useRef(null);

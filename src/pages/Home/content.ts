@@ -3,13 +3,10 @@
 // import { DashedCopyGridProps } from "../../components/DashedCopy/DashedCopy";
 // import { HomeHeroProps } from "../../layout/HomeHero/HomeHero";
 
-
 // export const welcomeCopyCopyOnlyContent: Omit<CopyOnlyProps, "variation" | "headingSize"> = {
 //   eyebrow: "We're getting married",
 //   header: "Once upon a time, we found each other, and now we're counting down the days until we say **I do**. We would be thrilled to have you join us in this next chapter.",
 // };
-
-
 
 // export const welcomeInfoDashedCopyGridContent: DashedCopyGridProps = {
 //   dashedCopy: [
@@ -27,8 +24,6 @@
 //     },
 //   ],
 // };
-
-
 
 // export const heroHomeHeroContent: Omit<HomeHeroProps, "loaded"> = {
 //   heading: {
@@ -134,16 +129,23 @@
 //   ],
 // };
 
+const hero = {
+    header: "Alex & Max",
+    sideImages: [
+        { src: "/images/Engagement.jpg", caption: "Max proposing to Alex in the Japan Garden in Epcot", alt: "Max proposing to Alex in the Japan Garden in Epcot" },
+        { src: "/images/Graduation.jpg", caption: "Max's Graduation", alt: "Max and Alex at Max's college graduation" },
+        { src: "/images/Sunglasses.jpg", caption: "", alt: "" },
+        { src: "/images/Disney.jpg", caption: "Disney Trip", alt: "Max and Alex kissing in front of the Disney castle" },
+    ],
+};
+
 const quickLinks = {
-    copyOnly: {
-
-    },
-    
-}
-
+    copyOnly: {},
+};
 
 const homeContent = {
-    quickLinks: quickLinks
-}
+    hero: hero,
+    quickLinks: quickLinks,
+};
 
 export default homeContent;

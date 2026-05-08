@@ -2,12 +2,13 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
+import { DEFAULT_IMAGE, DEFAULT_SIDE_IMAGES } from "../../data/defaultImage";
+import { useFadeInChildren } from "../../hooks/useFadeIn";
+import { ImageProps } from "../../types/images";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import "./HomeHero2.scss";
-import { useFadeInChildren } from "../../hooks/useFadeIn";
-import { ImageProps } from "../../types/images";
+import "./ScrollRevealHero.scss";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,29 +20,22 @@ const END_Y = 12; // translateY px
 const SCROLL_PX = 1200;
 
 interface HeroProps {
-    heroImageSrc?: string;
-    coupleName?: string;
-    scrollMessage?: string;
-    //   coupleInitials?: string;
-    //   rsvpHref?: string;
-    //   navLinks?: { label: string; href: string }[];
-    //   // 4 images: [leftTop, leftBottom, rightTop, rightBottom]
+    mainImage?: ImageProps;
     sideImages?: Array<ImageProps>;
+    header?: string;
+    hideScrollLine?: boolean;
+    scrollMessage?: string;
 }
 
-const DEFAULT_SIDE_IMAGES = [
-    { src: "/images/Engagement.jpg", caption: "Max proposing to Alex in the Japan Garden in Epcot", alt: "Max proposing to Alex in the Japan Garden in Epcot" },
-    { src: "/images/Graduation.jpg", caption: "Max's Graduation",  alt: "Max and Alex at Max's college graduation" },
-    { src: "/images/Sunglasses.jpg", caption: "",  alt: "" },
-    { src: "/images/Disney.jpg", caption: "Disney Trip",  alt: "Max and Alex kissing in front of the Disney castle" },
-];
-
-export default function HomeHero2({
-    heroImageSrc = "/images/MaxAndAlex.jpg",
-    coupleName = "Alex & Max",
-    scrollMessage = "Scroll for details",
+export default function ScrollRevealHero({ 
+    mainImage = DEFAULT_IMAGE,
     sideImages = DEFAULT_SIDE_IMAGES,
+    header = "Alex & Max", 
+    hideScrollLine = false, 
+    scrollMessage = "Scroll for details", 
+    
 }: HeroProps) {
+    
     const sectionRef = useRef<HTMLElement>(null);
     const cardRef = useRef<HTMLDivElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
@@ -51,6 +45,15 @@ export default function HomeHero2({
     const sideR0 = useRef<HTMLDivElement>(null);
     const sideR1 = useRef<HTMLDivElement>(null);
     const [scrolled, setScrolled] = useState(false);
+    const [tooltip, setTooltip] = useState<{ x: number; y: number; caption: string } | null>(null);
+
+    const makeMouseHandlers = (caption: string) => ({
+        onMouseMove: (e: React.MouseEvent) => {
+            if (!caption) return;
+            setTooltip({ x: e.clientX, y: e.clientY, caption });
+        },
+        onMouseLeave: () => setTooltip(null),
+    });
 
     const ref = useFadeInChildren<HTMLDivElement>(".mwc-animate", {
         stagger: 0.15,
@@ -75,7 +78,6 @@ export default function HomeHero2({
         const navEl = document.querySelector<HTMLElement>(".navigation-wrapper");
         // Disable CSS transition while GSAP owns these properties
         if (navEl) navEl.style.transition = "none";
-
 
         const ctx = gsap.context(() => {
             const mm = gsap.matchMedia();
@@ -196,32 +198,32 @@ export default function HomeHero2({
                 <div className="ch2-center">
                     <div ref={cardRef} className="ch2-card mwc-animate">
                         <div className="img-holder">
-                            {/* <div className="img-overlay top"></div> */}
-                            <img src={heroImageSrc} alt={coupleName} className="ch2-card-img img-bw" />
+                            <img src={mainImage.src} alt={mainImage.alt} className="ch2-card-img img-bw" />
                             <div className="img-overlay"></div>
                             <div ref={overlayRef} className="ch2-card-dark" />
                         </div>
 
-
                         <div ref={textRef} className="ch2-text">
                             {/* Name */}
                             <div className="ch2-name-wrap mwc-animate">
-                                <h1 className="ch2-name-text">{coupleName}</h1>
+                                <h1 className="ch2-name-text">{header}</h1>
                             </div>
 
                             {/* Scroll hint */}
-                            <div className="ch2-hint mwc-animate">
-                                <div className="ch2-hint-line" />
+                            {!hideScrollLine && (
+                                <div className="ch2-hint mwc-animate">
+                                    <div className="ch2-hint-line" />
 
-                                <div className="ch2-hint-row">
-                                    <div className="ch2-bounce">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M7 13l5 5 5-5M12 6v12" />
-                                        </svg>
+                                    <div className="ch2-hint-row">
+                                        <div className="ch2-bounce">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M7 13l5 5 5-5M12 6v12" />
+                                            </svg>
+                                        </div>
+                                        {scrollMessage && <p className="ch2-hint-text">{scrollMessage}</p>}
                                     </div>
-                                    <p className="ch2-hint-text">{scrollMessage}</p>
                                 </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -230,33 +232,35 @@ export default function HomeHero2({
                 <div className="ch2-side-layer">
                     {/* Left column */}
                     <div className="ch2-col-left">
-                        <div ref={sideL0} className="ch2-side-panel img-holder" style={{ width: 264.5, height: 352.896, borderRadius: 16 }}>
+                        <div ref={sideL0} className="ch2-side-panel img-holder" style={{ width: 264.5, height: 352.896, borderRadius: 16 }} {...makeMouseHandlers(imgs[0].caption ?? "")}>
                             <img src={imgs[0].src} alt={imgs[0].alt ?? ""} className="img-bw" />
                             <div className="img-overlay"></div>
-                            {imgs[0].caption && <p className="ch2-side-caption">{imgs[0].caption}</p>}
                         </div>
-                        <div ref={sideL1} className="ch2-side-panel img-holder" style={{ width: 206.31, height: 205.856, borderRadius: 16 }}>
+                        <div ref={sideL1} className="ch2-side-panel img-holder" style={{ width: 206.31, height: 205.856, borderRadius: 16 }} {...makeMouseHandlers(imgs[1].caption ?? "")}>
                             <img src={imgs[1].src} alt={imgs[1].alt ?? ""} className="img-bw" />
                             <div className="img-overlay"></div>
-                            {imgs[1].caption && <p className="ch2-side-caption">{imgs[1].caption}</p>}
                         </div>
                     </div>
 
                     {/* Right column */}
                     <div className="ch2-col-right">
-                        <div ref={sideR0} className="ch2-side-panel img-holder" style={{ width: 206.31, height: 205.856, borderRadius: 16 }}>
+                        <div ref={sideR0} className="ch2-side-panel img-holder" style={{ width: 206.31, height: 205.856, borderRadius: 16 }} {...makeMouseHandlers(imgs[2].caption ?? "")}>
                             <img src={imgs[2].src} alt={imgs[2].alt ?? ""} className="img-bw" />
                             <div className="img-overlay"></div>
-                            {imgs[2].caption && <p className="ch2-side-caption">{imgs[2].caption}</p>}
                         </div>
-                        <div ref={sideR1} className="ch2-side-panel  img-holder" style={{ width: 264.5, height: 352.896, borderRadius: 16 }}>
+                        <div ref={sideR1} className="ch2-side-panel img-holder" style={{ width: 264.5, height: 352.896, borderRadius: 16 }} {...makeMouseHandlers(imgs[3].caption ?? "")}>
                             <img src={imgs[3].src} alt={imgs[3].alt ?? ""} className="img-bw" />
                             <div className="img-overlay"></div>
-                            {imgs[3].caption && <p className="ch2-side-caption">{imgs[3].caption}</p>}
                         </div>
                     </div>
                 </div>
             </div>
+
+            {tooltip && (
+                <div className="ch2-tooltip" style={{ left: tooltip.x + 14, top: tooltip.y + 14 }}>
+                    {tooltip.caption}
+                </div>
+            )}
         </section>
     );
 }

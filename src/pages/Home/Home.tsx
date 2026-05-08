@@ -2,8 +2,8 @@ import './Home.scss';
 import CopyOnly from "../../components/CopyOnly/CopyOnly";
 import DashedCopyGrid from "../../components/DashedCopy/DashedCopy";
 import DrinkCardGrid from "../../components/DrinkCardGrid/DrinkCardGrid";
-import HomeHero from "../../layout/HomeHero/HomeHero";
-import HomeHero2 from "../../layout/HomeHero2/HomeHero2";
+import SplitHero from "../../layout/SplitHero/SplitHero";
+import ScrollRevealHero  from "../../layout/ScrollRevealHero/ScrollRevealHero";
 import ImageGrid from "../../components/ImageGrid/ImageGrid";
 import Slant from "../../components/Slant/Slant";
 import { heroHomeHeroContent, photoGalleryImageGridContent, quickNavigationCardsDrinkCardGridContent, quickNavigationCopyCopyOnlyContent, welcomeCopyCopyOnlyContent, welcomeInfoDashedCopyGridContent } from "../../generated/home.content";
@@ -27,7 +27,7 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
                 {...heroHomeHeroContent}
             /> */}
 
-            <HomeHero2 />
+            <ScrollRevealHero  />
             
 
             <section ref={welcomeRef} id="welcome" className="welcome-section base_section">

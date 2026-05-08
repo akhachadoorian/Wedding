@@ -1,11 +1,11 @@
-// scripts/mappings/HomeHero.mapping.ts
-// Defines how vault content in Home.md > ## Hero maps to HomeHero props
+// scripts/mappings/SplitHero.mapping.ts
+// Defines how vault content in Home.md > ## Hero maps to SplitHero props
 import type { ComponentMappingProps, MappingConfig } from "../../core/types";
 
-const HomeHeroProps: ComponentMappingProps = {
-    component: "HomeHero",
-    componentPath: "../components/heros/HomeHero/HomeHero",
-    propsImport: 'Omit<HomeHeroProps, "loaded">',
+const SplitHeroProps: ComponentMappingProps = {
+    component: "SplitHero",
+    componentPath: "../components/heros/SplitHero/SplitHero",
+    propsImport: 'Omit<SplitHeroProps, "loaded">',
     props: {
         "heading.line1": {
             field: "Heading",
@@ -47,12 +47,12 @@ const HomeHeroProps: ComponentMappingProps = {
     },
 };
 
-const HomeHeroMapping: Array<MappingConfig> = [
+const SplitHeroMapping: Array<MappingConfig> = [
     {
         source: "Home",
         section: "Hero",
-        componentMap: HomeHeroProps,
+        componentMap: SplitHeroProps,
     },
 ];
 
-export default HomeHeroMapping;
+export default SplitHeroMapping;

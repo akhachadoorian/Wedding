@@ -4,7 +4,7 @@
 import type { CopyOnlyProps } from "../components/CopyOnly/CopyOnly";
 import type { DashedCopyGridProps } from "../components/DashedCopy/DashedCopy";
 import type { DrinkCardGridProps } from "../components/DrinkCardGrid/DrinkCardGrid";
-import type { HomeHeroProps } from "../layout/HomeHero/HomeHero";
+import type { SplitHeroProps } from "../layout/SplitHero/SplitHero";
 import type { ImageGridProps } from "../components/ImageGrid/ImageGrid";
 
 export const welcomeCopyCopyOnlyContent: Omit<CopyOnlyProps, "variation" | "headingSize"> = {
@@ -102,7 +102,7 @@ export const quickNavigationCardsDrinkCardGridContent: DrinkCardGridProps = {
   ],
 };
 
-export const heroHomeHeroContent: Omit<HomeHeroProps, "loaded"> = {
+export const heroHomeHeroContent: Omit<SplitHeroProps, "loaded"> = {
   heading: {
     line1: "Alex Khachadoorian",
     line2: "& Max Paluett",
