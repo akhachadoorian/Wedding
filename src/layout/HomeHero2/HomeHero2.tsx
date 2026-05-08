@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "./HomeHero2.scss";
 import { useFadeInChildren } from "../../hooks/useFadeIn";
+import { ImageProps } from "../../types/images";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,14 +26,14 @@ interface HeroProps {
     //   rsvpHref?: string;
     //   navLinks?: { label: string; href: string }[];
     //   // 4 images: [leftTop, leftBottom, rightTop, rightBottom]
-    sideImages?: { src: string; alt?: string }[];
+    sideImages?: Array<ImageProps>;
 }
 
 const DEFAULT_SIDE_IMAGES = [
-    { src: "/images/Engagement.jpg", alt: "Max proposing to Alex in the Japan Garden in Epcot" },
-    { src: "/images/Graduation.jpg", alt: "Max and Alex at Max's college graduation" },
-    { src: "/images/Sunglasses.jpg", alt: "" },
-    { src: "/images/Disney.jpg", alt: "Max and Alex kissing in front of the Disney castle" },
+    { src: "/images/Engagement.jpg", caption: "Max proposing to Alex in the Japan Garden in Epcot", alt: "Max proposing to Alex in the Japan Garden in Epcot" },
+    { src: "/images/Graduation.jpg", caption: "Max's Graduation",  alt: "Max and Alex at Max's college graduation" },
+    { src: "/images/Sunglasses.jpg", caption: "",  alt: "" },
+    { src: "/images/Disney.jpg", caption: "Disney Trip",  alt: "Max and Alex kissing in front of the Disney castle" },
 ];
 
 export default function HomeHero2({
@@ -232,10 +233,12 @@ export default function HomeHero2({
                         <div ref={sideL0} className="ch2-side-panel img-holder" style={{ width: 264.5, height: 352.896, borderRadius: 16 }}>
                             <img src={imgs[0].src} alt={imgs[0].alt ?? ""} className="img-bw" />
                             <div className="img-overlay"></div>
+                            {imgs[0].caption && <p className="ch2-side-caption">{imgs[0].caption}</p>}
                         </div>
                         <div ref={sideL1} className="ch2-side-panel img-holder" style={{ width: 206.31, height: 205.856, borderRadius: 16 }}>
                             <img src={imgs[1].src} alt={imgs[1].alt ?? ""} className="img-bw" />
                             <div className="img-overlay"></div>
+                            {imgs[1].caption && <p className="ch2-side-caption">{imgs[1].caption}</p>}
                         </div>
                     </div>
 
@@ -244,10 +247,12 @@ export default function HomeHero2({
                         <div ref={sideR0} className="ch2-side-panel img-holder" style={{ width: 206.31, height: 205.856, borderRadius: 16 }}>
                             <img src={imgs[2].src} alt={imgs[2].alt ?? ""} className="img-bw" />
                             <div className="img-overlay"></div>
+                            {imgs[2].caption && <p className="ch2-side-caption">{imgs[2].caption}</p>}
                         </div>
                         <div ref={sideR1} className="ch2-side-panel  img-holder" style={{ width: 264.5, height: 352.896, borderRadius: 16 }}>
                             <img src={imgs[3].src} alt={imgs[3].alt ?? ""} className="img-bw" />
                             <div className="img-overlay"></div>
+                            {imgs[3].caption && <p className="ch2-side-caption">{imgs[3].caption}</p>}
                         </div>
                     </div>
                 </div>

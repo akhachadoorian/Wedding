@@ -228,8 +228,9 @@ $col-gap: 10px;
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
-    // background: #2a2820;
     will-change: transform, opacity;
+    pointer-events: auto;
+    cursor: default;
 
     img {
         position: absolute;
@@ -238,6 +239,33 @@ $col-gap: 10px;
         height: 100%;
         object-fit: cover;
         display: block;
+        transition: filter 0.45s ease;
+    }
+
+    &:hover img {
+        filter: grayscale(0) !important;
+    }
+}
+
+.ch2-side-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    padding: var(--space-300) var(--space-200) var(--space-150);
+    background: linear-gradient(to top, rgba(16, 17, 17, 0.8) 0%, transparent 100%);
+    color: var(--cream-500);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+
+    .ch2-side-panel:hover & {
+        opacity: 1;
     }
 }
 
