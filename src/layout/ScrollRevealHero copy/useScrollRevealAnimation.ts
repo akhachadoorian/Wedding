@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 const END_W = 529;    // portrait card width (px)
 const END_H = 735.2;  // portrait card height (px)
 const END_R = 16;     // border-radius at rest (px)
-const END_Y = 0;     // translateY at rest (px)
+const END_Y = 12;     // translateY at rest (px)
 const SCROLL_PX = 1200; // scroll distance over which the animation plays (matches $scroll-px in SCSS)
 
 /** DOM refs consumed by the scroll animation — all sourced from ScrollRevealHero. */
@@ -60,14 +60,12 @@ export default function useScrollRevealAnimation({
         const ctx = gsap.context(() => {
             const mm = gsap.matchMedia();
 
-            mm.add("(min-width: 750px)", () => {
-                const PAD = 32; // --space-400
-                console.log("width 1 : ",  window.innerWidth - PAD * 2)
-
-                console.log("width 2: ",  window.innerWidth - PAD )
+            mm.add("(min-width: 800px)", () => {
                 // ── Initial states ────────────────────────────────────────────────────────
-                // const PAD = 32; // --space-400
+                const PAD = 32; // --space-400
                 gsap.set(card, { width: window.innerWidth - PAD * 2, height: window.innerHeight - PAD * 2, borderRadius: 8, y: 0 });
+
+                console.log("width: ",  window.innerWidth - PAD * 2)
 
                 // gsap.set(overlay, { opacity: 0.22 });
                 gsap.set(text, { opacity: 1 });
@@ -136,79 +134,6 @@ export default function useScrollRevealAnimation({
 
                 tl.to(hoverHintRef.current, { autoAlpha: 1, y: 0, ease: "power2.out", duration: 0.15 }, 0.5);
             });
-
-            // mm.add("(max-width: 750px)", () => {
-            //     // ── Initial states ────────────────────────────────────────────────────────
-            //     const PAD = 32; // --space-400
-            //     gsap.set(card, { width: window.innerWidth - PAD * 2, height: window.innerHeight - PAD * 2, borderRadius: 4, y: 0 });
-
-            //     // gsap.set(overlay, { opacity: 0.22 });
-            //     gsap.set(text, { opacity: 1 });
-
-            //     gsap.set([sideL0.current, sideL1.current], { x: -575, y: 400, scale: 0.96, autoAlpha: 0 });
-            //     gsap.set([sideR0.current, sideR1.current], { x: 575, y: 400, scale: 0.96, autoAlpha: 0 });
-            //     gsap.set(hoverHintRef.current, { autoAlpha: 0, y: 6 });
-
-            //     if (navEl) {
-            //         gsap.set(navEl, {
-            //             backgroundColor: "transparent",
-            //             borderColor: "transparent",
-            //             boxShadow: "none",
-            //             top: "16px",
-            //             maxWidth: 1600,
-            //         });
-            //     }
-
-            //     // ── Scroll-scrubbed timeline ──────────────────────────────────────────────
-            //     const tl = gsap.timeline({
-            //         scrollTrigger: {
-            //             trigger: section,
-            //             start: "top top",
-            //             end: `+=${SCROLL_PX}`,
-            //             scrub: 1.2,
-            //             pin: false,
-            //             invalidateOnRefresh: true,
-            //         },
-            //     });
-
-            //     tl.to(text, { opacity: 0, ease: "none", duration: 0.2 }, 0);
-            //     // tl.to(overlay, { opacity: 1, ease: "none" }, 0);
-
-            //     tl.to(
-            //         card,
-            //         { width: '36.736vw', height: END_H, borderRadius: END_R, y: END_Y, ease: "power2.inOut" },
-            //         0,
-            //     );
-
-            //     if (navEl) {
-            //         tl.to(
-            //             navEl,
-            //             {
-            //                 backgroundColor: "var(--black-900)",
-            //                 borderColor: "var(--black-850)",
-            //                 boxShadow: "0 3px 6px rgba(16,17,17,0.34), 0 10px 10px rgba(16,17,17,0.30), 0 23px 14px rgba(16,17,17,0.18)",
-            //                 maxWidth: 870,
-            //                 top: "0px",
-            //                 ease: "power2.inOut",
-            //             },
-            //             0,
-            //         );
-            //     }
-
-            //     tl.to(
-            //         [sideL0.current, sideL1.current],
-            //         { x: 0, y: 0, scale: 1, autoAlpha: 1, ease: "power2.out", stagger: 0.1 },
-            //         0.1,
-            //     );
-
-            //     tl.to(
-            //         [sideR0.current, sideR1.current],
-            //         { x: 0, y: 0, scale: 1, autoAlpha: 1, ease: "power2.out", stagger: 0.1 },
-            //         0.3,
-            //     );
-
-            //     tl.to(hoverHintRef.current, { autoAlpha: 1, y: 0, ease: "power2.out", duration: 0.15 }, 0.5);
-            // });
 
             return () => mm.revert();
         }, section);

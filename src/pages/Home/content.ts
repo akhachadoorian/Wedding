@@ -8,7 +8,8 @@ const hero: ScrollRevealHeroProps = {
     header: "Alex & Max",
     hideScrollHint: false,
     scrollHintMessage: "Scroll for details",
-    endScrollMessage: "Hover images for our story",
+    endScrollMessage: "Hover on images",
+    endScrollMessageMobile: "Touch the images for more!",
     sideImages: [
         { src: "/images/Engagement.jpg", caption: "Max proposing to Alex in the Japan Garden in Epcot", alt: "Max proposing to Alex in the Japan Garden in Epcot", aspectRatio: 'portrait' },
         { src: "/images/Graduation.jpg", caption: "Max's Graduation", alt: "Max and Alex at Max's college graduation", aspectRatio: 'square' },

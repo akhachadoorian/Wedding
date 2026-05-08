@@ -15,7 +15,7 @@ export type SplitHeroProps = {
         line2?: string;
     };
     eyebrow?: {
-        variation?: "left" | "centered" | "double";
+        variation?: "left" | "center" | "double";
         text: string;
         doubleText?: string;
     };
