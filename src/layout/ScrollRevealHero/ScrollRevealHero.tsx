@@ -25,8 +25,6 @@ export type ScrollRevealHeroProps = {
     endScrollMessage?: string;
     /** Message displayed at the bottom of screen after the scroll effect.*/
     endScrollMessageMobile?: string;
-
-    // leftImages?: Array<ImageProps>;
 };
 
 /**
