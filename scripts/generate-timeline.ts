@@ -71,7 +71,7 @@ export function generateTimeline(isWatch:boolean = false  ) {
         mappingDir: MAPPINGS_TIMELINE_DIR,
         applyMapping: applyTimelineMapping,
         buildOutput: writeTimelineOutput
-    } as GenerateProps;
+    } as unknown as GenerateProps;
 
     generate(gProps).then(() => {
         if (isWatch) {

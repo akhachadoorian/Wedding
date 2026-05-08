@@ -1,11 +1,11 @@
 import { forwardRef, useLayoutEffect, useRef } from "react";
 
-import { ButtonSettingProps, ThreeButtonsArray } from "../../../types/buttons";
-import { ImageProps } from "../../../types/images";
-import Buttons, { ThreeButtons } from "../../Buttons/Buttons";
-import Diamond from "../../Diamond/Diamond";
-import Eyebrow from "../../Eyebrow/Eyebrow";
-import SmallText, { SmallTextProps } from "../../SmallText/SmallText";
+import { ButtonSettingProps, ThreeButtonsArray } from "../../types/buttons";
+import { ImageProps } from "../../types/images";
+import Buttons, { ThreeButtons } from "../../components/Buttons/Buttons";
+import Diamond from "../../components/Diamond/Diamond";
+import Eyebrow from "../../components/Eyebrow/Eyebrow";
+import SmallText, { SmallTextProps } from "../../components/SmallText/SmallText";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 

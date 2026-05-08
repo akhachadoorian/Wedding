@@ -1,17 +1,19 @@
+import './Home.scss';
+import CopyOnly from "../../components/CopyOnly/CopyOnly";
+import DashedCopyGrid from "../../components/DashedCopy/DashedCopy";
+import DrinkCardGrid from "../../components/DrinkCardGrid/DrinkCardGrid";
+import HomeHero from "../../layout/HomeHero/HomeHero";
+import HomeHero2 from "../../layout/HomeHero2/HomeHero2";
+import ImageGrid from "../../components/ImageGrid/ImageGrid";
+import Slant from "../../components/Slant/Slant";
+import { heroHomeHeroContent, photoGalleryImageGridContent, quickNavigationCardsDrinkCardGridContent, quickNavigationCopyCopyOnlyContent, welcomeCopyCopyOnlyContent, welcomeInfoDashedCopyGridContent } from "../../generated/home.content";
+import { useFadeIn } from "../../hooks/useFadeIn";
 
-import CopyOnly from "../components/CopyOnly/CopyOnly";
-import DashedCopyGrid from "../components/DashedCopy/DashedCopy";
-import LineSeparatedContent from "../components/DashedCopy/DashedCopy";
-import DrinkCardGrid from "../components/DrinkCardGrid/DrinkCardGrid";
-import HomeHero from "../components/heros/HomeHero/HomeHero";
-import WeddingHero from "../components/heros/HomeHero2/HomeHero2";
-import ImageGrid from "../components/ImageGrid/ImageGrid";
-import Slant from "../components/Slant/Slant";
-import { heroHomeHeroContent, photoGalleryImageGridContent, quickNavigationCardsDrinkCardGridContent, quickNavigationCopyCopyOnlyContent, welcomeCopyCopyOnlyContent, welcomeInfoDashedCopyGridContent } from "../generated/home.content";
-import { useFadeIn } from "../hooks/useFadeIn";
 
 
-function Wedding({ loaded = true }: { loaded?: boolean }) {
+
+
+export default function Home({ loaded = true }: { loaded?: boolean }) {
     // Setup refs for fade in
     const welcomeRef = useFadeIn<HTMLDivElement>();
     const photoGalleryRef = useFadeIn<HTMLDivElement>();
@@ -19,13 +21,13 @@ function Wedding({ loaded = true }: { loaded?: boolean }) {
     const quickLinksRef = useFadeIn<HTMLDivElement>();
 
     return (
-        <div className="wedding">
+        <>
             {/* <HomeHero  
                 loaded={loaded} 
                 {...heroHomeHeroContent}
             /> */}
 
-            <WeddingHero />
+            <HomeHero2 />
             
 
             <section ref={welcomeRef} id="welcome" className="welcome-section base_section">
@@ -41,9 +43,9 @@ function Wedding({ loaded = true }: { loaded?: boolean }) {
                 />
             </section>
 
-            <section ref={photoGalleryRef} id="photo_gallery" className="photo_gallery-section base_section">
+            {/* <section ref={photoGalleryRef} id="photo_gallery" className="photo_gallery-section base_section">
                 <ImageGrid {...photoGalleryImageGridContent}/>
-            </section>
+            </section> */}
 
             <section ref={ourStoryRef} id="our_story" className="our_story-section full_width">
                 <Slant size="large" order="top" color="--black-900" />
@@ -61,8 +63,7 @@ function Wedding({ loaded = true }: { loaded?: boolean }) {
                 <DrinkCardGrid {...quickNavigationCardsDrinkCardGridContent} />
             </section>
 
-        </div>
+        </>
     );
 }
 
-export default Wedding;

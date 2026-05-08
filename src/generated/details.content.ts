@@ -4,7 +4,7 @@
 import type { AccordionsProps } from "../components/Accordions/Accordions";
 import type { CopyOnlyProps } from "../components/CopyOnly/CopyOnly";
 import type { MediaWithCopyProps } from "../components/MediaWithCopy/MediaWithCopy";
-import type { SmallTextTagHeroProps } from "../components/heros/SmallTextTagHero/SmallTextTagHero";
+import type { SmallTextTagHeroProps } from "../layout/SmallTextTagHero/SmallTextTagHero";
 
 export const fAQItemsAccordionsContent: Omit<AccordionsProps, 'className'> = {
   accordions: [

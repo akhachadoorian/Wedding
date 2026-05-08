@@ -7,17 +7,16 @@ import "lenis/dist/lenis.css";
 import { ReactLenis } from "lenis/react";
 import type { LenisRef } from "lenis/react";
 
-import Footer from "./components/globals/Footer/Footer";
-import LoadingScreen from "./components/globals/LoadingScreen/LoadingScreen";
-import Navigation from "./components/globals/Navigation/Navigation";
-import ScrollToHash from "./hooks/ScrollToHash";
+import Footer from "./layout/Footer/Footer";
+import LoadingScreen from "./layout/LoadingScreen/LoadingScreen";
+import Navigation from "./layout/Navigation/Navigation";
 
 import Accommodations from "./pages/Accommodations";
 import Details from "./pages/Details";
 import RSVP from "./pages/RSVP";
 import Registry from "./pages/Registry";
 import Timeline from "./pages/Timeline";
-import Wedding from "./pages/Wedding";
+import Home from "./pages/Home/Home";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,7 +50,7 @@ function App() {
                 <Navigation />
                 <main>
                     <Routes>
-                        <Route path="/" element={<Wedding loaded={loaded} />} />
+                        <Route path="/" element={<Home loaded={loaded} />} />
                         <Route path="/details" element={<Details loaded={loaded} />} />
                         <Route path="/accommodations" element={<Accommodations loaded={loaded} />} />
                         <Route path="/registry" element={<Registry loaded={loaded} />} />

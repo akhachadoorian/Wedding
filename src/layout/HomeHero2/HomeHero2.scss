@@ -1,5 +1,5 @@
-@use "../../../styles/variables" as *;
-@use "../../../styles/tokens/typography" as typo;
+@use "../../styles/variables" as *;
+@use "../../styles/tokens/typography" as typo;
 
 // Matches JS constants in HomeHero2.tsx
 $scroll-px: 1200px;
@@ -77,8 +77,8 @@ $col-gap: 10px;
     //   background: #2a2820;
     will-change: transform, width, height, border-radius;
 
-    .img-overlay.full {
-        background: linear-gradient(180deg, rgba(16, 17, 17, 0) 0%, rgba(16, 17, 17, 0.68) 87.5%);
+    .img-overlay {
+        background: linear-gradient(180deg, rgba(16, 17, 17, 0) 0%, rgba(16, 17, 17, 0.68) 87.5%), linear-gradient(180deg, rgba(16, 17, 17, 0.8) 0%, rgba(16, 17, 17, 0) 18.75%);
     }
 
     .img-overlay.top {

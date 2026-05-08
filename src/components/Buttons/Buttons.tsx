@@ -29,7 +29,7 @@ export default function Buttons({ style = "solid", theme, className, btnSettings
 }
 
 export function TwoButtons({ buttons, className }: TwoButtonsProps) {
-    if (buttons === undefined || buttons?.length == 0) return;
+    if (buttons === undefined || buttons?.length == 0) return null;
 
     const styleMap: Array<BtnStyles> = [
         'solid', 'lines'
@@ -93,7 +93,7 @@ export function TwoButtons({ buttons, className }: TwoButtonsProps) {
 // }
 
 export function ThreeButtons({ buttons, className, ref}: ThreeButtonsProps) {
-    if (buttons === undefined || buttons?.length == 0) return;
+    if (buttons === undefined || buttons?.length == 0) return null;
 
     const styleMap: Array<BtnStyles> = [
         'solid', 'outline', 'lines'

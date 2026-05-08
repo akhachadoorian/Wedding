@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "./HomeHero2.scss";
+import { useFadeInChildren } from "../../hooks/useFadeIn";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,23 +29,16 @@ interface HeroProps {
 }
 
 const DEFAULT_SIDE_IMAGES = [
-    { src: "/images/Engagement.jpg", alt: "" },
-    { src: "/images/Graduation.jpg", alt: "" },
-    { src: "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80", alt: "" },
-    { src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80", alt: "" },
+    { src: "/images/Engagement.jpg", alt: "Max proposing to Alex in the Japan Garden in Epcot" },
+    { src: "/images/Graduation.jpg", alt: "Max and Alex at Max's college graduation" },
+    { src: "/images/Sunglasses.jpg", alt: "" },
+    { src: "/images/Disney.jpg", alt: "Max and Alex kissing in front of the Disney castle" },
 ];
 
 export default function HomeHero2({
     heroImageSrc = "/images/MaxAndAlex.jpg",
     coupleName = "Alex & Max",
     scrollMessage = "Scroll for details",
-    //   coupleInitials = "A&M",
-    //   rsvpHref     = "#rsvp",
-    //   navLinks = [
-    //     { label: "Travel Logistics", href: "#travel" },
-    //     { label: "Registry",         href: "#registry" },
-    //     { label: "FAQ",              href: "#faq" },
-    //   ],
     sideImages = DEFAULT_SIDE_IMAGES,
 }: HeroProps) {
     const sectionRef = useRef<HTMLElement>(null);
@@ -56,6 +50,11 @@ export default function HomeHero2({
     const sideR0 = useRef<HTMLDivElement>(null);
     const sideR1 = useRef<HTMLDivElement>(null);
     const [scrolled, setScrolled] = useState(false);
+
+    const ref = useFadeInChildren<HTMLDivElement>(".mwc-animate", {
+        stagger: 0.15,
+        y: 24,
+    });
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 40);
@@ -76,99 +75,106 @@ export default function HomeHero2({
         // Disable CSS transition while GSAP owns these properties
         if (navEl) navEl.style.transition = "none";
 
+
         const ctx = gsap.context(() => {
-            // ── Initial states ────────────────────────────────────────────────────────
-            const PAD = 32; // --space-400
-            gsap.set(card, { width: window.innerWidth - PAD * 2, height: window.innerHeight - PAD * 2, borderRadius: 8, y: 0 });
-            gsap.set(overlay, { opacity: 0.22 });
-            gsap.set(text, { opacity: 1 });
+            const mm = gsap.matchMedia();
 
-            // Side images start off-screen: diagonal (x ±575, y +400, scale 0.96)
-            gsap.set([sideL0.current, sideL1.current], { x: -575, y: 400, scale: 0.96, autoAlpha: 0 });
-            gsap.set([sideR0.current, sideR1.current], { x: 575, y: 400, scale: 0.96, autoAlpha: 0 });
+            mm.add("(min-width: 800px)", () => {
+                // ── Initial states ────────────────────────────────────────────────────────
+                const PAD = 32; // --space-400
+                gsap.set(card, { width: window.innerWidth - PAD * 2, height: window.innerHeight - PAD * 2, borderRadius: 8, y: 0 });
+                gsap.set(overlay, { opacity: 0.22 });
+                gsap.set(text, { opacity: 1 });
 
-            if (navEl) {
-                gsap.set(navEl, {
-                    backgroundColor: "transparent",
-                    borderColor: "transparent",
-                    boxShadow: "none",
-                    top: "16px",
-                    maxWidth: 1600,
+                // Side images start off-screen: diagonal (x ±575, y +400, scale 0.96)
+                gsap.set([sideL0.current, sideL1.current], { x: -575, y: 400, scale: 0.96, autoAlpha: 0 });
+                gsap.set([sideR0.current, sideR1.current], { x: 575, y: 400, scale: 0.96, autoAlpha: 0 });
+
+                if (navEl) {
+                    gsap.set(navEl, {
+                        backgroundColor: "transparent",
+                        borderColor: "transparent",
+                        boxShadow: "none",
+                        top: "16px",
+                        maxWidth: 1600,
+                    });
+                }
+
+                // ── Scroll-scrubbed timeline ──────────────────────────────────────────────
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top top",
+                        end: `+=${SCROLL_PX}`,
+                        scrub: 1.2,
+                        pin: false,
+                        invalidateOnRefresh: true,
+                    },
                 });
-            }
 
-            // ── Scroll-scrubbed timeline ──────────────────────────────────────────────
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top top",
-                    end: `+=${SCROLL_PX}`,
-                    scrub: 1.2,
-                    pin: false,
-                    invalidateOnRefresh: true,
-                },
-            });
+                // Phase 1 (0–40%): text overlay + dark overlay fade out
+                tl.to(text, { opacity: 0, ease: "none", duration: 0.2 }, 0);
+                tl.to(overlay, { opacity: 0.02, ease: "none" }, 0);
 
-            // Phase 1 (0–40%): text overlay + dark overlay fade out
-            tl.to(text, { opacity: 0, ease: "none", duration: 0.2  }, 0);
-            tl.to(overlay, { opacity: 0.02, ease: "none" }, 0);
-
-            // Phase 1–2 (0–100%): card shrinks from full-screen to portrait card
-            tl.to(
-                card,
-                {
-                    width: END_W,
-                    height: END_H,
-                    borderRadius: END_R,
-                    y: END_Y,
-                    ease: "power2.inOut",
-                },
-                0,
-            );
-
-            // Nav scrubs from transparent/full-width → dark pill in sync with the card
-            if (navEl) {
+                // Phase 1–2 (0–100%): card shrinks from full-screen to portrait card
                 tl.to(
-                    navEl,
+                    card,
                     {
-                        backgroundColor: "var(--black-900)",
-                        borderColor: "var(--black-850)",
-                        boxShadow: "0 3px 6px rgba(16,17,17,0.34), 0 10px 10px rgba(16,17,17,0.30), 0 23px 14px rgba(16,17,17,0.18)",
-                        maxWidth: 870,
-                        top: "0px",
+                        width: END_W,
+                        height: END_H,
+                        borderRadius: END_R,
+                        y: END_Y,
                         ease: "power2.inOut",
                     },
                     0,
                 );
-            }
 
-            // Phase 2 (30–100%): side images fly in diagonally (staggered within each column)
-            tl.to(
-                [sideL0.current, sideL1.current],
-                {
-                    x: 0,
-                    y: 0,
-                    scale: 1,
-                    autoAlpha: 1,
-                    ease: "power2.out",
-                    stagger: 0.1,
-                },
-                0.1,
-            );
+                // Nav scrubs from transparent/full-width → dark pill in sync with the card
+                if (navEl) {
+                    tl.to(
+                        navEl,
+                        {
+                            backgroundColor: "var(--black-900)",
+                            borderColor: "var(--black-850)",
+                            boxShadow: "0 3px 6px rgba(16,17,17,0.34), 0 10px 10px rgba(16,17,17,0.30), 0 23px 14px rgba(16,17,17,0.18)",
+                            maxWidth: 870,
+                            top: "0px",
+                            ease: "power2.inOut",
+                        },
+                        0,
+                    );
+                }
 
-            tl.to(
-                [sideR0.current, sideR1.current],
-                {
-                    x: 0,
-                    y: 0,
-                    scale: 1,
-                    autoAlpha: 1,
-                    ease: "power2.out",
-                    stagger: 0.1,
-                },
-                0.3,
-            );
-        });
+                // Phase 2 (30–100%): side images fly in diagonally (staggered within each column)
+                tl.to(
+                    [sideL0.current, sideL1.current],
+                    {
+                        x: 0,
+                        y: 0,
+                        scale: 1,
+                        autoAlpha: 1,
+                        ease: "power2.out",
+                        stagger: 0.1,
+                    },
+                    0.1,
+                );
+
+                tl.to(
+                    [sideR0.current, sideR1.current],
+                    {
+                        x: 0,
+                        y: 0,
+                        scale: 1,
+                        autoAlpha: 1,
+                        ease: "power2.out",
+                        stagger: 0.1,
+                    },
+                    0.3,
+                );
+            });
+
+            return () => mm.revert();
+        }, section);
 
         const onResize = () => ScrollTrigger.refresh();
         window.addEventListener("resize", onResize);
@@ -184,26 +190,26 @@ export default function HomeHero2({
 
     return (
         <section ref={sectionRef} className="ch2-outer">
-            <div className="ch2-sticky">
+            <div ref={ref} className="ch2-sticky">
                 {/* Card — centered via flex, sized by GSAP */}
                 <div className="ch2-center">
-                    <div ref={cardRef} className="ch2-card">
+                    <div ref={cardRef} className="ch2-card mwc-animate">
                         <div className="img-holder">
-                            <div className="img-overlay top"></div>
+                            {/* <div className="img-overlay top"></div> */}
                             <img src={heroImageSrc} alt={coupleName} className="ch2-card-img img-bw" />
-                            <div className="img-overlay full"></div>
+                            <div className="img-overlay"></div>
+                            <div ref={overlayRef} className="ch2-card-dark" />
                         </div>
 
-                        <div ref={overlayRef} className="ch2-card-dark" />
 
                         <div ref={textRef} className="ch2-text">
                             {/* Name */}
-                            <div className="ch2-name-wrap">
+                            <div className="ch2-name-wrap mwc-animate">
                                 <h1 className="ch2-name-text">{coupleName}</h1>
                             </div>
 
                             {/* Scroll hint */}
-                            <div className="ch2-hint">
+                            <div className="ch2-hint mwc-animate">
                                 <div className="ch2-hint-line" />
 
                                 <div className="ch2-hint-row">

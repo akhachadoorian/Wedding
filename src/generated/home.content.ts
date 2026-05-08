@@ -4,7 +4,7 @@
 import type { CopyOnlyProps } from "../components/CopyOnly/CopyOnly";
 import type { DashedCopyGridProps } from "../components/DashedCopy/DashedCopy";
 import type { DrinkCardGridProps } from "../components/DrinkCardGrid/DrinkCardGrid";
-import type { HomeHeroProps } from "../components/heros/HomeHero/HomeHero";
+import type { HomeHeroProps } from "../layout/HomeHero/HomeHero";
 import type { ImageGridProps } from "../components/ImageGrid/ImageGrid";
 
 export const welcomeCopyCopyOnlyContent: Omit<CopyOnlyProps, "variation" | "headingSize"> = {
@@ -23,10 +23,10 @@ export const welcomeInfoDashedCopyGridContent: DashedCopyGridProps = {
       leftCopy: "Saturday, October 31st, 2026",
       rightCopy: "Guests arrive at 4:30 PM",
     },
-    {
-      leftCopy: "Ceremony – Reception",
-      rightCopy: "5:00 PM – 10:30 PM",
-    },
+    // {
+    //   leftCopy: "Ceremony – Reception",
+    //   rightCopy: "5:00 PM – 10:30 PM",
+    // },
     {
       leftCopy: "The Clay Theatre",
       rightCopy: "Green Cove Springs, Florida",

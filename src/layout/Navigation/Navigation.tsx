@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { useLenis } from "../../../context/LenisContext";
-import { NAV_ITEMS } from "../../../data/navItems";
-import type { NavItem, NavDropdown } from "../../../types/navigation";
-import ArrowBox from "../../ArrowBox/ArrowBox";
+import { useLenis } from "../../context/LenisContext";
+import { NAV_ITEMS } from "../../data/navItems";
+import type { NavItem, NavDropdown } from "../../types/navigation";
+import ArrowBox from "../../components/ArrowBox/ArrowBox";
 import { CaretDownIcon} from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import "./Navigation.scss";
-import { LenisLink } from "../../../hooks/LenisLink";
+import { LenisLink } from "../../hooks/LenisLink";
 
 function renderNavItem(item: NavItem, onNavigate: () => void, openDropdown: string | null, toggleDropdown: (name: string) => void, closeDropdown: () => void) {
     if (item.kind === "dropdown") {

@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SmallTextTagHero from "../components/heros/SmallTextTagHero/SmallTextTagHero";
+import SmallTextTagHero from "../layout/SmallTextTagHero/SmallTextTagHero";
 import { dressCodeCopyOnlyContent, fAQItemsAccordionsContent, fAQsCopyOnlyContent, heroSmallTextTagHeroContent, timelineCopyOnlyContent, venueMediaWithCopyContent, weddingPartyCopyOnlyContent } from "../generated/details.content";
 import Slant from "../components/Slant/Slant";
 import CopyOnly from "../components/CopyOnly/CopyOnly";

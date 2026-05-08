@@ -1,12 +1,12 @@
 import { useLayoutEffect, useRef } from "react";
-import Buttons from "../../Buttons/Buttons";
-import Eyebrow from "../../Eyebrow/Eyebrow";
+import Buttons from "../../components/Buttons/Buttons";
+import Eyebrow from "../../components/Eyebrow/Eyebrow";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "./HomeHero.scss";
-import { ButtonSettingProps } from "../../../types/buttons";
-import { ImageProps } from "../../../types/images";
+import { ButtonSettingProps } from "../../types/buttons";
+import { ImageProps } from "../../types/images";
 
 export type HomeHeroProps = {
     loaded: boolean;

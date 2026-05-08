@@ -1,18 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-import { useLenis } from "../../../context/LenisContext";
-import { NAV_ITEMS } from "../../../data/navItems";
-import Diamond from "../../Diamond/Diamond";
-import Eyebrow from "../../Eyebrow/Eyebrow";
-import SmallText from "../../SmallText/SmallText";
-
-// import { NAV_ITEMS } from "../../../constants/navItems";
+import { useLenis } from "../../context/LenisContext";
+import { NAV_ITEMS } from "../../data/navItems";
+import Diamond from "../../components/Diamond/Diamond";
+import Eyebrow from "../../components/Eyebrow/Eyebrow";
+import SmallText from "../../components/SmallText/SmallText";
 
 import "./Footer.scss";
-import Marquee from "../../Marquee/Marquee";
-import { useFadeIn } from "../../../hooks/useFadeIn";
-import { LenisLink } from "../../../hooks/LenisLink";
+import Marquee from "../../components/Marquee/Marquee";
+import { useFadeIn } from "../../hooks/useFadeIn";
+import { LenisLink } from "../../hooks/LenisLink";
 
 function Footer({}) {
     const footerRef = useFadeIn<HTMLDivElement>();

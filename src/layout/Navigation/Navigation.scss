@@ -1,5 +1,6 @@
-@use "../../../styles/variables" as *;
-@use "../../ArrowBox/ArrowBox.scss" as *;
+@use "../../styles//variables" as *;
+@use "../../components/ArrowBox/ArrowBox.scss" as *;
+@use "../../styles/tokens/typography" as typo;
 
 body.mobile-nav-open {
     overflow: hidden;
@@ -130,11 +131,11 @@ header {
             gap: var(--space-025);
 
             text-decoration: none;
+            color: $gold;
 
             .nav-letter {
-                color: $gold;
                 font-family: $font-sans;
-                font-size: 24px; // TODO: make variation or clamp
+                font-size: var(--text-lg); // TODO: make variation or clamp
                 line-height: 100%;
                 font-weight: 600;
                 letter-spacing: 1.2px;
@@ -145,9 +146,8 @@ header {
             }
 
             .nav-and {
-                color: $gold;
                 font-family: $font-sans;
-                font-size: 14px; // TODO: make variation or clamp
+                font-size: var(--text-s); // TODO: make variation or clamp
                 line-height: 100%;
                 font-weight: 600;
                 letter-spacing: 1.2px;
