@@ -1,9 +1,6 @@
 import CopyOnly from "../../components/CopyOnly/CopyOnly";
 import DashedCopyGrid from "../../components/DashedCopy/DashedCopy";
 import DrinkCardGrid from "../../components/DrinkCardGrid/DrinkCardGrid";
-import ImageGrid from "../../components/ImageGrid/ImageGrid";
-import Slant from "../../components/Slant/Slant";
-import { heroHomeHeroContent, photoGalleryImageGridContent, quickNavigationCardsDrinkCardGridContent, quickNavigationCopyCopyOnlyContent, welcomeCopyCopyOnlyContent, welcomeInfoDashedCopyGridContent } from "../../generated/home.content";
 import { useFadeIn } from "../../hooks/useFadeIn";
 import ScrollRevealHero from "../../layout/ScrollRevealHero/ScrollRevealHero";
 import content from "./content";

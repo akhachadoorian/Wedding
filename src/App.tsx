@@ -12,7 +12,7 @@ import LoadingScreen from "./layout/LoadingScreen/LoadingScreen";
 import Navigation from "./layout/Navigation/Navigation";
 
 import Accommodations from "./pages/Accommodations";
-import Details from "./pages/Details";
+import Details from "./pages/Details/Details";
 import RSVP from "./pages/RSVP";
 import Registry from "./pages/Registry";
 import Timeline from "./pages/Timeline";
@@ -46,8 +46,8 @@ function App() {
         <ReactLenis root options={{ autoRaf: false, duration: 1.2, anchors: true, smoothWheel: true, syncTouch: false, naiveDimensions: true, stopInertiaOnNavigate: true }} ref={lenisRef}>
             {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
             <Router>
-                {/* <ScrollToHash /> */}
-                {/* <Navigation />  FIXME: FIX NAV*/}
+                {/* FIXME: FIX NAV*/}
+                <Navigation />  
                 <main>
                     <Routes>
                         <Route path="/" element={<Home loaded={loaded} />} />

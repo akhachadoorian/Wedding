@@ -1,13 +1,14 @@
-import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SmallTextTagHero from "../layout/SmallTextTagHero/SmallTextTagHero";
-import { dressCodeCopyOnlyContent, fAQItemsAccordionsContent, fAQsCopyOnlyContent, heroSmallTextTagHeroContent, timelineCopyOnlyContent, venueMediaWithCopyContent, weddingPartyCopyOnlyContent } from "../generated/details.content";
-import Slant from "../components/Slant/Slant";
-import CopyOnly from "../components/CopyOnly/CopyOnly";
-import MediaWithCopy from "../components/MediaWithCopy/MediaWithCopy";
-import { useFadeIn } from "../hooks/useFadeIn";
-import Accordions, { Accordion } from "../components/Accordions/Accordions";
+import { useEffect, useRef } from "react";
+import Accordions from "../../components/Accordions/Accordions";
+import CopyOnly from "../../components/CopyOnly/CopyOnly";
+import MediaWithCopy from "../../components/MediaWithCopy/MediaWithCopy";
+import Slant from "../../components/Slant/Slant";
+import { useFadeIn } from "../../hooks/useFadeIn";
+import SmallTextTagHero from "../../layout/SmallTextTagHero/SmallTextTagHero";
+import './Details.scss';
+import content from './content';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,7 +46,7 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
 
     return (
         <div className="details">
-            <SmallTextTagHero loaded={loaded} {...heroSmallTextTagHeroContent} />
+            <SmallTextTagHero loaded={loaded} {...content.hero} />
 
             <section ref={venueRef} id="venue" className="venue-section full-width">
                 <Slant size="small" order="top" color="--black-900" />
@@ -54,7 +55,7 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                     {/* TODO: get better image for venue */}
                     <MediaWithCopy 
                         mediaSide="left"
-                        {...venueMediaWithCopyContent}
+                        {...content.venue}
                     />
 
                     {/* TODO: add parking  */}
@@ -92,15 +93,33 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
             </section>
 
             <section ref={timelineRef} id="timeline" className="timeline-section base_section">
-                <CopyOnly variation="center" headingSize="h2" {...timelineCopyOnlyContent}/>
+                <CopyOnly
+                    styleOptions={{
+                        variation: "center",
+                        headingSize: "h2",
+                    }}
+                    {...content.timeline.copyOnly}
+                />
             </section>
 
             <section ref={dressCodeRef} id="dress_code" className="dress_code-section base_section">
-                <CopyOnly variation="left" headingSize="h2" {...dressCodeCopyOnlyContent}/>
+                <CopyOnly
+                    styleOptions={{
+                        variation: "left",
+                        headingSize: "h2",
+                    }}
+                    {...content.dressCode.copyOnly}
+                />
             </section>
 
             <section id="wedding_party" className="wedding_party-section base_section">
-                <CopyOnly variation="center" headingSize="h2" {...weddingPartyCopyOnlyContent}/>
+                <CopyOnly
+                    styleOptions={{
+                        variation: "center",
+                        headingSize: "h2",
+                    }}
+                    {...content.weddingParty.copyOnly}
+                />
             </section>
 
             <section id="venue" className="venue-section full-width">
@@ -115,9 +134,15 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
 
             <section id="faqs" className="faqs-section full_width_bg">
                 <div className="section-inner">
-                    <CopyOnly variation="center" headingSize="h2" {...fAQsCopyOnlyContent} />
+                    <CopyOnly
+                    styleOptions={{
+                        variation: "center",
+                        headingSize: "h2",
+                    }}
+                    {...content.faqs.copyOnly}
+                />
 
-                    <Accordions {...fAQItemsAccordionsContent} />
+                    <Accordions {...content.faqs.accordions} />
                 </div>
             </section>
         </div>
