@@ -47,7 +47,7 @@ function App() {
             {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
             <Router>
                 {/* <ScrollToHash /> */}
-                <Navigation />
+                {/* <Navigation />  FIXME: FIX NAV*/}
                 <main>
                     <Routes>
                         <Route path="/" element={<Home loaded={loaded} />} />

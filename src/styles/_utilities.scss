@@ -34,6 +34,18 @@
     &-bw {
         filter: grayscale(1);
     }
+
+    &-portrait {
+        aspect-ratio: 2 / 3;
+    }
+
+    &-square {
+        aspect-ratio: 1 / 1;
+    }
+
+    &-landscape {
+        aspect-ratio: 3 / 2;
+    }
 }
 
 // ── Btns ───────────────────────

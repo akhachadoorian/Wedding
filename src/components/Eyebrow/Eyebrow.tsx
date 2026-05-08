@@ -6,7 +6,7 @@ import Diamond from "../Diamond/Diamond";
 import "./Eyebrow.scss";
 
 type EyebrowProps = {
-    variation?: "left" | "centered" | "double";
+    variation?: "left" | "center" | "double";
     color?: ColorVariables;
     text: string;
     doubleText?: string;
@@ -15,7 +15,7 @@ type EyebrowProps = {
 };
 
 export default function Eyebrow({ variation = "left", color = "--gold-500", text, doubleText, className, ref}:EyebrowProps) {
-    if (variation == "centered") {
+    if (variation == "center") {
         return (
             <div ref={ref} className={`eyebrow-wrapper centered ${className}`}>
                 <p className="eyebrow" style={{ color: `var(${color})` }}>

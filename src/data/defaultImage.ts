@@ -4,30 +4,35 @@ export const DEFAULT_IMAGE: ImageProps = {
     src: "/images/MaxAndAlex.jpg",
     alt: "Max and Alex posed on a bridge in Epcot's Japan pavilion.",
     caption: "Epcot's Japan pavilion during engagement trip.",
+    aspectRatio: 'portrait'
 };
 
 export const IMAGE_ENGAGEMENT: ImageProps = {
     src: "/images/Engagement.jpg",
     alt: "Max proposing to Alex in the Japan Garden in Epcot.",
     caption: "Max proposing to Alex in the Japan Garden in Epcot",
+    aspectRatio: 'portrait'
 };
 
 export const IMAGE_GRADUATION: ImageProps = {
     src: "/images/Graduation.jpg",
     alt: "Max and Alex at Max's college graduation.",
     caption: "Max's Graduation",
+    aspectRatio: 'square'
 };
 
 export const IMAGE_SUNGLASSES: ImageProps = {
     src: "/images/Sunglasses.jpg",
     alt: "",
     caption: "",
+    aspectRatio: 'square'
 };
 
 export const IMAGE_DISNEY: ImageProps = {
     src: "/images/Disney.jpg",
     alt: "Max and Alex kissing in front of the Disney castle.",
     caption: "Disney Trip",
+    aspectRatio: 'portrait'
 };
 
 export const DEFAULT_SIDE_IMAGES: ImageProps[] = [
