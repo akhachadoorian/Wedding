@@ -30,7 +30,7 @@ const DEFAULT_STYLE = {
     headingSize: "h2",
     eyebrowColor: "--gold-500",
     textColor: "light",
-} as CopyOnlyStyleProps;
+} satisfies CopyOnlyStyleProps;
 
 /**
  * Props for the CopyOnly component.
@@ -91,17 +91,17 @@ export default function CopyOnly({
         return (
             <div
                 ref={ref}
-                className={`copy copy-${styleOptions.textColor ?? 'light'} ${className ?? ''}`}
+                className={`copy copy-${styleOptions.textColor ?? DEFAULT_STYLE.textColor} ${className ?? ''}`}
             >
                 <div className={`copy-inner copy-${styleOptions.variation}`}>
                     <div className="copy-left_col">
                         {eyebrow && (
                             <Eyebrow
-                                variation={eyebrowVariation ?? "left"}
+                                styleOptions={{
+                                    variation: eyebrowVariation ?? DEFAULT_STYLE.variation,
+                                    color: styleOptions.eyebrowColor ?? DEFAULT_STYLE.eyebrowColor
+                                }}
                                 text={eyebrow}
-                                color={
-                                    styleOptions.eyebrowColor ?? "--gold-500"
-                                }
                                 className={"mwc-animate"}
                             />
                         )}
@@ -141,18 +141,18 @@ export default function CopyOnly({
     return (
         <div
             ref={ref}
-            className={`copy copy-${styleOptions.textColor ?? 'light'} ${className ?? ''}`}
+            className={`copy copy-${styleOptions.textColor ?? DEFAULT_STYLE.textColor} ${className ?? ''}`}
         >
             <div className={`copy-inner copy-${styleOptions.variation}`}>
                 <div className="copy-text">
                     <div className="copy-upper">
                         {eyebrow && (
                             <Eyebrow
-                                variation={eyebrowVariation ?? "left"}
+                                styleOptions={{
+                                    variation: eyebrowVariation ?? DEFAULT_STYLE.variation,
+                                    color: styleOptions.eyebrowColor ?? DEFAULT_STYLE.eyebrowColor
+                                }}
                                 text={eyebrow}
-                                color={
-                                    styleOptions.eyebrowColor ?? "--gold-500"
-                                }
                                 className={"mwc-animate"}
                             />
                         )}

@@ -2,7 +2,7 @@
 
 // ── Dashed Copy (single component) ──────────────────────────────
 
-.dashed_copy-wrapper {
+.dashed_copy {
     display: flex;
     flex-direction: column;
     gap: var(--space-200);
@@ -23,7 +23,7 @@
         white-space: nowrap;
     }
 
-    .left-copy {
+    &-left {
         padding-right: var(--space-200);
 
         @include big {
@@ -31,7 +31,7 @@
         }
     }
 
-    .right-copy {
+    &-right {
         padding-left: var(--space-200);
         text-align: right;
 
@@ -40,12 +40,17 @@
             text-align: left;
         }
     }
+
+    &-link {
+        text-decoration: none;
+    }
 }
 
 // ── Dashed Copy Grid (has Dashed Copy) ──────────────────────────────
 
-.dashed_copy_grid-wrapper {
-    .dashed_copy_grid {
+.dashed_copy_grid {
+    position: relative;
+    &-inner {
         display: flex;
         flex-direction: column;
         gap: var(--space-300);

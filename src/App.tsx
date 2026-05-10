@@ -10,6 +10,7 @@ import type { LenisRef } from "lenis/react";
 import Footer from "./layout/Footer/Footer";
 import LoadingScreen from "./layout/LoadingScreen/LoadingScreen";
 import Navigation from "./layout/Navigation/Navigation";
+import { GlobalTooltip, TooltipProvider } from "./layout/GlobalTooltip/GlobalTooltip";
 
 import Accommodations from "./pages/Accommodations";
 import Details from "./pages/Details/Details";
@@ -43,24 +44,27 @@ function App() {
 
 
     return (
-        <ReactLenis root options={{ autoRaf: false, duration: 1.2, anchors: true, smoothWheel: true, syncTouch: false, naiveDimensions: true, stopInertiaOnNavigate: true }} ref={lenisRef}>
-            {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
-            <Router>
-                {/* FIXME: FIX NAV*/}
-                <Navigation />  
-                <main>
-                    <Routes>
-                        <Route path="/" element={<Home loaded={loaded} />} />
-                        <Route path="/details" element={<Details loaded={loaded} />} />
-                        <Route path="/accommodations" element={<Accommodations loaded={loaded} />} />
-                        <Route path="/registry" element={<Registry loaded={loaded} />} />
-                        <Route path="/rsvp" element={<RSVP loaded={loaded} />} />
-                        <Route path="/timeline" element={<Timeline loaded={loaded} />} />
-                    </Routes>
-                </main>
-                <Footer />
-            </Router>
-        </ReactLenis>
+        <TooltipProvider>
+            <ReactLenis root options={{ autoRaf: false, duration: 1.2, anchors: true, smoothWheel: true, syncTouch: false, naiveDimensions: true, stopInertiaOnNavigate: true }} ref={lenisRef}>
+                {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
+                <Router>
+                    {/* FIXME: FIX NAV*/}
+                    <Navigation />
+                    <main>
+                        <Routes>
+                            <Route path="/" element={<Home loaded={loaded} />} />
+                            <Route path="/details" element={<Details loaded={loaded} />} />
+                            <Route path="/accommodations" element={<Accommodations loaded={loaded} />} />
+                            <Route path="/registry" element={<Registry loaded={loaded} />} />
+                            <Route path="/rsvp" element={<RSVP loaded={loaded} />} />
+                            <Route path="/timeline" element={<Timeline loaded={loaded} />} />
+                        </Routes>
+                    </main>
+                    <Footer />
+                </Router>
+                <GlobalTooltip />
+            </ReactLenis>
+        </TooltipProvider>
     );
 }
 

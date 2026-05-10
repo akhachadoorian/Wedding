@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTooltip } from "../GlobalTooltip/GlobalTooltip";
 
 import { DEFAULT_IMAGE, DEFAULT_SIDE_IMAGES } from "../../data/defaultImage";
 import { useFadeInChildren } from "../../hooks/useFadeIn";
@@ -9,6 +10,7 @@ import useScrollRevealAnimation from "./useScrollRevealAnimation";
 import { ArrowDownIcon } from "@phosphor-icons/react";
 
 import "./ScrollRevealHero.scss";
+import Diamond from "../../components/Diamond/Diamond";
 
 export type ScrollRevealHeroProps = {
     /** Center card image. Defaults to the primary couple photo. */
@@ -46,16 +48,8 @@ export default function ScrollRevealHero({ mainImage = DEFAULT_IMAGE, sideImages
 
     // ----- State Variables ---------------------------
     const [scrolled, setScrolled] = useState(false);
-    const [tooltip, setTooltip] = useState<{ x: number; y: number; caption: string } | null>(null);
     const [touchedIdx, setTouchedIdx] = useState<number | null>(null);
-
-    const makeMouseHandlers = (caption: string) => ({
-        onMouseMove: (e: React.MouseEvent) => {
-            if (!caption || window.matchMedia("(hover: none)").matches) return;
-            setTooltip({ x: e.clientX, y: e.clientY, caption });
-        },
-        onMouseLeave: () => setTooltip(null),
-    });
+    const { makeMouseHandlers } = useTooltip();
 
     const makeTouchHandlers = (idx: number) => ({
         onTouchStart: (e: React.TouchEvent) => {
@@ -134,9 +128,23 @@ export default function ScrollRevealHero({ mainImage = DEFAULT_IMAGE, sideImages
 
                     {(endScrollMessage || endScrollMessageMobile) && (
                         <div ref={hoverHintRef} className="scroll_reveal_hero-hover-hint">
+                            <div className="line"></div>
+
+                            <Diamond 
+                                color="--gold-500" 
+                                size={{size: {minSize: 10, desiredSize: 12, maxSize: 14}}}
+                            />
+
                             {endScrollMessage && <p className="desktop">{endScrollMessage}</p>}
 
                             {endScrollMessageMobile && <p className="mobile">{endScrollMessageMobile}</p>}
+
+                            <Diamond 
+                                color="--gold-500" 
+                                size={{size: {minSize: 10, desiredSize: 12, maxSize: 14}}}
+                            />
+
+                            <div className="line"></div>
                         </div>
                     )}
                 </div>
@@ -155,18 +163,8 @@ export default function ScrollRevealHero({ mainImage = DEFAULT_IMAGE, sideImages
                     </div>
                 </div>
             </div>
-
-            {tooltip && (
-                <div
-                    className="scroll_reveal_hero-tooltip"
-                    style={{
-                        left: Math.min(tooltip.x + 14, window.innerWidth - 280),
-                        top: Math.min(tooltip.y + 14, window.innerHeight - 48),
-                    }}
-                >
-                    {tooltip.caption}
-                </div>
-            )}
+            
+            
         </section>
     );
 }

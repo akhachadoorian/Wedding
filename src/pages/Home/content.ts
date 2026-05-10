@@ -20,9 +20,33 @@ const hero: ScrollRevealHeroProps = {
 
 // ----- Welcome / Overview -----------------------------------------------
 
+// const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
+//     eyebrow: "We're getting married",
+//     header: "Once upon a time, we found each other, and now we're counting down the days until we say **I do**. We would be thrilled to have you join us in this next chapter.",
+// };
+
+// const welcomeDashedGrid: DashedCopyGridProps = {
+//     dashedCopy: [
+//         {
+//             leftCopy: "Saturday, October 31st, 2026",
+//             rightCopy: "Guests arrive at 4:30 PM",
+//             link: '/details#timeline',
+//             tooltipCaption: 'View the timeline'
+//         },
+//         // {
+//         //   leftCopy: "Ceremony – Reception",
+//         //   rightCopy: "5:00 PM – 10:30 PM",
+//         // },
+//         {
+//             leftCopy: "The Clay Theatre",
+//             rightCopy: "Green Cove Springs, Florida",
+//         },
+//     ],
+// };
+
 const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
     eyebrow: "We're getting married",
-    header: "Once upon a time, we found each other, and now we're counting down the days until we say **I do**. We would be thrilled to have you join us in this next chapter.",
+    header: "Together with their families, **Alex & Max** joyfully invite you to share in the celebration of their marriage.",
 };
 
 const welcomeDashedGrid: DashedCopyGridProps = {
@@ -30,11 +54,17 @@ const welcomeDashedGrid: DashedCopyGridProps = {
         {
             leftCopy: "Saturday, October 31st, 2026",
             rightCopy: "Guests arrive at 4:30 PM",
+            link: '/details#timeline',
+            tooltipCaption: 'View the timeline'
         },
-        // {
-        //   leftCopy: "Ceremony – Reception",
-        //   rightCopy: "5:00 PM – 10:30 PM",
-        // },
+        {
+          leftCopy: "Ceremony",
+          rightCopy: "5:00 PM",
+        },
+        {
+          leftCopy: "Reception",
+          rightCopy: "Until 10:30 PM",
+        },
         {
             leftCopy: "The Clay Theatre",
             rightCopy: "Green Cove Springs, Florida",

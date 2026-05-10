@@ -8,8 +8,12 @@ gsap.registerPlugin(ScrollTrigger);
 const END_W = 529;
 /** Portrait card height at rest (px) — must match `$end-h` in ScrollRevealHero.scss */
 const END_H = 735.2;
+/** Card border-radius at start (px) */
+// const END_R = 16;
+const START_R = 6;
 /** Card border-radius at rest (px) */
-const END_R = 16;
+// const END_R = 16;
+const END_R = 6;
 /** Card translateY at rest (px) */
 const END_Y = 0;
 /** Total scroll distance (px) over which the animation plays — must match `$scroll-px` in ScrollRevealHero.scss */
@@ -109,7 +113,7 @@ export default function useScrollRevealAnimation({
             mm.add("(min-width: 750px)", () => {
                 // ── Initial states ────────────────────────────────────────────────────────
                 const PAD = 32; // --space-400
-                gsap.set(card, { width: width - PAD * 2, height: height - PAD * 2, borderRadius: 8, y: 0 });
+                gsap.set(card, { width: width - PAD * 2, height: height - PAD * 2, borderRadius: START_R, y: 0 });
 
                 // gsap.set(overlay, { opacity: 0.22 });
                 gsap.set(text, { opacity: 1 });

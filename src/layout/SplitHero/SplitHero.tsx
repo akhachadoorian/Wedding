@@ -1,12 +1,13 @@
 import { useLayoutEffect, useRef } from "react";
+
 import Buttons from "../../components/Buttons/Buttons";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";
+import { ButtonSettingProps } from "../../types/buttons";
+import { ImageProps } from "../../types/images";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "./SplitHero.scss";
-import { ButtonSettingProps } from "../../types/buttons";
-import { ImageProps } from "../../types/images";
 
 export type SplitHeroProps = {
     loaded: boolean;
@@ -154,17 +155,14 @@ export default function SplitHero({ loaded, heading, eyebrow, btn, image }: Spli
                 //     height: "38vh",
                 //     y: 0,
                 // });
-
                 // gsap.set(text, {
                 //     x: 0,
                 //     y: 0,
                 //     opacity: 1,
                 // });
-
                 // gsap.set(image, {
                 //     scale: 1,
                 // });
-
                 // const tl = gsap.timeline({
                 //     scrollTrigger: {
                 //         trigger: section,
@@ -174,7 +172,6 @@ export default function SplitHero({ loaded, heading, eyebrow, btn, image }: Spli
                 //         invalidateOnRefresh: true,
                 //     },
                 // });
-
                 // tl.to(
                 //     media,
                 //     {
@@ -235,13 +232,25 @@ export default function SplitHero({ loaded, heading, eyebrow, btn, image }: Spli
                         <div className="home_hero-text_upper">
                             {eyebrow && (
                                 <div className="eyebrow_wrapper" ref={eyebrowRef}>
-                                    <Eyebrow variation={eyebrow.variation || "double"} color={"--gold-500"} text={eyebrow.text} doubleText={eyebrow.doubleText} />
+                                    <Eyebrow
+                                        styleOptions={{
+                                            variation: eyebrow.variation || "double",
+                                            color: "--gold-500",
+                                        }}
+                                        text={eyebrow.text}
+                                        doubleText={eyebrow.doubleText ?? ''}
+                                    />
                                 </div>
                             )}
 
                             <h1 ref={h1Ref} className="home_hero-title">
                                 {heading.line1}
-                                {heading.line2 && <><br />{heading.line2 }</>}
+                                {heading.line2 && (
+                                    <>
+                                        <br />
+                                        {heading.line2}
+                                    </>
+                                )}
                             </h1>
                         </div>
 
