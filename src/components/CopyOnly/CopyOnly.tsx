@@ -45,6 +45,7 @@ const DEFAULT_STYLE = {
  * @property buttons      - Up to three CTA buttons rendered below the body copy.
  */
 export type CopyOnlyProps = {
+    /** Additional CSS class(es) applied to the root element. */
     className?: string;
 
     // Style Options
@@ -78,6 +79,7 @@ export default function CopyOnly({
     // Eyebrow centering only applies to the `center` layout variation.
     const eyebrowVariation =
         styleOptions.variation === "center" ? "center" : "left";
+        
     const ref = useFadeInChildren<HTMLDivElement>(".mwc-animate", {
         stagger: 0.15,
         y: 24,

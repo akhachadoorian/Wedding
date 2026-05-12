@@ -11,10 +11,35 @@ const hero: ScrollRevealHeroProps = {
     endScrollMessage: "Hover on images for more!",
     endScrollMessageMobile: "Touch the images for more!",
     sideImages: [
-        { src: "/images/Engagement.jpg", caption: "Max proposing to Alex in the Japan Garden in Epcot", alt: "Max proposing to Alex in the Japan Garden in Epcot", aspectRatio: 'portrait' },
-        { src: "/images/Graduation.jpg", caption: "Max's Graduation", alt: "Max and Alex at Max's college graduation", aspectRatio: 'square' },
-        { src: "/images/Sunglasses.jpg", caption: "", alt: "", aspectRatio: 'square' },
-        { src: "/images/Disney.jpg", caption: "Disney Trip", alt: "Max and Alex kissing in front of the Disney castle", aspectRatio: 'portrait' },
+        { 
+            src: "/images/Engagement.jpg", 
+            alt: "Max proposing to Alex in the Japan Garden in Epcot",
+            caption: "Max proposing to Alex in the Japan Garden in Epcot",
+            borderStyle: 'simple',
+            aspectRatio: "portrait" 
+        },
+        { 
+            src: "/images/Graduation.jpg", 
+            alt: "Max and Alex at Max's college graduation",
+            caption: "Max's Graduation", 
+            borderStyle: 'double',
+            aspectRatio: "square" 
+        },
+        { 
+            src: "/images/Sunglasses.jpg", 
+            alt: "", 
+            caption: "", 
+            borderStyle: 'corner',
+            aspectRatio: "square" 
+
+        },
+        { 
+            src: "/images/Disney.jpg", 
+            alt: "Max and Alex kissing in front of the Disney castle", 
+            caption: "Disney Trip", 
+            borderStyle: 'diamond',
+            aspectRatio: "portrait" 
+        },
     ],
 };
 
@@ -46,7 +71,8 @@ const hero: ScrollRevealHeroProps = {
 
 const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
     eyebrow: "We're getting married",
-    header: "Together with their families, **Alex & Max** joyfully invite you to share in the celebration of their marriage.",
+    // header: "Together with their families, **Alex & Max** joyfully invite you to share in the celebration of their marriage.",
+    header: "We're counting down the days until we say **I do**. We would be thrilled to have you join us in this next chapter."
 };
 
 const welcomeDashedGrid: DashedCopyGridProps = {
@@ -54,20 +80,18 @@ const welcomeDashedGrid: DashedCopyGridProps = {
         {
             leftCopy: "Saturday, October 31st, 2026",
             rightCopy: "Guests arrive at 4:30 PM",
-            link: '/details#timeline',
-            tooltipCaption: 'View the timeline'
+            link: "/details#timeline",
+            tooltipCaption: "View the timeline",
         },
         {
-          leftCopy: "Ceremony",
-          rightCopy: "5:00 PM",
-        },
-        {
-          leftCopy: "Reception",
-          rightCopy: "Until 10:30 PM",
+            leftCopy: "Ceremony starts at 5:00 PM",
+            rightCopy: "Reception ends at 10:30 PM",
         },
         {
             leftCopy: "The Clay Theatre",
             rightCopy: "Green Cove Springs, Florida",
+            link: "/details#venue",
+            tooltipCaption: "Venue details",
         },
     ],
 };

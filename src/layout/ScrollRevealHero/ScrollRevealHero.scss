@@ -81,6 +81,7 @@ $col-gap: 16px;
                     display: block;
                 }
             }
+
         }
 
         // ── Text overlay (name + scroll hint) ─────────────────────────────────────────
@@ -218,7 +219,7 @@ $col-gap: 16px;
                 width: calc(50% - (var(--space-400) / 2));
 
                 @include big {
-                    width: 265px;
+                    width: clamp(265px, 18.403vw, 315PX);
                 }
             }
 
@@ -227,6 +228,7 @@ $col-gap: 16px;
 
                 @include big {
                     width: 206px;
+                    width: clamp(206px, 14.306vw, 256PX);
                 }
             }
 
@@ -247,10 +249,12 @@ $col-gap: 16px;
         font-weight: 600;
         letter-spacing: 0.6px;
         text-transform: uppercase;
+        text-align: center;
 
         width: 100%;
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: var(--space-100);
 
         .desktop {
@@ -313,6 +317,167 @@ $col-gap: 16px;
 
         @include big {
             display: none;
+        }
+    }
+
+}
+
+// ── Art deco border variants ──────────────────────────────────────────────────
+// Apply to any position:relative / overflow:hidden container.
+// Use ::before for the primary frame, ::after for the secondary layer.
+
+$db-radius: 4px;
+$db-gold: var(--gold-400);
+
+.deco-border {
+
+    // Single inset gold frame with dark halos for legibility on any image tone
+    &--simple {
+        &::before {
+            content: '';
+            position: absolute;
+            inset: var(--space-100);
+            border: 1.5px solid $db-gold;
+            border-radius: $db-radius;
+            // box-shadow:
+            //     0 0 0 0.75px $_db-dark,
+            //     inset 0 0 0 0.75px rgba(#101111, 0.15);
+            z-index: 1;
+            pointer-events: none;
+        }
+    }
+
+    // Classic art deco double-rule: outer + inner frame
+    &--double {
+        &::before {
+            content: '';
+            position: absolute;
+            inset: var(--space-100);
+            border: 1.5px solid var(--gold-500);
+            border-radius: $db-radius;
+            // box-shadow: 0 0 0 0.5px $_db-dark;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 50%;
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            inset: var(--space-200);
+            border: 1px solid var(--gold-500);
+            border-radius: $db-radius;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 50%;
+        }
+    }
+
+    // L-shaped bracket at each corner — no full border, works on bright images
+    &--corner {
+        &::before {
+            $c:   var(--gold-400);
+            $arm: 18px;
+            $w:   1.5px;
+            content: '';
+            position: absolute;
+            inset: var(--space-150);
+            z-index: 1;
+            pointer-events: none;
+            background:
+                linear-gradient($c, $c) 0    0    / #{$arm} #{$w}   no-repeat, // top left
+                linear-gradient($c, $c) 0    0    / #{$w}   #{$arm} no-repeat, // top left
+                linear-gradient($c, $c) 100% 0    / #{$arm} #{$w}   no-repeat, // top right
+                linear-gradient($c, $c) 100% 0    / #{$w}   #{$arm} no-repeat, // top right
+                linear-gradient($c, $c) 0    100% / #{$arm} #{$w}   no-repeat, // bottom left
+                linear-gradient($c, $c) 0    100% / #{$w}   #{$arm} no-repeat, // bottom left
+                linear-gradient($c, $c) 100% 100% / #{$arm} #{$w}   no-repeat, // bottom right
+                linear-gradient($c, $c) 100% 100% / #{$w}   #{$arm} no-repeat; // bottom right
+        }
+    }
+
+    &--odd-corner {
+        &::before {
+            $c:   var(--gold-400);
+            $arm: 18px;
+            $w:   1.5px;
+            content: '';
+            position: absolute;
+            inset: var(--space-150);
+            z-index: 1;
+            pointer-events: none;
+            background:
+                linear-gradient($c, $c) 0    0    / #{$arm} #{$w}   no-repeat, // top left
+                linear-gradient($c, $c) 0    0    / #{$w}   #{$arm} no-repeat, // top left
+                linear-gradient($c, $c) 100% 100% / #{$arm} #{$w}   no-repeat, // bottom right
+                linear-gradient($c, $c) 100% 100% / #{$w}   #{$arm} no-repeat; // bottom right
+        }
+    }
+
+    &--even-corner {
+        &::before {
+            $c:   var(--gold-400);
+            $arm: 18px;
+            $w:   1.5px;
+            content: '';
+            position: absolute;
+            inset: var(--space-150);
+            z-index: 1;
+            pointer-events: none;
+            background:
+                linear-gradient($c, $c) 100% 0    / #{$arm} #{$w}   no-repeat, // top right
+                linear-gradient($c, $c) 100% 0    / #{$w}   #{$arm} no-repeat, // top right
+                linear-gradient($c, $c) 0    100% / #{$arm} #{$w}   no-repeat, // bottom left
+                linear-gradient($c, $c) 0    100% / #{$w}   #{$arm} no-repeat, // bottom left
+        }
+    }
+
+    // Single frame + true diamond (rotated square) jewels centered on each border corner
+    &--diamond {
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 1.5px solid $db-gold;
+            // box-shadow:
+            //     0 0 0 0.75px $_db-dark,
+            //     inset 0 0 0 0.75px rgba(#101111, 0.15);
+            z-index: 1;
+            pointer-events: none;
+        }
+        &::after {
+            // Each diamond = 4 right-triangle gradients meeting at a center point.
+            // inset: 6px → diamond center lands on the 10px border corner (6 + 4 = 10).
+            // background-position percentages: `100%` with image size $h places the tile's
+            // left edge at (element_size - $h), which is exactly the far border corner.
+            // `calc(100% - $h)` places it one $h step inward from there.
+            $j: var(--gold-400);
+            $h: 4px;  // half-diamond — full diamond is 2×$h
+            content: '';
+            position: absolute;
+            inset: 6px;
+            z-index: 1;
+            pointer-events: none;
+            background:
+                // ── top-left ───────────────────────────────────────────────────
+                linear-gradient(to bottom right, transparent 50%, $j 50%) 0                  0                  / #{$h} #{$h} no-repeat,
+                linear-gradient(to bottom left,  transparent 50%, $j 50%) #{$h}              0                  / #{$h} #{$h} no-repeat,
+                linear-gradient(to top right,    transparent 50%, $j 50%) 0                  #{$h}              / #{$h} #{$h} no-repeat,
+                linear-gradient(to top left,     transparent 50%, $j 50%) #{$h}              #{$h}              / #{$h} #{$h} no-repeat,
+                // ── top-right ──────────────────────────────────────────────────
+                linear-gradient(to bottom right, transparent 50%, $j 50%) calc(100% - #{$h}) 0                  / #{$h} #{$h} no-repeat,
+                linear-gradient(to bottom left,  transparent 50%, $j 50%) 100%               0                  / #{$h} #{$h} no-repeat,
+                linear-gradient(to top right,    transparent 50%, $j 50%) calc(100% - #{$h}) #{$h}              / #{$h} #{$h} no-repeat,
+                linear-gradient(to top left,     transparent 50%, $j 50%) 100%               #{$h}              / #{$h} #{$h} no-repeat,
+                // ── bottom-left ────────────────────────────────────────────────
+                linear-gradient(to bottom right, transparent 50%, $j 50%) 0                  calc(100% - #{$h}) / #{$h} #{$h} no-repeat,
+                linear-gradient(to bottom left,  transparent 50%, $j 50%) #{$h}              calc(100% - #{$h}) / #{$h} #{$h} no-repeat,
+                linear-gradient(to top right,    transparent 50%, $j 50%) 0                  100%               / #{$h} #{$h} no-repeat,
+                linear-gradient(to top left,     transparent 50%, $j 50%) #{$h}              100%               / #{$h} #{$h} no-repeat,
+                // ── bottom-right ───────────────────────────────────────────────
+                linear-gradient(to bottom right, transparent 50%, $j 50%) calc(100% - #{$h}) calc(100% - #{$h}) / #{$h} #{$h} no-repeat,
+                linear-gradient(to bottom left,  transparent 50%, $j 50%) 100%               calc(100% - #{$h}) / #{$h} #{$h} no-repeat,
+                linear-gradient(to top right,    transparent 50%, $j 50%) calc(100% - #{$h}) 100%               / #{$h} #{$h} no-repeat,
+                linear-gradient(to top left,     transparent 50%, $j 50%) 100%               100%               / #{$h} #{$h} no-repeat;
         }
     }
 

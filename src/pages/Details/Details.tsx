@@ -112,7 +112,7 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                 />
             </section>
 
-            <section id="wedding_party" className="wedding_party-section base_section">
+            {/* <section id="wedding_party" className="wedding_party-section base_section">
                 <CopyOnly
                     styleOptions={{
                         variation: "center",
@@ -120,7 +120,7 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                     }}
                     {...content.weddingParty.copyOnly}
                 />
-            </section>
+            </section> */}
 
             <section id="venue" className="venue-section full-width">
                 <Slant size="small" order="top" color="--black-900" inverseDirection={true} />

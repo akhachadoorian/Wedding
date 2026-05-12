@@ -13,7 +13,7 @@
         gap: var(--space-400);
     }
 
-    .dashed_copy-line {
+    &-line {
         height: 2px;
         width: 100%;
         background-color: var(--gold-500);
@@ -21,6 +21,21 @@
 
     .eyebrow {
         white-space: nowrap;
+    }
+
+    &-text {
+        color: var(--white);
+
+        font-size: var(--text-md);
+        font-family: $font-sans;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+
+        @include big {
+            white-space: nowrap;
+        }
     }
 
     &-left {

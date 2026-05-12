@@ -12,11 +12,17 @@ import { ArrowDownIcon } from "@phosphor-icons/react";
 import "./ScrollRevealHero.scss";
 import Diamond from "../../components/Diamond/Diamond";
 
+export type DecoBorder = 'simple' | 'double' | 'odd-corner' | 'even-corner' | 'corner' | 'diamond';
+
+export type SideImageConfig = ImageProps & { borderStyle?: DecoBorder };
+
 export type ScrollRevealHeroProps = {
     /** Center card image. Defaults to the primary couple photo. */
     mainImage?: ImageProps;
-    /** Up to 4 flanking photos merged with defaults; captions appear on hover. */
-    sideImages?: Array<ImageProps>;
+    /** Art deco border style for the center card. */
+    centerBorderStyle?: DecoBorder;
+    /** Up to 4 flanking photos merged with defaults; each can have its own borderStyle. */
+    sideImages?: Array<SideImageConfig>;
     /** Heading rendered over the card (e.g. couple's names). */
     header?: string;
     /** Hides the horizontal rule and scroll arrow at the bottom of the card. */
@@ -34,7 +40,7 @@ export type ScrollRevealHeroProps = {
  * Scroll animation is owned by `useScrollRevealAnimation`; this component handles layout,
  * tooltip state, and fade-in on mount.
  */
-export default function ScrollRevealHero({ mainImage = DEFAULT_IMAGE, sideImages = DEFAULT_SIDE_IMAGES, header = "Alex & Max", hideScrollHint = true, scrollHintMessage, endScrollMessage, endScrollMessageMobile }: ScrollRevealHeroProps) {
+export default function ScrollRevealHero({ mainImage = DEFAULT_IMAGE, centerBorderStyle, sideImages = DEFAULT_SIDE_IMAGES, header = "Alex & Max", hideScrollHint = true, scrollHintMessage, endScrollMessage, endScrollMessageMobile }: ScrollRevealHeroProps) {
     // ----- GSAP References ---------------------------
     const sectionRef = useRef<HTMLElement>(null);
     const cardRef = useRef<HTMLDivElement>(null);
@@ -77,20 +83,20 @@ export default function ScrollRevealHero({ mainImage = DEFAULT_IMAGE, sideImages
         return () => document.removeEventListener("touchstart", clearTouch);
     }, []);
 
-    const imgs = [...sideImages, ...DEFAULT_SIDE_IMAGES].slice(0, 4);
+    const imgs: SideImageConfig[] = [...sideImages, ...DEFAULT_SIDE_IMAGES].slice(0, 4);
 
     return (
         <section ref={sectionRef} className="scroll_reveal_hero">
             <div ref={ref} className="scroll_reveal_hero-sticky">
                 {/* LEFT COLUMN */}
                 <div className="scroll_reveal_hero-sides-left scroll_reveal_hero-sides-col">
-                    <div ref={sideL0} className={`scroll_reveal_hero-sides-img img-holder img-${imgs[0].aspectRatio ?? "square"}${touchedIdx === 0 ? " is-touched" : ""}`} {...makeMouseHandlers(imgs[0].caption ?? "")} {...makeTouchHandlers(0)}>
+                    <div ref={sideL0} className={`scroll_reveal_hero-sides-img img-holder img-${imgs[0].aspectRatio ?? "square"}${touchedIdx === 0 ? " is-touched" : ""}${imgs[0].borderStyle ? ` deco-border--${imgs[0].borderStyle}` : ''}`} {...makeMouseHandlers(imgs[0].caption ?? "")} {...makeTouchHandlers(0)}>
                         <img src={imgs[0].src} alt={imgs[0].alt ?? ""} className="img-bw" />
                         <div className="img-overlay"></div>
                         {imgs[0].caption && <p className="scroll_reveal_hero-caption">{imgs[0].caption}</p>}
                     </div>
 
-                    <div ref={sideL1} className={`scroll_reveal_hero-sides-img img-holder img-${imgs[1].aspectRatio ?? "square"}${touchedIdx === 1 ? " is-touched" : ""}`} {...makeMouseHandlers(imgs[1].caption ?? "")} {...makeTouchHandlers(1)}>
+                    <div ref={sideL1} className={`scroll_reveal_hero-sides-img img-holder img-${imgs[1].aspectRatio ?? "square"}${touchedIdx === 1 ? " is-touched" : ""}${imgs[1].borderStyle ? ` deco-border--${imgs[1].borderStyle}` : ''}`} {...makeMouseHandlers(imgs[1].caption ?? "")} {...makeTouchHandlers(1)}>
                         <img src={imgs[1].src} alt={imgs[1].alt ?? ""} className="img-bw" />
                         <div className="img-overlay"></div>
                         {imgs[1].caption && <p className="scroll_reveal_hero-caption">{imgs[1].caption}</p>}
@@ -99,7 +105,7 @@ export default function ScrollRevealHero({ mainImage = DEFAULT_IMAGE, sideImages
 
                 {/* CENTER COLUMN */}
                 <div className=" scroll_reveal_hero-center">
-                    <div ref={cardRef} className="scroll_reveal_hero-center-card mwc-animate">
+                    <div ref={cardRef} className={`scroll_reveal_hero-center-card mwc-animate${centerBorderStyle ? ` deco-border--${centerBorderStyle}` : ''}`}>
                         <div className="img-holder">
                             <img src={mainImage.src} alt={mainImage.alt} className="scroll_reveal_hero-card-img img-bw" />
                             <div className="img-overlay"></div>
@@ -126,37 +132,37 @@ export default function ScrollRevealHero({ mainImage = DEFAULT_IMAGE, sideImages
                         </p>
                     )} */}
 
-                    {(endScrollMessage || endScrollMessageMobile) && (
-                        <div ref={hoverHintRef} className="scroll_reveal_hero-hover-hint">
-                            <div className="line"></div>
+                    {/* {(endScrollMessage || endScrollMessageMobile) && ( */}
+                        {/* // <div ref={hoverHintRef} className="scroll_reveal_hero-hover-hint"> */}
+                            {/* <div className="line"></div>
 
                             <Diamond 
                                 color="--gold-500" 
                                 size={{size: {minSize: 10, desiredSize: 12, maxSize: 14}}}
-                            />
+                            /> */}
 
-                            {endScrollMessage && <p className="desktop">{endScrollMessage}</p>}
+                            {/* {endScrollMessage && <p className="desktop">{endScrollMessage}</p>} */}
 
-                            {endScrollMessageMobile && <p className="mobile">{endScrollMessageMobile}</p>}
+                            {/* {endScrollMessageMobile && <p className="mobile">{endScrollMessageMobile}</p>} */}
 
-                            <Diamond 
+                            {/* <Diamond 
                                 color="--gold-500" 
                                 size={{size: {minSize: 10, desiredSize: 12, maxSize: 14}}}
                             />
 
-                            <div className="line"></div>
-                        </div>
-                    )}
+                            <div className="line"></div> */}
+                        {/* </div> */}
+                    {/* )} */}
                 </div>
 
                 {/* RIGHT COLUMN */}
                 <div className="scroll_reveal_hero-sides-right scroll_reveal_hero-sides-col">
-                    <div ref={sideR0} className={`scroll_reveal_hero-sides-img img-holder img-${imgs[2].aspectRatio ?? "square"}${touchedIdx === 2 ? " is-touched" : ""}`} {...makeMouseHandlers(imgs[2].caption ?? "")} {...makeTouchHandlers(2)}>
+                    <div ref={sideR0} className={`scroll_reveal_hero-sides-img img-holder img-${imgs[2].aspectRatio ?? "square"}${touchedIdx === 2 ? " is-touched" : ""}${imgs[2].borderStyle ? ` deco-border--${imgs[2].borderStyle}` : ''}`} {...makeMouseHandlers(imgs[2].caption ?? "")} {...makeTouchHandlers(2)}>
                         <img src={imgs[2].src} alt={imgs[2].alt ?? ""} className="img-bw" />
                         <div className="img-overlay"></div>
                         {imgs[2].caption && <p className="scroll_reveal_hero-caption">{imgs[2].caption}</p>}
                     </div>
-                    <div ref={sideR1} className={`scroll_reveal_hero-sides-img img-holder img-${imgs[3].aspectRatio ?? "square"}${touchedIdx === 3 ? " is-touched" : ""}`} {...makeMouseHandlers(imgs[3].caption ?? "")} {...makeTouchHandlers(3)}>
+                    <div ref={sideR1} className={`scroll_reveal_hero-sides-img img-holder img-${imgs[3].aspectRatio ?? "square"}${touchedIdx === 3 ? " is-touched" : ""}${imgs[3].borderStyle ? ` deco-border--${imgs[3].borderStyle}` : ''}`} {...makeMouseHandlers(imgs[3].caption ?? "")} {...makeTouchHandlers(3)}>
                         <img src={imgs[3].src} alt={imgs[3].alt ?? ""} className="img-bw" />
                         <div className="img-overlay"></div>
                         {imgs[3].caption && <p className="scroll_reveal_hero-caption">{imgs[3].caption}</p>}
@@ -164,7 +170,7 @@ export default function ScrollRevealHero({ mainImage = DEFAULT_IMAGE, sideImages
                 </div>
             </div>
             
-            
+
         </section>
     );
 }

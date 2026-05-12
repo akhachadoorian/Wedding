@@ -1,13 +1,16 @@
 ﻿import { useLayoutEffect, useEffect, RefObject, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { px } from "motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /** Portrait card width at rest (px) — must match `$end-w` in ScrollRevealHero.scss */
-const END_W = 529;
+// const END_W = 529;
+const END_W = "clamp(529px, 363.736vw, 629px)";
 /** Portrait card height at rest (px) — must match `$end-h` in ScrollRevealHero.scss */
-const END_H = 735.2;
+// const END_H = 735.2;
+const END_H = "clamp(735px, 51.042vw, 835px)";
 /** Card border-radius at start (px) */
 // const END_R = 16;
 const START_R = 6;
