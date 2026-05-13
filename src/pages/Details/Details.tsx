@@ -9,6 +9,7 @@ import { useFadeIn } from "../../hooks/useFadeIn";
 import SmallTextTagHero from "../../layout/SmallTextTagHero/SmallTextTagHero";
 import './Details.scss';
 import content from './content';
+import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,7 +47,16 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
 
     return (
         <div className="details">
-            <SmallTextTagHero loaded={loaded} {...content.hero} />
+            {/* <SmallTextTagHero loaded={loaded} {...content.hero} /> */}
+            <TextOnlyHero 
+                loaded={loaded} 
+                {...content.hero} 
+                styleOptions={{
+                    variation: 'columns',
+                    theme: 'art-deco-bg',
+                    // inset: true
+                }} 
+            />
 
             <section ref={venueRef} id="venue" className="venue-section full-width">
                 <Slant size="small" order="top" color="--black-900" />

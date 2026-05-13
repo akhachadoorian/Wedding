@@ -2,23 +2,50 @@ import { AccordionsProps } from "../../components/Accordions/Accordions";
 import { CopyOnlyProps } from "../../components/CopyOnly/CopyOnly";
 import { MediaWithCopyProps } from "../../components/MediaWithCopy/MediaWithCopy";
 import { SmallTextTagHeroProps } from "../../layout/SmallTextTagHero/SmallTextTagHero";
+import { TextOnlyHeroProps } from "../../layout/TextOnlyHero/TextOnlyHero";
 
 // ----- Hero -----------------------------------------------
-const hero: Omit<SmallTextTagHeroProps, "loaded"> = {
+// const hero: Omit<SmallTextTagHeroProps, "loaded"> = {
+//     eyebrow: "The Details",
+//     heading: "Your Guide to the Day",
+//     body: "Everything from venue details to the evening timeline — so you arrive knowing exactly what to expect.",
+//     smallTextTag1: {
+//         eyebrow: "Date",
+//         title: "October 31st, 2026",
+//         body: "Ceremony at 5 PM",
+//     },
+//     smallTextTag2: {
+//         eyebrow: "Location",
+//         title: "Clay Theatre",
+//         body: "Green Cove Springs, FL",
+//     },
+// };
+
+const hero: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
     eyebrow: "The Details",
-    heading: "Your Guide to the Day",
+    header: "Your Guide to the Day",
     body: "Everything from venue details to the evening timeline — so you arrive knowing exactly what to expect.",
-    smallTextTag1: {
-        eyebrow: "Date",
-        title: "October 31st, 2026",
-        body: "Ceremony at 5 PM",
-    },
-    smallTextTag2: {
-        eyebrow: "Location",
-        title: "Clay Theatre",
-        body: "Green Cove Springs, FL",
-    },
+    buttons: [
+      {
+        btnText: 'Venue Details',
+        link: '/details#venue',
+        target: '_self'
+      },
+      {
+        btnText: 'View Timeline',
+        link: '/details#timeline',
+        target: '_self'
+      },
+      
+      // {
+      //   btnText: 'FAQs',
+      //   link: '/details#faqs',
+      //   target: '_self'
+      // },
+    ]
 };
+
+
 
 // ----- Venue -----------------------------------------------
 

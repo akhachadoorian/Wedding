@@ -88,7 +88,7 @@ h6,
 .body,
 p  { 
   @extend %body-base;
-  font-size: var(--body); 
+  font-size: var(--text-base); 
 }
 
 .body-l  { 

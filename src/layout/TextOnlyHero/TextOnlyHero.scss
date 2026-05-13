@@ -1,0 +1,152 @@
+@use "../../styles/variables" as *;
+
+.text_only_hero {
+    margin: 0 auto;
+
+    @include big {
+        max-width: var(--max-width);
+    }
+
+    &-section {
+        padding: var(--layout-section-padding) var(--layout-column-margin);
+        // margin: auto;
+        min-height: calc(100dvh - (var(--layout-section-padding) * 2));
+
+        display: flex;
+        align-items: center;
+
+        // @include big {
+        //     max-width: var(--max-width);
+        // }
+
+        &.inset {
+            //     // margin: var(--layout-column-margin);
+            //     min-height: calc(100dvh - (var(--layout-section-padding) * 2) - (var(--space-1000) * 2));
+            //     padding: var(--space-1000) var(--layout-column-margin);
+            //     margin: var(--layout-section-padding) var(--layout-column-margin);
+
+            //     @include big {
+            //         // max-width: var(--max-width);
+            //     }
+        }
+    }
+
+    &-wrapper {
+        padding: var(--layout-section-padding) var(--layout-column-margin);
+        margin: auto;
+        min-height: calc(100dvh - var(--layout-section-padding) - var(--layout-section-padding));
+
+        display: flex;
+        align-items: center;
+
+        @include big {
+            max-width: var(--max-width);
+        }
+    }
+
+    &-subtitle,
+    &-body {
+        margin-top: var(--space-300);
+    }
+
+    &-btns {
+        margin-top: var(--space-500);
+    }
+
+    // ---- Layout Variations -------------------------------------------
+    &-variation {
+        &-left {
+            @include big {
+                max-width: 75.833vw;
+            }
+
+            @media (min-width: $max-width) {
+                max-width: 60.417vw;
+            }
+        }
+
+        &-center {
+            text-align: center;
+
+            @include big {
+                max-width: 60.417vw;
+                margin: auto;
+            }
+
+            .eyebrow-wrapper,
+            .subtitle {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .btns {
+                justify-content: center;
+            }
+        }
+
+        &-columns {
+            display: flex;
+            flex-direction: column;
+
+            @include big {
+                flex-direction: row;
+                align-items: center;
+                gap: var(--layout-column-gutter);
+            }
+
+            &-left {
+                @include big {
+                    flex: 1 1 760px;
+                }
+            }
+
+            &-right {
+                @include big {
+                    flex: 1 1 530px;
+                }
+            }
+        }
+    }
+
+    // ---- Theme Variations -------------------------------------------
+    &-theme {
+        &-black {
+            background-color: var(--black-900);
+
+            &.inset {
+                background-color: transparent;
+
+                .text_only_hero {
+                    padding: var(--space-1000) var(--layout-column-margin);
+                    background-color: var(--black-900);
+
+                    @include big {
+                        padding: var(--space-1500) var(--layout-column-margin);
+                    }
+                }
+            }
+        }
+
+        &-art-deco-bg {
+            background: linear-gradient(to top, var(--black-1000) 35%, transparent 100%), url("../../assets/DiamondPattern.svg");
+            background-repeat: repeat;
+            background-size: 50vw;
+
+            &.inset { // TODO: make better
+                background: transparent;
+
+                .text_only_hero {
+                    background: linear-gradient(to top, var(--black-1000) 35%, transparent 100%), url("../../assets/DiamondPattern.svg");
+                    background-repeat: repeat;
+                    background-size: 50vw;
+
+                    padding: var(--space-1000) var(--layout-column-margin);
+
+                    @include big {
+                        padding: var(--space-1500) var(--layout-column-margin);
+                    }
+                }
+            }
+        }
+    }
+}

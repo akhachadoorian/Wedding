@@ -34,7 +34,7 @@ export default function MediaWithCopy({ className, mediaSide = 'right', headingS
         <div className={`media_with_copy-wrapper  ${className ?? ''} ${mediaSide}`}>
                 <div className="media_with_copy-text">
                     <div className="media_with_copy-text">
-                        {eyebrow && <Eyebrow text={eyebrow} variation={"left"} />}
+                        {eyebrow && <Eyebrow text={eyebrow} styleOptions={{variation: 'left'}}/>}
 
                         <Heading className="">{header}</Heading>
 

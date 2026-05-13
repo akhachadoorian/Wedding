@@ -1,41 +1,29 @@
 @use "../../styles/variables" as *;
 
-.eyebrow-wrapper {
-    display: flex;
-    align-items: center;
-    gap: var(--space-100);
-    
-    width: fit-content;
-
-    &.gold { color: var(--gold-500); }
-
-    .diamond_underline {
-        height: 1px;
-        width: 100px;
-        background-color: var(--gold-500);
-    }
-
-    .diamond_underline-wrapper {
+.eyebrow {
+    &-wrapper {
         display: flex;
         align-items: center;
-        gap: var(--space-075);
-        // padding: 0 10px;
-        width: 100%;
+        gap: var(--space-100);
 
-        @include big  {
-            width: calc(100% + 40px);
-            gap: var(--space-100);
+        width: fit-content;
+
+        &.gold {
+            color: var(--gold-500);
         }
-
-        .diamond_underline { width: 100%; }
     }
 
-    &.centered {
+    &-margin {
+        margin-bottom: var(--space-200);
+    }
+
+    // ---- Layout Variations -------------------------------------------
+    &-center {
         flex-direction: column;
         text-align: center;
     }
 
-    &.double {
+    &-double {
         flex-direction: column;
         gap: var(--space-075);
 
@@ -61,3 +49,24 @@
         }
     }
 }
+
+.diamond_divider {
+    display: flex;
+        align-items: center;
+        gap: var(--space-075);
+
+        width: 100%;
+
+        @include big {
+            width: calc(100% + 40px);
+            gap: var(--space-100);
+        }
+
+    &-underline {
+        height: 1px;
+        min-width: 100px;
+        width: 100%;
+        background-color: var(--gold-500);
+    }
+}
+
