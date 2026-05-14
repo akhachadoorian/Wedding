@@ -4,7 +4,6 @@ import ArrowBox from '../../components/ArrowBox/ArrowBox';
 import type { ARROW_DIRECTIONS } from '../../components/ArrowBox/ArrowBox';
 import type { ColorVariables } from '../../types/colors';
 import './GlobalTooltip.scss';
-import { ArrowRightIcon } from '@phosphor-icons/react';
 
 type TextContent      = { type: 'text';       caption: string };
 type ArrowContent     = { type: 'arrow';      arrowDirection?: ARROW_DIRECTIONS; color?: ColorVariables };
@@ -45,7 +44,16 @@ export function useTooltip() {
         };
     };
 
-    return { makeMouseHandlers };
+    const showTooltip = (x: number, y: number, content: string | TooltipContent) => {
+        const normalized: TooltipContent = typeof content === 'string'
+            ? { type: 'text', caption: content }
+            : content;
+        setTooltip({ x, y, ...normalized });
+    };
+
+    const hideTooltip = () => setTooltip(null);
+
+    return { makeMouseHandlers, showTooltip, hideTooltip };
 }
 
 export function GlobalTooltip() {

@@ -36,13 +36,17 @@ export default function TextOnlyHero({ loaded, styleOptions, eyebrow, header, su
 
     return (
         <section className={`text_only_hero-section text_only_hero-theme-${styleOptions?.theme || DEFAULT_STYLE.theme} ${styleOptions?.inset ? 'inset' : ''} ${loaded ? "is-loaded" : "is-hidden"} `}>
-            {styleOptions?.variation === "columns" ? (
+
+            <div className={`text_only_hero-wrapper`}>
+                {styleOptions?.variation === "columns" ? (
                 <ColumnsTextOnlyHero eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
             ) : styleOptions?.variation === "center" ? (
                 <CenterTextOnlyHero eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
             ) : (
                 <LeftTextOnlyHero eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
             )}
+            </div>
+            
         </section>
     );
 }

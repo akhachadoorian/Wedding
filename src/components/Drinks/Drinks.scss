@@ -1,19 +1,18 @@
 @use "../../styles/variables" as *;
 
 .drinks {
-    &-wrapper {
-        width: var(--drink-size-mobile-width);
-        height: var(--drink-size-mobile-height);
 
-        @include big {
-            width: var(--drink-size-width);
-            height: var(--drink-size-height);
-        }
+    width: var(--drink-size-mobile-width);
+    height: var(--drink-size-mobile-height);
 
-        svg {
-            width: 100%;
-            height: 100%;
-        }
+    @include big {
+        width: var(--drink-size-width);
+        height: var(--drink-size-height);
+    }
+
+    svg {
+        width: 100%;
+        height: 100%;
     }
 
     &-cocktail {
@@ -31,7 +30,7 @@
     &-highball {
         aspect-ratio: 9/20;
     }
-    
+
     &-margarita {
         aspect-ratio: 71/92;
     }

@@ -76,7 +76,7 @@ export default function Drinks({ className, size, sizeHeight = true, type = "mar
     const DrinkComponent = DrinkMap[type];
 
     return (
-        <div className={`drinks-wrapper drinks-${type} ${className ?? ""}`} style={sizeStyle}>
+        <div className={`drinks drinks-${type} ${className ?? ""}`} style={sizeStyle}>
             <DrinkComponent />
         </div>
     );

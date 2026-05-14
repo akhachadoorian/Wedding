@@ -12,11 +12,11 @@ import LoadingScreen from "./layout/LoadingScreen/LoadingScreen";
 import Navigation from "./layout/Navigation/Navigation";
 import { GlobalTooltip, TooltipProvider } from "./layout/GlobalTooltip/GlobalTooltip";
 
-import Accommodations from "./pages/Accommodations";
+import Accommodations from "./pages/Accommodations/Accommodations";
 import Details from "./pages/Details/Details";
-import RSVP from "./pages/RSVP";
-import Registry from "./pages/Registry";
-import Timeline from "./pages/Timeline";
+import RSVP from "./pages/RSVP/RSVP";
+import Registry from "./pages/Registry/Registry";
+import Timeline from "./pages/Timeline/Timeline";
 import Home from "./pages/Home/Home";
 
 gsap.registerPlugin(ScrollTrigger);

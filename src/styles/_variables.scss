@@ -51,7 +51,7 @@
 }
 
 // ── SCSS variables ────────────────────────────────────────────
-$max-width: 1600px;
+$max-width: var(--max-width);
 
 // ──── Fonts ───────────────────────────────────
 $font-serif: "Instrument Serif", serif;
