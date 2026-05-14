@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 
-import Buttons from "../../components/Buttons/Buttons";
+import Button from "../../components/Buttons/Button";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";
 import { ButtonSettingProps } from "../../types/buttons";
 import { ImageProps } from "../../types/images";
@@ -255,11 +255,11 @@ export default function SplitHero({ loaded, heading, eyebrow, btn, image }: Spli
                         </div>
 
                         {btn && (
-                            <Buttons
+                            <Button
                                 style="solid"
                                 theme="gold"
                                 btnSettings={{
-                                    btnText: btn.btnText,
+                                    text: btn.text,
                                     link: btn.link,
                                 }}
                                 includeArrow={true}

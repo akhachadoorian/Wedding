@@ -48,7 +48,7 @@ export type PropMapping =
     | {
           /** Read multiple named rows, mapping each row's columns to output keys */
           fields?: string[];
-          /** Maps output key → vault column e.g. { btnText: "content", link: "link" } */
+          /** Maps output key → vault column e.g. { text: "content", link: "link" } */
           shape: Record<string, string>;
           /** Optional reshaper: runs on each mapped row, letting you build nested structures */
           transform?: (item: Record<string, string>) => Record<string, unknown>;

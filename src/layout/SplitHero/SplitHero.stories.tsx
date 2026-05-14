@@ -31,7 +31,7 @@ export const Hero: Story = {
             text: 'Eyebrow'
         },
         btn: {
-            btnText: "Button",
+            text: "Button",
             link: "/"
         },
         

@@ -30,7 +30,7 @@ function applyPageMapping(mapping: unknown, sections: Record<string, SectionData
             // console.log("=== value ", value);
 
         // Strategy 2 — shape: build an array of objects from vault rows, re-keyed via config.shape
-        // (e.g. { btnText: "content", link: "link" } maps vault columns → prop keys).
+        // (e.g. { text: "content", link: "link" } maps vault columns → prop keys).
         // config.fields picks specific named rows; omitting it uses all records in the section.
         // Rows where every mapped column is empty are dropped.
         } else if ("shape" in config && config.shape) {

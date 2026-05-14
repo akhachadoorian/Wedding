@@ -2,11 +2,11 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
 
-import Buttons from "./Buttons";
+import Button from "./Button";
 
-const meta: Meta<typeof Buttons> = {
+const meta: Meta<typeof Button> = {
     title: "Components/Buttons",
-    component: Buttons,
+    component: Button,
     tags: ["autodocs"],
     decorators: [
         (Story: React.ComponentType) => (
@@ -18,14 +18,14 @@ const meta: Meta<typeof Buttons> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof Buttons>;
+type Story = StoryObj<typeof Button>;
 
 export const Solid: Story = {
     args: {
         style: "solid",
         theme: "gold",
         btnSettings: {
-            btnText: "View Details",
+            text: "View Details",
             link: "/details",
         },
         includeArrow: true,
@@ -41,7 +41,7 @@ export const Outline: Story = {
         style: "outline",
         theme: "cream",
         btnSettings: {
-            btnText: "View Details",
+            text: "View Details",
             link: "/details",
         },
         includeArrow: true,
@@ -57,7 +57,7 @@ export const Lines: Story = {
         style: "lines",
         theme: "gold",
         btnSettings: {
-            btnText: "View Details",
+            text: "View Details",
             link: "/details",
         },
         includeArrow: true,
@@ -73,7 +73,7 @@ export const NoArrow: Story = {
         style: "solid",
         theme: "cream",
         btnSettings: {
-            btnText: "View Details",
+            text: "View Details",
             link: "/details",
         },
         includeArrow: false,
@@ -85,7 +85,7 @@ export const LeftArrow: Story = {
         style: "solid",
         theme: "cream",
         btnSettings: {
-            btnText: "View Details",
+            text: "View Details",
             link: "/details",
         },
         includeArrow: true,

@@ -1,7 +1,7 @@
 import ReactMarkdown from "react-markdown";
 
 import { ThreeButtonsArray } from "../../types/buttons";
-import { ThreeButtons } from "../Buttons/Buttons";
+import { ThreeButtons } from "../Buttons/ButtonGroups";
 import Eyebrow from "../Eyebrow/Eyebrow";
 
 import "./CopyOnly.scss";
@@ -128,7 +128,7 @@ export default function CopyOnly({
 
                         {body && <ReactMarkdown components={{ p: ({ children }) => <p className={`mwc-animate copy-body ${styleOptions.headingSize === "h2" ? "body-l" : "body"}`}>{children}</p> }}>{body}</ReactMarkdown>}
 
-                        {buttons && buttons?.length != 0 && (
+                        {buttons && (
                             <ThreeButtons
                                 className="copy-btns btns mwc-animate"
                                 buttons={buttons ?? []}
@@ -190,7 +190,7 @@ export default function CopyOnly({
                     {body && <ReactMarkdown components={{ p: ({ children }) => <p className={`copy-body mwc-animate ${styleOptions.headingSize === "h2" ? "body-l" : "body"}`}>{children}</p> }}>{body}</ReactMarkdown>}
                 </div>
 
-                {buttons && buttons?.length != 0 && (
+                {buttons && (
                     <ThreeButtons
                         className="copy-btns btns mwc-animate"
                         buttons={buttons ?? []}

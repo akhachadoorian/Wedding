@@ -1,0 +1,203 @@
+@use "../../styles/variables" as *;
+@use "../ArrowBox/ArrowBox.scss" as *;
+@use "sass:map";
+
+// ---- Button SCSS Variables -------------------------------------------
+
+$btnTB: 12px;
+$btnLR: 24px;
+$btnBorderWidth: 2px;
+
+// ---- Button Color Arrays -------------------------------------------
+
+$solid-btn: (
+    "gold": (
+        "default": (
+            "border-color": $gold,
+            "background-color": $gold,
+            "color": $cream,
+        ),
+        "hover": (
+            "border-color": $gold-600,
+            "background-color": $gold-600,
+            "color": $cream,
+        ),
+    ),
+    "cream": (
+        "default": (
+            "border-color": $cream,
+            "background-color": $cream,
+            "color": $gold,
+        ),
+        "hover": (
+            "border-color": $gold,
+            "background-color": $gold,
+            "color": $cream,
+        ),
+    ),
+);
+
+$outline-btn: (
+    "gold": (
+        "default": (
+            "border-color": $gold,
+            "background-color": "transparent",
+            "color": $gold,
+        ),
+        "hover": (
+            "border-color": $cream,
+            "background-color": $cream,
+            "color": $gold,
+        ),
+    ),
+    "cream": (
+        "default": (
+            "border-color": $cream,
+            "background-color": "transparent",
+            "color": $cream,
+        ),
+        "hover": (
+            "border-color": $gold-600,
+            "background-color": $gold-600,
+            "color": $cream,
+        ),
+    ),
+);
+
+$line-btn: (
+    "gold": (
+        "default": (
+            "lines-color": $gold,
+            "color": $gold,
+        ),
+    ),
+    "cream": (
+        "default": (
+            "lines-color": $cream,
+            "color": $cream,
+        ),
+    ),
+);
+
+.btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-150);
+
+    width: fit-content;
+    text-decoration: none;
+    transition: $transition;
+
+    &-text {
+        font-family: $font-sans;
+        font-size: var(--text-md);
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    &:hover {
+        @each $dir, $t in $arrow-hover-transforms {
+            .arrow_box-grid.#{$dir} {
+                transform: $t;
+            }
+        }
+    }
+
+    // ---- Variants -------------------------------------------
+
+    &-variant {
+        &-solid {
+            padding: $btnTB $btnLR;
+            border: $btnBorderWidth solid;
+
+
+            @each $theme, $states in $solid-btn {
+                $default: map.get($states, "default");
+                $hover: map.get($states, "hover");
+
+                &.btn-color_scheme-#{$theme} {
+                    border-color: map.get($default, "border-color");
+                    background-color: map.get($default, "background-color");
+                    color: map.get($default, "color");
+
+                    &:hover {
+                        border-color: map.get($hover, "border-color");
+                        background-color: map.get($hover, "background-color");
+                        color: map.get($hover, "color");
+                    }
+                }
+            }
+        }
+
+        &-outline {
+            padding: $btnTB $btnLR;
+            border: $btnBorderWidth solid;
+
+            @each $theme, $states in $outline-btn {
+                $default: map.get($states, "default");
+                $hover: map.get($states, "hover");
+
+                &.btn-color_scheme-#{$theme} {
+                    border-color: map.get($default, "border-color");
+                    background-color: map.get($default, "background-color");
+                    color: map.get($default, "color");
+
+                    &:hover {
+                        border-color: map.get($hover, "border-color");
+                        background-color: map.get($hover, "background-color");
+                        color: map.get($hover, "color");
+                    }
+                }
+            }
+        }
+
+        &-lines {
+            padding: var(--space-100) var(--space-075);
+            position: relative;
+
+            &::before,
+            &::after {
+                content: "";
+                height: 1px;
+                width: 0;
+
+                position: absolute;
+
+                transition: $transition;
+            }
+
+            &::before {
+                top: 0;
+                left: 0;
+            }
+
+            &::after {
+                bottom: 0;
+                right: 0;
+            }
+
+            &:hover {
+                &::before,
+                &::after {
+                    width: 100%;
+                }
+            }
+
+            @each $theme, $states in $line-btn {
+                $default: map.get($states, "default");
+                $hover: map.get($states, "hover");
+
+                &.btn-color_scheme-#{$theme} {
+                    color: map.get($default, "color");
+                    
+                    &::before,
+                    &::after {
+                        background-color: map.get($default, "lines-color");
+                    }
+                }
+            }
+        }
+    }
+}

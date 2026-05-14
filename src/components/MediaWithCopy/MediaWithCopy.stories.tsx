@@ -28,11 +28,11 @@ export const Left: Story = {
         body: "**Lorem ipsum** dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus." ,
         buttons: [
             {
-                btnText: "B1",
+                text: "B1",
                 link: "/",
             },
             {
-                btnText: "B2",
+                text: "B2",
                 link: "/",
             },
         ],
@@ -48,11 +48,11 @@ export const Right: Story = {
         body: "**Lorem ipsum** dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus." ,
         buttons: [
             {
-                btnText: "B1",
+                text: "B1",
                 link: "/",
             },
             {
-                btnText: "B2",
+                text: "B2",
                 link: "/",
             },
         ],

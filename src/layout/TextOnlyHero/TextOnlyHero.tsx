@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ThreeButtons } from "../../components/Buttons/Buttons";
+import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";
 import { ThreeButtonsArray } from "../../types/buttons";
 
@@ -64,7 +64,7 @@ function CenterTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eyeb
 
             {body && <p className="text_only_hero-body body-l">{body}</p>}
 
-            {buttons && buttons?.length != 0 && <ThreeButtons className="text_only_hero-btns btns" buttons={buttons ?? []} />}
+            {buttons && <ThreeButtons className="text_only_hero-btns btns" buttons={buttons ?? []} />}
         </div>
     );
 }
@@ -80,7 +80,7 @@ function LeftTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eyebro
 
             {body && <p className="text_only_hero-body body-l">{body}</p>}
 
-            {buttons && buttons?.length != 0 && <ThreeButtons className="text_only_hero-btns btns" buttons={buttons ?? []} />}
+            {buttons && <ThreeButtons className="text_only_hero-btns btns" buttons={buttons ?? []} />}
         </div>
     );
 }
@@ -93,13 +93,13 @@ function ColumnsTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eye
 
                 <h1 className="text_only_hero-header">{header}</h1>
             </div>
-            {(subtitle || body || (buttons && buttons?.length != 0)) && (
+            {(subtitle || body || buttons) && (
                 <div className="text_only_hero-variation-columns-right">
                     {subtitle && <p className="subtitle text_only_hero-subtitle">{subtitle}</p>}
 
                     {body && <p className="text_only_hero-body body-l">{body}</p>}
 
-                    {buttons && buttons?.length != 0 && <ThreeButtons className="text_only_hero-btns btns" buttons={buttons ?? []} />}
+                    {buttons && <ThreeButtons className="text_only_hero-btns btns" buttons={buttons ?? []} />}
                 </div>
             )}
         </div>

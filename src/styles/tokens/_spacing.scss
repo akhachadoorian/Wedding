@@ -18,4 +18,20 @@
   --space-1500: calc(var(--space-1000) * 1.5); //120px
 }
 
-// calc(var(--space-1000) * 1.5) == 120px
+$space-0: var(--space-0);
+$space-025: var(--space-025);
+$space-050: var(--space-050);
+$space-075: var(--space-075);
+$space-100: var(--space-100);
+$space-150: var(--space-150);
+$space-200: var(--space-200);
+$space-250: var(--space-250);
+$space-300: var(--space-300);
+$space-400: var(--space-400);
+$space-500: var(--space-500);
+$space-600: var(--space-600);
+$space-700: var(--space-700);
+$space-750: var(--space-750);
+$space-800: var(--space-800);
+$space-1000: var(--space-1000);
+$space-1500: var(--space-1500);

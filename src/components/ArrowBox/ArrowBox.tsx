@@ -5,10 +5,10 @@ import { ArrowUpIcon, ArrowDownIcon, ArrowUpRightIcon, ArrowRightIcon, ArrowLeft
 
 import "./ArrowBox.scss";
 
-export type ARROW_DIRECTIONS = 'up' | 'down' | 'right' | 'left' | 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+export type ArrowDirectionProps = 'up' | 'down' | 'right' | 'left' | 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
 type ArrowBoxProps = {
-    arrowDirection?: ARROW_DIRECTIONS;
+    arrowDirection?: ArrowDirectionProps;
     color?: ColorVariables;
 };
 
@@ -22,7 +22,7 @@ export default function ArrowBox({ color = "--cream-500", arrowDirection = "top-
         "top-left": ArrowUpLeftIcon,
         'bottom-right': ArrowDownRightIcon,
         'bottom-left': ArrowDownLeftIcon,
-    } satisfies Record<ARROW_DIRECTIONS, React.ElementType>;
+    } satisfies Record<ArrowDirectionProps, React.ElementType>;
     const Arrow = arrowMap[arrowDirection];
 
     return (

@@ -27,7 +27,7 @@ const CopyOnlyProps: ComponentMappingProps  = {
         },
         buttons: {
             fields: ["Button 1", "Button 2", "Button 3"],
-            shape: { btnText: "content", link: "link", target: "target" },
+            shape: { text: "content", link: "link", target: "target" },
         }
     }
 };

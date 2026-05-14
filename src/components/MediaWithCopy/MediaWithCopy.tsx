@@ -1,5 +1,5 @@
 import { TwoButtonsArray } from "../../types/buttons";
-import { TwoButtons } from "../Buttons/Buttons";
+import { TwoButtons } from "../Buttons/Button";
 import Eyebrow from "../Eyebrow/Eyebrow";
 
 import "./MediaWithCopy.scss";

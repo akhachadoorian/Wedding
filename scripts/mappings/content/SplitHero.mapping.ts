@@ -27,7 +27,7 @@ const SplitHeroProps: ComponentMappingProps = {
             transform: (val) => val.split(" · ")[1].trim(),
         },
 
-        "btn.btnText": {
+        "btn.text": {
             field: "CTA Button",
             column: "content",
         },

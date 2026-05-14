@@ -1,1 +1,56 @@
 @use "../../styles/variables" as *;
+
+.split_info {
+    display: flex;
+    flex-direction: column;
+
+    @include big {
+        flex-direction: row;
+    }
+
+    &-side {
+        padding: var(--space-600) var(--space-700);
+
+        @include big {
+            flex: 1 1 660px;
+        }
+    }
+
+    &-solid {
+        background: $black;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: $space-500;
+
+        &-body {
+            margin-top: $space-100;
+        }
+
+        &-lower {
+            padding-top: $space-200;
+            border-top: 1.5px solid $black-700;
+
+            &-header {
+                color: $cream-900;
+            }
+
+            &-body {
+                margin-top: $space-100;
+            }
+        }
+    }
+
+    &-outline {
+        display: flex;
+        flex-direction: column;
+        gap: $space-500;
+
+        border: 2px solid $black;
+
+        &-body {
+            margin-top: $space-300;
+        }
+    }
+}

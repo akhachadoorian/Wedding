@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-import { ThreeButtons } from "../../components/Buttons/Buttons";
+import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
 import Drinks, { DrinkTypes } from "../../components/Drinks/Drinks";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";
 import { ThreeButtonsArray } from "../../types/buttons";
@@ -22,11 +22,14 @@ type DraggableHeroProps = {
     buttons?: ThreeButtonsArray;
 };
 
-const drinks = [
-    { type: "cocktail", x: 0,   y: 0,   rotate: 0  },
-    { type: "martini",  x: 200, y: -80, rotate: 12 },
-    { type: "wine",     x: -50, y: 120, rotate: -8 },
-] satisfies Array<{ type: DrinkTypes; x: number; y: number; rotate: number }>;
+type DrinkPosition = { x: number; y: number; rotate: number };
+type DrinkConfig = { type: DrinkTypes; desktop: DrinkPosition; mobile: DrinkPosition };
+
+const drinks: DrinkConfig[] = [
+    { type: "cocktail", desktop: { x: 0,   y: 0,   rotate: 0  }, mobile: { x: 0,   y: 0,  rotate: 0  } },
+    { type: "martini",  desktop: { x: 200, y: -80, rotate: 12 }, mobile: { x: 80,  y: 40, rotate: 8  } },
+    { type: "wine",     desktop: { x: -50, y: 120, rotate: -8 }, mobile: { x: -30, y: 80, rotate: -5 } },
+];
 
 const drinkSize = {
     size: { minSize: 150, desiredSize: 225, maxSize: 275 },
@@ -40,7 +43,8 @@ export default function DraggableHero({ loaded, eyebrow, header, subtitle, body,
             const el = drinksRefs.current[i];
             if (!el) return null;
 
-            gsap.set(el, { x: drink.x, y: drink.y, rotation: drink.rotate });
+            const pos = window.matchMedia("(min-width: 750px)").matches ? drink.desktop : drink.mobile;
+            gsap.set(el, { x: pos.x, y: pos.y, rotation: pos.rotate });
 
             const [d] = Draggable.create(el, {
                 type: "x,y",
@@ -73,7 +77,7 @@ export default function DraggableHero({ loaded, eyebrow, header, subtitle, body,
 
                     {body && <p className="draggable_hero-body body-l">{body}</p>}
 
-                    {buttons && buttons?.length != 0 && <ThreeButtons className="draggable_hero-btns btns" buttons={buttons ?? []} />}
+                    {buttons && <ThreeButtons className="draggable_hero-btns btns" buttons={buttons ?? []} />}
                 </div>
 
                 {drinks.map((drink, i) => (

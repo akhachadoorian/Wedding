@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import ArrowBox, { ARROW_DIRECTIONS } from './ArrowBox';
+import ArrowBox, { ArrowDirectionProps } from './ArrowBox';
 
 
 const meta: Meta<typeof ArrowBox> = {
@@ -17,7 +17,7 @@ const meta: Meta<typeof ArrowBox> = {
     // argTypes: {
     //     arrowDirection: {
     //         control: 'select',
-    //         options: ['up', 'down', 'right', 'left', 'top-right', 'top-left', 'bottom-right', 'bottom-left'] satisfies ARROW_DIRECTIONS[],
+    //         options: ['up', 'down', 'right', 'left', 'top-right', 'top-left', 'bottom-right', 'bottom-left'] satisfies ArrowDirectionProps[],
     //     },
     // },
 };

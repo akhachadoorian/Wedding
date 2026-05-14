@@ -1,13 +1,13 @@
 import { createContext, Dispatch, SetStateAction, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 import ArrowBox from '../../components/ArrowBox/ArrowBox';
-import type { ARROW_DIRECTIONS } from '../../components/ArrowBox/ArrowBox';
+import type { ArrowDirectionProps } from '../../components/ArrowBox/ArrowBox';
 import type { ColorVariables } from '../../types/colors';
 import './GlobalTooltip.scss';
 
 type TextContent      = { type: 'text';       caption: string };
-type ArrowContent     = { type: 'arrow';      arrowDirection?: ARROW_DIRECTIONS; color?: ColorVariables };
-type TextArrowContent = { type: 'text-arrow'; caption: string; arrowDirection?: ARROW_DIRECTIONS; color?: ColorVariables };
+type ArrowContent     = { type: 'arrow';      arrowDirection?: ArrowDirectionProps; color?: ColorVariables };
+type TextArrowContent = { type: 'text-arrow'; caption: string; arrowDirection?: ArrowDirectionProps; color?: ColorVariables };
 type TooltipContent   = TextContent | ArrowContent | TextArrowContent;
 type TooltipState     = ({ x: number; y: number } & TooltipContent) | null;
 

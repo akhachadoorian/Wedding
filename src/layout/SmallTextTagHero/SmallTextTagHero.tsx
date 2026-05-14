@@ -2,7 +2,7 @@ import { forwardRef, useLayoutEffect, useRef } from "react";
 
 import { ButtonSettingProps, ThreeButtonsArray } from "../../types/buttons";
 import { ImageProps } from "../../types/images";
-import Buttons, { ThreeButtons } from "../../components/Buttons/Buttons";
+import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
 import Diamond from "../../components/Diamond/Diamond";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";
 import SmallText, { SmallTextProps } from "../../components/SmallText/SmallText";
@@ -90,7 +90,7 @@ export default function SmallTextTagHero({ loaded, eyebrow, heading, body, butto
 
                 {body && <p ref={bodyRef} className="small_text_tag_hero-body">{body}</p>}
 
-                {(buttons && buttons?.length != 0) && (
+                {buttons && (
                     <ThreeButtons ref={btnsRef} className="small_text_tag_hero-btns" buttons={buttons ?? []} />
                 )}
             </div>

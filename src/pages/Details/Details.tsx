@@ -10,6 +10,8 @@ import SmallTextTagHero from "../../layout/SmallTextTagHero/SmallTextTagHero";
 import './Details.scss';
 import content from './content';
 import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
+import SplitInfo from "../../components/SplitInfo/SplitInfo";
+import Button from "../../components/Buttons/Button";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,8 +48,7 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
     }, []);
 
     return (
-        <div className="details">
-            {/* <SmallTextTagHero loaded={loaded} {...content.hero} /> */}
+        <>
             <TextOnlyHero 
                 loaded={loaded} 
                 {...content.hero} 
@@ -58,18 +59,21 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                 }} 
             />
 
-            <section ref={venueRef} id="venue" className="venue-section full-width">
-                <Slant size="small" order="top" color="--black-900" />
+            <section ref={venueRef} id="venue" className="venue-section base_section">
+                <SplitInfo {...content.summary} />
 
-                <div className="section-inner">
+                {/* <Slant size="small" order="top" color="--black-900" /> */}
+
+                {/* <div className="section-inner"> */}
+                    
                     {/* TODO: get better image for venue */}
-                    <MediaWithCopy 
+                    {/* <MediaWithCopy 
                         mediaSide="left"
                         {...content.venue}
-                    />
+                    /> */}
 
                     {/* TODO: add parking  */}
-                    <div ref={parkingRef} className="parking_grid">
+                    {/* <div ref={parkingRef} className="parking_grid">
                         <div className="parking_grid-card">
                             <div className="div_line"></div>
                             <div className="parking_grid-text">
@@ -96,10 +100,10 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                                 <p className="body-s">Free parking is available in the grass lot connected to Clay Theatre, conveniently located right next to the venue for easy access.</p>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div> */}
+                {/* </div> */}
 
-                <Slant size="small" order="bottom" color="--black-900" />
+                {/* <Slant size="small" order="bottom" color="--black-900" /> */}
             </section>
 
             <section ref={timelineRef} id="timeline" className="timeline-section base_section">
@@ -155,6 +159,6 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                     <Accordions {...content.faqs.accordions} />
                 </div>
             </section>
-        </div>
+        </>
     )
 }
