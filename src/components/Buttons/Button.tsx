@@ -6,14 +6,9 @@ import { Icon } from "@phosphor-icons/react";
 
 import "./Button.scss";
 
-const ARROW_THEME_MAP: Record<string, Record<string, ColorVariables>> = {
+const DECORATION_COLOR_MAP: Record<string, Record<string, ColorVariables>> = {
     cream: { solid: "--gold-500", outline: "--cream-500", lines: "--cream-500" },
     gold: { solid: "--cream-500", outline: "--gold-500", lines: "--gold-500" },
-};
-
-const DEFAULT_ARROW_SETTINGS = {
-    arrowSide: "right",
-    arrowDirection: "top-right",
 };
 
 export default function Button({
@@ -26,7 +21,7 @@ export default function Button({
     className, // pulled out because this components constructs it for LenisLink
     ...rest // includes a11yProps and HTMLProps
 }: ButtonProps) {
-    const arrowColor = (ARROW_THEME_MAP[colorScheme]?.[variant] ?? "--cream-500") as ColorVariables;
+    const decorationColor = (DECORATION_COLOR_MAP[colorScheme]?.[variant] ?? "--cream-500") as ColorVariables;
 
     return (
         <LenisLink
@@ -43,11 +38,11 @@ export default function Button({
                 <ArrowButtonInner
                     arrowSide={decoration.arrowSide ?? "right"}
                     arrowDirection={decoration.arrowDirection ? decoration.arrowDirection : decoration.arrowSide === "left" ? "top-left" : "top-right"}
-                    arrowColor={arrowColor}
+                    arrowColor={decorationColor}
                     text={btnSettings.text}
                 />
             ) : decoration && decoration.type === "icon" && decoration.icon ? (
-                <IconButtonInner icon={decoration.icon} text={btnSettings.text} />
+                <IconButtonInner icon={decoration.icon} iconColor={decorationColor} text={btnSettings.text} />
             ) : (
                 <p className="btn-text">{btnSettings.text}</p>
             )}
@@ -55,11 +50,11 @@ export default function Button({
     );
 }
 
-function IconButtonInner({ text, icon }: { text: string; icon: Icon }) {
+function IconButtonInner({ text, icon, iconColor }: { text: string; icon: Icon, iconColor: ColorVariables }) {
     const IconComponent = icon;
     return (
         <>
-            <IconComponent size={16} />
+            <IconComponent size={24} color={`var(${iconColor})`} />
             <p className="btn-text">{text}</p>
         </>
     );
@@ -68,7 +63,6 @@ function IconButtonInner({ text, icon }: { text: string; icon: Icon }) {
 function ArrowButtonInner({ text, arrowSide, arrowDirection, arrowColor }: { text: string; arrowSide: "left" | "right"; arrowDirection: ArrowDirectionProps; arrowColor: ColorVariables }) {
     return (
         <>
-            {arrowSide === "left" && <ArrowBox color={arrowColor} arrowDirection={arrowDirection} />}
 
             <p className="btn-text">{text}</p>
 

@@ -8,7 +8,7 @@ export type NoteProps = {
     className?: string;
     variation?: 'center' | 'left';
     backgroundColor?: ColorVariables;
-    icon?: 'info' | 'warning' | 'question';
+    icon?: 'info' | 'warning' | 'question'; // TODO: fix to use Icon type
     title?: string;
     body?: string;
     

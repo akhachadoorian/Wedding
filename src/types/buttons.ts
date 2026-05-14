@@ -38,9 +38,28 @@ import { Icon } from "@phosphor-icons/react";
  *   },
  * };
  */
-export type ButtonSettingProps = {
+
+type LinkButtonSettings = {
+    type: 'link';
+    /** Label displayed inside the button */
+    text: string;
+    /** React Router path or absolute URL the button links to */
+    link: string;
+    /** Whether the link opens in a new tab @default '_self' */
+    target?: "_blank" | "_self";
+}
+
+type ModalButtonSettings = {
+    type: 'modal';
+    /** Label displayed inside the button */
+    text: string;
     /** */
-    icon?: Icon;
+    modalID: string;
+}
+
+// export type ButtonSettingProps = LinkButtonSettings | ModalButtonSettings;
+
+export type ButtonSettingProps = {
     /** Label displayed inside the button */
     text: string;
     /** React Router path or absolute URL the button links to */
@@ -93,7 +112,7 @@ type BtnIconSettings = {
 
 type BtnDecoration = BtnArrowSettings | BtnIconSettings;
 
-export type BtnDecorationMap<N extends number> = RequireX<BtnDecoration, N>;
+export type BtnDecorationMap<N extends number> = NonEmptyMaxX<BtnDecoration, N>;
 
 // #endregion 
 
@@ -118,7 +137,6 @@ export type ButtonProps = WithHTMLProps &
 export type TwoButtonsArray = NonEmptyMaxX<ButtonSettingProps, 2>;
 
 export type TwoButtonsProps = WithHTMLProps & {
-    className?: string;
     buttons: TwoButtonsArray;
 
     customVariantMap?: BtnVariantMap<2>;
@@ -133,8 +151,6 @@ export type TwoButtonsProps = WithHTMLProps & {
 export type ThreeButtonsArray = NonEmptyMaxX<ButtonSettingProps, 3>;
 
 export type ThreeButtonsProps = WithHTMLProps & {
-    ref?: React.Ref<HTMLDivElement>;
-
     buttons: ThreeButtonsArray;
 
     customVariantMap?: BtnVariantMap<3>;

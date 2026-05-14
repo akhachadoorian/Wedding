@@ -1,3 +1,5 @@
+import { BtnColorSchemeMap, BtnVariantMap, ThreeButtonsArray, ThreeButtonsProps, TwoButtonsArray } from '../../types/buttons';
+import { ThreeButtons, TwoButtons } from '../Buttons/ButtonGroups';
 import Eyebrow from '../Eyebrow/Eyebrow';
 import Note, { NoteProps } from '../Note/Note';
 import './SplitInfo.scss'
@@ -57,8 +59,8 @@ type OutlineSplitInfoProps = {
     body?: string;
 
     // buttons
+    buttons?: Omit<ThreeButtonsProps, 'customColorSchemeMap' | 'customVariantMap'>;
 
-    // note?: NoteProps;
     note?: {
         icon?: 'info' | 'warning' | 'question';
         title?: string;
@@ -66,7 +68,10 @@ type OutlineSplitInfoProps = {
     }
 };
 
-function OutlineSplitInfo({eyebrow, header, body, note}:OutlineSplitInfoProps) {
+function OutlineSplitInfo({eyebrow, header, body, buttons, note}:OutlineSplitInfoProps) {
+    const customColorSchemeMap:BtnColorSchemeMap<3> = ['gold', 'gold', 'gold']
+    const customVariantMap:BtnVariantMap<3> = ['outline', 'outline', 'outline'];
+
     return (
         <div className='split_info-outline split_info-side'>
             <div className='split_info-outline-text'>
@@ -76,6 +81,15 @@ function OutlineSplitInfo({eyebrow, header, body, note}:OutlineSplitInfoProps) {
 
                 {body && <p className='split_info-outline-body body'>{body}</p>}
             </div>
+
+            {buttons && (
+                <ThreeButtons 
+                    className='split_info-outline-btns'
+                    customColorSchemeMap={customColorSchemeMap}
+                    customVariantMap={customVariantMap}
+                    {...buttons}
+                />
+            )}
 
             {/* <div className='split_info-outline-btns '></div> */}
 

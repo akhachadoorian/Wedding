@@ -1,8 +1,7 @@
+import { MapTrifoldIcon, VanIcon } from "@phosphor-icons/react";
 import { AccordionsProps } from "../../components/Accordions/Accordions";
 import { CopyOnlyProps } from "../../components/CopyOnly/CopyOnly";
-import { MediaWithCopyProps } from "../../components/MediaWithCopy/MediaWithCopy";
 import { SplitInfoProps } from "../../components/SplitInfo/SplitInfo";
-import { SmallTextTagHeroProps } from "../../layout/SmallTextTagHero/SmallTextTagHero";
 import { TextOnlyHeroProps } from "../../layout/TextOnlyHero/TextOnlyHero";
 
 // ----- Hero -----------------------------------------------
@@ -39,9 +38,9 @@ const hero: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
         },
 
         {
-          text: 'FAQs',
-          link: '/details#faqs',
-          target: '_self'
+            text: "FAQs",
+            link: "/details#faqs",
+            target: "_self",
         },
     ],
 };
@@ -53,18 +52,7 @@ const hero: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
 //   header: "The Clay Theatre",
 //   subtitle: "326 Walnut St, Green Cove Springs, FL 32043",
 //   body: "We are so excited to celebrate with you at The Clay Theatre, a beautifully restored historic venue nestled in downtown Green Cove Springs.",
-//   buttons: [
-//     {
-//       text: "View Directions",
-//       link: "https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUqDwgAEAAYQxjjAhiABBiKBTIPCAAQABhDGOMCGIAEGIoFMhIIARAuGEMYrwEYxwEYgAQYigUyDQgCEC4YgwEYsQMYgAQyDQgDEAAYgwEYsQMYgAQyBggEEEUYOTIGCAUQRRg8MgYIBhBFGDwyBggHEEUYPNIBCDE1NjRqMGo0qAIAsAIB&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=KZ00Fx6y0OWIMRYGQ-r5b-pC&daddr=326+Walnut+St,+Green+Cove+Springs,+FL+32043",
-//       target: "_blank",
-//     },
-//     {
-//       text: "Transportation",
-//       link: "/accommodations#transportation",
-//       target: "_self",
-//     },
-//   ],
+
 //   img: {
 //     src: "/images/ClayTheatre.jpg",
 //   },
@@ -74,25 +62,55 @@ const hero: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
 //     body: "Please keep in mind that while you may be able to get an Uber or another rideshare service to the venue, we have been informed that it is very difficult to get an Uber back into Jacksonville.",
 //   },
 // };
-const date = {
+const date: SplitInfoProps["solidContent"] = {
     eyebrow: "Wedding Day",
     header: "October 31st, 2026",
     body: "Saturday · Halloween",
     lowerText: {
-      header: "Address",
-      body: "326 Walnut St, Green Cove Springs, FL 32043"
-    }
+        header: "Address",
+        body: "326 Walnut St, Green Cove Springs, FL 32043",
+    },
 };
 
-const venue = {
+const venue: SplitInfoProps["outlineContent"] = {
     eyebrow: "The Venue",
     header: "The Clay Theatre",
     body: "We are so excited to celebrate with you at The Clay Theatre, a beautifully restored historic venue nestled in downtown Green Cove Springs.",
-    // buttons
+    buttons: {
+        buttons: [
+            {
+                text: "View Directions",
+                link: "https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUqDwgAEAAYQxjjAhiABBiKBTIPCAAQABhDGOMCGIAEGIoFMhIIARAuGEMYrwEYxwEYgAQYigUyDQgCEC4YgwEYsQMYgAQyDQgDEAAYgwEYsQMYgAQyBggEEEUYOTIGCAUQRRg8MgYIBhBFGDwyBggHEEUYPNIBCDE1NjRqMGo0qAIAsAIB&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=KZ00Fx6y0OWIMRYGQ-r5b-pC&daddr=326+Walnut+St,+Green+Cove+Springs,+FL+32043",
+                target: "_blank" as const,
+            },
+            {
+                text: "Transportation",
+                link: "/accommodations#transportation",
+                target: "_self" as const,
+            },
+        ],
+
+        
+        customDecorationMap: [
+          {
+            type: 'icon',
+            icon: MapTrifoldIcon
+          },
+          {
+            type: 'icon',
+            icon: VanIcon
+          },
+          // {
+          //   type: 'icon',
+          //   icon: LetterCircleP
+          // },
+        ]
+    },
+
     note: {
-      icon: "warning" as const,
-      body: "Getting a rideshare (ex: Uber) back to Jacksonville from the venue is very difficult. Please keep that in mind."
-    }
+        icon: "warning" as const,
+        body: "Getting a rideshare (ex: Uber) back to Jacksonville from the venue is very difficult. Please keep that in mind.",
+    },
 };
 
 const summary: SplitInfoProps = {
