@@ -3,15 +3,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
 import Accordions from "../../components/Accordions/Accordions";
 import CopyOnly from "../../components/CopyOnly/CopyOnly";
-import MediaWithCopy from "../../components/MediaWithCopy/MediaWithCopy";
-import Slant from "../../components/Slant/Slant";
+import SplitInfo from "../../components/SplitInfo/SplitInfo";
 import { useFadeIn } from "../../hooks/useFadeIn";
-import SmallTextTagHero from "../../layout/SmallTextTagHero/SmallTextTagHero";
+import SlantedSection from "../../layout/SlatedSection/SlantedSection";
+import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
 import './Details.scss';
 import content from './content';
-import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
-import SplitInfo from "../../components/SplitInfo/SplitInfo";
-import Button from "../../components/Buttons/Button";
+import InsetBackgroundSection from "../../layout/InsetBackgroundSection/InsetBackgroundSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,49 +59,6 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
 
             <section ref={venueRef} id="venue" className="venue-section base_section">
                 <SplitInfo {...content.summary} />
-
-                {/* <Slant size="small" order="top" color="--black-900" /> */}
-
-                {/* <div className="section-inner"> */}
-                    
-                    {/* TODO: get better image for venue */}
-                    {/* <MediaWithCopy 
-                        mediaSide="left"
-                        {...content.venue}
-                    /> */}
-
-                    {/* TODO: add parking  */}
-                    {/* <div ref={parkingRef} className="parking_grid">
-                        <div className="parking_grid-card">
-                            <div className="div_line"></div>
-                            <div className="parking_grid-text">
-                                <p className="heading-xs">Grass Lot Parking</p>
-
-                                <p className="body-s">Free parking is available in the grass lot connected to Clay Theatre, conveniently located right next to the venue for easy access.</p>
-                            </div>
-                        </div>
-
-                        <div className="parking_grid-card">
-                            <div className="div_line"></div>
-                            <div className="parking_grid-text">
-                                <p className="heading-xs">Grass Lot Parking</p>
-
-                                <p className="body-s">Free parking is available in the grass lot connected to Clay Theatre, conveniently located right next to the venue for easy access.</p>
-                            </div>
-                        </div>
-
-                        <div className="parking_grid-card">
-                            <div className="div_line"></div>
-                            <div className="parking_grid-text">
-                                <p className="heading-xs">Grass Lot Parking</p>
-
-                                <p className="body-s">Free parking is available in the grass lot connected to Clay Theatre, conveniently located right next to the venue for easy access.</p>
-                            </div>
-                        </div>
-                    </div> */}
-                {/* </div> */}
-
-                {/* <Slant size="small" order="bottom" color="--black-900" /> */}
             </section>
 
             <section ref={timelineRef} id="timeline" className="timeline-section base_section">
@@ -136,19 +91,35 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                 />
             </section> */}
 
-            <section id="venue" className="venue-section full-width">
-                <Slant size="small" order="top" color="--black-900" inverseDirection={true} />
+            <SlantedSection 
+                id="rehearsal" 
+                className="rehearsal-section"
 
-                {/* <div className="section-inner"> */}
-                    {/* TODO: rehearsal mixer  */}
-                {/* </div> */}
+                slantSettings={{
+                    depth: 'large',
+                    flipped: true
+                }}
+            >
+                {/* TODO: rehearsal mixer  */}
+                
+                <CopyOnly 
+                    styleOptions={{
+                        variation: "left",
+                        headingSize: "h2",
+                    }}
+                    {...content.rehearsalMixer.copyOnly} 
+                />
+            </SlantedSection>
 
-                <Slant size="small" order="bottom" color="--black-900" inverseDirection={true} />
-            </section>
-
-            <section id="faqs" className="faqs-section full_width_bg">
-                <div className="section-inner">
-                    <CopyOnly
+            <InsetBackgroundSection 
+                id="faqs" 
+                className="faqs-section"
+                backgroundImage="/assets/DiamondPattern.svg"
+                backgroundSize="60vw"
+                backgroundRepeat="repeat"
+                backgroundPosition="center"
+            >
+                <CopyOnly
                     styleOptions={{
                         variation: "center",
                         headingSize: "h2",
@@ -156,9 +127,8 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                     {...content.faqs.copyOnly}
                 />
 
-                    <Accordions {...content.faqs.accordions} />
-                </div>
-            </section>
+                <Accordions {...content.faqs.accordions} />
+            </InsetBackgroundSection>
         </>
     )
 }

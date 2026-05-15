@@ -1,82 +1,38 @@
 // _wedding.scss
 @use "../../styles/variables" as *;
 
-.details {
-    // .welcome-section, .quick_links-section {
-    // display: flex;
-    // flex-direction: column;
-    // gap: var(--space-700);
+.venue-section {
+    margin: var(--layout-section-padding) auto;
 
-    // @include big  {
-    //     gap: var(--space-1000);
-    // }
-    // }
+    .section-inner {
+        background-color: var(--black-900);
 
-    .venue-section {
-        margin: var(--layout-section-padding) auto;
-
-        .section-inner {
-            background-color: var(--black-900);
-
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-700);
-
-            @include big {
-                gap: var(--space-1000);
-            }
-        }
-    }
-
-    .faqs-section {
-        background-image: url("../../assets/DiamondPattern.svg");
-        background-repeat: repeat;
-        background-size: 60vw;
-        
-        padding: var(--layout-section-padding) var(--layout-column-margin);
-
-        @include big {
-            padding: calc(var(--space-1500) + var(--layout-section-padding)) var(--layout-column-margin);
-
-            margin-top: -70px; // TODO: Fix the top margin to hug to the previous block
-        }
-
-        .section-inner {
-            background-color: rgba(22, 24, 24, 0.90);
-            padding: var(--space-500) var(--space-300);
-
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-700);
-
-            @include big {
-                gap: var(--space-1000);
-                padding: var(--space-750);
-                max-width: calc(60.417vw + var(--space-700));
-                margin: 0 auto;
-            }
-        }
-    }
-}
-
-// TODO: Remove with component
-.parking_grid {
-    display: flex;
-    gap: var(--layout-column-margin);
-
-    &-card {
         display: flex;
         flex-direction: column;
-        gap: 32px;
+        gap: var(--space-700);
 
-        .div_line {
-            width: 100px;
-            height: 3px;
-            background: $gold;
-        }
-
-        .body-s {
-            margin-top: var(--space-200);
+        @include big {
+            gap: var(--space-1000);
         }
     }
 }
+
+.rehearsal-section {
+    // display: flex;
+    //     flex-direction: column;
+    //     gap: var(--space-700);
+
+    //     @include big {
+    //         gap: var(--space-1000);
+    //     }
+}
+
+.faqs-section {
+
+    @include big {
+
+        margin-top: -70px; // TODO: Fix the top margin to hug to the previous block
+    }
+}
+
+

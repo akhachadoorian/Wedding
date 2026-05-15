@@ -6,3 +6,14 @@ export type ImageProps = {
     aspectRatio?: 'landscape' | 'portrait' | 'square';
 }
 
+
+// #region Background Image
+
+export type BackgroundImageProps = {
+    backgroundImage?: string;
+    backgroundSize?: string;
+    backgroundPosition?: string;
+    backgroundRepeat?: string;
+}
+
+// #endregion 

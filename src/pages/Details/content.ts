@@ -187,6 +187,19 @@ const weddingParty = {
     copyOnly: weddingPartyCopyOnly,
 };
 
+// ----- Rehearsal -----------------------------------------------
+
+const rehearsalCopyOnly = {
+    eyebrow: "The evening before",
+    header: "Rehearsal Mixer ",
+    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
+}
+
+const rehearsalMixer = {
+    copyOnly: rehearsalCopyOnly
+}
+
+
 // ----- FAQs -----------------------------------------------
 
 const fAQsCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
@@ -221,6 +234,7 @@ const detailsContent = {
     timeline: timeline,
     dressCode: dressCode,
     weddingParty: weddingParty,
+    rehearsalMixer: rehearsalMixer,
     faqs: faqs,
 };
 
