@@ -129,7 +129,7 @@ export type BtnColorSchemeMap<N extends number> = RequireX<BtnColorScheme, N>;
 // #endregion
 
 // #region Button Decoration
-export type BtnArrowSettings = {
+type BtnArrowSettings = {
     type: 'arrow';
     arrowSide?: "left" | "right";
     arrowDirection?: ArrowDirectionProps;
@@ -140,7 +140,7 @@ type BtnIconSettings = {
     icon: Icon;
 }
 
-type BtnDecoration = BtnArrowSettings | BtnIconSettings;
+export type BtnDecoration = BtnArrowSettings | BtnIconSettings;
 
 export type BtnDecorationMap<N extends number> = NonEmptyMaxX<BtnDecoration, N>;
 
