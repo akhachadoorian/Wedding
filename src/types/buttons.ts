@@ -43,6 +43,8 @@ type LinkButtonSettings = {
     type: 'link';
     /** Label displayed inside the button */
     text: string;
+    /** Button decoration (icon, arrow) or left blank for none */
+    decoration?: BtnDecoration;
     /** React Router path or absolute URL the button links to */
     link: string;
     /** Whether the link opens in a new tab @default '_self' */
@@ -53,6 +55,8 @@ type ModalButtonSettings = {
     type: 'modal';
     /** Label displayed inside the button */
     text: string;
+    /** Button decoration (icon, arrow) or left blank for none */
+    decoration?: BtnDecoration;
     /** */
     modalID: string;
 }
@@ -62,11 +66,35 @@ type ModalButtonSettings = {
 export type ButtonSettingProps = {
     /** Label displayed inside the button */
     text: string;
+    /** Button decoration (icon, arrow) or left blank for none */
+    decoration?: BtnDecoration;
     /** React Router path or absolute URL the button links to */
     link: string;
     /** Whether the link opens in a new tab @default '_self' */
     target?: "_blank" | "_self";
 };
+
+
+/**
+ *
+ */
+export type ButtonProps = WithHTMLProps &
+    WithA11yProps & {
+        /** Text content and link destination */
+        btnSettings: ButtonSettingProps;
+
+        /** Visual style variant @default 'solid' */
+        variant?: BtnVariants;
+        /** Color theme applied to the button and arrow */
+        colorScheme?: BtnColorScheme;
+        /** */
+        decoration?: BtnDecoration;  // omit for no decoration
+    };
+
+
+// export type ButtonWithDecorationProps = {
+
+// }
 
 // #region Button Variants and Variants Map
 
@@ -97,7 +125,6 @@ export type BtnColorScheme = "gold" | "cream" | "black";
 export type BtnColorSchemeMap<N extends number> = RequireX<BtnColorScheme, N>;
 // #endregion
 
-
 // #region Button Decoration
 export type BtnArrowSettings = {
     type: 'arrow';
@@ -116,24 +143,7 @@ export type BtnDecorationMap<N extends number> = NonEmptyMaxX<BtnDecoration, N>;
 
 // #endregion 
 
-/**
- *
- */
-
-
-export type ButtonProps = WithHTMLProps &
-    WithA11yProps & {
-        /** Text content and link destination */
-        btnSettings: ButtonSettingProps;
-
-        /** Visual style variant @default 'solid' */
-        variant?: BtnVariants;
-        /** Color theme applied to the button and arrow */
-        colorScheme?: BtnColorScheme;
-        /** */
-        decoration?: BtnDecoration;  // omit for no decoration
-    };
-
+// #region Button Groups
 export type TwoButtonsArray = NonEmptyMaxX<ButtonSettingProps, 2>;
 
 export type TwoButtonsProps = WithHTMLProps & {
@@ -158,3 +168,4 @@ export type ThreeButtonsProps = WithHTMLProps & {
     customDecorationMap?: BtnDecorationMap<3>;
     noDecorationMap?: boolean;
 };
+// #endregion

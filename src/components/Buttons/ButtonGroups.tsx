@@ -18,14 +18,14 @@ export function TwoButtons({
             {buttons?.map((btn, idx) => {
                 return (
                     <Button
-                        className=""
+                        key={idx}
                         variant={customVariantMap[idx]}
                         colorScheme={customColorSchemeMap[idx]}
-                        decoration={noDecorationMap ? undefined : customDecorationMap[idx]}
                         btnSettings={{
                             text: btn.text,
                             link: btn.link,
                             target: btn.target ?? "_self",
+                            decoration: noDecorationMap ? btn.decoration : customDecorationMap[idx]
                         }}
                     />
                 );
@@ -50,14 +50,14 @@ export function ThreeButtons({
             {buttons?.map((btn, idx) => {
                 return (
                     <Button
-                        className=""
+                        key={idx}
                         variant={customVariantMap[idx]}
                         colorScheme={customColorSchemeMap[idx]}
-                        decoration={noDecorationMap ? undefined : customDecorationMap[idx]}
                         btnSettings={{
                             text: btn.text,
                             link: btn.link,
                             target: btn.target ?? "_self",
+                            decoration: noDecorationMap ? btn.decoration : customDecorationMap[idx]
                         }}
                     />
                 );

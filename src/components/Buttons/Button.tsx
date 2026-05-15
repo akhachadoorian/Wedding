@@ -16,25 +16,36 @@ export default function Button({
 
     variant = "solid",
     colorScheme = "gold",
-    decoration,
+    // decoration,
 
     className, // pulled out because this components constructs it for LenisLink
     ...rest // includes a11yProps and HTMLProps
 }: ButtonProps) {
     const decorationColor = (DECORATION_COLOR_MAP[colorScheme]?.[variant] ?? "--cream-500") as ColorVariables;
 
+    console.log("btnSettings", btnSettings)
+
     return (
         <LenisLink
-            className={`btn 
-                btn-variant-${variant} 
-                btn-color_scheme-${colorScheme} 
-                ${className ?? ""}
-            `}
+            className={`btn btn-variant-${variant} btn-color_scheme-${colorScheme} ${className ?? ""}`}
             to={btnSettings.link}
             target={btnSettings.target ?? "_self"}
             {...rest}
         >
-            {decoration && decoration.type === "arrow" ? (
+            {btnSettings.decoration && btnSettings.decoration.type === "arrow" ? (
+                <ArrowButtonInner
+                    arrowSide={btnSettings.decoration.arrowSide ?? "right"}
+                    arrowDirection={btnSettings.decoration.arrowDirection ? btnSettings.decoration.arrowDirection : btnSettings.decoration.arrowSide === "left" ? "top-left" : "top-right"}
+                    arrowColor={decorationColor}
+                    text={btnSettings.text}
+                />
+            ) : btnSettings.decoration && btnSettings.decoration.type === "icon" && btnSettings.decoration.icon ? (
+                <IconButtonInner icon={btnSettings.decoration.icon} iconColor={decorationColor} text={btnSettings.text} />
+            ) : (
+                <p className="btn-text">{btnSettings.text}</p>
+            )}
+
+            {/* {decoration && decoration.type === "arrow" ? (
                 <ArrowButtonInner
                     arrowSide={decoration.arrowSide ?? "right"}
                     arrowDirection={decoration.arrowDirection ? decoration.arrowDirection : decoration.arrowSide === "left" ? "top-left" : "top-right"}
@@ -45,7 +56,7 @@ export default function Button({
                 <IconButtonInner icon={decoration.icon} iconColor={decorationColor} text={btnSettings.text} />
             ) : (
                 <p className="btn-text">{btnSettings.text}</p>
-            )}
+            )} */}
         </LenisLink>
     );
 }

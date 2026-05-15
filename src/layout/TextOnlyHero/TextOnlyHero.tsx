@@ -64,7 +64,7 @@ function CenterTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eyeb
 
             {body && <p className="text_only_hero-body body-l">{body}</p>}
 
-            {buttons && <ThreeButtons className="text_only_hero-btns btns" buttons={buttons ?? []} />}
+            {buttons && <ThreeButtons className="text_only_hero-btns btns" noDecorationMap={true} buttons={buttons ?? []} />}
         </div>
     );
 }
@@ -80,7 +80,7 @@ function LeftTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eyebro
 
             {body && <p className="text_only_hero-body body-l">{body}</p>}
 
-            {buttons && <ThreeButtons className="text_only_hero-btns btns" buttons={buttons ?? []} />}
+            {buttons && <ThreeButtons className="text_only_hero-btns btns" noDecorationMap={true} buttons={buttons ?? []} />}
         </div>
     );
 }
@@ -99,7 +99,7 @@ function ColumnsTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eye
 
                     {body && <p className="text_only_hero-body body-l">{body}</p>}
 
-                    {buttons && <ThreeButtons className="text_only_hero-btns btns" buttons={buttons ?? []} />}
+                    {buttons && <ThreeButtons className="text_only_hero-btns btns" noDecorationMap={true} buttons={buttons ?? []} />}
                 </div>
             )}
         </div>

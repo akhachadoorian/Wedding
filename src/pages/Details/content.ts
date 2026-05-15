@@ -1,8 +1,8 @@
-import { MapTrifoldIcon, VanIcon } from "@phosphor-icons/react";
 import { AccordionsProps } from "../../components/Accordions/Accordions";
 import { CopyOnlyProps } from "../../components/CopyOnly/CopyOnly";
 import { SplitInfoProps } from "../../components/SplitInfo/SplitInfo";
 import { TextOnlyHeroProps } from "../../layout/TextOnlyHero/TextOnlyHero";
+import { MapTrifoldIcon, VanIcon } from "@phosphor-icons/react";
 
 // ----- Hero -----------------------------------------------
 // const hero: Omit<SmallTextTagHeroProps, "loaded"> = {
@@ -30,17 +30,26 @@ const hero: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
             text: "Venue Details",
             link: "/details#venue",
             target: "_self",
+            decoration: {
+                type: 'arrow',
+            }
         },
         {
             text: "View Timeline",
             link: "/details#timeline",
             target: "_self",
+            decoration: {
+                type: 'arrow',
+            }
         },
 
         {
             text: "FAQs",
             link: "/details#faqs",
             target: "_self",
+            decoration: {
+                type: 'arrow',
+            }
         },
     ],
 };
@@ -62,60 +71,54 @@ const hero: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
 //     body: "Please keep in mind that while you may be able to get an Uber or another rideshare service to the venue, we have been informed that it is very difficult to get an Uber back into Jacksonville.",
 //   },
 // };
-const date: SplitInfoProps["solidContent"] = {
-    eyebrow: "Wedding Day",
-    header: "October 31st, 2026",
-    body: "Saturday · Halloween",
+const date: SplitInfoProps["intro"] = {
+    upperText: {
+        eyebrow: "Wedding Day",
+        header: "October 31st, 2026",
+        body: "Saturday · Halloween",
+    },
+
     lowerText: {
-        header: "Address",
-        body: "326 Walnut St, Green Cove Springs, FL 32043",
+        header: "Rideshare warning",
+        body: "Please keep in mind that while you may be able to get an Uber or another rideshare service to the venue, we have been informed that it is very difficult to get an Uber back into Jacksonville.",
     },
 };
 
-const venue: SplitInfoProps["outlineContent"] = {
-    eyebrow: "The Venue",
-    header: "The Clay Theatre",
-    body: "We are so excited to celebrate with you at The Clay Theatre, a beautifully restored historic venue nestled in downtown Green Cove Springs.",
-    buttons: {
-        buttons: [
-            {
-                text: "View Directions",
-                link: "https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUqDwgAEAAYQxjjAhiABBiKBTIPCAAQABhDGOMCGIAEGIoFMhIIARAuGEMYrwEYxwEYgAQYigUyDQgCEC4YgwEYsQMYgAQyDQgDEAAYgwEYsQMYgAQyBggEEEUYOTIGCAUQRRg8MgYIBhBFGDwyBggHEEUYPNIBCDE1NjRqMGo0qAIAsAIB&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=KZ00Fx6y0OWIMRYGQ-r5b-pC&daddr=326+Walnut+St,+Green+Cove+Springs,+FL+32043",
-                target: "_blank" as const,
-            },
-            {
-                text: "Transportation",
-                link: "/accommodations#transportation",
-                target: "_self" as const,
-            },
-        ],
-
+const venue: SplitInfoProps["content"] = {
+    content: [
+        {
+            eyebrow: "The Venue",
+            header: "The Clay Theatre",
+            subtitle: "326 Walnut St, Green Cove Springs, FL 32043",
+            body: "We are so excited to celebrate with you at The Clay Theatre, a beautifully restored historic venue nestled in downtown Green Cove Springs.",
+            buttons: [
+                {
+                    text: "View Directions",
+                    link: "https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUqDwgAEAAYQxjjAhiABBiKBTIPCAAQABhDGOMCGIAEGIoFMhIIARAuGEMYrwEYxwEYgAQYigUyDQgCEC4YgwEYsQMYgAQyDQgDEAAYgwEYsQMYgAQyBggEEEUYOTIGCAUQRRg8MgYIBhBFGDwyBggHEEUYPNIBCDE1NjRqMGo0qAIAsAIB&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=KZ00Fx6y0OWIMRYGQ-r5b-pC&daddr=326+Walnut+St,+Green+Cove+Springs,+FL+32043",
+                    target: "_blank" as const,
+                    decoration: {
+                        type: "icon",
+                        icon: MapTrifoldIcon,
+                    },
+                },
+                {
+                    text: "Transportation",
+                    link: "/accommodations#transportation",
+                    target: "_self" as const,
+                    decoration: {
+                        type: "icon",
+                        icon: VanIcon,
+                    },
+                },
+            ],
+        },
         
-        customDecorationMap: [
-          {
-            type: 'icon',
-            icon: MapTrifoldIcon
-          },
-          {
-            type: 'icon',
-            icon: VanIcon
-          },
-          // {
-          //   type: 'icon',
-          //   icon: LetterCircleP
-          // },
-        ]
-    },
-
-    note: {
-        icon: "warning" as const,
-        body: "Getting a rideshare (ex: Uber) back to Jacksonville from the venue is very difficult. Please keep that in mind.",
-    },
+    ],
 };
 
 const summary: SplitInfoProps = {
-    solidContent: date,
-    outlineContent: venue,
+    intro: date,
+    content: venue,
 };
 
 // ----- Timeline -----------------------------------------------
