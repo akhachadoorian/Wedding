@@ -2,7 +2,7 @@ import { AccordionsProps } from "../../components/Accordions/Accordions";
 import { CopyOnlyProps } from "../../components/CopyOnly/CopyOnly";
 import { SplitInfoProps } from "../../components/SplitInfo/SplitInfo";
 import { TextOnlyHeroProps } from "../../layout/TextOnlyHero/TextOnlyHero";
-import { MapTrifoldIcon, VanIcon } from "@phosphor-icons/react";
+import { LetterCirclePIcon, MapTrifoldIcon, VanIcon } from "@phosphor-icons/react";
 
 // ----- Hero -----------------------------------------------
 // const hero: Omit<SmallTextTagHeroProps, "loaded"> = {
@@ -26,15 +26,16 @@ const hero: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
     header: "Your Guide to the Day",
     body: "Everything from venue details to the evening timeline — so you arrive knowing exactly what to expect.",
     buttons: [
-        {
-            text: "Venue Details",
-            link: "/details#venue",
-            target: "_self",
-            decoration: {
-                type: 'arrow',
-            }
-        },
-        {
+        // {
+        //     text: "Venue Details",
+        //     link: "/details#venue",
+        //     target: "_self",
+        //     decoration: {
+        //         type: 'arrow',
+        //     }
+        // },
+        { 
+            type: 'link',
             text: "View Timeline",
             link: "/details#timeline",
             target: "_self",
@@ -44,6 +45,7 @@ const hero: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
         },
 
         {
+            type: 'link',
             text: "FAQs",
             link: "/details#faqs",
             target: "_self",
@@ -93,6 +95,7 @@ const venue: SplitInfoProps["content"] = {
             body: "We are so excited to celebrate with you at The Clay Theatre, a beautifully restored historic venue nestled in downtown Green Cove Springs.",
             buttons: [
                 {
+                    type: 'link',
                     text: "View Directions",
                     link: "https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUqDwgAEAAYQxjjAhiABBiKBTIPCAAQABhDGOMCGIAEGIoFMhIIARAuGEMYrwEYxwEYgAQYigUyDQgCEC4YgwEYsQMYgAQyDQgDEAAYgwEYsQMYgAQyBggEEEUYOTIGCAUQRRg8MgYIBhBFGDwyBggHEEUYPNIBCDE1NjRqMGo0qAIAsAIB&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=KZ00Fx6y0OWIMRYGQ-r5b-pC&daddr=326+Walnut+St,+Green+Cove+Springs,+FL+32043",
                     target: "_blank" as const,
@@ -102,6 +105,7 @@ const venue: SplitInfoProps["content"] = {
                     },
                 },
                 {
+                    type: 'link',
                     text: "Transportation",
                     link: "/accommodations#transportation",
                     target: "_self" as const,
@@ -110,6 +114,32 @@ const venue: SplitInfoProps["content"] = {
                         icon: VanIcon,
                     },
                 },
+                {
+                    type: 'modal',
+                    text: 'parking',
+                    decoration: {
+                        type: 'icon',
+                        icon: LetterCirclePIcon
+                    },
+                    modalID: 'parking_modal',
+                    modalContent: {
+                        header: 'Parking',
+                        content: [
+                            {
+                               title: 'Grass Lot Parking',
+                               body: 'Free parking is available in the grass lot connected to Clay Theatre, conveniently located right next to the venue for easy access.',
+                            },
+                            {
+                               title: 'On-Street Parking',
+                               body: 'On-street parking and public parking along Spring Park are both available and just a short walk from the venue.',
+                            },
+                            {
+                               title: 'City Hall Parking',
+                               body: 'City Hall is just across the street from the venue. Per the venue, guests are welcome to park in their lot as the building is closed on Saturdays.',
+                            },
+                        ]
+                    }
+                }
             ],
         },
         

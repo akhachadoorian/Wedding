@@ -1,4 +1,5 @@
 import { ArrowDirectionProps } from "../components/ArrowBox/ArrowBox";
+import { ModalProps } from "../components/Modal/Modal";
 import { WithA11yProps, WithHTMLProps } from "./props";
 import { NonEmptyMaxX, RequireX } from "./utility";
 import { Icon } from "@phosphor-icons/react";
@@ -59,20 +60,22 @@ type ModalButtonSettings = {
     decoration?: BtnDecoration;
     /** */
     modalID: string;
+    /** */
+    modalContent: Omit<ModalProps, 'isOpen' | 'onClose'>;
 }
 
-// export type ButtonSettingProps = LinkButtonSettings | ModalButtonSettings;
+export type ButtonSettingProps = LinkButtonSettings | ModalButtonSettings;
 
-export type ButtonSettingProps = {
-    /** Label displayed inside the button */
-    text: string;
-    /** Button decoration (icon, arrow) or left blank for none */
-    decoration?: BtnDecoration;
-    /** React Router path or absolute URL the button links to */
-    link: string;
-    /** Whether the link opens in a new tab @default '_self' */
-    target?: "_blank" | "_self";
-};
+// export type ButtonSettingProps = {
+//     /** Label displayed inside the button */
+//     text: string;
+//     /** Button decoration (icon, arrow) or left blank for none */
+//     decoration?: BtnDecoration;
+//     /** React Router path or absolute URL the button links to */
+//     link: string;
+//     /** Whether the link opens in a new tab @default '_self' */
+//     target?: "_blank" | "_self";
+// };
 
 
 /**

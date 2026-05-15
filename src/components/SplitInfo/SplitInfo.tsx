@@ -1,10 +1,9 @@
-import { BtnColorSchemeMap, BtnVariantMap, ButtonSettingProps, ThreeButtonsArray, ThreeButtonsProps, TwoButtonsArray } from "../../types/buttons";
+import React from "react";
+import { ButtonSettingProps } from "../../types/buttons";
 import { WithHTMLProps } from "../../types/props";
 import { NonEmptyArray } from "../../types/utility";
 import Button from "../Buttons/Button";
-import { ThreeButtons, TwoButtons } from "../Buttons/ButtonGroups";
 import Eyebrow from "../Eyebrow/Eyebrow";
-import Note, { NoteProps } from "../Note/Note";
 
 import "./SplitInfo.scss";
 
@@ -82,8 +81,8 @@ function ContentSplitInfo({ content }: ContentSplitInfoProps) {
     return (
         <div className="split_info-content split_info-side">
             {content.map((c, idx) => (
-                <>
-                    <div className="split_info-content-section" key={idx}>
+                <React.Fragment key={idx}>
+                    <div className="split_info-content-section">
                     {c.eyebrow && <Eyebrow text={c.eyebrow} styleOptions={{ variation: "left", includeMargin: true }} />}
 
                     <h3 className="split_info-content-section-header heading-m">{c.header}</h3>
@@ -109,9 +108,7 @@ function ContentSplitInfo({ content }: ContentSplitInfoProps) {
                         <div className="split_info-content-line"></div>
                     )}
                 
-                </>
-
-
+                </React.Fragment>
             ))}
         </div>
     );

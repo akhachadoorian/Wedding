@@ -5,6 +5,8 @@ import ArrowBox, { ArrowDirectionProps } from "../ArrowBox/ArrowBox";
 import { Icon } from "@phosphor-icons/react";
 
 import "./Button.scss";
+import Modal from "../Modal/Modal";
+import { useState } from "react";
 
 const DECORATION_COLOR_MAP: Record<string, Record<string, ColorVariables>> = {
     cream: { solid: "--gold-500", outline: "--cream-500", lines: "--cream-500" },
@@ -23,45 +25,56 @@ export default function Button({
 }: ButtonProps) {
     const decorationColor = (DECORATION_COLOR_MAP[colorScheme]?.[variant] ?? "--cream-500") as ColorVariables;
 
-    console.log("btnSettings", btnSettings)
+    if (btnSettings.type === "modal") {
+        const [modalOpen, setModalOpen] = useState(false);
 
-    return (
-        <LenisLink
-            className={`btn btn-variant-${variant} btn-color_scheme-${colorScheme} ${className ?? ""}`}
-            to={btnSettings.link}
-            target={btnSettings.target ?? "_self"}
-            {...rest}
-        >
-            {btnSettings.decoration && btnSettings.decoration.type === "arrow" ? (
-                <ArrowButtonInner
-                    arrowSide={btnSettings.decoration.arrowSide ?? "right"}
-                    arrowDirection={btnSettings.decoration.arrowDirection ? btnSettings.decoration.arrowDirection : btnSettings.decoration.arrowSide === "left" ? "top-left" : "top-right"}
-                    arrowColor={decorationColor}
-                    text={btnSettings.text}
-                />
-            ) : btnSettings.decoration && btnSettings.decoration.type === "icon" && btnSettings.decoration.icon ? (
-                <IconButtonInner icon={btnSettings.decoration.icon} iconColor={decorationColor} text={btnSettings.text} />
-            ) : (
-                <p className="btn-text">{btnSettings.text}</p>
-            )}
+        return (
+            <>
+                <button 
+                    className={`btn btn-variant-${variant} btn-color_scheme-${colorScheme} ${className ?? ""}`}
+                    onClick={() => setModalOpen(true)}
+                >
+                    {btnSettings.decoration && btnSettings.decoration.type === "arrow" ? (
+                        <ArrowButtonInner
+                            arrowSide={btnSettings.decoration.arrowSide ?? "right"}
+                            arrowDirection={btnSettings.decoration.arrowDirection ? btnSettings.decoration.arrowDirection : btnSettings.decoration.arrowSide === "left" ? "top-left" : "top-right"}
+                            arrowColor={decorationColor}
+                            text={btnSettings.text}
+                        />
+                    ) : btnSettings.decoration && btnSettings.decoration.type === "icon" && btnSettings.decoration.icon ? (
+                        <IconButtonInner icon={btnSettings.decoration.icon} iconColor={decorationColor} text={btnSettings.text} />
+                    ) : (
+                        <p className="btn-text">{btnSettings.text}</p>
+                    )}
+                </button>
 
-            {/* {decoration && decoration.type === "arrow" ? (
-                <ArrowButtonInner
-                    arrowSide={decoration.arrowSide ?? "right"}
-                    arrowDirection={decoration.arrowDirection ? decoration.arrowDirection : decoration.arrowSide === "left" ? "top-left" : "top-right"}
-                    arrowColor={decorationColor}
-                    text={btnSettings.text}
-                />
-            ) : decoration && decoration.type === "icon" && decoration.icon ? (
-                <IconButtonInner icon={decoration.icon} iconColor={decorationColor} text={btnSettings.text} />
-            ) : (
-                <p className="btn-text">{btnSettings.text}</p>
-            )} */}
-        </LenisLink>
-    );
+                
+                <Modal {...btnSettings.modalContent} id={btnSettings.modalID} isOpen={modalOpen} onClose={() => setModalOpen(false)}/>
+
+                
+            </>
+        );
+    } else {
+        return (
+            <LenisLink className={`btn btn-variant-${variant} btn-color_scheme-${colorScheme} ${className ?? ""}`} to={btnSettings.link} target={btnSettings.target ?? "_self"} {...rest}>
+                {btnSettings.decoration && btnSettings.decoration.type === "arrow" ? (
+                    <ArrowButtonInner
+                        arrowSide={btnSettings.decoration.arrowSide ?? "right"}
+                        arrowDirection={btnSettings.decoration.arrowDirection ? btnSettings.decoration.arrowDirection : btnSettings.decoration.arrowSide === "left" ? "top-left" : "top-right"}
+                        arrowColor={decorationColor}
+                        text={btnSettings.text}
+                    />
+                ) : btnSettings.decoration && btnSettings.decoration.type === "icon" && btnSettings.decoration.icon ? (
+                    <IconButtonInner icon={btnSettings.decoration.icon} iconColor={decorationColor} text={btnSettings.text} />
+                ) : (
+                    <p className="btn-text">{btnSettings.text}</p>
+                )}
+            </LenisLink>
+        );
+    }
 }
 
-function IconButtonInner({ text, icon, iconColor }: { text: string; icon: Icon, iconColor: ColorVariables }) {
+function IconButtonInner({ text, icon, iconColor }: { text: string; icon: Icon; iconColor: ColorVariables }) {
     const IconComponent = icon;
     return (
         <>
@@ -74,6 +87,7 @@ function IconButtonInner({ text, icon, iconColor }: { text: string; icon: Icon, 
 function ArrowButtonInner({ text, arrowSide, arrowDirection, arrowColor }: { text: string; arrowSide: "left" | "right"; arrowDirection: ArrowDirectionProps; arrowColor: ColorVariables }) {
     return (
         <>
+            {arrowSide === "left" && <ArrowBox color={arrowColor} arrowDirection={arrowDirection} />}
 
             <p className="btn-text">{text}</p>
 
