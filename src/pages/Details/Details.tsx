@@ -10,6 +10,7 @@ import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
 import './Details.scss';
 import content from './content';
 import InsetBackgroundSection from "../../layout/InsetBackgroundSection/InsetBackgroundSection";
+import ParallaxingDrinkSection from "../../layout/ParallaxingDrinkSection/ParallaxingDrinkSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,32 +19,8 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
     const venueRef = useFadeIn<HTMLDivElement>();
     const timelineRef = useFadeIn<HTMLDivElement>();
     const dressCodeRef = useFadeIn<HTMLDivElement>();
-    const parkingRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const el = parkingRef.current;
-        if (!el) return;
-
-        const ctx = gsap.context(() => {
-            gsap.fromTo(
-                ".div_line",
-                { width: 0 },
-                {
-                    width: 100,
-                    duration: 0.6,
-                    stagger: 0.2,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 80%",
-                        toggleActions: "play none none none",
-                    },
-                }
-            );
-        }, el);
-
-        return () => ctx.revert();
-    }, []);
+    const rehearsalRef = useFadeIn<HTMLDivElement>();
+    const faqsRef = useFadeIn<HTMLDivElement>();
 
     return (
         <>
@@ -61,7 +38,7 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                 <SplitInfo {...content.summary} />
             </section>
 
-            <section ref={timelineRef} id="timeline" className="timeline-section base_section">
+            {/* <section ref={timelineRef} id="timeline" className="timeline-section base_section">
                 <CopyOnly
                     styleOptions={{
                         variation: "center",
@@ -69,7 +46,21 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                     }}
                     {...content.timeline.copyOnly}
                 />
-            </section>
+            </section> */}
+
+            <ParallaxingDrinkSection 
+                className="timeline-section"
+                ref={timelineRef} 
+                id="timeline"
+            >
+               <CopyOnly
+                    styleOptions={{
+                        variation: "center",
+                        headingSize: "h2",
+                    }}
+                    {...content.timeline.copyOnly}
+                /> 
+            </ParallaxingDrinkSection>
 
             <section ref={dressCodeRef} id="dress_code" className="dress_code-section base_section">
                 <CopyOnly
@@ -94,6 +85,7 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
             <SlantedSection 
                 id="rehearsal" 
                 className="rehearsal-section"
+                ref={rehearsalRef}
 
                 slantSettings={{
                     depth: 'large',
@@ -114,6 +106,8 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
             <InsetBackgroundSection 
                 id="faqs" 
                 className="faqs-section"
+                ref={faqsRef}
+
                 backgroundImage="/assets/DiamondPattern.svg"
                 backgroundSize="60vw"
                 backgroundRepeat="repeat"

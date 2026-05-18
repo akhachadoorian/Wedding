@@ -1,11 +1,11 @@
 import { TwoButtonsArray } from "../../types/buttons";
-import { TwoButtons } from "../Buttons/Button";
 import Eyebrow from "../Eyebrow/Eyebrow";
 
-import "./MediaWithCopy.scss";
-import { ImageProps } from "../../types/images";
 import ReactMarkdown from "react-markdown";
+import { ImageProps } from "../../types/images";
 import Note from "../Note/Note";
+import "./MediaWithCopy.scss";
+import { TwoButtons } from "../Buttons/ButtonGroups";
 
 export type MediaWithCopyProps = {
     className?: string;
@@ -43,7 +43,7 @@ export default function MediaWithCopy({ className, mediaSide = 'right', headingS
                         {body && <ReactMarkdown components={{ p: ({ children }) => <p className={"body"}>{children}</p> }}>{body}</ReactMarkdown>}
                     </div>
 
-                    {buttons && buttons?.length != 0 && <TwoButtons className="media_with_copy-btns" buttons={buttons ?? []} />}
+                    {buttons && <TwoButtons className="media_with_copy-btns" buttons={buttons ?? []} />}
 
                     {note && <Note variation="left" backgroundColor="--black-700" {...note} />}
                 </div>

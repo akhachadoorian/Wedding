@@ -29,7 +29,13 @@ function Footer({}) {
             <div className="footer-wrapper">
                 <div className="footer-upper">
                     <div className="footer-left">
-                        <Eyebrow variation="left" color="--gold-500" text="October 31st, 2026" />
+                        <Eyebrow 
+                            styleOptions={{
+                                variation:"left",
+                                color:"--gold-500"
+                            }}
+                              text="October 31st, 2026" 
+                        />
 
                         <h5 className="heading-xl">
                             Lets celebrate <span className="gold-italic">together</span>

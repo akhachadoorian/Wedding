@@ -84,7 +84,10 @@ export default function SmallTextTagHero({ loaded, eyebrow, heading, body, butto
     return (
         <section className={`small_text_tag_hero-wrapper ${loaded ? "is-loaded" : "is-hidden"}`}>
             <div className="small_text_tag_hero-left">
-                {eyebrow && <Eyebrow ref={eyebrowRef} className={"small_text_tag_hero-e"} text={eyebrow} color="--gold-500" variation="left"/>}
+                {eyebrow && <Eyebrow ref={eyebrowRef} className={"small_text_tag_hero-e"} text={eyebrow} styleOptions={{
+                    color:"--gold-500",
+                    variation:"left"
+                }}/>}
 
                 <h1 ref={h1Ref} className="small_text_tag_hero-title">{heading}</h1>
 

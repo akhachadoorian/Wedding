@@ -52,6 +52,7 @@
 
 // ── SCSS variables ────────────────────────────────────────────
 $max-width: var(--max-width);
+$max-width-bp: 1600px; // raw value for use in media queries
 
 // ──── Fonts ───────────────────────────────────
 $font-serif: "Instrument Serif", serif;

@@ -13,10 +13,9 @@
             max-width: 75.833vw;
         }
 
-        @media (min-width: $max-width) {
+        @include big($max-width-bp) {
             max-width: 60.417vw;
         }
-
     }
 
     &-text {
@@ -47,9 +46,9 @@
             max-width: 75.833vw;
         }
 
-        @media (min-width: $max-width) {
-            max-width: 60.417vw;
-        }
+        @include big($max-width-bp) {
+                max-width: 60.417vw;
+            }
     }
 
     // Centered single-column layout; narrower max-width for optimal line length.
@@ -129,7 +128,7 @@
         color: var(--black-1000);
 
         a {
-            color:var(--gold-500);
+            color: var(--gold-500);
             &:hover {
                 text-decoration-color: var(--gold-500);
             }

@@ -129,7 +129,7 @@ export type BtnColorSchemeMap<N extends number> = RequireX<BtnColorScheme, N>;
 // #endregion
 
 // #region Button Decoration
-type BtnArrowSettings = {
+export type BtnArrowSettings = {
     type: 'arrow';
     arrowSide?: "left" | "right";
     arrowDirection?: ArrowDirectionProps;

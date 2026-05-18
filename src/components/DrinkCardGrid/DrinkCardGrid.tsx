@@ -1,14 +1,13 @@
-import React from "react";
 import ReactMarkdown from "react-markdown";
-import { Link } from "react-router-dom";
 
-import { MaxTwo } from "../../types/utility";
 import ArrowBox from "../ArrowBox/ArrowBox";
-import Drinks, { DrinkTypes } from "../Drinks/Drinks";
+import Drinks from "../Drinks/Drinks";
 
-import "./DrinkCardGrid.scss";
-import { ResponsiveClampSize } from "../../types/size";
 import { LenisLink } from "../../hooks/LenisLink";
+import { ResponsiveClampSize } from "../../types/size";
+import "./DrinkCardGrid.scss";
+import { MaxX } from "../../types/utility";
+import { DrinkTypes } from "../Drinks/drinks.type";
 
 type DrinkSettings = {
     type: DrinkTypes;
@@ -24,7 +23,7 @@ export type DrinkCardProps = {
     link?: string;
     target?: "_blank" | "_self";
 
-    drinks?: MaxTwo<DrinkSettings>;
+    drinks?: MaxX<DrinkSettings, 2>;
 };
 
 export type DrinkCardGridProps = {

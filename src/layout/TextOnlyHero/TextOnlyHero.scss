@@ -55,7 +55,7 @@
                 // max-width: 60.417vw;
             }
 
-            @media (min-width: $max-width) {
+            @include big($max-width-bp) {
                 max-width: 60.417vw;
             }
         }

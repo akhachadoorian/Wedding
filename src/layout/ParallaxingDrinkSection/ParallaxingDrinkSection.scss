@@ -1,0 +1,22 @@
+@use "../../styles/variables" as *;
+
+.parallaxing_drink {
+    &-section {
+        padding: var(--layout-section-padding) var(--layout-column-margin);
+        margin: var(--layout-section-padding) auto;
+        position: relative;
+
+        @include big {
+            // max-width: var(--max-width);
+        }
+    }
+    
+    &-drink {
+        position: absolute;
+        top: 0;
+        left: 0;
+        
+        width: 100%;
+        height: 100%;
+    }
+}

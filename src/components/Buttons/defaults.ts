@@ -1,5 +1,4 @@
 import { BtnArrowSettings, BtnColorSchemeMap, BtnDecorationMap, BtnVariantMap } from "../../types/buttons";
-import { ArrowDirectionProps } from "../ArrowBox/ArrowBox";
 
 // #region Btn Arrow Defaults
 const RIGHT_ARROW: BtnArrowSettings = {

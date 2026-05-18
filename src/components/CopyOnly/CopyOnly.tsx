@@ -124,8 +124,6 @@ export default function CopyOnly({
                             <h5 className="subtitle mwc-animate">{subtitle}</h5>
                         )}
 
-                        {/* {body && <ReactMarkdown components={{ p: ({ children }) => <p className={`body-md ${headingSize === "h2" ? "body-l" : "body"}`}>{children}</p> }}>{body}</ReactMarkdown>} */}
-
                         {body && <ReactMarkdown components={{ p: ({ children }) => <p className={`mwc-animate copy-body ${styleOptions.headingSize === "h2" ? "body-l" : "body"}`}>{children}</p> }}>{body}</ReactMarkdown>}
 
                         {buttons && (

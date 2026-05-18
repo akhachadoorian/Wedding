@@ -1,20 +1,49 @@
 import { useEffect, useRef } from "react";
 
-import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
-import Drinks, { DrinkTypes } from "../../components/Drinks/Drinks";
-import Eyebrow from "../../components/Eyebrow/Eyebrow";
-import { ThreeButtonsArray } from "../../types/buttons";
 import gsap from "gsap";
 import { Draggable } from "gsap/Draggable";
+import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
+import Drinks from "../../components/Drinks/Drinks";
+import Eyebrow from "../../components/Eyebrow/Eyebrow";
+import { ThreeButtonsArray } from "../../types/buttons";
 
+import { DrinkConfig } from "../../components/Drinks/drinks.type";
+import { NonEmptyArray } from "../../types/utility";
 import "./DraggableHero.scss";
 
 gsap.registerPlugin(Draggable);
+
+// #region --- Default Drinks -----------------------------
+
+const DEFAULT_DRINKS: NonEmptyArray<DrinkConfig> = [
+    {
+        type: "martini",
+        desktopPosition: { x: 0, y: 0, rotate: 0 },
+        mobilePosition: { x: 0, y: 0, rotate: 0 },
+    },
+    {
+        type: "wine",
+        desktopPosition: { x: "14vw", y: "-5.5vw", rotate: 12 },
+        mobilePosition: { x: "21vw", y: "11vw", rotate: 8 },
+    },
+    {
+        type: "highball",
+        desktopPosition: { x: "-3.5vw", y: "8vw", rotate: -8 },
+        mobilePosition: { x: "-8vw", y: "21vw", rotate: -5 },
+    },
+];
+
+const DEFAULT_DRINK_SIZE = {
+    size: { minSize: 150, desiredSize: 225, maxSize: 275 },
+};
+
+// #endregion ---------------------------------------------
 
 type DraggableHeroProps = {
     loaded: boolean;
 
     // Fields
+    drinks?: NonEmptyArray<DrinkConfig>;
     eyebrow?: string;
     header: string;
     subtitle?: string;
@@ -22,20 +51,8 @@ type DraggableHeroProps = {
     buttons?: ThreeButtonsArray;
 };
 
-type DrinkPosition = { x: number; y: number; rotate: number };
-type DrinkConfig = { type: DrinkTypes; desktop: DrinkPosition; mobile: DrinkPosition };
 
-const drinks: DrinkConfig[] = [
-    { type: "cocktail", desktop: { x: 0,   y: 0,   rotate: 0  }, mobile: { x: 0,   y: 0,  rotate: 0  } },
-    { type: "martini",  desktop: { x: 200, y: -80, rotate: 12 }, mobile: { x: 80,  y: 40, rotate: 8  } },
-    { type: "wine",     desktop: { x: -50, y: 120, rotate: -8 }, mobile: { x: -30, y: 80, rotate: -5 } },
-];
-
-const drinkSize = {
-    size: { minSize: 150, desiredSize: 225, maxSize: 275 },
-};
-
-export default function DraggableHero({ loaded, eyebrow, header, subtitle, body, buttons }: DraggableHeroProps) {
+export default function DraggableHero({ loaded, drinks = DEFAULT_DRINKS, eyebrow, header, subtitle, body, buttons }: DraggableHeroProps) {
     const drinksRefs = useRef<(HTMLDivElement | null)[]>([]);
     const sectionRef = useRef<HTMLElement>(null);
     useEffect(() => {
@@ -43,7 +60,7 @@ export default function DraggableHero({ loaded, eyebrow, header, subtitle, body,
             const el = drinksRefs.current[i];
             if (!el) return null;
 
-            const pos = window.matchMedia("(min-width: 750px)").matches ? drink.desktop : drink.mobile;
+            const pos = window.matchMedia("(min-width: 750px)").matches ? drink.desktopPosition : drink.mobilePosition;
             gsap.set(el, { x: pos.x, y: pos.y, rotation: pos.rotate });
 
             const [d] = Draggable.create(el, {
@@ -87,7 +104,7 @@ export default function DraggableHero({ loaded, eyebrow, header, subtitle, body,
                         className="draggable_hero-drink"
 
                     >
-                        <Drinks type={drink.type} size={drinkSize} />
+                        <Drinks type={drink.type} size={DEFAULT_DRINK_SIZE} />
                     </div>
                 ))}
             </div>

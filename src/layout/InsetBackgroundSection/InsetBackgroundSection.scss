@@ -10,6 +10,13 @@
     flex-direction: column;
     gap: var(--space-700);
 
+    @include big {
+            gap: var(--space-1000);
+            padding: var(--space-750);
+            max-width: calc(60.417vw + var(--space-700));
+            margin: $space-800 auto;
+        }
+
     &-section {
         padding: var(--layout-section-padding) var(--layout-column-margin);
 

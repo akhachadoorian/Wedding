@@ -238,7 +238,7 @@ export default function SplitHero({ loaded, heading, eyebrow, btn, image }: Spli
                                             color: "--gold-500",
                                         }}
                                         text={eyebrow.text}
-                                        doubleText={eyebrow.doubleText ?? ''}
+                                        doubleText={eyebrow.doubleText ?? ""}
                                     />
                                 </div>
                             )}
@@ -254,17 +254,7 @@ export default function SplitHero({ loaded, heading, eyebrow, btn, image }: Spli
                             </h1>
                         </div>
 
-                        {btn && (
-                            <Button
-                                style="solid"
-                                theme="gold"
-                                btnSettings={{
-                                    text: btn.text,
-                                    link: btn.link,
-                                }}
-                                includeArrow={true}
-                            />
-                        )}
+                        {btn && <Button variant="solid" colorScheme="gold" btnSettings={btn} />}
                     </div>
                 </div>
 
