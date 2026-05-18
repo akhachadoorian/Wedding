@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# Alex & Max — Wedding Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A custom wedding website for Alex & Max, built with React + TypeScript. Live at [alexmaxwedding.com](https://alexmaxwedding.com).
 
-## Available Scripts
+## Pages
 
-In the project directory, you can run:
+| Route | Description |
+|---|---|
+| `/` | Home — hero, wedding overview, and quick-links |
+| `/details` | Ceremony details, venue info, and day-of timeline |
+| `/accommodations` | Hotel blocks, parking, and travel directions |
+| `/rsvp` | RSVP form |
+| `/registry` | Gift registry |
+| `/timeline` | Full day timeline |
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React 19** + **TypeScript** via **Vite**
+- **GSAP** + **Lenis** — scroll animations and smooth scrolling
+- **Framer Motion** (`motion`) — component-level animations
+- **React Router v7** — client-side routing
+- **Sass** — styling
+- **Storybook** — component development and documentation
+- **Vitest** — unit tests
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+```bash
+npm install
+npm start        # dev server at http://localhost:3000
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Scripts
 
-### `npm run build`
+| Command | Description |
+|---|---|
+| `npm start` | Start dev server (exposed on local network) |
+| `npm run build` | Type-check and build for production → `dist/` |
+| `npm test` | Run unit tests with Vitest |
+| `npm run preview` | Preview the production build locally |
+| `npm run deploy` | Build and deploy to GitHub Pages |
+| `npm run storybook` | Start Storybook at port 6006 |
+| `npm run generate` | Run content generation script |
+| `npm run generate-content` | Generate page content |
+| `npm run generate-timeline` | Generate timeline content |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Deployment
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The site deploys to GitHub Pages via the `gh-pages` package:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm run deploy
+```
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This runs `npm run build` first, then publishes the `dist/` folder.
