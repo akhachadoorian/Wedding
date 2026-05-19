@@ -48,7 +48,6 @@ function App() {
                 {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
                 <Router>
                     <TransitionProvider>
-                        {/* FIXME: FIX NAV*/}
                         <Navigation />
                         {/* <PageTransition /> */}
                         <main>
