@@ -10,7 +10,9 @@ import type { LenisRef } from "lenis/react";
 import Footer from "./layout/Footer/Footer";
 import LoadingScreen from "./layout/LoadingScreen/LoadingScreen";
 import Navigation from "./layout/Navigation/Navigation";
+import PageTransition from "./layout/PageTransition/PageTransition";
 import { GlobalTooltip, TooltipProvider } from "./layout/GlobalTooltip/GlobalTooltip";
+import { TransitionProvider } from "./context/TransitionContext";
 
 import Accommodations from "./pages/Accommodations/Accommodations";
 import Details from "./pages/Details/Details";
@@ -18,6 +20,7 @@ import RSVP from "./pages/RSVP/RSVP";
 import Registry from "./pages/Registry/Registry";
 import Timeline from "./pages/Timeline/Timeline";
 import Home from "./pages/Home/Home";
+import CustomRouter from "./routes/Router";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,9 +28,7 @@ gsap.registerPlugin(ScrollTrigger);
 const DISABLE_LOADER = true;
 
 function App() {
-
     const [loaded, setLoaded] = useState(DISABLE_LOADER);
-
 
     const lenisRef = useRef<LenisRef>(null);
 
@@ -41,26 +42,20 @@ function App() {
         return () => gsap.ticker.remove(update);
     }, []);
 
-
-
     return (
         <TooltipProvider>
             <ReactLenis root options={{ autoRaf: false, duration: 1.2, anchors: true, smoothWheel: true, syncTouch: false, naiveDimensions: true, stopInertiaOnNavigate: true }} ref={lenisRef}>
                 {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
                 <Router>
-                    {/* FIXME: FIX NAV*/}
-                    <Navigation />
-                    <main>
-                        <Routes>
-                            <Route path="/" element={<Home loaded={loaded} />} />
-                            <Route path="/details" element={<Details loaded={loaded} />} />
-                            <Route path="/accommodations" element={<Accommodations loaded={loaded} />} />
-                            <Route path="/registry" element={<Registry loaded={loaded} />} />
-                            <Route path="/rsvp" element={<RSVP loaded={loaded} />} />
-                            <Route path="/timeline" element={<Timeline loaded={loaded} />} />
-                        </Routes>
-                    </main>
-                    <Footer />
+                    <TransitionProvider>
+                        {/* FIXME: FIX NAV*/}
+                        <Navigation />
+                        {/* <PageTransition /> */}
+                        <main>
+                            <CustomRouter loaded={loaded} />
+                        </main>
+                        <Footer />
+                    </TransitionProvider>
                 </Router>
                 <GlobalTooltip />
             </ReactLenis>

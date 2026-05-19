@@ -31,23 +31,12 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                 styleOptions={{
                     variation: 'columns',
                     theme: 'art-deco-bg',
-                    // inset: true
                 }} 
             />
 
             <section ref={venueRef} id="venue" className="venue-section base_section">
                 <SplitInfo {...content.summary} />
             </section>
-
-            {/* <section ref={timelineRef} id="timeline" className="timeline-section base_section">
-                <CopyOnly
-                    styleOptions={{
-                        variation: "center",
-                        headingSize: "h2",
-                    }}
-                    {...content.timeline.copyOnly}
-                />
-            </section> */}
 
             <ParallaxingDrinkSection 
                 className="timeline-section"
