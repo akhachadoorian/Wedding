@@ -1,7 +1,7 @@
 import { PropsWithChildren, useEffect, useRef } from "react";
 
 import Drinks from "../../components/Drinks/Drinks";
-import { DrinkConfig } from "../../components/Drinks/drinks.type";
+import { DrinkConfig, DrinkConfig2 } from "../../components/Drinks/drinks.type";
 import { WithHTMLProps } from "../../types/props";
 import { NonEmptyArray } from "../../types/utility";
 import gsap from "gsap";
@@ -10,21 +10,39 @@ import "./ParallaxingDrinkSection.scss";
 
 // #region --- Default Drinks -----------------------------
 
-const DEFAULT_DRINKS: NonEmptyArray<DrinkConfig> = [
+// const DEFAULT_DRINKS: NonEmptyArray<DrinkConfig> = [
+//     {
+//         type: "martini",
+//         desktopPosition: { x: "0vw", y: "-5vh", rotate: 30 },
+//         mobilePosition: { x: 0, y: 0, rotate: 30 },
+//     },
+//     {
+//         type: "wine",
+//         desktopPosition: { x: "2vw", y: 0, rotate: -30 },
+//         mobilePosition: { x: 0, y: 0, rotate: -30 },
+//     },
+//     {
+//         type: "highball",
+//         desktopPosition: { x: "-3.5vw", y: "80vh", rotate: -25 },
+//         mobilePosition: { x: "-8vw", y: "80vh", rotate: -25 },
+//     },
+// ];
+// TODO: mobile
+const DEFAULT_DRINKS: NonEmptyArray<DrinkConfig2> = [
     {
         type: "martini",
-        desktopPosition: { x: 0, y: 0, rotate: 0 },
-        mobilePosition: { x: 0, y: 0, rotate: 0 },
+        desktopPosition: { top: "-5%", left: 0, rotate: 30 },
+        mobilePosition: { top: "-5%", left: 0, rotate: 30 },
     },
     {
         type: "wine",
-        desktopPosition: { x: "14vw", y: "-5.5vw", rotate: 12 },
-        mobilePosition: { x: "21vw", y: "11vw", rotate: 8 },
+        desktopPosition: { top: '15%', left: '10%', rotate: -30 },
+        mobilePosition: { top: '15%', left: '10%', rotate: -30 },
     },
     {
         type: "highball",
-        desktopPosition: { x: "-3.5vw", y: "8vw", rotate: -8 },
-        mobilePosition: { x: "-8vw", y: "21vw", rotate: -5 },
+        desktopPosition: { top: "80%", left: "90%", rotate: -25 },
+        mobilePosition:  { top: "80%", left: "90%", rotate: -25 },
     },
 ];
 
@@ -32,61 +50,74 @@ const DEFAULT_DRINK_SIZE = {
     size: { minSize: 150, desiredSize: 225, maxSize: 275 },
 };
 
+const PARALLAX_SPEED = 60;
+
 // #endregion ---------------------------------------------
 
-type ParallaxingDrinkSectionProps = WithHTMLProps & PropsWithChildren & {
-    drinks?: NonEmptyArray<DrinkConfig>;
-};
+type ParallaxingDrinkSectionProps = WithHTMLProps &
+    PropsWithChildren & {
+        drinks?: NonEmptyArray<DrinkConfig2>;
+    };
 
-export default function ParallaxingDrinkSection({ 
+export default function ParallaxingDrinkSection({
     drinks = DEFAULT_DRINKS,
 
-    children, 
-    className, 
-    ...htmlProps }: ParallaxingDrinkSectionProps) {
+    children,
+    className,
+    ...htmlProps
+}: ParallaxingDrinkSectionProps) {
     const drinksRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-    useEffect(() => { // FIXME: finish this
-        const instances = drinks.map((drink, i) => {
+    useEffect(() => {
+        const tweens = drinks.map((drink, i) => {
             const el = drinksRefs.current[i];
             if (!el) return null;
 
-            const pos = window.matchMedia("(min-width: 750px)").matches ? drink.desktopPosition : drink.desktopPosition;
-            gsap.set(el, { x: pos.x, y: pos.y, rotation: pos.rotate });
+            const pos = window.matchMedia("(min-width: 750px)").matches ? drink.desktopPosition : drink.mobilePosition;
+            gsap.set(el, { top: pos.top, left: pos.left, rotation: pos.rotate, willChange: "transform" });
 
-            gsap.to(drink, {
+            return gsap.to(el, {
+                y: `+=${PARALLAX_SPEED}`,
                 ease: "none",
                 scrollTrigger: {
                     trigger: ".parallaxing_drink-section",
-                    start: "top bottom", // Start when top of container hits bottom of viewport
-                    end: "bottom top", // End when bottom of container leaves top of viewport
-                    scrub: true, // Smoothly link to scroll
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1,
                 },
             });
         });
 
         return () => {
-            // instances.forEach((d) => {
-            //     // d?.kill();
-            // });
+            tweens.forEach((t) => t?.scrollTrigger?.kill());
         };
     }, []);
 
     return (
         <section {...htmlProps} className={`parallaxing_drink-section ${className ?? ""}`}>
+            <div className="parallaxing_drink-drinks">
             {drinks.map((drink, i) => (
-                <div
-                    key={drink.type}
-                    ref={(el) => {
-                        drinksRefs.current[i] = el;
-                    }}
-                    className="parallaxing_drink-drink"
-                >
-                    <Drinks type={drink.type} size={DEFAULT_DRINK_SIZE} />
-                </div>
+                // <div
+                //     key={drink.type}
+                //     ref={(el) => {
+                //         drinksRefs.current[i] = el;
+                //     }}
+                //     className="parallaxing_drink-drink"
+                // >
+                    <Drinks 
+                        key={drink.type} 
+                        className="parallaxing_drink-drink" 
+                        ref={(el) => {
+                            drinksRefs.current[i] = el;
+                        }}
+                        type={drink.type} 
+                        size={DEFAULT_DRINK_SIZE} 
+                    />
+                // </div>
             ))}
+            </div>
 
-            <div className="parallaxing_drink">{children}</div>
+            <div className="parallaxing_drink-content">{children}</div>
         </section>
     );
 }

@@ -11,18 +11,19 @@ import "./SimpleTable.scss";
  * 
  * @see {@link WithHTMLProps} for inherited styling and layout props.
  */
-export type SimpleTableProps = WithHTMLProps & {
+export type SimpleTableProps = Omit<WithHTMLProps, 'ref'> & {
     /** A non-emp array of table rows */
     rows: NonEmptyArray<SimpleTableRowProps>;
+    ref?: React.Ref<HTMLTableElement>;
 };
 
-export default function SimpleTable({ rows, className, ...htmlProps }: SimpleTableProps) {
+export default function SimpleTable({ rows, ref, className, ...htmlProps }: SimpleTableProps) {
     return (
-        <div {...htmlProps}className={`simple_table ${className ?? ""}`}>
+        <table {...htmlProps} ref={ref} className={`simple_table ${className ?? ""}`}>
             {rows.map((r, idx) => (
                 <SimpleTableRow key={idx} {...r} />
             ))}
-        </div>
+        </table>
     );
 }
 
@@ -43,7 +44,7 @@ type SimpleTableRowProps = {
  */
 function SimpleTableRow({ row, isTitleRow }: SimpleTableRowProps) {
     return (
-        <div className={`simple_table_row ${isTitleRow ? 'simple_table_row-title' : ''}`}>
+        <tr className={`simple_table_row ${isTitleRow ? 'simple_table_row-title' : ''}`}>
             {row.map((r, idx) =>
                 r.type === "time" ? (
                     <SimpleTableElementTime {...r} key={idx} />
@@ -57,7 +58,7 @@ function SimpleTableRow({ row, isTitleRow }: SimpleTableRowProps) {
                     <SimpleTableElementHTML {...r} key={idx} />
                 ) : null,
             )}
-        </div>
+        </tr>
     );
 }
 
@@ -76,9 +77,9 @@ type SimpleTableElementTimeProps = {
 
 function SimpleTableElementTime({ type, time }: SimpleTableElementTimeProps) {
     return (
-        <div className="simple_table_element simple_table_element-time">
-            <p className="heading-xs">{time}</p>
-        </div>
+        <td className="simple_table_element">
+            <p className="simple_table_element-time heading-xs">{time}</p>
+        </td>
     );
 }
 
@@ -89,9 +90,9 @@ type SimpleTableElementTitleProps = {
 
 function SimpleTableElementTitle({ type, title }: SimpleTableElementTitleProps) {
     return (
-        <div className="simple_table_element simple_table_element-title">
-            <p className="heading-m">{title}</p>
-        </div>
+        <td className="simple_table_element">
+            <p className="simple_table_element-title heading-m">{title}</p>
+        </td>
     );
 }
 
@@ -102,9 +103,9 @@ type SimpleTableElementBodyProps = {
 
 function SimpleTableElementBody({ type, body }: SimpleTableElementBodyProps) {
     return (
-        <div className="simple_table_element simple_table_element-body">
-            <p className="body">{body}</p>
-        </div>
+        <td className="simple_table_element">
+            <p className="simple_table_element-body body">{body}</p>
+        </td>
     );
 }
 
@@ -115,9 +116,9 @@ type SimpleTableElementButtonProps = {
 
 function SimpleTableElementButton({ type, button }: SimpleTableElementButtonProps) {
     return (
-        <div className="simple_table_element simple_table_element-btn">
-            <Button className="" btnSettings={button} colorScheme="gold" variant="outline" />
-        </div>
+        <td className="simple_table_element">
+            <Button className="simple_table_element-btn" btnSettings={button} colorScheme="gold" variant="outline" />
+            </td>
     );
 }
 
@@ -128,9 +129,9 @@ type SimpleTableElementHTMLProps = {
 
 function SimpleTableElementHTML({ type, html }: SimpleTableElementHTMLProps) {
     return (
-        // <div className="simple_table_element">
-            <div className="simple_table_element simple_table_element-html" dangerouslySetInnerHTML={{ __html: html }}></div>
-        // </div>
+        <td className="simple_table_element">
+            <div className="simple_table_element-html" dangerouslySetInnerHTML={{ __html: html }}></div>
+        </td>
     );
 }
 

@@ -70,4 +70,16 @@ export type DrinkConfig = {
     mobilePosition: DrinkPosition;
 };
 
+type DrinkPosition2 = {
+    top: number | string;
+    left: number | string;
+    rotate: number;
+};
+
+export type DrinkConfig2 = {
+    type: DrinkTypes;
+    desktopPosition: DrinkPosition2;
+    mobilePosition: DrinkPosition2;
+};
+
 // #endregion ------------------------------------------------

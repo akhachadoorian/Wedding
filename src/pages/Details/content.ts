@@ -1,5 +1,6 @@
 import { AccordionsProps } from "../../components/Accordions/Accordions";
 import { CopyOnlyProps } from "../../components/CopyOnly/CopyOnly";
+import { SimpleTableProps } from "../../components/SimpleTable/SimpleTable";
 import { SplitInfoProps } from "../../components/SplitInfo/SplitInfo";
 import { TextOnlyHeroProps } from "../../layout/TextOnlyHero/TextOnlyHero";
 import { LetterCirclePIcon, MapTrifoldIcon, VanIcon } from "@phosphor-icons/react";
@@ -159,8 +160,94 @@ const timelineCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
 };
 
+const timelineTable: SimpleTableProps = {
+    rows: [
+        {
+            row: [
+                {
+                    type: 'time',
+                    time: '4:30 PM'
+                },
+                {
+                    type: 'title',
+                    title: 'Guest Arrival'
+                },
+                {
+                    type: 'body',
+                    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.'
+                },
+            ]
+        },
+        {
+            row: [
+                {
+                    type: 'time',
+                    time: '5:00 PM'
+                },
+                {
+                    type: 'title',
+                    title: 'I Do'
+                },
+                {
+                    type: 'body',
+                    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.'
+                },
+            ]
+        },
+        {
+            row: [
+                {
+                    type: 'time',
+                    time: '6:00 PM'
+                },
+                {
+                    type: 'title',
+                    title: 'Cocktail Hour'
+                },
+                {
+                    type: 'body',
+                    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.'
+                },
+            ]
+        },
+        {
+            row: [
+                {
+                    type: 'time',
+                    time: '7:00 PM'
+                },
+                {
+                    type: 'title',
+                    title: 'Dinner'
+                },
+                {
+                    type: 'body',
+                    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.'
+                },
+            ]
+        },
+        // {
+        //     row: [
+        //         {
+        //             type: 'time',
+        //             time: ''
+        //         },
+        //         {
+        //             type: 'Title',
+        //             title: ''
+        //         },
+        //         {
+        //             type: 'body',
+        //             body: ''
+        //         },
+        //     ]
+        // },
+    ]
+}
+
 const timeline = {
     copyOnly: timelineCopyOnly,
+    simpleTable: timelineTable
 };
 
 // ----- Dress Code -----------------------------------------------

@@ -11,6 +11,7 @@ import './Details.scss';
 import content from './content';
 import InsetBackgroundSection from "../../layout/InsetBackgroundSection/InsetBackgroundSection";
 import ParallaxingDrinkSection from "../../layout/ParallaxingDrinkSection/ParallaxingDrinkSection";
+import SimpleTable from "../../components/SimpleTable/SimpleTable";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -60,6 +61,8 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                     }}
                     {...content.timeline.copyOnly}
                 /> 
+
+                <SimpleTable {...content.timeline.simpleTable} />
             </ParallaxingDrinkSection>
 
             <section ref={dressCodeRef} id="dress_code" className="dress_code-section base_section">

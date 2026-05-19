@@ -11,12 +11,30 @@
         }
     }
     
-    &-drink {
+    &-drinks {
         position: absolute;
         top: 0;
         left: 0;
-        
+        z-index: 0;
+
         width: 100%;
         height: 100%;
+    }
+
+    &-content {
+        position: relative;
+        z-index: 1;
+
+        @include big {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+    }
+
+    &-drink {
+        position: absolute;
+        width: fit-content;
+        opacity: 50%;
+        z-index: 0;
     }
 }
