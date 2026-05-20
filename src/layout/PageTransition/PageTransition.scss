@@ -1,10 +1,15 @@
 @use "../../styles/variables" as *;
 
+.page-transition-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
 .page-transition-overlay {
-    position: fixed;
+    position: absolute;
     inset: 0;
-    z-index: 9998;
+    z-index: 100;
     background: $gold;
-    transform: translateY(100%);
     pointer-events: none;
+    transform: translateX(100%);
 }
