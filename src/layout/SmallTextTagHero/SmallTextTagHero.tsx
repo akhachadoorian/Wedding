@@ -99,7 +99,13 @@ export default function SmallTextTagHero({ loaded, eyebrow, heading, body, butto
             </div>
 
             <div className="small_text_tag_hero-right">
-                <SmallText ref={stt1Ref} variation="right" {...smallTextTag1} mobileVariation="left"/>
+                <SmallText 
+                    ref={stt1Ref}
+                    alignment={{
+                        desktop: 'right',
+                        mobile: 'left'
+                    }}
+                 />
 
                 <div ref={artDecoRef} className="art_deco_div">
                     <Diamond className="tablet_only" color="--gold-500" />
@@ -110,7 +116,9 @@ export default function SmallTextTagHero({ loaded, eyebrow, heading, body, butto
                 </div>
 
                 <SmallText ref={stt2Ref}
-                    variation="right"
+                    alignment={{
+                        desktop: 'right'
+                    }}
                     {...smallTextTag2}
                 />
             </div>

@@ -27,20 +27,21 @@
     }
 
     // #endregion -----------------------------------------------------
-
 }
 
 // #region --- Small Text Grid -------------------------------
 .small_text_grid {
-    display: grid;
-    grid-template-columns: [s] 100% [e];
-    gap: $space-600;
+    
+        display: grid;
+        grid-template-columns: [s] 100% [e];
+        gap: $space-600;
 
-    @include big {
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: $space-100;
-        row-gap: $space-600;
-    }
+        @include big {
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: $space-100;
+            row-gap: $space-600;
+        }
+    
 }
 
 // #endregion -----------------------------------------------------

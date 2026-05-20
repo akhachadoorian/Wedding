@@ -1,4 +1,5 @@
-
+import mergeRefs from "../../hooks/mergeRefs";
+import { useFadeInChildren } from "../../hooks/useFadeIn";
 import { useBreakpoints } from "../../hooks/useWindowWidth";
 import { WithHTMLProps } from "../../types/props";
 import { AlignmentProps, NonEmptyArray } from "../../types/utility";
@@ -39,10 +40,7 @@ export default function SmallText({
     const isDesktop = width.isDesktop || width.isLargeDesktop;
 
     return (
-        <div 
-            {...htmlProps} 
-            className={`small_text small_text-alignment-${isDesktop ? alignment.desktop : alignment.mobile ? alignment.mobile : alignment.desktop}`}
-        >
+        <div {...htmlProps} className={`small_text small_text-alignment-${isDesktop ? alignment.desktop : alignment.mobile ? alignment.mobile : alignment.desktop} ${className ?? ''}`}>
             {eyebrow && <p className="eyebrow gold">{eyebrow}</p>}
 
             {title && <h5 className="heading-s">{title}</h5>}
@@ -53,22 +51,29 @@ export default function SmallText({
 }
 
 export type SmallTextGridProps = WithHTMLProps & {
-    smallText: NonEmptyArray<SmallTextProps>
+    smallText: NonEmptyArray<SmallTextProps>;
     // columns
-}
+};
 
-export function SmallTextGrid({ 
+export function SmallTextGrid({
     smallText,
 
     // WithHTMLProps
     className,
+    ref,
     ...htmlProps
-}:SmallTextGridProps ) {
+}: SmallTextGridProps) {
+    const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", { stagger: 0.15, y: 24 });
+
     return (
-        <div {...htmlProps} className={`small_text_grid ${className ?? ''}`}>
+        <div 
+            {...htmlProps} 
+            ref={mergeRefs(animRef, ref)} 
+            className={`small_text_grid ${className ?? ""}`}
+        >
             {smallText.map((s, idx) => (
-                <SmallText key={idx} {...s} />
+                <SmallText key={idx} className="mwc-animate" {...s} />
             ))}
         </div>
-    )
+    );
 }
