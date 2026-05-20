@@ -1,39 +1,50 @@
 import { PropsWithChildren } from "react";
-import { WithHTMLProps } from "../../types/props"
+
+import generateSectionClass from "../../hooks/generateSectionClass";
 import { ColorVariables } from "../../types/colors";
-import './SlantedSection.scss';
+import { WithHTMLProps } from "../../types/props";
 
-type SlantedSectionProps = WithHTMLProps & PropsWithChildren & {
+import "./SlantedSection.scss";
 
-    fill?: ColorVariables;
-    slantSettings?: {
-        depth?: "small" | "large";
-        flipped?: boolean;
-    } 
-};
+type SlantedSectionProps = WithHTMLProps &
+    PropsWithChildren & {
+        fill?: ColorVariables;
+        slantSettings?: {
+            depth?: "small" | "large";
+            flipped?: boolean;
+        };
+
+        sectionPrefix?: string;
+    };
 
 export default function SlantedSection({
-    fill = "--black-900", 
+    fill = "--black-900",
     slantSettings,
-    
+
+    sectionPrefix,
+
     children,
+    id,
     className,
     ...htmlProps
 }: SlantedSectionProps) {
-    return (
-        <section {...htmlProps} className={`slanted-section ${className ?? ''}`}>
-            <Slant fill={fill} edge="top"  {...slantSettings} />
+    const outerClass =
+        className && sectionPrefix ? generateSectionClass({ sectionPrefix: sectionPrefix, className: className }) : className ? className : sectionPrefix ? `${sectionPrefix}-section` : "";
 
-            <div className={`slanted`} style={{backgroundColor: `var(${fill})`}}>
-                {children}
+    return (
+        <section {...htmlProps} id={id ? id : sectionPrefix ? sectionPrefix : ""} className={`slanted-section ${outerClass}`}>
+            <Slant fill={fill} edge="top" {...slantSettings} />
+
+            <div className="slanted-wrapper" style={{ backgroundColor: `var(${fill})` }}>
+                <div className={`slanted ${sectionPrefix ?? ""}`} >
+                    {children}
+                </div>
             </div>
 
-            <Slant fill={fill} edge="bottom"  {...slantSettings} />
-            
+            <Slant fill={fill} edge="bottom" {...slantSettings} />
         </section>
-    )
+    );
 }
-
 
 type SlantProps = {
     // props: PropsWithChildren;
@@ -43,15 +54,12 @@ type SlantProps = {
     flipped?: boolean;
 };
 
-
 function Slant({
     // props,
     edge,
-    fill = "--black-900", 
-    depth = "small", 
-    flipped = false, 
-}:SlantProps) {
-    return (
-        <div className={`slant slant-${depth} slant-${edge} ${flipped ? 'slant-flipped' : ''}`} style={{backgroundColor: `var(${fill})`}} />
-    )
+    fill = "--black-900",
+    depth = "small",
+    flipped = false,
+}: SlantProps) {
+    return <div className={`slant slant-${depth} slant-${edge} ${flipped ? "slant-flipped" : ""}`} style={{ backgroundColor: `var(${fill})` }} />;
 }

@@ -1,19 +1,18 @@
 import React from "react";
 
-import { useLenis } from "../../context/LenisContext";
-import { NAV_ITEMS } from "../../data/navItems";
 import Diamond from "../../components/Diamond/Diamond";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";
+import Marquee from "../../components/Marquee/Marquee";
 import SmallText from "../../components/SmallText/SmallText";
+import { useLenis } from "../../context/LenisContext";
+import { NAV_ITEMS } from "../../data/navItems";
+import { LenisLink } from "../../hooks/LenisLink";
+import { useFadeIn } from "../../hooks/useFadeIn";
 
 import "./Footer.scss";
-import Marquee from "../../components/Marquee/Marquee";
-import { useFadeIn } from "../../hooks/useFadeIn";
-import { LenisLink } from "../../hooks/LenisLink";
 
 function Footer({}) {
     const footerRef = useFadeIn<HTMLDivElement>();
-
 
     // Handle scrolling
     const lenis = useLenis();
@@ -29,12 +28,12 @@ function Footer({}) {
             <div className="footer-wrapper">
                 <div className="footer-upper">
                     <div className="footer-left">
-                        <Eyebrow 
+                        <Eyebrow
                             styleOptions={{
-                                variation:"left",
-                                color:"--gold-500"
+                                variation: "left",
+                                color: "--gold-500",
                             }}
-                              text="October 31st, 2026" 
+                            text="October 31st, 2026"
                         />
 
                         <h5 className="heading-xl">
@@ -52,7 +51,12 @@ function Footer({}) {
                         </div>
                     </div>
                     <div className="footer-right">
-                        <SmallText eyebrow="Date" title="October 31st, 2026" body="Ceremony at 5pm" variation="right"  mobileVariation="left"/>
+                        <SmallText 
+                            eyebrow="Date" 
+                            title="October 31st, 2026" 
+                            body="Ceremony at 5pm" 
+                            alignment={{ desktop: "right", mobile: "left" }} 
+                        />
 
                         <div className="art_deco_div">
                             {/* <Diamond className="tablet_only" color="--gold-500" /> */}
@@ -62,7 +66,7 @@ function Footer({}) {
                             <Diamond color="--gold-500" />
                         </div>
 
-                        <SmallText eyebrow="Location" title="Clay Theatre" body="Green Cove Springs, FL" variation="right"  mobileVariation="left" />
+                        <SmallText eyebrow="Location" title="Clay Theatre" body="Green Cove Springs, FL" alignment={{ desktop: "right", mobile: "left" }} />
                     </div>
                 </div>
 

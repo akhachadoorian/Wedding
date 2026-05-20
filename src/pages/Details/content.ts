@@ -4,6 +4,8 @@ import { SimpleTableProps } from "../../components/SimpleTable/SimpleTable";
 import { SplitInfoProps } from "../../components/SplitInfo/SplitInfo";
 import { TextOnlyHeroProps } from "../../layout/TextOnlyHero/TextOnlyHero";
 import { LetterCirclePIcon, MapTrifoldIcon, VanIcon } from "@phosphor-icons/react";
+import { ButtonProps } from "../../types/buttons";
+import { SmallTextGridProps } from "../../components/SmallText/SmallText";
 
 // ----- Hero -----------------------------------------------
 // const hero: Omit<SmallTextTagHeroProps, "loaded"> = {
@@ -276,14 +278,61 @@ const weddingParty = {
 
 // ----- Rehearsal -----------------------------------------------
 
-const rehearsalCopyOnly = {
+const rehearsalCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     eyebrow: "The evening before",
     header: "Rehearsal Mixer ",
     body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
 }
 
+const rehearsalSmallTextGrid:SmallTextGridProps = {
+    smallText: [
+        {
+            eyebrow: 'Time',
+            title: '8:30 PM - 11 PM',
+            alignment: {
+                desktop: 'left'
+            }
+        },
+        {
+            eyebrow: 'Date',
+            title: 'October 30th, 2026',
+            alignment: {
+                desktop: 'left'
+            }
+        },
+        {
+            eyebrow: 'Location',
+            title: 'Maggiano’s Little Italy',
+            alignment: {
+                desktop: 'left'
+            }
+        },
+        {
+            eyebrow: 'Attire',
+            title: 'Casual',
+            alignment: {
+                desktop: 'left'
+            }
+        },
+    ]
+}
+
+const rehearsalButton:ButtonProps = {
+    btnSettings: {
+        type: 'link',
+        text: 'View Directions',
+        link: 'https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=Kdf6yjxXteWIMdVw3e0vrM0V&daddr=St.+Johns+Town+Center,+10367+Mid+Town+Pkwy,+Jacksonville,+FL+32246',
+        target: '_blank',
+        decoration: {
+            type: 'arrow',
+        }
+    }
+}
+
 const rehearsalMixer = {
-    copyOnly: rehearsalCopyOnly
+    copyOnly: rehearsalCopyOnly,
+    smallTextGrid: rehearsalSmallTextGrid,
+    button: rehearsalButton
 }
 
 

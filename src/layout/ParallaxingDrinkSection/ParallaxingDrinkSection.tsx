@@ -7,6 +7,7 @@ import { NonEmptyArray } from "../../types/utility";
 import gsap from "gsap";
 
 import "./ParallaxingDrinkSection.scss";
+import generateSectionClass from "../../hooks/generateSectionClass";
 
 // #region --- Default Drinks -----------------------------
 
@@ -57,12 +58,16 @@ const PARALLAX_SPEED = 60;
 type ParallaxingDrinkSectionProps = WithHTMLProps &
     PropsWithChildren & {
         drinks?: NonEmptyArray<DrinkConfig2>;
+        sectionPrefix?: string;
     };
 
 export default function ParallaxingDrinkSection({
     drinks = DEFAULT_DRINKS,
 
+    sectionPrefix,
+
     children,
+    id,
     className,
     ...htmlProps
 }: ParallaxingDrinkSectionProps) {
@@ -93,17 +98,16 @@ export default function ParallaxingDrinkSection({
         };
     }, []);
 
+    const outerClass = className && sectionPrefix ? generateSectionClass({sectionPrefix: sectionPrefix, className:className}) : className ? className : sectionPrefix ? `${sectionPrefix}-section` : '';
+
     return (
-        <section {...htmlProps} className={`parallaxing_drink-section ${className ?? ""}`}>
+        <section 
+            {...htmlProps} 
+            id={id ? id : sectionPrefix ? sectionPrefix : ''} 
+            className={`parallaxing_drink-section ${outerClass}`}
+        >
             <div className="parallaxing_drink-drinks">
             {drinks.map((drink, i) => (
-                // <div
-                //     key={drink.type}
-                //     ref={(el) => {
-                //         drinksRefs.current[i] = el;
-                //     }}
-                //     className="parallaxing_drink-drink"
-                // >
                     <Drinks 
                         key={drink.type} 
                         className="parallaxing_drink-drink" 
@@ -113,11 +117,10 @@ export default function ParallaxingDrinkSection({
                         type={drink.type} 
                         size={DEFAULT_DRINK_SIZE} 
                     />
-                // </div>
             ))}
             </div>
 
-            <div className="parallaxing_drink-content">{children}</div>
+            <div className={`parallaxing_drink-content ${sectionPrefix ?? ''}`}>{children}</div>
         </section>
     );
 }

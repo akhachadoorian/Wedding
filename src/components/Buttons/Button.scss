@@ -105,7 +105,7 @@ $line-btn: (
         }
     }
 
-    // ---- Variants -------------------------------------------
+    // #region --- Variants -------------------------------------------
 
     &-variant {
         &-solid {
@@ -200,4 +200,14 @@ $line-btn: (
             }
         }
     }
+
+    // #endregion ------------------------------------------------------
+    
+    // #region --- Additional Classes ---------------------------------
+        &-full_width {
+            width: -webkit-fill-available;
+            justify-content: center;
+        }
+
+    // #endregion ------------------------------------------------------
 }

@@ -90,8 +90,8 @@ export type ButtonProps = WithHTMLProps &
         variant?: BtnVariants;
         /** Color theme applied to the button and arrow */
         colorScheme?: BtnColorScheme;
-        /** */
-        decoration?: BtnDecoration;  // omit for no decoration
+        /** Adds optional full-width class */
+        fullWidth?: boolean;
     };
 
 

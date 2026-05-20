@@ -1,22 +1,25 @@
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
+
 import Accordions from "../../components/Accordions/Accordions";
 import CopyOnly from "../../components/CopyOnly/CopyOnly";
+import SimpleTable from "../../components/SimpleTable/SimpleTable";
+import { SmallTextGrid } from "../../components/SmallText/SmallText";
 import SplitInfo from "../../components/SplitInfo/SplitInfo";
 import { useFadeIn } from "../../hooks/useFadeIn";
-import SlantedSection from "../../layout/SlatedSection/SlantedSection";
-import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
-import './Details.scss';
-import content from './content';
 import InsetBackgroundSection from "../../layout/InsetBackgroundSection/InsetBackgroundSection";
 import ParallaxingDrinkSection from "../../layout/ParallaxingDrinkSection/ParallaxingDrinkSection";
-import SimpleTable from "../../components/SimpleTable/SimpleTable";
+import SlantedSection from "../../layout/SlatedSection/SlantedSection";
+import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
+import content from "./content";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import "./Details.scss";
+import Button from "../../components/Buttons/Button";
 
 gsap.registerPlugin(ScrollTrigger);
 
-
-export default function Details({ loaded = true }: { loaded?: boolean })  {
+export default function Details({ loaded = true }: { loaded?: boolean }) {
     const venueRef = useFadeIn<HTMLDivElement>();
     const timelineRef = useFadeIn<HTMLDivElement>();
     const dressCodeRef = useFadeIn<HTMLDivElement>();
@@ -25,14 +28,14 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
 
     return (
         <>
-            <TextOnlyHero 
-                loaded={loaded} 
-                {...content.hero} 
+            <TextOnlyHero
+                loaded={loaded}
+                {...content.hero}
                 styleOptions={{
-                    variation: 'columns',
-                    theme: 'art-deco-bg',
+                    variation: "columns",
+                    theme: "art-deco-bg",
                     // inset: true
-                }} 
+                }}
             />
 
             <section ref={venueRef} id="venue" className="venue-section base_section">
@@ -49,18 +52,14 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                 />
             </section> */}
 
-            <ParallaxingDrinkSection 
-                className="timeline-section"
-                ref={timelineRef} 
-                id="timeline"
-            >
-               <CopyOnly
+            <ParallaxingDrinkSection className="timeline-section" ref={timelineRef} id="timeline">
+                <CopyOnly
                     styleOptions={{
                         variation: "center",
                         headingSize: "h2",
                     }}
                     {...content.timeline.copyOnly}
-                /> 
+                />
 
                 <SimpleTable {...content.timeline.simpleTable} />
             </ParallaxingDrinkSection>
@@ -85,32 +84,43 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                 />
             </section> */}
 
-            <SlantedSection 
-                id="rehearsal" 
-                className="rehearsal-section"
+            <SlantedSection
                 ref={rehearsalRef}
-
+                sectionPrefix="rehearsal"
                 slantSettings={{
-                    depth: 'large',
-                    flipped: true
+                    depth: "large",
+                    flipped: true,
                 }}
             >
                 {/* TODO: rehearsal mixer  */}
-                
-                <CopyOnly 
+
+                <CopyOnly
                     styleOptions={{
                         variation: "left",
                         headingSize: "h2",
                     }}
-                    {...content.rehearsalMixer.copyOnly} 
+                    className="rehearsal-left"
+
+                    {...content.rehearsalMixer.copyOnly}
                 />
+
+                <div className="rehearsal-right">
+                    <Button 
+                        colorScheme="gold"
+                        variant="solid"
+                        fullWidth={true} 
+                        {...content.rehearsalMixer.button}
+                    />
+                    
+                    <SmallTextGrid {...content.rehearsalMixer.smallTextGrid} />
+
+                    
+                </div>
             </SlantedSection>
 
-            <InsetBackgroundSection 
-                id="faqs" 
-                className="faqs-section"
+            <InsetBackgroundSection
+                sectionPrefix="faqs"
                 ref={faqsRef}
-
                 backgroundImage="/assets/DiamondPattern.svg"
                 backgroundSize="60vw"
                 backgroundRepeat="repeat"
@@ -127,5 +137,5 @@ export default function Details({ loaded = true }: { loaded?: boolean })  {
                 <Accordions {...content.faqs.accordions} />
             </InsetBackgroundSection>
         </>
-    )
+    );
 }

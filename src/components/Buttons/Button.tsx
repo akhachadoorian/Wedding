@@ -18,7 +18,7 @@ export default function Button({
 
     variant = "solid",
     colorScheme = "gold",
-    // decoration,
+    fullWidth = false,
 
     className, // pulled out because this components constructs it for LenisLink
     ...rest // includes a11yProps and HTMLProps
@@ -31,7 +31,7 @@ export default function Button({
         return (
             <>
                 <button 
-                    className={`btn btn-variant-${variant} btn-color_scheme-${colorScheme} ${className ?? ""}`}
+                    className={`btn btn-variant-${variant} btn-color_scheme-${colorScheme} ${className ?? ""} ${fullWidth ? 'btn-full_width' : ''}`}
                     onClick={() => setModalOpen(true)}
                 >
                     {btnSettings.decoration && btnSettings.decoration.type === "arrow" ? (
@@ -56,7 +56,7 @@ export default function Button({
         );
     } else {
         return (
-            <LenisLink className={`btn btn-variant-${variant} btn-color_scheme-${colorScheme} ${className ?? ""}`} to={btnSettings.link} target={btnSettings.target ?? "_self"} {...rest}>
+            <LenisLink className={`btn btn-variant-${variant} btn-color_scheme-${colorScheme} ${className ?? ""} ${fullWidth ? 'btn-full_width' : ''}`} to={btnSettings.link} target={btnSettings.target ?? "_self"} {...rest}>
                 {btnSettings.decoration && btnSettings.decoration.type === "arrow" ? (
                     <ArrowButtonInner
                         arrowSide={btnSettings.decoration.arrowSide ?? "right"}

@@ -3,10 +3,11 @@ import { WithHTMLProps } from "../../types/props"
 import { ColorVariables } from "../../types/colors";
 import './InsetBackgroundSection.scss';
 import { BackgroundImageProps } from "../../types/images";
+import generateSectionClass from "../../hooks/generateSectionClass";
 
 
 type InsetBackgroundSectionProps = WithHTMLProps & PropsWithChildren & BackgroundImageProps & {
-
+    sectionPrefix?: string;
 };
 
 export default function InsetBackgroundSection({
@@ -15,15 +16,21 @@ export default function InsetBackgroundSection({
     backgroundPosition = 'center center',
     backgroundRepeat = 'no-repeat',
 
+    sectionPrefix,
+
     children,
+    id,
     style,
     className,
     ...htmlProps
 }: InsetBackgroundSectionProps) {
+    const outerClass = className && sectionPrefix ? generateSectionClass({sectionPrefix: sectionPrefix, className:className}) : className ? className : sectionPrefix ? `${sectionPrefix}-section` : '';
+
     return (
         <section 
             {...htmlProps} 
-            className={`inset_bg-section ${className ?? ''}`} 
+            id={id ? id : sectionPrefix ? sectionPrefix : ''} 
+            className={`inset_bg-section ${outerClass}`}
             style={{
                 ...style,
                 backgroundImage: `url('${backgroundImage}')`,
@@ -32,7 +39,7 @@ export default function InsetBackgroundSection({
                 backgroundRepeat: backgroundRepeat,
             }}
         >
-            <div className={`inset_bg`} >
+            <div className={`inset_bg ${sectionPrefix ?? ''}`} >
                 {children}
             </div>
 

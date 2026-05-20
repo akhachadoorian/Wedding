@@ -2,17 +2,21 @@
 
 // #region Slanted Section -------------------------------------------
 .slanted {
-    padding: var(--layout-section-padding) var(--layout-column-margin); // FIXME: determine if larger or small top/bottom padding
-
-    &-section {
-
+    @include big {
+        max-width: var(--max-width);
+        margin: 0 auto;
     }
 
-    
+    &-section {
+        position: relative;
+    }
+
+    &-wrapper {
+        padding: var(--layout-section-padding) var(--layout-column-margin);
+    }
 }
 
 // #endregion --------------------------------------------------------
-
 
 // #region --- Slant -------------------------------------------------
 
@@ -23,39 +27,36 @@
 
     // #region Flipped  -------------------------------
 
-        &-flipped {
-            transform: scaleX(-1);
-        }
+    &-flipped {
+        transform: scaleX(-1);
+    }
 
     // #endregion -------------------------------------
 
     // #region --- Edge -------------------------------
 
-        &-bottom {
-           &.slant-flipped {
+    &-bottom {
+        &.slant-flipped {
             transform: scaleY(-1);
-           }
-
-           &:not(.slant-flipped ) {
-            transform: scaleY(-1) scaleX(-1);
-           }
         }
 
+        &:not(.slant-flipped) {
+            transform: scaleY(-1) scaleX(-1);
+        }
+    }
 
     // #endregion -------------------------------------
 
     // #region --- Depth -------------------------------
 
-        &-large {
-            aspect-ratio: 619/95;
-        }
+    &-large {
+        aspect-ratio: 619/95;
+    }
 
-        &-small {
-            aspect-ratio: 821/63;
-        }
+    &-small {
+        aspect-ratio: 821/63;
+    }
 
     // #endregion -------------------------------------
-
-
 }
 // #endregion --------------------------------------------------------

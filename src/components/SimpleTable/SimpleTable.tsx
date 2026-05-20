@@ -5,6 +5,7 @@ import { NonEmptyArray } from "../../types/utility";
 import Button from "../Buttons/Button";
 
 import "./SimpleTable.scss";
+import { useFadeInChildren } from "../../hooks/useFadeIn";
 
 /**
  * Props for the {@link SimpleTable} component.
@@ -17,10 +18,16 @@ export type SimpleTableProps = WithHTMLProps & {
 };
 
 export default function SimpleTable({ rows, className, ...htmlProps }: SimpleTableProps) {
+
+    const ref = useFadeInChildren<HTMLDivElement>(".mwc-animate", {
+            stagger: 0.15,
+            y: 24,
+        });
+
     return (
-        <div {...htmlProps}className={`simple_table ${className ?? ""}`}>
+        <div {...htmlProps} ref={ref} className={`simple_table ${className ?? ""}`}>
             {rows.map((r, idx) => (
-                <SimpleTableRow key={idx} {...r} />
+                <SimpleTableRow key={idx} className={'mwc-animate'} {...r} />
             ))}
         </div>
     );
@@ -31,19 +38,20 @@ export default function SimpleTable({ rows, className, ...htmlProps }: SimpleTab
 /**
  * Props for the {@link SimpleTableRow} component.
  */
-type SimpleTableRowProps = {
+type SimpleTableRowProps = WithHTMLProps & {
     /** A non-emp array of rows elements */
     row: NonEmptyArray<SimpleTableElementProps>;
     /** Determines whether the row has the title row class */
     isTitleRow?: boolean;
+
 };
 
 /**
  * 
  */
-function SimpleTableRow({ row, isTitleRow }: SimpleTableRowProps) {
+function SimpleTableRow({ row, isTitleRow, className, ...htmlProps }: SimpleTableRowProps) {
     return (
-        <div className={`simple_table_row ${isTitleRow ? 'simple_table_row-title' : ''}`}>
+        <div className={`simple_table_row ${isTitleRow ? 'simple_table_row-title' : ''} ${className ?? ''}`}>
             {row.map((r, idx) =>
                 r.type === "time" ? (
                     <SimpleTableElementTime {...r} key={idx} />

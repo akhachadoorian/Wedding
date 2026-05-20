@@ -1,50 +1,46 @@
 @use "../../styles/variables" as *;
 
 .small_text {
-    &-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-100);
+
+    .body-xs {
+        color: var(--cream-700);
     }
 
-    &-inner {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-100);
-
-        &.right {
+    // #region --- Alignment Variations -------------------------------
+    &-alignment {
+        &-right {
             align-items: flex-end;
             text-align: right;
         }
 
-        &.center {
+        &-center {
             align-items: center;
             text-align: center;
         }
 
-        &.left {
+        &-left {
             align-items: flex-start;
         }
-
-        .body-xs {
-            color: var(--cream-700);
-        }
     }
 
-    &-mobile {
-      @include small {
-         &-left {
-            align-items: flex-start !important;
-            text-align: left !important;
-         }
+    // #endregion -----------------------------------------------------
 
-         &-center {
-            align-items: center !important;
-            text-align: center !important;
-         }
+}
 
-         &-right {
-            align-items: flex-end !important;
-            text-align: right !important;
-         }
-      }
-      
+// #region --- Small Text Grid -------------------------------
+.small_text_grid {
+    display: grid;
+    grid-template-columns: [s] 100% [e];
+    gap: $space-600;
+
+    @include big {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: $space-100;
+        row-gap: $space-600;
     }
 }
+
+// #endregion -----------------------------------------------------

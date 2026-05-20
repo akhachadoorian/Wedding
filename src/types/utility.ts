@@ -47,3 +47,18 @@ export type NonEmptyArray<T> = [T, ...T[]];
  * type StyleMap<N extends number> = RequireX<BtnStyles, N>;
  */
 export type RequireX<T, N extends number, A extends T[] = []> = A["length"] extends N ? A : RequireX<T, N, [...A, T]>;
+
+
+/**
+ * Utility alignment type
+ * 
+ * @description
+ * Allows the user to pass both the desktop and mobile alignment an item
+ * 
+ */
+export type AlignmentProps = {
+    desktop: 'center' | 'left' | 'right';
+    mobile?: 'center' | 'left' | 'right';
+}
+
+// export type BreakpointProps = 'mobile' | 'tablet' | 'desktop' | 'large-desktop';
