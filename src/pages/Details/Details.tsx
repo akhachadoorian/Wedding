@@ -84,6 +84,8 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                 />
             </section> */}
 
+
+            {/* TODO: rehearsal mixer?  */}
             <SlantedSection
                 ref={rehearsalRef}
                 sectionPrefix="rehearsal"
@@ -92,7 +94,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                     flipped: true,
                 }}
             >
-                {/* TODO: rehearsal mixer  */}
+                
 
                 <CopyOnly
                     styleOptions={{
@@ -111,7 +113,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                         fullWidth={true} 
                         {...content.rehearsalMixer.button}
                     />
-                    
+
                     <SmallTextGrid {...content.rehearsalMixer.smallTextGrid} />
 
                     

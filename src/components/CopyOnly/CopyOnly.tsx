@@ -1,12 +1,14 @@
 import ReactMarkdown from "react-markdown";
 
+import mergeRefs from "../../hooks/mergeRefs";
+import { useFadeInChildren } from "../../hooks/useFadeIn";
 import { ThreeButtonsArray } from "../../types/buttons";
+import { ColorVariables } from "../../types/colors";
+import { WithHTMLProps } from "../../types/props";
 import { ThreeButtons } from "../Buttons/ButtonGroups";
 import Eyebrow from "../Eyebrow/Eyebrow";
 
 import "./CopyOnly.scss";
-import { ColorVariables } from "../../types/colors";
-import { useFadeInChildren } from "../../hooks/useFadeIn";
 
 /**
  * Controls the visual layout and color treatment of the CopyOnly component.
@@ -35,7 +37,6 @@ const DEFAULT_STYLE = {
 /**
  * Props for the CopyOnly component.
  *
- * @property className    - Additional CSS class(es) applied to the root element.
  * @property styleOptions - Layout and color configuration. See {@link CopyOnlyStyleProps}.
  * @property eyebrow      - Optional small label rendered above the heading.
  * @property header       - Primary heading text (required).
@@ -44,10 +45,7 @@ const DEFAULT_STYLE = {
  *                          `dangerouslySetInnerHTML` when HTML tags are detected.
  * @property buttons      - Up to three CTA buttons rendered below the body copy.
  */
-export type CopyOnlyProps = {
-    /** Additional CSS class(es) applied to the root element. */
-    className?: string;
-
+export type CopyOnlyProps = WithHTMLProps & {
     // Style Options
     styleOptions: CopyOnlyStyleProps;
 
@@ -68,22 +66,23 @@ export type CopyOnlyProps = {
  * into a right column (stacked on mobile, side-by-side on large viewports).
  */
 export default function CopyOnly({
-    className,
-    styleOptions = DEFAULT_STYLE,
     eyebrow,
     header,
     subtitle,
     body,
     buttons,
+
+    styleOptions = DEFAULT_STYLE,
+
+    // WithHTMLProps
+    className,
+    ref,
+    ...htmlProps
 }: CopyOnlyProps) {
     // Eyebrow centering only applies to the `center` layout variation.
-    const eyebrowVariation =
-        styleOptions.variation === "center" ? "center" : "left";
-        
-    const ref = useFadeInChildren<HTMLDivElement>(".mwc-animate", {
-        stagger: 0.15,
-        y: 24,
-    });
+    const eyebrowVariation = styleOptions.variation === "center" ? "center" : "left";
+
+    const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", { stagger: 0.15, y: 24 });
 
     const Heading = styleOptions.headingSize ?? "h2";
     // Detect inline HTML so rich-text body strings are rendered correctly.
@@ -91,17 +90,14 @@ export default function CopyOnly({
 
     if (styleOptions.variation === "columns") {
         return (
-            <div
-                ref={ref}
-                className={`copy copy-${styleOptions.textColor ?? DEFAULT_STYLE.textColor} ${className ?? ''}`}
-            >
+            <div {...htmlProps} ref={mergeRefs(animRef, ref)} className={`copy copy-${styleOptions.textColor ?? DEFAULT_STYLE.textColor} ${className ?? ""}`}>
                 <div className={`copy-inner copy-${styleOptions.variation}`}>
                     <div className="copy-left_col">
                         {eyebrow && (
                             <Eyebrow
                                 styleOptions={{
                                     variation: eyebrowVariation ?? DEFAULT_STYLE.variation,
-                                    color: styleOptions.eyebrowColor ?? DEFAULT_STYLE.eyebrowColor
+                                    color: styleOptions.eyebrowColor ?? DEFAULT_STYLE.eyebrowColor,
                                 }}
                                 text={eyebrow}
                                 className={"mwc-animate"}
@@ -116,22 +112,21 @@ export default function CopyOnly({
                             components={{
                                 p: ({ children }) => <Heading className="copy-header mwc-animate">{children}</Heading>,
                             }}
-                        >{header}</ReactMarkdown>
+                        >
+                            {header}
+                        </ReactMarkdown>
                     </div>
 
                     <div className="copy-right_col">
-                        {subtitle && (
-                            <h5 className="subtitle mwc-animate">{subtitle}</h5>
+                        {subtitle && <h5 className="subtitle mwc-animate">{subtitle}</h5>}
+
+                        {body && (
+                            <ReactMarkdown components={{ p: ({ children }) => <p className={`mwc-animate copy-body ${styleOptions.headingSize === "h2" ? "body-l" : "body"}`}>{children}</p> }}>
+                                {body}
+                            </ReactMarkdown>
                         )}
 
-                        {body && <ReactMarkdown components={{ p: ({ children }) => <p className={`mwc-animate copy-body ${styleOptions.headingSize === "h2" ? "body-l" : "body"}`}>{children}</p> }}>{body}</ReactMarkdown>}
-
-                        {buttons && (
-                            <ThreeButtons
-                                className="copy-btns btns mwc-animate"
-                                buttons={buttons ?? []}
-                            />
-                        )}
+                        {buttons && <ThreeButtons className="copy-btns btns mwc-animate" buttons={buttons ?? []} />}
                     </div>
                 </div>
             </div>
@@ -139,10 +134,7 @@ export default function CopyOnly({
     }
 
     return (
-        <div
-            ref={ref}
-            className={`copy copy-${styleOptions.textColor ?? DEFAULT_STYLE.textColor} ${className ?? ''}`}
-        >
+        <div {...htmlProps} ref={mergeRefs(animRef, ref)} className={`copy copy-${styleOptions.textColor ?? DEFAULT_STYLE.textColor} ${className ?? ""}`}>
             <div className={`copy-inner copy-${styleOptions.variation}`}>
                 <div className="copy-text">
                     <div className="copy-upper">
@@ -150,7 +142,7 @@ export default function CopyOnly({
                             <Eyebrow
                                 styleOptions={{
                                     variation: eyebrowVariation ?? DEFAULT_STYLE.variation,
-                                    color: styleOptions.eyebrowColor ?? DEFAULT_STYLE.eyebrowColor
+                                    color: styleOptions.eyebrowColor ?? DEFAULT_STYLE.eyebrowColor,
                                 }}
                                 text={eyebrow}
                                 className={"mwc-animate"}
@@ -165,12 +157,12 @@ export default function CopyOnly({
                             components={{
                                 p: ({ children }) => <Heading className="copy-header mwc-animate">{children}</Heading>,
                             }}
-                        >{header}</ReactMarkdown>
+                        >
+                            {header}
+                        </ReactMarkdown>
                     </div>
 
-                    {subtitle && (
-                        <h5 className="subtitle mwc-animate">{subtitle}</h5>
-                    )}
+                    {subtitle && <h5 className="subtitle mwc-animate">{subtitle}</h5>}
 
                     {/* {body && hasHtmlTags(body) ? (
                         <div
@@ -185,15 +177,14 @@ export default function CopyOnly({
                         </p>
                     )} */}
 
-                    {body && <ReactMarkdown components={{ p: ({ children }) => <p className={`copy-body mwc-animate ${styleOptions.headingSize === "h2" ? "body-l" : "body"}`}>{children}</p> }}>{body}</ReactMarkdown>}
+                    {body && (
+                        <ReactMarkdown components={{ p: ({ children }) => <p className={`copy-body mwc-animate ${styleOptions.headingSize === "h2" ? "body-l" : "body"}`}>{children}</p> }}>
+                            {body}
+                        </ReactMarkdown>
+                    )}
                 </div>
 
-                {buttons && (
-                    <ThreeButtons
-                        className="copy-btns btns mwc-animate"
-                        buttons={buttons ?? []}
-                    />
-                )}
+                {buttons && <ThreeButtons className="copy-btns btns mwc-animate" buttons={buttons ?? []} />}
             </div>
         </div>
     );
