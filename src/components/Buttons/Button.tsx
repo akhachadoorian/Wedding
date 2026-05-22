@@ -1,17 +1,15 @@
-import { LenisLink } from "../../hooks/LenisLink";
-import { ButtonProps } from "../../types/buttons";
-import { ColorVariables } from "../../types/colors";
-import ArrowBox, { ArrowDirectionProps } from "../ArrowBox/ArrowBox";
-import { Icon } from "@phosphor-icons/react";
-
-import "./Button.scss";
-import Modal from "../Modal/Modal";
 import { useState } from "react";
 
-const DECORATION_COLOR_MAP: Record<string, Record<string, ColorVariables>> = {
-    cream: { solid: "--gold-500", outline: "--cream-500", lines: "--cream-500" },
-    gold: { solid: "--cream-500", outline: "--gold-500", lines: "--gold-500" },
-};
+import { Icon } from "@phosphor-icons/react";
+import { LenisLink } from "../../hooks/LenisLink";
+import { BtnDecoration, ButtonProps, LinkButtonSettings, ModalButtonSettings } from "../../types/buttons";
+import { ColorVariables } from "../../types/colors";
+import ArrowBox, { ArrowDirectionProps } from "../ArrowBox/ArrowBox";
+import Modal from "../Modal/Modal";
+
+import "./Button.scss";
+import { ColorSchemeMap } from "../../classes/ColorSchemeMap";
+import { CssColor } from "../../classes/CssColor";
 
 export default function Button({
     btnSettings,
@@ -23,68 +21,64 @@ export default function Button({
     className, // pulled out because this components constructs it for LenisLink
     ...rest // includes a11yProps and HTMLProps
 }: ButtonProps) {
-    const decorationColor = (DECORATION_COLOR_MAP[colorScheme]?.[variant] ?? "--cream-500") as ColorVariables;
 
-    if (btnSettings.type === "modal") {
-        const [modalOpen, setModalOpen] = useState(false);
+    const decorationColor = ColorSchemeMap.DECORATION.get(colorScheme, variant)
 
-        return (
-            <>
-                <button 
-                    className={`btn btn-variant-${variant} btn-color_scheme-${colorScheme} ${className ?? ""} ${fullWidth ? 'btn-full_width' : ''}`}
-                    onClick={() => setModalOpen(true)}
-                >
-                    {btnSettings.decoration && btnSettings.decoration.type === "arrow" ? (
-                        <ArrowButtonInner
-                            arrowSide={btnSettings.decoration.arrowSide ?? "right"}
-                            arrowDirection={btnSettings.decoration.arrowDirection ? btnSettings.decoration.arrowDirection : btnSettings.decoration.arrowSide === "left" ? "top-left" : "top-right"}
-                            arrowColor={decorationColor}
-                            text={btnSettings.text}
-                        />
-                    ) : btnSettings.decoration && btnSettings.decoration.type === "icon" && btnSettings.decoration.icon ? (
-                        <IconButtonInner icon={btnSettings.decoration.icon} iconColor={decorationColor} text={btnSettings.text} />
-                    ) : (
-                        <p className="btn-text">{btnSettings.text}</p>
-                    )}
-                </button>
 
-                
-                <Modal {...btnSettings.modalContent} id={btnSettings.modalID} isOpen={modalOpen} onClose={() => setModalOpen(false)}/>
+    const btnClass = `btn btn-variant-${variant} btn-color_scheme-${colorScheme} ${className ?? ""} ${fullWidth ? "btn-full_width" : ""}`;
 
-                
-            </>
-        );
-    } else {
-        return (
-            <LenisLink className={`btn btn-variant-${variant} btn-color_scheme-${colorScheme} ${className ?? ""} ${fullWidth ? 'btn-full_width' : ''}`} to={btnSettings.link} target={btnSettings.target ?? "_self"} {...rest}>
-                {btnSettings.decoration && btnSettings.decoration.type === "arrow" ? (
-                    <ArrowButtonInner
-                        arrowSide={btnSettings.decoration.arrowSide ?? "right"}
-                        arrowDirection={btnSettings.decoration.arrowDirection ? btnSettings.decoration.arrowDirection : btnSettings.decoration.arrowSide === "left" ? "top-left" : "top-right"}
-                        arrowColor={decorationColor}
-                        text={btnSettings.text}
-                    />
-                ) : btnSettings.decoration && btnSettings.decoration.type === "icon" && btnSettings.decoration.icon ? (
-                    <IconButtonInner icon={btnSettings.decoration.icon} iconColor={decorationColor} text={btnSettings.text} />
-                ) : (
-                    <p className="btn-text">{btnSettings.text}</p>
-                )}
-            </LenisLink>
-        );
-    }
+    if (btnSettings.type === "modal") return <ModalButton btnClass={btnClass} btnSettings={btnSettings} decorationColor={decorationColor} {...rest} />;
+
+    return <LinkButton btnClass={btnClass} btnSettings={btnSettings} decorationColor={decorationColor} {...rest} /> 
+
+}
+// #region --- Button Types Rendering ---------------------------------------------
+
+function ModalButton({ btnClass, btnSettings, decorationColor, ...rest }: { btnClass: string; btnSettings: ModalButtonSettings; decorationColor: CssColor }) {
+    const [modalOpen, setModalOpen] = useState(false);
+
+    return (
+        <>
+            <button {...rest} className={btnClass} onClick={() => setModalOpen(true)}>
+                <ButtonInner text={btnSettings.text} decoration={btnSettings.decoration} decorationColor={decorationColor} />
+            </button>
+
+            <Modal {...btnSettings.modalContent} id={btnSettings.modalID} isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+        </>
+    );
 }
 
-function IconButtonInner({ text, icon, iconColor }: { text: string; icon: Icon; iconColor: ColorVariables }) {
+function LinkButton({ btnClass, btnSettings, decorationColor, ...rest }: { btnClass: string; btnSettings: LinkButtonSettings; decorationColor: CssColor }) {
+    return (
+        <LenisLink {...rest} className={btnClass} to={btnSettings.link} target={btnSettings.target ?? "_self"}>
+            <ButtonInner text={btnSettings.text} decoration={btnSettings.decoration} decorationColor={decorationColor} />
+        </LenisLink>
+    );
+}
+
+// #endregion ---------------------------------------------------------
+
+// #region --- Button Inner Rendering ---------------------------------------------
+
+function ButtonInner({ text, decoration, decorationColor }: { text: string; decoration?: BtnDecoration; decorationColor: CssColor }) {
+    if (decoration?.type === "arrow") return <ArrowButtonInner text={text} arrowColor={decorationColor} arrowSide={decoration.arrowSide ?? 'right'} arrowDirection={decoration.arrowDirection ? decoration.arrowDirection : decoration.arrowSide === 'left' ? 'left' : 'top-right' } /> ;
+
+    if (decoration?.type === "icon") return <IconButtonInner text={text} icon={decoration.icon} iconColor={decorationColor} />;
+
+    return <p className="btn-text">{text}</p>;
+}
+
+function IconButtonInner({ text, icon, iconColor }: { text: string; icon: Icon; iconColor: CssColor }) {
     const IconComponent = icon;
     return (
         <>
-            <IconComponent size={24} color={`var(${iconColor})`} />
+            <IconComponent size={24} color={iconColor.toCssVar()} />
             <p className="btn-text">{text}</p>
         </>
     );
 }
 
-function ArrowButtonInner({ text, arrowSide, arrowDirection, arrowColor }: { text: string; arrowSide: "left" | "right"; arrowDirection: ArrowDirectionProps; arrowColor: ColorVariables }) {
+function ArrowButtonInner({ text, arrowSide, arrowDirection, arrowColor }: { text: string; arrowSide: "left" | "right"; arrowDirection: ArrowDirectionProps; arrowColor: CssColor }) {
     return (
         <>
             {arrowSide === "left" && <ArrowBox color={arrowColor} arrowDirection={arrowDirection} />}
@@ -95,3 +89,5 @@ function ArrowButtonInner({ text, arrowSide, arrowDirection, arrowColor }: { tex
         </>
     );
 }
+
+// #endregion ---------------------------------------------------------

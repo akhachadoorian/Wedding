@@ -1,0 +1,171 @@
+@use "../../styles/variables" as *;
+
+.image_callout {
+    position: relative;
+    overflow: hidden;
+
+    // &-section {
+    //     //     padding: var(--layout-section-padding) var(--layout-column-margin);
+    //     // margin: var(--layout-section-padding) auto;
+    // }
+
+    &-img_holder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+
+        width: 100%;
+        height: 100%;
+
+        .img-overlay {
+            &-left {
+                background: linear-gradient(270deg, rgba(16, 17, 17, 0) 25.3%, rgba(16, 17, 17, 0.7) 80.25%), linear-gradient(0deg, rgba(16, 17, 17, 0.4) 0%, rgba(16, 17, 17, 0.4) 100%);
+            }
+
+            &-center,
+            &-columns {
+                background: linear-gradient(0deg, rgba(16, 17, 17, 0.65) 0%, rgba(16, 17, 17, 0.65) 100%);
+            }
+        }
+    }
+
+    &-text {
+        position: relative;
+        z-index: 2;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        padding: $space-1000 $space-200;
+
+        @include big {
+            //    max-width: 60.417vw;
+            min-height: 45dvh;
+
+            padding: $space-1000 $space-750;
+        }
+
+        &-inner {
+            margin-top: $space-300;
+
+            display: flex;
+            flex-direction: column;
+            gap: $space-100;
+        }
+
+        &-left {
+            @include big {
+                flex: 1 1 762px;
+            }
+        }
+
+        &-right {
+            @include big {
+                flex: 1 1 528px;
+            }
+        }
+    }
+
+    &-btns {
+        margin-top: $space-500;
+    }
+
+    // #region --- Text Layouts ------------------------------
+
+    &-layout {
+        &-left {
+            @include big {
+                max-width: 60.417vw;
+            }
+        }
+
+        &-center {
+            text-align: center;
+            align-items: center;
+
+            @include big {
+                max-width: 60.417vw;
+                margin: 0 auto;
+            }
+        }
+
+        &-columns {
+            display: flex;
+            flex-direction: column;
+            gap: var(--layout-column-gutter);
+
+            @include big {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .image_callout-text-inner {
+                margin-top: 0;
+            }
+        }
+    }
+
+    // #endregion -------------------------------------------
+
+    // #region --- Variations ------------------------------
+
+    &-variation {
+        &-full_width {
+            padding: 0 var(--layout-column-margin);
+            // padding: var(--layout-section-padding) var(--layout-column-margin);
+
+            .image_callout-text {
+                @include big {
+                    max-width: var(--max-width);
+                    margin: var(--layout-section-padding) auto;
+                }
+            }
+        }
+
+        &-inset {
+            padding: 0 var(--layout-column-margin);
+            margin: var(--layout-section-padding) var(--layout-column-margin);
+
+            @include big {
+                max-width: var(--max-width);
+                margin: var(--layout-section-padding) auto;
+            }
+
+            .image_callout-img_holder {
+                @include big {
+                    width: calc(100% - (var(--layout-column-margin) * 2));
+                    left: var(--layout-column-margin);
+                }
+            }
+        }
+
+        &-slant {
+            clip-path: polygon(0 10%, 100% 0%, 100% 90%, 0% 100%);
+            margin: $space-300 0;
+
+            .image_callout-text {
+                @include big {
+                    max-width: var(--max-width);
+                    margin: 0 auto;
+                }
+            }
+
+        }
+
+        &-slant_inverse {
+            clip-path: polygon(0% 0, 100% 10%, 100% 100%, 0 90%); 
+            margin: $space-300 0;
+
+            .image_callout-text {
+                @include big {
+                    max-width: var(--max-width);
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+
+    // #endregion -------------------------------------------
+}

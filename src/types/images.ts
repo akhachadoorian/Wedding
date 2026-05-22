@@ -4,6 +4,7 @@ export type ImageProps = {
     alt?: string;
     caption?: string;
     aspectRatio?: 'landscape' | 'portrait' | 'square';
+    // objectPosition: 
 }
 
 

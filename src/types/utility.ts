@@ -49,6 +49,42 @@ export type NonEmptyArray<T> = [T, ...T[]];
 export type RequireX<T, N extends number, A extends T[] = []> = A["length"] extends N ? A : RequireX<T, N, [...A, T]>;
 
 
+
+/**
+ * Internal helper that builds a union of integers from 0 to N-1.
+ *
+ * @template N - The exclusive upper bound
+ * @template Acc - Internal accumulator, do not pass this yourself
+ */
+type Enumerate<N extends number, Acc extends number[] = []> =
+  Acc['length'] extends N
+  ? Acc[number]
+  : Enumerate<N, [...Acc, Acc['length']]>;
+
+/**
+ * A union of all integers between L and U, inclusive on both ends.
+ *
+ * @template U - Upper bound (included)
+ * @template L - Lower bound (included)
+ *
+ * @example
+ * type T = NumBetweenInclusive<5, 2>; // 2 | 3 | 4 | 5
+ */
+export type NumBetweenInclusive<U extends number, L extends number> = Exclude<Enumerate<U>, Enumerate<L>> | U
+
+/**
+ * A union of all integers strictly between E and S, exclusive on both ends.
+ *
+ * @template S - Upper bound (excluded)
+ * @template E - Lower bound (excluded)
+ *
+ * @example
+ * type T = NumBetweenExclusive<5, 2>; // 3 | 4
+ */
+export type NumBetweenExclusive<S extends number, E extends number> = Exclude<Enumerate<S>, Enumerate<E> | E>
+
+
+
 /**
  * Utility alignment type
  * 

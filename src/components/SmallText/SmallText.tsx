@@ -37,10 +37,10 @@ export default function SmallText({
     if (!eyebrow && !title && !body) return;
 
     const width = useBreakpoints();
-    const isDesktop = width.isDesktop || width.isLargeDesktop;
+    const isMobile = width.isTablet || width.isMobile;
 
     return (
-        <div {...htmlProps} className={`small_text small_text-alignment-${isDesktop ? alignment.desktop : alignment.mobile ? alignment.mobile : alignment.desktop} ${className ?? ''}`}>
+        <div {...htmlProps} className={`small_text small_text-alignment-${isMobile && alignment.mobile ? alignment.mobile : alignment.desktop} ${className ?? ''}`}>
             {eyebrow && <p className="eyebrow gold">{eyebrow}</p>}
 
             {title && <h5 className="heading-s">{title}</h5>}

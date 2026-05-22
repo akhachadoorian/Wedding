@@ -40,7 +40,7 @@ import { Icon } from "@phosphor-icons/react";
  * };
  */
 
-type LinkButtonSettings = {
+export type LinkButtonSettings = {
     type: 'link';
     /** Label displayed inside the button */
     text: string;
@@ -52,7 +52,7 @@ type LinkButtonSettings = {
     target?: "_blank" | "_self";
 }
 
-type ModalButtonSettings = {
+export type ModalButtonSettings = {
     type: 'modal';
     /** Label displayed inside the button */
     text: string;
