@@ -1,34 +1,20 @@
 import ReactMarkdown from "react-markdown";
 
+import { LenisLink } from "../../hooks/LenisLink";
+import mergeRefs from "../../hooks/mergeRefs";
+import { useFadeInChildren } from "../../hooks/useFadeIn";
+import { WithHTMLProps } from "../../types/props";
+import { ResponsiveClampSize } from "../../types/size";
+import { MaxX } from "../../types/utility";
 import ArrowBox from "../ArrowBox/ArrowBox";
 import Drinks from "../Drinks/Drinks";
-
-import { LenisLink } from "../../hooks/LenisLink";
-import { ResponsiveClampSize } from "../../types/size";
-import "./DrinkCardGrid.scss";
-import { MaxX } from "../../types/utility";
 import { DrinkTypes } from "../Drinks/drinks.type";
 
-type DrinkSettings = {
-    type: DrinkTypes;
-    rotate: "small" | "medium" | "large";
-    rotateNeg: boolean;
-    hoverHeight: "low" | "medium" | "high";
-};
+import "./DrinkCardGrid.scss";
 
-export type DrinkCardProps = {
-    eyebrow?: string;
-    title: string;
-    body?: string;
-    link?: string;
-    target?: "_blank" | "_self";
+// #region --- Drink Card ---------------------------------------------
 
-    drinks?: MaxX<DrinkSettings, 2>;
-};
-
-export type DrinkCardGridProps = {
-    drinkCards: Array<DrinkCardProps>;
-};
+// #region --- Drink Defaults ------------------------
 
 const DEFAULT_DRINK_LEFT = {
     type: "cocktail",
@@ -44,14 +30,41 @@ const DEFAULT_DRINK_RIGHT = {
     hoverHeight: "low",
 } as DrinkSettings;
 
+// #endregion ------------------------------------
 
+type DrinkSettings = {
+    type: DrinkTypes;
+    rotate: "small" | "medium" | "large";
+    rotateNeg: boolean;
+    hoverHeight: "low" | "medium" | "high";
+};
 
-export function DrinkCards({ eyebrow, title, body, link, target, drinks }: DrinkCardProps) {
-    const drinkLeft  = drinks?.[0] ?? DEFAULT_DRINK_LEFT;
+export type DrinkCardProps = WithHTMLProps & {
+    eyebrow?: string;
+    title: string;
+    body?: string;
+    link?: string;
+    target?: "_blank" | "_self";
+
+    drinks?: MaxX<DrinkSettings, 2>;
+};
+
+export function DrinkCards({
+    eyebrow,
+    title,
+    body,
+    link,
+    target,
+    drinks,
+
+    className,
+    ...htmlProps
+}: DrinkCardProps) {
+    const drinkLeft = drinks?.[0] ?? DEFAULT_DRINK_LEFT;
     const drinkRight = drinks?.[1] ?? DEFAULT_DRINK_RIGHT;
 
-    const leftRotateClass = `rotate-${drinkLeft.rotate}${drinkLeft.rotateNeg ? '-inverse' : ''}`;
-    const rightRotateClass = `rotate-${drinkRight.rotate}${drinkRight.rotateNeg ? '-inverse' : ''}`;
+    const leftRotateClass = `rotate-${drinkLeft.rotate}${drinkLeft.rotateNeg ? "-inverse" : ""}`;
+    const rightRotateClass = `rotate-${drinkRight.rotate}${drinkRight.rotateNeg ? "-inverse" : ""}`;
 
     const leftHoverHeightClass = `hover_height-${drinkLeft.hoverHeight}`;
     const rightHoverHeightClass = `hover_height-${drinkRight.hoverHeight}`;
@@ -61,11 +74,11 @@ export function DrinkCards({ eyebrow, title, body, link, target, drinks }: Drink
             minSize: 120,
             desiredSize: 150,
             maxSize: 170,
-        }
+        },
     } as ResponsiveClampSize;
 
     return (
-        <LenisLink to={link ?? "/"} className="drink_card-wrapper" target={target ?? "_self"}>
+        <LenisLink {...htmlProps} to={link ?? "/"} className={`drink_card ${className ?? ""}`} target={target ?? "_self"}>
             <div className="drink_card-inner">
                 <div className="drink_card-upper">
                     <div className="drink_card-text">
@@ -92,14 +105,30 @@ export function DrinkCards({ eyebrow, title, body, link, target, drinks }: Drink
     );
 }
 
-export default function DrinkCardGrid({ drinkCards }: DrinkCardGridProps) {
+// #endregion -------------------------------------------------------
+
+// #region --- Drink Card Grid ------------------------------------------
+
+export type DrinkCardGridProps = WithHTMLProps & {
+    drinkCards: Array<DrinkCardProps>;
+};
+
+export default function DrinkCardGrid({
+    drinkCards,
+
+    className,
+    ref,
+    ...htmlProps
+}: DrinkCardGridProps) {
+    const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", { stagger: 0.15, y: 24 });
+
     return (
-        <div className="drink_card_grid-wrapper">
-            <div className="drink_card_grid">
-                {drinkCards.map((d, idx) => (
-                    <DrinkCards key={idx} {...d} />
-                ))}
-            </div>
+        <div {...htmlProps} ref={mergeRefs(animRef, ref)} className="drink_card_grid">
+            {drinkCards.map((d, idx) => (
+                <DrinkCards key={idx} className="mwc-animate" {...d} />
+            ))}
         </div>
     );
 }
+
+// #endregion -------------------------------------------------------

@@ -1,23 +1,26 @@
+import { LenisLink } from "../../hooks/LenisLink";
 import mergeRefs from "../../hooks/mergeRefs";
 import { useFadeInChildren } from "../../hooks/useFadeIn";
-import { ButtonSettingProps } from "../../types/buttons";
+import { LinkButtonSettings } from "../../types/buttons";
 import { WithHTMLProps } from "../../types/props";
 import { NonEmptyArray } from "../../types/utility";
+import ArtDecoIcon, { ArtDecoIconTypeProps } from "../ArtDecoIcon/ArtDecoIcon";
+import Button from "../Buttons/Button";
 
+import './ArtDecoCardGrid.scss'
 
 // #region --- Art Deco Cards -----------------------------
 
-type ArtDecoCardProps = WithHTMLProps & {
-    icon?: 'fan';
+export type ArtDecoCardProps = WithHTMLProps & {
+    icon?: ArtDecoIconTypeProps;
     title: string;
     subtitle?: string;
     body?: string;
-    btnSettings?: ButtonSettingProps
-}
-
+    btnSettings?: LinkButtonSettings;
+};
 
 export function ArtDecoCard({
-    icon = 'fan',
+    icon = "fan",
     title,
     subtitle,
     body,
@@ -25,60 +28,82 @@ export function ArtDecoCard({
 
     className,
     ...htmlProps
-}:ArtDecoCardProps) {
-    
+}: ArtDecoCardProps) {
+    // if (btnSettings) return <ButtonArtDecoCard icon={icon} title={title} subtitle={subtitle} body={body} btnSettings={btnSettings} className={className} {...htmlProps} />;
 
+    if (btnSettings) {
+        return (
+            <LenisLink {...htmlProps} className={`art_deco_card ${className ?? ""}`} to={btnSettings.link}>
+                <ArtDecoIcon type={icon} className="art_deco_card-icon" />
+
+                <InnerArtDecoCard title={title} subtitle={subtitle} body={body} />
+
+                <Button
+                    variant="lines"
+                    colorScheme="cream"
+                    btnSettings={{
+                        type: 'visual',
+                        text: btnSettings.text,
+                        decoration: {
+                            type: 'arrow',
+                            arrowDirection: 'top-right',
+                            arrowSide: 'right'
+                        }
+                    }}
+                />
+            </LenisLink>
+        );
+    }
 
     return (
-        <div {...htmlProps} className={`art_deco_card ${className ?? ''}`}>
-            {/* icon */}
+        <div {...htmlProps} className={`art_deco_card ${className ?? ""}`}>
+            <ArtDecoIcon type="fan" className="art_deco_card-icon" />
 
-            <p className="art_deco_card-title">{title}</p>
-
-            {subtitle && <p className="art_deco_card-subtitle">{subtitle}</p>}
+            <InnerArtDecoCard title={title} subtitle={subtitle} body={body} />
         </div>
-    )
+    );
 }
 
-    // #region ---
-        
+    // #region --- Inner Art Deco Card --------------------------
 
-    // function ClickableArtDecoCard({}) {
-    //     return (
+    function InnerArtDecoCard({ title, subtitle, body }: { title: string; subtitle?: string; body?: string }) {
+        return (
+            <div className="art_deco_card-text">
+                <p className="art_deco_card-title heading-s">{title}</p>
 
-    //     )
-    // }
+                {subtitle && <p className="art_deco_card-subtitle subtitle-extra">{subtitle}</p>}
+
+                {body && <p className="art_deco_card-body body">{body}</p>}
+            </div>
+        );
+    }
 
     // #endregion -------------------------------------------
 
 // #endregion -------------------------------------------
 
-
-
-
-
 // #region --- Art Deco Card Grid -------------------------------
 
-type ArtDecoCardGridProps = WithHTMLProps & {
-    cards: NonEmptyArray<ArtDecoCardProps>
-}
+export type ArtDecoCardGridProps = WithHTMLProps & {
+    cards: NonEmptyArray<ArtDecoCardProps>;
+};
 
-export default  function ArtDecoCardGrid({
-    cards, 
+export default function ArtDecoCardGrid({
+    cards,
 
     className,
     ref,
     ...htmlProps
-}:ArtDecoCardGridProps) {
+}: ArtDecoCardGridProps) {
     const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", { stagger: 0.15, y: 24 });
 
     return (
-        <div {...htmlProps} className={` ${className ?? ''}`}  ref={mergeRefs(animRef, ref)} >
-            {cards.map(() => (
-
+        <div {...htmlProps} className={`art_deco_card_grid ${className ?? ""}`} ref={mergeRefs(animRef, ref)}>
+            {cards.map((c, idx) => (
+                <ArtDecoCard key={idx} className="mwc-animate" {...c} />
             ))}
         </div>
-    )
+    );
 }
 
 // #endregion -------------------------------------------

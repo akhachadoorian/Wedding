@@ -2,82 +2,99 @@
 @use "../ArrowBox/ArrowBox.scss" as *;
 @use "sass:map";
 
-// ---- Button SCSS Variables -------------------------------------------
+// #region --- Button SCSS Variables -------------------------------------------
 
 $btnTB: 12px;
 $btnLR: 24px;
 $btnBorderWidth: 2px;
 
-// ---- Button Color Arrays -------------------------------------------
+// #endregion -------------------------------------------------------------------
 
-$solid-btn: (
-    "gold": (
-        "default": (
-            "border-color": $gold,
-            "background-color": $gold,
-            "color": $cream,
-        ),
-        "hover": (
-            "border-color": $gold-600,
-            "background-color": $gold-600,
-            "color": $cream,
-        ),
-    ),
-    "cream": (
-        "default": (
-            "border-color": $cream,
-            "background-color": $cream,
-            "color": $gold,
-        ),
-        "hover": (
-            "border-color": $gold,
-            "background-color": $gold,
-            "color": $cream,
-        ),
-    ),
-);
+// #region --- Button Color Arrays -------------------------------------------
 
-$outline-btn: (
-    "gold": (
-        "default": (
-            "border-color": $gold,
-            "background-color": transparent,
-            "color": $gold,
-        ),
-        "hover": (
-            "border-color": $cream,
-            "background-color": $cream,
-            "color": $gold,
-        ),
-    ),
-    "cream": (
-        "default": (
-            "border-color": $cream,
-            "background-color": transparent,
-            "color": $cream,
-        ),
-        "hover": (
-            "border-color": $gold-600,
-            "background-color": $gold-600,
-            "color": $cream,
-        ),
-    ),
-);
+    // #region --- Solid Button ---------------------------
+        $solid-btn: (
+            "gold": (
+                "default": (
+                    "border-color": $gold,
+                    "background-color": $gold,
+                    "color": $cream,
+                ),
+                "hover": (
+                    "border-color": $gold-600,
+                    "background-color": $gold-600,
+                    "color": $cream,
+                ),
+            ),
+            "cream": (
+                "default": (
+                    "border-color": $cream,
+                    "background-color": $cream,
+                    "color": $gold,
+                ),
+                "hover": (
+                    "border-color": $gold,
+                    "background-color": $gold,
+                    "color": $cream,
+                ),
+            ),
+        );
 
-$line-btn: (
-    "gold": (
-        "default": (
-            "lines-color": $gold,
-            "color": $gold,
-        ),
-    ),
-    "cream": (
-        "default": (
-            "lines-color": $cream,
-            "color": $cream,
-        ),
-    ),
-);
+    // #endregion ---------------------------------
+
+    // #region --- Outline Button ---------------------------
+
+        $outline-btn: (
+            "gold": (
+                "default": (
+                    "border-color": $gold,
+                    "background-color": transparent,
+                    "color": $gold,
+                ),
+                "hover": (
+                    "border-color": $cream,
+                    "background-color": $cream,
+                    "color": $gold,
+                ),
+            ),
+            "cream": (
+                "default": (
+                    "border-color": $cream,
+                    "background-color": transparent,
+                    "color": $cream,
+                ),
+                "hover": (
+                    "border-color": $gold-600,
+                    "background-color": $gold-600,
+                    "color": $cream,
+                ),
+            ),
+        );
+
+    // #endregion ---------------------------------
+
+    // #region --- Line Button ---------------------------
+
+        $line-btn: (
+            "gold": (
+                "default": (
+                    "lines-color": $gold,
+                    "color": $gold,
+                ),
+            ),
+            "cream": (
+                "default": (
+                    "lines-color": $cream,
+                    "color": $cream,
+                ),
+            ),
+        );
+
+    // #endregion ---------------------------------
+
+// #endregion -------------------------------------------------------------------
+
+// #region --- Button Styling -------------------------------------------
 
 .btn {
     display: flex;
@@ -97,14 +114,6 @@ $line-btn: (
         text-transform: uppercase;
     }
 
-    &:hover {
-        @each $dir, $t in $arrow-hover-transforms {
-            .arrow_box-grid.#{$dir} {
-                transform: $t;
-            }
-        }
-    }
-
     // #region --- Variants -------------------------------------------
 
     &-variant {
@@ -115,18 +124,18 @@ $line-btn: (
 
             @each $theme, $states in $solid-btn {
                 $default: map.get($states, "default");
-                $hover: map.get($states, "hover");
+                // $hover: map.get($states, "hover");
 
                 &.btn-color_scheme-#{$theme} {
                     border-color: map.get($default, "border-color");
                     background-color: map.get($default, "background-color");
                     color: map.get($default, "color");
 
-                    &:hover {
-                        border-color: map.get($hover, "border-color");
-                        background-color: map.get($hover, "background-color");
-                        color: map.get($hover, "color");
-                    }
+                    // &:hover {
+                    //     border-color: map.get($hover, "border-color");
+                    //     background-color: map.get($hover, "background-color");
+                    //     color: map.get($hover, "color");
+                    // }
                 }
             }
         }
@@ -137,18 +146,18 @@ $line-btn: (
 
             @each $theme, $states in $outline-btn {
                 $default: map.get($states, "default");
-                $hover: map.get($states, "hover");
+                // $hover: map.get($states, "hover");
 
                 &.btn-color_scheme-#{$theme} {
                     border-color: map.get($default, "border-color");
                     background-color: map.get($default, "background-color");
                     color: map.get($default, "color");
 
-                    &:hover {
-                        border-color: map.get($hover, "border-color");
-                        background-color: map.get($hover, "background-color");
-                        color: map.get($hover, "color");
-                    }
+                    // &:hover {
+                    //     border-color: map.get($hover, "border-color");
+                    //     background-color: map.get($hover, "background-color");
+                    //     color: map.get($hover, "color");
+                    // }
                 }
             }
         }
@@ -178,16 +187,16 @@ $line-btn: (
                 right: 0;
             }
 
-            &:hover {
-                &::before,
-                &::after {
-                    width: 100%;
-                }
-            }
+            // &:hover {
+            //     &::before,
+            //     &::after {
+            //         width: 100%;
+            //     }
+            // }
 
             @each $theme, $states in $line-btn {
                 $default: map.get($states, "default");
-                $hover: map.get($states, "hover");
+                // $hover: map.get($states, "hover");
 
                 &.btn-color_scheme-#{$theme} {
                     color: map.get($default, "color");
@@ -211,3 +220,61 @@ $line-btn: (
 
     // #endregion ------------------------------------------------------
 }
+
+// #endregion -------------------------------------------------------------------
+
+// #region --- Hover Effects -------------------------------------------
+
+a.btn, button.btn {
+    &:hover {
+        @each $dir, $t in $arrow-hover-transforms {
+            .arrow_box-grid.#{$dir} {
+                transform: $t;
+            }
+        }
+    }
+
+    // #region --- Variants -------------------------------------------
+
+    &-variant {
+        &-solid {
+            @each $theme, $states in $solid-btn {
+                $hover: map.get($states, "hover");
+
+                &.btn-color_scheme-#{$theme}:hover {
+                        border-color: map.get($hover, "border-color");
+                        background-color: map.get($hover, "background-color");
+                        color: map.get($hover, "color");
+                    
+                }
+            }
+        }
+
+        &-outline {
+            @each $theme, $states in $outline-btn {
+                $hover: map.get($states, "hover");
+
+                &.btn-color_scheme-#{$theme} {
+                    &:hover {
+                        border-color: map.get($hover, "border-color");
+                        background-color: map.get($hover, "background-color");
+                        color: map.get($hover, "color");
+                    }
+                }
+            }
+        }
+
+        &-lines {
+            &:hover {
+                &::before,
+                &::after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    // #endregion ------------------------------------------------------
+}
+
+// #endregion -------------------------------------------------------------------

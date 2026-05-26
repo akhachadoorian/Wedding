@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Icon } from "@phosphor-icons/react";
 import { LenisLink } from "../../hooks/LenisLink";
-import { BtnDecoration, ButtonProps, LinkButtonSettings, ModalButtonSettings } from "../../types/buttons";
+import { BtnDecoration, ButtonProps, LinkButtonSettings, ModalButtonSettings, VisualButtonSettings } from "../../types/buttons";
 import { ColorVariables } from "../../types/colors";
 import ArrowBox, { ArrowDirectionProps } from "../ArrowBox/ArrowBox";
 import Modal from "../Modal/Modal";
@@ -22,14 +22,16 @@ export default function Button({
     ...rest // includes a11yProps and HTMLProps
 }: ButtonProps) {
 
-    const decorationColor = ColorSchemeMap.DECORATION.get(colorScheme, variant)
+    const decorationColor = ColorSchemeMap.DECORATION.get(colorScheme, variant);
 
 
     const btnClass = `btn btn-variant-${variant} btn-color_scheme-${colorScheme} ${className ?? ""} ${fullWidth ? "btn-full_width" : ""}`;
 
     if (btnSettings.type === "modal") return <ModalButton btnClass={btnClass} btnSettings={btnSettings} decorationColor={decorationColor} {...rest} />;
 
-    return <LinkButton btnClass={btnClass} btnSettings={btnSettings} decorationColor={decorationColor} {...rest} /> 
+    if (btnSettings.type === 'link') return <LinkButton btnClass={btnClass} btnSettings={btnSettings} decorationColor={decorationColor} {...rest} /> 
+
+    return <VisualButton btnClass={btnClass} btnSettings={btnSettings} decorationColor={decorationColor} {...rest} /> 
 
 }
 // #region --- Button Types Rendering ---------------------------------------------
@@ -54,6 +56,14 @@ function LinkButton({ btnClass, btnSettings, decorationColor, ...rest }: { btnCl
             <ButtonInner text={btnSettings.text} decoration={btnSettings.decoration} decorationColor={decorationColor} />
         </LenisLink>
     );
+}
+
+function VisualButton({ btnClass, btnSettings, decorationColor, ...rest }: { btnClass: string; btnSettings: VisualButtonSettings; decorationColor: CssColor }) {
+    return (
+        <div {...rest} className={btnClass}>
+            <ButtonInner text={btnSettings.text} decoration={btnSettings.decoration} decorationColor={decorationColor} />
+        </div>
+    )
 }
 
 // #endregion ---------------------------------------------------------

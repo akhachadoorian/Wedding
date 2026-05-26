@@ -64,7 +64,19 @@ export type ModalButtonSettings = {
     modalContent: Omit<ModalProps, 'isOpen' | 'onClose'>;
 }
 
-export type ButtonSettingProps = LinkButtonSettings | ModalButtonSettings;
+/**
+ * Button for visual only (not clickable)
+ * 
+ */
+export type VisualButtonSettings = {
+    type: 'visual';
+    /** Label displayed inside the button */
+    text: string;
+    /** Button decoration (icon, arrow) or left blank for none */
+    decoration?: BtnDecoration;
+}
+
+export type ButtonSettingProps = LinkButtonSettings | ModalButtonSettings | VisualButtonSettings;
 
 // export type ButtonSettingProps = {
 //     /** Label displayed inside the button */

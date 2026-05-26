@@ -3,151 +3,166 @@
 // ── Base resets ──────────────────────────────────────────────
 
 p {
-  margin: 0;
-  font-family: $font-sans;
-  // color: var(--cream-500);
+    margin: 0;
+    font-family: $font-sans;
+    // color: var(--cream-500);
 }
 
 a {
-  margin: 0;
-  font-family: $font-sans;
-  color: var(--cream-500);
-
-
+    margin: 0;
+    font-family: $font-sans;
+    color: var(--cream-500);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  // color: var(--cream-500);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    // color: var(--cream-500);
 }
 
 // ── Placeholders ──────────────────────────────────────
 
 %body-base {
-  font-family: $font-sans;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
+    font-family: $font-sans;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
 }
 
 %heading-base {
-  font-family: $font-serif;
-  font-weight: 400;
-  line-height: 120%;
-  font-style: italic;
+    font-family: $font-serif;
+    font-weight: 400;
+    line-height: 120%;
+    font-style: italic;
 }
 
 %subheading-base {
-  font-family: $font-sans;
-  font-weight: 600;
-  line-height: 140%;
-  letter-spacing: 0.84px;
-  text-transform: uppercase;
+    font-family: $font-sans;
+    font-weight: 600;
+    line-height: 140%;
+    letter-spacing: 0.84px;
+    text-transform: uppercase;
 }
 
 // ── Heading styles ────────────────────────────────────────────
 
 h1,
 .heading-xxl {
-  @extend %heading-base;
-  font-size: var(--text-5xl);
+    @extend %heading-base;
+    font-size: var(--text-5xl);
 }
 
 h2,
 .heading-xl {
-  @extend %heading-base;
-  font-size: var(--text-4xl);
+    @extend %heading-base;
+    font-size: var(--text-4xl);
 }
 
 h3,
 .heading-l {
-  @extend %heading-base;
-  font-size: var(--text-3xl);
+    @extend %heading-base;
+    font-size: var(--text-3xl);
 }
 
 h4,
 .heading-m {
-  @extend %heading-base;
-  font-size: var(--text-2xl);
+    @extend %heading-base;
+    font-size: var(--text-2xl);
 }
 
 h5,
 .heading-s {
-  @extend %heading-base;
-  font-size: var(--text-xl);
+    @extend %heading-base;
+    font-size: var(--text-xl);
 }
 
 h6,
 .heading-xs {
-  @extend %subheading-base;
-  font-size: var(--text-lg);
+    @extend %subheading-base;
+    font-size: var(--text-lg);
 }
 
 // ── Body ──────────────────────────────────────────────────────
 
 .body,
-p  { 
-  @extend %body-base;
-  font-size: var(--text-base); 
+p {
+    @extend %body-base;
+    font-size: var(--text-base);
 }
 
-.body-l  { 
-  @extend %body-base;
-  font-size: var(--text-md); 
+.body-l {
+    @extend %body-base;
+    font-size: var(--text-md);
 }
 
-.body-s  { 
-  @extend %body-base;
-  font-size: var(--text-s); 
+.body-s {
+    @extend %body-base;
+    font-size: var(--text-s);
 }
 
-.body-xs  { 
-  @extend %body-base;
-  font-size: var(--text-xs); 
+.body-xs {
+    @extend %body-base;
+    font-size: var(--text-xs);
 }
 
 // ── Eyebrow ───────────────────────────────────────────────────
 
 .eyebrow {
-  font-family: $font-sans;
-  font-size: var(--text-md);
-  font-weight: 600;
-  line-height: normal;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
+    font-family: $font-sans;
+    font-size: var(--text-md);
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
 
-  &.centered { text-align: center; }
-  &.gold  { color: var(--gold-500); }
-  &.white { color: var(--cream-500); }
+    &.centered {
+        text-align: center;
+    }
+    &.gold {
+        color: var(--gold-500);
+    }
+    &.white {
+        color: var(--cream-500);
+    }
 }
 
 // ── Subtitle ─────────────────────────────────────────────────
 
 .subtitle {
-  @extend %body-base;
-  font-size: var(--text-base);
-  font-weight: 700;
+    @extend %body-base;
+    font-size: var(--text-base);
+    font-weight: 700;
 
-  // padding: var(--space-100) var(--space-075);
-  // border-top: 1px solid $gold; 
-  // border-bottom: 1px solid $gold;
-  // width: fit-content;  
+    &-extra {
+        padding: var(--space-100) var(--space-075);
+        border-top: 1px solid $gold;
+        border-bottom: 1px solid $gold;
+        width: fit-content;
 
-
+        font-family: $font-sans;
+        font-size: var(--text-md);
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+    }
 }
-
 
 // ── Utilities ─────────────────────────────────────────────────
 
 .gold-italic {
-  color: var(--gold-500);
-  font-style: italic;
+    color: var(--gold-500);
+    font-style: italic;
 }
 
 .heading-md > strong {
-  font-weight: 400;
-  font-style: italic;
-  color: $gold;
+    font-weight: 400;
+    font-style: italic;
+    color: $gold;
 }
 
 .body-md > strong {
