@@ -1,0 +1,77 @@
+@use "@/styles/variables" as *;;
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100dvw;
+    height: 100dvh;
+
+    display: flex;
+    justify-content: flex-end;
+
+    &-inner {
+        background-color: $black;
+        width: 56.319vw;
+        padding: var(--space-750) var(--layout-column-margin);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--layout-column-gap);
+
+        &-header {
+            color: $gold;
+        }
+    }
+
+    &-close {
+        background-color: $black-700;
+        border: none;
+        padding: var(--space-050, 4px);
+        height: 38px;
+        aspect-ratio: 1;
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        gap: $space-300;
+
+        &-section {
+            display: flex;
+            flex-direction: column;
+            gap: $space-200;
+
+            &:not(:last-of-type) {
+                padding-bottom: $space-300;
+                border-bottom: 1.5px solid $black-700;
+            }
+        }
+    }
+
+    &-overlay {
+        flex: 1;
+        background: rgba(11, 12, 12, 0.35);
+    }
+
+    // ---- Open vs Closed state -------------------------------------------
+    &-closed {
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0;
+    }
+
+    &-open {
+        opacity: 1;
+        z-index: 999;
+        pointer-events: auto;
+    }
+}

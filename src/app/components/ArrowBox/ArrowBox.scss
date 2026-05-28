@@ -1,0 +1,119 @@
+@use "@/styles/variables" as *;;
+
+//
+$arrowWidth: 18px;
+
+$arrow-hover-transforms: (
+    'top-right': translate(0, -$arrowWidth),
+    'top-left': translate(-$arrowWidth, -$arrowWidth),
+    'bottom-right': translate(0, 0),
+    'bottom-left': translate(-$arrowWidth, 0),
+    'right': translate(0, 0),
+    'left': translate(-$arrowWidth, 0),
+    'up': translate(0, -$arrowWidth),
+    'down': translate(0, 0),
+);
+
+// @each $dir, $t in $arrow-hover-transforms {
+//     .arrow_box-grid.#{$dir} { transform: $t; }
+// }
+
+// @use 'sass:map';
+// transform: map.get($arrow-hover-transforms, 'top-right');
+
+.arrow_box-wrapper {
+    padding: var(--space-025);
+    border: 1px solid var(--cream-500);
+    transition: $transition;
+
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    aspect-ratio: 1;
+    flex: 0 0 20px;
+    overflow: hidden;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .arrow_box-grid {
+        display: grid;
+        transition: $transition;
+    }
+
+    .arrow_box-inner {
+        width: $arrowWidth;
+        height: $arrowWidth;
+        aspect-ratio: 1;
+
+        position: relative;
+    }
+
+    .arrow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 18px;
+        height: 18px;
+        aspect-ratio: 1;
+
+        svg path {
+            transition: $transition;
+        }
+    }
+}
+
+@mixin arrow-grid($transform, $start-col, $start-row, $end-col, $end-row, $rows: 1) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat($rows, 1fr);
+    transform: $transform;
+
+    .arrow.start {
+        grid-column: #{$start-col}/#{$start-col};
+        grid-row: #{$start-row}/#{$start-row};
+    }
+    .arrow.end {
+        grid-column: #{$end-col}/#{$end-col};
+        grid-row: #{$end-row}/#{$end-row};
+    }
+}
+////////////////////////////////////
+// DIAGONAL DIRECTIONS
+////////////////////////////////////
+.arrow_box-grid.top-right {
+    @include arrow-grid(translateX(-$arrowWidth), 2, 1, 1, 2, $rows: 2);
+}
+
+.arrow_box-grid.top-left {
+    @include arrow-grid(translateX(0), 1, 1, 2, 2, $rows: 2);
+}
+
+.arrow_box-grid.bottom-right {
+    @include arrow-grid(translate(-$arrowWidth, -$arrowWidth), 1, 1, 2, 2, $rows: 2);
+}
+
+.arrow_box-grid.bottom-left {
+    @include arrow-grid(translate(0, -$arrowWidth), 2, 1, 1, 2, $rows: 2);
+}
+
+////////////////////////////////////
+// DEFAULT DIRECTIONS
+////////////////////////////////////
+.arrow_box-grid.right {
+    @include arrow-grid(translateX(-$arrowWidth), 1, 1, 2, 1);
+}
+
+.arrow_box-grid.left {
+    @include arrow-grid(translateX(0px), 1, 1, 2, 1);
+}
+
+.arrow_box-grid.up {
+    @include arrow-grid(translateX(0), 1, 1, 1, 2, $rows: 2);
+}
+
+.arrow_box-grid.down {
+    @include arrow-grid(translateY(-$arrowWidth), 1, 1, 1, 2, $rows: 2);
+}

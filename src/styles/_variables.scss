@@ -1,7 +1,7 @@
-@forward 'mixins';
-@forward 'tokens/spacing';
-@forward 'tokens/layout';
-@forward 'tokens/typography';
+@forward 'styles/mixins';
+@forward 'styles/tokens/spacing';
+@forward 'styles/tokens/layout';
+@forward 'styles/tokens/typography';
 
 // ── Google Fonts ───────────────────────────────────
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");

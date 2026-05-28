@@ -1,0 +1,29 @@
+@use "@/styles/variables" as *;;
+
+// #region Slanted Section -------------------------------------------
+
+.inset_bg {
+    background-color: rgba(22, 24, 24, 0.9);
+    padding: var(--space-500) var(--space-300);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-700);
+
+    @include big {
+            gap: var(--space-1000);
+            padding: var(--space-750);
+            max-width: calc(60.417vw + var(--space-700));
+            margin: $space-800 auto;
+        }
+
+    &-section {
+        padding: var(--layout-section-padding) var(--layout-column-margin);
+
+        @include big {
+            padding: calc(var(--space-1500) + var(--layout-section-padding)) var(--layout-column-margin);
+        }
+    }
+}
+
+// #endregion --------------------------------------------------------

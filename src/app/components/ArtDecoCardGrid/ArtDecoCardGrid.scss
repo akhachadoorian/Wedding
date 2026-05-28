@@ -1,0 +1,72 @@
+@use "@/styles/variables" as *;;
+@use "../ArrowBox/ArrowBox.scss" as *;
+
+// #region --- Art Deco Card ---------------------------------------------
+.art_deco_card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-500;
+
+    text-align: center;
+    padding: $space-400 $space-300;
+    border: 1px solid transparent;
+    transition: $transition;
+
+    &-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: $space-200;
+    }
+
+    &-subtitle {
+    }
+
+    &-body {
+        color: $cream-700;
+    }
+}
+
+a.art_deco_card {
+    text-decoration: none;
+    
+
+    &:hover {
+        border-color: $gold;
+        box-shadow: 0 22px 74px 0 rgba(166, 130, 74, 0.40);
+
+        .btn {
+            &::before,
+            &::after {
+                width: 100%;
+            }
+        }
+
+        @each $dir, $t in $arrow-hover-transforms {
+            .arrow_box-grid.#{$dir} {
+                transform: $t;
+            }
+        }
+    }
+}
+
+// #endregion ------------------------------------------------------------
+
+// #region --- Art Deco Card Grid ----------------------------------------
+
+.art_deco_card_grid {
+    display: grid;
+    grid-template-columns: [s] 100% [e];
+    gap: var(--layout-column-gutter);
+
+    @include big {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include breakpx(800px, 1100px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+// #endregion ------------------------------------------------------------

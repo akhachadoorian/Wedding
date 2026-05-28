@@ -1,0 +1,88 @@
+@use "@/styles/variables" as *;;
+
+.split_info {
+    display: flex;
+    flex-direction: column;
+
+    @include big {
+        flex-direction: row;
+
+        min-height: 480px;
+    }
+
+    &-side {
+        padding: var(--space-400) var(--space-300);
+
+        @include big {
+            flex: 1 1 660px;
+            padding: var(--space-600) var(--space-700);
+        }
+    }
+
+    &-intro {
+        background: $black;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: $space-600;
+
+        @include big {
+          gap: $space-700;  
+        }
+        
+
+        &-upper {
+            &-body {
+                margin-top: $space-100;
+            }
+        }
+
+        &-lower {
+            padding-top: $space-200;
+            border-top: 2px solid $black-700;
+
+            &-header {
+                color: $cream-900;
+            }
+
+            &-body {
+                margin-top: $space-100;
+                font-style: italic !important;
+            }
+        }
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        gap: $space-500;
+
+        border: 2px solid $black;
+
+        &-section {
+            &-text {
+                margin-top: $space-300;
+
+                display: flex;
+                flex-direction: column;
+                gap: $space-100;
+            }
+
+
+            &-btns {
+                margin-top: $space-600;
+
+                @include big {
+                    margin-top: $space-700;
+                }
+            }
+        }
+
+        &-line {
+            width: 100%;
+            height: 2px;
+            background-color: $black;   
+        }
+    }
+}

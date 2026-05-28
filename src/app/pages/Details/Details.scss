@@ -1,0 +1,77 @@
+// _wedding.scss
+@use "@/styles/variables" as *;;
+
+.venue-section {
+    margin: var(--layout-section-padding) auto;
+
+    .section-inner {
+        background-color: var(--black-900);
+
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-700);
+
+        @include big {
+            gap: var(--space-1000);
+        }
+    }
+}
+
+.timeline-section .parallaxing_drink-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-700);
+
+    @include big {
+        gap: var(--space-1000);
+    }
+}
+
+.rehearsal {
+    &-section {
+        @include big {
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-600);
+
+    @include big {
+        flex-direction: row;
+        gap: 9.583vw;
+    }
+
+    &-left {
+        @include big {
+            flex: 1 1 546px;
+            max-width: none;
+        }
+    }
+
+    &-right {
+        display: flex;
+        flex-direction: column;
+        gap: $space-400;
+
+        @include big {
+            flex: 1 1 627px;
+        }
+
+        .btn {
+            @include big {
+                order: 2;
+            }
+        }
+    }
+}
+
+.faqs-section {
+    @include big {
+        margin-top: -12vw; // TODO: Fix the top margin to hug to the previous block
+        position: relative;
+        z-index: 1;
+    }
+}

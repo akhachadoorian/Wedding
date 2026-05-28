@@ -1,0 +1,149 @@
+@use "@/styles/variables" as *;;
+
+.text_only_hero {
+    width: 100%;
+
+    &-section {
+        width: 100%;
+        min-height: 70dvh;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &-wrapper {
+        position: relative;
+        width: 100%;
+        padding: var(--layout-section-padding) var(--layout-column-margin);
+
+        display: flex;
+        align-items: center;
+
+        @include big {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        // Full-width background bleed: stretches to 100vw while wrapper stays max-width
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            z-index: -1;
+        }
+    }
+
+    &-subtitle,
+    &-body {
+        margin-top: var(--space-300);
+    }
+
+    &-btns {
+        margin-top: var(--space-500);
+    }
+
+    // ---- Layout Variations -------------------------------------------
+    &-variation {
+        &-left {
+            // margin: 0;
+            @include big {
+                max-width: 75.833vw;
+                // max-width: 60.417vw;
+            }
+
+            @include big($max-width-bp) {
+                max-width: 60.417vw;
+            }
+        }
+
+        &-center {
+            margin: 0 auto;
+            text-align: center;
+
+            @include big {
+                max-width: 60.417vw;
+                margin: auto;
+            }
+
+            .eyebrow-wrapper,
+            .subtitle {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .btns {
+                justify-content: center;
+            }
+        }
+
+        &-columns {
+            margin: 0 auto;
+
+            display: flex;
+            flex-direction: column;
+
+            @include big {
+                flex-direction: row;
+                align-items: center;
+                gap: var(--layout-column-gutter);
+            }
+
+            &-left {
+                @include big {
+                    flex: 1 1 760px;
+                }
+            }
+
+            &-right {
+                @include big {
+                    flex: 1 1 530px;
+                }
+            }
+        }
+    }
+
+    // ---- Theme Variations -------------------------------------------
+    // Non-inset: background on ::before (full-width bleed, wrapper height)
+    // Inset: background directly on wrapper (constrained to max-width)
+    &-theme {
+        &-black {
+            .text_only_hero-wrapper::before {
+                background-color: var(--black-900);
+            }
+
+            &.inset {
+                .text_only_hero-wrapper::before {
+                    display: none;
+                }
+                .text_only_hero-wrapper {
+                    background-color: var(--black-900);
+                }
+            }
+        }
+
+        &-art-deco-bg {
+             background: linear-gradient(to top, var(--black-1000) 35%, transparent 100%), url("../../assets/DiamondPattern.svg");
+                background-repeat: repeat;
+                background-size: 50vw;
+
+            .text_only_hero-wrapper::before {
+                display: none;
+            }
+
+            &.inset {
+                .text_only_hero-wrapper::before {
+                    display: none;
+                }
+                .text_only_hero-wrapper {
+                    background: linear-gradient(to top, var(--black-1000) 35%, transparent 100%), url("../../assets/DiamondPattern.svg");
+                    background-repeat: repeat;
+                    background-size: 50vw;
+                }
+            }
+        }
+    }
+}

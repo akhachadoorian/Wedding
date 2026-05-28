@@ -1,0 +1,39 @@
+@use "@/styles/variables" as *;;
+
+.simple_table {
+    width: 100%;
+}
+
+// #region --- SimpleTableRow --------------------------------
+
+.simple_table_row {
+    display: flex;
+    flex-direction: column;
+
+    border-bottom: 1px solid $gold;
+
+    @include big {
+        flex-direction: row;
+        align-items: center;
+        gap: $space-800;
+
+        padding: var(--space-400, 32px);
+    }
+}
+
+// #endregion --------------------------------------------------
+
+// #region --- SimpleTable Element ------------------------------
+
+.simple_table_element {
+    &-time {
+        white-space: nowrap;
+    }
+
+    &-title {
+        flex: 1 0 245px;
+        white-space: nowrap;
+    }
+}
+
+// #endregion --------------------------------------------------
