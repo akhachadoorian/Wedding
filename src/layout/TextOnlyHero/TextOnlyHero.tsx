@@ -3,22 +3,23 @@ import React from "react";
 import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";
 import { ThreeButtonsArray } from "../../types/buttons";
+import { WithHTMLProps } from "../../types/props";
 
 import "./TextOnlyHero.scss";
 
 type TextOnlyHeroStyleProps = {
-    variation?: "left" | "center" | "columns";
-    theme?: 'default' | 'black' | 'art-deco-bg';
+    variation: "left" | "center" | "columns";
+    theme: "default" | "black" | "art-deco-bg";
     inset?: boolean;
 };
 
 const DEFAULT_STYLE = {
     variation: "left",
-    theme: 'default',
+    theme: "default",
     inset: false,
 } satisfies TextOnlyHeroStyleProps;
 
-export type TextOnlyHeroProps = {
+export type TextOnlyHeroProps = WithHTMLProps & {
     loaded: boolean;
 
     // Style Options
@@ -32,39 +33,82 @@ export type TextOnlyHeroProps = {
     buttons?: ThreeButtonsArray;
 };
 
-export default function TextOnlyHero({ loaded, styleOptions, eyebrow, header, subtitle, body, buttons }: TextOnlyHeroProps) {
+export default function TextOnlyHero({
+    loaded,
+    styleOptions = DEFAULT_STYLE,
 
+    eyebrow,
+    header,
+    subtitle,
+    body,
+    buttons,
+
+    className,
+    ...htmlProps
+}: TextOnlyHeroProps) {
     return (
-        <section className={`text_only_hero-section text_only_hero-theme-${styleOptions?.theme || DEFAULT_STYLE.theme} ${styleOptions?.inset ? 'inset' : ''} ${loaded ? "is-loaded" : "is-hidden"} `}>
-
+        <section {...htmlProps} className={`text_only_hero-section text_only_hero-theme-${styleOptions.theme} ${styleOptions.inset ? "inset" : ""} ${loaded ? "is-loaded" : "is-hidden"} `}>
             <div className={`text_only_hero-wrapper`}>
                 {styleOptions?.variation === "columns" ? (
-                <ColumnsTextOnlyHero eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
-            ) : styleOptions?.variation === "center" ? (
-                <CenterTextOnlyHero eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
-            ) : (
-                <LeftTextOnlyHero eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
-            )}
+                    <ColumnsTextOnlyHero eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
+                ) : styleOptions?.variation === "center" ? (
+                    <CenterTextOnlyHero eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
+                ) : (
+                    <LeftTextOnlyHero eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
+                )}
             </div>
-            
         </section>
     );
 }
 
-// ---- Sub-components --------------------------------------------------------
+// #region --- Sub-components --------------------------------------------------------
 
-function CenterTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eyebrow?: string; header: string; subtitle?: string; body?: string; buttons?: ThreeButtonsArray }) {
+function LeftContentTextOnlyHero({
+    eyebrowVariation,
+    eyebrow, 
+    header,
+}: { 
+    eyebrowVariation?: 'center' | 'left';
+    eyebrow?: string; 
+    header: string;
+}) {
     return (
-        <div className={`text_only_hero text_only_hero-variation-center`}>
-            {eyebrow && <Eyebrow className={"text_only_hero-eyebrow"} text={eyebrow} styleOptions={{ variation: "center" }} />}
+        <>
+            {eyebrow && <Eyebrow className={`text_only_hero-eyebrow`} text={eyebrow} styleOptions={{ variation: eyebrowVariation ?? 'left' }} />}
 
-            <h1 className="text_only_hero-header">{header}</h1>
+            <h1 className={`text_only_hero-header`}>{header}</h1>
+        </>
+    )
+}
 
-            {subtitle && <p className="subtitle text_only_hero-subtitle">{subtitle}</p>}
+function RightContentTextOnlyHero({
+    subtitle, 
+    body, 
+    buttons
+}:{
+    subtitle?: string; 
+    body?: string; 
+    buttons?: ThreeButtonsArray
+}) {
+    if (!subtitle && !body && !buttons) return;
+
+    return (
+        <>
+            {subtitle && <p className="subtitle-extra text_only_hero-subtitle">{subtitle}</p>}
 
             {body && <p className="text_only_hero-body body-l">{body}</p>}
 
             {buttons && <ThreeButtons className="text_only_hero-btns btns" noDecorationMap={true} buttons={buttons ?? []} />}
+        </>
+    )
+}
+
+function CenterTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eyebrow?: string; header: string; subtitle?: string; body?: string; buttons?: ThreeButtonsArray }) {
+    return (
+        <div className={`text_only_hero text_only_hero-variation-center`}>
+            <LeftContentTextOnlyHero eyebrowVariation="center" eyebrow={eyebrow} header={header} />
+
+            <RightContentTextOnlyHero subtitle={subtitle} body={body} buttons={buttons} />
         </div>
     );
 }
@@ -72,15 +116,10 @@ function CenterTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eyeb
 function LeftTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eyebrow?: string; header: string; subtitle?: string; body?: string; buttons?: ThreeButtonsArray }) {
     return (
         <div className={`text_only_hero text_only_hero-variation-left`}>
-            {eyebrow && <Eyebrow className={"text_only_hero-eyebrow"} text={eyebrow} styleOptions={{ variation: "left" }} />}
 
-            <h1 className="text_only_hero-header">{header}</h1>
+            <LeftContentTextOnlyHero eyebrowVariation="left" eyebrow={eyebrow} header={header} />
 
-            {subtitle && <p className="subtitle text_only_hero-subtitle">{subtitle}</p>}
-
-            {body && <p className="text_only_hero-body body-l">{body}</p>}
-
-            {buttons && <ThreeButtons className="text_only_hero-btns btns" noDecorationMap={true} buttons={buttons ?? []} />}
+            <RightContentTextOnlyHero subtitle={subtitle} body={body} buttons={buttons} />
         </div>
     );
 }
@@ -89,19 +128,14 @@ function ColumnsTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eye
     return (
         <div className={`text_only_hero text_only_hero-variation-columns`}>
             <div className="text_only_hero-variation-columns-left">
-                {eyebrow && <Eyebrow className={"text_only_hero-eyebrow"} text={eyebrow} styleOptions={{ variation: "left" }} />}
-
-                <h1 className="text_only_hero-header">{header}</h1>
+                <LeftContentTextOnlyHero eyebrowVariation="left" eyebrow={eyebrow} header={header} />
             </div>
             {(subtitle || body || buttons) && (
                 <div className="text_only_hero-variation-columns-right">
-                    {subtitle && <p className="subtitle text_only_hero-subtitle">{subtitle}</p>}
-
-                    {body && <p className="text_only_hero-body body-l">{body}</p>}
-
-                    {buttons && <ThreeButtons className="text_only_hero-btns btns" noDecorationMap={true} buttons={buttons ?? []} />}
+                    <RightContentTextOnlyHero subtitle={subtitle} body={body} buttons={buttons} />
                 </div>
             )}
         </div>
     );
 }
+// #endregion ----------------------------------------------------------
