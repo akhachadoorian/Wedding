@@ -1,7 +1,7 @@
-import { CopyOnlyProps } from "../../components/CopyOnly/CopyOnly";
-import { DashedCopyGridProps } from "../../components/DashedCopy/DashedCopy";
-import { DrinkCardGridProps } from "../../components/DrinkCardGrid/DrinkCardGrid";
-import { ScrollRevealHeroProps } from "../../layout/ScrollRevealHero/ScrollRevealHero";
+import { CopyOnlyProps } from "../../../components/CopyOnly/CopyOnly";
+import { DashedCopyGridProps } from "../../../components/DashedCopy/DashedCopy";
+import { DrinkCardGridProps } from "../../../components/DrinkCardGrid/DrinkCardGrid";
+import { ScrollRevealHeroProps } from "../../../layout/ScrollRevealHero/ScrollRevealHero";
 
 // ----- Hero -----------------------------------------------
 const hero: ScrollRevealHeroProps = {

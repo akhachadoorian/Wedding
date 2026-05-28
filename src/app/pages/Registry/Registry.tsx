@@ -1,12 +1,12 @@
 import React from "react";
-import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
+import TextOnlyHero from "../../../layout/TextOnlyHero/TextOnlyHero";
 import './Registry.scss';
 import content from './content';
-import DraggableHero from "../../layout/DraggableHero/DraggableHero";
-import { useFadeIn } from "../../hooks/useFadeIn";
-import CopyOnly from "../../components/CopyOnly/CopyOnly";
-import ImageCallout from "../../components/ImageCallout/ImageCallout";
-import BackgroundSection from "../../layout/BackgroundSection/BackgroundSection";
+import DraggableHero from "../../../layout/DraggableHero/DraggableHero";
+import { useFadeIn } from "../../../hooks/useFadeIn";
+import CopyOnly from "../../../components/CopyOnly/CopyOnly";
+import ImageCallout from "../../../components/ImageCallout/ImageCallout";
+import BackgroundSection from "../../../layout/BackgroundSection/BackgroundSection";
 
 export default function Registry({ loaded = true }: { loaded?: boolean })  {
     const thanksRef = useFadeIn<HTMLDivElement>();

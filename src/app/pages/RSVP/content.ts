@@ -1,5 +1,5 @@
-import { RSVPFormProps, RSVPStepProps } from "../../components/RSVPForm/RSVPForm";
-import { TextOnlyHeroProps } from "../../layout/TextOnlyHero/TextOnlyHero";
+import { RSVPFormProps, RSVPStepProps } from "../../../components/RSVPForm/RSVPForm";
+import { TextOnlyHeroProps } from "../../../layout/TextOnlyHero/TextOnlyHero";
 
 // #region --- Hero --------------------------------------------------
 

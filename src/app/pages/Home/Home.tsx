@@ -1,8 +1,8 @@
-import CopyOnly from "../../components/CopyOnly/CopyOnly";
-import DashedCopyGrid from "../../components/DashedCopy/DashedCopy";
-import DrinkCardGrid from "../../components/DrinkCardGrid/DrinkCardGrid";
-import { useFadeIn } from "../../hooks/useFadeIn";
-import ScrollRevealHero from "../../layout/ScrollRevealHero/ScrollRevealHero";
+import CopyOnly from "../../../components/CopyOnly/CopyOnly";
+import DashedCopyGrid from "../../../components/DashedCopy/DashedCopy";
+import DrinkCardGrid from "../../../components/DrinkCardGrid/DrinkCardGrid";
+import { useFadeIn } from "../../../hooks/useFadeIn";
+import ScrollRevealHero from "../../../layout/ScrollRevealHero/ScrollRevealHero";
 import content from "./content";
 
 import "./Home.scss";

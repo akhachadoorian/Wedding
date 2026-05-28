@@ -1,6 +1,6 @@
-import { CopyOnlyProps } from "../../components/CopyOnly/CopyOnly";
-import { ImageCalloutProps } from "../../components/ImageCallout/ImageCallout";
-import { TextOnlyHeroProps } from "../../layout/TextOnlyHero/TextOnlyHero";
+import { CopyOnlyProps } from "../../../components/CopyOnly/CopyOnly";
+import { ImageCalloutProps } from "../../../components/ImageCallout/ImageCallout";
+import { TextOnlyHeroProps } from "../../../layout/TextOnlyHero/TextOnlyHero";
 
 // ----- Content -----------------------------------------------
 const hero: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {

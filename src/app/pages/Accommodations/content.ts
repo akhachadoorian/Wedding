@@ -1,7 +1,7 @@
-import { ArtDecoCardGridProps, ArtDecoCardProps } from "../../components/ArtDecoCardGrid/ArtDecoCardGrid";
-import { CopyOnlyProps } from "../../components/CopyOnly/CopyOnly";
-import { SplitInfoProps } from "../../components/SplitInfo/SplitInfo";
-import { TextOnlyHeroProps } from "../../layout/TextOnlyHero/TextOnlyHero";
+import { ArtDecoCardGridProps, ArtDecoCardProps } from "../../../components/ArtDecoCardGrid/ArtDecoCardGrid";
+import { CopyOnlyProps } from "../../../components/CopyOnly/CopyOnly";
+import { SplitInfoProps } from "../../../components/SplitInfo/SplitInfo";
+import { TextOnlyHeroProps } from "../../../layout/TextOnlyHero/TextOnlyHero";
 import { NonEmptyArray } from "../../types/utility";
 import { BusIcon, LetterCirclePIcon, MapTrifoldIcon } from "@phosphor-icons/react";
 
