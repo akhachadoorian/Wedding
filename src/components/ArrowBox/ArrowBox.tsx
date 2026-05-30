@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 
 import { ColorVariables } from "../../types/colors";
@@ -32,7 +34,7 @@ export default function ArrowBox({ color = "--cream-500", arrowDirection = "top-
 
 
     return (
-        <div className="arrow_box-wrapper" style={{ borderColor: `var(${color})` }}>
+        <div className="arrow_box-wrapper" style={{ borderColor: resolvedColor.toCssVar() }}>
             <div className={`arrow_box-inner`}>
                 <div className={`arrow_box-grid ${arrowDirection}`}>
                     <div className="arrow start">

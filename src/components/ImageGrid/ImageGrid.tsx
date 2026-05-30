@@ -1,3 +1,5 @@
+'use client'
+
 import { ImageProps } from "../../types/images";
 
 import "./ImageGrid.scss";

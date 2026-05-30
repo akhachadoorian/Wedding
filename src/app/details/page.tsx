@@ -1,21 +1,23 @@
+'use client'
+
 import { useEffect, useRef } from "react";
 
-import Accordions from "../../../components/Accordions/Accordions";
-import CopyOnly from "../../../components/CopyOnly/CopyOnly";
-import SimpleTable from "../../../components/SimpleTable/SimpleTable";
-import { SmallTextGrid } from "../../../components/SmallText/SmallText";
-import SplitInfo from "../../../components/SplitInfo/SplitInfo";
-import { useFadeIn } from "../../../hooks/useFadeIn";
-import InsetBackgroundSection from "../../../layout/InsetBackgroundSection/InsetBackgroundSection";
-import ParallaxingDrinkSection from "../../../layout/ParallaxingDrinkSection/ParallaxingDrinkSection";
-import SlantedSection from "../../../layout/SlatedSection/SlantedSection";
-import TextOnlyHero from "../../../layout/TextOnlyHero/TextOnlyHero";
+import Accordions from "@/components/Accordions/Accordions";
+import CopyOnly from "@/components/CopyOnly/CopyOnly";
+import SimpleTable from "@/components/SimpleTable/SimpleTable";
+import { SmallTextGrid } from "@/components/SmallText/SmallText";
+import SplitInfo from "@/components/SplitInfo/SplitInfo";
+import { useFadeIn } from "@/hooks/useFadeIn";
+import InsetBackgroundSection from "@/layout/InsetBackgroundSection/InsetBackgroundSection";
+import ParallaxingDrinkSection from "@/layout/ParallaxingDrinkSection/ParallaxingDrinkSection";
+import SlantedSection from "@/layout/SlatedSection/SlantedSection";
+import TextOnlyHero from "@/layout/TextOnlyHero/TextOnlyHero";
 import content from "./content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "./Details.scss";
-import Button from "../../../components/Buttons/Button";
+import Button from "@/components/Buttons/Button";
 
 gsap.registerPlugin(ScrollTrigger);
 

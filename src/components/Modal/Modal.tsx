@@ -59,9 +59,9 @@ export default function Modal({
             {isVisible && (
                 <motion.div
                     style={{ overflow: "hidden" }}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "100dvh", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
+                    initial={{ translateX: '100dvw', opacity: 0 }}
+                    animate={{ translateX: "0dvw", opacity: 1 }}
+                    exit={{ translateX: '100dvw', opacity: 0 }}
                     transition={{ duration: 0.4 }}
                     // onAnimationComplete={onClose}
                     {...rest}

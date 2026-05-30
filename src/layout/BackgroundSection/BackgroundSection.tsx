@@ -1,3 +1,5 @@
+'use client'
+
 import { PropsWithChildren } from "react";
 import generateSectionClass from "../../hooks/generateSectionClass";
 import { BackgroundImageProps, ImageProps } from "../../types/images";

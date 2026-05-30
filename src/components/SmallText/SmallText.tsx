@@ -1,3 +1,5 @@
+'use client'
+
 import mergeRefs from "../../hooks/mergeRefs";
 import { useFadeInChildren } from "../../hooks/useFadeIn";
 import { useBreakpoints } from "../../hooks/useWindowWidth";

@@ -1,5 +1,5 @@
 @use "@/styles/variables" as *;;
-@use "../ArrowBox/ArrowBox.scss" as *;
+@use "@/components/ArrowBox/arrow-tokens" as *;
 
 // #region --- Art Deco Card ---------------------------------------------
 .art_deco_card {

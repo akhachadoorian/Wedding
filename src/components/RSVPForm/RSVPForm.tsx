@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import GUEST_LIST from "../../data/guestList";
 import toHtmlId from "../../hooks/toHtmlId";
-import RSVP from "../../app/pages/RSVP/RSVP";
+import RSVP from "../../app/rsvp/page";
 import { party } from "../../types/guestList";
 import { WithHTMLProps } from "../../types/props";
 import { NonEmptyArray } from "../../types/utility";

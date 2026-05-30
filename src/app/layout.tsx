@@ -1,19 +1,15 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 
 import "@/styles/main.scss";
 import LenisProvider from "../utils/LenisProvider";
 import Footer from "../layout/Footer/Footer";
 import Navigation from "../layout/Navigation/Navigation";
+import { GlobalTooltip, TooltipProvider } from "../layout/GlobalTooltip/GlobalTooltip";
 
 export const metadata: Metadata = {
-    title: "Nilex Industrial | Safety & Industrial Supplies — Mobile, AL",
+    title: "Alex & Max | October 31, 2026",
     description:
-        "Nilex Industrial is a woman-owned, family-run safety and industrial supply company based in Mobile, AL. PPE, gloves, lighting, and more. Call (251) 458-9718.",
-    robots: "index, follow",
-    verification: {
-        google: "YPMVenJkUa6BlbvxZn_rEaa1t4DCh2Ss5-9B3ZIO-Vw",
-    },
+        "Join us to celebrate the wedding of Alex & Max on October 31st, 2026 at The Clay Theatre in Green Cove Springs, Florida.",
 };
 
 export default function RootLayout({
@@ -34,20 +30,22 @@ export default function RootLayout({
                     href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
                     rel="stylesheet"
                 />
-                <link rel="canonical" href="https://alexmaxwedding.com/" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/Logo.svg" />
                 <link rel="apple-touch-icon" href="/logo192.png" />
                 <link rel="manifest" href="/manifest.json" />
                 <meta name="theme-color" content="#000000" />
             </head>
             <body>
-                <LenisProvider>
-                    <Navigation />
+                <TooltipProvider>
+                    <LenisProvider>
+                        <Navigation />
 
-                    <main>{children}</main>
+                        <main>{children}</main>
 
-                    <Footer />
-                </LenisProvider>
+                        <Footer />
+                    </LenisProvider>
+                    <GlobalTooltip />
+                </TooltipProvider>
             </body>
         </html>
     );

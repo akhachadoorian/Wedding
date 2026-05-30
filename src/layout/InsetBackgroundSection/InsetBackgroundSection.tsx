@@ -1,3 +1,5 @@
+'use client'
+
 import { PropsWithChildren } from "react";
 import { WithHTMLProps } from "../../types/props"
 import { ColorVariables } from "../../types/colors";

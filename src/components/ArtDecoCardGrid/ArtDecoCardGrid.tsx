@@ -1,3 +1,5 @@
+'use client'
+
 import { LenisLink } from "../../hooks/LenisLink";
 import mergeRefs from "../../hooks/mergeRefs";
 import { useFadeInChildren } from "../../hooks/useFadeIn";

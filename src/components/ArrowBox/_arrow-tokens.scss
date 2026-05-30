@@ -10,3 +10,11 @@ $arrow-hover-transforms: (
     'up': translate(0, -$arrowWidth),
     'down': translate(0, 0),
 );
+
+// 
+// @each $dir, $t in $arrow-hover-transforms {
+//     .arrow_box-grid.#{$dir} { transform: $t; }
+// }
+
+// @use 'sass:map';
+// transform: map.get($arrow-hover-transforms, 'top-right');

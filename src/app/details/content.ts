@@ -1,11 +1,11 @@
-import { AccordionsProps } from "../../../components/Accordions/Accordions";
-import { CopyOnlyProps } from "../../../components/CopyOnly/CopyOnly";
-import { SimpleTableProps } from "../../../components/SimpleTable/SimpleTable";
-import { SplitInfoProps } from "../../../components/SplitInfo/SplitInfo";
-import { TextOnlyHeroProps } from "../../../layout/TextOnlyHero/TextOnlyHero";
+import { AccordionsProps } from "@/components/Accordions/Accordions";
+import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
+import { SimpleTableProps } from "@/components/SimpleTable/SimpleTable";
+import { SplitInfoProps } from "@/components/SplitInfo/SplitInfo";
+import { TextOnlyHeroProps } from "@/layout/TextOnlyHero/TextOnlyHero";
 import { LetterCirclePIcon, MapTrifoldIcon, VanIcon } from "@phosphor-icons/react";
 import { ButtonProps } from "../../types/buttons";
-import { SmallTextGridProps } from "../../../components/SmallText/SmallText";
+import { SmallTextGridProps } from "@/components/SmallText/SmallText";
 
 // ----- Hero -----------------------------------------------
 // const hero: Omit<SmallTextTagHeroProps, "loaded"> = {

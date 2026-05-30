@@ -1,3 +1,5 @@
+'use client'
+
 import { TwoButtonsArray } from "../../types/buttons";
 import Eyebrow from "../Eyebrow/Eyebrow";
 

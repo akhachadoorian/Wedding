@@ -1,3 +1,5 @@
+'use client'
+
 import { DEFAULT_IMAGE } from "../../data/defaultImage";
 import mergeRefs from "../../hooks/mergeRefs";
 import { useFadeInChildren } from "../../hooks/useFadeIn";

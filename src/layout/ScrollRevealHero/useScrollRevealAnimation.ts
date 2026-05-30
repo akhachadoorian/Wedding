@@ -3,7 +3,6 @@
 import { useLayoutEffect, useEffect, RefObject, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { px } from "motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,8 +78,8 @@ export default function useScrollRevealAnimation({
     hoverHintRef,
 }: ScrollRevealRefs) {
     // ----- State Variables ---------------------------
-    let [width, setWidth] = useState(window.innerWidth);
-    let [height, setHeight] = useState(window.innerHeight);
+    let [width, setWidth] = useState(0);
+    let [height, setHeight] = useState(0);
 
     // ----- Use Effect ---------------------------
     /**

@@ -1,12 +1,14 @@
+'use client'
+
 import React from "react";
 
 import './Accommodations.scss';
 import content from './content';
-import TextOnlyHero from "../../../layout/TextOnlyHero/TextOnlyHero";
-import { useFadeIn } from "../../../hooks/useFadeIn";
-import SplitInfo from "../../../components/SplitInfo/SplitInfo";
-import ArtDecoCardGrid, { ArtDecoCard } from "../../../components/ArtDecoCardGrid/ArtDecoCardGrid";
-import CopyOnly from "../../../components/CopyOnly/CopyOnly";
+import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
+import { useFadeIn } from "../../hooks/useFadeIn";
+import SplitInfo from "../../components/SplitInfo/SplitInfo";
+import ArtDecoCardGrid, { ArtDecoCard } from "../../components/ArtDecoCardGrid/ArtDecoCardGrid";
+import CopyOnly from "../../components/CopyOnly/CopyOnly";
 
 export default function Accommodations({ loaded = true }: { loaded?: boolean })  {
     const hotelsRef = useFadeIn<HTMLDivElement>();

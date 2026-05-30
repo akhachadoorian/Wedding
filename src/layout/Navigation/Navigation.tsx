@@ -159,7 +159,7 @@ function Navigation() {
     };
 
     return (
-        <header className={""}>
+        <header className={"is-home"}>
             <div className={`navigation-wrapper ${mobileOpen ? "mobile_nav_open" : ""}`}>
                 <div className="navigation-upper">
                     <LenisLink href={"/"} className="navigation-left">

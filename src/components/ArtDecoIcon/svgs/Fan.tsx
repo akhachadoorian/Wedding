@@ -1,3 +1,5 @@
+'use client'
+
 import { ColorSchemeMap } from "../../../classes/ColorSchemeMap";
 import { ArtDecoSVG } from "../ArtDecoIcon";
 
