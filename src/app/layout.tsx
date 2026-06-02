@@ -5,6 +5,8 @@ import LenisProvider from "../utils/LenisProvider";
 import Footer from "../layout/Footer/Footer";
 import Navigation from "../layout/Navigation/Navigation";
 import { GlobalTooltip, TooltipProvider } from "../layout/GlobalTooltip/GlobalTooltip";
+import Navigation2 from "@/layout/Navigation 2/Navigation2";
+import ComingSoon from "@/layout/ComingSoon/ComingSoon";
 
 export const metadata: Metadata = {
     title: "Alex & Max | October 31, 2026",
@@ -38,9 +40,14 @@ export default function RootLayout({
             <body>
                 <TooltipProvider>
                     <LenisProvider>
-                        <Navigation />
+                        {/* <Navigation /> */}
+                        <Navigation2 />
 
-                        <main>{children}</main>
+                        {/* <main>{children}</main> */}
+
+                        <main>
+                            <ComingSoon />
+                        </main>
 
                         <Footer />
                     </LenisProvider>

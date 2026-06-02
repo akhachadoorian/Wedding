@@ -10,15 +10,16 @@ import type { NavItem } from "../types/navigation"
  * @see {@link NavItem} for the full type definition
  */
 export const NAV_ITEMS = [
-  {
-    kind: "dropdown" as const,
-    text: "Details",
-    link: "/details",
-    children: [
-      { kind: "link" as const, text: "Venue", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." ,link: "/details#venue" },
-      { kind: "link" as const, text: "Timeline", link: "/details#timeline" },
-    ]
-  },
+  // {
+  //   kind: "dropdown" as const,
+  //   text: "Details",
+  //   link: "/details",
+  //   children: [
+  //     { kind: "link" as const, text: "Venue", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." ,link: "/details#venue" },
+  //     { kind: "link" as const, text: "Timeline", link: "/details#timeline" },
+  //   ]
+  // },
+  { kind: "link" as const, text: "Details", link: "/details" },
   { kind: "link" as const, text: "Accommodations", link: "/accommodations" },
   { kind: "link" as const, text: "Registry", link: "/registry" },
   { kind: "link" as const, text: "RSVP", link: "/rsvp" },

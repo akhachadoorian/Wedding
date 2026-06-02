@@ -1,0 +1,121 @@
+@use "@/styles/variables" as *;
+
+.goth_hero {
+    position: relative;
+    min-height: 100dvh;
+    overflow: hidden;
+
+    display: flex;
+    align-items: flex-end;
+
+    &-img {
+        position: absolute;
+        z-index: 1;
+
+        height: 100dvh;
+        width: 100%;
+        // aspect-ratio: 4093/2729;
+        // height: auto;
+
+        img {
+            // object-position: center 25%;
+            // height: 100dvh;
+            // aspect-ratio: 4093/2729;
+            @include big {
+                object-position: center 20%;
+            }
+        }
+    }
+
+    &-text {
+        position: relative;
+        z-index: 5;
+
+        width: 100%;
+        background: linear-gradient(
+            180deg,
+            rgba(16, 17, 17, 0) 12.02%,
+            rgba(16, 17, 17, 0.60) 47.12%
+        );
+
+        padding: $space-200 var(--layout-column-margin);
+
+        &-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: $space-200;
+
+            @include big {
+            max-width: var(--max-width);
+            margin: auto;
+        }
+
+            h1 {
+                font-family: Respira;
+                // font-size: 225px;
+                font-size: 15.625vw;
+                font-style: normal;
+                font-weight: 800;
+                line-height: 100%;
+
+                @include big {
+                    font-size: 15.625vw;
+                }
+            }
+
+            p {
+                font-family: Respira;
+                font-size: 120px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 100%;
+
+                @include big {
+                    font-size: 8.333vw;
+                }
+            }
+        }
+
+        &-eyebrow {
+            // margin-bottom: $space-400;
+            margin: 0 auto $space-400 auto;
+
+            display: flex;
+            // flex-direction: column;
+            justify-content: space-between;
+            gap: var(--layout-column-gutter);
+
+            @include big {
+                max-width: var(--max-width);
+                margin: 0 auto $space-400 auto;
+
+                // flex-direction: row;
+                // justify-content: space-between;
+                // gap: var(--layout-column-gutter);
+            }
+
+            p {
+                font-family: Unbounded;
+                font-size: var(--text-md, 20px);
+                font-style: normal;
+                font-weight: 400;
+                line-height: 140%; /* 28px */
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+
+            &-left {
+                text-align: left;
+            }
+
+            &-center {
+                text-align: center;
+            }
+
+            &-right {
+                text-align: right;
+            }
+        }
+    }
+}

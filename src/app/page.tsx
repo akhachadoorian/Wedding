@@ -8,6 +8,7 @@ import ScrollRevealHero from "@/layout/ScrollRevealHero/ScrollRevealHero";
 import content from "./content";
 
 import "./Home.scss";
+import GothHero from "../layout/GothHero/GothHero";
 
 export default function Home({ loaded = true }: { loaded?: boolean }) {
     // Setup refs for fade in
@@ -16,7 +17,9 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
 
     return (
         <>
-            <ScrollRevealHero {...content.hero} />
+            {/* <ScrollRevealHero {...content.hero} /> */}
+            
+            <GothHero loaded={loaded}  {...content.hero}/>
 
             <section ref={welcomeRef} id="welcome" className="welcome-section base_section">
                 <CopyOnly

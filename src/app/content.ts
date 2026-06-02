@@ -1,47 +1,61 @@
 import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
 import { DashedCopyGridProps } from "@/components/DashedCopy/DashedCopy";
 import { DrinkCardGridProps } from "@/components/DrinkCardGrid/DrinkCardGrid";
+import { GothHeroProps } from "@/layout/GothHero/GothHero";
 import { ScrollRevealHeroProps } from "@/layout/ScrollRevealHero/ScrollRevealHero";
 
 // ----- Hero -----------------------------------------------
-const hero: ScrollRevealHeroProps = {
-    header: "Alex & Max",
-    hideScrollHint: false,
-    scrollHintMessage: "Scroll for details",
-    endScrollMessage: "Hover on images for more!",
-    endScrollMessageMobile: "Touch the images for more!",
-    sideImages: [
-        { 
-            src: "/images/Engagement.jpg", 
-            alt: "Max proposing to Alex in the Japan Garden in Epcot",
-            caption: "Max proposing to Alex in the Japan Garden in Epcot",
-            borderStyle: 'simple',
-            aspectRatio: "portrait" 
-        },
-        { 
-            src: "/images/Graduation.jpg", 
-            alt: "Max and Alex at Max's college graduation",
-            caption: "Max's Graduation", 
-            borderStyle: 'double',
-            aspectRatio: "square" 
-        },
-        { 
-            src: "/images/Sunglasses.jpg", 
-            alt: "", 
-            caption: "", 
-            borderStyle: 'corner',
-            aspectRatio: "square" 
+// const hero: ScrollRevealHeroProps = {
+//     header: "Alex & Max",
+//     hideScrollHint: false,
+//     scrollHintMessage: "Scroll for details",
+//     endScrollMessage: "Hover on images for more!",
+//     endScrollMessageMobile: "Touch the images for more!",
+//     sideImages: [
+//         { 
+//             src: "/images/Engagement.jpg", 
+//             alt: "Max proposing to Alex in the Japan Garden in Epcot",
+//             caption: "Max proposing to Alex in the Japan Garden in Epcot",
+//             borderStyle: 'simple',
+//             aspectRatio: "portrait" 
+//         },
+//         { 
+//             src: "/images/Graduation.jpg", 
+//             alt: "Max and Alex at Max's college graduation",
+//             caption: "Max's Graduation", 
+//             borderStyle: 'double',
+//             aspectRatio: "square" 
+//         },
+//         { 
+//             src: "/images/Sunglasses.jpg", 
+//             alt: "", 
+//             caption: "", 
+//             borderStyle: 'corner',
+//             aspectRatio: "square" 
 
-        },
-        { 
-            src: "/images/Disney.jpg", 
-            alt: "Max and Alex kissing in front of the Disney castle", 
-            caption: "Disney Trip", 
-            borderStyle: 'diamond',
-            aspectRatio: "portrait" 
-        },
-    ],
-};
+//         },
+//         { 
+//             src: "/images/Disney.jpg", 
+//             alt: "Max and Alex kissing in front of the Disney castle", 
+//             caption: "Disney Trip", 
+//             borderStyle: 'diamond',
+//             aspectRatio: "portrait" 
+//         },
+//     ],
+// };
+
+const hero: Omit<GothHeroProps, 'loaded'> = {
+    // header: '',
+    img: {
+        src: '/images/DipShot.jpg',
+        alt: 'Max dipping Alex'
+    },
+    eyebrows: {
+        left: "October 31st, 2026\nCeremony at 5pm",
+        right: "The Clay Theatre\nJacksonville, Fl"
+    }
+}
+
 
 // ----- Welcome / Overview -----------------------------------------------
 
