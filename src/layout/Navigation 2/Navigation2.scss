@@ -1,5 +1,6 @@
 @use "@/styles/variables" as *;
 @use "@/components/ArrowBox/arrow-tokens" as *;
+@use "@/styles/placeholders" as *;
 
 body.mobile-nav-open {
     overflow: hidden;
@@ -73,22 +74,34 @@ body.mobile-nav-open {
         gap: $space-200;
 
         .side_nav {
-            display: flex;
+            display: none;
+
+            @include big {
+                display: flex;
             align-items: center;
             gap: $space-200;
+            }
         }
     }
 
     .nav {
         &-logo {
-            aspect-ratio: 95/87;
+            img {
+                aspect-ratio: 95/87;
+
+            @include small {
+                width: 60px;
+                height: auto;
+            }
+            }
         }
 
         &-link {
+             @extend %underline-settings;
             // text-decoration: none;
             text-decoration: underline transparent;
-            text-decoration-thickness: 2px;
-            text-underline-offset: 5px;
+            // text-decoration-thickness: 2px;
+            // text-underline-offset: 5px;
             transition: $transition;
 
             &:hover {
@@ -101,9 +114,11 @@ body.mobile-nav-open {
 
         &-text {
             @extend %nav-link-uppercase;
+            color: $cream;
             transition: $transition;
         }
     }
+
 
     // .nav-link {
     //     text-decoration: none;

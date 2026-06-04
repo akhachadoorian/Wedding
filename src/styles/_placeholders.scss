@@ -1,39 +1,8 @@
 @use "styles/variables" as *;
 
-%nav-link-base {
-    color: var(--cream-500);
-    text-decoration: none;
-    transition: all ease-in-out 300ms;
-
-    &:hover {
-        color: var(--gold-500);
-    }
-}
-
-%nav-link-uppercase {
-    @extend %nav-link-base;
-
-    font-family: $font-sans;
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-
-    &::after {
-        content: "";
-        background-color: var(--gold-500);
-        height: 1px;
-        width: 0;
-        transition: all ease-in-out 300ms;
-    }
-
-    &:hover::after {
-        width: 100%;
-    }
+%underline-settings {
+    text-decoration-thickness: 2px;
+        text-underline-offset: 5px;
 }
 
 %flexbox-rc {

@@ -76,7 +76,7 @@ function DiamondDivider({ color }: { color: ColorVariables }) {
     return (
         <div className="diamond_divider">
             <div className={`diamond_divider-underline`} style={{ backgroundColor: `var(${color})` }}></div>
-            <Diamond
+            {/* <Diamond
                 size={{
                     size: {
                         minSize: 16,
@@ -90,7 +90,7 @@ function DiamondDivider({ color }: { color: ColorVariables }) {
                     },
                 }}
                 color={color}
-            />
+            /> */}
             <div className={`diamond_divider-underline`} style={{ backgroundColor: `var(${color})` }}></div>
         </div>
     );
@@ -100,7 +100,7 @@ function DiamondDivider({ color }: { color: ColorVariables }) {
 function LeftEyebrow({text, color, includeMargin, ref, className}:{text:string, color: ColorVariables, includeMargin:boolean, ref?: React.Ref<HTMLDivElement>, className?:string}) {
     return (
         <div ref={ref} className={`eyebrow-wrapper left ${className ?? ""} ${includeMargin ? "eyebrow-margin" : ""}`}>
-            <Diamond
+            {/* <Diamond
                 size={{
                     size: {
                         minSize: 18,
@@ -114,7 +114,7 @@ function LeftEyebrow({text, color, includeMargin, ref, className}:{text:string, 
                     },
                 }}
                 color={color}
-            />
+            /> */}
             <p className="eyebrow" style={{ color: `var(${color})` }}>
                 {text}
             </p>
@@ -129,7 +129,7 @@ function CenterEyebrow({text, color, includeMargin, ref, className}:{text:string
                     {text}
                 </p>
 
-                <DiamondDivider color={color} />
+                {/* <DiamondDivider color={color} /> */}
             </div>
     );
 }

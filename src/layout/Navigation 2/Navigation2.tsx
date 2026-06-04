@@ -7,6 +7,7 @@ import type { NavItem, NavDropdown } from "@/types/navigation";
 import ArrowBox from "@/components/ArrowBox/ArrowBox";
 import { CaretDownIcon } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 import "./Navigation2.scss";
 import { LenisLink } from "@/hooks/LenisLink";
@@ -254,7 +255,7 @@ export default function Navigation2() {
             >
                 {/* <div className="navigation-upper"> */}
 
-                <nav className="desktop">
+                <nav>
                     <div className="side_nav-left side_nav">
                         {nav_left.map((item) => (
                             <React.Fragment key={item.text}>
@@ -270,7 +271,8 @@ export default function Navigation2() {
                     </div>
 
                     <LenisLink href={"/"} className="nav-logo">
-                        <img src="/assets/AM.svg" alt="A and M monogram" />
+                        <Image src="/assets/AM.svg" alt="A and M monogram" width={95} height={87} priority={true} />
+
                     </LenisLink>
 
                     <div className="side_nav-right side_nav">
@@ -287,9 +289,9 @@ export default function Navigation2() {
                         ))}
                     </div>
 
-                    {/* <div className={`mobile_nav_btn ${mobileOpen ? 'mobile_open': ''}`} id="mobile_nav_btn" onClick={() => setMobileOpen(!mobileOpen)}>
+                    <div className={`mobile_nav_btn ${mobileOpen ? 'mobile_open': ''}`} id="mobile_nav_btn" onClick={() => setMobileOpen(!mobileOpen)}>
                         <div className="mobile_nav_btn-line"></div>
-                    </div> */}
+                    </div>
                 </nav>
 
                 {/* </div> */}
@@ -309,13 +311,13 @@ export default function Navigation2() {
                 </div> */}
             </div>
 
-            {/* <div className={mobileOpen ? "mobile_nav-wrapper open" : "mobile_nav-wrapper"}>
+            <div className={mobileOpen ? "mobile_nav-wrapper open" : "mobile_nav-wrapper"}>
                 <div className="mobile_nav-inner">
                     {NAV_ITEMS.map((item) => (
                         <React.Fragment key={item.text}>{renderMobileNavItem(item, closeMenu, openMobileAccordions, toggleMobileAccordion)}</React.Fragment>
                     ))}
                 </div>
-            </div> */}
+            </div>
         </header>
     );
 }

@@ -66,8 +66,9 @@ $max-width-bp: 1600px; // raw value for use in media queries
 
 // ──── Fonts ───────────────────────────────────
 $font-serif: "Instrument Serif", serif;
-$font-sans:  "Inter", sans-serif;
-$font-mono: "Space Mono", mono;
+// $font-sans:  "Inter", sans-serif;
+$font-sans:  Unbounded, sans-serif;
+$font-goth: Respira;
 
 // ──── Color primitives ────────────────────────
 // Gold

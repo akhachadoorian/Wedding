@@ -34,9 +34,9 @@ h6 {
 }
 
 %heading-base {
-    font-family: $font-serif;
-    // font-family: Respira;
-    font-weight: 400;
+    // font-family: $font-serif;
+    font-family: $font-goth;
+    font-weight: 00;
     line-height: 120%;
     // font-style: italic;
 }
@@ -83,7 +83,7 @@ h5,
 
 h6,
 .heading-xs {
-    @extend %subheading-base;
+    @extend %heading-base;
     font-size: var(--text-lg);
 }
 
