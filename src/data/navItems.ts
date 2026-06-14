@@ -9,7 +9,7 @@ import type { NavItem } from "../types/navigation"
  *
  * @see {@link NavItem} for the full type definition
  */
-export const NAV_ITEMS = [
+export const NAV_ITEMS: NavItem[] = [
   // {
   //   kind: "dropdown" as const,
   //   text: "Details",
