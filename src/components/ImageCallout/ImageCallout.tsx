@@ -11,6 +11,7 @@ import Eyebrow from "../Eyebrow/Eyebrow";
 import { sub } from "motion/react-client";
 
 import "./ImageCallout.scss";
+import Image from "next/image";
 
 type ImageCalloutStyleProps = {
     variation: "full_width" | "inset" | "slant" | 'slant_inverse';
@@ -53,7 +54,7 @@ export default function ImageCallout({
         <section {...htmlProps} ref={mergeRefs(animRef, ref)} className={`image_callout ${className ?? ""} image_callout-variation-${styleOptions.variation}`}>
             {/* <div className="image_callout"> */}
                 <div className="img-holder image_callout-img_holder">
-                    <img src={image.src} alt={image.alt} className="img-bw" />
+                    <Image src={image.src} alt={image.alt} className="img-bw" />
 
                     <div className={`img-overlay img-overlay-${styleOptions.textLayout}`} />
                 </div>
