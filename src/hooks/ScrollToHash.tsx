@@ -1,23 +1,23 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 import { useLenis } from 'lenis/react';
 
 export default function ScrollToHash() {
-    const { hash, pathname } = useLocation();
+    const pathname = usePathname();
     const lenis = useLenis();
-    // const isMounted = useRef(false);
-
-
+    const [hash, setHash] = useState('');
 
     useEffect(() => {
-        // if (!isMounted.current) {
-        //     isMounted.current = true;
-        //     return;
-        // }
+        setHash(window.location.hash);
+        const handleHashChange = () => setHash(window.location.hash);
+        window.addEventListener('hashchange', handleHashChange);
+        return () => window.removeEventListener('hashchange', handleHashChange);
+    }, [pathname]);
 
+    useEffect(() => {
         if (!hash) {
             if (lenis) {
                 lenis.scrollTo(0, { immediate: true });

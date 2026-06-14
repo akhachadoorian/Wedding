@@ -7,6 +7,7 @@ import { WithHTMLProps } from "../../types/props";
 import './BackgroundSection.scss';
 import { DEFAULT_IMAGE } from "../../data/defaultImage";
 import { NumBetweenInclusive } from "../../types/utility";
+import Image from "next/image";
 
 
 type BackgroundSectionProps = WithHTMLProps & PropsWithChildren & {
@@ -39,7 +40,7 @@ export default function BackgroundSection({
             className={`bg-section ${outerClass} ${!applySlant ? '' : inverseSlant ? 'bg-slant' : 'bg-slant-inverse'}`}
         >
             <div className='img-holder bg-img_holder'>
-                <img src={image.src} alt={image.alt} className="img-bw" />
+                <Image src={image.src} alt={image.alt} className="img-bw" />
 
                 <div className="img-overlay" style={{opacity: `${overlayWeight}%`}} />
             </div>

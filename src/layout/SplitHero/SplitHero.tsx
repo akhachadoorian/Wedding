@@ -10,6 +10,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "./SplitHero.scss";
+import Image from "next/image";
 
 export type SplitHeroProps = {
     loaded: boolean;
@@ -262,7 +263,7 @@ export default function SplitHero({ loaded, heading, eyebrow, btn, image }: Spli
 
                 <div ref={mediaRef} className="home_hero-media">
                     <div className="home_hero-overlay"></div>
-                    <img ref={imageRef} src={image?.src ?? "/images/MaxAndAlex.jpg"} alt={image?.alt ?? "Max and Alex posed on a bridge."} className="home_hero-image" decoding="async" />
+                    <Image ref={imageRef} src={image?.src ?? "/images/MaxAndAlex.jpg"} alt={image?.alt ?? "Max and Alex posed on a bridge."} className="home_hero-image" decoding="async" />
                 </div>
             </div>
         </section>

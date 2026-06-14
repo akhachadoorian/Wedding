@@ -2,6 +2,7 @@ import CopyOnly from '@/components/CopyOnly/CopyOnly';
 import GothHero from '../GothHero/GothHero';
 import './ComingSoon.scss'
 import Eyebrow from '@/components/Eyebrow/Eyebrow';
+import Image from 'next/image';
 
 type ComingSoonProps = {
     pageTitle?: string;
@@ -19,7 +20,7 @@ export default function ComingSoon({
     return (
             <section className={`coming_soon`}>
                 <div className="img-holder coming_soon-img">
-                    <img src={'/images/DipShot.jpg'} alt={"Max dipping Alex and kissing"} className="img-bw" />
+                    <Image src={'/images/DipShot.jpg'} alt={"Max dipping Alex and kissing"} className="img-bw" />
                     <div className="img-overlay"></div>
                 </div>
     
