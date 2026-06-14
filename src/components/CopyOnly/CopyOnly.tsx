@@ -1,16 +1,21 @@
-'use client'
+"use client";
 
 import ReactMarkdown from "react-markdown";
 
 import mergeRefs from "../../hooks/mergeRefs";
 import { useFadeInChildren } from "../../hooks/useFadeIn";
-import { ThreeButtonsArray } from "../../types/buttons";
+import {
+    BtnColorSchemeMap,
+    BtnVariantMap,
+    ThreeButtonsArray,
+} from "../../types/buttons";
 import { ColorVariables } from "../../types/colors";
 import { WithHTMLProps } from "../../types/props";
 import { ThreeButtons } from "../Buttons/ButtonGroups";
 import Eyebrow from "../Eyebrow/Eyebrow";
 
 import "./CopyOnly.scss";
+import { THREE_BUTTON_DEFAULTS } from "../Buttons/defaults";
 
 /**
  * Controls the visual layout and color treatment of the CopyOnly component.
@@ -20,20 +25,21 @@ import "./CopyOnly.scss";
  *                         (two-column split with heading left and body right).
  * @property headingSize - Semantic heading level rendered for `header`. Defaults to `h2`.
  * @property eyebrowColor - CSS variable token for the eyebrow label color.
- * @property textColor   - `dark` renders stone-1000 text; `light` renders stone-000 (for dark backgrounds).
  */
 type CopyOnlyStyleProps = {
     variation: "left" | "center" | "columns";
     headingSize?: "h2" | "h3" | "h4";
     eyebrowColor?: ColorVariables;
-    textColor?: "light" | "dark";
+    // textColor?: "light" | "dark";
+    customBtnVariantMap?: BtnVariantMap<3>;
+    customBtnColorSchemeMap?: BtnColorSchemeMap<3>;
 };
 
 const DEFAULT_STYLE = {
     variation: "left",
     headingSize: "h2",
     eyebrowColor: "--gold-500",
-    textColor: "light",
+    // textColor: "light",
 } satisfies CopyOnlyStyleProps;
 
 /**
@@ -82,112 +88,287 @@ export default function CopyOnly({
     ...htmlProps
 }: CopyOnlyProps) {
     // Eyebrow centering only applies to the `center` layout variation.
-    const eyebrowVariation = styleOptions.variation === "center" ? "center" : "left";
+    // const eyebrowVariation =
+    //     styleOptions.variation === "center" ? "center" : "left";
 
-    const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", { stagger: 0.15, y: 24 });
+    const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", {
+        stagger: 0.15,
+        y: 24,
+    });
 
-    const Heading = styleOptions.headingSize ?? "h2";
-    // Detect inline HTML so rich-text body strings are rendered correctly.
-    // const hasHtmlTags = (body: string) => /<[a-z][\s\S]*>/i.test(body);
-
-    if (styleOptions.variation === "columns") {
-        return (
-            <div {...htmlProps} ref={mergeRefs(animRef, ref)} className={`copy copy-${styleOptions.textColor ?? DEFAULT_STYLE.textColor} ${className ?? ""}`}>
-                <div className={`copy-inner copy-${styleOptions.variation}`}>
-                    <div className="copy-left_col">
-                        {eyebrow && (
-                            <Eyebrow
-                                styleOptions={{
-                                    variation: eyebrowVariation ?? DEFAULT_STYLE.variation,
-                                    color: styleOptions.eyebrowColor ?? DEFAULT_STYLE.eyebrowColor,
-                                }}
-                                text={eyebrow}
-                                className={"mwc-animate"}
-                            />
-                        )}
-
-                        {/* <Heading className="copy-header heading-md mwc-animate">
-                            {header}
-                        </Heading> */}
-
-                        <ReactMarkdown
-                            components={{
-                                p: ({ children }) => <Heading className="copy-header mwc-animate">{children}</Heading>,
-                            }}
-                        >
-                            {header}
-                        </ReactMarkdown>
-                    </div>
-
-                    <div className="copy-right_col">
-                        {subtitle && <h5 className="subtitle mwc-animate">{subtitle}</h5>}
-
-                        {body && (
-                            <ReactMarkdown components={{ p: ({ children }) => <p className={`mwc-animate copy-body ${styleOptions.headingSize === "h2" ? "body-l" : "body"}`}>{children}</p> }}>
-                                {body}
-                            </ReactMarkdown>
-                        )}
-
-                        {buttons && <ThreeButtons className="copy-btns btns mwc-animate" buttons={buttons ?? []} />}
-                    </div>
-                </div>
-            </div>
-        );
-    }
+    // const Heading = styleOptions.headingSize ?? "h2";
 
     return (
-        <div {...htmlProps} ref={mergeRefs(animRef, ref)} className={`copy copy-${styleOptions.textColor ?? DEFAULT_STYLE.textColor} ${className ?? ""}`}>
-            <div className={`copy-inner copy-${styleOptions.variation}`}>
-                <div className="copy-text">
-                    <div className="copy-upper">
-                        {eyebrow && (
-                            <Eyebrow
-                                styleOptions={{
-                                    variation: eyebrowVariation ?? DEFAULT_STYLE.variation,
-                                    color: styleOptions.eyebrowColor ?? DEFAULT_STYLE.eyebrowColor,
-                                }}
-                                text={eyebrow}
-                                className={"mwc-animate"}
-                            />
-                        )}
+        <div
+            {...htmlProps}
+            ref={mergeRefs(animRef, ref)}
+            className={`copy ${className ?? ""}`}
+        >
+            {styleOptions.variation === "columns" ? (
+                <ColumnsCopyOnly
+                    eyebrow={eyebrow}
+                    header={header}
+                    subtitle={subtitle}
+                    body={body}
+                    styleOptions={styleOptions}
+                />
+            ) : styleOptions.variation === "center" ? (
+                <CenterCopyOnly
+                    eyebrow={eyebrow}
+                    header={header}
+                    subtitle={subtitle}
+                    body={body}
+                    styleOptions={styleOptions}
+                />
+            ) : (
+                <LeftCopyOnly
+                    eyebrow={eyebrow}
+                    header={header}
+                    subtitle={subtitle}
+                    body={body}
+                    styleOptions={styleOptions}
+                />
+            )}
+        </div>
+    );
+}
 
-                        {/* <Heading className="copy-header heading-md mwc-animate">
-                            {header}
-                        </Heading> */}
+// #region --- Function Inner Variations ---------------------------------------------
 
-                        <ReactMarkdown
-                            components={{
-                                p: ({ children }) => <Heading className="copy-header mwc-animate">{children}</Heading>,
-                            }}
-                        >
-                            {header}
-                        </ReactMarkdown>
-                    </div>
+type SubFunctionCopyOnlyProps = {
+    eyebrow?: string;
+    header: string;
+    subtitle?: string;
+    body?: string;
+    buttons?: ThreeButtonsArray;
 
-                    {subtitle && <h5 className="subtitle mwc-animate">{subtitle}</h5>}
+    styleOptions: CopyOnlyStyleProps;
+};
 
-                    {/* {body && hasHtmlTags(body) ? (
-                        <div
-                            className={`copy-body mwc-animate ${styleOptions.headingSize === "h2" ? "body-l" : "body"}`}
-                            dangerouslySetInnerHTML={{ __html: body }}
-                        />
-                    ) : (
-                        <p
-                            className={`mwc-animate copy-body ${styleOptions.headingSize === "h2" ? "body-l" : "body"}`}
-                        >
-                            {body}
-                        </p>
-                    )} */}
+function ColumnsCopyOnly({
+    eyebrow,
+    header,
+    subtitle,
+    body,
+    buttons,
 
-                    {body && (
-                        <ReactMarkdown components={{ p: ({ children }) => <p className={`copy-body mwc-animate ${styleOptions.headingSize === "h2" ? "body-l" : "body"}`}>{children}</p> }}>
-                            {body}
-                        </ReactMarkdown>
-                    )}
-                </div>
+    styleOptions,
+}: SubFunctionCopyOnlyProps) {
+    return (
+        <div className={`copy-inner copy-columns`}>
+            <div className="copy-left_col">
+                <EyebrowHeaderCopyOnly
+                    eyebrow={eyebrow}
+                    eyebrowColor={styleOptions.eyebrowColor}
+                    header={header}
+                    headerSize={styleOptions.headingSize}
+                />
+            </div>
 
-                {buttons && <ThreeButtons className="copy-btns btns mwc-animate" buttons={buttons ?? []} />}
+            <div className="copy-right_col">
+                {subtitle && <SubtitleCopyOnly subtitle={subtitle} />}
+
+                {body && (
+                    <BodyCopyOnly
+                        body={body}
+                        bodySize={
+                            styleOptions.headingSize === "h2"
+                                ? "body-l"
+                                : "body"
+                        }
+                    />
+                )}
+
+                {buttons && (
+                    <BtnsCopyOnly
+                        buttons={buttons}
+                        customBtnColorSchemeMap={
+                            styleOptions.customBtnColorSchemeMap
+                        }
+                        customBtnVariantMap={styleOptions.customBtnVariantMap}
+                    />
+                )}
             </div>
         </div>
     );
 }
+
+function CenterCopyOnly({
+    eyebrow,
+    header,
+    subtitle,
+    body,
+    buttons,
+
+    styleOptions,
+}: SubFunctionCopyOnlyProps) {
+    return (
+        <div className={`copy-inner copy-left`}>
+            <div className="copy-text">
+                <div className="copy-upper">
+                    <EyebrowHeaderCopyOnly
+                        eyebrow={eyebrow}
+                        eyebrowColor={styleOptions.eyebrowColor}
+                        header={header}
+                        headerSize={styleOptions.headingSize}
+                    />
+                </div>
+
+                {subtitle && <SubtitleCopyOnly subtitle={subtitle} />}
+
+                {body && (
+                    <BodyCopyOnly
+                        body={body}
+                        bodySize={
+                            styleOptions.headingSize === "h2"
+                                ? "body-l"
+                                : "body"
+                        }
+                    />
+                )}
+            </div>
+
+            {buttons && (
+                <BtnsCopyOnly
+                    buttons={buttons}
+                    customBtnColorSchemeMap={
+                        styleOptions.customBtnColorSchemeMap
+                    }
+                    customBtnVariantMap={styleOptions.customBtnVariantMap}
+                />
+            )}
+        </div>
+    );
+}
+
+function LeftCopyOnly({
+    eyebrow,
+    header,
+    subtitle,
+    body,
+    buttons,
+
+    styleOptions,
+}: SubFunctionCopyOnlyProps) {
+    return (
+        <div className={`copy-inner copy-${styleOptions.variation}`}>
+            <div className="copy-text">
+                <div className="copy-upper">
+                    <EyebrowHeaderCopyOnly
+                        eyebrow={eyebrow}
+                        eyebrowColor={styleOptions.eyebrowColor}
+                        header={header}
+                        headerSize={styleOptions.headingSize}
+                    />
+                </div>
+
+                {subtitle && <SubtitleCopyOnly subtitle={subtitle} />}
+
+                {body && (
+                    <BodyCopyOnly
+                        body={body}
+                        bodySize={
+                            styleOptions.headingSize === "h2"
+                                ? "body-l"
+                                : "body"
+                        }
+                    />
+                )}
+            </div>
+
+            {buttons && (
+                <BtnsCopyOnly
+                    buttons={buttons}
+                    customBtnColorSchemeMap={
+                        styleOptions.customBtnColorSchemeMap
+                    }
+                    customBtnVariantMap={styleOptions.customBtnVariantMap}
+                />
+            )}
+        </div>
+    );
+}
+
+// #endregion ----------------------------------------------------------------------
+
+// #region --- Text Elements -------------------------------------------------------
+
+function EyebrowHeaderCopyOnly({
+    eyebrow,
+    eyebrowColor = DEFAULT_STYLE.eyebrowColor,
+
+    header,
+    headerSize = "h2",
+}: {
+    eyebrow?: string;
+    eyebrowColor?: ColorVariables;
+    header: string;
+    headerSize?: "h2" | "h3" | "h4";
+}) {
+    const Heading = headerSize;
+
+    return (
+        <>
+            {eyebrow && (
+                <Eyebrow
+                    styleOptions={{
+                        variation: "left",
+                        color: eyebrowColor,
+                    }}
+                    text={eyebrow}
+                    className={"mwc-animate"}
+                />
+            )}
+
+            <Heading className="copy-header heading-md mwc-animate">
+                {header}
+            </Heading>
+        </>
+    );
+}
+
+function SubtitleCopyOnly({ subtitle }: { subtitle: string }) {
+    return <h5 className="subtitle mwc-animate">{subtitle}</h5>;
+}
+
+function BodyCopyOnly({
+    body,
+    bodySize = "body",
+}: {
+    body: string;
+    bodySize?: "body-l" | "body";
+}) {
+    const hasHtmlTags = (body: string) => /<[a-z][\s\S]*>/i.test(body);
+
+    if (hasHtmlTags(body)) {
+        return (
+            <div
+                className={`copy-body mwc-animate ${bodySize}`}
+                dangerouslySetInnerHTML={{ __html: body }}
+            />
+        );
+    }
+
+    return <p className={`mwc-animate copy-body ${bodySize}`}>{body}</p>;
+}
+
+function BtnsCopyOnly({
+    buttons,
+    customBtnVariantMap = THREE_BUTTON_DEFAULTS.variantMap,
+    customBtnColorSchemeMap = THREE_BUTTON_DEFAULTS.colorSchemeMap,
+}: {
+    buttons: ThreeButtonsArray;
+    customBtnVariantMap?: BtnVariantMap<3>;
+    customBtnColorSchemeMap?: BtnColorSchemeMap<3>;
+}) {
+    return (
+        <ThreeButtons
+            className="copy-btns btns mwc-animate"
+            buttons={buttons}
+            customVariantMap={customBtnVariantMap}
+            customColorSchemeMap={customBtnColorSchemeMap}
+        />
+    );
+}
+
+// #endregion ----------------------------------------------------------------------

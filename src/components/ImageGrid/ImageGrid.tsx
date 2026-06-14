@@ -1,13 +1,13 @@
 'use client'
 
-import { ImageProps } from "../../types/images";
+import { CustomImageProps } from "../../types/images";
 
 import "./ImageGrid.scss";
 
 export type ImageGridProps = {
-    curvedImg?: ImageProps;
+    curvedImg?: CustomImageProps;
     curvedImgCaption?: string;
-    squareImg?: ImageProps;
+    squareImg?: CustomImageProps;
     squareImgCaption?: string;
 };
 

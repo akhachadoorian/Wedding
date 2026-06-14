@@ -109,29 +109,29 @@
         }
     }
 
-    // ---- Text Color Themes -------------------------------------------
+    // // ---- Text Color Themes -------------------------------------------
 
-    // For use on light backgrounds.
-    &-light {
-        color: var(--cream-500);
+    // // For use on light backgrounds.
+    // &-light {
+    //     color: var(--cream-500);
 
-        a {
-            color: var(--gold-500);
-            &:hover {
-                text-decoration-color: var(--gold-500);
-            }
-        }
-    }
+    //     a {
+    //         color: var(--gold-500);
+    //         &:hover {
+    //             text-decoration-color: var(--gold-500);
+    //         }
+    //     }
+    // }
 
-    // For use on dark backgrounds.
-    &-dark {
-        color: var(--black-1000);
+    // // For use on dark backgrounds.
+    // &-dark {
+    //     color: var(--black-1000);
 
-        a {
-            color: var(--gold-500);
-            &:hover {
-                text-decoration-color: var(--gold-500);
-            }
-        }
-    }
+    //     a {
+    //         color: var(--gold-500);
+    //         &:hover {
+    //             text-decoration-color: var(--gold-500);
+    //         }
+    //     }
+    // }
 }

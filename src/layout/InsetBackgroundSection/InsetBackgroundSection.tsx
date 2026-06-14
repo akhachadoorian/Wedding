@@ -4,11 +4,11 @@ import { PropsWithChildren } from "react";
 import { WithHTMLProps } from "../../types/props"
 import { ColorVariables } from "../../types/colors";
 import './InsetBackgroundSection.scss';
-import { BackgroundImageProps } from "../../types/images";
+import { BackgroundCustomImageProps } from "../../types/images";
 import generateSectionClass from "../../hooks/generateSectionClass";
 
 
-type InsetBackgroundSectionProps = WithHTMLProps & PropsWithChildren & BackgroundImageProps & {
+type InsetBackgroundSectionProps = WithHTMLProps & PropsWithChildren & BackgroundCustomImageProps & {
     sectionPrefix?: string;
 };
 

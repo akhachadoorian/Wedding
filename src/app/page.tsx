@@ -9,16 +9,16 @@ import content from "./content";
 
 import "./Home.scss";
 import GothHero from "../layout/GothHero/GothHero";
+import PhotoCollage from "@/components/PhotoCollage/PhotoCollage";
 
 export default function Home({ loaded = true }: { loaded?: boolean }) {
     // Setup refs for fade in
     const welcomeRef = useFadeIn<HTMLDivElement>();
+    const ourStoryRef = useFadeIn<HTMLDivElement>();
     const quickLinksRef = useFadeIn<HTMLDivElement>();
 
     return (
         <>
-            {/* <ScrollRevealHero {...content.hero} /> */}
-            
             <GothHero loaded={loaded}  {...content.hero}/>
 
             <section ref={welcomeRef} id="welcome" className="welcome-section base_section">
@@ -33,6 +33,9 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
                 <DashedCopyGrid {...content.welcome.dashedCopyGrid} />
             </section>
 
+            <section ref={ourStoryRef} id="our_story" className="our_story-section base_section">
+                    <PhotoCollage {...content.ourStory} />
+            </section> 
 
             <section ref={quickLinksRef} id="quick_links" className="quick_links-section base_section">
                 <CopyOnly

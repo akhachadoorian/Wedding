@@ -1,5 +1,53 @@
 @use "@/styles/variables" as *;
 
-.coming_soon {
+$imgHeight: calc(100dvh + $space-400);
 
+.coming_soon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100dvh;
+
+    &-img {
+        position: absolute;
+        z-index: 1;
+
+        height: $imgHeight;
+        width: 100%;
+
+        img {
+            @include big {
+                object-position: center 20%;
+            }
+        }
+
+        .img-overlay {
+            background: rgba(#101111, 0.85);
+        }
+    }
+
+    &-text {
+        position: relative;
+        z-index: 5;
+
+        padding: $space-200 var(--layout-column-margin) $space-400;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        text-align: center;
+
+
+        @include big {
+            // max-width: var(--max-width);
+            max-width: 60.417vw;
+            margin: auto;
+        }
+    }
+
+    &-body {
+        margin-top: $space-300;
+    }
 }

@@ -4,7 +4,7 @@ import { WithHTMLProps } from "../../types/props";
 
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
 import TextWithNewLine from "@/utils/TextWithNewLine";
-import { ImageProps } from "@/types/images";
+import { CustomImageProps } from "@/types/images";
 import "./GothHero.scss";
 import Image from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
@@ -18,7 +18,7 @@ export type GothHeroProps = WithHTMLProps & {
 
     // Fields
     // header: string;
-    img?: ImageProps;
+    img?: CustomImageProps;
 
     eyebrows?: {
         left?: string;

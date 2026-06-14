@@ -57,7 +57,7 @@ const hero: Omit<GothHeroProps, 'loaded'> = {
 }
 
 
-// ----- Welcome / Overview -----------------------------------------------
+// #region --- Overview --------------------------------
 
 // const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
 //     eyebrow: "We're getting married",
@@ -83,10 +83,21 @@ const hero: Omit<GothHeroProps, 'loaded'> = {
 //     ],
 // };
 
+
+
 const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
     eyebrow: "We're getting married",
     // header: "Together with their families, **Alex & Max** joyfully invite you to share in the celebration of their marriage.",
-    header: "We're counting down the days until we say **I do**. We would be thrilled to have you join us in this next chapter."
+    header: "Til Death Do Us Part",
+    // buttons: {
+        buttons: [
+            {
+                type: 'link',
+                text: 'View Full Details',
+                link: '/details'
+            }
+        ]
+    // }
 };
 
 const welcomeDashedGrid: DashedCopyGridProps = {
@@ -114,6 +125,25 @@ const welcome = {
     copyOnly: welcomeCopyOnly,
     dashedCopyGrid: welcomeDashedGrid,
 };
+
+// #endregion --------------------------------
+
+
+// #region --- Our Story --------------------------------
+
+const ourStory = {
+    header: 'Our Story',
+    mainImage: {
+        src: "/images/DipShot.jpg",
+        alt: "Max dipping Alex and kissing.",
+        caption: "Engagement ", 
+        width: 696,
+        height: 522
+    },
+
+}
+
+// #endregion ----------------------------------------------------------
 
 // ----- Quick Links -----------------------------------------------
 const qlCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
@@ -168,6 +198,7 @@ const quickLinks = {
 const homeContent = {
     hero: hero,
     welcome: welcome,
+    ourStory: ourStory,
     quickLinks: quickLinks,
 };
 

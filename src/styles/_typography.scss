@@ -36,8 +36,9 @@ h6 {
 %heading-base {
     // font-family: $font-serif;
     font-family: $font-goth;
-    font-weight: 00;
-    line-height: 120%;
+    font-feature-settings: 'ss01' on;
+    font-weight: 800;
+    line-height: 110%;
     // font-style: italic;
 }
 

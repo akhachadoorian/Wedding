@@ -49,7 +49,6 @@ export type NonEmptyArray<T> = [T, ...T[]];
 export type RequireX<T, N extends number, A extends T[] = []> = A["length"] extends N ? A : RequireX<T, N, [...A, T]>;
 
 
-
 /**
  * Internal helper that builds a union of integers from 0 to N-1.
  *

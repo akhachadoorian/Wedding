@@ -5,7 +5,7 @@ import { useLayoutEffect, useRef } from "react";
 import Button from "../../components/Buttons/Button";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";
 import { ButtonSettingProps } from "../../types/buttons";
-import { ImageProps } from "../../types/images";
+import { CustomImageProps } from "../../types/images";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -23,7 +23,7 @@ export type SplitHeroProps = {
         doubleText?: string;
     };
     btn?: ButtonSettingProps;
-    image?: ImageProps;
+    image?: CustomImageProps;
 };
 
 export default function SplitHero({ loaded, heading, eyebrow, btn, image }: SplitHeroProps) {

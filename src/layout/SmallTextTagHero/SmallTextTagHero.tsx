@@ -3,7 +3,7 @@
 import { forwardRef, useLayoutEffect, useRef } from "react";
 
 import { ButtonSettingProps, ThreeButtonsArray } from "../../types/buttons";
-import { ImageProps } from "../../types/images";
+import { CustomImageProps } from "../../types/images";
 import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
 import Diamond from "../../components/Diamond/Diamond";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";

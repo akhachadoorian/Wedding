@@ -4,19 +4,10 @@
 @forward 'styles/tokens/typography';
 
 // ── Google Fonts ───────────────────────────────────
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+// @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+// @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-@font-face {
-    font-family: Respira;
-    src: url(https://static1.squarespace.com/static/650a2fd409fa505e5a339ca9/t/6786f3c35c093c2819462248/1736897476051/Black.woff); //FIXME: NEED TO UPDATE FOR LEGAL REASON
-}
-
-@font-face {
-    font-family: Unbounded;
-    src: url(https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap);
-}
 
 // ── CSS custom properties (primitives) ───────────────────────
 :root {
@@ -67,8 +58,8 @@ $max-width-bp: 1600px; // raw value for use in media queries
 // ──── Fonts ───────────────────────────────────
 $font-serif: "Instrument Serif", serif;
 // $font-sans:  "Inter", sans-serif;
-$font-sans:  Unbounded, sans-serif;
-$font-goth: Respira;
+$font-sans:  var(--font-unbounded), sans-serif;
+$font-goth: var(--font-respira-black);
 
 // ──── Color primitives ────────────────────────
 // Gold
