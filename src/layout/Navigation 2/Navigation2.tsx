@@ -189,16 +189,7 @@ function renderMobileNavItem(
 }
 
 export default function Navigation2() {
-    // Handle scrolling
     const lenis = useLenis();
-    // const location = useLocation();
-    // const isHome = location.pathname === "/";
-
-    // const scrollToBlockById = (id: string) => {
-    //     const element = document.getElementById(id);
-    //     if (!element) return;
-    //     lenis ? lenis.scrollTo(element, { offset: 0, duration: 1.4 }) : element.scrollIntoView({ behavior: "smooth" });
-    // };
 
     // Handle mobile menu open and closing
     const [mobileOpen, setMobileOpen] = useState(false);

@@ -58,10 +58,6 @@ export default function RootLayout({
 
                         <main>{children}</main>
 
-                        {/* <main>
-                            <ComingSoon />
-                        </main> */}
-
                         {/* <Footer /> */}
                         <Footer2 />
                     </LenisProvider>
