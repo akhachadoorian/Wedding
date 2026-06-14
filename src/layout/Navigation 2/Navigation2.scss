@@ -74,12 +74,17 @@ body.mobile-nav-open {
         gap: $space-200;
 
         .side_nav {
+            flex: 1;
             display: none;
 
             @include big {
                 display: flex;
-            align-items: center;
-            gap: $space-200;
+                align-items: center;
+                gap: $space-200;
+            }
+
+            &-right {
+                justify-content: flex-end;
             }
         }
     }

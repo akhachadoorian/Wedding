@@ -48,6 +48,14 @@
     --black-950: #161818;
     --black-1000: #101111;
 
+    // Semantics
+    --positive: #7E9568;
+    --positive-bg: rgba(126,149,104,0.14);
+    --negative: #B0685A;
+    --negative-bg: rgba(176,104,90,0.14);
+    --info: #6E8BA6;
+    --info-bg: rgba(110,139,166,0.12);
+
     --max-width: 1600px;
 }
 
@@ -105,6 +113,13 @@ $gold:  $gold-500;
 $cream: $cream-300;
 $black: $black-900;
 $black-bg: $black-1000;
+
+$positive: var(--positive);
+$positive-bg : var(--positive-bg);
+$negative: var(--negative);
+$negative-bg : var(--negative-bg);
+$info: var(--info);
+$info-bg : var(--info-bg);
 
 // ──── Utility ─────────────────────────────────
 $overlay-bg: rgba(#101111, 0.35);

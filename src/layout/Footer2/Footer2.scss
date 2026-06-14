@@ -43,25 +43,42 @@ footer {
             gap: $space-400;
         }
 
-        &-logo {
-            aspect-ratio: 95/87;
+        &-line {
+            background-color: #92928f;
+            width: 1px;
 
-            @include small {
+            @include big {
+                width: 1.5px;
+            }
+        }
+
+        &-logo {
+            // aspect-ratio: 95/87;
+
+            // @include small {
+            //     width: 200px;
+            //     height: auto;
+            // }
+
+            @include big {
+                flex: 1 1 306px;
+            }
+
+            &-img {
+                aspect-ratio: 95/87;
+                width: 100%;
+
+                @include small {
                     width: 200px;
                     height: auto;
                 }
-
-            @include big {
-                flex: 0 1 306px;
             }
-
-
         }
 
         &-text {
-            padding: $space-400 0;
-            border-top: 1px solid #92928f;
-            border-bottom: 1px solid #92928f;
+            // padding: $space-400 0;
+            // border-top: 1px solid #92928f;
+            // border-bottom: 1px solid #92928f;
 
             text-align: center;
 
@@ -72,14 +89,14 @@ footer {
             gap: $space-400;
 
             @include big {
-                padding: 0 $space-400;
-                border-left: 1.5px solid #92928f;
-                border-right: 1.5px solid #92928f;
+                // padding: 0 $space-400;
+                // border-left: 1.5px solid #92928f;
+                // border-right: 1.5px solid #92928f;
 
                 border-top: none;
                 border-bottom: none;
 
-                flex: 1;
+                flex: 1 1 570px;
             }
 
             &-group {
@@ -91,6 +108,10 @@ footer {
                     flex-direction: row;
                     align-items: center;
                     gap: var(--layout-column-gutter);
+                }
+
+                @include breakpx(800px, 1100px) {
+                    flex-direction: column;
                 }
 
                 p {
@@ -118,7 +139,7 @@ footer {
             align-self: center;
 
             @include big {
-                flex: 0 1 306px;
+                flex: 1 1 306px;
                 justify-content: flex-end;
             }
 
@@ -152,7 +173,7 @@ footer {
     &-lower {
         padding-top: $space-400;
         border-top: 1.5px solid $cream;
-        opacity: 0.60;
+        opacity: 0.6;
 
         gap: $space-400;
 
@@ -208,10 +229,16 @@ footer {
             align-items: center;
             gap: $space-200;
 
-            
-
             @include big {
-                margin-bottom: -15px;
+                margin-bottom: -3dvh;
+            }
+
+            @include breakpx(1000px, 1550px) {
+                margin-bottom: -6dvh;
+            }
+
+            @include breakpx(1550px, 3000px) {
+                margin-bottom: -12dvh;
             }
 
             h6 {

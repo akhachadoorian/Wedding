@@ -108,16 +108,22 @@ const welcomeDashedGrid: DashedCopyGridProps = {
             link: "/details#timeline",
             tooltipCaption: "View the timeline",
         },
-        {
-            leftCopy: "Ceremony starts at 5:00 PM",
-            rightCopy: "Reception ends at 10:30 PM",
-        },
+        // {
+        //     leftCopy: "Ceremony starts at 5:00 PM",
+        //     rightCopy: "Reception ends at 10:30 PM",
+        // },
         {
             leftCopy: "The Clay Theatre",
             rightCopy: "Green Cove Springs, Florida",
             link: "/details#venue",
             tooltipCaption: "Venue details",
         },
+        // {
+        //     leftCopy: "Rehearsal Mixer",
+        //     rightCopy: "Green Cove Springs, Florida",
+        //     link: "/details#rehearsal-mixer",
+        //     tooltipCaption: "View the rehearsal mixer details",
+        // },
     ],
 };
 

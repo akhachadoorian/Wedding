@@ -7,30 +7,25 @@ import { LenisLink } from "@/hooks/LenisLink";
 
 import Image from "next/image";
 import "./Footer2.scss";
+import { useFadeIn } from "@/hooks/useFadeIn";
 
 export default function Footer2({}) {
-    // const footerRef = useFadeIn<HTMLDivElement>();
-
-    // Handle scrolling
-    // const lenis = useLenis();
-    // const scrollToBlockById = (id: string) => {
-    //     const element = document.getElementById(id);
-    //     if (!element) return;
-    //     lenis ? lenis.scrollTo(element, { offset: 0, duration: 1.4 }) : element.scrollIntoView({ behavior: "smooth" });
-    // };
+    const footerRef = useFadeIn<HTMLDivElement>();
 
     return (
-        <footer>
+        <footer ref={footerRef}>
             <div className="footer-upper footer-group">
-                <LenisLink href={"/"}>
+                <LenisLink href={"/"} className="footer-upper-logo">
                     <Image
                         src="/assets/AM.svg"
                         alt="A & M logo"
                         width={306}
                         height={280}
-                        className="footer-upper-logo"
+                        className="footer-upper-logo-img"
                     />
                 </LenisLink>
+
+                <div className="footer-upper-line" />
 
                 <div className="footer-upper-text">
                     <h6 className="heading-l">Lets celebrate together</h6>
@@ -46,6 +41,8 @@ export default function Footer2({}) {
                         </p>
                     </div>
                 </div>
+
+                <div className="footer-upper-line" />
 
                 <div className="footer-upper-nav">
                     {NAV_ITEMS.map((item) => (
