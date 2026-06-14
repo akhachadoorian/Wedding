@@ -1,0 +1,226 @@
+@use "@/styles/variables" as *;
+// @use "@/styles/placeholders" as *;
+@use "@/styles/placeholders" as *;
+
+footer {
+    background-color: $black;
+    padding: $space-750 var(--layout-column-margin) 0;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    gap: $space-400;
+
+    @include big {
+        gap: $space-750;
+    }
+}
+
+.footer {
+    &-group {
+        flex: 1;
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        gap: $space-400;
+
+        @include big {
+            margin: auto;
+            max-width: $max-width;
+            gap: $space-200;
+        }
+    }
+
+    &-upper {
+        // flex-direction: column;
+        align-items: center;
+
+        @include big {
+            flex-direction: row;
+            align-items: stretch;
+            // gap: 2.222vw;
+            gap: $space-400;
+        }
+
+        &-logo {
+            aspect-ratio: 95/87;
+
+            @include small {
+                    width: 200px;
+                    height: auto;
+                }
+
+            @include big {
+                flex: 0 1 306px;
+            }
+
+
+        }
+
+        &-text {
+            padding: $space-400 0;
+            border-top: 1px solid #92928f;
+            border-bottom: 1px solid #92928f;
+
+            text-align: center;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: $space-400;
+
+            @include big {
+                padding: 0 $space-400;
+                border-left: 1.5px solid #92928f;
+                border-right: 1.5px solid #92928f;
+
+                border-top: none;
+                border-bottom: none;
+
+                flex: 1;
+            }
+
+            &-group {
+                display: flex;
+                flex-direction: column;
+                gap: $space-200;
+
+                @include big {
+                    flex-direction: row;
+                    align-items: center;
+                    gap: var(--layout-column-gutter);
+                }
+
+                p {
+                    font-size: var(--text-base, 18px);
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 160%; /* 28.8px */
+                    letter-spacing: 1.8px;
+                    text-transform: uppercase;
+                }
+            }
+        }
+
+        &-nav {
+            display: flex;
+            // flex-direction: column;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: $space-200;
+
+            text-align: right;
+
+            height: fit-content;
+            align-self: center;
+
+            @include big {
+                flex: 0 1 306px;
+                justify-content: flex-end;
+            }
+
+            &-link {
+                @extend %underline-settings;
+                text-decoration: underline transparent;
+                transition: $transition;
+
+                height: fit-content;
+
+                @include small {
+                    text-decoration-color: $cream;
+                }
+
+                &:hover {
+                    text-decoration-color: $cream;
+                }
+
+                p {
+                    font-size: var(--text-base, 18px);
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 120%; /* 21.6px */
+                    letter-spacing: 1.8px;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+
+    &-lower {
+        padding-top: $space-400;
+        border-top: 1.5px solid $cream;
+        opacity: 0.60;
+
+        gap: $space-400;
+
+        @include big {
+            padding-top: $space-750;
+        }
+
+        &-links {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: var(--layout-column-gutter);
+
+            position: relative;
+            z-index: 3;
+
+            text-align: center;
+
+            @include big {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+
+                text-align: left;
+            }
+        }
+
+        &-link {
+            @extend %underline-settings;
+            text-decoration: underline transparent;
+            transition: $transition;
+
+            font-size: var(--text-s, 16px);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%; /* 22.4px */
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+
+            &:hover {
+                text-decoration-color: $cream;
+            }
+        }
+
+        &-lg_text {
+            position: relative;
+            z-index: 1;
+
+            text-align: center;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: $space-200;
+
+            
+
+            @include big {
+                margin-bottom: -15px;
+            }
+
+            h6 {
+                font-size: 80px;
+
+                @include big {
+                    font-size: clamp(100px, 19vw, 350px);
+                }
+            }
+        }
+    }
+}

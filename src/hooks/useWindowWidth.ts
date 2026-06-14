@@ -1,8 +1,10 @@
+'use client';
+
 import { useEffect, useState } from "react";
 import { BREAKPOINT_DESKTOP, BREAKPOINT_MOBILE, BREAKPOINT_TABLET } from "../constants/breakpoints";
 
 export default function useWindowWidth() {
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(0);
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);

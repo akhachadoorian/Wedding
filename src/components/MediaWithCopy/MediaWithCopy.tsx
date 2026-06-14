@@ -1,8 +1,10 @@
+'use client'
+
 import { TwoButtonsArray } from "../../types/buttons";
 import Eyebrow from "../Eyebrow/Eyebrow";
 
 import ReactMarkdown from "react-markdown";
-import { ImageProps } from "../../types/images";
+import { CustomImageProps } from "../../types/images";
 import Note from "../Note/Note";
 import "./MediaWithCopy.scss";
 import { TwoButtons } from "../Buttons/ButtonGroups";
@@ -23,7 +25,7 @@ export type MediaWithCopyProps = {
         body?: string;
     }
 
-    img?: ImageProps;
+    img?: CustomImageProps;
     
 };
 

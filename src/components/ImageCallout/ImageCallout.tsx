@@ -1,8 +1,10 @@
+'use client'
+
 import { DEFAULT_IMAGE } from "../../data/defaultImage";
 import mergeRefs from "../../hooks/mergeRefs";
 import { useFadeInChildren } from "../../hooks/useFadeIn";
 import { ThreeButtonsArray } from "../../types/buttons";
-import { ImageProps } from "../../types/images";
+import { CustomImageProps } from "../../types/images";
 import { WithHTMLProps } from "../../types/props";
 import { ThreeButtons } from "../Buttons/ButtonGroups";
 import Eyebrow from "../Eyebrow/Eyebrow";
@@ -21,7 +23,7 @@ const DEFAULT_STYLE: ImageCalloutStyleProps = {
 };
 
 export type ImageCalloutProps = WithHTMLProps & {
-    image: ImageProps;
+    image: CustomImageProps;
     eyebrow?: string;
     header: string;
     subtitle?: string;

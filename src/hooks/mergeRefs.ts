@@ -1,3 +1,4 @@
+'use client';
 
 /**
  * Merges multiple refs into a single callback ref, so one element can satisfy

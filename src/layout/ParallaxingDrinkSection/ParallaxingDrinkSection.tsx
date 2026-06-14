@@ -1,3 +1,5 @@
+'use client';
+
 import { PropsWithChildren, useEffect, useRef } from "react";
 
 import Drinks from "../../components/Drinks/Drinks";

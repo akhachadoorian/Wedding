@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+'use client';
 
-import { useLenis } from "../../context/LenisContext";
-import { NAV_ITEMS } from "../../data/navItems";
-import type { NavItem, NavDropdown } from "../../types/navigation";
-import ArrowBox from "../../components/ArrowBox/ArrowBox";
+import React, { useState, useEffect } from "react";
+
+import { NAV_ITEMS } from "@/data/navItems";
+import type { NavItem, NavDropdown } from "@/types/navigation";
+import ArrowBox from "@/components/ArrowBox/ArrowBox";
 import { CaretDownIcon} from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import "./Navigation.scss";
-import { LenisLink } from "../../hooks/LenisLink";
+import { LenisLink } from "@/hooks/LenisLink";
+import { useLenis } from "lenis/react";
 
 function renderNavItem(item: NavItem, onNavigate: () => void, openDropdown: string | null, toggleDropdown: (name: string) => void, closeDropdown: () => void) {
     if (item.kind === "dropdown") {
@@ -17,7 +18,7 @@ function renderNavItem(item: NavItem, onNavigate: () => void, openDropdown: stri
 
         return (
             <div className="nav-dropdown" onMouseEnter={() => toggleDropdown(item.text)} onMouseLeave={closeDropdown}>
-                <LenisLink to={item.link} className={`nav-link has-dropdown ${isOpen ? "open" : ""}`} onClick={onNavigate}>
+                <LenisLink href={item.link} className={`nav-link has-dropdown ${isOpen ? "open" : ""}`} onClick={onNavigate}>
                     <p className="nav-text">{item.text}</p>
                     <div className={`caret-wrapper ${isOpen ? "open" : ""}`}>
                         <CaretDownIcon color="var(--cream-500)" size={16} />
@@ -28,7 +29,7 @@ function renderNavItem(item: NavItem, onNavigate: () => void, openDropdown: stri
     }
 
     return (
-        <LenisLink to={item.link} className="nav-link" onClick={onNavigate}>
+        <LenisLink href={item.link} className="nav-link" onClick={onNavigate}>
             <p className="nav-text">{item.text}</p>
         </LenisLink>
     );
@@ -42,7 +43,7 @@ function renderDropdown(item: NavDropdown, onNavigate: () => void, isOpen: boole
                     <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className={`dropdown ${isOpen ? "open" : ""}`} id={`dd-${item.text}`}>
                         <div className="dropdown-inner">
                             {item.children.map((child) => (
-                                <LenisLink key={child.link} to={child.link} className="dd-link" onClick={onNavigate}>
+                                <LenisLink key={child.link} href={child.link} className="dd-link" onClick={onNavigate}>
                                     <div className="dd-text_wrapper">
                                         <p className="dd-text">{child.text}</p>
 
@@ -77,14 +78,14 @@ function renderMobileNavItem(item: NavItem, onNavigate: () => void, openAccordio
                     {isOpen && (
                         <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4 }}>
                             <div className={`mobile_nav-dropdown ${isOpen ? "open" : ""}`}>
-                                <LenisLink to={item.link} className="mobile_nav-view_page" onClick={onNavigate}>
+                                <LenisLink href={item.link} className="mobile_nav-view_page" onClick={onNavigate}>
                                     <p className="mobile_nav-text eyebrow">View Page</p>
 
                                     <ArrowBox color="--gold-500" />
                                 </LenisLink>
 
                                 {item.children.map((child) => (
-                                    <LenisLink key={child.link} to={child.link} className="mdd-link" onClick={onNavigate}>
+                                    <LenisLink key={child.link} href={child.link} className="mdd-link" onClick={onNavigate}>
                                         <div className="mdd-text_wrapper">
                                             <p className="mdd-text eyebrow">{child.text}</p>
                                             {child.body && <p className="mdd-body body-xs">{child.body}</p>}
@@ -102,7 +103,7 @@ function renderMobileNavItem(item: NavItem, onNavigate: () => void, openAccordio
     }
 
     return (
-        <LenisLink to={item.link} className="mobile_nav-link" onClick={onNavigate}>
+        <LenisLink href={item.link} className="mobile_nav-link" onClick={onNavigate}>
             <p className="mobile_nav-text eyebrow">{item.text}</p>
 
             <ArrowBox />
@@ -114,14 +115,14 @@ function Navigation() {
 
     // Handle scrolling
     const lenis = useLenis();
-    const location = useLocation();
-    const isHome = location.pathname === "/";
+    // const location = useLocation();
+    // const isHome = location.pathname === "/";
 
-    const scrollToBlockById = (id: string) => {
-        const element = document.getElementById(id);
-        if (!element) return;
-        lenis ? lenis.scrollTo(element, { offset: 0, duration: 1.4 }) : element.scrollIntoView({ behavior: "smooth" });
-    };
+    // const scrollToBlockById = (id: string) => {
+    //     const element = document.getElementById(id);
+    //     if (!element) return;
+    //     lenis ? lenis.scrollTo(element, { offset: 0, duration: 1.4 }) : element.scrollIntoView({ behavior: "smooth" });
+    // };
 
     // Handle mobile menu open and closing
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -158,10 +159,10 @@ function Navigation() {
     };
 
     return (
-        <header className={isHome ? "is-home" : ""}>
+        <header className={"is-home"}>
             <div className={`navigation-wrapper ${mobileOpen ? "mobile_nav_open" : ""}`}>
                 <div className="navigation-upper">
-                    <LenisLink to={"/"} className="navigation-left">
+                    <LenisLink href={"/"} className="navigation-left">
                         <p className="nav-letter">M</p>
                         <p className="nav-and">&</p>
                         <p className="nav-letter">A</p>

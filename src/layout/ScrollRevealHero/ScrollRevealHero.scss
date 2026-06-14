@@ -1,4 +1,4 @@
-@use "../../styles/variables" as *;
+@use "@/styles/variables" as *;;
 @use "../../styles/tokens/typography" as typo;
 
 // Matches JS constants in HomeHero2.tsx
@@ -66,8 +66,9 @@ $col-gap: 16px;
             overflow: hidden;
             will-change: transform, width, height, border-radius;
 
-            width: calc(100vw - 32px);
-            height: calc(85vh - 32px);
+            width: calc(100vw - (var(--space-200) * 4));
+            height: calc(100vh - (var(--space-200) * 4));
+            // height: calc(85vh - 32px);
 
             .img-holder {
                 img {

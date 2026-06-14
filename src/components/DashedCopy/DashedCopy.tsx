@@ -1,3 +1,5 @@
+'use client';
+
 import { LenisLink } from "../../hooks/LenisLink";
 import { NonEmptyArray } from "../../types/utility";
 import { useTooltip } from "../../layout/GlobalTooltip/GlobalTooltip";
@@ -75,7 +77,7 @@ export function DashedCopy({ className, leftCopy, rightCopy, link, tooltipCaptio
 
     if (link) {
         return (
-            <LenisLink to={link} className={`dashed_copy dashed_copy-link ${className ?? ""}`} {...(tooltipCaption ? { "data-tooltip": tooltipCaption } : {})}>
+            <LenisLink href={link} className={`dashed_copy dashed_copy-link ${className ?? ""}`} {...(tooltipCaption ? { "data-tooltip": tooltipCaption } : {})}>
                 {leftCopy && <p className="dashed_copy-text dashed_copy-left">{leftCopy}</p>}
                 <div ref={lineRef} className="dashed_copy-line"></div>
                 {rightCopy && <p className="dashed_copy-text dashed_copy-right">{rightCopy}</p>}

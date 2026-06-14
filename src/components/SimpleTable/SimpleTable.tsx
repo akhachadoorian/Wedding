@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import { ButtonSettingProps } from "../../types/buttons";
 import { WithHTMLProps } from "../../types/props";

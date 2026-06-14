@@ -1,4 +1,4 @@
-@use "./variables" as *;
+@use "styles/variables" as *;
 
 // ── Base resets ──────────────────────────────────────────────
 
@@ -34,10 +34,12 @@ h6 {
 }
 
 %heading-base {
-    font-family: $font-serif;
-    font-weight: 400;
-    line-height: 120%;
-    font-style: italic;
+    // font-family: $font-serif;
+    font-family: $font-goth;
+    font-feature-settings: 'ss01' on;
+    font-weight: 800;
+    line-height: 110%;
+    // font-style: italic;
 }
 
 %subheading-base {
@@ -82,7 +84,7 @@ h5,
 
 h6,
 .heading-xs {
-    @extend %subheading-base;
+    @extend %heading-base;
     font-size: var(--text-lg);
 }
 

@@ -1,20 +1,19 @@
+import { ImageProps } from "next/image";
 
-export type ImageProps = {
-    src: string;
-    alt?: string;
+export type CustomImageProps = ImageProps & {
     caption?: string;
-    aspectRatio?: 'landscape' | 'portrait' | 'square';
-    // objectPosition: 
 }
 
+// type BasicImageProps = 
 
-// #region Background Image
 
-export type BackgroundImageProps = {
+// #region --- Background Image ------------------------------------------
+
+export type BackgroundCustomImageProps = {
     backgroundImage?: string;
     backgroundSize?: string;
     backgroundPosition?: string;
     backgroundRepeat?: string;
 }
 
-// #endregion 
+// #endregion ------------------------------------------------------------

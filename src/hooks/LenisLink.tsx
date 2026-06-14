@@ -1,18 +1,20 @@
-import { Link, LinkProps } from 'react-router-dom';
-import { useLenis } from 'lenis/react';
+'use client';
 
-export function LenisLink({ onClick, ...props }: LinkProps) {
-    const lenis = useLenis();
-    return (
-        <Link
-            {...props}
-            onClick={(e) => {
-                const hasHash = typeof props.to === 'string'
-                    ? props.to.includes('#')
-                    : !!(props.to as { hash?: string }).hash;
-                if (!hasHash) lenis?.scrollTo(0, { immediate: true });
-                onClick?.(e);
-            }}
-        />
-    );
+import Link, { type LinkProps } from "next/link";
+import { useLenis } from "lenis/react";
+
+type Props = LinkProps & { className?: string; onClick?: React.MouseEventHandler; children?: React.ReactNode; target?: string };
+
+export function LenisLink({ onClick, ...props }: Props) {
+  const lenis = useLenis();
+  return (
+    <Link
+      {...props}
+      onClick={(e) => {
+        const hasHash = typeof props.href === 'string' && props.href.includes('#');
+        if (!hasHash) lenis?.scrollTo(0, { immediate: true });
+        onClick?.(e);
+      }}
+    />
+  );
 }

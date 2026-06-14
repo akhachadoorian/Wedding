@@ -1,13 +1,15 @@
+'use client';
+
 import React from "react";
 
-import Diamond from "../../components/Diamond/Diamond";
-import Eyebrow from "../../components/Eyebrow/Eyebrow";
-import Marquee from "../../components/Marquee/Marquee";
-import SmallText from "../../components/SmallText/SmallText";
-import { useLenis } from "../../context/LenisContext";
-import { NAV_ITEMS } from "../../data/navItems";
-import { LenisLink } from "../../hooks/LenisLink";
-import { useFadeIn } from "../../hooks/useFadeIn";
+import Diamond from "@/components/Diamond/Diamond";
+import Eyebrow from "@/components/Eyebrow/Eyebrow";
+import Marquee from "@/components/Marquee/Marquee";
+import SmallText from "@/components/SmallText/SmallText";
+import { useLenis } from "@/context/LenisContext";
+import { NAV_ITEMS } from "@/data/navItems";
+import { LenisLink } from "@/hooks/LenisLink";
+import { useFadeIn } from "@/hooks/useFadeIn";
 
 import "./Footer.scss";
 
@@ -43,7 +45,7 @@ function Footer({}) {
                         <div className="footer-nav">
                             {NAV_ITEMS.map((item) => (
                                 <React.Fragment key={item.text}>
-                                    <LenisLink to={item.link} className="footer-link">
+                                    <LenisLink href={item.link} className="footer-link">
                                         <p className="nav-text">{item.text}</p>
                                     </LenisLink>
                                 </React.Fragment>
@@ -71,7 +73,7 @@ function Footer({}) {
                 </div>
 
                 <div className="footer-lower">
-                    <LenisLink to={"/"} className="">
+                    <LenisLink href={"/"} className="">
                         <p className="">alexmaxwedding.com</p>
                     </LenisLink>
 

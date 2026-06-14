@@ -1,3 +1,5 @@
+'use client'
+
 import { CalculateClamp } from "../../hooks/calculateClamp";
 import { ColorVariables } from "../../types/colors";
 import { WithHTMLProps } from "../../types/props";

@@ -1,3 +1,5 @@
+'use client'
+
 import { LenisLink } from "../../hooks/LenisLink";
 import mergeRefs from "../../hooks/mergeRefs";
 import { useFadeInChildren } from "../../hooks/useFadeIn";
@@ -33,7 +35,7 @@ export function ArtDecoCard({
 
     if (btnSettings) {
         return (
-            <LenisLink {...htmlProps} className={`art_deco_card ${className ?? ""}`} to={btnSettings.link}>
+            <LenisLink {...htmlProps} className={`art_deco_card ${className ?? ""}`} href={btnSettings.link}>
                 <ArtDecoIcon type={icon} className="art_deco_card-icon" />
 
                 <InnerArtDecoCard title={title} subtitle={subtitle} body={body} />

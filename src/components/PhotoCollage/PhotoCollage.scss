@@ -1,0 +1,81 @@
+@use "@/styles/variables" as *;
+
+.photo_collage {
+    &-text {
+        // opacity: 70%;
+
+        @include big {
+            font-size: 13.889vw;
+            text-align: center;
+
+            margin-bottom: -80px;
+        }
+    }
+
+    &-imgs {
+        display: flex;
+        gap: var(--layout-column-gutter);
+
+        @include big {
+            flex-direction: row;
+            align-items: center;
+            // gap: var(--layout-column-gutter);
+        }
+
+        &-main {
+            @include big {
+                flex: 3 1 696px;
+                height: 100%;
+            }
+        }
+
+        &-side {
+            display: flex;
+            flex-direction: row;
+            gap: var(--layout-column-gutter);
+
+            @include big {
+                flex-direction: column;
+                flex: 1 1 281px;
+
+                padding: var(--layout-column-gutter) 0;
+            }
+        }
+
+        // &-left {
+        //     .photo_collage-img {
+        //         &:first-of-type {
+        //             aspect-ratio: ;
+        //         }
+        //     }
+        // }
+    }
+
+    &-img {
+        overflow: hidden;
+
+        &-tall {
+            aspect-ratio: 136/151;
+        }
+
+        &-long {
+            aspect-ratio: 94/61;
+        }
+
+        &:hover {
+            img {
+                filter: grayscale(0) !important;
+            }
+
+            .img-overlay {
+                
+            }
+        }
+
+        &:hover img,
+        &.is-touched img {
+            filter: grayscale(0) !important;
+            
+        }
+    }
+}

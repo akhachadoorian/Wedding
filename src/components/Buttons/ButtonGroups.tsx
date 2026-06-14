@@ -1,3 +1,5 @@
+'use client'
+
 import { BtnDecoration, ButtonSettingProps, ThreeButtonsProps, TwoButtonsProps } from "../../types/buttons";
 import Button from "./Button";
 import { THREE_BUTTON_DEFAULTS, TWO_BUTTON_DEFAULTS } from "./defaults";

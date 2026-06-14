@@ -1,3 +1,5 @@
+'use client'
+
 import ReactMarkdown from "react-markdown";
 
 import { LenisLink } from "../../hooks/LenisLink";
@@ -78,7 +80,7 @@ export function DrinkCards({
     } as ResponsiveClampSize;
 
     return (
-        <LenisLink {...htmlProps} to={link ?? "/"} className={`drink_card ${className ?? ""}`} target={target ?? "_self"}>
+        <LenisLink {...htmlProps} href={link ?? "/"} className={`drink_card ${className ?? ""}`} target={target ?? "_self"}>
             <div className="drink_card-inner">
                 <div className="drink_card-upper">
                     <div className="drink_card-text">

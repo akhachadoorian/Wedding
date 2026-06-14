@@ -1,5 +1,5 @@
-@use "../../styles/variables" as *;
-@use "../ArrowBox/ArrowBox.scss" as *;
+@use "@/styles/variables" as *;
+@use "@/components/ArrowBox/arrow-tokens" as *;
 @use "sass:map";
 
 // #region --- Button SCSS Variables -------------------------------------------

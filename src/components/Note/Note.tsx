@@ -1,3 +1,5 @@
+'use client'
+
 import ReactMarkdown from 'react-markdown';
 import './Note.scss';
 import React from 'react';

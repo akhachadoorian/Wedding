@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from "react";
 
 import { Icon } from "@phosphor-icons/react";
@@ -52,7 +54,7 @@ function ModalButton({ btnClass, btnSettings, decorationColor, ...rest }: { btnC
 
 function LinkButton({ btnClass, btnSettings, decorationColor, ...rest }: { btnClass: string; btnSettings: LinkButtonSettings; decorationColor: CssColor }) {
     return (
-        <LenisLink {...rest} className={btnClass} to={btnSettings.link} target={btnSettings.target ?? "_self"}>
+        <LenisLink {...rest} className={btnClass} href={btnSettings.link} target={btnSettings.target ?? "_self"}>
             <ButtonInner text={btnSettings.text} decoration={btnSettings.decoration} decorationColor={decorationColor} />
         </LenisLink>
     );

@@ -1,6 +1,5 @@
-@use "../../styles//variables" as *;
-@use "../../components/ArrowBox/ArrowBox.scss" as *;
-@use "../../styles/tokens/typography" as typo;
+@use "@/styles/variables" as *;
+@use "@/components/ArrowBox/arrow-tokens" as *;
 
 body.mobile-nav-open {
     overflow: hidden;

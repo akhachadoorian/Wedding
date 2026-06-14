@@ -1,6 +1,8 @@
+'use client'
+
 import { PropsWithChildren } from "react";
 import generateSectionClass from "../../hooks/generateSectionClass";
-import { BackgroundImageProps, ImageProps } from "../../types/images";
+import { BackgroundCustomImageProps, CustomImageProps } from "../../types/images";
 import { WithHTMLProps } from "../../types/props";
 import './BackgroundSection.scss';
 import { DEFAULT_IMAGE } from "../../data/defaultImage";
@@ -8,7 +10,7 @@ import { NumBetweenInclusive } from "../../types/utility";
 
 
 type BackgroundSectionProps = WithHTMLProps & PropsWithChildren & {
-    image: ImageProps;
+    image: CustomImageProps;
     overlayWeight?: NumBetweenInclusive<100, 0>;
     applySlant?: boolean;
     inverseSlant?: boolean;
