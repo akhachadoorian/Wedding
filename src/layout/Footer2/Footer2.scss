@@ -2,6 +2,9 @@
 // @use "@/styles/placeholders" as *;
 @use "@/styles/placeholders" as *;
 
+$lg-text-percent-show: 0.65;
+
+
 footer {
     background-color: $black;
     padding: $space-750 var(--layout-column-margin) 0;
@@ -43,12 +46,18 @@ footer {
             gap: $space-400;
         }
 
+        @include breakpx($bp-tablet, 1100px) {
+            gap: $space-200;
+        }
+
         &-line {
             background-color: #92928f;
-            width: 1px;
+            width: 100%;
+            height: 1px;
 
             @include big {
                 width: 1.5px;
+                height: auto;
             }
         }
 
@@ -99,6 +108,17 @@ footer {
                 flex: 1 1 570px;
             }
 
+            &-header {
+                        font-size: var(--text-2xl);
+                @include big {
+                    font-size: var(--text-3xl);
+                }
+
+                @include breakpx($bp-tablet, 1100px) {
+                    font-size: var(--text-2xl);
+                }
+            }
+
             &-group {
                 display: flex;
                 flex-direction: column;
@@ -114,12 +134,14 @@ footer {
                     flex-direction: column;
                 }
 
+                
+
                 p {
-                    font-size: var(--text-base, 18px);
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 160%; /* 28.8px */
-                    letter-spacing: 1.8px;
+                    // font-size: var(--text-base, 18px);
+                    // font-style: normal;
+                    // font-weight: 400;
+                    // line-height: 160%; /* 28.8px */
+                    // letter-spacing: 1.8px;
                     text-transform: uppercase;
                 }
             }
@@ -226,23 +248,18 @@ footer {
 
             display: flex;
             justify-content: space-between;
-            align-items: center;
             gap: $space-200;
 
+            overflow: hidden;
+            height: calc(80px * $lg-text-percent-show);
+
             @include big {
-                margin-bottom: -3dvh;
-            }
-
-            @include breakpx(1000px, 1550px) {
-                margin-bottom: -6dvh;
-            }
-
-            @include breakpx(1550px, 3000px) {
-                margin-bottom: -12dvh;
+                height: calc(clamp(100px, 19vw, 350px) * $lg-text-percent-show);
             }
 
             h6 {
                 font-size: 80px;
+                line-height: 1;
 
                 @include big {
                     font-size: clamp(100px, 19vw, 350px);

@@ -46,7 +46,7 @@ export default function PhotoCollage({
     className,
     ...htmlProps
 }: PhotoCollageProps) {
-    const [touchedIdx, setTouchedIdx] = useState<number | null>(null);
+    const [touchedIdx, setTouchedIdx] = useState<number | null>(null); // TODO: add mobile touch functionality
     const { makeMouseHandlers } = useTooltip();
 
     const makeTouchHandlers = (idx: number) => ({
