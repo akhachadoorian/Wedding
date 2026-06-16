@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import Accordions from "@/components/Accordions/Accordions";
 import CopyOnly from "@/components/CopyOnly/CopyOnly";
 import SimpleTable from "@/components/SimpleTable/SimpleTable";
-import { SmallTextGrid } from "@/components/SmallText/SmallText";
+import { SmallTextGrid } from "@/components/SmallTextGrid/SmallTextGrid";
 import SplitInfo from "@/components/SplitInfo/SplitInfo";
 import { useFadeIn } from "@/hooks/useFadeIn";
 import InsetBackgroundSection from "@/layout/InsetBackgroundSection/InsetBackgroundSection";

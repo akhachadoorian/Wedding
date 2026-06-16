@@ -39,8 +39,6 @@ export default function GothHero({
 }: GothHeroProps) {
     const [imgReady, setImgReady] = useState(false);
 
-    
-    // TODO: add load-in animation
     // Load References
     const sectionRef = useRef(null);
     const imgRef = useRef(null);
@@ -53,21 +51,31 @@ export default function GothHero({
         if (!loaded || !imgReady) return;
 
         const ctx = gsap.context(() => {
-            const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+            const mm = gsap.matchMedia();
 
-            tl.from(h1Ref.current, { y: 16, autoAlpha: 0, duration: 0.8 });
+            mm.add("(min-width: 800px)", () => {
+                const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
 
-            const eyebrows = [eyebrowLeftRef, eyebrowCenterRef, eyebrowRightRef]
-                .map((r) => r.current)
-                .filter(Boolean);
+                tl.from(h1Ref.current, { y: 16, autoAlpha: 0, duration: 0.8 });
 
-            if (eyebrows.length > 0) {
-                tl.from(
-                    eyebrows,
-                    { y: 16, autoAlpha: 0, duration: 0.8, stagger: 0.15 },
-                    "-=0.3",
-                );
-            }
+                const eyebrows = [
+                    eyebrowLeftRef,
+                    eyebrowCenterRef,
+                    eyebrowRightRef,
+                ]
+                    .map((r) => r.current)
+                    .filter(Boolean);
+
+                if (eyebrows.length > 0) {
+                    tl.from(
+                        eyebrows,
+                        { y: 16, autoAlpha: 0, duration: 0.8, stagger: 0.15 },
+                        "-=0.3",
+                    );
+                }
+            });
+
+            mm.add("(max-width: 799px)", () => {});
         });
 
         return () => ctx.revert();

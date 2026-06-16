@@ -38,6 +38,18 @@ $btnBorderWidth: 2px;
                     "color": $cream,
                 ),
             ),
+            'black': (
+                "default": (
+                    "border-color": $black,
+                    "background-color": $black,
+                    "color": $cream,
+                ),
+                "hover": (
+                    "border-color": $gold,
+                    "background-color": $gold,
+                    "color": $cream,
+                ),
+            )
         );
 
     // #endregion ---------------------------------

@@ -1,6 +1,7 @@
 import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
 import { DashedCopyGridProps } from "@/components/DashedCopy/DashedCopy";
 import { DrinkCardGridProps } from "@/components/DrinkCardGrid/DrinkCardGrid";
+import { SmallTextProps } from "@/components/SmallTextGrid/SmallTextGrid";
 import { GothHeroProps } from "@/layout/GothHero/GothHero";
 import { ScrollRevealHeroProps } from "@/layout/ScrollRevealHero/ScrollRevealHero";
 
@@ -12,50 +13,49 @@ import { ScrollRevealHeroProps } from "@/layout/ScrollRevealHero/ScrollRevealHer
 //     endScrollMessage: "Hover on images for more!",
 //     endScrollMessageMobile: "Touch the images for more!",
 //     sideImages: [
-//         { 
-//             src: "/images/Engagement.jpg", 
+//         {
+//             src: "/images/Engagement.jpg",
 //             alt: "Max proposing to Alex in the Japan Garden in Epcot",
 //             caption: "Max proposing to Alex in the Japan Garden in Epcot",
 //             borderStyle: 'simple',
-//             aspectRatio: "portrait" 
+//             aspectRatio: "portrait"
 //         },
-//         { 
-//             src: "/images/Graduation.jpg", 
+//         {
+//             src: "/images/Graduation.jpg",
 //             alt: "Max and Alex at Max's college graduation",
-//             caption: "Max's Graduation", 
+//             caption: "Max's Graduation",
 //             borderStyle: 'double',
-//             aspectRatio: "square" 
+//             aspectRatio: "square"
 //         },
-//         { 
-//             src: "/images/Sunglasses.jpg", 
-//             alt: "", 
-//             caption: "", 
+//         {
+//             src: "/images/Sunglasses.jpg",
+//             alt: "",
+//             caption: "",
 //             borderStyle: 'corner',
-//             aspectRatio: "square" 
+//             aspectRatio: "square"
 
 //         },
-//         { 
-//             src: "/images/Disney.jpg", 
-//             alt: "Max and Alex kissing in front of the Disney castle", 
-//             caption: "Disney Trip", 
+//         {
+//             src: "/images/Disney.jpg",
+//             alt: "Max and Alex kissing in front of the Disney castle",
+//             caption: "Disney Trip",
 //             borderStyle: 'diamond',
-//             aspectRatio: "portrait" 
+//             aspectRatio: "portrait"
 //         },
 //     ],
 // };
 
-const hero: Omit<GothHeroProps, 'loaded'> = {
+const hero: Omit<GothHeroProps, "loaded"> = {
     // header: '',
     img: {
-        src: '/images/DipShot.jpg',
-        alt: 'Max dipping Alex'
+        src: "/images/DipShot.jpg",
+        alt: "Max dipping Alex",
     },
     eyebrows: {
         left: "October 31st, 2026\nCeremony at 5pm",
-        right: "The Clay Theatre\nJacksonville, Fl"
-    }
-}
-
+        right: "The Clay Theatre\nJacksonville, Fl",
+    },
+};
 
 // #region --- Overview --------------------------------
 
@@ -83,20 +83,18 @@ const hero: Omit<GothHeroProps, 'loaded'> = {
 //     ],
 // };
 
-
-
 const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
     eyebrow: "We're getting married",
     // header: "Together with their families, **Alex & Max** joyfully invite you to share in the celebration of their marriage.",
     header: "Til Death Do Us Part",
     // buttons: {
-        buttons: [
-            {
-                type: 'link',
-                text: 'View Full Details',
-                link: '/details'
-            }
-        ]
+    buttons: [
+        {
+            type: "link",
+            text: "View Full Details",
+            link: "/details",
+        },
+    ],
     // }
 };
 
@@ -127,27 +125,39 @@ const welcomeDashedGrid: DashedCopyGridProps = {
     ],
 };
 
+const welcomeSmallText: Array<SmallTextProps> = [
+    {
+        eyebrow: "when",
+        title: "October 31st, 2026",
+        subtitle: "Guests arrive at 4:30 PM",
+        button: {
+            type: "link",
+            link: "/details#timeline",
+            text: 'View the Timeline'
+        }
+    },
+];
+
 const welcome = {
     copyOnly: welcomeCopyOnly,
     dashedCopyGrid: welcomeDashedGrid,
+    smallText: welcomeSmallText,
 };
 
 // #endregion --------------------------------
 
-
 // #region --- Our Story --------------------------------
 
 const ourStory = {
-    header: 'Our Story',
+    header: "Our Story",
     mainImage: {
         src: "/images/DipShot.jpg",
         alt: "Max dipping Alex and kissing.",
-        caption: "Engagement ", 
+        caption: "Engagement ",
         width: 696,
-        height: 522
+        height: 522,
     },
-
-}
+};
 
 // #endregion ----------------------------------------------------------
 
@@ -166,8 +176,18 @@ const drinkGrid: DrinkCardGridProps = {
             link: "/details",
             target: "_self",
             drinks: [
-                { type: "martini", rotate: "large", rotateNeg: true, hoverHeight: "high" },
-                { type: "highball", rotate: "small", rotateNeg: false, hoverHeight: "low" },
+                {
+                    type: "martini",
+                    rotate: "large",
+                    rotateNeg: true,
+                    hoverHeight: "high",
+                },
+                {
+                    type: "highball",
+                    rotate: "small",
+                    rotateNeg: false,
+                    hoverHeight: "low",
+                },
             ],
         },
         {
@@ -177,8 +197,18 @@ const drinkGrid: DrinkCardGridProps = {
             link: "/accommodations",
             target: "_self",
             drinks: [
-                { type: "cocktail", rotate: "medium", rotateNeg: false, hoverHeight: "medium" },
-                { type: "whiskey", rotate: "large", rotateNeg: true, hoverHeight: "high" },
+                {
+                    type: "cocktail",
+                    rotate: "medium",
+                    rotateNeg: false,
+                    hoverHeight: "medium",
+                },
+                {
+                    type: "whiskey",
+                    rotate: "large",
+                    rotateNeg: true,
+                    hoverHeight: "high",
+                },
             ],
         },
         {
@@ -188,8 +218,18 @@ const drinkGrid: DrinkCardGridProps = {
             link: "/rsvp",
             target: "_self",
             drinks: [
-                { type: "coupe", rotate: "medium", rotateNeg: false, hoverHeight: "medium" },
-                { type: "margarita", rotate: "large", rotateNeg: true, hoverHeight: "high" },
+                {
+                    type: "coupe",
+                    rotate: "medium",
+                    rotateNeg: false,
+                    hoverHeight: "medium",
+                },
+                {
+                    type: "margarita",
+                    rotate: "large",
+                    rotateNeg: true,
+                    hoverHeight: "high",
+                },
             ],
         },
     ],

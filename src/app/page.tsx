@@ -10,6 +10,7 @@ import content from "./content";
 import "./Home.scss";
 import GothHero from "../layout/GothHero/GothHero";
 import PhotoCollage from "@/components/PhotoCollage/PhotoCollage";
+import SmallText from "@/components/SmallTextGrid/SmallTextGrid";
 
 export default function Home({ loaded = true }: { loaded?: boolean }) {
     // Setup refs for fade in
@@ -24,17 +25,23 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
             <section ref={welcomeRef} id="welcome" className="welcome-section base_section">
                 <CopyOnly
                     styleOptions={{
-                        variation: "left",
+                        variation: "center",
                         headingSize: "h2",
+                        customBtnColorSchemeMap: ['black', 'cream', 'cream']
                     }}
                     {...content.welcome.copyOnly}
                 />
 
                 <DashedCopyGrid {...content.welcome.dashedCopyGrid} />
+
+                {/* <div className="small_text_column">
+                    <SmallText {...content.welcome.smallText[0]}  />
+                    <SmallText {...content.welcome.smallText[0]}  />
+                </div> */}
             </section>
 
             <section ref={ourStoryRef} id="our_story" className="our_story-section base_section">
-                    <PhotoCollage {...content.ourStory} />
+                    <PhotoCollage {...content.ourStory} styleOptions={{headerTop: true, textBehind: true}}/>
             </section> 
 
             <section ref={quickLinksRef} id="quick_links" className="quick_links-section base_section">

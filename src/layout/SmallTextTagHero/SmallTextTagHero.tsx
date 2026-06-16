@@ -7,7 +7,7 @@ import { CustomImageProps } from "../../types/images";
 import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
 import Diamond from "../../components/Diamond/Diamond";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";
-import SmallText, { SmallTextProps } from "../../components/SmallText/SmallText";
+import SmallText, { SmallTextProps } from "../../components/SmallTextGrid/SmallTextGrid";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 

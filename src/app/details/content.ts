@@ -5,7 +5,7 @@ import { SplitInfoProps } from "@/components/SplitInfo/SplitInfo";
 import { TextOnlyHeroProps } from "@/layout/TextOnlyHero/TextOnlyHero";
 import { LetterCirclePIcon, MapTrifoldIcon, VanIcon } from "@phosphor-icons/react";
 import { ButtonProps } from "../../types/buttons";
-import { SmallTextGridProps } from "@/components/SmallText/SmallText";
+import { SmallTextGridProps } from "@/components/SmallTextGrid/SmallTextGrid";
 
 // ----- Hero -----------------------------------------------
 // const hero: Omit<SmallTextTagHeroProps, "loaded"> = {
