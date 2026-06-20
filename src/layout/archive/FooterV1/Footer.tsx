@@ -4,16 +4,16 @@ import React from "react";
 
 import Diamond from "@/components/Diamond/Diamond";
 import Eyebrow from "@/components/Eyebrow/Eyebrow";
-import Marquee from "@/components/Marquee/Marquee";
+import Marquee from "@/components/archive/Marquee/Marquee";
 import SmallText from "@/components/SmallTextGrid/SmallTextGrid";
 import { useLenis } from "@/context/LenisContext";
 import { NAV_ITEMS } from "@/data/navItems";
 import { LenisLink } from "@/hooks/LenisLink";
 import { useFadeIn } from "@/hooks/useFadeIn";
 
-import "./Footer.scss";
+import "./FooterV1.scss";
 
-function Footer({}) {
+function FooterV1({}) {
     const footerRef = useFadeIn<HTMLDivElement>();
 
     // Handle scrolling
@@ -86,4 +86,4 @@ function Footer({}) {
     );
 }
 
-export default Footer;
+export default FooterV1;

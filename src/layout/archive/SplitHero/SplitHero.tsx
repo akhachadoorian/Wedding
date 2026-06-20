@@ -2,10 +2,10 @@
 
 import { useLayoutEffect, useRef } from "react";
 
-import Button from "../../components/Buttons/Button";
-import Eyebrow from "../../components/Eyebrow/Eyebrow";
-import { ButtonSettingProps } from "../../types/buttons";
-import { CustomImageProps } from "../../types/images";
+import Button from "@/components/Buttons/Button";
+import Eyebrow from "@/components/Eyebrow/Eyebrow";
+import { ButtonSettingProps } from "@/types/buttons";
+import { CustomImageProps } from "@/types/images";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 

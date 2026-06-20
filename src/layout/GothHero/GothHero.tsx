@@ -125,7 +125,7 @@ export default function GothHero({
                             <p
                                 className="goth_hero-text-eyebrow-left"
                                 ref={eyebrowLeftRef}
-                                style={{ visibility: "hidden" }}
+                                // style={{ visibility: "hidden" }}
                             >
                                 <TextWithNewLine text={eyebrows.left} />
                             </p>
@@ -134,7 +134,7 @@ export default function GothHero({
                             <p
                                 className="goth_hero-text-eyebrow-center"
                                 ref={eyebrowCenterRef}
-                                style={{ visibility: "hidden" }}
+                                // style={{ visibility: "hidden" }}
                             >
                                 <TextWithNewLine text={eyebrows.center} />
                             </p>
@@ -143,7 +143,7 @@ export default function GothHero({
                             <p
                                 className="goth_hero-text-eyebrow-right"
                                 ref={eyebrowRightRef}
-                                style={{ visibility: "hidden" }}
+                                // style={{ visibility: "hidden" }}
                             >
                                 <TextWithNewLine text={eyebrows.right} />
                             </p>
@@ -154,7 +154,7 @@ export default function GothHero({
                 <div
                     className="goth_hero-text-title"
                     ref={h1Ref}
-                    style={{ visibility: "hidden" }}
+                    // style={{ visibility: "hidden" }}
                 >
                     <div className="goth_hero-text-title-desktop">
                         <h1>Alex</h1>

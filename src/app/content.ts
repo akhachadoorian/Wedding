@@ -2,8 +2,9 @@ import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
 import { DashedCopyGridProps } from "@/components/DashedCopy/DashedCopy";
 import { DrinkCardGridProps } from "@/components/DrinkCardGrid/DrinkCardGrid";
 import { SmallTextProps } from "@/components/SmallTextGrid/SmallTextGrid";
+import { WatermarkTextProps } from "@/components/WatermarkText/WatermarkText";
 import { GothHeroProps } from "@/layout/GothHero/GothHero";
-import { ScrollRevealHeroProps } from "@/layout/ScrollRevealHero/ScrollRevealHero";
+import { ScrollRevealHeroProps } from "@/layout/archive/ScrollRevealHero/ScrollRevealHero";
 
 // ----- Hero -----------------------------------------------
 // const hero: ScrollRevealHeroProps = {
@@ -53,7 +54,7 @@ const hero: Omit<GothHeroProps, "loaded"> = {
     },
     eyebrows: {
         left: "October 31st, 2026\nCeremony at 5pm",
-        right: "The Clay Theatre\nJacksonville, Fl",
+        right: "The Clay Theatre\nGreen Cove, Fl",
     },
 };
 
@@ -133,15 +134,57 @@ const welcomeSmallText: Array<SmallTextProps> = [
         button: {
             type: "link",
             link: "/details#timeline",
-            text: 'View the Timeline'
-        }
+            text: "View the Timeline",
+        },
     },
 ];
+
+const welcomeWatermarkText: Omit<WatermarkTextProps, "loaded"> = {
+    // header: '',
+    watermarkText: "October 31st",
+    subheader: "We're getting married",
+    captions: {
+        left: {
+            lines: ["The Clay Theatre", "Green Cove, Fl"],
+            button: {
+                type: 'link',
+                link: '/details#venue',
+                text: 'View Venue Details',
+                decoration: {
+                    type: 'arrow'
+                }
+            }
+        },
+        center: {
+            lines: ["Doors open at 4:30pm", "Ceremony at 5pm"],
+            button: {
+                type: 'link',
+                link: '/details#timeline',
+                text: 'View Timeline',
+                decoration: {
+                    type: 'arrow'
+                }
+            }
+        },
+        right: {
+            lines: ["RSVP by", "October 1st"],
+            button: {
+                type: 'link',
+                link: '/rsvp',
+                text: 'RSVP Now',
+                decoration: {
+                    type: 'arrow'
+                }
+            }
+        },
+    },
+};
 
 const welcome = {
     copyOnly: welcomeCopyOnly,
     dashedCopyGrid: welcomeDashedGrid,
     smallText: welcomeSmallText,
+    welcomeWatermarkText: welcomeWatermarkText,
 };
 
 // #endregion --------------------------------

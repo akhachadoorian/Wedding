@@ -2,12 +2,12 @@
 
 import { forwardRef, useLayoutEffect, useRef } from "react";
 
-import { ButtonSettingProps, ThreeButtonsArray } from "../../types/buttons";
-import { CustomImageProps } from "../../types/images";
-import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
-import Diamond from "../../components/Diamond/Diamond";
-import Eyebrow from "../../components/Eyebrow/Eyebrow";
-import SmallText, { SmallTextProps } from "../../components/SmallTextGrid/SmallTextGrid";
+import { ButtonSettingProps, ThreeButtonsArray } from "@/types/buttons";
+import { CustomImageProps } from "@/types/images";
+import { ThreeButtons } from "@/components/Buttons/ButtonGroups";
+import Diamond from "@/components/Diamond/Diamond";
+import Eyebrow from "@/components/Eyebrow/Eyebrow";
+import SmallText, { SmallTextProps } from "@/components/SmallTextGrid/SmallTextGrid";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
