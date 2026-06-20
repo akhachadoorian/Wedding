@@ -57,7 +57,7 @@ function Footer({}) {
                             eyebrow="Date" 
                             title="October 31st, 2026" 
                             body="Ceremony at 5pm" 
-                            alignment={{ desktop: "right", mobile: "left" }} 
+                            // alignment={{ desktop: "right", mobile: "left" }} 
                         />
 
                         <div className="art_deco_div">
@@ -68,7 +68,9 @@ function Footer({}) {
                             <Diamond color="--gold-500" />
                         </div>
 
-                        <SmallText eyebrow="Location" title="Clay Theatre" body="Green Cove Springs, FL" alignment={{ desktop: "right", mobile: "left" }} />
+                        <SmallText eyebrow="Location" title="Clay Theatre" body="Green Cove Springs, FL" 
+                        // alignment={{ desktop: "right", mobile: "left" }} 
+                        />
                     </div>
                 </div>
 
