@@ -103,10 +103,10 @@ export default function SmallTextTagHero({ loaded, eyebrow, heading, body, butto
             <div className="small_text_tag_hero-right">
                 <SmallText 
                     ref={stt1Ref}
-                    alignment={{
-                        desktop: 'right',
-                        mobile: 'left'
-                    }}
+                    // alignment={{
+                    //     desktop: 'right',
+                    //     mobile: 'left'
+                    // }}
                  />
 
                 <div ref={artDecoRef} className="art_deco_div">
@@ -118,9 +118,9 @@ export default function SmallTextTagHero({ loaded, eyebrow, heading, body, butto
                 </div>
 
                 <SmallText ref={stt2Ref}
-                    alignment={{
-                        desktop: 'right'
-                    }}
+                    // alignment={{
+                    //     desktop: 'right'
+                    // }}
                     {...smallTextTag2}
                 />
             </div>
