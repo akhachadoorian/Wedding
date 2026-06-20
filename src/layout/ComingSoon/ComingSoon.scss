@@ -9,6 +9,10 @@ $imgHeight: calc(100dvh + $space-400);
 
     min-height: 100dvh;
 
+    @include big {
+        // padding: $space-1500 0;
+    }
+
     &-img {
         position: absolute;
         z-index: 1;
@@ -41,8 +45,9 @@ $imgHeight: calc(100dvh + $space-400);
 
 
         @include big {
-            // max-width: var(--max-width);
-            max-width: 60.417vw;
+            max-width: var(--max-width);
+            // max-width: 60.417vw;
+            padding: $space-1500 var(--layout-column-margin);
             margin: auto;
         }
 
