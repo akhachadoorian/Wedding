@@ -1,4 +1,4 @@
-@use "@/styles/variables" as *;;
+@use "@/styles/variables" as *;
 
 // #region --- RSVP Form ------------------------------------
 
@@ -20,7 +20,6 @@
     padding: $space-800 $space-750;
     border: 2px solid $black-800;
 
-    
     &-inner {
         display: flex;
 
@@ -57,7 +56,7 @@
             flex: 1 1 546px;
         }
     }
-    
+
     &-search {
         width: 100%;
         margin-top: $space-600;
@@ -90,7 +89,7 @@
                 color: $cream-900;
                 opacity: 1;
                 font-family: $font-sans;
-                font-size: var(text-base);
+                font-size: var(--text-base);
                 font-style: normal;
                 font-weight: 400;
                 line-height: 150%;
@@ -106,8 +105,6 @@
                     opacity: 0;
                 }
             }
-
-            
         }
     }
 
@@ -167,11 +164,11 @@
 
         &-text {
             font-family: $font-sans;
-        font-size: var(--text-md);
-        font-weight: 600;
-        line-height: normal;
-        letter-spacing: 1px;
-        text-transform: uppercase;
+            font-size: var(--text-md);
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         &.active {
