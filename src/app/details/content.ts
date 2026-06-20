@@ -289,30 +289,18 @@ const rehearsalSmallTextGrid:SmallTextGridProps = {
         {
             eyebrow: 'Time',
             title: '8:30 PM - 11 PM',
-            alignment: {
-                desktop: 'left'
-            }
         },
         {
             eyebrow: 'Date',
             title: 'October 30th, 2026',
-            alignment: {
-                desktop: 'left'
-            }
         },
         {
             eyebrow: 'Location',
             title: 'Maggiano’s Little Italy',
-            alignment: {
-                desktop: 'left'
-            }
         },
         {
             eyebrow: 'Attire',
             title: 'Casual',
-            alignment: {
-                desktop: 'left'
-            }
         },
     ]
 }
