@@ -13,6 +13,7 @@ import PhotoCollage from "@/components/PhotoCollage/PhotoCollage";
 import SmallText from "@/components/SmallTextGrid/SmallTextGrid";
 import WelcomeBlockB from "@/components/WelcomeBlockB/WelcomeBlockB";
 
+
 export default function Home({ loaded = true }: { loaded?: boolean }) {
     // Setup refs for fade in
     const welcomeRef = useFadeIn<HTMLDivElement>();
@@ -23,7 +24,7 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
         <>
             <GothHero loaded={loaded} {...content.hero} />
 
-            <section ref={welcomeRef} id="welcome" className="welcome-section base_section">
+            {/* <section ref={welcomeRef} id="welcome" className="welcome-section base_section">
                 <CopyOnly
                     styleOptions={{
                         variation: "center",
@@ -33,15 +34,15 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
                     {...content.welcome.copyOnly}
                 />
 
-                <DashedCopyGrid {...content.welcome.dashedCopyGrid} />
+                <DashedCopyGrid {...content.welcome.dashedCopyGrid} /> */}
 
             {/* <div className="small_text_column">
                     <SmallText {...content.welcome.smallText[0]}  />
                     <SmallText {...content.welcome.smallText[0]}  />
                 </div> */}
-            </section>
+            {/* </section> */}
 
-            {/* <section
+            <section
                 ref={welcomeRef}
                 id="welcome"
                 className="welcome-section base_section"
@@ -74,7 +75,7 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
                     ]}
                     cta={{ text: "RSVP Now", link: "/rsvp" }}
                 />
-            </section> */}
+            </section>
 
             <section
                 ref={ourStoryRef}
