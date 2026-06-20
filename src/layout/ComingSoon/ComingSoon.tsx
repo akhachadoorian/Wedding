@@ -20,7 +20,7 @@ export default function ComingSoon({
     return (
             <section className={`coming_soon`}>
                 <div className="img-holder coming_soon-img">
-                    <Image src={'/images/DipShot.jpg'} alt={"Max dipping Alex and kissing"} className="img-bw" />
+                    <Image src={'/images/DipShot.jpg'} alt={"Max dipping Alex and kissing"} className="img-bw" width={696} height={522} />
                     <div className="img-overlay"></div>
                 </div>
     
