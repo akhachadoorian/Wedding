@@ -110,6 +110,7 @@ export default function CopyOnly({
                     header={header}
                     subtitle={subtitle}
                     body={body}
+                    buttons={buttons}
                     styleOptions={styleOptions}
                 />
             ) : styleOptions.variation === "center" ? (
@@ -118,6 +119,7 @@ export default function CopyOnly({
                     header={header}
                     subtitle={subtitle}
                     body={body}
+                    buttons={buttons}
                     styleOptions={styleOptions}
                 />
             ) : (
@@ -126,6 +128,7 @@ export default function CopyOnly({
                     header={header}
                     subtitle={subtitle}
                     body={body}
+                    buttons={buttons}
                     styleOptions={styleOptions}
                 />
             )}
@@ -203,7 +206,7 @@ function CenterCopyOnly({
     styleOptions,
 }: SubFunctionCopyOnlyProps) {
     return (
-        <div className={`copy-inner copy-left`}>
+        <div className={`copy-inner copy-center`}>
             <div className="copy-text">
                 <div className="copy-upper">
                     <EyebrowHeaderCopyOnly
@@ -251,7 +254,7 @@ function LeftCopyOnly({
     styleOptions,
 }: SubFunctionCopyOnlyProps) {
     return (
-        <div className={`copy-inner copy-${styleOptions.variation}`}>
+        <div className={`copy-inner copy-left`}>
             <div className="copy-text">
                 <div className="copy-upper">
                     <EyebrowHeaderCopyOnly

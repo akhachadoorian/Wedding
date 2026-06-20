@@ -1,0 +1,58 @@
+@use "@/styles/variables" as *;
+
+.small_text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-100);
+
+    padding: $space-400 0;
+    border-top: 1px solid $cream;
+
+    @include big {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 7.222vw;
+    }
+
+    &-left {
+        @include big {
+            flex: 1;
+        }
+    }
+
+    &-right {
+        display: flex;
+        flex-direction: column;
+        gap: $space-500;
+
+        @include big {
+            flex: 1 1 388px;
+        }
+    }
+
+    &-text {
+        display: flex;
+        flex-direction: column;
+        gap: $space-200;
+    }
+
+    &-subtitle {
+        color: $cream-500;
+        opacity: 75%;
+    }
+}
+
+// #region --- Small Text Grid -------------------------------
+.small_text_grid {
+    display: grid;
+    grid-template-columns: [s] 100% [e];
+    gap: $space-600;
+
+    @include big {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: $space-100;
+        row-gap: $space-600;
+    }
+}
+
+// #endregion -----------------------------------------------------

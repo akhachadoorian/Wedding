@@ -5,7 +5,7 @@ import React from "react";
 import Diamond from "@/components/Diamond/Diamond";
 import Eyebrow from "@/components/Eyebrow/Eyebrow";
 import Marquee from "@/components/Marquee/Marquee";
-import SmallText from "@/components/SmallText/SmallText";
+import SmallText from "@/components/SmallTextGrid/SmallTextGrid";
 import { useLenis } from "@/context/LenisContext";
 import { NAV_ITEMS } from "@/data/navItems";
 import { LenisLink } from "@/hooks/LenisLink";

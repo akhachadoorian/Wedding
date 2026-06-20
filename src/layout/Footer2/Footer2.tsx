@@ -28,14 +28,14 @@ export default function Footer2({}) {
                 <div className="footer-upper-line" />
 
                 <div className="footer-upper-text">
-                    <h6 className="heading-l">Lets celebrate together</h6>
+                    <h6 className="footer-upper-text-header">Lets celebrate together</h6>
 
                     <div className="footer-upper-text-group">
-                        <p className="">
+                        <p className="body-s">
                             October 31st, 2026 <br />
                             Ceremony at 5pm
                         </p>
-                        <p>
+                        <p className="body-s">
                             The Clay Theatre <br />
                             Jacksonville, Fl
                         </p>
@@ -78,10 +78,13 @@ export default function Footer2({}) {
                         </p>
                     </LenisLink>
                 </div>
+                {/* <div className="footer-lower-lg_text-wrapper">  */}
+          {/* TODO: fix */}
                 <div className="footer-lower-lg_text">
                     <h6 className="">Til</h6>
                     <h6 className="">Death</h6>
                 </div>
+                {/* </div> */}
             </div>
         </footer>
     );

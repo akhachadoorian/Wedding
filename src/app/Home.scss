@@ -1,7 +1,31 @@
 // _wedding.scss
 @use "@/styles/variables" as *;;
 
-.welcome-section,
+.welcome-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--layout-column-gutter);
+
+    @include big {
+        gap: var(--space-1000);
+        // flex-direction: row;
+        // gap: var(--layout-column-gutter);
+    }
+
+    // .copy {
+    //     @include big {
+    //         flex: 2 1 696px;
+    //     }
+    // }
+
+    // .small_text_column {
+    //     @include big {
+    //         flex: 1 1 594px;
+    //     }
+    // }
+}
+
+
 .quick_links-section {
     display: flex;
     flex-direction: column;
