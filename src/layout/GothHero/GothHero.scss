@@ -5,6 +5,7 @@ $imgHeight: calc(100dvh + $space-400);
 .goth_hero {
     position: relative;
     min-height: $imgHeight;
+    width: 100dvw;
     overflow: hidden;
 
     display: flex;
@@ -33,7 +34,10 @@ $imgHeight: calc(100dvh + $space-400);
         position: relative;
         z-index: 5;
 
-        width: 100%;
+        // width: 100%;
+        // flex: 1;
+        width: 100dvw;
+        overflow: hidden;
         background: linear-gradient(
             180deg,
             rgba(16, 17, 17, 0) 12.02%,
@@ -44,6 +48,10 @@ $imgHeight: calc(100dvh + $space-400);
         padding: $space-200 var(--layout-column-margin) $space-400;
 
         &-title {
+            // visibility: hidden;
+            text-align: center;
+              container-type: inline-size; 
+
             @include big {
                 max-width: var(--max-width);
                 margin: auto;
@@ -51,23 +59,26 @@ $imgHeight: calc(100dvh + $space-400);
             }
 
             h1 {
-                font-family: Respira;
-                font-size: 125px;
+                font-family: $font-goth;
+                // font-size: 125px;
+                font-size: 17cqw;
                 font-style: normal;
                 font-weight: 800;
                 line-height: 100%;
+                white-space: nowrap;
 
                 @include big {
-                    font-size: 15.625vw;
-                    text-align: left;
+                    // font-size: 15.625vw;
+                    text-align: center;
+                    font-size: 18cqw;
                     // flex: 1;
                     // visibility: hidden;
                 }
             }
 
-            p {
-                font-family: Respira;
-                font-size: 60px;
+            p, span {
+                font-family: $font-goth;
+                font-size: .5em;
                 font-style: normal;
                 font-weight: 400;
                 line-height: 100%;
@@ -160,6 +171,7 @@ $imgHeight: calc(100dvh + $space-400);
             }
 
             &-left {
+                // visibility: hidden;
                 text-align: left;
 
                 @include big {
@@ -168,6 +180,7 @@ $imgHeight: calc(100dvh + $space-400);
             }
 
             &-center {
+                // visibility: hidden;
                 text-align: center;
 
                 @include big {
@@ -177,6 +190,7 @@ $imgHeight: calc(100dvh + $space-400);
             }
 
             &-right {
+                // visibility: hidden;
                 text-align: right;
 
                 @include big {

@@ -1,0 +1,12 @@
+@use "@/styles/variables" as *;
+
+.img-holder  {
+
+    img {
+        object-position: var(--img-object-position-mobile);
+
+        @include big {
+            object-position: var(--img-object-position);
+        }
+    }
+}

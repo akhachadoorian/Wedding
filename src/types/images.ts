@@ -2,9 +2,13 @@ import { ImageProps } from "next/image";
 
 export type CustomImageProps = ImageProps & {
     caption?: string;
+    imgPositionResponsive?: ImgPositionResponsive;
 }
 
-// type BasicImageProps = 
+type ImgPositionResponsive = {
+    desktop: string;
+    mobile?: string;
+}
 
 
 // #region --- Background Image ------------------------------------------
