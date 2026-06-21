@@ -1,14 +1,11 @@
+import Footer2 from "@/layout/Footer2/Footer2";
+import Navigation2 from "@/layout/Navigation 2/Navigation2";
+import "@/styles/main.scss";
 import type { Metadata } from "next";
 import { Unbounded } from 'next/font/google';
 import localFont from 'next/font/local';
-import "@/styles/main.scss";
-import LenisProvider from "../utils/LenisProvider";
-import Footer from "../layout/Footer/Footer";
-import Navigation from "../layout/Navigation/Navigation";
 import { GlobalTooltip, TooltipProvider } from "../layout/GlobalTooltip/GlobalTooltip";
-import Navigation2 from "@/layout/Navigation 2/Navigation2";
-import ComingSoon from "@/layout/ComingSoon/ComingSoon";
-import Footer2 from "@/layout/Footer2/Footer2";
+import LenisProvider from "../utils/LenisProvider";
 
 export const metadata: Metadata = {
     title: "Alex & Max | October 31, 2026",

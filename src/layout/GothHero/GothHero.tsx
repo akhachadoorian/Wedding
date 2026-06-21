@@ -10,6 +10,8 @@ import Image from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useFitText } from "@/hooks/useFitText";
+import ImageHolder from "@/components/ImageHolder/ImageHolder";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,7 +19,6 @@ export type GothHeroProps = WithHTMLProps & {
     loaded: boolean;
 
     // Fields
-    // header: string;
     img?: CustomImageProps;
 
     eyebrows?: {
@@ -75,7 +76,7 @@ export default function GothHero({
                 }
             });
 
-            mm.add("(max-width: 799px)", () => {});
+            // mm.add("(max-width: 799px)", () => {});
         });
 
         return () => ctx.revert();
@@ -83,15 +84,19 @@ export default function GothHero({
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.to(imgRef.current, {
-                yPercent: -2,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true,
-                },
+            const mm = gsap.matchMedia();
+
+            mm.add("(min-width: 800px)", () => {
+                gsap.to(imgRef.current, {
+                    yPercent: -2,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: true,
+                    },
+                });
             });
         });
 
@@ -104,7 +109,26 @@ export default function GothHero({
             {...htmlProps}
             className={` goth_hero ${className ?? ""}`}
         >
-            <div ref={imgRef} className="img-holder goth_hero-img">
+            <ImageHolder
+                className="goth_hero-img"
+                img={{
+                    ...img,
+                    priority: true,
+                    sizes: "100vw",
+                    fill: true,
+                    style: { objectFit: "cover" },
+                    onLoad: () => setImgReady(true),
+                }}
+            />
+
+            <div
+                ref={imgRef}
+                className="img-holder goth_hero-img"
+                style={{
+                    "--img-object-position": img.imgPositionResponsive?.desktop ?? "center",
+                    "--img-object-position-mobile": img.imgPositionResponsive?.mobile ?? img.imgPositionResponsive?.desktop ?? "center",
+                } as React.CSSProperties}
+            >
                 <Image
                     src={img.src}
                     alt={img.alt ?? ""}
@@ -156,8 +180,22 @@ export default function GothHero({
                     ref={h1Ref}
                     // style={{ visibility: "hidden" }}
                 >
+                    {/* <h1 ref={alexUseFitText}>Alex</h1>
+                        <p>&</p>
+                        <h1 ref={maxUseFitText}>Max</h1> */}
+
+                    <h1>
+                        Alex <span>&</span> Max
+                    </h1>
+                </div>
+
+                {/* <div
+                    className="goth_hero-text-title"
+                    ref={h1Ref}
+                    // style={{ visibility: "hidden" }}
+                >
                     <div className="goth_hero-text-title-desktop">
-                        <h1>Alex</h1>
+                        <h1 ref={alexUseFitText}>Alex</h1>
                         <p>&</p>
                         <h1>Max</h1>
                     </div>
@@ -169,7 +207,7 @@ export default function GothHero({
                             <h1>Max</h1>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </section>
     );

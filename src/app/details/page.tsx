@@ -8,7 +8,7 @@ import SplitInfo from "@/components/SplitInfo/SplitInfo";
 import { useFadeIn } from "@/hooks/useFadeIn";
 import InsetBackgroundSection from "@/layout/InsetBackgroundSection/InsetBackgroundSection";
 import ParallaxingDrinkSection from "@/layout/ParallaxingDrinkSection/ParallaxingDrinkSection";
-import SlantedSection from "@/layout/SlatedSection/SlantedSection";
+import SlantedSection from "@/layout/SlantedSection/SlantedSection";
 import TextOnlyHero from "@/layout/TextOnlyHero/TextOnlyHero";
 import content from "./content";
 import gsap from "gsap";

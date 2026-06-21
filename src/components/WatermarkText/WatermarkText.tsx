@@ -12,6 +12,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ButtonSettingProps } from "@/types/buttons";
 import { NonEmptyArray } from "@/types/utility";
 import Button from "../Buttons/Button";
+import { useFitLongestWord } from "@/hooks/useFitLongestWord";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,6 +44,7 @@ export default function WatermarkText({
     const subheaderRef = useRef<HTMLHeadingElement>(null);
     const watermarkTextRef = useRef<HTMLDivElement>(null);
     const fitTextRef = useFitText<HTMLHeadingElement>();
+    // const fitLongestWord = useFitLongestWord<HTMLHeadingElement>();
     // const parallaxRef = useRef<HTMLDivElement>(null);
     const captionLeftRef = useRef<HTMLParagraphElement>(null);
     const captionCenterRef = useRef<HTMLParagraphElement>(null);
@@ -139,9 +141,7 @@ export default function WatermarkText({
             )}
 
             <div className="watermark_text-title" ref={watermarkTextRef}>
-                <div className="watermark_text-title-desktop">
                     <h2 ref={fitTextRef}>October 31st</h2>
-                </div>
             </div>
 
             {captions && (
@@ -164,6 +164,7 @@ export default function WatermarkText({
 
                             {captions.left.button && (
                                 <Button
+                                    className="watermark_text-caption-btn"
                                     btnSettings={captions.left.button}
                                     colorScheme="black"
                                     variant="solid"
@@ -189,6 +190,7 @@ export default function WatermarkText({
 
                             {captions.center.button && (
                                 <Button
+                                    className="watermark_text-caption-btn"
                                     btnSettings={captions.center.button}
                                     colorScheme="black"
                                     variant="solid"
@@ -214,6 +216,7 @@ export default function WatermarkText({
 
                             {captions.right.button && (
                                 <Button
+                                    className="watermark_text-caption-btn"
                                     btnSettings={captions.right.button}
                                     colorScheme="black"
                                     variant="solid"

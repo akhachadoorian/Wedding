@@ -16,6 +16,7 @@ import { useFadeInChildren } from "@/hooks/useFadeIn";
 import mergeRefs from "@/hooks/mergeRefs";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useFitText } from "@/hooks/useFitText";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,6 +70,7 @@ export default function PhotoCollage({
 
     let styleClasses = styleOptions.textBehind ? "photo_collage-text_behind" : "photo_collage-text_front";
 
+    const useFitTextRef = useFitText<HTMLHeadingElement>({ mobile: true });
     const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", { stagger: 0.15, y: 24 });
 
     const headerParallaxRef = useRef<HTMLDivElement>(null);
@@ -106,7 +108,7 @@ export default function PhotoCollage({
         >
             {(header && styleOptions.headerTop) && (
                 <div ref={headerParallaxRef} className="photo_collage-header_top">
-                    <h2 className="photo_collage-text mwc-animate">{header}</h2>
+                    <h2 ref={useFitTextRef} className="photo_collage-text mwc-animate">{header}</h2>
                 </div>
             )}
 
@@ -150,7 +152,7 @@ export default function PhotoCollage({
 
             {(header && !styleOptions.headerTop) && (
                 <div ref={headerParallaxRef} className="photo_collage-header_bottom">
-                    <h2 className="photo_collage-text mwc-animate">{header}</h2>
+                    <h2 ref={useFitTextRef}  className="photo_collage-text mwc-animate">{header}</h2>
                 </div>
             )}
         </div>

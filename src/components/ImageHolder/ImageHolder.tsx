@@ -14,13 +14,24 @@ export default function ImageHolder({
     includeOverlay = true,
 
     className,
+    style: wrapperStyle,
     ...htmlProps
 }:ImageHolderProps) {
+    const { caption, imgPositionResponsive, style, ...imageProps } = img;
+
+    const divStyle = {
+        "--img-object-position": imgPositionResponsive?.desktop ?? "center",
+        "--img-object-position-mobile": imgPositionResponsive?.mobile ?? imgPositionResponsive?.desktop ?? "center",
+        ...wrapperStyle,
+    } as React.CSSProperties;
+
+
     return (
-        <div {...htmlProps} className={`img-holder ${className ?? ""}`}>
-            <Image 
-                {...img}
-                className='bw-img'
+        <div {...htmlProps} className={`img-holder ${className ?? ""}`} style={divStyle}>
+            <Image
+                {...imageProps}
+                className='img-bw'
+                style={style}
             />
 
             {includeOverlay && <div className='img-overlay' />}
