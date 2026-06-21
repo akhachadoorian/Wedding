@@ -119,11 +119,15 @@ $btnBorderWidth: 2px;
 
     &-text {
         font-family: $font-sans;
-        font-size: var(--text-md);
+        font-size: var(--text-s);
         font-weight: 600;
         line-height: normal;
         letter-spacing: 1px;
         text-transform: uppercase;
+
+        @include big {
+            font-size: var(--text-md);
+        }
     }
 
     // #region --- Variants -------------------------------------------
