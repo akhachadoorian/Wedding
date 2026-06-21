@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import './Note.scss';
 import React from 'react';
 import { InfoIcon, QuestionIcon, WarningDiamondIcon } from '@phosphor-icons/react';
-import { ColorVariables } from '../../types/colors';
+import { ColorVariables } from '../../../types/colors';
 
 export type NoteProps = {
     className?: string;

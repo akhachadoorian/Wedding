@@ -1,17 +1,14 @@
 "use client";
 
 import CopyOnly from "@/components/CopyOnly/CopyOnly";
-import DashedCopyGrid from "@/components/DashedCopy/DashedCopy";
 import DrinkCardGrid from "@/components/DrinkCardGrid/DrinkCardGrid";
 import { useFadeIn } from "@/hooks/useFadeIn";
-import ScrollRevealHero from "@/layout/ScrollRevealHero/ScrollRevealHero";
 import content from "./content";
 
-import "./Home.scss";
-import GothHero from "../layout/GothHero/GothHero";
 import PhotoCollage from "@/components/PhotoCollage/PhotoCollage";
-import SmallText from "@/components/SmallTextGrid/SmallTextGrid";
-import WelcomeBlockB from "@/components/WelcomeBlockB/WelcomeBlockB";
+import GothHero from "../layout/GothHero/GothHero";
+import "./Home.scss";
+import WatermarkText from "@/components/WatermarkText/WatermarkText";
 
 
 export default function Home({ loaded = true }: { loaded?: boolean }) {
@@ -47,6 +44,15 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
                 id="welcome"
                 className="welcome-section base_section"
             >
+                <WatermarkText {...content.welcome.welcomeWatermarkText} />
+
+            </section>
+
+            {/* <section
+                ref={welcomeRef}
+                id="welcome"
+                className="welcome-section base_section"
+            >
                 <WelcomeBlockB
                     eyebrow="We're getting married"
                     heading="Saturday, October"
@@ -75,7 +81,7 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
                     ]}
                     cta={{ text: "RSVP Now", link: "/rsvp" }}
                 />
-            </section>
+            </section> */}
 
             <section
                 ref={ourStoryRef}

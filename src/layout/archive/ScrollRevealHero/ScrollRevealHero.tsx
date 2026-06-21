@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useTooltip } from "../GlobalTooltip/GlobalTooltip";
+import { useTooltip } from "../../GlobalTooltip/GlobalTooltip";
 
-import { useFadeInChildren } from "../../hooks/useFadeIn";
+import { useFadeInChildren } from "../../../hooks/useFadeIn";
 import useScrollRevealAnimation from "./useScrollRevealAnimation";
 import { ArrowDownIcon } from "@phosphor-icons/react";
 
 import "./ScrollRevealHero.scss";
-import Diamond from "../../components/Diamond/Diamond";
+import Diamond from "../../../components/Diamond/Diamond";
 import Image, { ImageProps } from "next/image";
 import { DEFAULT_IMAGE, DEFAULT_IMAGE_DISNEY, DEFAULT_IMAGE_ENGAGEMENT, DEFAULT_IMAGE_GRADUATION, DEFAULT_IMAGE_SUNGLASSES,  } from "@/data/defaultImage";
 

@@ -47,6 +47,7 @@ $imgHeight: calc(100dvh + $space-400);
             @include big {
                 max-width: var(--max-width);
                 margin: auto;
+                visibility: hidden;
             }
 
             h1 {
@@ -60,6 +61,7 @@ $imgHeight: calc(100dvh + $space-400);
                     font-size: 15.625vw;
                     text-align: left;
                     // flex: 1;
+                    // visibility: hidden;
                 }
             }
 
@@ -72,6 +74,7 @@ $imgHeight: calc(100dvh + $space-400);
 
                 @include big {
                     font-size: 8.333vw;
+                    // visibility: hidden;
                 }
             }
 
@@ -84,6 +87,7 @@ $imgHeight: calc(100dvh + $space-400);
                     justify-content: space-between;
                     align-items: center;
                     gap: $space-200;
+                    // visibility: hidden;
                 }
 
                 @include breakpx(650px, $bp-tablet) {
@@ -159,6 +163,7 @@ $imgHeight: calc(100dvh + $space-400);
                 text-align: left;
 
                 @include big {
+                    visibility: hidden;
                 }
             }
 
@@ -167,6 +172,7 @@ $imgHeight: calc(100dvh + $space-400);
 
                 @include big {
                     text-align: center;
+                    visibility: hidden;
                 }
             }
 
@@ -175,6 +181,7 @@ $imgHeight: calc(100dvh + $space-400);
 
                 @include big {
                     text-align: right;
+                    visibility: hidden;
                 }
             }
         }

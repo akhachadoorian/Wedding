@@ -5,7 +5,7 @@ import Eyebrow from "../Eyebrow/Eyebrow";
 
 import ReactMarkdown from "react-markdown";
 import { CustomImageProps } from "../../types/images";
-import Note from "../Note/Note";
+import Note from "../archive/Note/Note";
 import "./MediaWithCopy.scss";
 import { TwoButtons } from "../Buttons/ButtonGroups";
 import Image from "next/image";
