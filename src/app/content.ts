@@ -3,21 +3,26 @@ import { DashedCopyGridProps } from "@/components/DashedCopy/DashedCopy";
 import { DrinkCardGridProps } from "@/components/DrinkCardGrid/DrinkCardGrid";
 import { SmallTextProps } from "@/components/SmallTextGrid/SmallTextGrid";
 import { WatermarkTextProps } from "@/components/WatermarkText/WatermarkText";
+import {
+    DEFAULT_IMAGE_GRADUATION,
+    DEFAULT_IMAGE_MaxAlexJules,
+    DEFAULT_IMAGE_MaxHoldingBucky,
+    DEFAULT_IMAGE_SUNGLASSES,
+} from "@/data/defaultImage";
 import { GothHeroProps } from "@/layout/GothHero/GothHero";
 import { ScrollRevealHeroProps } from "@/layout/archive/ScrollRevealHero/ScrollRevealHero";
 
 // ----- Hero -----------------------------------------------
 
-
 const hero: Omit<GothHeroProps, "loaded"> = {
     // header: '',
     img: {
         src: "/images/DipShot.jpg",
-        alt: "Max dipping Alex",
+        alt: "Max dipping Alex and kissing.",
         imgPositionResponsive: {
-            desktop: "center",
-            mobile: "35% center"
-        }
+            desktop: "center 25%",
+            mobile: "35% center",
+        },
     },
     eyebrows: {
         left: "October 31st, 2026\nCeremony at 5pm",
@@ -89,35 +94,35 @@ const welcomeWatermarkText: Omit<WatermarkTextProps, "loaded"> = {
         left: {
             lines: ["The Clay Theatre", "Green Cove, Fl"],
             button: {
-                type: 'link',
-                link: '/details#venue',
-                text: 'View Venue Details',
+                type: "link",
+                link: "/details#venue",
+                text: "View Venue Details",
                 decoration: {
-                    type: 'arrow'
-                }
-            }
+                    type: "arrow",
+                },
+            },
         },
         center: {
             lines: ["Doors open at 4:30pm", "Ceremony at 5pm"],
             button: {
-                type: 'link',
-                link: '/details#timeline',
-                text: 'View Timeline',
+                type: "link",
+                link: "/details#timeline",
+                text: "View Timeline",
                 decoration: {
-                    type: 'arrow'
-                }
-            }
+                    type: "arrow",
+                },
+            },
         },
         right: {
             lines: ["RSVP by", "October 1st"],
             button: {
-                type: 'link',
-                link: '/rsvp',
-                text: 'RSVP Now',
+                type: "link",
+                link: "/rsvp",
+                text: "RSVP Now",
                 decoration: {
-                    type: 'arrow'
-                }
-            }
+                    type: "arrow",
+                },
+            },
         },
     },
 };
@@ -136,13 +141,25 @@ const welcome = {
 const ourStory = {
     header: "Our Story",
     mainImage: {
-        src: "/images/DipShot.jpg",
-        alt: "Max dipping Alex and kissing.",
-        caption: "Engagement ",
-        width: 696,
-        height: 522,
-        
+        src: "/images/Engagement.jpg",
+        alt: "Max proposing to Alex at Epcot",
+        caption: "Max proposing to Alex at Epcot ",
+        width: 282,
+        height: 320,
     },
+    leftSideImages: [
+        DEFAULT_IMAGE_GRADUATION,
+        DEFAULT_IMAGE_MaxAlexJules, //TODO: make about how jules is how we meet
+    ],
+    rightSideImages: [
+        {
+            ...DEFAULT_IMAGE_MaxHoldingBucky,
+            imgPositionResponsive: {
+                desktop: "center 15%",
+            },
+        },
+        DEFAULT_IMAGE_SUNGLASSES, // * first of many disney trips?
+    ],
 };
 
 // #endregion ----------------------------------------------------------
@@ -235,9 +252,6 @@ const homeContent = {
 };
 
 export default homeContent;
-
-
-
 
 // #region --- ARCHIVE -----------------------------------------------
 // const hero: ScrollRevealHeroProps = {
