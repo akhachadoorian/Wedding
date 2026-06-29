@@ -31,6 +31,11 @@ export type WatermarkTextProps = WithHTMLProps & {
     };
 };
 
+const BUTTON_STYLE = {
+    colorScheme: 'cream' as const,
+    variation: 'outline' as const
+}
+
 export default function WatermarkText({
     watermarkText,
     subheader,
@@ -166,8 +171,8 @@ export default function WatermarkText({
                                 <Button
                                     className="watermark_text-caption-btn"
                                     btnSettings={captions.left.button}
-                                    colorScheme="black"
-                                    variant="solid"
+                                    colorScheme={BUTTON_STYLE.colorScheme}
+                                    variant={BUTTON_STYLE.variation}
                                 />
                             )}
                         </div>
@@ -192,8 +197,8 @@ export default function WatermarkText({
                                 <Button
                                     className="watermark_text-caption-btn"
                                     btnSettings={captions.center.button}
-                                    colorScheme="black"
-                                    variant="solid"
+                                    colorScheme={BUTTON_STYLE.colorScheme}
+                                    variant={BUTTON_STYLE.variation}
                                 />
                             )}
                         </div>
@@ -218,8 +223,8 @@ export default function WatermarkText({
                                 <Button
                                     className="watermark_text-caption-btn"
                                     btnSettings={captions.right.button}
-                                    colorScheme="black"
-                                    variant="solid"
+                                    colorScheme={BUTTON_STYLE.colorScheme}
+                                    variant={BUTTON_STYLE.variation}
                                 />
                             )}
                         </div>

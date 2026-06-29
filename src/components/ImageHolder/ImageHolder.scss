@@ -1,7 +1,6 @@
 @use "@/styles/variables" as *;
 
-.img-holder  {
-
+.img-holder {
     img {
         object-position: var(--img-object-position-mobile);
 
@@ -9,4 +8,22 @@
             object-position: var(--img-object-position);
         }
     }
+}
+
+.img-tooltip_hover {
+    &:hover {
+        img {
+            filter: grayscale(0) !important;
+        }
+
+        .img-overlay {
+            opacity: 0;
+        }
+    }
+
+    // &:hover img,
+    // &.is-touched img {
+    //     filter: grayscale(0) !important;
+
+    // }
 }

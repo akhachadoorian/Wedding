@@ -32,6 +32,7 @@
         h2 {
             opacity: 50%;
             font-family: $font-goth;
+            font-size: var(--text-5xl);
             font-style: normal;
             font-weight: 800;
             line-height: 100%;
@@ -107,11 +108,14 @@
                 // @include big {
                 //     flex: 1;
                 // }
+
+                text-align: center;
+                align-items: center;
             }
 
             &-line {
                 font-family: Unbounded;
-                font-size: var(--text-md);
+                font-size: var(--text-base);
                 font-style: normal;
                 font-weight: 400;
                 line-height: 140%; /* 28px */
@@ -127,39 +131,41 @@
             &-btn {
                 // flex: 0 0 50%;
 
-                // @include big {
-                //     flex: 1;
-                // }
+                @include big {
+                    // flex: 1;
+                    width: auto;
+                    justify-content: center;
+                }
             }
         }
 
         &-left {
-            text-align: center;
-            align-items: center;
+            // text-align: center;
+            // align-items: center;
 
-            @include big {
-                text-align: left;
-            }
+            // @include big {
+            //     text-align: left;
+            // }
         }
 
         &-center {
-            text-align: center;
-            align-items: center;
+            // text-align: center;
+            // align-items: center;
 
-            @include big {
-                text-align: center;
-                align-items: center;
-            }
+            // @include big {
+            //     text-align: center;
+            //     align-items: center;
+            // }
         }
 
         &-right {
-            text-align: center;
-            align-items: center;
+            // text-align: center;
+            // align-items: center;
 
-            @include big {
-                text-align: right;
-                align-items: flex-end;
-            }
+            // @include big {
+            //     text-align: right;
+            //     align-items: flex-end;
+            // }
         }
     }
 

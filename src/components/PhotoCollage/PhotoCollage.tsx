@@ -17,6 +17,7 @@ import mergeRefs from "@/hooks/mergeRefs";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useFitText } from "@/hooks/useFitText";
+import { ToolTipHoverImageHolder } from "../ImageHolder/ImageHolder";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -117,7 +118,7 @@ export default function PhotoCollage({
                 {leftSideImages && (
                     <div className="photo_collage-imgs-left photo_collage-imgs-side">
                         {leftSideImages.map((img, idx) => (
-                            <PhotoCollageImageHolder
+                            <ToolTipHoverImageHolder
                                 key={idx}
                                 className={`photo_collage-img photo_collage-img-${idx === 0 ? "tall" : "long"} mwc-animate`}
                                 img={img}
@@ -128,7 +129,7 @@ export default function PhotoCollage({
                 )}
 
                 {/* Center Image */}
-                <PhotoCollageImageHolder
+                <ToolTipHoverImageHolder
                     className="photo_collage-imgs-main mwc-animate"
                     img={mainImage}
                     makeMouseHandlers={makeMouseHandlers}
@@ -139,7 +140,7 @@ export default function PhotoCollage({
                 {rightSideImages && (
                     <div className="photo_collage-imgs-right photo_collage-imgs-side">
                         {rightSideImages.map((img, idx) => (
-                            <PhotoCollageImageHolder
+                            <ToolTipHoverImageHolder
                                 key={idx}
                                 className={`photo_collage-img photo_collage-img-${idx === 0 ? "long" : "tall"} mwc-animate`}
                                 img={img}
@@ -155,33 +156,6 @@ export default function PhotoCollage({
                     <h2 ref={useFitTextRef}  className="photo_collage-text mwc-animate">{header}</h2>
                 </div>
             )}
-        </div>
-    );
-}
-
-function PhotoCollageImageHolder({
-    img,
-    hideOverlay = false,
-    className,
-    makeMouseHandlers,
-    // makeTouchHandlers
-}: {
-    img: CustomImageProps;
-    hideOverlay?: boolean;
-    className?: string;
-    makeMouseHandlers: ReturnType<typeof useTooltip>["makeMouseHandlers"];
-    // makeTouchHandlers: (idx: number) => { onTouchStart: (e: React.TouchEvent) => void };
-}) {
-    return (
-        <div
-            className={`img-holder photo_collage-img ${className ?? ""}`}
-            {...(img.caption
-                ? makeMouseHandlers({ type: "text", caption: img.caption })
-                : "")}
-        >
-            <Image {...img} className="img-bw" />
-
-            {!hideOverlay && <div className="img-overlay" />}
         </div>
     );
 }
