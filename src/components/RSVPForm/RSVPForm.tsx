@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import GUEST_LIST from "../../data/guestList";
 import toHtmlId from "../../hooks/toHtmlId";
@@ -26,37 +26,44 @@ export default function RSVPForm({
 }: RSVPFormProps) {
     const [step, setStep] = useState(0);
 
-    const [searchQuery, setSearchQuery] = useState("");
-    const [searchResult, setSearchResult] = useState<party[]>([]);
-    const [searchError, setSearchError] = useState("");
-    const [searching, setSearching] = useState(false);
+    useEffect(() => {
+        fetch("/api/guests").then((res) => res.json()).then((data) => console.log("guests", data));
+    }, []);
 
-    const handleSearch = () => {
-        setSearching(true);
-        setSearchError("");
-        setSearchResult([]);
-        setTimeout(() => {
-            const q = searchQuery.trim().toLowerCase();
+    // const [searchQuery, setSearchQuery] = useState("");
+    // const [searchResult, setSearchResult] = useState<party[]>([]);
+    // const [searchError, setSearchError] = useState("");
+    // const [searching, setSearching] = useState(false);
 
-            const found = GUEST_LIST.filter((p) => p.guests.some((g) => g.lastName?.toLowerCase() === q));
+    // const handleSearch = () => {
+    //     setSearching(true);
+    //     setSearchError("");
+    //     setSearchResult([]);
+    //     setTimeout(() => {
+    //         const q = searchQuery.trim().toLowerCase();
 
-            if (found.length > 0) {
-                setSearchResult(found);
-            } else {
-                setSearchError("We couldn't find that name. Please try again.");
-            }
-            setSearching(false);
-        }, 600);
-    };
+    //         const found = GUEST_LIST.filter((p) => p.guests.some((g) => g.lastName?.toLowerCase() === q));
 
-    console.log("searchResult", searchResult);
+    //         if (found.length > 0) {
+    //             setSearchResult(found);
+    //         } else {
+    //             setSearchError("We couldn't find that name. Please try again.");
+    //         }
+    //         setSearching(false);
+    //     }, 600);
+    // };
+    
+
+    // console.log("searchResult", searchResult);
+
+    
 
     return (
         <section {...htmlProps} className={`rsvp_form base_section ${className ?? ""}`}>
-            <RSVPProgressBar texts={progressBar} currStep={step} />
+            {/* <RSVPProgressBar texts={progressBar} currStep={step} /> */}
 
             <div className="rsvp_form-steps">
-                <RSVPStep
+                {/* <RSVPStep
                     textContent={steps[step].textContent}
                     type={steps[step].type}
                     searchQuery={searchQuery}
@@ -65,7 +72,7 @@ export default function RSVPForm({
                     searchResult={searchResult}
                     searchError={searchError}
                     searching={searching}
-                />
+                /> */}
             </div>
         </section>
     );

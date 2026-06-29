@@ -2,6 +2,7 @@ import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
 import { DashedCopyGridProps } from "@/components/DashedCopy/DashedCopy";
 import { DrinkCardGridProps } from "@/components/DrinkCardGrid/DrinkCardGrid";
 import { SmallTextProps } from "@/components/SmallTextGrid/SmallTextGrid";
+import { PhotoCollageProps } from "@/components/PhotoCollage/PhotoCollage";
 import { WatermarkTextProps } from "@/components/WatermarkText/WatermarkText";
 import {
     DEFAULT_IMAGE_GRADUATION,
@@ -138,7 +139,7 @@ const welcome = {
 
 // #region --- Our Story --------------------------------
 
-const ourStory = {
+const ourStory: PhotoCollageProps = {
     header: "Our Story",
     mainImage: {
         src: "/images/Engagement.jpg",
