@@ -10,7 +10,7 @@ import { CustomImageProps } from "@/types/images";
 import { WithHTMLProps } from "@/types/props";
 import { RequireX } from "@/types/utility";
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import "./PhotoCollage.scss";
 import { useFadeInChildren } from "@/hooks/useFadeIn";
 import mergeRefs from "@/hooks/mergeRefs";
@@ -59,15 +59,7 @@ export default function PhotoCollage({
     ref,
     ...htmlProps
 }: PhotoCollageProps) {
-    const [touchedIdx, setTouchedIdx] = useState<number | null>(null); // TODO: add mobile touch functionality
     const { makeMouseHandlers } = useTooltip();
-
-    const makeTouchHandlers = (idx: number) => ({
-        onTouchStart: (e: React.TouchEvent) => {
-            e.stopPropagation();
-            setTouchedIdx((prev) => (prev === idx ? null : idx));
-        },
-    });
 
     let styleClasses = styleOptions.textBehind ? "photo_collage-text_behind" : "photo_collage-text_front";
 
@@ -108,7 +100,10 @@ export default function PhotoCollage({
             ref={mergeRefs(animRef, ref)}
         >
             {(header && styleOptions.headerTop) && (
-                <div ref={headerParallaxRef} className="photo_collage-header_top">
+                <div 
+                ref={headerParallaxRef} 
+                className="photo_collage-header_top"
+                >
                     <h2 ref={useFitTextRef} className="photo_collage-text mwc-animate">{header}</h2>
                 </div>
             )}
@@ -123,6 +118,7 @@ export default function PhotoCollage({
                                 className={`photo_collage-img photo_collage-img-${idx === 0 ? "tall" : "long"} mwc-animate`}
                                 img={img}
                                 makeMouseHandlers={makeMouseHandlers}
+                                // makeTouchHandlers={makeTouchHandlers}
                             />
                         ))}
                     </div>
@@ -133,7 +129,6 @@ export default function PhotoCollage({
                     className="photo_collage-imgs-main mwc-animate"
                     img={mainImage}
                     makeMouseHandlers={makeMouseHandlers}
-                    // makeTouchHandlers={makeTouchHandlers}
                 />
 
                 {/* Right Column */}
@@ -145,17 +140,18 @@ export default function PhotoCollage({
                                 className={`photo_collage-img photo_collage-img-${idx === 0 ? "long" : "tall"} mwc-animate`}
                                 img={img}
                                 makeMouseHandlers={makeMouseHandlers}
+                                // makeTouchHandlers={makeTouchHandlers}
                             />
                         ))}
                     </div>
                 )}
             </div>
 
-            {(header && !styleOptions.headerTop) && (
+            {/* {(header && !styleOptions.headerTop) && (
                 <div ref={headerParallaxRef} className="photo_collage-header_bottom">
                     <h2 ref={useFitTextRef}  className="photo_collage-text mwc-animate">{header}</h2>
                 </div>
-            )}
+            )} */}
         </div>
     );
 }

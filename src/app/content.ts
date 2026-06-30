@@ -13,6 +13,122 @@ import {
 import { GothHeroProps } from "@/layout/GothHero/GothHero";
 import { ScrollRevealHeroProps } from "@/layout/archive/ScrollRevealHero/ScrollRevealHero";
 
+// #region --- ARCHIVE -----------------------------------------------
+
+const welcomeDashedGrid: DashedCopyGridProps = {
+    dashedCopy: [
+        {
+            leftCopy: "Saturday, October 31st, 2026",
+            rightCopy: "Guests arrive at 4:30 PM",
+            link: "/details#timeline",
+            tooltipCaption: "View the timeline",
+        },
+        // {
+        //     leftCopy: "Ceremony starts at 5:00 PM",
+        //     rightCopy: "Reception ends at 10:30 PM",
+        // },
+        {
+            leftCopy: "The Clay Theatre",
+            rightCopy: "Green Cove Springs, Florida",
+            link: "/details#venue",
+            tooltipCaption: "Venue details",
+        },
+        // {
+        //     leftCopy: "Rehearsal Mixer",
+        //     rightCopy: "Green Cove Springs, Florida",
+        //     link: "/details#rehearsal-mixer",
+        //     tooltipCaption: "View the rehearsal mixer details",
+        // },
+    ],
+};
+
+const welcomeSmallText: Array<SmallTextProps> = [
+    {
+        eyebrow: "when",
+        title: "October 31st, 2026",
+        subtitle: "Guests arrive at 4:30 PM",
+        button: {
+            type: "link",
+            link: "/details#timeline",
+            text: "View the Timeline",
+        },
+    },
+];
+
+const oldHero: ScrollRevealHeroProps = {
+    header: "Alex & Max",
+    hideScrollHint: false,
+    scrollHintMessage: "Scroll for details",
+    endScrollMessage: "Hover on images for more!",
+    endScrollMessageMobile: "Touch the images for more!",
+    sideImages: [
+        {
+            src: "/images/Engagement.jpg",
+            alt: "Max proposing to Alex in the Japan Garden in Epcot",
+            caption: "Max proposing to Alex in the Japan Garden in Epcot",
+            borderStyle: 'simple',
+            aspectRatio: "portrait",
+            width: 2000,
+            height: 2000
+        },
+        {
+            src: "/images/Graduation.jpg",
+            alt: "Max and Alex at Max's college graduation",
+            caption: "Max's Graduation",
+            borderStyle: 'double',
+            aspectRatio: "square",
+            width: 2000,
+            height: 2000
+        },
+        {
+            src: "/images/Sunglasses.jpg",
+            alt: "",
+            caption: "",
+            borderStyle: 'corner',
+            aspectRatio: "square",
+            width: 2000,
+            height: 2000
+
+        },
+        {
+            src: "/images/Disney.jpg",
+            alt: "Max and Alex kissing in front of the Disney castle",
+            caption: "Disney Trip",
+            borderStyle: 'diamond',
+            aspectRatio: "portrait",
+            width: 2000,
+            height: 2000
+        },
+    ],
+};
+
+// const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
+//     eyebrow: "We're getting married",
+//     header: "Once upon a time, we found each other, and now we're counting down the days until we say **I do**. We would be thrilled to have you join us in this next chapter.",
+// };
+
+// const welcomeDashedGrid: DashedCopyGridProps = {
+//     dashedCopy: [
+//         {
+//             leftCopy: "Saturday, October 31st, 2026",
+//             rightCopy: "Guests arrive at 4:30 PM",
+//             link: '/details#timeline',
+//             tooltipCaption: 'View the timeline'
+//         },
+//         // {
+//         //   leftCopy: "Ceremony – Reception",
+//         //   rightCopy: "5:00 PM – 10:30 PM",
+//         // },
+//         {
+//             leftCopy: "The Clay Theatre",
+//             rightCopy: "Green Cove Springs, Florida",
+//         },
+//     ],
+// };
+
+// #endregion -----------------------------------------------
+
+
 // ----- Hero -----------------------------------------------
 
 const hero: Omit<GothHeroProps, "loaded"> = {
@@ -100,7 +216,12 @@ const ourStory: PhotoCollageProps = {
         src: "/images/Engagement.jpg",
         alt: "Max proposing to Alex at Epcot",
         caption: "Max proposing to Alex at Epcot ",
-        fill: true
+        // fill: true
+        // width: 282,
+        // height: 320,
+        width: 2160,
+        height: 2880,
+        // sizes: "(max-width: 768px) 100vw, 696px",
     },
     leftSideImages: [
         DEFAULT_IMAGE_GRADUATION,
@@ -204,113 +325,8 @@ const homeContent = {
     welcome: welcome,
     ourStory: ourStory,
     quickLinks: quickLinks,
+    oldHero: oldHero
 };
 
 export default homeContent;
 
-// #region --- ARCHIVE -----------------------------------------------
-
-const welcomeDashedGrid: DashedCopyGridProps = {
-    dashedCopy: [
-        {
-            leftCopy: "Saturday, October 31st, 2026",
-            rightCopy: "Guests arrive at 4:30 PM",
-            link: "/details#timeline",
-            tooltipCaption: "View the timeline",
-        },
-        // {
-        //     leftCopy: "Ceremony starts at 5:00 PM",
-        //     rightCopy: "Reception ends at 10:30 PM",
-        // },
-        {
-            leftCopy: "The Clay Theatre",
-            rightCopy: "Green Cove Springs, Florida",
-            link: "/details#venue",
-            tooltipCaption: "Venue details",
-        },
-        // {
-        //     leftCopy: "Rehearsal Mixer",
-        //     rightCopy: "Green Cove Springs, Florida",
-        //     link: "/details#rehearsal-mixer",
-        //     tooltipCaption: "View the rehearsal mixer details",
-        // },
-    ],
-};
-
-const welcomeSmallText: Array<SmallTextProps> = [
-    {
-        eyebrow: "when",
-        title: "October 31st, 2026",
-        subtitle: "Guests arrive at 4:30 PM",
-        button: {
-            type: "link",
-            link: "/details#timeline",
-            text: "View the Timeline",
-        },
-    },
-];
-
-// const hero: ScrollRevealHeroProps = {
-//     header: "Alex & Max",
-//     hideScrollHint: false,
-//     scrollHintMessage: "Scroll for details",
-//     endScrollMessage: "Hover on images for more!",
-//     endScrollMessageMobile: "Touch the images for more!",
-//     sideImages: [
-//         {
-//             src: "/images/Engagement.jpg",
-//             alt: "Max proposing to Alex in the Japan Garden in Epcot",
-//             caption: "Max proposing to Alex in the Japan Garden in Epcot",
-//             borderStyle: 'simple',
-//             aspectRatio: "portrait"
-//         },
-//         {
-//             src: "/images/Graduation.jpg",
-//             alt: "Max and Alex at Max's college graduation",
-//             caption: "Max's Graduation",
-//             borderStyle: 'double',
-//             aspectRatio: "square"
-//         },
-//         {
-//             src: "/images/Sunglasses.jpg",
-//             alt: "",
-//             caption: "",
-//             borderStyle: 'corner',
-//             aspectRatio: "square"
-
-//         },
-//         {
-//             src: "/images/Disney.jpg",
-//             alt: "Max and Alex kissing in front of the Disney castle",
-//             caption: "Disney Trip",
-//             borderStyle: 'diamond',
-//             aspectRatio: "portrait"
-//         },
-//     ],
-// };
-
-// const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
-//     eyebrow: "We're getting married",
-//     header: "Once upon a time, we found each other, and now we're counting down the days until we say **I do**. We would be thrilled to have you join us in this next chapter.",
-// };
-
-// const welcomeDashedGrid: DashedCopyGridProps = {
-//     dashedCopy: [
-//         {
-//             leftCopy: "Saturday, October 31st, 2026",
-//             rightCopy: "Guests arrive at 4:30 PM",
-//             link: '/details#timeline',
-//             tooltipCaption: 'View the timeline'
-//         },
-//         // {
-//         //   leftCopy: "Ceremony – Reception",
-//         //   rightCopy: "5:00 PM – 10:30 PM",
-//         // },
-//         {
-//             leftCopy: "The Clay Theatre",
-//             rightCopy: "Green Cove Springs, Florida",
-//         },
-//     ],
-// };
-
-// #endregion -----------------------------------------------

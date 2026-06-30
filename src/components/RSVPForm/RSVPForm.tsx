@@ -26,9 +26,9 @@ export default function RSVPForm({
 }: RSVPFormProps) {
     const [step, setStep] = useState(0);
 
-    useEffect(() => {
-        fetch("/api/guests").then((res) => res.json()).then((data) => console.log("guests", data));
-    }, []);
+    // useEffect(() => {
+    //     fetch("/api/guests").then((res) => res.json()).then((data) => console.log("guests", data));
+    // }, []);
 
     // const [searchQuery, setSearchQuery] = useState("");
     // const [searchResult, setSearchResult] = useState<party[]>([]);

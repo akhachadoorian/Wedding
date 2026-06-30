@@ -93,22 +93,6 @@
                 aspect-ratio: 94/61;
             }
         }
-
-        &:hover {
-            img {
-                filter: grayscale(0) !important;
-            }
-
-            .img-overlay {
-                opacity: 0;
-            }
-        }
-
-        // &:hover img,
-        // &.is-touched img {
-        //     filter: grayscale(0) !important;
-            
-        // }
     }
 
     // #region --- Style Variations

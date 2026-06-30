@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useTooltip } from "../../GlobalTooltip/GlobalTooltip";
 
-import { useFadeInChildren } from "../../../hooks/useFadeIn";
+import { useFadeInChildren } from "@/hooks/useFadeIn";
 import useScrollRevealAnimation from "./useScrollRevealAnimation";
 import { ArrowDownIcon } from "@phosphor-icons/react";
 
 import "./ScrollRevealHero.scss";
-import Diamond from "../../../components/Diamond/Diamond";
+import Diamond from "@/components/Diamond/Diamond";
 import Image, { ImageProps } from "next/image";
 import { DEFAULT_IMAGE, DEFAULT_IMAGE_DISNEY, DEFAULT_IMAGE_ENGAGEMENT, DEFAULT_IMAGE_GRADUATION, DEFAULT_IMAGE_SUNGLASSES,  } from "@/data/defaultImage";
 
@@ -197,13 +197,13 @@ export default function ScrollRevealHero({ mainImage = DEFAULT_IMAGE, centerBord
                 {/* LEFT COLUMN */}
                 <div className="scroll_reveal_hero-sides-left scroll_reveal_hero-sides-col">
                     <div ref={sideL0} className={`scroll_reveal_hero-sides-img img-holder img-${imgs[0].aspectRatio ?? "square"}${touchedIdx === 0 ? " is-touched" : ""}${imgs[0].borderStyle ? ` deco-border--${imgs[0].borderStyle}` : ''}`} {...makeMouseHandlers(imgs[0].caption ?? "")} {...makeTouchHandlers(0)}>
-                        <Image src={imgs[0].src} alt={imgs[0].alt ?? ""} className="img-bw" />
+                        <Image width={imgs[0].width} height={imgs[0].height} src={imgs[0].src} alt={imgs[0].alt ?? ""} className="img-bw" />
                         <div className="img-overlay"></div>
                         {imgs[0].caption && <p className="scroll_reveal_hero-caption">{imgs[0].caption}</p>}
                     </div>
 
                     <div ref={sideL1} className={`scroll_reveal_hero-sides-img img-holder img-${imgs[1].aspectRatio ?? "square"}${touchedIdx === 1 ? " is-touched" : ""}${imgs[1].borderStyle ? ` deco-border--${imgs[1].borderStyle}` : ''}`} {...makeMouseHandlers(imgs[1].caption ?? "")} {...makeTouchHandlers(1)}>
-                        <Image src={imgs[1].src} alt={imgs[1].alt ?? ""} className="img-bw" />
+                        <Image width={imgs[1].width} height={imgs[1].height} src={imgs[1].src} alt={imgs[1].alt ?? ""} className="img-bw" />
                         <div className="img-overlay"></div>
                         {imgs[1].caption && <p className="scroll_reveal_hero-caption">{imgs[1].caption}</p>}
                     </div>
@@ -213,7 +213,7 @@ export default function ScrollRevealHero({ mainImage = DEFAULT_IMAGE, centerBord
                 <div className=" scroll_reveal_hero-center">
                     <div ref={cardRef} className={`scroll_reveal_hero-center-card mwc-animate${centerBorderStyle ? ` deco-border--${centerBorderStyle}` : ''}`}>
                         <div className="img-holder">
-                            <Image src={mainImage.src} alt={mainImage.alt} className="scroll_reveal_hero-card-img img-bw" />
+                            <Image width={3000} height={3000} src={mainImage.src} alt={mainImage.alt} className="scroll_reveal_hero-card-img img-bw" />
                             <div className="img-overlay"></div>
                         </div>
 
@@ -264,12 +264,12 @@ export default function ScrollRevealHero({ mainImage = DEFAULT_IMAGE, centerBord
                 {/* RIGHT COLUMN */}
                 <div className="scroll_reveal_hero-sides-right scroll_reveal_hero-sides-col">
                     <div ref={sideR0} className={`scroll_reveal_hero-sides-img img-holder img-${imgs[2].aspectRatio ?? "square"}${touchedIdx === 2 ? " is-touched" : ""}${imgs[2].borderStyle ? ` deco-border--${imgs[2].borderStyle}` : ''}`} {...makeMouseHandlers(imgs[2].caption ?? "")} {...makeTouchHandlers(2)}>
-                        <Image src={imgs[2].src} alt={imgs[2].alt ?? ""} className="img-bw" />
+                        <Image width={imgs[2].width} height={imgs[2].height} src={imgs[2].src} alt={imgs[2].alt ?? ""} className="img-bw" />
                         <div className="img-overlay"></div>
                         {imgs[2].caption && <p className="scroll_reveal_hero-caption">{imgs[2].caption}</p>}
                     </div>
                     <div ref={sideR1} className={`scroll_reveal_hero-sides-img img-holder img-${imgs[3].aspectRatio ?? "square"}${touchedIdx === 3 ? " is-touched" : ""}${imgs[3].borderStyle ? ` deco-border--${imgs[3].borderStyle}` : ''}`} {...makeMouseHandlers(imgs[3].caption ?? "")} {...makeTouchHandlers(3)}>
-                        <Image src={imgs[3].src} alt={imgs[3].alt ?? ""} className="img-bw" />
+                        <Image width={imgs[3].width} height={imgs[3].height} src={imgs[3].src} alt={imgs[3].alt ?? ""} className="img-bw" />
                         <div className="img-overlay"></div>
                         {imgs[3].caption && <p className="scroll_reveal_hero-caption">{imgs[3].caption}</p>}
                     </div>
