@@ -46,6 +46,23 @@ export function useTooltip() {
         };
     };
 
+    // const makeTouchHandlers = (content: string | TooltipContent) => {
+    //     const normalized: TooltipContent = typeof content === 'string'
+    //         ? { type: 'text', caption: content }
+    //         : content;
+
+    //     const isEmpty = normalized.type === 'text' && !normalized.caption;
+
+    //     return {
+    //         onPointerDown: (e: React.PointerEvent) => {
+    //             if (isEmpty || e.pointerType === 'mouse') return;
+    //             setTooltip({ x: e.clientX, y: e.clientY, ...normalized });
+    //             console.log("click")
+    //         },
+    //         onPointerUp: () => setTimeout(() => setTooltip(null), 1500),
+    //     };
+    // };
+
     const showTooltip = (x: number, y: number, content: string | TooltipContent) => {
         const normalized: TooltipContent = typeof content === 'string'
             ? { type: 'text', caption: content }

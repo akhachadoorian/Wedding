@@ -13,40 +13,7 @@ import {
 import { GothHeroProps } from "@/layout/GothHero/GothHero";
 import { ScrollRevealHeroProps } from "@/layout/archive/ScrollRevealHero/ScrollRevealHero";
 
-// ----- Hero -----------------------------------------------
-
-const hero: Omit<GothHeroProps, "loaded"> = {
-    // header: '',
-    img: {
-        src: "/images/DipShot.jpg",
-        alt: "Max dipping Alex and kissing.",
-        imgPositionResponsive: {
-            desktop: "center 25%",
-            mobile: "35% center",
-        },
-    },
-    eyebrows: {
-        left: "October 31st, 2026\nCeremony at 5pm",
-        right: "The Clay Theatre\nGreen Cove, Fl",
-    },
-};
-
-// #region --- Overview --------------------------------
-
-const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
-    eyebrow: "We're getting married",
-    // header: "Together with their families, **Alex & Max** joyfully invite you to share in the celebration of their marriage.",
-    header: "Til Death Do Us Part",
-    // buttons: {
-    buttons: [
-        {
-            type: "link",
-            text: "View Full Details",
-            link: "/details",
-        },
-    ],
-    // }
-};
+// #region --- ARCHIVE -----------------------------------------------
 
 const welcomeDashedGrid: DashedCopyGridProps = {
     dashedCopy: [
@@ -87,6 +54,112 @@ const welcomeSmallText: Array<SmallTextProps> = [
         },
     },
 ];
+
+const oldHero: ScrollRevealHeroProps = {
+    header: "Alex & Max",
+    hideScrollHint: false,
+    scrollHintMessage: "Scroll for details",
+    endScrollMessage: "Hover on images for more!",
+    endScrollMessageMobile: "Touch the images for more!",
+    sideImages: [
+        {
+            src: "/images/Engagement.jpg",
+            alt: "Max proposing to Alex in the Japan Garden in Epcot",
+            caption: "Max proposing to Alex in the Japan Garden in Epcot",
+            borderStyle: 'simple',
+            aspectRatio: "portrait",
+            width: 2000,
+            height: 2000
+        },
+        {
+            src: "/images/Graduation.jpg",
+            alt: "Max and Alex at Max's college graduation",
+            caption: "Max's Graduation",
+            borderStyle: 'double',
+            aspectRatio: "square",
+            width: 2000,
+            height: 2000
+        },
+        {
+            src: "/images/Sunglasses.jpg",
+            alt: "",
+            caption: "",
+            borderStyle: 'corner',
+            aspectRatio: "square",
+            width: 2000,
+            height: 2000
+
+        },
+        {
+            src: "/images/Disney.jpg",
+            alt: "Max and Alex kissing in front of the Disney castle",
+            caption: "Disney Trip",
+            borderStyle: 'diamond',
+            aspectRatio: "portrait",
+            width: 2000,
+            height: 2000
+        },
+    ],
+};
+
+// const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
+//     eyebrow: "We're getting married",
+//     header: "Once upon a time, we found each other, and now we're counting down the days until we say **I do**. We would be thrilled to have you join us in this next chapter.",
+// };
+
+// const welcomeDashedGrid: DashedCopyGridProps = {
+//     dashedCopy: [
+//         {
+//             leftCopy: "Saturday, October 31st, 2026",
+//             rightCopy: "Guests arrive at 4:30 PM",
+//             link: '/details#timeline',
+//             tooltipCaption: 'View the timeline'
+//         },
+//         // {
+//         //   leftCopy: "Ceremony – Reception",
+//         //   rightCopy: "5:00 PM – 10:30 PM",
+//         // },
+//         {
+//             leftCopy: "The Clay Theatre",
+//             rightCopy: "Green Cove Springs, Florida",
+//         },
+//     ],
+// };
+
+// #endregion -----------------------------------------------
+
+
+// ----- Hero -----------------------------------------------
+
+const hero: Omit<GothHeroProps, "loaded"> = {
+    // header: '',
+    img: {
+        src: "/images/DipShot.jpg",
+        alt: "Max dipping Alex and kissing.",
+        imgPositionResponsive: {
+            desktop: "center 25%",
+            mobile: "35% center",
+        },
+    },
+    eyebrows: {
+        left: "October 31st, 2026\nCeremony at 5pm",
+        right: "The Clay Theatre\nGreen Cove, Fl",
+    },
+};
+
+// #region --- Overview --------------------------------
+const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
+    eyebrow: "We're getting married",
+    header: "Til Death Do Us Part",
+    buttons: [
+        {
+            type: "link",
+            text: "View Full Details",
+            link: "/details",
+        },
+    ],
+};
+
 
 const welcomeWatermarkText: Omit<WatermarkTextProps, "loaded"> = {
     watermarkText: "October 31st",
@@ -130,8 +203,6 @@ const welcomeWatermarkText: Omit<WatermarkTextProps, "loaded"> = {
 
 const welcome = {
     copyOnly: welcomeCopyOnly,
-    dashedCopyGrid: welcomeDashedGrid,
-    smallText: welcomeSmallText,
     welcomeWatermarkText: welcomeWatermarkText,
 };
 
@@ -145,8 +216,12 @@ const ourStory: PhotoCollageProps = {
         src: "/images/Engagement.jpg",
         alt: "Max proposing to Alex at Epcot",
         caption: "Max proposing to Alex at Epcot ",
-        width: 282,
-        height: 320,
+        // fill: true
+        // width: 282,
+        // height: 320,
+        width: 2160,
+        height: 2880,
+        // sizes: "(max-width: 768px) 100vw, 696px",
     },
     leftSideImages: [
         DEFAULT_IMAGE_GRADUATION,
@@ -250,72 +325,8 @@ const homeContent = {
     welcome: welcome,
     ourStory: ourStory,
     quickLinks: quickLinks,
+    oldHero: oldHero
 };
 
 export default homeContent;
 
-// #region --- ARCHIVE -----------------------------------------------
-// const hero: ScrollRevealHeroProps = {
-//     header: "Alex & Max",
-//     hideScrollHint: false,
-//     scrollHintMessage: "Scroll for details",
-//     endScrollMessage: "Hover on images for more!",
-//     endScrollMessageMobile: "Touch the images for more!",
-//     sideImages: [
-//         {
-//             src: "/images/Engagement.jpg",
-//             alt: "Max proposing to Alex in the Japan Garden in Epcot",
-//             caption: "Max proposing to Alex in the Japan Garden in Epcot",
-//             borderStyle: 'simple',
-//             aspectRatio: "portrait"
-//         },
-//         {
-//             src: "/images/Graduation.jpg",
-//             alt: "Max and Alex at Max's college graduation",
-//             caption: "Max's Graduation",
-//             borderStyle: 'double',
-//             aspectRatio: "square"
-//         },
-//         {
-//             src: "/images/Sunglasses.jpg",
-//             alt: "",
-//             caption: "",
-//             borderStyle: 'corner',
-//             aspectRatio: "square"
-
-//         },
-//         {
-//             src: "/images/Disney.jpg",
-//             alt: "Max and Alex kissing in front of the Disney castle",
-//             caption: "Disney Trip",
-//             borderStyle: 'diamond',
-//             aspectRatio: "portrait"
-//         },
-//     ],
-// };
-
-// const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
-//     eyebrow: "We're getting married",
-//     header: "Once upon a time, we found each other, and now we're counting down the days until we say **I do**. We would be thrilled to have you join us in this next chapter.",
-// };
-
-// const welcomeDashedGrid: DashedCopyGridProps = {
-//     dashedCopy: [
-//         {
-//             leftCopy: "Saturday, October 31st, 2026",
-//             rightCopy: "Guests arrive at 4:30 PM",
-//             link: '/details#timeline',
-//             tooltipCaption: 'View the timeline'
-//         },
-//         // {
-//         //   leftCopy: "Ceremony – Reception",
-//         //   rightCopy: "5:00 PM – 10:30 PM",
-//         // },
-//         {
-//             leftCopy: "The Clay Theatre",
-//             rightCopy: "Green Cove Springs, Florida",
-//         },
-//     ],
-// };
-
-// #endregion -----------------------------------------------

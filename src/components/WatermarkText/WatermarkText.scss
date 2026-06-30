@@ -129,13 +129,8 @@
             }
 
             &-btn {
-                // flex: 0 0 50%;
-
-                @include big {
-                    // flex: 1;
-                    width: auto;
-                    justify-content: center;
-                }
+                width: auto;
+                justify-content: center;
             }
         }
 

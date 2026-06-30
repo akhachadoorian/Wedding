@@ -9,6 +9,7 @@ import PhotoCollage from "@/components/PhotoCollage/PhotoCollage";
 import GothHero from "../layout/GothHero/GothHero";
 import "./Home.scss";
 import WatermarkText from "@/components/WatermarkText/WatermarkText";
+import ScrollRevealHero from "@/layout/archive/ScrollRevealHero/ScrollRevealHero";
 
 
 export default function Home({ loaded = true }: { loaded?: boolean }) {
@@ -19,6 +20,7 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
 
     return (
         <>
+            {/* <ScrollRevealHero {...content.oldHero}/> */}
             <GothHero loaded={loaded} {...content.hero} />
 
             {/* <section ref={welcomeRef} id="welcome" className="welcome-section base_section">

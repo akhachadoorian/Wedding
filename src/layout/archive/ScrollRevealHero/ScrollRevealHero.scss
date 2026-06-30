@@ -1,5 +1,5 @@
 @use "@/styles/variables" as *;;
-@use "../../styles/tokens/typography" as typo;
+@use "@/styles/tokens/typography" as typo;
 
 // Matches JS constants in HomeHero2.tsx
 $scroll-px: 1200px;
@@ -71,6 +71,8 @@ $col-gap: 16px;
             // height: calc(85vh - 32px);
 
             .img-holder {
+                width: calc(100vw - (var(--space-200) * 4));
+            height: calc(100vh - (var(--space-200) * 4));
                 img {
                     position: absolute;
                     inset: 0;
@@ -218,6 +220,7 @@ $col-gap: 16px;
 
             &.img-portrait {
                 width: calc(50% - (var(--space-400) / 2));
+                aspect-ratio: 2/3;
 
                 @include big {
                     width: clamp(265px, 18.403vw, 315PX);
@@ -226,7 +229,7 @@ $col-gap: 16px;
 
             &.img-square {
                 width: calc(50% - (var(--space-400) / 2));
-
+                aspect-ratio: 1;
                 @include big {
                     width: 206px;
                     width: clamp(206px, 14.306vw, 256PX);
