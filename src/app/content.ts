@@ -32,12 +32,9 @@ const hero: Omit<GothHeroProps, "loaded"> = {
 };
 
 // #region --- Overview --------------------------------
-
 const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
     eyebrow: "We're getting married",
-    // header: "Together with their families, **Alex & Max** joyfully invite you to share in the celebration of their marriage.",
     header: "Til Death Do Us Part",
-    // buttons: {
     buttons: [
         {
             type: "link",
@@ -45,48 +42,8 @@ const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
             link: "/details",
         },
     ],
-    // }
 };
 
-const welcomeDashedGrid: DashedCopyGridProps = {
-    dashedCopy: [
-        {
-            leftCopy: "Saturday, October 31st, 2026",
-            rightCopy: "Guests arrive at 4:30 PM",
-            link: "/details#timeline",
-            tooltipCaption: "View the timeline",
-        },
-        // {
-        //     leftCopy: "Ceremony starts at 5:00 PM",
-        //     rightCopy: "Reception ends at 10:30 PM",
-        // },
-        {
-            leftCopy: "The Clay Theatre",
-            rightCopy: "Green Cove Springs, Florida",
-            link: "/details#venue",
-            tooltipCaption: "Venue details",
-        },
-        // {
-        //     leftCopy: "Rehearsal Mixer",
-        //     rightCopy: "Green Cove Springs, Florida",
-        //     link: "/details#rehearsal-mixer",
-        //     tooltipCaption: "View the rehearsal mixer details",
-        // },
-    ],
-};
-
-const welcomeSmallText: Array<SmallTextProps> = [
-    {
-        eyebrow: "when",
-        title: "October 31st, 2026",
-        subtitle: "Guests arrive at 4:30 PM",
-        button: {
-            type: "link",
-            link: "/details#timeline",
-            text: "View the Timeline",
-        },
-    },
-];
 
 const welcomeWatermarkText: Omit<WatermarkTextProps, "loaded"> = {
     watermarkText: "October 31st",
@@ -130,8 +87,6 @@ const welcomeWatermarkText: Omit<WatermarkTextProps, "loaded"> = {
 
 const welcome = {
     copyOnly: welcomeCopyOnly,
-    dashedCopyGrid: welcomeDashedGrid,
-    smallText: welcomeSmallText,
     welcomeWatermarkText: welcomeWatermarkText,
 };
 
@@ -145,8 +100,7 @@ const ourStory: PhotoCollageProps = {
         src: "/images/Engagement.jpg",
         alt: "Max proposing to Alex at Epcot",
         caption: "Max proposing to Alex at Epcot ",
-        width: 282,
-        height: 320,
+        fill: true
     },
     leftSideImages: [
         DEFAULT_IMAGE_GRADUATION,
@@ -255,6 +209,47 @@ const homeContent = {
 export default homeContent;
 
 // #region --- ARCHIVE -----------------------------------------------
+
+const welcomeDashedGrid: DashedCopyGridProps = {
+    dashedCopy: [
+        {
+            leftCopy: "Saturday, October 31st, 2026",
+            rightCopy: "Guests arrive at 4:30 PM",
+            link: "/details#timeline",
+            tooltipCaption: "View the timeline",
+        },
+        // {
+        //     leftCopy: "Ceremony starts at 5:00 PM",
+        //     rightCopy: "Reception ends at 10:30 PM",
+        // },
+        {
+            leftCopy: "The Clay Theatre",
+            rightCopy: "Green Cove Springs, Florida",
+            link: "/details#venue",
+            tooltipCaption: "Venue details",
+        },
+        // {
+        //     leftCopy: "Rehearsal Mixer",
+        //     rightCopy: "Green Cove Springs, Florida",
+        //     link: "/details#rehearsal-mixer",
+        //     tooltipCaption: "View the rehearsal mixer details",
+        // },
+    ],
+};
+
+const welcomeSmallText: Array<SmallTextProps> = [
+    {
+        eyebrow: "when",
+        title: "October 31st, 2026",
+        subtitle: "Guests arrive at 4:30 PM",
+        button: {
+            type: "link",
+            link: "/details#timeline",
+            text: "View the Timeline",
+        },
+    },
+];
+
 // const hero: ScrollRevealHeroProps = {
 //     header: "Alex & Max",
 //     hideScrollHint: false,
