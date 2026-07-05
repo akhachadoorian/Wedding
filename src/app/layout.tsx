@@ -1,5 +1,5 @@
-import Footer2 from "@/layout/Footer2/Footer2";
-import Navigation2 from "@/layout/Navigation 2/Navigation2";
+import Footer from "@/layout/Footer/Footer";
+import Navigation from "@/layout/Navigation/Navigation";
 import "@/styles/main.scss";
 import type { Metadata } from "next";
 import { Unbounded } from 'next/font/google';
@@ -51,12 +51,12 @@ export default function RootLayout({
                 <TooltipProvider>
                     <LenisProvider>
                         {/* <Navigation /> */}
-                        <Navigation2 />
+                        <Navigation />
 
                         <main>{children}</main>
 
                         {/* <Footer /> */}
-                        <Footer2 />
+                        <Footer />
                     </LenisProvider>
                     <GlobalTooltip />
                 </TooltipProvider>

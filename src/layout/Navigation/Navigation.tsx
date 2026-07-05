@@ -9,7 +9,7 @@ import { CaretDownIcon } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
-import "./Navigation2.scss";
+import "./Navigation.scss";
 import { LenisLink } from "@/hooks/LenisLink";
 import { useLenis } from "lenis/react";
 
@@ -188,7 +188,7 @@ function renderMobileNavItem(
     );
 }
 
-export default function Navigation2() {
+export default function Navigation() {
     const lenis = useLenis();
 
     // Handle mobile menu open and closing

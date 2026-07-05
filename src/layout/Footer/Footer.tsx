@@ -6,10 +6,10 @@ import { NAV_ITEMS } from "@/data/navItems";
 import { LenisLink } from "@/hooks/LenisLink";
 
 import Image from "next/image";
-import "./Footer2.scss";
+import "./Footer.scss";
 import { useFadeIn } from "@/hooks/useFadeIn";
 
-export default function Footer2({}) {
+export default function Footer({}) {
     const footerRef = useFadeIn<HTMLDivElement>();
 
     return (

@@ -1,6 +1,9 @@
 import { google } from "googleapis";
 import { NextResponse } from "next/server";
 
+
+const GUEST_RANGE = "Guests!A:E"
+
 async function getGuests() {
     const rawKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY;
     // Handle both literal \n (from .env without quotes) and already-escaped newlines
@@ -16,7 +19,7 @@ async function getGuests() {
 
     const response = await glSheets.spreadsheets.values.get({
         spreadsheetId: process.env.GOOGLE_SHEET_ID,
-        range: "Guests!A:C",
+        range: GUEST_RANGE,
     });
 
     return response.data.values;
