@@ -1,16 +1,19 @@
 @use "@/styles/variables" as *;;
 
 .text_only_hero {
-    width: 100%;
+    position: relative;
+    min-height: 100dvh;
+    width: 100dvw;
+    overflow: hidden;
 
-    &-section {
-        width: 100%;
-        min-height: 70dvh;
+    // &-section {
+    //     width: 100%;
+    //     min-height: 70dvh;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
+    // }
 
     &-wrapper {
         position: relative;
@@ -44,6 +47,14 @@
 
     &-btns {
         margin-top: var(--space-500);
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        overflow: hidden;
     }
 
     // ---- Layout Variations -------------------------------------------

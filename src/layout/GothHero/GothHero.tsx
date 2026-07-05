@@ -111,6 +111,7 @@ export default function GothHero({
         >
             <ImageHolder
                 className="goth_hero-img"
+                ref={imgRef}
                 img={{
                     ...img,
                     priority: true,

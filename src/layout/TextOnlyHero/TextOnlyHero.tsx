@@ -10,8 +10,8 @@ import { WithHTMLProps } from "../../types/props";
 import "./TextOnlyHero.scss";
 
 type TextOnlyHeroStyleProps = {
-    variation: "left" | "center" | "columns";
-    theme: "default" | "black" | "art-deco-bg";
+    variation?: "left" | "center" | "columns";
+    theme?: "default" | "black" | "art-deco-bg";
     inset?: boolean;
 };
 
@@ -48,12 +48,15 @@ export default function TextOnlyHero({
     className,
     ...htmlProps
 }: TextOnlyHeroProps) {
+    const theme = styleOptions.theme ?? DEFAULT_STYLE.theme;
+    const variation = styleOptions.variation ?? DEFAULT_STYLE.variation;
+
     return (
-        <section {...htmlProps} className={`text_only_hero-section text_only_hero-theme-${styleOptions.theme} ${styleOptions.inset ? "inset" : ""} ${loaded ? "is-loaded" : "is-hidden"} `}>
+        <section {...htmlProps} className={`text_only_hero text_only_hero-theme-${theme} ${styleOptions.inset ? "inset" : ""} ${loaded ? "is-loaded" : "is-hidden"} `}>
             <div className={`text_only_hero-wrapper`}>
-                {styleOptions?.variation === "columns" ? (
+                {variation === "columns" ? (
                     <ColumnsTextOnlyHero eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
-                ) : styleOptions?.variation === "center" ? (
+                ) : variation === "center" ? (
                     <CenterTextOnlyHero eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
                 ) : (
                     <LeftTextOnlyHero eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
@@ -63,7 +66,7 @@ export default function TextOnlyHero({
     );
 }
 
-// #region --- Sub-components --------------------------------------------------------
+// #region --- Inner Components --------------------------------------------------------
 
 function LeftContentTextOnlyHero({
     eyebrowVariation,
@@ -105,9 +108,13 @@ function RightContentTextOnlyHero({
     )
 }
 
+// #endregion ----------------------------------------------------------
+
+// #region --- Sub-components --------------------------------------------------------
+
 function CenterTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eyebrow?: string; header: string; subtitle?: string; body?: string; buttons?: ThreeButtonsArray }) {
     return (
-        <div className={`text_only_hero text_only_hero-variation-center`}>
+        <div className={`text_only_hero-content text_only_hero-variation-center`}>
             <LeftContentTextOnlyHero eyebrowVariation="center" eyebrow={eyebrow} header={header} />
 
             <RightContentTextOnlyHero subtitle={subtitle} body={body} buttons={buttons} />
@@ -117,7 +124,7 @@ function CenterTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eyeb
 
 function LeftTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eyebrow?: string; header: string; subtitle?: string; body?: string; buttons?: ThreeButtonsArray }) {
     return (
-        <div className={`text_only_hero text_only_hero-variation-left`}>
+        <div className={`text_only_hero-content text_only_hero-variation-left`}>
 
             <LeftContentTextOnlyHero eyebrowVariation="left" eyebrow={eyebrow} header={header} />
 
@@ -128,7 +135,7 @@ function LeftTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eyebro
 
 function ColumnsTextOnlyHero({ eyebrow, header, subtitle, body, buttons }: { eyebrow?: string; header: string; subtitle?: string; body?: string; buttons?: ThreeButtonsArray }) {
     return (
-        <div className={`text_only_hero text_only_hero-variation-columns`}>
+        <div className={`text_only_hero-content text_only_hero-variation-columns`}>
             <div className="text_only_hero-variation-columns-left">
                 <LeftContentTextOnlyHero eyebrowVariation="left" eyebrow={eyebrow} header={header} />
             </div>

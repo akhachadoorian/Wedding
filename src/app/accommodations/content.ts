@@ -16,14 +16,20 @@ import { DEFAULT_IMAGE } from "@/data/defaultImage";
 
 // #region --- Hero -----------------------------------------------
 
-const heroV1: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
-    eyebrow: "Accommodations",
-    header: "Where to Stay & How to Get There",
-    body: "The venue is in Green Cove Springs, a beautiful small town about 30 minutes south of Jacksonville.  Below you'll find our hotel recommendations, transportation details, and everything else you need to feel prepared for the weekend.",
-};
+// const heroV1: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
+//     eyebrow: "Accommodations",
+//     header: "Where to Stay & How to Get There",
+//     body: "The venue is in Green Cove Springs, a beautiful small town about 30 minutes south of Jacksonville.  Below you'll find our hotel recommendations, transportation details, and everything else you need to feel prepared for the weekend.",
+// };
 
 const hero: Omit<ImageOverlayHeroProps, "loaded" | "styleOptions"> = {
-    image: DEFAULT_IMAGE,
+    image: {
+        ...DEFAULT_IMAGE,
+        imgPositionResponsive: {
+            desktop: "center 25%",
+            mobile: "35% center",
+        },
+    },
     eyebrow: "Accommodations",
     header: "Hotels & Transportation",
     body: "We've reserved hotel blocks in Jacksonville and arranged a complimentary bus to the venue. Here's what to know about hotels, parking, and getting there.",
@@ -33,7 +39,7 @@ const hero: Omit<ImageOverlayHeroProps, "loaded" | "styleOptions"> = {
             text: "See Hotels",
             link: "/accommodations#hotels",
             decoration: {
-                type: 'arrow'
+                type: "arrow",
             },
         },
         {
@@ -41,7 +47,7 @@ const hero: Omit<ImageOverlayHeroProps, "loaded" | "styleOptions"> = {
             text: "Transportation Details",
             link: "/accommodations#transportation",
             decoration: {
-                type: 'arrow'
+                type: "arrow",
             },
         },
     ],

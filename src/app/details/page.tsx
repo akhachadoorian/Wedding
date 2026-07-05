@@ -40,10 +40,10 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
             <TextOnlyHero
                 loaded={loaded}
                 {...content.hero}
-                styleOptions={{
-                    variation: "columns",
-                    theme: "art-deco-bg",
-                }}
+                // styleOptions={{
+                //     variation: "columns",
+                //     theme: "black",
+                // }}
             />
 
             <section ref={venueRef} id="venue" className="venue-section base_section">

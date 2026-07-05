@@ -6,6 +6,8 @@
 
 $btnTB: 12px;
 $btnLR: 24px;
+$btnMobileTB: 8px;
+$btnMobileLR: 16px;
 $btnBorderWidth: 2px;
 
 // #endregion -------------------------------------------------------------------
@@ -134,9 +136,12 @@ $btnBorderWidth: 2px;
 
     &-variant {
         &-solid {
-            padding: $btnTB $btnLR;
             border: $btnBorderWidth solid;
-
+            padding: $btnMobileTB $btnMobileLR;
+            
+            @include big {
+               padding: $btnTB $btnLR; 
+            }
 
             @each $theme, $states in $solid-btn {
                 $default: map.get($states, "default");
@@ -157,8 +162,12 @@ $btnBorderWidth: 2px;
         }
 
         &-outline {
-            padding: $btnTB $btnLR;
             border: $btnBorderWidth solid;
+            padding: $btnMobileTB $btnMobileLR;
+            
+            @include big {
+               padding: $btnTB $btnLR; 
+            }
 
             @each $theme, $states in $outline-btn {
                 $default: map.get($states, "default");

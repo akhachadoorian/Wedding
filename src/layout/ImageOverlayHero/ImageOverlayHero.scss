@@ -2,7 +2,7 @@
 @use "@/styles/tokens/typography" as typo;
 
 
-$imgHeight: calc(100dvh);
+$imgHeight: 100dvh;
 
 .img_overlay_hero {
     position: relative;
@@ -12,11 +12,19 @@ $imgHeight: calc(100dvh);
 
     &-subtitle,
     &-body {
-        margin-top: var(--space-300);
+        margin-top: $space-200;
+
+        @include big {
+            margin-top: $space-300;
+        }
     }
 
     &-btns {
-        margin-top: var(--space-500);
+        margin-top: $space-300;
+
+        @include big {
+            margin-top: $space-500;
+        }
     }
 
     &-heading {
@@ -43,6 +51,9 @@ $imgHeight: calc(100dvh);
     &-content {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+
+        overflow: hidden;
     }
 
     &-img {
@@ -60,11 +71,9 @@ $imgHeight: calc(100dvh);
 
     &-variation {
         &-left {
-            justify-content: center;
             margin: 0;
 
             @include big {
-                justify-content: center;
                 max-width: 75.833vw;
             }
 
@@ -83,6 +92,10 @@ $imgHeight: calc(100dvh);
                 max-width: 60.417vw;
                 margin: auto;
             }
+
+            .btns {
+                justify-content: center;
+            }
         }
 
         &-columns {
@@ -94,6 +107,10 @@ $imgHeight: calc(100dvh);
                 justify-content: space-between;
                 align-items: center;
                 gap: var(--layout-column-gutter);
+
+                .img_overlay_hero-subtitle {
+                    margin-top: 0;
+                }
             }
 
             @include big($max-width-bp) {
