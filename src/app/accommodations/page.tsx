@@ -10,6 +10,7 @@ import ArtDecoCardGrid, { ArtDecoCard } from "../../components/ArtDecoCardGrid/A
 import CopyOnly from "../../components/CopyOnly/CopyOnly";
 import ComingSoon from "@/layout/ComingSoon/ComingSoon";
 import PageGuard from "@/components/PageGuard/PageGuard";
+import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
 
 export default function Accommodations({ loaded = true }: { loaded?: boolean }) {
     const hotelsRef = useFadeIn<HTMLDivElement>();
@@ -25,14 +26,7 @@ export default function Accommodations({ loaded = true }: { loaded?: boolean }) 
                 />
             }
         >
-            <TextOnlyHero
-                loaded={loaded}
-                {...content.hero}
-                styleOptions={{
-                    variation: "left",
-                    theme: "black",
-                }}
-            />
+            <ImageOverlayHero {...content.hero} loaded={loaded} styleOptions={{variation: 'columns'}}/>
 
             <section id="hotels" className="base_section hotels-section" ref={hotelsRef}>
                 <CopyOnly
@@ -42,7 +36,7 @@ export default function Accommodations({ loaded = true }: { loaded?: boolean }) 
                     }}
                     {...content.hotels.copyOnly}
                 />
-                <ArtDecoCardGrid {...content.hotels.hotelCards} />
+                {/* <ArtDecoCardGrid {...content.hotels.hotelCards} /> */}
             </section>
 
             <section id="transportation" className="base_section transportation-section" ref={transportationRef}>

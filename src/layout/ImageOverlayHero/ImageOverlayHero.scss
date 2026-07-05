@@ -1,0 +1,118 @@
+@use "@/styles/variables" as *;
+@use "@/styles/tokens/typography" as typo;
+
+
+$imgHeight: calc(100dvh);
+
+.img_overlay_hero {
+    position: relative;
+    min-height: $imgHeight;
+    width: 100dvw;
+    overflow: hidden;
+
+    &-subtitle,
+    &-body {
+        margin-top: var(--space-300);
+    }
+
+    &-btns {
+        margin-top: var(--space-500);
+    }
+
+    &-heading {
+
+    }
+
+    &-wrapper {
+        position: relative;
+        z-index: 5;
+
+        padding: $space-200 var(--layout-column-margin) $space-400;
+        min-height: calc(#{$imgHeight} - #{$space-400});
+
+        display: flex;
+
+        @include big {
+            max-width: var(--max-width);
+            min-height: calc(#{$imgHeight} - #{$space-1500} - #{$space-1500});
+            padding: $space-1500 var(--layout-column-margin);
+            margin: auto;
+        }
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-img {
+        position: absolute !important;
+        z-index: 1;
+
+        min-height: $imgHeight;
+        height: 100%;
+        width: 100%;
+
+        .img-overlay {
+            background: rgba(#101111, 0.8);
+        }
+    }
+
+    &-variation {
+        &-left {
+            justify-content: center;
+            margin: 0;
+
+            @include big {
+                justify-content: center;
+                max-width: 75.833vw;
+            }
+
+            @include big($max-width-bp) {
+                max-width: 60.417vw;
+            }
+        }
+
+        &-center {
+            margin: 0 auto;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+
+            @include big {
+                max-width: 60.417vw;
+                margin: auto;
+            }
+        }
+
+        &-columns {
+            margin: 0 auto;
+            width: 100%;
+
+            @include big {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: var(--layout-column-gutter);
+            }
+
+            @include big($max-width-bp) {
+                gap: 120px
+            }
+
+            &-left {
+                @include big {
+                    flex: 1 1 760px;
+                    // flex: 1 1 530px;
+                }
+            }
+
+            &-right {
+                @include big {
+                    flex: 1 1 530px;
+                    // flex: 1 1 647px;
+                }
+            }
+        }
+    }
+}

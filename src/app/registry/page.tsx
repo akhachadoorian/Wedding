@@ -30,7 +30,7 @@ export default function Registry({ loaded = true }: { loaded?: boolean }) {
                 />
             </section>
 
-            <ImageCallout
+            {/* <ImageCallout
                 ref={honeymoonRef}
                 className="honeymoon-section"
                 {...content.honeymoon}
@@ -38,7 +38,7 @@ export default function Registry({ loaded = true }: { loaded?: boolean }) {
                     variation: "inset",
                     textLayout: "left",
                 }}
-            />
+            /> */}
         </PageGuard>
     );
 }

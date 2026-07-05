@@ -49,10 +49,8 @@
     // ---- Layout Variations -------------------------------------------
     &-variation {
         &-left {
-            // margin: 0;
             @include big {
                 max-width: 75.833vw;
-                // max-width: 60.417vw;
             }
 
             @include big($max-width-bp) {

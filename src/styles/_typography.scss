@@ -1,4 +1,5 @@
 @use "styles/variables" as *;
+@use "@/styles/tokens/typography" as typo;
 
 // ── Base resets ──────────────────────────────────────────────
 
@@ -38,7 +39,8 @@ h6 {
     font-family: $font-goth;
     font-feature-settings: 'ss01' on;
     font-weight: 800;
-    line-height: 110%;
+    line-height: 130%;
+    overflow-wrap: break-word;
     // font-style: italic;
 }
 
@@ -46,7 +48,7 @@ h6 {
     font-family: $font-sans;
     font-weight: 600;
     line-height: 140%;
-    letter-spacing: 0.84px;
+    letter-spacing: 1.4px;
     text-transform: uppercase;
 }
 
@@ -115,7 +117,7 @@ p {
 
 .eyebrow {
     font-family: $font-sans;
-    font-size: var(--text-md);
+    font-size: typo.fluid(16, 20);
     font-weight: 600;
     line-height: normal;
     letter-spacing: 0.6px;
@@ -135,9 +137,10 @@ p {
 // ── Subtitle ─────────────────────────────────────────────────
 
 .subtitle {
-    @extend %body-base;
-    font-size: var(--text-base);
-    font-weight: 700;
+    @extend %subheading-base;
+    font-size: var(--text-lg);
+    color: $cream-600;
+    // font-weight: 700;
 
     &-extra {
         padding: var(--space-100) var(--space-075);

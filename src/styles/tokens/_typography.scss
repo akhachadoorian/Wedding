@@ -5,7 +5,9 @@
 
 // breakpoints
 $vp-min: 375;
-$vp-max: 1440;
+$vp-mid: 768; // matches $bp-tablet in _mixins.scss, unitless for use in fluid()
+// $vp-max: 1440;
+$vp-max: 1920;
 
 // token definitions — min and max in px
 $text-xs: (
@@ -25,40 +27,54 @@ $text-md: (
     max: 20,
 );
 $text-lg: (
-    min: 24,
+    min: 22,
     max: 28,
 );
 $text-xl: (
-    min: 28,
+    min: 26,
     max: 36,
 );
 $text-2xl: (
-    min: 36,
+    min: 32,
     max: 48,
 );
+// min/mid/max in px — mid kicks in at $vp-mid (768px) for tokens using fluid-multi()
 $text-3xl: (
-    min: 48,
+    min: 36,
+    mid: 44,
     max: 60,
 );
 $text-4xl: (
-    min: 55,
-    // max: 72,
+    min: 42,
+    mid: 50,
     max: 100
 );
 $text-5xl: (
-    min: 70,
-    max: 150,
+    min: 42,
+    mid: 56,
+    max: 125,
 );
 
-@function fluid($min, $max) {
-    $v: math.div(($max - $min), ($vp-max - $vp-min)) * 100;
-    $r: math.div($min - math.div($v, 100) * $vp-min, 16);
+@function fluid($min, $max, $vp-start: $vp-min, $vp-end: $vp-max) {
+    $v: math.div(($max - $min), ($vp-end - $vp-start)) * 100;
+    $r: math.div($min - math.div($v, 100) * $vp-start, 16);
 
     @return clamp(
         #{math.div($min, 16)}rem,
         #{$v}vw + #{$r}rem,
         #{math.div($max, 16)}rem
     );
+}
+
+// 3-stop curve: min -> mid over $vp-min..$vp-mid, then mid -> max over $vp-mid..$vp-max.
+// Both segments meet exactly at $mid when the viewport crosses $vp-mid, so there's no visible jump —
+// it just lets growth be slower on mobile/tablet and faster from tablet to desktop (or vice versa).
+@mixin fluid-multi($name, $min, $mid, $max, $breakpoint: $bp-tablet) {
+    #{$name}: #{fluid($min, $mid, $vp-min, $vp-mid)};
+
+    @include big($breakpoint) {
+        #{$name}: #{fluid($mid, $max, $vp-mid, $vp-max)};
+    }
 }
 
 :root {
@@ -69,9 +85,10 @@ $text-5xl: (
     --text-lg: #{fluid(map.get($text-lg, min), map.get($text-lg, max))};
     --text-xl: #{fluid(map.get($text-xl, min), map.get($text-xl, max))};
     --text-2xl: #{fluid(map.get($text-2xl, min), map.get($text-2xl, max))};
-    --text-3xl: #{fluid(map.get($text-3xl, min), map.get($text-3xl, max))};
-    --text-4xl: #{fluid(map.get($text-4xl, min), map.get($text-4xl, max))};
-    --text-5xl: #{fluid(map.get($text-5xl, min), map.get($text-5xl, max))};
+
+    @include fluid-multi(--text-3xl, map.get($text-3xl, min), map.get($text-3xl, mid), map.get($text-3xl, max));
+    @include fluid-multi(--text-4xl, map.get($text-4xl, min), map.get($text-4xl, mid), map.get($text-4xl, max));
+    @include fluid-multi(--text-5xl, map.get($text-5xl, min), map.get($text-5xl, mid), map.get($text-5xl, max));
 }
 
 // $viewport-width: 1440;

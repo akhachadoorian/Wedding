@@ -121,27 +121,6 @@ export default function GothHero({
                 }}
             />
 
-            <div
-                ref={imgRef}
-                className="img-holder goth_hero-img"
-                style={{
-                    "--img-object-position": img.imgPositionResponsive?.desktop ?? "center",
-                    "--img-object-position-mobile": img.imgPositionResponsive?.mobile ?? img.imgPositionResponsive?.desktop ?? "center",
-                } as React.CSSProperties}
-            >
-                <Image
-                    src={img.src}
-                    alt={img.alt ?? ""}
-                    className="img-bw"
-                    priority={true}
-                    sizes="100vw"
-                    fill
-                    style={{ objectFit: "cover" }}
-                    onLoad={() => setImgReady(true)}
-                />
-                <div className="img-overlay"></div>
-            </div>
-
             <div className="goth_hero-text">
                 {eyebrows && (
                     <div className="goth_hero-text-eyebrow">

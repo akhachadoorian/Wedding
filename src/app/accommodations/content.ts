@@ -1,16 +1,50 @@
-import { ArtDecoCardGridProps, ArtDecoCardProps } from "../../components/ArtDecoCardGrid/ArtDecoCardGrid";
+import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero/ImageOverlayHero";
+import {
+    ArtDecoCardGridProps,
+    ArtDecoCardProps,
+} from "../../components/ArtDecoCardGrid/ArtDecoCardGrid";
 import { CopyOnlyProps } from "../../components/CopyOnly/CopyOnly";
 import { SplitInfoProps } from "../../components/SplitInfo/SplitInfo";
 import { TextOnlyHeroProps } from "../../layout/TextOnlyHero/TextOnlyHero";
 import { NonEmptyArray } from "../../types/utility";
-import { BusIcon, LetterCirclePIcon, MapTrifoldIcon } from "@phosphor-icons/react";
+import {
+    BusIcon,
+    LetterCirclePIcon,
+    MapTrifoldIcon,
+} from "@phosphor-icons/react";
+import { DEFAULT_IMAGE } from "@/data/defaultImage";
 
 // #region --- Hero -----------------------------------------------
 
-const hero: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
+const heroV1: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
     eyebrow: "Accommodations",
     header: "Where to Stay & How to Get There",
     body: "The venue is in Green Cove Springs, a beautiful small town about 30 minutes south of Jacksonville.  Below you'll find our hotel recommendations, transportation details, and everything else you need to feel prepared for the weekend.",
+};
+
+const hero: Omit<ImageOverlayHeroProps, "loaded" | "styleOptions"> = {
+    image: DEFAULT_IMAGE,
+    eyebrow: "Accommodations",
+    header: "Hotels & Transportation",
+    body: "We've reserved hotel blocks in Jacksonville and arranged a complimentary bus to the venue. Here's what to know about hotels, parking, and getting there.",
+    buttons: [
+        {
+            type: "link",
+            text: "See Hotels",
+            link: "/accommodations#hotels",
+            decoration: {
+                type: 'arrow'
+            },
+        },
+        {
+            type: "link",
+            text: "Transportation Details",
+            link: "/accommodations#transportation",
+            decoration: {
+                type: 'arrow'
+            },
+        },
+    ],
 };
 
 // #endregion
@@ -23,11 +57,10 @@ const hotelsCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     body: "The venue is located in Green Cove Springs, a beautiful area without hotels nearby. We recommend staying in Jacksonville — just a short drive away — where we've reserved room blocks at three convenient hotels. ",
 };
 
-
 const hotelCards: ArtDecoCardGridProps = {
     cards: [
         {
-            icon: 'sunrise',
+            icon: "sunrise",
             title: "Homewood Suites by Hilton",
             subtitle: "Jacksonville / St. Johns Town Center",
             body: "10434 Midtown Parkway, Jacksonville, Florida 32246",
@@ -39,7 +72,7 @@ const hotelCards: ArtDecoCardGridProps = {
             },
         },
         {
-            icon: 'rounded',
+            icon: "rounded",
             title: "Hyatt Place",
             subtitle: "Jacksonville / St. Johns Town Center",
             body: "4742 Town Center Parkway, Jacksonville, FL 32246",
@@ -51,7 +84,7 @@ const hotelCards: ArtDecoCardGridProps = {
             },
         },
         {
-            icon: 'fan',
+            icon: "fan",
             title: "AC Hotel",
             subtitle: "Jacksonville / St. Johns Town Center",
             body: "5323 Big Island Drive Jacksonville, FL, 32246",
@@ -67,8 +100,8 @@ const hotelCards: ArtDecoCardGridProps = {
 
 const hotels = {
     copyOnly: hotelsCopyOnly,
-    hotelCards: hotelCards
-}
+    hotelCards: hotelCards,
+};
 
 // ----- Transportation -----------------------------------------------
 
