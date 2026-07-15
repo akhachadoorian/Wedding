@@ -56,7 +56,7 @@ export default function RootLayout({
                         <main>{children}</main>
 
                         {/* <Footer /> */}
-                        <Footer2 />
+                        {/* <Footer2 /> */}
                     </LenisProvider>
                     <GlobalTooltip />
                 </TooltipProvider>
