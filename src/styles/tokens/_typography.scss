@@ -52,7 +52,7 @@ $text-4xl: (
 $text-5xl: (
     min: 46,
     mid: 56,
-    max: 125,
+    max: 120,
 );
 
 @function fluid($min, $max, $vp-start: $vp-min, $vp-end: $vp-max) {

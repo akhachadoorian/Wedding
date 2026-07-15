@@ -32,7 +32,7 @@ export default function Accommodations({ loaded = true }: { loaded?: boolean }) 
                 <CopyOnly
                     styleOptions={{
                         variation: "center",
-                        headingSize: "h2",
+                        headingLevel: "h2",
                     }}
                     {...content.hotels.copyOnly}
                 />

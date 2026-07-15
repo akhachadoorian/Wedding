@@ -30,7 +30,7 @@ h6 {
 %body-base {
     font-family: $font-sans;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 150%;
 }
 
@@ -46,7 +46,7 @@ h6 {
 
 %subheading-base {
     font-family: $font-sans;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 140%;
     letter-spacing: 1.4px;
     text-transform: uppercase;
@@ -120,7 +120,7 @@ p {
     font-size: typo.fluid(16, 20);
     font-weight: 600;
     line-height: normal;
-    letter-spacing: 0.6px;
+    letter-spacing: 1.4px;
     text-transform: uppercase;
 
     &.centered {
@@ -139,7 +139,8 @@ p {
 .subtitle {
     @extend %subheading-base;
     font-size: var(--text-lg);
-    color: $cream-600;
+    font-size: typo.fluid(20, 24);
+    color: $cream-700;
     // font-weight: 700;
 
     &-extra {
@@ -148,13 +149,26 @@ p {
         border-bottom: 1px solid $gold;
         width: fit-content;
 
-        font-family: $font-sans;
-        font-size: var(--text-md);
-        font-weight: 600;
-        line-height: normal;
-        letter-spacing: 0.6px;
+        // font-family: $font-sans;
+        // font-size: var(--text-md);
+        // font-weight: 600;
+        // line-height: normal;
+        // letter-spacing: 0.6px;
         text-transform: uppercase;
     }
+}
+
+.subtitle-extra {
+    @extend %subheading-base;
+    font-size: var(--text-lg);
+    font-size: typo.fluid(20, 24);
+    color: $cream;
+    text-transform: uppercase;
+
+    padding: var(--space-100) var(--space-075);
+        border-top: 1px solid $gold;
+        border-bottom: 1px solid $gold;
+        width: fit-content;
 }
 
 // ── Utilities ─────────────────────────────────────────────────

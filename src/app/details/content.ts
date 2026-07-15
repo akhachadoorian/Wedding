@@ -6,37 +6,25 @@ import { TextOnlyHeroProps } from "@/layout/TextOnlyHero/TextOnlyHero";
 import { LetterCirclePIcon, MapTrifoldIcon, VanIcon } from "@phosphor-icons/react";
 import { ButtonProps } from "../../types/buttons";
 import { SmallTextGridProps } from "@/components/SmallTextGrid/SmallTextGrid";
+import { DEFAULT_IMAGE } from "@/data/defaultImage";
+import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero/ImageOverlayHero";
 
 // ----- Hero -----------------------------------------------
-// const hero: Omit<SmallTextTagHeroProps, "loaded"> = {
-//     eyebrow: "The Details",
-//     heading: "Your Guide to the Day",
-//     body: "Everything from venue details to the evening timeline — so you arrive knowing exactly what to expect.",
-//     smallTextTag1: {
-//         eyebrow: "Date",
-//         title: "October 31st, 2026",
-//         body: "Ceremony at 5 PM",
-//     },
-//     smallTextTag2: {
-//         eyebrow: "Location",
-//         title: "Clay Theatre",
-//         body: "Green Cove Springs, FL",
-//     },
-// };
 
-const hero: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
+const heroText: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
     eyebrow: "The Details",
     header: "Your Guide to the Day",
     body: "Everything from venue details to the evening timeline — so you arrive knowing exactly what to expect.",
     buttons: [
-        // {
-        //     text: "Venue Details",
-        //     link: "/details#venue",
-        //     target: "_self",
-        //     decoration: {
-        //         type: 'arrow',
-        //     }
-        // },
+        {
+            type: 'link',
+            text: "Venue Details",
+            link: "/details#venue",
+            target: "_self",
+            decoration: {
+                type: 'arrow',
+            }
+        },
         { 
             type: 'link',
             text: "View Timeline",
@@ -59,9 +47,42 @@ const hero: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
     ],
 };
 
+const hero: Omit<ImageOverlayHeroProps, "loaded" | "styleOptions"> = {
+    image: {
+        ...DEFAULT_IMAGE,
+        imgPositionResponsive: {
+            desktop: "center 25%",
+            mobile: "35% center",
+        },
+    },
+    eyebrow: "The Details",
+    header: "When & Where",
+    body: "The venue, the timeline, what to wear, and the extra details around the weekend — everything you need to know.",
+    buttons: [
+        {
+            type: 'link',
+            text: "Venue Details",
+            link: "/details#venue",
+            target: "_self",
+            decoration: {
+                type: 'arrow',
+            }
+        },
+        { 
+            type: 'link',
+            text: "View Timeline",
+            link: "/details#timeline",
+            target: "_self",
+            decoration: {
+                type: 'arrow',
+            }
+        },
+    ],
+}
+
 // ----- Summary / Venue -----------------------------------------------
 
-// const venue: Omit<MediaWithCopyProps, "media_side" | "headingSize"> = {
+// const venue: Omit<MediaWithCopyProps, "media_side" | "headingLevel"> = {
 //     eyebrow: "The Venue",
 //   header: "The Clay Theatre",
 //   subtitle: "326 Walnut St, Green Cove Springs, FL 32043",

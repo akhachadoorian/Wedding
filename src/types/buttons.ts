@@ -4,6 +4,29 @@ import { WithA11yProps, WithHTMLProps } from "./props";
 import { NonEmptyMaxX, RequireX } from "./utility";
 import { Icon } from "@phosphor-icons/react";
 
+
+export interface LinkSettings {
+    type: 'link';
+    /** Label displayed inside the button */
+    text: string;
+    /** React Router path or absolute URL the button links to */
+    link: string;
+    /** Whether the link opens in a new tab @default '_self' */
+    target?: "_blank" | "_self";
+}   
+
+export interface ModalSettings {
+    type: 'modal';
+    /** Label displayed inside the button */
+    text: string;
+    /** Button decoration (icon, arrow) or left blank for none */
+    decoration?: BtnDecoration;
+    /** */
+    modalID: string;
+    /** */
+    modalContent: Omit<ModalProps, 'isOpen' | 'onClose'>;
+}
+
 /**
  * Text content, destination, and link behavior for a single button.
  *
@@ -40,29 +63,39 @@ import { Icon } from "@phosphor-icons/react";
  * };
  */
 
-export type LinkButtonSettings = {
-    type: 'link';
-    /** Label displayed inside the button */
-    text: string;
+// export type LinkButtonSettings = {
+//     type: 'link';
+//     /** Label displayed inside the button */
+//     text: string;
+//     /** Button decoration (icon, arrow) or left blank for none */
+//     decoration?: BtnDecoration;
+//     /** React Router path or absolute URL the button links to */
+//     link: string;
+//     /** Whether the link opens in a new tab @default '_self' */
+//     target?: "_blank" | "_self";
+// }
+
+export interface LinkButtonSettings extends LinkSettings {
     /** Button decoration (icon, arrow) or left blank for none */
     decoration?: BtnDecoration;
-    /** React Router path or absolute URL the button links to */
-    link: string;
-    /** Whether the link opens in a new tab @default '_self' */
-    target?: "_blank" | "_self";
 }
 
-export type ModalButtonSettings = {
-    type: 'modal';
-    /** Label displayed inside the button */
-    text: string;
+export interface ModalButtonSettings extends ModalSettings {
     /** Button decoration (icon, arrow) or left blank for none */
     decoration?: BtnDecoration;
-    /** */
-    modalID: string;
-    /** */
-    modalContent: Omit<ModalProps, 'isOpen' | 'onClose'>;
 }
+
+// export type ModalButtonSettings = {
+//     type: 'modal';
+//     /** Label displayed inside the button */
+//     text: string;
+//     /** Button decoration (icon, arrow) or left blank for none */
+//     decoration?: BtnDecoration;
+//     /** */
+//     modalID: string;
+//     /** */
+//     modalContent: Omit<ModalProps, 'isOpen' | 'onClose'>;
+// }
 
 /**
  * Button for visual only (not clickable)

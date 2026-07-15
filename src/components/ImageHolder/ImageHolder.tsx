@@ -7,14 +7,18 @@ import { CustomImageProps } from "@/types/images";
 import { useTooltip } from "@/layout/GlobalTooltip/GlobalTooltip";
 import { useState, useEffect, useCallback } from "react";
 
-export type ImageHolderProps = WithHTMLProps & {
+export interface ImageHolderProps extends WithHTMLProps {
     img: CustomImageProps;
+    customImageClass?: string;
     includeOverlay?: boolean;
-};
+    customOverlayClass?: string;
+}
 
 export default function ImageHolder({
     img,
+    customImageClass,
     includeOverlay = true,
+    customOverlayClass,
 
     className,
     style: wrapperStyle,
@@ -37,23 +41,27 @@ export default function ImageHolder({
             className={`img-holder ${className ?? ""}`}
             style={divStyle}
         >
-            <Image {...imageProps} className="img-bw" style={style} />
+            <Image {...imageProps} className={`img-bw ${customImageClass ?? ''}`} style={style} />
 
-            {includeOverlay && <div className="img-overlay" />}
+            {includeOverlay && <div className={`img-overlay ${customOverlayClass ?? ''}`} />}
         </div>
     );
 }
 
-type ToolTipHoverImageHolderProps = ImageHolderProps & {
+interface ToolTipHoverImageHolderProps extends ImageHolderProps {
     makeMouseHandlers: ReturnType<typeof useTooltip>["makeMouseHandlers"];
-};
+}
 
 export function ToolTipHoverImageHolder({
     img,
+    customImageClass,
     includeOverlay = true,
+    customOverlayClass,
+
     style: wrapperStyle,
     className,
     makeMouseHandlers,
+    ...htmlProps
 }: ToolTipHoverImageHolderProps) {
     const [isTouched, setIsTouched] = useState(false);
     const [canHover, setCanHover] = useState(true);
@@ -93,6 +101,7 @@ export function ToolTipHoverImageHolder({
 
     return (
         <div
+            {...htmlProps}
             className={` img-tooltip_hover ${isTouched ? " is-touched" : ""} ${className ?? ""}`}
             style={wrapperStyle}
             {...(canHover && tooltipContent
@@ -104,9 +113,9 @@ export function ToolTipHoverImageHolder({
                 className="img-holder"
                 style={divStyle}
             >
-                <Image {...imageProps} className="img-bw" style={style} />
+                <Image {...imageProps} style={style} className={`img-bw ${customImageClass ?? ''}`} />
 
-                {includeOverlay && <div className="img-overlay" />}
+                {includeOverlay && <div className={`img-overlay ${customOverlayClass ?? ''}`} />}
             </div>
             {img.caption && <p className="img-caption">{img.caption}</p>}
         </div>

@@ -27,7 +27,7 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
                 <CopyOnly
                     styleOptions={{
                         variation: "center",
-                        headingSize: "h2",
+                        headingLevel: "h2",
                         customBtnColorSchemeMap: ['black', 'cream', 'cream']
                     }}
                     {...content.welcome.copyOnly}
@@ -104,7 +104,7 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
                 <CopyOnly
                     styleOptions={{
                         variation: "center",
-                        headingSize: "h2",
+                        headingLevel: "h2",
                     }}
                     {...content.quickLinks.copyOnly}
                 />

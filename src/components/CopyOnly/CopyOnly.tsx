@@ -1,6 +1,5 @@
 "use client";
 
-import ReactMarkdown from "react-markdown";
 
 import mergeRefs from "../../hooks/mergeRefs";
 import { useFadeInChildren } from "../../hooks/useFadeIn";
@@ -14,8 +13,9 @@ import { WithHTMLProps } from "../../types/props";
 import { ThreeButtons } from "../Buttons/ButtonGroups";
 import Eyebrow from "../Eyebrow/Eyebrow";
 
-import "./CopyOnly.scss";
+import { HeadingClassProps, HeadingLevelProps } from "@/types/headings";
 import { THREE_BUTTON_DEFAULTS } from "../Buttons/defaults";
+import "./CopyOnly.scss";
 
 /**
  * Controls the visual layout and color treatment of the CopyOnly component.
@@ -23,21 +23,22 @@ import { THREE_BUTTON_DEFAULTS } from "../Buttons/defaults";
  * @property variation   - Layout mode: `left` (single column, left-aligned),
  *                         `center` (single column, centered), or `columns`
  *                         (two-column split with heading left and body right).
- * @property headingSize - Semantic heading level rendered for `header`. Defaults to `h2`.
+ * @property headingLevel - Semantic heading level rendered for `header`. Defaults to `h2`.
  * @property eyebrowColor - CSS variable token for the eyebrow label color.
  */
 type CopyOnlyStyleProps = {
     variation: "left" | "center" | "columns";
-    headingSize?: "h2" | "h3" | "h4";
+    headingLevel?: Exclude<HeadingLevelProps, 'h1'>;
+    headingClass?: HeadingClassProps;
     eyebrowColor?: ColorVariables;
-    // textColor?: "light" | "dark";
     customBtnVariantMap?: BtnVariantMap<3>;
     customBtnColorSchemeMap?: BtnColorSchemeMap<3>;
 };
 
 const DEFAULT_STYLE = {
     variation: "left",
-    headingSize: "h2",
+    headingLevel: "h2",
+    headingClass: "heading-xl",
     eyebrowColor: "--gold-500",
     // textColor: "light",
 } satisfies CopyOnlyStyleProps;
@@ -96,7 +97,7 @@ export default function CopyOnly({
         y: 24,
     });
 
-    // const Heading = styleOptions.headingSize ?? "h2";
+    // const Heading = styleOptions.headingLevel ?? "h2";
 
     return (
         <div
@@ -164,7 +165,8 @@ function ColumnsCopyOnly({
                     eyebrow={eyebrow}
                     eyebrowColor={styleOptions.eyebrowColor}
                     header={header}
-                    headerSize={styleOptions.headingSize}
+                    headingLevel={styleOptions.headingLevel}
+                    headingClass={styleOptions.headingClass}
                 />
             </div>
 
@@ -175,7 +177,7 @@ function ColumnsCopyOnly({
                     <BodyCopyOnly
                         body={body}
                         bodySize={
-                            styleOptions.headingSize === "h2"
+                            styleOptions.headingLevel === "h2"
                                 ? "body-l"
                                 : "body"
                         }
@@ -213,7 +215,8 @@ function CenterCopyOnly({
                         eyebrow={eyebrow}
                         eyebrowColor={styleOptions.eyebrowColor}
                         header={header}
-                        headerSize={styleOptions.headingSize}
+                        headingLevel={styleOptions.headingLevel}
+                        headingClass={styleOptions.headingClass}
                     />
                 </div>
 
@@ -223,7 +226,7 @@ function CenterCopyOnly({
                     <BodyCopyOnly
                         body={body}
                         bodySize={
-                            styleOptions.headingSize === "h2"
+                            styleOptions.headingLevel === "h2"
                                 ? "body-l"
                                 : "body"
                         }
@@ -261,7 +264,8 @@ function LeftCopyOnly({
                         eyebrow={eyebrow}
                         eyebrowColor={styleOptions.eyebrowColor}
                         header={header}
-                        headerSize={styleOptions.headingSize}
+                        headingLevel={styleOptions.headingLevel}
+                        headingClass={styleOptions.headingClass}
                     />
                 </div>
 
@@ -271,7 +275,7 @@ function LeftCopyOnly({
                     <BodyCopyOnly
                         body={body}
                         bodySize={
-                            styleOptions.headingSize === "h2"
+                            styleOptions.headingLevel === "h2"
                                 ? "body-l"
                                 : "body"
                         }
@@ -301,14 +305,16 @@ function EyebrowHeaderCopyOnly({
     eyebrowColor = DEFAULT_STYLE.eyebrowColor,
 
     header,
-    headerSize = "h2",
+    headingLevel = "h2",
+    headingClass = "heading-xl"
 }: {
     eyebrow?: string;
     eyebrowColor?: ColorVariables;
     header: string;
-    headerSize?: "h2" | "h3" | "h4";
+    headingLevel?: Exclude<HeadingLevelProps, 'h1'>;
+    headingClass?: HeadingClassProps;
 }) {
-    const Heading = headerSize;
+    const Heading = headingLevel;
 
     return (
         <>
@@ -323,7 +329,7 @@ function EyebrowHeaderCopyOnly({
                 />
             )}
 
-            <Heading className="copy-header heading-md mwc-animate">
+            <Heading className={`copy-header heading-md mwc-animate ${headingClass}`}>
                 {header}
             </Heading>
         </>

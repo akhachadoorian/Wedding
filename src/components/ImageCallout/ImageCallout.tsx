@@ -12,6 +12,7 @@ import { sub } from "motion/react-client";
 
 import "./ImageCallout.scss";
 import Image from "next/image";
+import ImageHolder from "../ImageHolder/ImageHolder";
 
 type ImageCalloutStyleProps = {
     variation: "full_width" | "inset" | "slant" | 'slant_inverse';
@@ -49,15 +50,23 @@ export default function ImageCallout({
     ...htmlProps
 }: ImageCalloutProps) {
     const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", { stagger: 0.15, y: 24 });
+    const customOverlay = `img-overlay-${styleOptions.textLayout}`
 
     return (
         <section {...htmlProps} ref={mergeRefs(animRef, ref)} className={`image_callout ${className ?? ""} image_callout-variation-${styleOptions.variation}`}>
             {/* <div className="image_callout"> */}
-                <div className="img-holder image_callout-img_holder">
+                <ImageHolder img={{
+                    ...image,
+                    priority: true,
+                    sizes: "100vw",
+                    fill: true,
+                    style: { objectFit: "cover" },
+                }} customOverlayClass={customOverlay} className="image_callout-img_holder"/>
+                {/* <div className="img-holder image_callout-img_holder">
                     <Image src={image.src} alt={image.alt} className="img-bw" />
 
                     <div className={`img-overlay img-overlay-${styleOptions.textLayout}`} />
-                </div>
+                </div> */}
 
                 {styleOptions.textLayout === "center" ? (
                     <CenterTextLayoutImageCallout eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />

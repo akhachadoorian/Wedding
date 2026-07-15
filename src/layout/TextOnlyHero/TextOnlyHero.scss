@@ -17,8 +17,9 @@
 
     &-wrapper {
         position: relative;
-        width: 100%;
-        padding: var(--layout-section-padding) var(--layout-column-margin);
+        // padding: var(--layout-section-padding) var(--layout-column-margin);
+        padding: $space-200 var(--layout-column-margin) $space-400;
+        min-height: calc(100dvh - #{$space-400} - #{$space-400});
 
         display: flex;
         align-items: center;
@@ -26,18 +27,20 @@
         @include big {
             max-width: var(--max-width);
             margin: 0 auto;
+            min-height: calc(100dvh - #{$space-1500} - #{$space-1500});
+            padding: $space-1500 var(--layout-column-margin);
         }
 
         // Full-width background bleed: stretches to 100vw while wrapper stays max-width
-        &::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100vw;
-            z-index: -1;
-        }
+        // &::before {
+        //     content: '';
+        //     position: absolute;
+        //     inset: 0;
+        //     left: 50%;
+        //     transform: translateX(-50%);
+        //     width: 100vw;
+        //     z-index: -1;
+        // }
     }
 
     &-subtitle,
@@ -99,11 +102,19 @@
                 flex-direction: row;
                 align-items: center;
                 gap: var(--layout-column-gutter);
+
+                .text_only_hero-subtitle {
+                    margin-top: 0;
+                }
+            }
+
+            @include big($max-width-bp) {
+                gap: $space-1000;
             }
 
             &-left {
                 @include big {
-                    flex: 1 1 760px;
+                    flex: 2 1 760px;
                 }
             }
 
@@ -120,39 +131,32 @@
     // Inset: background directly on wrapper (constrained to max-width)
     &-theme {
         &-black {
-            .text_only_hero-wrapper::before {
-                background-color: var(--black-900);
-            }
-
-            &.inset {
-                .text_only_hero-wrapper::before {
-                    display: none;
-                }
-                .text_only_hero-wrapper {
-                    background-color: var(--black-900);
-                }
-            }
+            background-color: $black;
         }
 
-        &-art-deco-bg {
-             background: linear-gradient(to top, var(--black-1000) 35%, transparent 100%), url("../../assets/DiamondPattern.svg");
-                background-repeat: repeat;
-                background-size: 50vw;
-
-            .text_only_hero-wrapper::before {
-                display: none;
-            }
-
-            &.inset {
-                .text_only_hero-wrapper::before {
-                    display: none;
-                }
-                .text_only_hero-wrapper {
-                    background: linear-gradient(to top, var(--black-1000) 35%, transparent 100%), url("../../assets/DiamondPattern.svg");
-                    background-repeat: repeat;
-                    background-size: 50vw;
-                }
-            }
+        &-black_gradient {
+            background: linear-gradient(to bottom, $black-850, $black-bg);
         }
+
+        // &-art-deco-bg {
+        //      background: linear-gradient(to top, var(--black-1000) 35%, transparent 100%), url("../../assets/DiamondPattern.svg");
+        //         background-repeat: repeat;
+        //         background-size: 50vw;
+
+        //     .text_only_hero-wrapper::before {
+        //         display: none;
+        //     }
+
+        //     &.inset {
+        //         .text_only_hero-wrapper::before {
+        //             display: none;
+        //         }
+        //         .text_only_hero-wrapper {
+        //             background: linear-gradient(to top, var(--black-1000) 35%, transparent 100%), url("../../assets/DiamondPattern.svg");
+        //             background-repeat: repeat;
+        //             background-size: 50vw;
+        //         }
+        //     }
+        // }
     }
 }

@@ -1,7 +1,6 @@
 @use "@/styles/variables" as *;
 @use "@/styles/tokens/typography" as typo;
 
-
 $imgHeight: 100dvh;
 
 .img_overlay_hero {
@@ -10,14 +9,20 @@ $imgHeight: 100dvh;
     width: 100dvw;
     overflow: hidden;
 
-    &-subtitle,
-    &-body {
-        margin-top: $space-200;
+    // &-body {
+    //     // margin-top: $space-200;
+    //     margin-top: var(--body-margin-top-mobile);
 
-        @include big {
-            margin-top: $space-300;
-        }
-    }
+    //     @include big {
+    //         // margin-top: $space-300;
+    //         margin-top: var(--body-margin-top);
+    //     }
+    // }
+
+    // &-subtitle {
+    //     border-bottom: 1px solid $cream-600;
+    //     padding-bottom: $space-200;
+    // }
 
     &-btns {
         margin-top: $space-300;
@@ -28,7 +33,6 @@ $imgHeight: 100dvh;
     }
 
     &-heading {
-
     }
 
     &-wrapper {
@@ -36,7 +40,7 @@ $imgHeight: 100dvh;
         z-index: 5;
 
         padding: $space-200 var(--layout-column-margin) $space-400;
-        min-height: calc(#{$imgHeight} - #{$space-400});
+        min-height: calc(#{$imgHeight} - #{$space-400} - #{$space-400});
 
         display: flex;
 
@@ -54,6 +58,16 @@ $imgHeight: 100dvh;
         justify-content: center;
 
         overflow: hidden;
+    }
+
+    &-sb {
+        display: flex;
+        flex-direction: column;
+        gap: $space-200;
+
+        @include big {
+             gap: $space-300;
+        }
     }
 
     &-img {
@@ -80,6 +94,14 @@ $imgHeight: 100dvh;
             @include big($max-width-bp) {
                 max-width: 60.417vw;
             }
+
+            // .img_overlay_hero-subtitle {
+            //     margin-top: $space-200;
+
+            //     @include big {
+            //         margin-top: $space-300;
+            //     }
+            // }
         }
 
         &-center {
@@ -114,12 +136,12 @@ $imgHeight: 100dvh;
             }
 
             @include big($max-width-bp) {
-                gap: 120px
+                gap: $space-1000;
             }
 
             &-left {
                 @include big {
-                    flex: 1 1 760px;
+                    flex: 2 1 760px;
                     // flex: 1 1 530px;
                 }
             }

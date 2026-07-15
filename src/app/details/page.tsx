@@ -17,6 +17,7 @@ import "./Details.scss";
 import Button from "@/components/Buttons/Button";
 import ComingSoon from "@/layout/ComingSoon/ComingSoon";
 import PageGuard from "@/components/PageGuard/PageGuard";
+import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,15 +37,8 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                     body="This page will have information about the venue, the day-of timeline, FAQs and more."
                 />
             }
-        >
-            <TextOnlyHero
-                loaded={loaded}
-                {...content.hero}
-                // styleOptions={{
-                //     variation: "columns",
-                //     theme: "black",
-                // }}
-            />
+        >   
+            <ImageOverlayHero {...content.hero} loaded={loaded} styleOptions={{variation: 'columns'}}/>
 
             <section ref={venueRef} id="venue" className="venue-section base_section">
                 <SplitInfo {...content.summary} />
@@ -54,7 +48,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                 <CopyOnly
                     styleOptions={{
                         variation: "center",
-                        headingSize: "h2",
+                        headingLevel: "h2",
                     }}
                     {...content.timeline.copyOnly}
                 />
@@ -65,7 +59,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                 <CopyOnly
                     styleOptions={{
                         variation: "left",
-                        headingSize: "h2",
+                        headingLevel: "h2",
                     }}
                     {...content.dressCode.copyOnly}
                 />
@@ -82,7 +76,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                 <CopyOnly
                     styleOptions={{
                         variation: "left",
-                        headingSize: "h2",
+                        headingLevel: "h2",
                     }}
                     className="rehearsal-left"
                     {...content.rehearsalMixer.copyOnly}
@@ -109,7 +103,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                 <CopyOnly
                     styleOptions={{
                         variation: "center",
-                        headingSize: "h2",
+                        headingLevel: "h2",
                     }}
                     {...content.faqs.copyOnly}
                 />

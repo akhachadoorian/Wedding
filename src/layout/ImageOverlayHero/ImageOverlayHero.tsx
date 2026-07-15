@@ -4,7 +4,11 @@ import React from "react";
 
 import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";
-import { BtnColorSchemeMap, BtnVariantMap, ThreeButtonsArray } from "../../types/buttons";
+import {
+    BtnColorSchemeMap,
+    BtnVariantMap,
+    ThreeButtonsArray,
+} from "../../types/buttons";
 import { WithHTMLProps } from "../../types/props";
 
 import "./ImageOverlayHero.scss";
@@ -117,7 +121,10 @@ function LeftContentImageOverlayHero({
                 <Eyebrow
                     className={`img_overlay_hero-eyebrow`}
                     text={eyebrow}
-                    styleOptions={{ variation: eyebrowVariation ?? "left", includeMargin: true }}
+                    styleOptions={{
+                        variation: eyebrowVariation ?? "left",
+                        includeMargin: true,
+                    }}
                 />
             )}
 
@@ -138,18 +145,28 @@ function RightContentImageOverlayHero({
     if (!subtitle && !body && !buttons) return;
 
     // const customVariantMap: BtnVariantMap<3> = ["solid", "solid", "solid"];
-    
     const customColorSchemeMap: BtnColorSchemeMap<3> = ["gold", "gold", "gold"];
+
+    const bodyStyle = {
+        "--body-margin-top": subtitle ? "var(--space-300)" : "0px",
+        "--body-margin-top-mobile": subtitle ? "var(--space-200)" : "0px",
+    } as React.CSSProperties;
 
     return (
         <>
-            {subtitle && (
-                <p className="subtitle img_overlay_hero-subtitle">
-                    {subtitle}
-                </p>
-            )}
+            {(subtitle || body) && (
+                <div className="img_overlay_hero-sb">
+                    {subtitle && (
+                        <p className="subtitle-extra img_overlay_hero-subtitle">
+                            {subtitle}
+                        </p>
+                    )}
 
-            {body && <p className="img_overlay_hero-body body-l">{body}</p>}
+                    {body && (
+                        <p className="img_overlay_hero-body body">{body}</p>
+                    )}
+                </div>
+            )}
 
             {buttons && (
                 <ThreeButtons
@@ -178,7 +195,9 @@ function CenterImageOverlayHero({
     buttons?: ThreeButtonsArray;
 }) {
     return (
-        <div className={`img_overlay_hero-content img_overlay_hero-variation-center`}>
+        <div
+            className={`img_overlay_hero-content img_overlay_hero-variation-center`}
+        >
             <LeftContentImageOverlayHero
                 eyebrowVariation="center"
                 eyebrow={eyebrow}
@@ -208,7 +227,9 @@ function LeftImageOverlayHero({
     buttons?: ThreeButtonsArray;
 }) {
     return (
-        <div className={`img_overlay_hero-content img_overlay_hero-variation-left`}>
+        <div
+            className={`img_overlay_hero-content img_overlay_hero-variation-left`}
+        >
             <LeftContentImageOverlayHero
                 eyebrowVariation="left"
                 eyebrow={eyebrow}
@@ -238,7 +259,9 @@ function ColumnsImageOverlayHero({
     buttons?: ThreeButtonsArray;
 }) {
     return (
-        <div className={`img_overlay_hero-content img_overlay_hero-variation-columns`}>
+        <div
+            className={`img_overlay_hero-content img_overlay_hero-variation-columns`}
+        >
             <div className="img_overlay_hero-variation-columns-left">
                 <LeftContentImageOverlayHero
                     eyebrowVariation="left"

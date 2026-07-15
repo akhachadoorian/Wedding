@@ -7,6 +7,7 @@ import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
 import RSVPForm from "../../components/RSVPForm/RSVPForm";
 import ComingSoon from "@/layout/ComingSoon/ComingSoon";
 import PageGuard from "@/components/PageGuard/PageGuard";
+import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
 
 export default function RSVP({ loaded = true }: { loaded?: boolean }) {
     return (
@@ -19,14 +20,17 @@ export default function RSVP({ loaded = true }: { loaded?: boolean }) {
                 />
             }
         >
-            <TextOnlyHero
+            {/* <TextOnlyHero
                 loaded={loaded}
                 {...content.hero}
                 styleOptions={{
                     variation: "columns",
                     theme: "black",
                 }}
-            />
+            /> */}
+
+            <ImageOverlayHero {...content.hero} loaded={loaded} styleOptions={{variation: 'columns'}}/>
+
             <RSVPForm {...content.form} />
         </PageGuard>
     );

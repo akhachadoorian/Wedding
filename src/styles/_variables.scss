@@ -64,9 +64,8 @@ $max-width: var(--max-width);
 $max-width-bp: 1600px; // raw value for use in media queries
 
 // ──── Fonts ───────────────────────────────────
-// $font-serif: "Instrument Serif", serif;
+
 $font-serif: var(--font-respira-black);
-// $font-sans:  "Inter", sans-serif;
 $font-sans:  var(--font-unbounded), sans-serif;
 $font-goth: var(--font-respira-black);
 
