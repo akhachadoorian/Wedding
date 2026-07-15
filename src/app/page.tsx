@@ -10,6 +10,7 @@ import GothHero from "../layout/GothHero/GothHero";
 import "./Home.scss";
 import WatermarkText from "@/components/WatermarkText/WatermarkText";
 import ScrollRevealHero from "@/layout/archive/ScrollRevealHero/ScrollRevealHero";
+import PageGuard from "@/components/PageGuard/PageGuard";
 
 
 export default function Home({ loaded = true }: { loaded?: boolean }) {
@@ -19,7 +20,7 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
     const quickLinksRef = useFadeIn<HTMLDivElement>();
 
     return (
-        <>
+        <PageGuard route="/" fallback={<GothHero loaded={loaded} {...content.hero} />}>
             {/* <ScrollRevealHero {...content.oldHero}/> */}
             <GothHero loaded={loaded} {...content.hero} />
 
@@ -111,6 +112,6 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
 
                 <DrinkCardGrid {...content.quickLinks.drinkGrid} />
             </section>
-        </>
+        </PageGuard>
     );
 }
