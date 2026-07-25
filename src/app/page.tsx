@@ -5,12 +5,12 @@ import DrinkCardGrid from "@/components/DrinkCardGrid/DrinkCardGrid";
 import { useFadeIn } from "@/hooks/useFadeIn";
 import content from "./content";
 
+import PageGuard from "@/components/PageGuard/PageGuard";
 import PhotoCollage from "@/components/PhotoCollage/PhotoCollage";
+import WatermarkText from "@/components/WatermarkText/WatermarkText";
 import GothHero from "../layout/GothHero/GothHero";
 import "./Home.scss";
-import WatermarkText from "@/components/WatermarkText/WatermarkText";
-import ScrollRevealHero from "@/layout/archive/ScrollRevealHero/ScrollRevealHero";
-import PageGuard from "@/components/PageGuard/PageGuard";
+import CardGrid from "@/components/CardGrid/CardGrid";
 
 
 export default function Home({ loaded = true }: { loaded?: boolean }) {
@@ -21,26 +21,7 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
 
     return (
         <PageGuard route="/" fallback={<GothHero loaded={loaded} {...content.hero} />}>
-            {/* <ScrollRevealHero {...content.oldHero}/> */}
             <GothHero loaded={loaded} {...content.hero} />
-
-            {/* <section ref={welcomeRef} id="welcome" className="welcome-section base_section">
-                <CopyOnly
-                    styleOptions={{
-                        variation: "center",
-                        headingSize: "h2",
-                        customBtnColorSchemeMap: ['black', 'cream', 'cream']
-                    }}
-                    {...content.welcome.copyOnly}
-                />
-
-                <DashedCopyGrid {...content.welcome.dashedCopyGrid} /> */}
-
-            {/* <div className="small_text_column">
-                    <SmallText {...content.welcome.smallText[0]}  />
-                    <SmallText {...content.welcome.smallText[0]}  />
-                </div> */}
-            {/* </section> */}
 
             <section
                 ref={welcomeRef}
@@ -51,41 +32,6 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
 
             </section>
 
-            {/* <section
-                ref={welcomeRef}
-                id="welcome"
-                className="welcome-section base_section"
-            >
-                <WelcomeBlockB
-                    eyebrow="We're getting married"
-                    heading="Saturday, October"
-                    headingItalic="31st"
-                    location={{
-                        year: "2026",
-                        city: "Green Cove Springs",
-                        state: "Florida",
-                    }}
-                    details={[
-                        {
-                            label: "Guests Arrive",
-                            value: "4:30 PM",
-                            link: "/details#timeline",
-                        },
-                        {
-                            label: "Venue",
-                            value: "The Clay Theatre",
-                            link: "/details#venue",
-                        },
-                        {
-                            label: "Ceremony Begins",
-                            value: "5:00 PM",
-                            link: "/details#timeline",
-                        },
-                    ]}
-                    cta={{ text: "RSVP Now", link: "/rsvp" }}
-                />
-            </section> */}
-
             <section
                 ref={ourStoryRef}
                 id="our_story"
@@ -93,7 +39,7 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
             >
                 <PhotoCollage
                     {...content.ourStory}
-                    styleOptions={{ headerTop: true, textBehind: true }}
+                    styleOptions={{ headerTop: true, textBehind: true, reverseImageShapes: true }}
                 />
             </section>
 
@@ -105,12 +51,14 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
                 <CopyOnly
                     styleOptions={{
                         variation: "center",
-                        headingSize: "h2",
+                        headingLevel: "h2",
                     }}
                     {...content.quickLinks.copyOnly}
                 />
 
-                <DrinkCardGrid {...content.quickLinks.drinkGrid} />
+                <CardGrid {...content.quickLinks.cardGrid} />
+
+                {/* <DrinkCardGrid {...content.quickLinks.drinkGrid} /> */}
             </section>
         </PageGuard>
     );

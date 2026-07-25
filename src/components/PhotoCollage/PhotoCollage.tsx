@@ -30,12 +30,14 @@ export type PhotoCollageProps = WithHTMLProps & {
     styleOptions?: {
         headerTop: boolean;
         textBehind: boolean;
+        reverseImageShapes?: boolean;
     };
 };
 
 const DEFAULT_STYLE_OPTIONS = {
     headerTop: true,
     textBehind: false,
+    reverseImageShapes: false,
 };
 
 const DEFAULT_LEFT_IMAGES: RequireX<CustomImageProps, 2> = [
@@ -61,10 +63,15 @@ export default function PhotoCollage({
 }: PhotoCollageProps) {
     const { makeMouseHandlers } = useTooltip();
 
-    let styleClasses = styleOptions.textBehind ? "photo_collage-text_behind" : "photo_collage-text_front";
+    let styleClasses = styleOptions.textBehind
+        ? "photo_collage-text_behind"
+        : "photo_collage-text_front";
 
     const useFitTextRef = useFitText<HTMLHeadingElement>({ mobile: true });
-    const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", { stagger: 0.15, y: 24 });
+    const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", {
+        stagger: 0.15,
+        y: 24,
+    });
 
     const headerParallaxRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -74,7 +81,8 @@ export default function PhotoCollage({
         const ctx = gsap.context(() => {
             const mm = gsap.matchMedia();
             mm.add("(min-width: 800px)", () => {
-                gsap.fromTo(el,
+                gsap.fromTo(
+                    el,
                     { y: 0 },
                     {
                         y: 30,
@@ -85,7 +93,7 @@ export default function PhotoCollage({
                             end: "bottom top",
                             scrub: true,
                         },
-                    }
+                    },
                 );
             });
         });
@@ -99,12 +107,17 @@ export default function PhotoCollage({
             className={`photo_collage ${styleClasses} ${className ?? ""}`}
             ref={mergeRefs(animRef, ref)}
         >
-            {(header && styleOptions.headerTop) && (
-                <div 
-                ref={headerParallaxRef} 
-                className="photo_collage-header_top"
+            {header && styleOptions.headerTop && (
+                <div
+                    ref={headerParallaxRef}
+                    className="photo_collage-header_top"
                 >
-                    <h2 ref={useFitTextRef} className="photo_collage-text mwc-animate">{header}</h2>
+                    <h2
+                        ref={useFitTextRef}
+                        className="photo_collage-text mwc-animate"
+                    >
+                        {header}
+                    </h2>
                 </div>
             )}
 
@@ -112,21 +125,23 @@ export default function PhotoCollage({
                 {/* Left Column */}
                 {leftSideImages && (
                     <div className="photo_collage-imgs-left photo_collage-imgs-side">
-                        {leftSideImages.map((img, idx) => (
-                            <ToolTipHoverImageHolder
-                                key={idx}
-                                className={`photo_collage-img photo_collage-img-${idx === 0 ? "tall" : "long"} mwc-animate`}
-                                img={img}
-                                makeMouseHandlers={makeMouseHandlers}
-                                // makeTouchHandlers={makeTouchHandlers}
-                            />
-                        ))}
+                        {leftSideImages.map((img, idx) => {
+                            const tallIndex = styleOptions.reverseImageShapes ? 1 : 0;
+                            return (
+                                <ToolTipHoverImageHolder
+                                    key={idx}
+                                    className={`photo_collage-img photo_collage-img-${idx === tallIndex ? "tall" : "long"} mwc-animate`}
+                                    img={img}
+                                    makeMouseHandlers={makeMouseHandlers}
+                                />
+                            );
+                        })}
                     </div>
                 )}
 
                 {/* Center Image */}
                 <ToolTipHoverImageHolder
-                    className="photo_collage-imgs-main mwc-animate"
+                    className="photo_collage-img photo_collage-imgs-main mwc-animate"
                     img={mainImage}
                     makeMouseHandlers={makeMouseHandlers}
                 />
@@ -134,15 +149,16 @@ export default function PhotoCollage({
                 {/* Right Column */}
                 {rightSideImages && (
                     <div className="photo_collage-imgs-right photo_collage-imgs-side">
-                        {rightSideImages.map((img, idx) => (
+                        {rightSideImages.map((img, idx) =>  {
+                            const longIndex = styleOptions.reverseImageShapes ? 1 : 0;
+                            return (
                             <ToolTipHoverImageHolder
                                 key={idx}
-                                className={`photo_collage-img photo_collage-img-${idx === 0 ? "long" : "tall"} mwc-animate`}
+                                className={`photo_collage-img photo_collage-img-${idx === longIndex ? "long" : "tall"} mwc-animate`}
                                 img={img}
                                 makeMouseHandlers={makeMouseHandlers}
-                                // makeTouchHandlers={makeTouchHandlers}
                             />
-                        ))}
+                        )})}
                     </div>
                 )}
             </div>

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState, useEffect } from "react";
 
@@ -26,9 +26,11 @@ export default function RSVPForm({
 }: RSVPFormProps) {
     const [step, setStep] = useState(0);
 
-    // useEffect(() => {
-    //     fetch("/api/guests").then((res) => res.json()).then((data) => console.log("guests", data));
-    // }, []);
+    useEffect(() => {
+        fetch("/api/guests")
+            .then((res) => res.json())
+            .then((data) => console.log("guests", data));
+    }, []);
 
     // const [searchQuery, setSearchQuery] = useState("");
     // const [searchResult, setSearchResult] = useState<party[]>([]);
@@ -52,17 +54,16 @@ export default function RSVPForm({
     //         setSearching(false);
     //     }, 600);
     // };
-    
-
-    // console.log("searchResult", searchResult);
-
-    
 
     return (
-        <section {...htmlProps} className={`rsvp_form base_section ${className ?? ""}`}>
+        <section
+            {...htmlProps}
+            className={`rsvp_form base_section ${className ?? ""}`}
+        >
             {/* <RSVPProgressBar texts={progressBar} currStep={step} /> */}
 
             <div className="rsvp_form-steps">
+                <div className=""></div>
                 {/* <RSVPStep
                     textContent={steps[step].textContent}
                     type={steps[step].type}
@@ -73,6 +74,7 @@ export default function RSVPForm({
                     searchError={searchError}
                     searching={searching}
                 /> */}
+                {/* TODO: nav buttons */}
             </div>
         </section>
     );
@@ -94,7 +96,11 @@ function RSVPProgressBar({ texts, currStep }: RSVPProgressBarProps) {
                 let id = toHtmlId(t);
 
                 return (
-                    <div key={idx} id={`pb-${id}`} className={`rsvp_progress_bar-element ${idx <= currStep ? "active" : ""}`}>
+                    <div
+                        key={idx}
+                        id={`pb-${id}`}
+                        className={`rsvp_progress_bar-element ${idx <= currStep ? "active" : ""}`}
+                    >
                         <div className="rsvp_progress_bar-element-line" />
 
                         <p className="rsvp_progress_bar-element-text">{t}</p>
@@ -132,26 +138,22 @@ function RSVPStepText({ stepNumber, title, body }: RSVPStepTextProps) {
     );
 }
 
-// #endregion -------------------------------------------------------------
-
-type SearchStepPassthroughProps = {
-    searchQuery: string;
-    setSearchQuery: (value: string) => void;
-    handleSearch: () => void;
-    searchResult: party[];
-    searchError: string;
-    searching: boolean;
-};
-
-export type RSVPStepProps = {
-    type?: "search";
-    textContent: RSVPStepTextProps;
-} & Partial<SearchStepPassthroughProps>;
-
-function RSVPStep({ type, textContent, searchQuery, setSearchQuery, handleSearch, searchResult, searchError, searching }: RSVPStepProps) {
+function RSVPStep({
+    type,
+    textContent,
+    searchQuery,
+    setSearchQuery,
+    handleSearch,
+    searchResult,
+    searchError,
+    searching,
+}: RSVPStepProps) {
     return (
         <div className={`rsvp_step`}>
-            {type === "search" && searchQuery !== undefined && setSearchQuery && handleSearch ? (
+            {type === "search" &&
+            searchQuery !== undefined &&
+            setSearchQuery &&
+            handleSearch ? (
                 <SearchStep
                     textContent={textContent}
                     searchQuery={searchQuery}
@@ -178,13 +180,33 @@ function RSVPStep({ type, textContent, searchQuery, setSearchQuery, handleSearch
     );
 }
 
+// #endregion -------------------------------------------------------------
 
+// #region --- Search -------------------------------------------------
 
+type SearchStepPassthroughProps = {
+    searchQuery: string;
+    setSearchQuery: (value: string) => void;
+    handleSearch: () => void;
+    searchResult: party[];
+    searchError: string;
+    searching: boolean;
+};
 
+export type RSVPStepProps = {
+    type?: "search";
+    textContent: RSVPStepTextProps;
+} & Partial<SearchStepPassthroughProps>;
 
-
-
-function SearchStep({ textContent, searchQuery, setSearchQuery, handleSearch, searchResult, searchError, searching }: { textContent: RSVPStepTextProps } & SearchStepPassthroughProps) {
+function SearchStep({
+    textContent,
+    searchQuery,
+    setSearchQuery,
+    handleSearch,
+    searchResult,
+    searchError,
+    searching,
+}: { textContent: RSVPStepTextProps } & SearchStepPassthroughProps) {
     return (
         <div className={`search_step`}>
             <div className="search_step-left">
@@ -213,24 +235,58 @@ function SearchStep({ textContent, searchQuery, setSearchQuery, handleSearch, se
                 </div>
 
                 <div className="search_step-results-content">
-                    {!searching && searchResult.length === 0 && !searchError && (
-                        <p className="body search_step-placeholder">Results will appear here.</p>
-                    )}
+                    {!searching &&
+                        searchResult.length === 0 &&
+                        !searchError && (
+                            <p className="body search_step-placeholder">
+                                Results will appear here.
+                            </p>
+                        )}
 
                     {searching && <p className="body">Searching...</p>}
 
-                    {searchError && <p className="body search_step-error">{searchError}</p>}
+                    {searchError && (
+                        <p className="body search_step-error">{searchError}</p>
+                    )}
 
                     {searchResult.map((party, idx) => (
                         <div key={idx} className="search_step-result">
                             {party.guests.map((guest, gIdx) => (
                                 <p key={gIdx} className="body">
-                                    {guest.placeholder ? "Guest" : `${guest.firstName}${guest.lastName ? ` ${guest.lastName}` : ""}`}
+                                    {guest.placeholder
+                                        ? "Guest"
+                                        : `${guest.firstName}${guest.lastName ? ` ${guest.lastName}` : ""}`}
                                 </p>
                             ))}
                         </div>
                     ))}
                 </div>
+            </div>
+        </div>
+    );
+}
+
+// #endregion -------------------------------------------------------------
+
+const STEP_ONE_TEXT: RSVPStepTextProps = {
+    stepNumber: 1,
+    title: "Find Your Party",
+    body: "Enter your name to find your reservation.",
+};
+
+function StepOne({}) {
+    return (
+        <div className="rsvp_form_step step_one">
+            <div className="step_one-left">
+                <Eyebrow text={`Step ${STEP_ONE_TEXT.stepNumber}`} />
+                <h2 className="heading-l rsvp_step_text-title">
+                    {STEP_ONE_TEXT.title}
+                </h2>
+                <p className="">{STEP_ONE_TEXT.body}</p>
+            </div>
+            <div className="step_one-right">
+                <div className=""></div>
+                <div className=""></div>
             </div>
         </div>
     );

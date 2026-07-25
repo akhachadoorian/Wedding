@@ -13,7 +13,7 @@ import Image from "next/image";
 export type MediaWithCopyProps = {
     className?: string;
     mediaSide?: "left" | "right";
-    headingSize?: "h2" | "h3" | "h4";
+    headingLevel?: "h2" | "h3" | "h4";
 
     eyebrow?: string;
     header: string;
@@ -30,8 +30,8 @@ export type MediaWithCopyProps = {
     
 };
 
-export default function MediaWithCopy({ className, mediaSide = 'right', headingSize = "h2",eyebrow, header, subtitle, body, buttons, note, img}: MediaWithCopyProps) {
-    const Heading = headingSize;
+export default function MediaWithCopy({ className, mediaSide = 'right', headingLevel = "h2",eyebrow, header, subtitle, body, buttons, note, img}: MediaWithCopyProps) {
+    const Heading = headingLevel;
 
     return (
         <div className={`media_with_copy-wrapper  ${className ?? ''} ${mediaSide}`}>
@@ -71,7 +71,7 @@ export default function MediaWithCopy({ className, mediaSide = 'right', headingS
 
                     {subtitle && <h5 className="subtitle">{subtitle}</h5>}
 
-                    {body && <ReactMarkdown components={{ p: ({ children }) => <p className={headingSize === "h2" ? "body-l" : "body"}>{children}</p> }}>{body}</ReactMarkdown>}
+                    {body && <ReactMarkdown components={{ p: ({ children }) => <p className={headingLevel === "h2" ? "body-l" : "body"}>{children}</p> }}>{body}</ReactMarkdown>}
                 </div>
 
                  */}

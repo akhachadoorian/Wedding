@@ -9,7 +9,8 @@
     gap: $space-400;
 
     &-subheader {
-        color: $gold;
+        // color: $gold;
+        color: $cream;
         font-family: $font-sans;
         text-transform: uppercase;
         font-size: var(--text-md);
@@ -30,7 +31,8 @@
         }
 
         h2 {
-            opacity: 50%;
+            // opacity: 50%;
+            color: $wine-650;
             font-family: $font-goth;
             font-size: var(--text-5xl);
             font-style: normal;
@@ -131,6 +133,7 @@
             &-btn {
                 width: auto;
                 justify-content: center;
+                text-align: center;
             }
         }
 

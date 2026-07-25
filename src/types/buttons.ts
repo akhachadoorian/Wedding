@@ -4,6 +4,27 @@ import { WithA11yProps, WithHTMLProps } from "./props";
 import { NonEmptyMaxX, RequireX } from "./utility";
 import { Icon } from "@phosphor-icons/react";
 
+
+export interface LinkSettings {
+    /** Label displayed inside the button */
+    text?: string;
+    /** React Router path or absolute URL the button links to */
+    link: string;
+    /** Whether the link opens in a new tab @default '_self' */
+    target?: "_blank" | "_self";
+}   
+
+export interface ModalSettings {
+    /** Label displayed inside the button */
+    text?: string;
+    /** Button decoration (icon, arrow) or left blank for none */
+    decoration?: BtnDecoration;
+    /** */
+    modalID: string;
+    /** */
+    modalContent: Omit<ModalProps, 'isOpen' | 'onClose'>;
+}
+
 /**
  * Text content, destination, and link behavior for a single button.
  *
@@ -40,29 +61,45 @@ import { Icon } from "@phosphor-icons/react";
  * };
  */
 
-export type LinkButtonSettings = {
+// export type LinkButtonSettings = {
+//     type: 'link';
+//     /** Label displayed inside the button */
+//     text: string;
+//     /** Button decoration (icon, arrow) or left blank for none */
+//     decoration?: BtnDecoration;
+//     /** React Router path or absolute URL the button links to */
+//     link: string;
+//     /** Whether the link opens in a new tab @default '_self' */
+//     target?: "_blank" | "_self";
+// }
+
+export interface LinkButtonSettings extends LinkSettings {
     type: 'link';
-    /** Label displayed inside the button */
+     /** Label displayed inside the button */
     text: string;
     /** Button decoration (icon, arrow) or left blank for none */
     decoration?: BtnDecoration;
-    /** React Router path or absolute URL the button links to */
-    link: string;
-    /** Whether the link opens in a new tab @default '_self' */
-    target?: "_blank" | "_self";
 }
 
-export type ModalButtonSettings = {
+export interface ModalButtonSettings extends ModalSettings {
     type: 'modal';
-    /** Label displayed inside the button */
+     /** Label displayed inside the button */
     text: string;
     /** Button decoration (icon, arrow) or left blank for none */
     decoration?: BtnDecoration;
-    /** */
-    modalID: string;
-    /** */
-    modalContent: Omit<ModalProps, 'isOpen' | 'onClose'>;
 }
+
+// export type ModalButtonSettings = {
+//     type: 'modal';
+//     /** Label displayed inside the button */
+//     text: string;
+//     /** Button decoration (icon, arrow) or left blank for none */
+//     decoration?: BtnDecoration;
+//     /** */
+//     modalID: string;
+//     /** */
+//     modalContent: Omit<ModalProps, 'isOpen' | 'onClose'>;
+// }
 
 /**
  * Button for visual only (not clickable)
@@ -131,7 +168,7 @@ export type BtnVariantMap<N extends number> = RequireX<BtnVariants, N>;
 /**
  *
  */
-export type BtnColorScheme = "gold" | "cream" | "black";
+export type BtnColorScheme = "gold" | "cream" | "black" | 'burgundy' | 'cabernet';
 
 /**
  *

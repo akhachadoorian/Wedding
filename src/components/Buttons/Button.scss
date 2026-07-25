@@ -6,6 +6,8 @@
 
 $btnTB: 12px;
 $btnLR: 24px;
+$btnMobileTB: 8px;
+$btnMobileLR: 16px;
 $btnBorderWidth: 2px;
 
 // #endregion -------------------------------------------------------------------
@@ -61,7 +63,7 @@ $btnBorderWidth: 2px;
                 "default": (
                     "border-color": $gold,
                     "background-color": transparent,
-                    "color": $gold,
+                    "color": $cream,
                 ),
                 "hover": (
                     "border-color": $cream,
@@ -76,11 +78,37 @@ $btnBorderWidth: 2px;
                     "color": $cream,
                 ),
                 "hover": (
-                    "border-color": $gold-600,
-                    "background-color": $gold-600,
+                    // "border-color": $gold-600,
+                    // "background-color": $gold-600,
+                    "border-color": $burgundy,
+                    "background-color": $burgundy,
                     "color": $cream,
                 ),
             ),
+            // "burgundy": (
+            //     "default": (
+            //         "border-color": $cream,
+            //         "background-color": transparent,
+            //         "color": $cream,
+            //     ),
+            //     "hover": (
+            //         "border-color": $gold-600,
+            //         "background-color": $gold-600,
+            //         "color": $cream,
+            //     ),
+            // ),
+            // "cabernet": (
+            //     "default": (
+            //         "border-color": $cream,
+            //         "background-color": transparent,
+            //         "color": $cream,
+            //     ),
+            //     "hover": (
+            //         "border-color": $gold-600,
+            //         "background-color": $gold-600,
+            //         "color": $cream,
+            //     ),
+            // ),
         );
 
     // #endregion ---------------------------------
@@ -120,13 +148,13 @@ $btnBorderWidth: 2px;
     &-text {
         font-family: $font-sans;
         font-size: var(--text-s);
-        font-weight: 600;
+        font-weight: 500;
         line-height: normal;
         letter-spacing: 1px;
         text-transform: uppercase;
 
         @include big {
-            font-size: var(--text-md);
+            font-size: var(--text-base);
         }
     }
 
@@ -134,9 +162,12 @@ $btnBorderWidth: 2px;
 
     &-variant {
         &-solid {
-            padding: $btnTB $btnLR;
             border: $btnBorderWidth solid;
-
+            padding: $btnMobileTB $btnMobileLR;
+            
+            @include big {
+               padding: $btnTB $btnLR; 
+            }
 
             @each $theme, $states in $solid-btn {
                 $default: map.get($states, "default");
@@ -157,8 +188,12 @@ $btnBorderWidth: 2px;
         }
 
         &-outline {
-            padding: $btnTB $btnLR;
             border: $btnBorderWidth solid;
+            padding: $btnMobileTB $btnMobileLR;
+            
+            @include big {
+               padding: $btnTB $btnLR; 
+            }
 
             @each $theme, $states in $outline-btn {
                 $default: map.get($states, "default");

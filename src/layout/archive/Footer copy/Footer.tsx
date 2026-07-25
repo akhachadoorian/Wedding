@@ -6,10 +6,10 @@ import { NAV_ITEMS } from "@/data/navItems";
 import { LenisLink } from "@/hooks/LenisLink";
 
 import Image from "next/image";
-import "./Footer2.scss";
+import "./Footer.scss";
 import { useFadeIn } from "@/hooks/useFadeIn";
 
-export default function Footer2({}) {
+export default function Footer({}) {
     const footerRef = useFadeIn<HTMLDivElement>();
 
     return (
@@ -40,6 +40,7 @@ export default function Footer2({}) {
                             Jacksonville, Fl
                         </p>
                     </div>
+                    
                 </div>
 
                 <div className="footer-upper-line" />
@@ -80,10 +81,10 @@ export default function Footer2({}) {
                 </div>
                 {/* <div className="footer-lower-lg_text-wrapper">  */}
           {/* TODO: fix */}
-                <div className="footer-lower-lg_text">
+                {/* <div className="footer-lower-lg_text">
                     <h6 className="">Til</h6>
                     <h6 className="">Death</h6>
-                </div>
+                </div> */}
                 {/* </div> */}
             </div>
         </footer>

@@ -1,10 +1,12 @@
 @use "styles/variables" as *;
+@use "@/styles/tokens/typography" as typo;
 
 // ── Base resets ──────────────────────────────────────────────
 
 p {
     margin: 0;
-    font-family: $font-sans;
+    // font-family: $font-sans;
+    @extend %body-base;
     // color: var(--cream-500);
 }
 
@@ -29,7 +31,7 @@ h6 {
 %body-base {
     font-family: $font-sans;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 150%;
 }
 
@@ -38,15 +40,16 @@ h6 {
     font-family: $font-goth;
     font-feature-settings: 'ss01' on;
     font-weight: 800;
-    line-height: 110%;
+    line-height: 130%;
+    overflow-wrap: break-word;
     // font-style: italic;
 }
 
 %subheading-base {
     font-family: $font-sans;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 140%;
-    letter-spacing: 0.84px;
+    letter-spacing: 1.4px;
     text-transform: uppercase;
 }
 
@@ -115,10 +118,10 @@ p {
 
 .eyebrow {
     font-family: $font-sans;
-    font-size: var(--text-md);
+    font-size: typo.fluid(16, 20);
     font-weight: 600;
     line-height: normal;
-    letter-spacing: 0.6px;
+    letter-spacing: 1.4px;
     text-transform: uppercase;
 
     &.centered {
@@ -135,9 +138,11 @@ p {
 // ── Subtitle ─────────────────────────────────────────────────
 
 .subtitle {
-    @extend %body-base;
-    font-size: var(--text-base);
-    font-weight: 700;
+    @extend %subheading-base;
+    font-size: var(--text-lg);
+    font-size: typo.fluid(20, 24);
+    color: $cream-700;
+    // font-weight: 700;
 
     &-extra {
         padding: var(--space-100) var(--space-075);
@@ -145,13 +150,26 @@ p {
         border-bottom: 1px solid $gold;
         width: fit-content;
 
-        font-family: $font-sans;
-        font-size: var(--text-md);
-        font-weight: 600;
-        line-height: normal;
-        letter-spacing: 0.6px;
+        // font-family: $font-sans;
+        // font-size: var(--text-md);
+        // font-weight: 600;
+        // line-height: normal;
+        // letter-spacing: 0.6px;
         text-transform: uppercase;
     }
+}
+
+.subtitle-extra {
+    @extend %subheading-base;
+    font-size: var(--text-lg);
+    font-size: typo.fluid(20, 24);
+    color: $cream;
+    text-transform: uppercase;
+
+    padding: var(--space-100) var(--space-075);
+        border-top: 1px solid $gold;
+        border-bottom: 1px solid $gold;
+        width: fit-content;
 }
 
 // ── Utilities ─────────────────────────────────────────────────

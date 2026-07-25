@@ -1,8 +1,10 @@
 @use "@/styles/variables" as *;
+@use "@/styles/tokens/typography" as typo;
 
 $imgHeight: calc(100dvh + $space-400);
 
 .coming_soon {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,7 +16,7 @@ $imgHeight: calc(100dvh + $space-400);
     }
 
     &-img {
-        position: absolute;
+        position: absolute !important;
         z-index: 1;
 
         height: $imgHeight;
@@ -27,7 +29,7 @@ $imgHeight: calc(100dvh + $space-400);
         }
 
         .img-overlay {
-            background: rgba(#101111, 0.85);
+            background: rgba(#101111, 0.80);
         }
     }
 
@@ -42,6 +44,7 @@ $imgHeight: calc(100dvh + $space-400);
         align-items: center;
 
         text-align: center;
+        overflow: hidden;
 
 
         @include big {
@@ -52,7 +55,7 @@ $imgHeight: calc(100dvh + $space-400);
         }
 
         h1 {
-            
+            width: 100%;
         }
     }
 

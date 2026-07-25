@@ -1,0 +1,118 @@
+@use "@/styles/variables" as *;
+@use "@/components/ArrowBox/arrow-tokens" as *;
+
+.card {
+    // padding: $space-500;
+    // background-color: $black-900;
+    position: relative;
+    overflow: hidden;
+    height: fit-content;
+
+    // @include big {
+    //     min-height: 281px;
+    // }
+
+    &-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: $space-200;
+        height: 100%;
+        min-height: 180px;
+
+        padding: $space-500;
+        background-color: $black-900;
+        transition: $transition;
+
+        @include big {
+            min-height: 281px;
+        }
+    }
+
+    &-upper {
+        display: flex;
+        justify-content: space-between;
+        // flex-direction: column;
+
+        position: relative;
+        z-index: 2;
+
+        &-text {
+            display: flex;
+            flex-direction: column;
+            gap: $space-200;
+        }
+    }
+
+    &-letter {
+        font-family: $font-goth;
+        font-size: 170px;
+        line-height: 100%;
+        text-transform: uppercase;
+
+        opacity: 0.15;
+        color: $cream;
+        transition: $transition;
+
+        position: absolute;
+        bottom: -15px;
+        right: -15px;
+        z-index: 1;
+
+        @include big {
+            font-size: 200px;
+            bottom: -25px;
+            right: -25px;
+        }
+    }
+}
+
+.link_card {
+    text-decoration: none;
+    transition: all ease-in-out 300ms;
+
+    &:hover {
+        transform: translateY(-5px);
+
+        @each $dir, $t in $arrow-hover-transforms {
+            .arrow_box-grid.#{$dir} {
+                transform: $t;
+            }
+        }
+
+        .card-text {
+            // background-color: $black-800;
+            background-color: $cabernet;
+        }
+
+        .card-letter {
+            bottom: -20px;
+        }
+    }
+}
+
+.modal_card {
+    &:hover {
+        @each $dir, $t in $arrow-hover-transforms {
+            .arrow_box-grid.#{$dir} {
+                transform: $t;
+            }
+        }
+    }
+}
+
+.card_grid {
+    // TODO: fixme for smaller
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-400);
+
+    @include big {
+        grid-template-columns: repeat(12, 1fr);
+        gap: var(--layout-column-gutter);
+    }
+
+    .card {
+        grid-column: span 4;
+    }
+}
