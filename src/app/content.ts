@@ -5,6 +5,8 @@ import { SmallTextProps } from "@/components/SmallTextGrid/SmallTextGrid";
 import { PhotoCollageProps } from "@/components/PhotoCollage/PhotoCollage";
 import { WatermarkTextProps } from "@/components/WatermarkText/WatermarkText";
 import {
+    DEFAULT_IMAGE_DISNEY,
+    DEFAULT_IMAGE_ENGAGEMENT,
     DEFAULT_IMAGE_GRADUATION,
     DEFAULT_IMAGE_MaxAlexJules,
     DEFAULT_IMAGE_MaxHoldingBucky,
@@ -210,20 +212,10 @@ const welcome = {
 
 const ourStory: PhotoCollageProps = {
     header: "Our Story",
-    mainImage: {
-        src: "/images/Engagement.jpg",
-        alt: "Max proposing to Alex at Epcot",
-        caption: "Max proposed to Alex",
-        // fill: true
-        // width: 282,
-        // height: 320,
-        width: 2160,
-        height: 2880,
-        // sizes: "(max-width: 768px) 100vw, 696px",
-    },
+    mainImage: DEFAULT_IMAGE_ENGAGEMENT,
     leftSideImages: [
+        DEFAULT_IMAGE_MaxAlexJules,
         DEFAULT_IMAGE_GRADUATION,
-        DEFAULT_IMAGE_MaxAlexJules, //TODO: make about how jules is how we meet
     ],
     rightSideImages: [
         {
@@ -232,7 +224,7 @@ const ourStory: PhotoCollageProps = {
                 desktop: "center 15%",
             },
         },
-        DEFAULT_IMAGE_SUNGLASSES, // * first of many disney trips?
+        DEFAULT_IMAGE_DISNEY, // 
     ],
 };
 

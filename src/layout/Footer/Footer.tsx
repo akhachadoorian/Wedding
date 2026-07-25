@@ -14,42 +14,13 @@ export default function Footer({}) {
 
     return (
         <footer ref={footerRef}>
-            <div className="footer-upper footer-group">
-                <LenisLink href={"/"} className="footer-upper-logo">
-                    <Image
-                        src="/assets/AM.svg"
-                        alt="A & M logo"
-                        width={306}
-                        height={280}
-                        className="footer-upper-logo-img"
-                    />
-                </LenisLink>
-
-                <div className="footer-upper-line" />
-
-                <div className="footer-upper-text">
-                    <h6 className="footer-upper-text-header">Lets celebrate together</h6>
-
-                    <div className="footer-upper-text-group">
-                        <p className="body-s">
-                            October 31st, 2026 <br />
-                            Ceremony at 5pm
-                        </p>
-                        <p className="body-s">
-                            The Clay Theatre <br />
-                            Jacksonville, Fl
-                        </p>
-                    </div>
-                </div>
-
-                <div className="footer-upper-line" />
-
-                <div className="footer-upper-nav">
+            <div className="footer-group footer-group-nav">
+                <div className="footer-nav">
                     {NAV_ITEMS.map((item) => (
                         <React.Fragment key={item.text}>
                             <LenisLink
                                 href={item.link}
-                                className="footer-upper-nav-link"
+                                className="footer-link"
                             >
                                 <p className="">{item.text}</p>
                             </LenisLink>
@@ -58,33 +29,14 @@ export default function Footer({}) {
                 </div>
             </div>
 
-            <div className="footer-lower footer-group">
-                <div className="footer-lower-links">
-                    <LenisLink
-                        href={"/"}
-                        target="_self"
-                        className="footer-lower-link"
-                    >
-                        <p className="body-xs">alexmaxwedding.com</p>
-                    </LenisLink>
-
-                    <LenisLink
-                        href={"https://akhachadoorian.github.io/Resume/"}
-                        target="_blank"
-                        className="footer-lower-link"
-                    >
-                        <p className="body-xs">
-                            Designed & Developed by Alex Khachadoorian
-                        </p>
-                    </LenisLink>
-                </div>
-                {/* <div className="footer-lower-lg_text-wrapper">  */}
-          {/* TODO: fix */}
-                <div className="footer-lower-lg_text">
-                    <h6 className="">Til</h6>
-                    <h6 className="">Death</h6>
-                </div>
-                {/* </div> */}
+            <div className="footer-group footer-group-links">
+                <LenisLink
+                    href={"/"}
+                    target="_self"
+                    className="footer-link"
+                >
+                    <p className="body-xs">alexmaxwedding.com</p>
+                </LenisLink> 
             </div>
         </footer>
     );

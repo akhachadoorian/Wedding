@@ -17,7 +17,7 @@ export const fillDefaultImages = (count: number): CustomImageProps[] =>
 export const DEFAULT_IMAGE_ENGAGEMENT: CustomImageProps = {
     src: "/images/Engagement.jpg",
     alt: "Max proposing to Alex in the Japan Garden in Epcot.",
-    caption: "Max proposing to Alex in the Japan Garden in Epcot",
+    caption: "Max proposed to Alex in the Japan Garden in Epcot",
     fill: true,
     // width: 282,
     // height: 320,
@@ -26,7 +26,7 @@ export const DEFAULT_IMAGE_ENGAGEMENT: CustomImageProps = {
 export const DEFAULT_IMAGE_GRADUATION: CustomImageProps = {
     src: "/images/Graduation.jpg",
     alt: "Max and Alex at Max's college graduation.",
-    caption: "Max and Alex meet at the University of Alabama",
+    caption: "We graduated from the University of Alabama together",
     fill: true,
     // width: 282,
     // height: 320,
@@ -44,10 +44,10 @@ export const DEFAULT_IMAGE_SUNGLASSES: CustomImageProps = {
 export const DEFAULT_IMAGE_DISNEY: CustomImageProps = {
     src: "/images/Disney.jpg",
     alt: "Max and Alex kissing in front of the Disney castle.",
-    caption: "Disney Trip",
+    caption: "One of many Disney Trips",
     fill: true,
-    width: 282,
-    height: 188,
+    // width: 282,
+    // height: 188,
 };
 
 export const DEFAULT_IMAGE_MaxBuck: CustomImageProps = {
@@ -62,7 +62,7 @@ export const DEFAULT_IMAGE_MaxBuck: CustomImageProps = {
 export const DEFAULT_IMAGE_MaxHoldingBucky: CustomImageProps = {
     src: "/images/MaxHoldingBucky.jpg",
     alt: "Max holding our white, fluffy cat named Bucky",
-    caption: "Max holding his son, Bucky.",
+    caption: "Max holding his toddler, Bucky (our second cat)",
     fill: true,
     // width: 2160,
     // height: 2880,
@@ -74,7 +74,7 @@ export const DEFAULT_IMAGE_MaxHoldingBucky: CustomImageProps = {
 export const DEFAULT_IMAGE_MaxAlexJules: CustomImageProps = {
     src: "/images/MaxAlexJulesInCar.jpg",
     alt: "Alex, Max, and Jules in the car.",
-    caption: "Juliet was the reason we met.",
+    caption: "It all started when Max came over to meet Jules",
     width: 2880,
     height: 2160,
 };

@@ -98,6 +98,8 @@ export function ToolTipHoverImageHolder({
     const tooltipContent = img.caption
         ? { type: "text" as const, caption: img.caption }
         : null;
+    
+        console.log("img.caption ", img.caption)
 
     return (
         <div

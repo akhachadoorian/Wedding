@@ -39,7 +39,7 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
             >
                 <PhotoCollage
                     {...content.ourStory}
-                    styleOptions={{ headerTop: true, textBehind: true }}
+                    styleOptions={{ headerTop: true, textBehind: true, reverseImageShapes: true }}
                 />
             </section>
 

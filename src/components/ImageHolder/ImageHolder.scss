@@ -54,7 +54,7 @@
         .img-caption {
             opacity: 1;
             // transform: translateY(0) translateX(-50%);
-            transform: translateY(0);
+            transform: translate(-50%, 0);
         }
     }
     .img-caption {
@@ -72,12 +72,17 @@
         padding: var(--space-075) var(--space-150);
         // margin: 0 var(--space-200);
         border-radius: 6px;
+        max-width: calc(100% - var(--space-150) - var(--space-150) - var(--space-200) - var(--space-200));
+        width: 100%;
+        margin: 0 $space-100;
 
         border: 1px solid rgba(255, 255, 255, 0.08);
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 
-        // position: absolute;
-        // left: 50%;
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        // left: 0;
         // bottom: var(--space-200);
         z-index: 10;
 
@@ -85,7 +90,7 @@
 
         opacity: 0;
         // transform: translateY(4px) translateX(-50%);
-        transform: translateY(4px);
+        transform: translate(-50%, 4px);
         transition:
             opacity 0.2s ease,
             transform 0.2s ease;

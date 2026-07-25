@@ -21,7 +21,7 @@
 
         @include big {
             flex-direction: row;
-            align-items: center;
+            // align-items: center;
             // gap: var(--layout-column-gutter);
         }
 
@@ -35,13 +35,14 @@
 
 
         &-main {
-            overflow: hidden;
+            // overflow: hidden;
             aspect-ratio: 10/8;
 
             @include big {
                 flex: 3 1 696px;
-                height: 100%;
-                aspect-ratio: 29/23;
+                aspect-ratio: unset;
+                // height: 100%;
+                // aspect-ratio: 29/23;
 
             }
         }
@@ -54,6 +55,7 @@
 
             @include big {
                 flex-direction: column;
+                justify-content: center;
                 // align-items: ;
                 flex: 1 1 281px;
 
@@ -71,13 +73,13 @@
     }
 
     &-img {
-        overflow: hidden;
+        // overflow: hidden;
 
         &-tall {
             width: 100%;
             // aspect-ratio: 136/151;
             aspect-ratio: 1;
-            overflow: hidden;
+            // overflow: hidden;
 
             @include big {
                 aspect-ratio: 136/151;
@@ -87,7 +89,7 @@
         &-long {
             width: 100%;
             aspect-ratio: 3/2;
-            overflow: hidden;
+            // overflow: hidden;
 
             @include big {
                 aspect-ratio: 94/61;
