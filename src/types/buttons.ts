@@ -6,9 +6,8 @@ import { Icon } from "@phosphor-icons/react";
 
 
 export interface LinkSettings {
-    type: 'link';
     /** Label displayed inside the button */
-    text: string;
+    text?: string;
     /** React Router path or absolute URL the button links to */
     link: string;
     /** Whether the link opens in a new tab @default '_self' */
@@ -16,9 +15,8 @@ export interface LinkSettings {
 }   
 
 export interface ModalSettings {
-    type: 'modal';
     /** Label displayed inside the button */
-    text: string;
+    text?: string;
     /** Button decoration (icon, arrow) or left blank for none */
     decoration?: BtnDecoration;
     /** */
@@ -76,11 +74,17 @@ export interface ModalSettings {
 // }
 
 export interface LinkButtonSettings extends LinkSettings {
+    type: 'link';
+     /** Label displayed inside the button */
+    text: string;
     /** Button decoration (icon, arrow) or left blank for none */
     decoration?: BtnDecoration;
 }
 
 export interface ModalButtonSettings extends ModalSettings {
+    type: 'modal';
+     /** Label displayed inside the button */
+    text: string;
     /** Button decoration (icon, arrow) or left blank for none */
     decoration?: BtnDecoration;
 }
@@ -164,7 +168,7 @@ export type BtnVariantMap<N extends number> = RequireX<BtnVariants, N>;
 /**
  *
  */
-export type BtnColorScheme = "gold" | "cream" | "black";
+export type BtnColorScheme = "gold" | "cream" | "black" | 'burgundy' | 'cabernet';
 
 /**
  *

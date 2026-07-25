@@ -1,60 +1,68 @@
-@forward 'styles/mixins';
-@forward 'styles/tokens/spacing';
-@forward 'styles/tokens/layout';
-@forward 'styles/tokens/typography';
+@forward "styles/mixins";
+@forward "styles/tokens/spacing";
+@forward "styles/tokens/layout";
+@forward "styles/tokens/typography";
 
 // ── Google Fonts ───────────────────────────────────
 // @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
 // @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 // @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-
 // ── CSS custom properties (primitives) ───────────────────────
 :root {
     // Gold scale
-    --gold-100: #F4EFE6;
-    --gold-200: #E8DECF;
-    --gold-250: #DDCFB9;
-    --gold-300: #D2BFA2;
-    --gold-400: #C0A57D;
-    --gold-500: #A6824A;
-    --gold-600: #87693B;
-    --gold-700: #6B532E;
-    --gold-800: #523F22;
-    --gold-850: #41311A;
+    --gold-100: #f4efe6;
+    --gold-200: #e8decf;
+    --gold-250: #ddcfb9;
+    --gold-300: #d2bfa2;
+    --gold-400: #c0a57d;
+    --gold-500: #a6824a;
+    --gold-600: #87693b;
+    --gold-700: #6b532e;
+    --gold-800: #523f22;
+    --gold-850: #41311a;
     --gold-900: #302413;
-    --gold-1000: #20160B;
+    --gold-1000: #20160b;
 
     // Cream scale
-    --cream-100: #F5F2EE;
-    --cream-300: #EDE9E3;
-    --cream-500: #E6E2DA;
-    --cream-600: #D8D4CD;
-    --cream-700: #CEC9C0;
-    --cream-800: #BDB7AB;
-    --cream-900: #B0AA9F;
+    --cream: #EBE7DC;
+    --cream-100: #f5f2ee;
+    --cream-300: #ede9e3;
+    --cream-500: #e6e2da;
+    --cream-600: #d8d4cd;
+    --cream-700: #cec9c0;
+    --cream-800: #bdb7ab;
+    --cream-900: #b0aa9f;
 
     // Black scale
-    --black-100: #E9E9E8;
-    --black-200: #D0CFCE;
-    --black-300: #ABAAA9;
+    --black-100: #e9e9e8;
+    --black-200: #d0cfce;
+    --black-300: #abaaa9;
     --black-400: #838281;
     --black-500: #616060;
     --black-600: #484747;
     --black-700: #363737;
     --black-800: #272828;
     --black-850: #232424;
-    --black-900: #1F2121;
+    --black-900: #1f2121;
     --black-950: #161818;
     --black-1000: #101111;
 
+    // Wine
+    --wine-500: #a33e4d;
+    --wine-600: #672830; // Burgundy 
+    --wine-650: #59272E;
+    --wine-700: #4c242a;
+    --wine-750: #442227;
+    --wine-800: #3c2025; // Cabernet
+
     // Semantics
-    --positive: #7E9568;
-    --positive-bg: rgba(126,149,104,0.14);
-    --negative: #B0685A;
-    --negative-bg: rgba(176,104,90,0.14);
-    --info: #6E8BA6;
-    --info-bg: rgba(110,139,166,0.12);
+    --positive: #7e9568;
+    --positive-bg: rgba(126, 149, 104, 0.14);
+    --negative: #b0685a;
+    --negative-bg: rgba(176, 104, 90, 0.14);
+    --info: #6e8ba6;
+    --info-bg: rgba(110, 139, 166, 0.12);
 
     --max-width: 1600px;
 }
@@ -66,22 +74,22 @@ $max-width-bp: 1600px; // raw value for use in media queries
 // ──── Fonts ───────────────────────────────────
 
 $font-serif: var(--font-respira-black);
-$font-sans:  var(--font-unbounded), sans-serif;
+$font-sans: var(--font-unbounded), sans-serif;
 $font-goth: var(--font-respira-black);
 
 // ──── Color primitives ────────────────────────
 // Gold
-$gold-100:  var(--gold-100);
-$gold-200:  var(--gold-200);
-$gold-250:  var(--gold-250);
-$gold-300:  var(--gold-300);
-$gold-400:  var(--gold-400);
-$gold-500:  var(--gold-500);
-$gold-600:  var(--gold-600);
-$gold-700:  var(--gold-700);
-$gold-800:  var(--gold-800);
-$gold-850:  var(--gold-850);
-$gold-900:  var(--gold-900);
+$gold-100: var(--gold-100);
+$gold-200: var(--gold-200);
+$gold-250: var(--gold-250);
+$gold-300: var(--gold-300);
+$gold-400: var(--gold-400);
+$gold-500: var(--gold-500);
+$gold-600: var(--gold-600);
+$gold-700: var(--gold-700);
+$gold-800: var(--gold-800);
+$gold-850: var(--gold-850);
+$gold-900: var(--gold-900);
 $gold-1000: var(--gold-1000);
 
 // Cream
@@ -94,32 +102,44 @@ $cream-800: var(--cream-800);
 $cream-900: var(--cream-900);
 
 // Black
-$black-100:  var(--black-100);
-$black-200:  var(--black-200);
-$black-300:  var(--black-300);
-$black-400:  var(--black-400);
-$black-500:  var(--black-500);
-$black-600:  var(--black-600);
-$black-700:  var(--black-700);
-$black-800:  var(--black-800);
-$black-850:  var(--black-850);
-$black-900:  var(--black-900);
-$black-950:  var(--black-950);
+$black-100: var(--black-100);
+$black-200: var(--black-200);
+$black-300: var(--black-300);
+$black-400: var(--black-400);
+$black-500: var(--black-500);
+$black-600: var(--black-600);
+$black-700: var(--black-700);
+$black-800: var(--black-800);
+$black-850: var(--black-850);
+$black-900: var(--black-900);
+$black-950: var(--black-950);
 $black-1000: var(--black-1000);
+
+// Wine
+$wine-500: var(--wine-500);
+$wine-600: var(--wine-600);
+$wine-650: var(--wine-650);
+$wine-700: var(--wine-700);
+$wine-750: var(--wine-750);
+$wine-800: var(--wine-800);
 
 // ──── Semantic aliases ────────────────────────
 // Keep these for quick access to your most-used values
-$gold:  $gold-500;
-$cream: $cream-300;
+$gold: $gold-500;
+// $cream: $cream-300;
+$cream: var(--cream);
 $black: $black-900;
 $black-bg: $black-1000;
 
+$burgundy: $wine-600;
+$cabernet: $wine-800;
+
 $positive: var(--positive);
-$positive-bg : var(--positive-bg);
+$positive-bg: var(--positive-bg);
 $negative: var(--negative);
-$negative-bg : var(--negative-bg);
+$negative-bg: var(--negative-bg);
 $info: var(--info);
-$info-bg : var(--info-bg);
+$info-bg: var(--info-bg);
 
 // ──── Utility ─────────────────────────────────
 $overlay-bg: rgba(#101111, 0.35);
@@ -130,7 +150,6 @@ $drinks_bg: var(--black-900);
 $drinks_lines: var(--cream-500);
 
 // ──── Setup ─────────────────────────────────
-
 
 .placeholder {
     min-height: 60dvh;

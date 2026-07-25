@@ -32,6 +32,7 @@ export function useFadeIn<T extends HTMLElement>(options: FadeInOptions = {}) {
                     duration,
                     delay,
                     ease: "power2.out",
+                    clearProps: "transform",
                     scrollTrigger: {
                         trigger: el,
                         start: `top ${Math.round((1 - threshold) * 100)}%`,
@@ -69,6 +70,7 @@ export function useFadeInChildren<T extends HTMLElement>(
                     delay,
                     stagger,
                     ease: "power2.out",
+                    clearProps: "transform",
                     scrollTrigger: {
                         trigger: el,
                         start: `top ${Math.round((1 - threshold) * 100)}%`,

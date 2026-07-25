@@ -12,6 +12,7 @@ import {
 } from "@/data/defaultImage";
 import { GothHeroProps } from "@/layout/GothHero/GothHero";
 import { ScrollRevealHeroProps } from "@/layout/archive/ScrollRevealHero/ScrollRevealHero";
+import { CardGridProps } from "@/components/CardGrid/CardGrid";
 
 // #region --- ARCHIVE -----------------------------------------------
 
@@ -66,38 +67,37 @@ const oldHero: ScrollRevealHeroProps = {
             src: "/images/Engagement.jpg",
             alt: "Max proposing to Alex in the Japan Garden in Epcot",
             caption: "Max proposing to Alex in the Japan Garden in Epcot",
-            borderStyle: 'simple',
+            borderStyle: "simple",
             aspectRatio: "portrait",
             width: 2000,
-            height: 2000
+            height: 2000,
         },
         {
             src: "/images/Graduation.jpg",
             alt: "Max and Alex at Max's college graduation",
             caption: "Max's Graduation",
-            borderStyle: 'double',
+            borderStyle: "double",
             aspectRatio: "square",
             width: 2000,
-            height: 2000
+            height: 2000,
         },
         {
             src: "/images/Sunglasses.jpg",
             alt: "",
             caption: "",
-            borderStyle: 'corner',
+            borderStyle: "corner",
             aspectRatio: "square",
             width: 2000,
-            height: 2000
-
+            height: 2000,
         },
         {
             src: "/images/Disney.jpg",
             alt: "Max and Alex kissing in front of the Disney castle",
             caption: "Disney Trip",
-            borderStyle: 'diamond',
+            borderStyle: "diamond",
             aspectRatio: "portrait",
             width: 2000,
-            height: 2000
+            height: 2000,
         },
     ],
 };
@@ -127,7 +127,6 @@ const oldHero: ScrollRevealHeroProps = {
 // };
 
 // #endregion -----------------------------------------------
-
 
 // ----- Hero -----------------------------------------------
 
@@ -159,7 +158,6 @@ const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
         },
     ],
 };
-
 
 const welcomeWatermarkText: Omit<WatermarkTextProps, "loaded"> = {
     watermarkText: "October 31st",
@@ -215,7 +213,7 @@ const ourStory: PhotoCollageProps = {
     mainImage: {
         src: "/images/Engagement.jpg",
         alt: "Max proposing to Alex at Epcot",
-        caption: "Max proposing to Alex at Epcot ",
+        caption: "Max proposed to Alex",
         // fill: true
         // width: 282,
         // height: 320,
@@ -242,8 +240,59 @@ const ourStory: PhotoCollageProps = {
 
 // ----- Quick Links -----------------------------------------------
 const qlCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
-    eyebrow: "We've got you covered",
-    header: "Everything from the ceremony to where to stay, all in one place",
+    // eyebrow: "We've got you covered",
+    // header: "Everything from the ceremony to where to stay, all in one place",
+    eyebrow: "quick links",
+    header: "Everything you need, in one place"
+};
+
+const qlCardGrid: CardGridProps = {
+    cards: [
+        {
+            text: {
+                eyebrow: "The Day",
+                title: "Details",
+                body: "Ceremony time, timeline, and what to expect on the day",
+            },
+            cardType: {
+                type: "link",
+                linkSettings: {
+                    link: "/details",
+                    target: "_self",
+                },
+            },
+        },
+        {
+            text: {
+                eyebrow: "Accommodations",
+                title: "Stay & Travel",
+                body: "Hotel blocks, parking, and getting to The Clay Theatre",
+                // letter: "A"
+            },
+            cardType: {
+                type: "link",
+                linkSettings: {
+                    link: "/accommodations",
+                    target: "_self",
+                },
+            },
+        },
+        {
+            text: {
+                eyebrow: "RSVP",
+                title: "You're Invited",
+                body: "Let us know if you are able to come!",
+                // letter: "i"
+            },
+            cardType: {
+                type: "link",
+                linkSettings: {
+                    link: "/rsvp",
+                    target: "_self",
+                },
+            },
+        },
+    ],
 };
 
 const drinkGrid: DrinkCardGridProps = {
@@ -316,7 +365,8 @@ const drinkGrid: DrinkCardGridProps = {
 
 const quickLinks = {
     copyOnly: qlCopyOnly,
-    drinkGrid: drinkGrid,
+    cardGrid: qlCardGrid,
+    // drinkGrid: drinkGrid,
 };
 
 // ----- Content -----------------------------------------------
@@ -325,8 +375,7 @@ const homeContent = {
     welcome: welcome,
     ourStory: ourStory,
     quickLinks: quickLinks,
-    oldHero: oldHero
+    oldHero: oldHero,
 };
 
 export default homeContent;
-

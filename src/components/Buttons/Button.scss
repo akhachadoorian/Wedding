@@ -78,11 +78,37 @@ $btnBorderWidth: 2px;
                     "color": $cream,
                 ),
                 "hover": (
-                    "border-color": $gold-600,
-                    "background-color": $gold-600,
+                    // "border-color": $gold-600,
+                    // "background-color": $gold-600,
+                    "border-color": $burgundy,
+                    "background-color": $burgundy,
                     "color": $cream,
                 ),
             ),
+            // "burgundy": (
+            //     "default": (
+            //         "border-color": $cream,
+            //         "background-color": transparent,
+            //         "color": $cream,
+            //     ),
+            //     "hover": (
+            //         "border-color": $gold-600,
+            //         "background-color": $gold-600,
+            //         "color": $cream,
+            //     ),
+            // ),
+            // "cabernet": (
+            //     "default": (
+            //         "border-color": $cream,
+            //         "background-color": transparent,
+            //         "color": $cream,
+            //     ),
+            //     "hover": (
+            //         "border-color": $gold-600,
+            //         "background-color": $gold-600,
+            //         "color": $cream,
+            //     ),
+            // ),
         );
 
     // #endregion ---------------------------------
