@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -19,7 +19,7 @@ export function useFadeIn<T extends HTMLElement>(options: FadeInOptions = {}) {
     const { duration = 0.8, delay = 0, y = 20, threshold = 0.2, enabled = true } = options;
     const ref = useRef<T>(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const el = ref.current;
         if (!el || !enabled) return;
 
@@ -56,7 +56,7 @@ export function useFadeInChildren<T extends HTMLElement>(
     const { duration = 0.8, delay = 0, y = 20, stagger = 0.1, threshold = 0.2, enabled = true } = options;
     const ref = useRef<T>(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const el = ref.current;
         if (!el || !enabled) return;
 

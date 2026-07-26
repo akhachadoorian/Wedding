@@ -19,9 +19,12 @@ export default function LenisProvider({
   useEffect(() => {
     function update(time: number) {
       lenisRef.current?.lenis?.raf(time * 1000)
+      ScrollTrigger.update()
     }
 
     gsap.ticker.add(update)
+    gsap.ticker.lagSmoothing(0)
+
     return () => gsap.ticker.remove(update)
   }, [])
 
