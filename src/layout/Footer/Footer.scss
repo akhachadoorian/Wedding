@@ -11,10 +11,13 @@ footer {
     overflow: hidden;
 
     display: flex;
-    // flex-direction: column;
+    flex-direction: column;
+    align-items: center;
     gap: $space-400;
 
     @include big {
+        flex-direction: row;
+        align-items: stretch;
         justify-content: space-between;
         gap: $space-750;
     }
@@ -45,7 +48,7 @@ footer {
 
     &-nav {
         display: flex;
-        // flex-wrap: wrap;
+        flex-wrap: wrap;
         align-items: center;
         // justify-content: center;
         gap: $space-200;

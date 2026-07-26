@@ -39,7 +39,7 @@ type EyebrowProps = WithHTMLProps & {
     /** Primary label text. */
     text: string;
     /** Second label text, only rendered in the `double` variation. */
-    // doubleText?: string;
+    doubleText?: string;
 };
 
 export default function Eyebrow({ styleOptions = DEFAULT_STYLE, text, className, ...htmlProps }: EyebrowProps) {
