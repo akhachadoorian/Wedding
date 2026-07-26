@@ -1,13 +1,14 @@
-@use "@/styles/variables" as *;;
+@use "@/styles/variables" as *;
 
 .media_with_copy {
-            display: flex;
-        flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    gap: $space-600;
 
-        @include big {
-            flex-direction: row;
-            gap: 7.847vw;
-        }
+    @include big {
+        flex-direction: row;
+        gap: 7.847vw;
+    }
 
     &-text {
         @include big {
@@ -15,16 +16,22 @@
             padding: var(--space-200) 0;
         }
 
-        .subtitle, .body {
+        .subtitle,
+        .body {
             margin-top: var(--space-300);
         }
 
-        .btns, .note-wrapper {
-           margin-top: var(--space-500); 
+        .btns,
+        .note-wrapper {
+            margin-top: var(--space-500);
         }
     }
 
     &-img {
+        // flex: 1 1 259px;
+        aspect-ratio: 3 / 2;
+        // aspect-ratio: 49/37;
+
         @include big {
             flex: 1 1 532px;
         }
@@ -34,14 +41,14 @@
     &-side {
         &-left {
             @include big {
-            .media_with_copy-text {
-                order: 2;
-            }
+                .media_with_copy-text {
+                    order: 2;
+                }
 
-            .media_with_copy-img {
-                order: 1;
+                .media_with_copy-img {
+                    order: 1;
+                }
             }
-          }
         }
     }
 }

@@ -27,6 +27,20 @@ section.base_section {
     }
 }
 
+section.full-width {
+    & > .section-inner {
+        padding: var(--layout-section-padding) var(--layout-column-margin);
+
+        & > * {
+            @include big {
+                max-width: var(--max-width);
+                margin: auto;
+            }
+        }
+    }
+}
+
+
 // ── Custom cursor ─────────────────────────────────────────────
 // .cursor {
 //     position: fixed;
@@ -42,21 +56,3 @@ section.base_section {
 //     align-items: center;
 //     justify-content: center;
 // }
-
-section.full-width {
-    & > .section-inner {
-        padding: var(--layout-section-padding) var(--layout-column-margin);
-        // margin: var(--layout-section-padding) auto;
-
-        // @include big {
-        //     max-width: var(--max-width);
-        // }
-
-        & > * {
-            @include big {
-                max-width: var(--max-width);
-                margin: auto;
-            }
-        }
-    }
-}

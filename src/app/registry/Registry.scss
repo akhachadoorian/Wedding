@@ -1,12 +1,6 @@
 @use "@/styles/variables" as *;;
 
 
-.registry-section {
-        display: flex;
-    flex-direction: column;
-    gap: var(--space-700);
-
-    @include big {
-        gap: var(--space-1000);
-    }
+.registry_link-section {
+    @include section-stack;
 }

@@ -42,3 +42,16 @@ $bp-desktop: 1024px;
         @content;
     }
 }
+
+// ── Layout  ───────────────────────────────────
+
+// Vertical stack of section content, gap grows on desktop
+@mixin section-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-700);
+
+    @include big {
+        gap: var(--space-1000);
+    }
+}

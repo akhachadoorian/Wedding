@@ -79,12 +79,29 @@ export function ImageHolderBorder({
     } as React.CSSProperties;
 
     return (
-        <div
-            {...htmlProps}
-            className={`img-holder-border ${className ?? ""}`}
-            
-        >
-            <div className="img-holder" style={divStyle}>
+        <div {...htmlProps} className={`img-holder-border ${className ?? ""}`}>
+            <div className="img-border-long">
+                <div className="img-border-tall">
+                    <div className="img-holder" style={divStyle}>
+                        <Image
+                            {...imageProps}
+                            className={`img-bw ${customImageClass ?? ""}`}
+                            style={style}
+                        />
+
+                        {includeOverlay && (
+                            <div
+                                className={`img-overlay ${customOverlayClass ?? ""}`}
+                            />
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            {/* <div className="img-border img-border-long" /> */}
+            {/* <div className="img-border img-border-tall" /> */}
+
+            {/* <div className="img-holder" style={divStyle}>
                 <Image
                     {...imageProps}
                     className={`img-bw ${customImageClass ?? ""}`}
@@ -96,10 +113,7 @@ export function ImageHolderBorder({
                         className={`img-overlay ${customOverlayClass ?? ""}`}
                     />
                 )}
-            </div>
-
-            <div className="img-border"></div>
-            <div className="img-border2"></div>
+            </div> */}
         </div>
     );
 }

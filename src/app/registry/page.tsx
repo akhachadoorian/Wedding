@@ -14,8 +14,8 @@ import CardGrid from "@/components/CardGrid/CardGrid";
 import MediaWithCopy from "@/components/MediaWithCopy/MediaWithCopy";
 
 export default function Registry({ loaded = true }: { loaded?: boolean }) {
-    const thanksRef = useFadeIn<HTMLDivElement>();
-    const honeymoonRef = useFadeIn<HTMLDivElement>();
+    const registryLinksRef = useFadeIn<HTMLDivElement>();
+    const catGiftRef = useFadeIn<HTMLDivElement>();
 
     return (
         <PageGuard
@@ -26,9 +26,10 @@ export default function Registry({ loaded = true }: { loaded?: boolean }) {
                 {...content.hero}
                 loaded={loaded}
                 styleOptions={{ variation: "columns" }}
+                id="registry-hero"
             />
 
-            <section className="base_section registry-section">
+            <section id="registry_link" ref={registryLinksRef} className="base_section registry_link-section">
                 <CopyOnly
                     styleOptions={{
                         headingLevel: "h2",
@@ -39,7 +40,7 @@ export default function Registry({ loaded = true }: { loaded?: boolean }) {
                 />  
             </section>
 
-            <section className="base_section cat-section">
+            <section id="cat_gift" ref={catGiftRef} className="base_section cat_gift-section">
                 <MediaWithCopy
                     styleOptions={{
                         mediaSide: "right",

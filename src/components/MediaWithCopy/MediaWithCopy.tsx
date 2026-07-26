@@ -13,6 +13,8 @@ import { WithHTMLProps } from "@/types/props";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
 import ImageHolder, { ImageHolderBorder } from "../ImageHolder/ImageHolder";
 import { HeadingClassProps, HeadingLevelProps } from "@/types/headings";
+import { useFadeInChildren } from "@/hooks/useFadeIn";
+import mergeRefs from "@/hooks/mergeRefs";
 
 type MediaWithCopyStyleProps = {
     mediaSide: "left" | "right";
@@ -23,7 +25,7 @@ type MediaWithCopyStyleProps = {
 const DEFAULT_STYLE: MediaWithCopyStyleProps = {
     mediaSide: "left",
     headingLevel: "h2",
-    headingClass: "heading-xl"
+    headingClass: "heading-xl",
 };
 
 export type MediaWithCopyProps = WithHTMLProps & {
@@ -54,13 +56,20 @@ export default function MediaWithCopy({
     styleOptions = DEFAULT_STYLE,
 
     className,
+    ref,
     ...htmlProps
 }: MediaWithCopyProps) {
     const Heading = styleOptions.headingLevel;
 
+    const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", {
+        stagger: 0.15,
+        y: 24,
+    });
+
     return (
         <div
             {...htmlProps}
+            ref={mergeRefs(animRef, ref)}
             className={`media_with_copy  ${className ?? ""} media_with_copy-side-${styleOptions.mediaSide}`}
         >
             <div className="media_with_copy-text">
@@ -68,19 +77,30 @@ export default function MediaWithCopy({
                     {eyebrow && (
                         <Eyebrow
                             text={eyebrow}
-                            styleOptions={{ variation: "left", includeMargin: true }}
+                            styleOptions={{
+                                variation: "left",
+                                includeMargin: true,
+                            }}
                         />
                     )}
 
-                    <Heading className={` ${styleOptions.headingClass}`}>{header}</Heading>
+                    <Heading
+                        className={`media_with_copy-header mwc-animate ${styleOptions.headingClass}`}
+                    >
+                        {header}
+                    </Heading>
 
-                    {subtitle && <h5 className="subtitle">{subtitle}</h5>}
+                    {subtitle && (
+                        <h5 className="`media_with_copy-subtitle subtitle mwc-animate ">{subtitle}</h5>
+                    )}
 
                     {body && (
                         <ReactMarkdown
                             components={{
                                 p: ({ children }) => (
-                                    <p className={"body"}>{children}</p>
+                                    <p className={"`media_with_copy-body body mwc-animate "}>
+                                        {children}
+                                    </p>
                                 ),
                             }}
                         >
@@ -91,7 +111,7 @@ export default function MediaWithCopy({
 
                 {buttons && (
                     <TwoButtons
-                        className="media_with_copy-btns"
+                        className="media_with_copy-btns mwc-animate "
                         buttons={buttons ?? []}
                     />
                 )}
@@ -101,13 +121,14 @@ export default function MediaWithCopy({
                         variation="left"
                         backgroundColor="--black-700"
                         {...note}
+                        className="mwc-animate `media_with_copy-note"
                     />
                 )}
             </div>
 
-            <div className="media_with_copy-img img-wrapper">
-                {/* <ImageHolder img={img} /> */}
-                <ImageHolderBorder img={img} />
+            <div className="media_with_copy-img img-wrapper mwc-animate ">
+                <ImageHolder img={img} />
+                {/* <ImageHolderBorder img={img} /> */}
             </div>
         </div>
     );
