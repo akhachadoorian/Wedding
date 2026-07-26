@@ -154,8 +154,6 @@ export function ToolTipHoverImageHolder({
         ? { type: "text" as const, caption: img.caption }
         : null;
 
-    console.log("img.caption ", img.caption);
-
     return (
         <div
             {...htmlProps}
