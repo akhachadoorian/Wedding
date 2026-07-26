@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { forwardRef } from "react";
 
@@ -23,11 +23,12 @@ type EyebrowStyleProps = {
     color?: ColorVariables;
     /** When true, adds bottom margin below the eyebrow. */
     includeMargin?: boolean;
+    // includeStar?: boolean;
 };
 
 const DEFAULT_STYLE = {
     variation: "left",
-    color: "--wine-600",
+    color: "--cream",
     includeMargin: true,
 } satisfies EyebrowStyleProps;
 
@@ -42,12 +43,54 @@ type EyebrowProps = WithHTMLProps & {
     doubleText?: string;
 };
 
-export default function Eyebrow({ styleOptions = DEFAULT_STYLE, text, className, ...htmlProps }: EyebrowProps) {
-    const color: ColorVariables = styleOptions.color ?? DEFAULT_STYLE.color;
+// export default function Eyebrow({
+//     styleOptions = DEFAULT_STYLE,
+//     text,
+//     className,
+//     ...htmlProps
+// }: EyebrowProps) {
+//     const color: ColorVariables = styleOptions.color ?? DEFAULT_STYLE.color;
 
+//     // return (
+//     //     <div
+//     //         {...htmlProps}
+//     //         className={`eyebrow-component left ${className ?? ""} ${styleOptions.includeMargin ? "eyebrow-margin" : ""}`}
+//     //     >
+//     //         <p className="eyebrow" style={{ color: `var(${color})` }}>
+//     //             {text}
+//     //         </p>
+//     //     </div>
+//     // );
+
+//     return (
+//         <div
+//             {...htmlProps}
+//             className={`eyebrow-component ${className ?? ""} ${styleOptions.includeMargin ? "eyebrow-margin" : ""}`}
+//         >
+//             <Star color="--wine-600" />
+//             <p className="eyebrow" style={{ color: `var(${color})` }}>
+//                 {text}
+//             </p>
+//         </div>
+//     );
+// }
+
+function Star({color = '--wine-550'}:{color?: ColorVariables;}) {
     return (
-        <div {...htmlProps} className={`eyebrow-component left ${className ?? ""} ${styleOptions.includeMargin ? "eyebrow-margin" : ""}`}>
-            <p className="eyebrow" style={{ color: `var(${color})` }}>{text}</p>
+        <div className="eyebrow-star">
+            <svg
+                width="100%"
+                height="100%"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M12 0C12 6.5 6.5 12 0 12C6.5 12 12 17.5 12 24C12 17.5 17.5 12 24 12C17.5 12 12 6.5 12 0Z"
+                    fill={`var(${color})`}
+                    // fill="#800020"
+                ></path>
+            </svg>
         </div>
     );
 }
@@ -60,32 +103,33 @@ export default function Eyebrow({ styleOptions = DEFAULT_STYLE, text, className,
  * - `center` — text centered above a diamond divider line
  * - `double` — two text labels flanking a diamond divider line
  */
-// export default function Eyebrow({ styleOptions = DEFAULT_STYLE, text, doubleText, className, ref }: EyebrowProps) {
-//     const color: ColorVariables = styleOptions.color ?? DEFAULT_STYLE.color;
+export default function Eyebrow({ styleOptions = DEFAULT_STYLE, text, doubleText, className, ref }: EyebrowProps) {
+    const color: ColorVariables = styleOptions.color ?? DEFAULT_STYLE.color;
 
-//     if (styleOptions.variation == "center") {
-//         return (
-//             <CenterEyebrow text={text} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
-//         );
-//     } else if (styleOptions.variation == "double" && doubleText != null) {
-//         return (
-//             <DoubleEyebrow text={text} doubleText={doubleText} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
-//         );
-//     }
+    if (styleOptions.variation == "center") {
+        return (
+            <CenterEyebrow text={text} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
+        );
+    } else if (styleOptions.variation == "double" && doubleText != null) {
+        return (
+            <DoubleEyebrow text={text} doubleText={doubleText} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
+        );
+    }
 
-//     return (
-//         <LeftEyebrow text={text} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
-//     );
-// }
-
-
+    return (
+        <LeftEyebrow text={text} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
+    );
+}
 
 // ---- Sub-components --------------------------------------------------------
 
 function DiamondDivider({ color }: { color: ColorVariables }) {
     return (
         <div className="diamond_divider">
-            <div className={`diamond_divider-underline`} style={{ backgroundColor: `var(${color})` }}></div>
+            <div
+                className={`diamond_divider-underline`}
+                style={{ backgroundColor: `var(${color})` }}
+            ></div>
             {/* <Diamond
                 size={{
                     size: {
@@ -101,15 +145,32 @@ function DiamondDivider({ color }: { color: ColorVariables }) {
                 }}
                 color={color}
             /> */}
-            <div className={`diamond_divider-underline`} style={{ backgroundColor: `var(${color})` }}></div>
+            <div
+                className={`diamond_divider-underline`}
+                style={{ backgroundColor: `var(${color})` }}
+            ></div>
         </div>
     );
 }
 
-
-function LeftEyebrow({text, color, includeMargin, ref, className}:{text:string, color: ColorVariables, includeMargin:boolean, ref?: React.Ref<HTMLDivElement>, className?:string}) {
+function LeftEyebrow({
+    text,
+    color,
+    includeMargin,
+    ref,
+    className,
+}: {
+    text: string;
+    color: ColorVariables;
+    includeMargin: boolean;
+    ref?: React.Ref<HTMLDivElement>;
+    className?: string;
+}) {
     return (
-        <div ref={ref} className={`eyebrow-wrapper left ${className ?? ""} ${includeMargin ? "eyebrow-margin" : ""}`}>
+        <div
+            ref={ref}
+            className={`eyebrow-component left ${className ?? ""} ${includeMargin ? "eyebrow-margin" : ""}`}
+        >
             {/* <Diamond
                 size={{
                     size: {
@@ -125,6 +186,7 @@ function LeftEyebrow({text, color, includeMargin, ref, className}:{text:string, 
                 }}
                 color={color}
             /> */}
+            <Star />
             <p className="eyebrow" style={{ color: `var(${color})` }}>
                 {text}
             </p>
@@ -132,30 +194,64 @@ function LeftEyebrow({text, color, includeMargin, ref, className}:{text:string, 
     );
 }
 
-function CenterEyebrow({text, color, includeMargin, ref, className}:{text:string, color: ColorVariables, includeMargin:boolean, ref?: React.Ref<HTMLDivElement>, className?:string}) {
+function CenterEyebrow({
+    text,
+    color,
+    includeMargin,
+    ref,
+    className,
+}: {
+    text: string;
+    color: ColorVariables;
+    includeMargin: boolean;
+    ref?: React.Ref<HTMLDivElement>;
+    className?: string;
+}) {
     return (
-        <div ref={ref} className={`eyebrow-wrapper eyebrow-center ${className ?? ""} ${includeMargin ? "eyebrow-margin" : ""}`}>
-                <p className="eyebrow" style={{ color: `var(${color})` }}>
-                    {text}
-                </p>
+        <div
+            ref={ref}
+            className={`eyebrow-component eyebrow-center ${className ?? ""} ${includeMargin ? "eyebrow-margin" : ""}`}
+        >
+            <Star />
 
-                {/* <DiamondDivider color={color} /> */}
-            </div>
+            <p className="eyebrow" style={{ color: `var(${color})` }}>
+                {text}
+            </p>
+
+            <Star />
+        </div>
     );
 }
 
-function DoubleEyebrow({text, doubleText, color, includeMargin, ref, className}:{text:string, doubleText:string, color: ColorVariables, includeMargin:boolean, ref?: React.Ref<HTMLDivElement>, className?:string}) {
+function DoubleEyebrow({
+    text,
+    doubleText,
+    color,
+    includeMargin,
+    ref,
+    className,
+}: {
+    text: string;
+    doubleText: string;
+    color: ColorVariables;
+    includeMargin: boolean;
+    ref?: React.Ref<HTMLDivElement>;
+    className?: string;
+}) {
     return (
-        <div ref={ref} className={`eyebrow-wrapper eyebrow-double ${className ?? ""} ${includeMargin ? "eyebrow-margin" : ""}`}>
-                <p className="eyebrow" style={{ color: `var(${color})` }}>
-                    {text}
-                </p>
+        <div
+            ref={ref}
+            className={`eyebrow-wrapper eyebrow-double ${className ?? ""} ${includeMargin ? "eyebrow-margin" : ""}`}
+        >
+            <p className="eyebrow" style={{ color: `var(${color})` }}>
+                {text}
+            </p>
 
-                <DiamondDivider color={color} />
+            <DiamondDivider color={color} />
 
-                <p className="eyebrow" style={{ color: `var(${color})` }}>
-                    {doubleText}
-                </p>
-            </div>
+            <p className="eyebrow" style={{ color: `var(${color})` }}>
+                {doubleText}
+            </p>
+        </div>
     );
 }

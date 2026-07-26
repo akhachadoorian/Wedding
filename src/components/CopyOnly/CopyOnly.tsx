@@ -39,7 +39,7 @@ const DEFAULT_STYLE = {
     variation: "left",
     headingLevel: "h2",
     headingClass: "heading-xl",
-    eyebrowColor: "--wine-600",
+    eyebrowColor: "--cream",
     // textColor: "light",
 } satisfies CopyOnlyStyleProps;
 
@@ -213,6 +213,7 @@ function CenterCopyOnly({
                 <div className="copy-upper">
                     <EyebrowHeaderCopyOnly
                         eyebrow={eyebrow}
+                        eyebrowVariation="center"
                         eyebrowColor={styleOptions.eyebrowColor}
                         header={header}
                         headingLevel={styleOptions.headingLevel}
@@ -302,6 +303,7 @@ function LeftCopyOnly({
 
 function EyebrowHeaderCopyOnly({
     eyebrow,
+    eyebrowVariation = "left",
     eyebrowColor = DEFAULT_STYLE.eyebrowColor,
 
     header,
@@ -309,6 +311,7 @@ function EyebrowHeaderCopyOnly({
     headingClass = "heading-xl"
 }: {
     eyebrow?: string;
+    eyebrowVariation?: "left" | "center";
     eyebrowColor?: ColorVariables;
     header: string;
     headingLevel?: Exclude<HeadingLevelProps, 'h1'>;
@@ -321,7 +324,7 @@ function EyebrowHeaderCopyOnly({
             {eyebrow && (
                 <Eyebrow
                     styleOptions={{
-                        variation: "left",
+                        variation: eyebrowVariation,
                         color: eyebrowColor,
                     }}
                     text={eyebrow}

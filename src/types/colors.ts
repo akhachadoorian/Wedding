@@ -7,6 +7,6 @@ export type CreamScale = '--cream' | "--cream-100" | "--cream-300" | "--cream-50
 
 export type BlackScale = | "--black-100" | "--black-200" | "--black-300" | "--black-400" | "--black-500" | "--black-600" | "--black-700" | "--black-800" | "--black-850" | "--black-900"  | "--black-950" | "--black-1000";
 
-export type WineScale = '--wine-500' | '--wine-600' | '--wine-650' | '--wine-700' | '--wine-750' | '--wine-800';
+export type WineScale = '--wine-500' | '--wine-550' | '--wine-600' | '--wine-650' | '--wine-700' | '--wine-750' | '--wine-800';
 
 export type ColorVariables = GoldScale | CreamScale | BlackScale | WineScale;

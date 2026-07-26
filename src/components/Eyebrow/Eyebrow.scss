@@ -4,6 +4,20 @@
     &-component {
         // padding: $space-200;
         // background-color: $cabernet;
+        display: flex;
+        align-items: center;
+        // justify-content: center;
+        gap: $space-200;
+    }
+
+    &-star {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 24px;
+        height: 24px;
+        aspect-ratio: 1;
     }
 
     &-wrapper {
@@ -24,7 +38,7 @@
 
     // ---- Layout Variations -------------------------------------------
     &-center {
-        flex-direction: column;
+        // flex-direction: column;
         text-align: center;
     }
 
