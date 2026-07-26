@@ -305,6 +305,10 @@ a.btn, button.btn {
                 transform: $t;
             }
         }
+
+        .arrow_box-wrapper {
+            --arrow-color: var(--arrow-color-hover);
+        }
     }
 
     // #region --- Variants -------------------------------------------
