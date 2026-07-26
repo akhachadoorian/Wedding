@@ -10,7 +10,7 @@
     // }
 
     &-img_holder {
-        position: absolute;
+        position: absolute !important;
         top: 0;
         left: 0;
         z-index: 1;
@@ -21,7 +21,7 @@
 
         .img-overlay {
             &-left {
-                background: linear-gradient(270deg, rgba(16, 17, 17, 0) 25.3%, rgba(16, 17, 17, 0.7) 80.25%), linear-gradient(0deg, rgba(16, 17, 17, 0.4) 0%, rgba(16, 17, 17, 0.4) 100%);
+                background: linear-gradient(270deg, rgba(16, 17, 17, 0) 25.3%, rgba(16, 17, 17, 0.7) 80.25%), linear-gradient(0deg, rgba(16, 17, 17, 0.4) 0%, rgba(16, 17, 17, 0.4) 60%);
             }
 
             &-center,
@@ -78,7 +78,8 @@
     &-layout {
         &-left {
             @include big {
-                max-width: 60.417vw;
+                // max-width: 60.417vw;
+                max-width: calc(55% + $space-1000 + $space-1000);
             }
         }
 

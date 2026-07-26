@@ -4,3 +4,7 @@
 .registry_link-section {
     @include section-stack;
 }
+
+.cat_gift-section {
+    padding: var(--layout-section-padding) auto;
+}

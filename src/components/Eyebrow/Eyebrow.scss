@@ -7,7 +7,11 @@
         display: flex;
         align-items: center;
         // justify-content: center;
-        gap: $space-200;
+        gap: $space-100;
+
+        @include big {
+          gap: $space-200;  
+        }
     }
 
     &-star {
@@ -15,9 +19,28 @@
         align-items: center;
         justify-content: center;
 
-        width: 24px;
-        height: 24px;
+        width: 18px;
+        height: 18px;
         aspect-ratio: 1;
+        flex: 0 0 18px;
+
+        @include big {
+            width: 24px;
+            height: 24px;
+            flex: 0 0 24px;
+        }
+    }
+
+    // Flows inside the eyebrow text itself (rather than flanking it as a
+    // flex sibling) so it wraps and stays adjacent to the nearest line.
+    &-star-inline {
+        display: inline-flex;
+        vertical-align: middle;
+        margin: 0 var(--space-075);
+
+        @include big {
+            margin: 0 var(--space-100);
+        }
     }
 
     &-wrapper {

@@ -153,6 +153,24 @@ const catLink: Omit<MediaWithCopyProps, 'styleOptions'> = {
     ]
 }
 
+const catImageCallout: Omit<ImageCalloutProps, 'styleOptions'> = {
+    eyebrow: "They’ve dealt with lots of wedding stress",
+    header: "Something for our cats, Bucky & Jules",
+    image: {
+        ...IMAGE_BuckyJules,
+        imgPositionResponsive: {
+            desktop: " center 75%"
+        }
+    },
+    buttons: [
+        {
+            type: 'link',
+            text: "A gift they'll appreciate",
+            link: "https://www.zola.com/registry/maxandalexoctober31"
+        }
+    ]
+}
+
 
 // #region --- Content -----------------------------------------------
 
@@ -161,7 +179,8 @@ const registryContent = {
     thanks: thanksCopyOnly,
     honeymoon: honeymoonFund,
     registryLinks: registryLinks,
-    catLink: catLink
+    catLink: catLink,
+    catImageCallout: catImageCallout
 };
 
 export default registryContent;

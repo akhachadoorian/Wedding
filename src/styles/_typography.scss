@@ -118,11 +118,27 @@ p {
 
 .eyebrow {
     font-family: $font-sans;
-    font-size: typo.fluid(16, 20);
+    // font-size: typo.fluid(16, 20);
+    font-size: var(--text-s);
     font-weight: 600;
     line-height: normal;
     letter-spacing: 1.4px;
     text-transform: uppercase;
+
+    // &:before {
+    //     content: "";
+    //     background: url('/images/Star.svg');
+    //     background-size: contain;
+    //     width: 18px;
+    //     height: 18px;
+    //     aspect-ratio: 1;
+    //     position: relative;
+    //     display: block;
+    // }
+
+    @include big {
+        font-size: var(--text-base);
+    }
 
     // padding: 2px;
     // font-style: italic;

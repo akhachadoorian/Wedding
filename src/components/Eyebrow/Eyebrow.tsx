@@ -75,9 +75,11 @@ type EyebrowProps = WithHTMLProps & {
 //     );
 // }
 
-function Star({color = '--wine-550'}:{color?: ColorVariables;}) {
+function Star({color = '--wine-550', inline = false}:{color?: ColorVariables; inline?: boolean;}) {
+    const Tag = inline ? "span" : "div";
+
     return (
-        <div className="eyebrow-star">
+        <Tag className={`eyebrow-star${inline ? " eyebrow-star-inline" : ""}`}>
             <svg
                 width="100%"
                 height="100%"
@@ -91,7 +93,7 @@ function Star({color = '--wine-550'}:{color?: ColorVariables;}) {
                     // fill="#800020"
                 ></path>
             </svg>
-        </div>
+        </Tag>
     );
 }
 
@@ -212,13 +214,11 @@ function CenterEyebrow({
             ref={ref}
             className={`eyebrow-component eyebrow-center ${className ?? ""} ${includeMargin ? "eyebrow-margin" : ""}`}
         >
-            <Star />
-
             <p className="eyebrow" style={{ color: `var(${color})` }}>
+                <Star inline />
                 {text}
+                <Star inline />
             </p>
-
-            <Star />
         </div>
     );
 }

@@ -11,6 +11,9 @@
     }
 
     &-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         @include big {
             flex: 1 1 675px;
             padding: var(--space-200) 0;

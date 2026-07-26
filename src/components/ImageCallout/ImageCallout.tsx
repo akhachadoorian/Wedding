@@ -97,7 +97,6 @@ function LeftTextLayoutImageCallout({ eyebrow, header, subtitle, body, buttons }
                     text={eyebrow}
                     styleOptions={{
                         variation: "left",
-                        color: "--gold-500",
                         includeMargin: true,
                     }}
                 />
@@ -128,7 +127,6 @@ function ColumnsTextLayoutImageCallout({ eyebrow, header, subtitle, body, button
                         text={eyebrow}
                         styleOptions={{
                             variation: "left",
-                            color: "--gold-500",
                             includeMargin: true,
                         }}
                     />
@@ -163,7 +161,6 @@ function CenterTextLayoutImageCallout({ eyebrow, header, subtitle, body, buttons
                     text={eyebrow}
                     styleOptions={{
                         variation: "center",
-                        color: "--gold-500",
                         includeMargin: true,
                     }}
                 />
