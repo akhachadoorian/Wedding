@@ -57,8 +57,6 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
                 />
 
                 <CardGrid {...content.quickLinks.cardGrid} />
-
-                {/* <DrinkCardGrid {...content.quickLinks.drinkGrid} /> */}
             </section>
         </PageGuard>
     );

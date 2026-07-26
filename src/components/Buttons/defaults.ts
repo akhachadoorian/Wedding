@@ -28,7 +28,7 @@ function createArrowArray<N extends number>({size, arrowDefault}: {size: N, arro
 // #region Two Button Defaults
 
 const TWO_BUTTON_DEFAULTS_VARIANT_MAP: BtnVariantMap<2> = ["solid", "lines"];
-const TWO_BUTTON_DEFAULTS_COLOR_SCHEME: BtnColorSchemeMap<2> = ["cabernet", "cream"];
+const TWO_BUTTON_DEFAULTS_COLOR_SCHEME: BtnColorSchemeMap<2> = ["burgundy", "burgundy"];
 const TWO_BUTTON_DEFAULTS_ARROW: BtnDecorationMap<2> = createArrowArray({size:2, arrowDefault:TOP_RIGHT_ARROW});
 
 export const TWO_BUTTON_DEFAULTS = {
@@ -42,7 +42,7 @@ export const TWO_BUTTON_DEFAULTS = {
 // #region
 const THREE_BTNS_DEFAULT_VARIANT_MAP: BtnVariantMap<3> = ["solid", "outline", "lines"];
 
-const THREE_BTNS_DEFAULT_COLOR_SCHEME_MAP: BtnColorSchemeMap<3> = ["cabernet", "cabernet", "cream"];
+const THREE_BTNS_DEFAULT_COLOR_SCHEME_MAP: BtnColorSchemeMap<3> = ["burgundy", "burgundy", "burgundy"];
 
 const THREE_BUTTON_DEFAULTS_ARROW: BtnDecorationMap<3> = createArrowArray({size:3, arrowDefault:TOP_RIGHT_ARROW});
 

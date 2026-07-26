@@ -78,3 +78,11 @@ export const DEFAULT_IMAGE_MaxAlexJules: CustomImageProps = {
     width: 2880,
     height: 2160,
 };
+
+
+export const IMAGE_BuckyJules: CustomImageProps = {
+    src: "/images/BuckyJules.jpg",
+    alt: "Our cats Bucky and Jules cuddling in a car together.",
+    // caption: "",
+    fill: true,
+}

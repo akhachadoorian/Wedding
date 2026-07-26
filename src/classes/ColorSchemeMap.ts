@@ -40,10 +40,10 @@ export class ColorSchemeMap {
          */
         static readonly DECORATION = new ColorSchemeMap(
             {
-                cream: { solid: "--gold-500", outline: "--cream-500", lines: "--cream-500" },
-                gold: { solid: "--cream-500", outline: "--gold-500", lines: "--gold-500" },
-                burgundy: { solid: "--wine-600", outline: "--wine-600", lines: "--wine-600" },
-                cabernet: { solid: "--cream", outline: "--cream", lines: "--wine-800" },
+                cream: { solid: "--gold-500", outline: "--cream", lines: "--cream" },
+                gold: { solid: "--cream", outline: "--gold-500", lines: "--gold-500" },
+                burgundy: { solid: "--cream", outline: "--cream", lines: "--cream" },
+                cabernet: { solid: "--cream", outline: "--cream", lines: "--cream" },
             },
             "--cream-500",
         );
@@ -62,7 +62,9 @@ export class ColorSchemeMap {
         static readonly DECORATION_HOVER = new ColorSchemeMap(
             {
                 // cream: { outline: "--wine-800", lines: "--wine-800" },
+                burgundy: {outline: "--wine-600"},
                 cabernet: {outline: "--wine-800" },
+                
             },
             "--cream-500",
         );

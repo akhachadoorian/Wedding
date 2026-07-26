@@ -143,12 +143,36 @@ $btnBorderWidth: 2px;
                     "lines-color": $gold,
                     "color": $gold,
                 ),
+                "hover": (
+                    "color": $gold,
+                )
             ),
             "cream": (
                 "default": (
                     "lines-color": $cream,
                     "color": $cream,
                 ),
+                "hover": (
+                    "color": $cream,
+                )
+            ),
+            "burgundy": (
+                "default": (
+                    "lines-color": $burgundy,
+                    "color": $cream,
+                ),
+                "hover": (
+                    "color": $cream,
+                )
+            ),
+            "cabernet": (
+                "default": (
+                    "lines-color": $cabernet,
+                    "color": $cream,
+                ),
+                "hover": (
+                    "color": $cabernet,
+                )
             ),
         );
 
@@ -193,18 +217,11 @@ $btnBorderWidth: 2px;
 
             @each $theme, $states in $solid-btn {
                 $default: map.get($states, "default");
-                // $hover: map.get($states, "hover");
 
                 &.btn-color_scheme-#{$theme} {
                     border-color: map.get($default, "border-color");
                     background-color: map.get($default, "background-color");
                     color: map.get($default, "color");
-
-                    // &:hover {
-                    //     border-color: map.get($hover, "border-color");
-                    //     background-color: map.get($hover, "background-color");
-                    //     color: map.get($hover, "color");
-                    // }
                 }
             }
         }
@@ -346,6 +363,16 @@ a.btn, button.btn {
                 &::before,
                 &::after {
                     width: 100%;
+                }
+
+                @each $theme, $states in $line-btn {
+                    $hover: map.get($states, "hover");
+
+                    &.btn-color_scheme-#{$theme} {
+                        &:hover {
+                            color: map.get($hover, "color");
+                        }
+                    }
                 }
             }
         }

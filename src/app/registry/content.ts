@@ -2,7 +2,7 @@ import { CardGridProps } from "@/components/CardGrid/CardGrid";
 import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
 import { ImageCalloutProps } from "@/components/ImageCallout/ImageCallout";
 import { MediaWithCopyProps } from "@/components/MediaWithCopy/MediaWithCopy";
-import { DEFAULT_IMAGE } from "@/data/defaultImage";
+import { DEFAULT_IMAGE, IMAGE_BuckyJules } from "@/data/defaultImage";
 import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero/ImageOverlayHero";
 import { TextOnlyHeroProps } from "@/layout/TextOnlyHero/TextOnlyHero";
 
@@ -143,7 +143,7 @@ const registryLinks = {
 const catLink: Omit<MediaWithCopyProps, 'styleOptions'> = {
     eyebrow: "They’ve dealt with lots of wedding stress",
     header: "Something for our cats, Bucky & Jules",
-    // img: 
+    img: IMAGE_BuckyJules,
     buttons: [
         {
             type: 'link',
