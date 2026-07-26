@@ -39,7 +39,7 @@ const DEFAULT_STYLE = {
     variation: "left",
     headingLevel: "h2",
     headingClass: "heading-xl",
-    eyebrowColor: "--gold-500",
+    eyebrowColor: "--wine-600",
     // textColor: "light",
 } satisfies CopyOnlyStyleProps;
 

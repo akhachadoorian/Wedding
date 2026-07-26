@@ -42,6 +42,27 @@ export class ColorSchemeMap {
             {
                 cream: { solid: "--gold-500", outline: "--cream-500", lines: "--cream-500" },
                 gold: { solid: "--cream-500", outline: "--gold-500", lines: "--gold-500" },
+                burgundy: { solid: "--wine-600", outline: "--wine-600", lines: "--wine-600" },
+                cabernet: { solid: "--cream", outline: "--cream", lines: "--wine-800" },
+            },
+            "--cream-500",
+        );
+
+        /**
+         * Hover-state overrides for {@link DECORATION}. Only schemes/variants that change
+         * color on hover need an entry — anything missing falls back to the base
+         * `DECORATION` color (i.e. no color change on hover). Use {@link tryGet} rather
+         * than {@link get} to read this map so the "no entry" case can be distinguished
+         * from an explicit color.
+         *
+         * @example
+         * ColorSchemeMap.DECORATION_HOVER.tryGet("cream", "outline") // → CssColor("--wine-800")
+         * ColorSchemeMap.DECORATION_HOVER.tryGet("gold", "solid") // → undefined
+         */
+        static readonly DECORATION_HOVER = new ColorSchemeMap(
+            {
+                // cream: { outline: "--wine-800", lines: "--wine-800" },
+                cabernet: {outline: "--wine-800" },
             },
             "--cream-500",
         );
@@ -64,6 +85,7 @@ export class ColorSchemeMap {
     /** Index of all named maps, used internally by {@link lookup}. */
     private static readonly ALL = {
         DECORATION:   ColorSchemeMap.DECORATION,
+        DECORATION_HOVER: ColorSchemeMap.DECORATION_HOVER,
         ART_DECO_ICON: ColorSchemeMap.ART_DECO_ICON,
     };
 
@@ -81,6 +103,22 @@ export class ColorSchemeMap {
         const color = this.map[scheme]?.[key] ?? this.fallback;
 
         return CssColor.of(color);
+    }
+
+    /**
+     * Like {@link get}, but returns `undefined` instead of the fallback when the
+     * scheme or key has no explicit entry. Use this for maps like `DECORATION_HOVER`
+     * where "no entry" is a meaningful case distinct from any particular color.
+     * @function
+     *
+     * @param scheme the scheme key
+     * @param key the key for the color
+     * @returns CssColor, or undefined if not explicitly present in the map
+     */
+    tryGet(scheme: string, key: string): CssColor | undefined {
+        const color = this.map[scheme]?.[key];
+
+        return color ? CssColor.of(color) : undefined;
     }
 
     /**

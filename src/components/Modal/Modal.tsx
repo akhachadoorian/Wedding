@@ -37,6 +37,11 @@ export default function Modal({
     ...rest
 }: ModalProps) {
     const [isVisible, setIsVisible] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         if (isOpen) setIsVisible(true);
@@ -53,6 +58,8 @@ export default function Modal({
             lenis?.start();
         };
     }, [isOpen, lenis]);
+
+    if (!mounted) return null;
 
     return createPortal(
         <AnimatePresence onExitComplete={onClose}>

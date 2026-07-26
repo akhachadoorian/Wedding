@@ -6,6 +6,7 @@ import { ColorVariables } from "../../types/colors";
 import Diamond from "../Diamond/Diamond";
 
 import "./Eyebrow.scss";
+import { WithHTMLProps } from "@/types/props";
 
 /**
  * Controls the visual layout and color treatment of the Eyebrow component.
@@ -26,13 +27,11 @@ type EyebrowStyleProps = {
 
 const DEFAULT_STYLE = {
     variation: "left",
-    color: "--gold-500",
+    color: "--wine-600",
     includeMargin: true,
 } satisfies EyebrowStyleProps;
 
-type EyebrowProps = {
-    /** Additional class name applied to the eyebrow wrapper. */
-    className?: string;
+type EyebrowProps = WithHTMLProps & {
     /** Reference to the wrapper div. */
     ref?: React.Ref<HTMLDivElement>;
     /** Layout and color options. Defaults to left-aligned gold. */
@@ -40,8 +39,18 @@ type EyebrowProps = {
     /** Primary label text. */
     text: string;
     /** Second label text, only rendered in the `double` variation. */
-    doubleText?: string;
+    // doubleText?: string;
 };
+
+export default function Eyebrow({ styleOptions = DEFAULT_STYLE, text, className, ...htmlProps }: EyebrowProps) {
+    const color: ColorVariables = styleOptions.color ?? DEFAULT_STYLE.color;
+
+    return (
+        <div {...htmlProps} className={`eyebrow-component left ${className ?? ""} ${styleOptions.includeMargin ? "eyebrow-margin" : ""}`}>
+            <p className="eyebrow" style={{ color: `var(${color})` }}>{text}</p>
+        </div>
+    );
+}
 
 /**
  * Decorative section label rendered above headings.
@@ -51,23 +60,24 @@ type EyebrowProps = {
  * - `center` — text centered above a diamond divider line
  * - `double` — two text labels flanking a diamond divider line
  */
-export default function Eyebrow({ styleOptions = DEFAULT_STYLE, text, doubleText, className, ref }: EyebrowProps) {
-    const color: ColorVariables = styleOptions.color ?? DEFAULT_STYLE.color;
+// export default function Eyebrow({ styleOptions = DEFAULT_STYLE, text, doubleText, className, ref }: EyebrowProps) {
+//     const color: ColorVariables = styleOptions.color ?? DEFAULT_STYLE.color;
 
-    if (styleOptions.variation == "center") {
-        return (
-            <CenterEyebrow text={text} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
-        );
-    } else if (styleOptions.variation == "double" && doubleText != null) {
-        return (
-            <DoubleEyebrow text={text} doubleText={doubleText} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
-        );
-    }
+//     if (styleOptions.variation == "center") {
+//         return (
+//             <CenterEyebrow text={text} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
+//         );
+//     } else if (styleOptions.variation == "double" && doubleText != null) {
+//         return (
+//             <DoubleEyebrow text={text} doubleText={doubleText} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
+//         );
+//     }
 
-    return (
-        <LeftEyebrow text={text} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
-    );
-}
+//     return (
+//         <LeftEyebrow text={text} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
+//     );
+// }
+
 
 
 // ---- Sub-components --------------------------------------------------------

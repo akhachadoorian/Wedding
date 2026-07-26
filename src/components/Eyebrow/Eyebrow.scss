@@ -1,6 +1,11 @@
 @use "@/styles/variables" as *;;
 
 .eyebrow {
+    &-component {
+        // padding: $space-200;
+        // background-color: $cabernet;
+    }
+
     &-wrapper {
         display: flex;
         align-items: center;

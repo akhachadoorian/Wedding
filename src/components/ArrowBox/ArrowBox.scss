@@ -2,8 +2,10 @@
 @use "arrow-tokens" as *;
 
 .arrow_box-wrapper {
+    --arrow-color: var(--arrow-color-base);
+
     padding: var(--space-025);
-    border: 1px solid var(--cream-500);
+    border: 1px solid var(--arrow-color, var(--cream-500));
     transition: $transition;
 
     box-sizing: border-box;

@@ -12,15 +12,16 @@ interface FadeInOptions {
     delay?: number;
     y?: number;
     threshold?: number;
+    enabled?: boolean;
 }
 
 export function useFadeIn<T extends HTMLElement>(options: FadeInOptions = {}) {
-    const { duration = 0.8, delay = 0, y = 20, threshold = 0.2 } = options;
+    const { duration = 0.8, delay = 0, y = 20, threshold = 0.2, enabled = true } = options;
     const ref = useRef<T>(null);
 
     useEffect(() => {
         const el = ref.current;
-        if (!el) return;
+        if (!el || !enabled) return;
 
         const ctx = gsap.context(() => {
             gsap.fromTo(
@@ -43,7 +44,7 @@ export function useFadeIn<T extends HTMLElement>(options: FadeInOptions = {}) {
         });
 
         return () => ctx.revert();
-    }, []);
+    }, [enabled]);
 
     return ref;
 }
@@ -52,12 +53,12 @@ export function useFadeInChildren<T extends HTMLElement>(
     selector: string,
     options: FadeInOptions & { stagger?: number } = {}
 ) {
-    const { duration = 0.8, delay = 0, y = 20, stagger = 0.1, threshold = 0.2 } = options;
+    const { duration = 0.8, delay = 0, y = 20, stagger = 0.1, threshold = 0.2, enabled = true } = options;
     const ref = useRef<T>(null);
 
     useEffect(() => {
         const el = ref.current;
-        if (!el) return;
+        if (!el || !enabled) return;
 
         const ctx = gsap.context(() => {
             gsap.fromTo(
@@ -81,7 +82,7 @@ export function useFadeInChildren<T extends HTMLElement>(
         }, el);
 
         return () => ctx.revert();
-    }, []);
+    }, [enabled]);
 
     return ref;
 }

@@ -10,6 +10,8 @@ import ComingSoon from "@/layout/ComingSoon/ComingSoon";
 import PageGuard from "@/components/PageGuard/PageGuard";
 import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
 import { useEffect } from "react";
+import CardGrid from "@/components/CardGrid/CardGrid";
+import MediaWithCopy from "@/components/MediaWithCopy/MediaWithCopy";
 
 export default function Registry({ loaded = true }: { loaded?: boolean }) {
     const thanksRef = useFadeIn<HTMLDivElement>();
@@ -53,7 +55,7 @@ export default function Registry({ loaded = true }: { loaded?: boolean }) {
                 />
             </section> */}
 
-            <section className="base_section -section">
+            <section className="base_section registry-section">
                 <CopyOnly
                     styleOptions={{
                         headingLevel: "h2",
@@ -63,10 +65,12 @@ export default function Registry({ loaded = true }: { loaded?: boolean }) {
                     {...content.registryLinks.copyOnly}
                 />
 
-                <div className="">
+                {/* <CardGrid {...content.registryLinks.cards} /> */}
+
+                {/* <div className="">
                     <a href="https://www.zola.com/registry/collection-item/6a3b3c84a5548d58919a7165" className="">test</a>
                     <a href=""></a>
-                </div>
+                </div> */}
             </section>
 
             {/* TODO: this is Zola embed script; determine if should remove
@@ -99,7 +103,16 @@ export default function Registry({ loaded = true }: { loaded?: boolean }) {
                     textLayout: "left",
                 }}
             /> */}
+            <section className="base_section cat-section">
+                <MediaWithCopy
+                    styleOptions={{
+                        mediaSide: "right",
+                        headingLevel: "h2",
+                        headingClass: 'heading-xl'
+                    }}
+                    {...content.catLink}
+                />
+            </section>
         </PageGuard>
     );
 }
-

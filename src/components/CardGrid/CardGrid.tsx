@@ -18,7 +18,7 @@ import Modal from "../Modal/Modal";
 // type CardType = 'link' | 'modal' | 'visual';
 
 type CardTextProps = {
-    eyebrow: string;
+    eyebrow?: string;
     title: string;
     body: string;
     letter?: string;
@@ -148,7 +148,7 @@ function CardContent({ text, includeArrow = false }: CardContentProps) {
             <div className="card-text">
                 <div className="card-upper">
                     <div className="card-upper-text">
-                        <p className="eyebrow">{eyebrow}</p>
+                        {eyebrow && <p className="eyebrow">{eyebrow}</p>}
 
                         <p className="heading-m">{title}</p>
                     </div>

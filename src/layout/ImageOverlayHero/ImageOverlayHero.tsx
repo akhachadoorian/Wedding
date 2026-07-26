@@ -1,22 +1,21 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 
 import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";
 import {
     BtnColorSchemeMap,
-    BtnVariantMap,
-    ThreeButtonsArray,
+    ThreeButtonsArray
 } from "../../types/buttons";
 import { WithHTMLProps } from "../../types/props";
 
-import "./ImageOverlayHero.scss";
-import { CustomImageProps } from "@/types/images";
-import Image from "next/image";
 import ImageHolder from "@/components/ImageHolder/ImageHolder";
-import { image } from "motion/react-client";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
+import mergeRefs from "@/hooks/mergeRefs";
+import { CustomImageProps } from "@/types/images";
+import "./ImageOverlayHero.scss";
+import { useFadeInChildren } from "@/hooks/useFadeIn";
 
 type ImageOverlayHeroStyleProps = {
     variation: "left" | "center" | "columns";
@@ -55,21 +54,35 @@ export default function ImageOverlayHero({
     buttons,
 
     className,
+    ref,
     ...htmlProps
 }: ImageOverlayHeroProps) {
+    const [imgReady, setImgReady] = useState(false);
+
+    const imgRef = useRef(null);
+
+    const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", {
+        stagger: 0.15,
+        y: 24,
+        enabled: loaded && imgReady,
+    });
+
     return (
         <section
             {...htmlProps}
+            ref={mergeRefs(animRef, ref)}
             className={`img_overlay_hero ${loaded ? "is-loaded" : "is-hidden"} `}
         >
             <ImageHolder
                 className="img_overlay_hero-img"
+                ref={imgRef}
                 img={{
                     ...image,
                     priority: true,
                     sizes: "100vw",
                     fill: true,
                     style: { objectFit: "cover" },
+                    onLoad: () => setImgReady(true),
                 }}
             />
 
@@ -104,7 +117,7 @@ export default function ImageOverlayHero({
     );
 }
 
-// #region --- Sub-components --------------------------------------------------------
+// #region --- Inner Components -------------------------------------------------------
 
 function LeftContentImageOverlayHero({
     eyebrowVariation,
@@ -119,16 +132,17 @@ function LeftContentImageOverlayHero({
         <>
             {eyebrow && (
                 <Eyebrow
-                    className={`img_overlay_hero-eyebrow`}
+                    className={`img_overlay_hero-eyebrow mwc-animate`}
                     text={eyebrow}
                     styleOptions={{
                         variation: eyebrowVariation ?? "left",
                         includeMargin: true,
+                        color: "--cream",
                     }}
                 />
             )}
 
-            <h1 className={`img_overlay_hero-heading`}>{header}</h1>
+            <h1 className={`img_overlay_hero-heading mwc-animate`}>{header}</h1>
         </>
     );
 }
@@ -145,7 +159,11 @@ function RightContentImageOverlayHero({
     if (!subtitle && !body && !buttons) return;
 
     // const customVariantMap: BtnVariantMap<3> = ["solid", "solid", "solid"];
-    const customColorSchemeMap: BtnColorSchemeMap<3> = ["gold", "gold", "gold"];
+    const customColorSchemeMap: BtnColorSchemeMap<3> = [
+        "cabernet",
+        "cabernet",
+        "cabernet",
+    ];
 
     const bodyStyle = {
         "--body-margin-top": subtitle ? "var(--space-300)" : "0px",
@@ -157,20 +175,22 @@ function RightContentImageOverlayHero({
             {(subtitle || body) && (
                 <div className="img_overlay_hero-sb">
                     {subtitle && (
-                        <p className="subtitle-extra img_overlay_hero-subtitle">
+                        <p className="subtitle-extra img_overlay_hero-subtitle mwc-animate">
                             {subtitle}
                         </p>
                     )}
 
                     {body && (
-                        <p className="img_overlay_hero-body body">{body}</p>
+                        <p className="img_overlay_hero-body body mwc-animate">
+                            {body}
+                        </p>
                     )}
                 </div>
             )}
 
             {buttons && (
                 <ThreeButtons
-                    className="img_overlay_hero-btns btns"
+                    className="img_overlay_hero-btns btns mwc-animate"
                     noDecorationMap={true}
                     buttons={buttons ?? []}
                     customColorSchemeMap={customColorSchemeMap}
@@ -181,19 +201,25 @@ function RightContentImageOverlayHero({
     );
 }
 
+// #endregion --------------------------------------------------------
+
+// #region --- Sub-components --------------------------------------------------------
+
+type SubImageOverlayHeroProps = {
+    eyebrow?: string;
+    header: string;
+    subtitle?: string;
+    body?: string;
+    buttons?: ThreeButtonsArray;
+};
+
 function CenterImageOverlayHero({
     eyebrow,
     header,
     subtitle,
     body,
     buttons,
-}: {
-    eyebrow?: string;
-    header: string;
-    subtitle?: string;
-    body?: string;
-    buttons?: ThreeButtonsArray;
-}) {
+}: SubImageOverlayHeroProps) {
     return (
         <div
             className={`img_overlay_hero-content img_overlay_hero-variation-center`}
@@ -219,13 +245,7 @@ function LeftImageOverlayHero({
     subtitle,
     body,
     buttons,
-}: {
-    eyebrow?: string;
-    header: string;
-    subtitle?: string;
-    body?: string;
-    buttons?: ThreeButtonsArray;
-}) {
+}: SubImageOverlayHeroProps) {
     return (
         <div
             className={`img_overlay_hero-content img_overlay_hero-variation-left`}
@@ -251,13 +271,7 @@ function ColumnsImageOverlayHero({
     subtitle,
     body,
     buttons,
-}: {
-    eyebrow?: string;
-    header: string;
-    subtitle?: string;
-    body?: string;
-    buttons?: ThreeButtonsArray;
-}) {
+}: SubImageOverlayHeroProps) {
     return (
         <div
             className={`img_overlay_hero-content img_overlay_hero-variation-columns`}

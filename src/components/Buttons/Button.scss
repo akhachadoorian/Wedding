@@ -47,8 +47,32 @@ $btnBorderWidth: 2px;
                     "color": $cream,
                 ),
                 "hover": (
-                    "border-color": $gold,
-                    "background-color": $gold,
+                    "border-color": $cabernet,
+                    "background-color": $cabernet,
+                    "color": $cream,
+                ),
+            ),
+            'burgundy': (
+                 "default": (
+                    "border-color": $burgundy,
+                    "background-color": $burgundy,
+                    "color": $cream,
+                ),
+                "hover": (
+                    "border-color": $cabernet,
+                    "background-color": $cabernet,
+                    "color": $cream,
+                ),
+            ),
+            'cabernet': (
+                 "default": (
+                    "border-color": $cabernet,
+                    "background-color": $cabernet,
+                    "color": $cream,
+                ),
+                "hover": (
+                    "border-color": $burgundy,
+                    "background-color": $burgundy,
                     "color": $cream,
                 ),
             )
@@ -78,37 +102,35 @@ $btnBorderWidth: 2px;
                     "color": $cream,
                 ),
                 "hover": (
-                    // "border-color": $gold-600,
-                    // "background-color": $gold-600,
-                    "border-color": $burgundy,
-                    "background-color": $burgundy,
+                    "border-color": $cabernet,
+                    "background-color": $cabernet,
                     "color": $cream,
                 ),
             ),
-            // "burgundy": (
-            //     "default": (
-            //         "border-color": $cream,
-            //         "background-color": transparent,
-            //         "color": $cream,
-            //     ),
-            //     "hover": (
-            //         "border-color": $gold-600,
-            //         "background-color": $gold-600,
-            //         "color": $cream,
-            //     ),
-            // ),
-            // "cabernet": (
-            //     "default": (
-            //         "border-color": $cream,
-            //         "background-color": transparent,
-            //         "color": $cream,
-            //     ),
-            //     "hover": (
-            //         "border-color": $gold-600,
-            //         "background-color": $gold-600,
-            //         "color": $cream,
-            //     ),
-            // ),
+            "burgundy": (
+                "default": (
+                    "border-color": $burgundy,
+                    "background-color": transparent,
+                    "color": $cream,
+                ),
+                "hover": (
+                    "border-color": $cream,
+                    "background-color": $cream,
+                    "color": $burgundy,
+                ),
+            ),
+            "cabernet": (
+                "default": (
+                    "border-color": $cabernet,
+                    "background-color": transparent,
+                    "color": $cream,
+                ),
+                "hover": (
+                    "border-color": $cream,
+                    "background-color": $cream,
+                    "color": $cabernet,
+                ),
+            ),
         );
 
     // #endregion ---------------------------------
@@ -282,6 +304,10 @@ a.btn, button.btn {
             .arrow_box-grid.#{$dir} {
                 transform: $t;
             }
+        }
+
+        .arrow_box-wrapper {
+            --arrow-color: var(--arrow-color-hover);
         }
     }
 
