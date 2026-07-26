@@ -6,6 +6,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const DEFAULT_DURATION = 0.5;
+const DEFAULT_DELAY = 0;
+const DEFAULT_Y = 20;
+const DEFAULT_THRESHOLD = 0.2;
+const DEFAULT_STAGGER = 0.1;
 
 interface FadeInOptions {
     duration?: number;
@@ -16,7 +21,7 @@ interface FadeInOptions {
 }
 
 export function useFadeIn<T extends HTMLElement>(options: FadeInOptions = {}) {
-    const { duration = 0.8, delay = 0, y = 20, threshold = 0.2, enabled = true } = options;
+    const { duration = DEFAULT_DURATION, delay = DEFAULT_DELAY, y = DEFAULT_Y, threshold = DEFAULT_THRESHOLD, enabled = true } = options;
     const ref = useRef<T>(null);
 
     useLayoutEffect(() => {
@@ -53,7 +58,7 @@ export function useFadeInChildren<T extends HTMLElement>(
     selector: string,
     options: FadeInOptions & { stagger?: number } = {}
 ) {
-    const { duration = 0.8, delay = 0, y = 20, stagger = 0.1, threshold = 0.2, enabled = true } = options;
+    const { duration = DEFAULT_DURATION, delay = DEFAULT_DELAY, y = DEFAULT_Y, stagger = DEFAULT_STAGGER, threshold = DEFAULT_THRESHOLD, enabled = true } = options;
     const ref = useRef<T>(null);
 
     useLayoutEffect(() => {

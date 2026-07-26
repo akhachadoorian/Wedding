@@ -61,7 +61,7 @@ export default function WatermarkText({
 
         const ctx = gsap.context(() => {
             const tl = gsap.timeline({
-                defaults: { ease: "power2.out", duration: 0.8 },
+                defaults: { ease: "power2.out", duration: 0.5 },
                 scrollTrigger: {
                     trigger: el,
                     start: "top 80%",
@@ -106,32 +106,6 @@ export default function WatermarkText({
 
         return () => ctx.revert();
     }, []);
-
-    // useEffect(() => {
-    //     const el = parallaxRef.current;
-    //     if (!el) return;
-
-    //     const ctx = gsap.context(() => {
-    //         const mm = gsap.matchMedia();
-    //         mm.add("(min-width: 800px)", () => {
-    //             gsap.fromTo(el,
-    //                 { y: 0 },
-    //                 {
-    //                     y: 30,
-    //                     ease: "none",
-    //                     scrollTrigger: {
-    //                         trigger: el,
-    //                         start: "top bottom",
-    //                         end: "bottom top",
-    //                         scrub: true,
-    //                     },
-    //                 }
-    //             );
-    //         });
-    //     });
-
-    //     return () => ctx.revert();
-    // }, []);
 
     return (
         <div
