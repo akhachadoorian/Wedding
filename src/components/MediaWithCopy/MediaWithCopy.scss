@@ -1,31 +1,13 @@
 @use "@/styles/variables" as *;;
 
 .media_with_copy {
-    &-wrapper {
-        display: flex;
+            display: flex;
         flex-direction: column;
 
         @include big {
             flex-direction: row;
             gap: 7.847vw;
         }
-
-        // &.right {
-            
-        // }
-
-        &.left {
-          @include big {
-            .media_with_copy-text {
-                order: 2;
-            }
-
-            .media_with_copy-img {
-                order: 1;
-            }
-          }  
-        }
-    }
 
     &-text {
         @include big {
@@ -49,11 +31,26 @@
             flex: 1 1 532px;
         }
 
-        .img-holder {
-            height: 100%;
-            width: 100%;
-        }
+        // .img-holder {
+        //     height: 100%;
+        //     width: 100%;
+        // }
 
         
+    }
+
+    // --- Side Options
+    &-side {
+        &-left {
+            @include big {
+            .media_with_copy-text {
+                order: 2;
+            }
+
+            .media_with_copy-img {
+                order: 1;
+            }
+          }
+        }
     }
 }

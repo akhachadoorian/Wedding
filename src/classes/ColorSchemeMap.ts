@@ -42,6 +42,8 @@ export class ColorSchemeMap {
             {
                 cream: { solid: "--gold-500", outline: "--cream-500", lines: "--cream-500" },
                 gold: { solid: "--cream-500", outline: "--gold-500", lines: "--gold-500" },
+                burgundy: { solid: "--wine-600", outline: "--wine-600", lines: "--wine-600" },
+                cabernet: { solid: "--cream", outline: "--wine-800", lines: "--wine-800" },
             },
             "--cream-500",
         );

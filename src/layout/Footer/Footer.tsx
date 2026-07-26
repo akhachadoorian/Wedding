@@ -10,10 +10,8 @@ import "./Footer.scss";
 import { useFadeIn } from "@/hooks/useFadeIn";
 
 export default function Footer({}) {
-    const footerRef = useFadeIn<HTMLDivElement>();
-
     return (
-        <footer ref={footerRef}>
+        <footer>
             <div className="footer-group footer-group-nav">
                 <div className="footer-nav">
                     {NAV_ITEMS.map((item) => (

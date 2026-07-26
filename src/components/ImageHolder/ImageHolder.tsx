@@ -41,9 +41,65 @@ export default function ImageHolder({
             className={`img-holder ${className ?? ""}`}
             style={divStyle}
         >
-            <Image {...imageProps} className={`img-bw ${customImageClass ?? ''}`} style={style} />
+            <Image
+                {...imageProps}
+                className={`img-bw ${customImageClass ?? ""}`}
+                style={style}
+            />
 
-            {includeOverlay && <div className={`img-overlay ${customOverlayClass ?? ''}`} />}
+            {includeOverlay && (
+                <div className={`img-overlay ${customOverlayClass ?? ""}`} />
+            )}
+
+            <div className="img-border"></div>
+            <div className="img-border2"></div>
+        </div>
+    );
+}
+
+export function ImageHolderBorder({
+    img,
+    customImageClass,
+    includeOverlay = true,
+    customOverlayClass,
+
+    className,
+    style: wrapperStyle,
+    ...htmlProps
+}: ImageHolderProps) {
+    const { caption, imgPositionResponsive, style, ...imageProps } = img;
+
+    const divStyle = {
+        "--img-object-position": imgPositionResponsive?.desktop ?? "center",
+        "--img-object-position-mobile":
+            imgPositionResponsive?.mobile ??
+            imgPositionResponsive?.desktop ??
+            "center",
+        ...wrapperStyle,
+    } as React.CSSProperties;
+
+    return (
+        <div
+            {...htmlProps}
+            className={`img-holder-border ${className ?? ""}`}
+            
+        >
+            <div className="img-holder" style={divStyle}>
+                <Image
+                    {...imageProps}
+                    className={`img-bw ${customImageClass ?? ""}`}
+                    style={style}
+                />
+
+                {includeOverlay && (
+                    <div
+                        className={`img-overlay ${customOverlayClass ?? ""}`}
+                    />
+                )}
+            </div>
+
+            <div className="img-border"></div>
+            <div className="img-border2"></div>
         </div>
     );
 }
@@ -76,7 +132,6 @@ export function ToolTipHoverImageHolder({
             "center",
     } as React.CSSProperties;
 
-
     useEffect(() => {
         const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
 
@@ -98,8 +153,8 @@ export function ToolTipHoverImageHolder({
     const tooltipContent = img.caption
         ? { type: "text" as const, caption: img.caption }
         : null;
-    
-        console.log("img.caption ", img.caption)
+
+    console.log("img.caption ", img.caption);
 
     return (
         <div
@@ -111,13 +166,18 @@ export function ToolTipHoverImageHolder({
                 : {})}
             onTouchEnd={toggleTap}
         >
-            <div
-                className="img-holder"
-                style={divStyle}
-            >
-                <Image {...imageProps} style={style} className={`img-bw ${customImageClass ?? ''}`} />
+            <div className="img-holder" style={divStyle}>
+                <Image
+                    {...imageProps}
+                    style={style}
+                    className={`img-bw ${customImageClass ?? ""}`}
+                />
 
-                {includeOverlay && <div className={`img-overlay ${customOverlayClass ?? ''}`} />}
+                {includeOverlay && (
+                    <div
+                        className={`img-overlay ${customOverlayClass ?? ""}`}
+                    />
+                )}
             </div>
             {img.caption && <p className="img-caption">{img.caption}</p>}
         </div>

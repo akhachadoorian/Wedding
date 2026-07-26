@@ -124,6 +124,7 @@ function LeftContentImageOverlayHero({
                     styleOptions={{
                         variation: eyebrowVariation ?? "left",
                         includeMargin: true,
+                        color: '--cream'
                     }}
                 />
             )}
@@ -145,7 +146,7 @@ function RightContentImageOverlayHero({
     if (!subtitle && !body && !buttons) return;
 
     // const customVariantMap: BtnVariantMap<3> = ["solid", "solid", "solid"];
-    const customColorSchemeMap: BtnColorSchemeMap<3> = ["gold", "gold", "gold"];
+    const customColorSchemeMap: BtnColorSchemeMap<3> = ["cabernet", "cabernet", "cabernet"];
 
     const bodyStyle = {
         "--body-margin-top": subtitle ? "var(--space-300)" : "0px",

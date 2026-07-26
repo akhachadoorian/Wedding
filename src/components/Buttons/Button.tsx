@@ -17,7 +17,7 @@ export default function Button({
     btnSettings,
 
     variant = "solid",
-    colorScheme = "gold",
+    colorScheme = "cream",
     fullWidth = false,
 
     className, // pulled out because this components constructs it for LenisLink
