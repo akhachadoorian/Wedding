@@ -160,9 +160,9 @@ function RightContentImageOverlayHero({
 
     // const customVariantMap: BtnVariantMap<3> = ["solid", "solid", "solid"];
     const customColorSchemeMap: BtnColorSchemeMap<3> = [
-        "cabernet",
-        "cabernet",
-        "cabernet",
+        "burgundy",
+        "burgundy",
+        "burgundy",
     ];
 
     const bodyStyle = {
