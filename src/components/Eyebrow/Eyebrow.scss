@@ -56,10 +56,10 @@
         // Keeps the flanking stars level with the first line instead of
         // centering on the whole block once the text wraps to two lines.
         align-items: flex-start;
-        gap: 2px;
+        // gap: 2px;
 
         @include big {
-            gap: 4px;
+            // gap: 4px;
         }
     }
 
