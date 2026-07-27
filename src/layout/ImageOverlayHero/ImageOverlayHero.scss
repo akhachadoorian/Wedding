@@ -124,7 +124,7 @@ $imgHeight: 100dvh;
             margin: 0 auto;
             width: 100%;
 
-            @include big {
+            @include desktopOnly {
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
@@ -140,14 +140,14 @@ $imgHeight: 100dvh;
             }
 
             &-left {
-                @include big {
+                @include desktopOnly {
                     flex: 2 1 760px;
                     // flex: 1 1 530px;
                 }
             }
 
             &-right {
-                @include big {
+                @include desktopOnly {
                     flex: 1 1 530px;
                     // flex: 1 1 647px;
                 }
