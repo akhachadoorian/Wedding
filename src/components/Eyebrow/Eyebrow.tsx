@@ -75,7 +75,7 @@ type EyebrowProps = WithHTMLProps & {
 //     );
 // }
 
-function Star({color = '--wine-550'}:{color?: ColorVariables;}) {
+function Star({color = '--wine-600'}:{color?: ColorVariables;}) {
     return (
         <div className="eyebrow-star">
             <svg
