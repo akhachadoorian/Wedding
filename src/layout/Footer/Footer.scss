@@ -52,6 +52,10 @@ footer {
         align-items: center;
         // justify-content: center;
         gap: $space-200;
+
+        @include small {
+            justify-content: center;
+        }
     }
 
     &-link {
