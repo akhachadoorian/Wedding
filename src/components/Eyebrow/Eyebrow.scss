@@ -31,18 +31,6 @@
         }
     }
 
-    // Flows inside the eyebrow text itself (rather than flanking it as a
-    // flex sibling) so it wraps and stays adjacent to the nearest line.
-    &-star-inline {
-        display: inline-flex;
-        vertical-align: middle;
-        margin: 0 var(--space-075);
-
-        @include big {
-            margin: 0 var(--space-100);
-        }
-    }
-
     &-wrapper {
         display: flex;
         align-items: center;
@@ -63,6 +51,16 @@
     &-center {
         // flex-direction: column;
         text-align: center;
+        justify-content: center;
+
+        // Keeps the flanking stars level with the first line instead of
+        // centering on the whole block once the text wraps to two lines.
+        align-items: flex-start;
+        gap: 2px;
+
+        @include big {
+            gap: 4px;
+        }
     }
 
     &-double {

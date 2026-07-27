@@ -88,7 +88,8 @@
             align-items: center;
 
             @include big {
-                max-width: 60.417vw;
+                // max-width: 60.417vw;
+                max-width: $max-width;
                 margin: 0 auto;
             }
         }
@@ -131,7 +132,7 @@
             margin: var(--layout-section-padding) var(--layout-column-margin);
 
             @include big {
-                max-width: var(--max-width);
+                // max-width: var(--max-width);
                 margin: var(--layout-section-padding) auto;
             }
 
