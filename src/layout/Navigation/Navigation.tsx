@@ -117,7 +117,7 @@ function renderMobileNavItem(
                     className={`mobile_nav-link ${isOpen ? "open" : ""}`}
                     onClick={() => toggleAccordion(item.text)}
                 >
-                    <p className="nav-text eyebrow">{item.text}</p>
+                    <p className="nav-text eyebrow text-cream">{item.text}</p>
                     <div className={`caret-wrapper ${isOpen ? "open" : ""}`}>
                         <CaretDownIcon color="var(--cream-500)" size={18} />
                     </div>
@@ -181,7 +181,7 @@ function renderMobileNavItem(
             className="mobile_nav-link"
             onClick={onNavigate}
         >
-            <p className="mobile_nav-text eyebrow">{item.text}</p>
+            <p className="mobile_nav-text eyebrow text-cream">{item.text}</p>
 
             <ArrowBox />
         </LenisLink>

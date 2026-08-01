@@ -29,125 +29,9 @@ $size-btn: (
 
 // #region --- Button Color Arrays -------------------------------------------
 
-    // #region --- Solid Button ---------------------------
-        $solid-btn: (
-            "gold": (
-                "default": (
-                    "border-color": $gold,
-                    "background-color": $gold,
-                    "color": $cream,
-                ),
-                "hover": (
-                    "border-color": $gold-600,
-                    "background-color": $gold-600,
-                    "color": $cream,
-                ),
-            ),
-            "cream": (
-                "default": (
-                    "border-color": $cream,
-                    "background-color": $cream,
-                    "color": $gold,
-                ),
-                "hover": (
-                    "border-color": $gold,
-                    "background-color": $gold,
-                    "color": $cream,
-                ),
-            ),
-            'black': (
-                "default": (
-                    "border-color": $black,
-                    "background-color": $black,
-                    "color": $cream,
-                ),
-                "hover": (
-                    "border-color": $cabernet,
-                    "background-color": $cabernet,
-                    "color": $cream,
-                ),
-            ),
-            'burgundy': (
-                 "default": (
-                    "border-color": $burgundy,
-                    "background-color": $burgundy,
-                    "color": $cream,
-                ),
-                "hover": (
-                    "border-color": $cabernet,
-                    "background-color": $cabernet,
-                    "color": $cream,
-                ),
-            ),
-            'cabernet': (
-                 "default": (
-                    "border-color": $cabernet,
-                    "background-color": $cabernet,
-                    "color": $cream,
-                ),
-                "hover": (
-                    "border-color": $burgundy,
-                    "background-color": $burgundy,
-                    "color": $cream,
-                ),
-            )
-        );
-
-    // #endregion ---------------------------------
-
-    // #region --- Outline Button ---------------------------
-
-        $outline-btn: (
-            "gold": (
-                "default": (
-                    "border-color": $gold,
-                    "background-color": transparent,
-                    "color": $cream,
-                ),
-                "hover": (
-                    "border-color": $cream,
-                    "background-color": $cream,
-                    "color": $gold,
-                ),
-            ),
-            "cream": (
-                "default": (
-                    "border-color": $cream,
-                    "background-color": transparent,
-                    "color": $cream,
-                ),
-                "hover": (
-                    "border-color": $cabernet,
-                    "background-color": $cabernet,
-                    "color": $cream,
-                ),
-            ),
-            "burgundy": (
-                "default": (
-                    "border-color": $burgundy,
-                    "background-color": transparent,
-                    "color": $cream,
-                ),
-                "hover": (
-                    "border-color": $cream,
-                    "background-color": $cream,
-                    "color": $burgundy,
-                ),
-            ),
-            "cabernet": (
-                "default": (
-                    "border-color": $cabernet,
-                    "background-color": transparent,
-                    "color": $cream,
-                ),
-                "hover": (
-                    "border-color": $cream,
-                    "background-color": $cream,
-                    "color": $cabernet,
-                ),
-            ),
-        );
-
+    // #region --- Solid & Outline Button ---------------------------
+        // Colors for these two variants are driven by cva (see button.variants.ts)
+        // and applied as Tailwind utility classes instead of SCSS maps.
     // #endregion ---------------------------------
 
     // #region --- Line Button ---------------------------
@@ -198,21 +82,21 @@ $size-btn: (
 // #region --- Button Styling -------------------------------------------
 
 .btn {
-    display: flex;
-    align-items: center;
-    gap: var(--space-150);
+    // display: flex;
+    // align-items: center;
+    // gap: var(--space-150);
 
     width: fit-content;
     text-decoration: none;
-    transition: $transition;
+    // transition: $transition;
 
     &-text {
-        font-family: $font-sans;
+        // font-family: $font-sans;
         // font-size: var(--text-s);
-        font-weight: 500;
-        line-height: normal;
-        letter-spacing: 1px;
-        text-transform: uppercase;
+        // font-weight: 500;
+        // line-height: normal;
+        // letter-spacing: 1px;
+        // text-transform: uppercase;
         // word-break: break-word;
 
         // @include big {
@@ -257,50 +141,8 @@ $size-btn: (
     // #region --- Variants -------------------------------------------
 
     &-variant {
-        &-solid {
-            border: $btnBorderWidth solid;
-            // padding: $btnMobileTB $btnMobileLR;
-            
-            @include big {
-            //    padding: $btnTB $btnLR; 
-            }
-
-            @each $theme, $states in $solid-btn {
-                $default: map.get($states, "default");
-
-                &.btn-color_scheme-#{$theme} {
-                    border-color: map.get($default, "border-color");
-                    background-color: map.get($default, "background-color");
-                    color: map.get($default, "color");
-                }
-            }
-        }
-
-        &-outline {
-            border: $btnBorderWidth solid;
-            // padding: $btnMobileTB $btnMobileLR;
-            
-            @include big {
-            //    padding: $btnTB $btnLR; 
-            }
-
-            @each $theme, $states in $outline-btn {
-                $default: map.get($states, "default");
-                // $hover: map.get($states, "hover");
-
-                &.btn-color_scheme-#{$theme} {
-                    border-color: map.get($default, "border-color");
-                    background-color: map.get($default, "background-color");
-                    color: map.get($default, "color");
-
-                    // &:hover {
-                    //     border-color: map.get($hover, "border-color");
-                    //     background-color: map.get($hover, "background-color");
-                    //     color: map.get($hover, "color");
-                    // }
-                }
-            }
-        }
+        // solid & outline: border-width/style, colors, and hover colors are
+        // applied via cva utility classes (see button.variants.ts)
 
         &-lines {
             // padding: var(--space-100) var(--space-075);
@@ -354,10 +196,10 @@ $size-btn: (
     // #endregion ------------------------------------------------------
     
     // #region --- Additional Classes ---------------------------------
-        &-full_width {
-            width: -webkit-fill-available;
-            justify-content: center;
-        }
+        // &-full_width {
+        //     width: -webkit-fill-available;
+        //     justify-content: center;
+        // }
 
     // #endregion ------------------------------------------------------
 }
@@ -382,32 +224,7 @@ a.btn, button.btn {
     // #region --- Variants -------------------------------------------
 
     &-variant {
-        &-solid {
-            @each $theme, $states in $solid-btn {
-                $hover: map.get($states, "hover");
-
-                &.btn-color_scheme-#{$theme}:hover {
-                        border-color: map.get($hover, "border-color");
-                        background-color: map.get($hover, "background-color");
-                        color: map.get($hover, "color");
-                    
-                }
-            }
-        }
-
-        &-outline {
-            @each $theme, $states in $outline-btn {
-                $hover: map.get($states, "hover");
-
-                &.btn-color_scheme-#{$theme} {
-                    &:hover {
-                        border-color: map.get($hover, "border-color");
-                        background-color: map.get($hover, "background-color");
-                        color: map.get($hover, "color");
-                    }
-                }
-            }
-        }
+        // solid & outline hover colors are applied via cva utility classes (see button.variants.ts)
 
         &-lines {
             &:hover {

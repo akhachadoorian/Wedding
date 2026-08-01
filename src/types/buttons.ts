@@ -172,6 +172,29 @@ export type BtnVariantMap<N extends number> = RequireX<BtnVariants, N>;
  */
 export type BtnColorScheme = "gold" | "cream" | "black" | 'burgundy' | 'cabernet';
 
+// export type BtnColorSchemeBase = "gold" | "cream" | "black" | "burgundy" | "cabernet";
+
+// export type BtnColorScheme =
+//     | BtnColorSchemeBase
+//     | readonly [base: BtnColorSchemeBase, hover: BtnColorSchemeBase];
+// const BTN_HOVER_OPTIONS = {
+//     // gold: ["gold-hover"],       // or whatever the single allowed hover is
+//     cream: [ "burgundy", "cabernet"],
+//     black: ["cream"],
+//     burgundy: ["cabernet"],
+//     cabernet: ["burgundy"],
+// } as const satisfies Record<BtnColorSchemeBase, readonly BtnColorSchemeBase[]>;
+
+// type BtnColorSchemeBase =  "cream" | "black" | "burgundy" | "cabernet";
+
+// type BtnColorSchemePair = {
+//     [B in keyof typeof BTN_HOVER_OPTIONS]: readonly [B, (typeof BTN_HOVER_OPTIONS)[B][number]];
+// }[BtnColorSchemeBase];
+
+// export type BtnColorScheme = BtnColorSchemeBase | BtnColorSchemePair;
+
+
+
 /**
  *
  * @template N - The required number of elements

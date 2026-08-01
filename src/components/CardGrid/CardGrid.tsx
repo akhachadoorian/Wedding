@@ -112,9 +112,6 @@ function ModalCard({
     ...htmlProps
 }: ModalCardProps) {
     const [modalOpen, setModalOpen] = useState(false);
-
-    console.log("modalSettings.modalContent ", modalSettings.modalContent)
-
     return (
         <div {...htmlProps} className={`modal_card-wrapper ${className ?? ""}`}>
             <button  onClick={() => setModalOpen(true)} className={`card modal_card card-hover`}>

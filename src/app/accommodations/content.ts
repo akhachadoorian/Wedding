@@ -72,6 +72,7 @@ const hotelsCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     body: "The venue is located in Green Cove Springs, a beautiful area without hotels nearby. We recommend staying in Jacksonville — just a short drive away — where we've reserved room blocks at three convenient hotels. ",
 };
 
+// TODO: determine if buttons or modal
 const hotelCards: CardGridProps = {
     cards: [
         {
