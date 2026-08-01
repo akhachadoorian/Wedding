@@ -18,10 +18,12 @@ import Button from "@/components/Buttons/Button";
 import ComingSoon from "@/layout/ComingSoon/ComingSoon";
 import PageGuard from "@/components/PageGuard/PageGuard";
 import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
+import WatermarkText from "@/components/WatermarkText/WatermarkText";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Details({ loaded = true }: { loaded?: boolean }) {
+    const dateTimeRef = useFadeIn<HTMLDivElement>();
     const venueRef = useFadeIn<HTMLDivElement>();
     const timelineRef = useFadeIn<HTMLDivElement>();
     const dressCodeRef = useFadeIn<HTMLDivElement>();
@@ -37,14 +39,30 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                     body="This page will have information about the venue, the day-of timeline, FAQs and more."
                 />
             }
-        >   
-            <ImageOverlayHero {...content.hero} loaded={loaded} styleOptions={{variation: 'columns'}}/>
+        >
+            <ImageOverlayHero
+                {...content.hero}
+                loaded={loaded}
+                styleOptions={{ variation: "columns" }}
+            />
+
+            <section
+                ref={dateTimeRef}
+                id="date_time"
+                className="date_time-section base_section"
+            >
+                <WatermarkText {...content.dateTime} />
+            </section>
 
             <section ref={venueRef} id="venue" className="venue-section base_section">
                 <SplitInfo {...content.summary} />
             </section>
 
-            <ParallaxingDrinkSection className="timeline-section" ref={timelineRef} id="timeline">
+            <ParallaxingDrinkSection
+                className="timeline-section"
+                ref={timelineRef}
+                id="timeline"
+            >
                 <CopyOnly
                     styleOptions={{
                         variation: "center",
@@ -55,7 +73,11 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                 <SimpleTable {...content.timeline.simpleTable} />
             </ParallaxingDrinkSection>
 
-            <section ref={dressCodeRef} id="dress_code" className="dress_code-section base_section">
+            <section
+                ref={dressCodeRef}
+                id="dress_code"
+                className="dress_code-section base_section"
+            >
                 <CopyOnly
                     styleOptions={{
                         variation: "left",

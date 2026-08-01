@@ -161,7 +161,7 @@ const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
     ],
 };
 
-const welcomeWatermarkText: Omit<WatermarkTextProps, "loaded"> = {
+const welcomeWatermarkText: WatermarkTextProps = {
     watermarkText: "October 31st",
     subheader: "We're getting married",
     captions: {

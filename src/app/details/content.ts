@@ -8,8 +8,10 @@ import { ButtonProps } from "../../types/buttons";
 import { SmallTextGridProps } from "@/components/SmallTextGrid/SmallTextGrid";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
 import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero/ImageOverlayHero";
+import { WatermarkTextProps } from "@/components/WatermarkText/WatermarkText";
 
-// ----- Hero -----------------------------------------------
+// #region --- Hero ---
+
 
 const heroText: Omit<TextOnlyHeroProps, "loaded" | "styleOptions"> = {
     eyebrow: "The Details",
@@ -80,23 +82,19 @@ const hero: Omit<ImageOverlayHeroProps, "loaded" | "styleOptions"> = {
     ],
 }
 
-// ----- Summary / Venue -----------------------------------------------
+// #endregion --- 
 
-// const venue: Omit<MediaWithCopyProps, "media_side" | "headingLevel"> = {
-//     eyebrow: "The Venue",
-//   header: "The Clay Theatre",
-//   subtitle: "326 Walnut St, Green Cove Springs, FL 32043",
-//   body: "We are so excited to celebrate with you at The Clay Theatre, a beautifully restored historic venue nestled in downtown Green Cove Springs.",
+// #region --- ---
 
-//   img: {
-//     src: "/images/ClayTheatre.jpg",
-//   },
-//   note: {
-//     icon: "warning",
-//     title: "Rideshare warning",
-//     body: "Please keep in mind that while you may be able to get an Uber or another rideshare service to the venue, we have been informed that it is very difficult to get an Uber back into Jacksonville.",
-//   },
-// };
+const dateTime: WatermarkTextProps = {
+    watermarkText: "October 31st",
+    subheader: "We're getting married",
+}
+
+// #endregion --- 
+
+// #region --- Summary / Venue ---
+
 const date: SplitInfoProps["intro"] = {
     upperText: {
         eyebrow: "Wedding Day",
@@ -175,7 +173,9 @@ const summary: SplitInfoProps = {
     content: venue,
 };
 
-// ----- Timeline -----------------------------------------------
+// #endregion --- 
+
+// #region --- Timeline ---
 
 const timelineCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     eyebrow: "Wedding Day",
@@ -273,7 +273,9 @@ const timeline = {
     simpleTable: timelineTable
 };
 
-// ----- Dress Code -----------------------------------------------
+// #endregion --- 
+
+// #region --- Dress Code ---
 
 const dressCodeCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     eyebrow: "Dress Code",
@@ -285,7 +287,9 @@ const dressCode = {
     copyOnly: dressCodeCopyOnly,
 };
 
-// ----- Wedding Party -----------------------------------------------
+// #endregion --- 
+
+// #region --- Wedding Party ---
 
 const weddingPartyCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     eyebrow: "Wedding Party",
@@ -297,7 +301,10 @@ const weddingParty = {
     copyOnly: weddingPartyCopyOnly,
 };
 
-// ----- Rehearsal -----------------------------------------------
+
+// #endregion --- 
+
+// #region --- Rehearsal ---
 
 const rehearsalCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     eyebrow: "The evening before",
@@ -344,8 +351,9 @@ const rehearsalMixer = {
     button: rehearsalButton
 }
 
+// #endregion --- 
 
-// ----- FAQs -----------------------------------------------
+// #region --- FAQs ---
 
 const fAQsCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     eyebrow: "FAQs",
@@ -371,10 +379,13 @@ const faqs = {
     accordions: fAQItemsAccordions,
 };
 
-// ----- Content -----------------------------------------------
+// #endregion --- 
+
+// #region --- Content ---
 
 const detailsContent = {
     hero: hero,
+    dateTime: dateTime,
     summary: summary,
     timeline: timeline,
     dressCode: dressCode,
@@ -384,3 +395,6 @@ const detailsContent = {
 };
 
 export default detailsContent;
+
+// #endregion --- 
+
