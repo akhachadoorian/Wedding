@@ -135,13 +135,6 @@ const hotelCards: CardGridProps = {
                     },
                 },
             },
-            // cardType: {
-            //     type: "link",
-            //     linkSettings: {
-            //         link: "https://www.hyatt.com/shop/rooms/jaxzs?checkinDate=2026-10-30&checkoutDate=2026-11-01&rooms=1&adults=1&kids=0&corp_id=G-PAKH&accessibilityCheck=false",
-            //         target: "_blank",
-            //     },
-            // },
         },
         {
             text: {
@@ -167,7 +160,7 @@ const hotelCards: CardGridProps = {
                             },
                             {
                                 title: "Group Code",
-                                body: "G-PAKH",
+                                body: "GRP",
                             },
                         ],
                     },
