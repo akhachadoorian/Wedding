@@ -19,6 +19,7 @@ export default function useWindowWidth() {
 
 export function useBreakpoints() {
   const width = useWindowWidth();
+  console.log("width ", width)
 
   return {
     isMobile: width < BREAKPOINT_MOBILE,

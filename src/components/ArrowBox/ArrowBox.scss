@@ -3,16 +3,20 @@
 
 .arrow_box-wrapper {
     --arrow-color: var(--arrow-color-base);
+    --arrow-box-size: 20px;
+    // Ratios preserve the original hand-tuned proportions (box 20 / inner+arrow 18 / icon inset 1px per side).
+    --arrow-inner-size: calc(var(--arrow-box-size) * 0.9);
+    --arrow-icon-inset: calc(var(--arrow-box-size) * 0.05);
 
     padding: var(--space-025);
     border: 1px solid var(--arrow-color, var(--cream-500));
     transition: $transition;
 
     box-sizing: border-box;
-    width: 20px;
-    height: 20px;
+    width: var(--arrow-box-size);
+    height: var(--arrow-box-size);
     aspect-ratio: 1;
-    flex: 0 0 20px;
+    flex: 0 0 var(--arrow-box-size);
     overflow: hidden;
     position: relative;
 
@@ -26,8 +30,8 @@
     }
 
     .arrow_box-inner {
-        width: $arrowWidth;
-        height: $arrowWidth;
+        width: var(--arrow-inner-size);
+        height: var(--arrow-inner-size);
         aspect-ratio: 1;
 
         position: relative;
@@ -37,9 +41,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        box-sizing: border-box;
+        padding: var(--arrow-icon-inset);
 
-        width: 18px;
-        height: 18px;
+        width: var(--arrow-inner-size);
+        height: var(--arrow-inner-size);
         aspect-ratio: 1;
 
         svg path {
@@ -66,7 +72,7 @@
 // DIAGONAL DIRECTIONS
 ////////////////////////////////////
 .arrow_box-grid.top-right {
-    @include arrow-grid(translateX(-$arrowWidth), 2, 1, 1, 2, $rows: 2);
+    @include arrow-grid(translateX(calc(-1 * var(--arrow-inner-size))), 2, 1, 1, 2, $rows: 2);
 }
 
 .arrow_box-grid.top-left {
@@ -74,18 +80,18 @@
 }
 
 .arrow_box-grid.bottom-right {
-    @include arrow-grid(translate(-$arrowWidth, -$arrowWidth), 1, 1, 2, 2, $rows: 2);
+    @include arrow-grid(translate(calc(-1 * var(--arrow-inner-size)), calc(-1 * var(--arrow-inner-size))), 1, 1, 2, 2, $rows: 2);
 }
 
 .arrow_box-grid.bottom-left {
-    @include arrow-grid(translate(0, -$arrowWidth), 2, 1, 1, 2, $rows: 2);
+    @include arrow-grid(translate(0, calc(-1 * var(--arrow-inner-size))), 2, 1, 1, 2, $rows: 2);
 }
 
 ////////////////////////////////////
 // DEFAULT DIRECTIONS
 ////////////////////////////////////
 .arrow_box-grid.right {
-    @include arrow-grid(translateX(-$arrowWidth), 1, 1, 2, 1);
+    @include arrow-grid(translateX(calc(-1 * var(--arrow-inner-size))), 1, 1, 2, 1);
 }
 
 .arrow_box-grid.left {
@@ -97,5 +103,5 @@
 }
 
 .arrow_box-grid.down {
-    @include arrow-grid(translateY(-$arrowWidth), 1, 1, 1, 2, $rows: 2);
+    @include arrow-grid(translateY(calc(-1 * var(--arrow-inner-size))), 1, 1, 1, 2, $rows: 2);
 }

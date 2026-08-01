@@ -10,6 +10,9 @@ const nextConfig = {
     root: __dirname,
   },
   allowedDevOrigins: ['192.168.1.85'],
+  devIndicators: {
+    position: 'bottom-left',
+  },
 }
 
 

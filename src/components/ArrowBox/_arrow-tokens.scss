@@ -1,13 +1,13 @@
-$arrowWidth: 18px;
-
+// Distances match --arrow-inner-size (set per-ArrowBox in ArrowBox.scss) so the hover
+// slide lines up regardless of the `size` prop passed to a given ArrowBox instance.
 $arrow-hover-transforms: (
-    'top-right': translate(0, -$arrowWidth),
-    'top-left': translate(-$arrowWidth, -$arrowWidth),
+    'top-right': translate(0, calc(-1 * var(--arrow-inner-size))),
+    'top-left': translate(calc(-1 * var(--arrow-inner-size)), calc(-1 * var(--arrow-inner-size))),
     'bottom-right': translate(0, 0),
-    'bottom-left': translate(-$arrowWidth, 0),
+    'bottom-left': translate(calc(-1 * var(--arrow-inner-size)), 0),
     'right': translate(0, 0),
-    'left': translate(-$arrowWidth, 0),
-    'up': translate(0, -$arrowWidth),
+    'left': translate(calc(-1 * var(--arrow-inner-size)), 0),
+    'up': translate(0, calc(-1 * var(--arrow-inner-size))),
     'down': translate(0, 0),
 );
 

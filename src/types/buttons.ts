@@ -1,5 +1,5 @@
 import { ArrowDirectionProps } from "../components/ArrowBox/ArrowBox";
-import { ModalProps } from "../components/Modal/Modal";
+import { ModalProps } from "@/components/Modal/Modal";
 import { WithA11yProps, WithHTMLProps } from "./props";
 import { NonEmptyMaxX, RequireX } from "./utility";
 import { Icon } from "@phosphor-icons/react";
@@ -141,6 +141,8 @@ export type ButtonProps = WithHTMLProps &
         colorScheme?: BtnColorScheme;
         /** Adds optional full-width class */
         fullWidth?: boolean;
+        /** */
+        size?: 'default' | 'small'
     };
 
 

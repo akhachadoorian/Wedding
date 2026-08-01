@@ -29,7 +29,7 @@ $imgHeight: calc(100dvh + $space-400);
         }
 
         .img-overlay {
-            background: rgba(#101111, 0.80);
+            background: rgba(#101111, 0.8);
         }
     }
 
@@ -46,7 +46,6 @@ $imgHeight: calc(100dvh + $space-400);
         text-align: center;
         overflow: hidden;
 
-
         @include big {
             max-width: var(--max-width);
             // max-width: 60.417vw;
@@ -62,4 +61,16 @@ $imgHeight: calc(100dvh + $space-400);
     &-body {
         margin-top: $space-300;
     }
+}
+
+.coming_soon_section {
+    background-color: $cabernet;
+    text-align: center;
+
+    padding:  var(--layout-section-padding) var(--layout-column-margin);
+    margin: var(--layout-section-padding) auto;
+
+    // @include big {
+    //     padding: $space-1500 var(--layout-column-margin);
+    // }
 }

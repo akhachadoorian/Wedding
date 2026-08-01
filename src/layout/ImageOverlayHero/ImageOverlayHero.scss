@@ -39,7 +39,7 @@ $imgHeight: 100dvh;
         position: relative;
         z-index: 5;
 
-        padding: $space-200 var(--layout-column-margin) $space-400;
+        padding: $space-1000 var(--layout-column-margin); // $space-400;
         min-height: calc(#{$imgHeight} - #{$space-400} - #{$space-400});
 
         display: flex;
@@ -123,6 +123,7 @@ $imgHeight: 100dvh;
         &-columns {
             margin: 0 auto;
             width: 100%;
+            gap: $space-300;
 
             @include desktopOnly {
                 flex-direction: row;
@@ -141,12 +142,13 @@ $imgHeight: 100dvh;
 
             &-left {
                 @include desktopOnly {
-                    flex: 2 1 760px;
+                    flex: 2 1 710px;
                     // flex: 1 1 530px;
                 }
             }
 
             &-right {
+                overflow: hidden;
                 @include desktopOnly {
                     flex: 1 1 530px;
                     // flex: 1 1 647px;

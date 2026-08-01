@@ -2,16 +2,15 @@
 
 import { useState } from "react";
 
+import Modal from "@/components/Modal/Modal";
 import { Icon } from "@phosphor-icons/react";
 import { LenisLink } from "../../hooks/LenisLink";
 import { BtnDecoration, ButtonProps, LinkButtonSettings, ModalButtonSettings, VisualButtonSettings } from "../../types/buttons";
-import { ColorVariables } from "../../types/colors";
 import ArrowBox, { ArrowDirectionProps } from "../ArrowBox/ArrowBox";
-import Modal from "../Modal/Modal";
 
-import "./Button.scss";
 import { ColorSchemeMap } from "../../classes/ColorSchemeMap";
 import { CssColor } from "../../classes/CssColor";
+import "./Button.scss";
 
 export default function Button({
     btnSettings,
@@ -19,6 +18,7 @@ export default function Button({
     variant = "solid",
     colorScheme = "cream",
     fullWidth = false,
+    size = 'default',
 
     className, // pulled out because this components constructs it for LenisLink
     ...rest // includes a11yProps and HTMLProps
@@ -28,7 +28,7 @@ export default function Button({
     const decorationHoverColor = ColorSchemeMap.DECORATION_HOVER.tryGet(colorScheme, variant) ?? decorationColor;
 
 
-    const btnClass = `btn btn-variant-${variant} btn-color_scheme-${colorScheme} ${className ?? ""} ${fullWidth ? "btn-full_width" : ""}`;
+    const btnClass = `btn btn-variant-${variant} btn-color_scheme-${colorScheme} ${className ?? ""} ${fullWidth ? "btn-full_width" : ""} ${size === 'small' ? "btn-size-small" : "btn-size-default" }`;
 
     if (btnSettings.type === "modal") return <ModalButton btnClass={btnClass} btnSettings={btnSettings} decorationColor={decorationColor} decorationHoverColor={decorationHoverColor} {...rest} />;
 

@@ -71,7 +71,7 @@ export default function ImageOverlayHero({
         <section
             {...htmlProps}
             ref={mergeRefs(animRef, ref)}
-            className={`img_overlay_hero ${loaded ? "is-loaded" : "is-hidden"} `}
+            className={`img_overlay_hero ${loaded ? "is-loaded" : "is-hidden"} ${className ?? ''} `}
         >
             <ImageHolder
                 className="img_overlay_hero-img"

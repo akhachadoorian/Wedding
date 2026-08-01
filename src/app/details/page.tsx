@@ -7,7 +7,7 @@ import { SmallTextGrid } from "@/components/SmallTextGrid/SmallTextGrid";
 import SplitInfo from "@/components/SplitInfo/SplitInfo";
 import { useFadeIn } from "@/hooks/useFadeIn";
 import InsetBackgroundSection from "@/layout/InsetBackgroundSection/InsetBackgroundSection";
-import ParallaxingDrinkSection from "@/layout/ParallaxingDrinkSection/ParallaxingDrinkSection";
+import ParallaxingDrinkSection from "@/layout/archive/ParallaxingDrinkSection/ParallaxingDrinkSection";
 import SlantedSection from "@/layout/SlantedSection/SlantedSection";
 import TextOnlyHero from "@/layout/TextOnlyHero/TextOnlyHero";
 import content from "./content";

@@ -8,7 +8,22 @@ $btnTB: 12px;
 $btnLR: 24px;
 $btnMobileTB: 8px;
 $btnMobileLR: 16px;
+
+$btnSmallTB: 8px;
+$btnSmallLR: 16px;
+
 $btnBorderWidth: 2px;
+
+$size-btn: (
+    'default': (
+        'desktop': $btnTB $btnLR,
+        'mobile': $btnMobileTB $btnMobileLR
+    ),
+    'small': (
+        'desktop': $btnSmallTB $btnSmallLR,
+        'mobile': $btnMobileTB $btnMobileLR
+    ),
+);
 
 // #endregion -------------------------------------------------------------------
 
@@ -193,26 +208,61 @@ $btnBorderWidth: 2px;
 
     &-text {
         font-family: $font-sans;
-        font-size: var(--text-s);
+        // font-size: var(--text-s);
         font-weight: 500;
         line-height: normal;
         letter-spacing: 1px;
         text-transform: uppercase;
+        // word-break: break-word;
 
-        @include big {
-            font-size: var(--text-base);
+        // @include big {
+        //     font-size: var(--text-base);
+        // }
+    }
+
+    // #region --- Size ---
+
+    &-size {
+        &-default {
+            padding: map.get($size-btn, "default", "mobile");
+
+            @include big {
+                padding: map.get($size-btn, "default", "desktop");
+            }
+
+            .btn-text {
+                font-size: var(--text-s);
+
+                @include big {
+                    font-size: var(--text-base);
+                }
+            }
+        }
+
+        &-small {
+            padding: map.get($size-btn, "small", "mobile");
+
+            @include big {
+                padding: map.get($size-btn, "small", "desktop");
+            }
+
+            .btn-text {
+                font-size: var(--text-s);
+            }
         }
     }
+
+    // #endregion ---
 
     // #region --- Variants -------------------------------------------
 
     &-variant {
         &-solid {
             border: $btnBorderWidth solid;
-            padding: $btnMobileTB $btnMobileLR;
+            // padding: $btnMobileTB $btnMobileLR;
             
             @include big {
-               padding: $btnTB $btnLR; 
+            //    padding: $btnTB $btnLR; 
             }
 
             @each $theme, $states in $solid-btn {
@@ -228,10 +278,10 @@ $btnBorderWidth: 2px;
 
         &-outline {
             border: $btnBorderWidth solid;
-            padding: $btnMobileTB $btnMobileLR;
+            // padding: $btnMobileTB $btnMobileLR;
             
             @include big {
-               padding: $btnTB $btnLR; 
+            //    padding: $btnTB $btnLR; 
             }
 
             @each $theme, $states in $outline-btn {
@@ -253,7 +303,8 @@ $btnBorderWidth: 2px;
         }
 
         &-lines {
-            padding: var(--space-100) var(--space-075);
+            // padding: var(--space-100) var(--space-075);
+            // padding: $btnMobileTB $btnMobileLR;
             position: relative;
 
             &::before,

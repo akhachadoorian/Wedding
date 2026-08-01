@@ -1,29 +1,32 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-import { WithEventProps, WithHTMLProps } from "../../types/props";
-import { NonEmptyArray } from "../../types/utility";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useLenis } from "lenis/react";
+import { WithHTMLProps } from "../../types/props";
+import { NonEmptyArray } from "../../types/utility";
 
-import "./Modal.scss";
 import { XIcon } from "@phosphor-icons/react";
+import "./Modal.scss";
+import { ButtonSettingProps, LinkButtonSettings } from "@/types/buttons";
+import { button } from "motion/react-client";
+import Button from "../Buttons/Button";
 
 type ModalContentProps = {
     title: string;
     body: string;
+    button?: Omit<LinkButtonSettings, 'type'>;
 };
 
-export type ModalProps = WithHTMLProps &
-    WithEventProps & {
-        header: string;
-        content: NonEmptyArray<ModalContentProps>;
+export type ModalProps = WithHTMLProps & {
+    header: string;
+    content: NonEmptyArray<ModalContentProps>;
 
-        isOpen: boolean;
-        onClose: () => void;
-    };
+    isOpen: boolean;
+    onClose: () => void;
+};
 
 export default function Modal({
     header,
@@ -49,7 +52,6 @@ export default function Modal({
 
     const handleClose = () => setIsVisible(false); // triggers exit animation
 
-
     const lenis = useLenis();
 
     useEffect(() => {
@@ -61,15 +63,19 @@ export default function Modal({
 
     if (!mounted) return null;
 
+    console.log("header", header)
+
     return createPortal(
         <AnimatePresence onExitComplete={onClose}>
             {isVisible && (
                 <motion.div
                     style={{ overflow: "hidden" }}
-                    initial={{ translateX: '100dvw', opacity: 0 }}
-                    animate={{ translateX: "0dvw", opacity: 1 }}
-                    exit={{ translateX: '100dvw', opacity: 0 }}
-                    transition={{ duration: 0.4 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, transition: { duration: 0.3 } }}
+                    exit={{
+                        opacity: 0,
+                        transition: { duration: 0.3, delay: 0.3 },
+                    }}
                     // onAnimationComplete={onClose}
                     {...rest}
                     id={id}
@@ -78,23 +84,53 @@ export default function Modal({
                     {/* overlay */}
                     <div className="modal-overlay" onClick={handleClose}></div>
 
-                    <div className="modal-inner">
+                    <motion.div
+                        className="modal-inner"
+                        initial={{ translateX: "100%" }}
+                        animate={{
+                            translateX: "0%",
+                            transition: {
+                                duration: 0.45,
+                                delay: 0.2,
+                                ease: [0.16, 1, 0.3, 1],
+                            },
+                        }}
+                        exit={{
+                            translateX: "100%",
+                            transition: {
+                                duration: 0.35,
+                                ease: [0.7, 0, 0.84, 0],
+                            },
+                        }}
+                    >
                         <div className="modal-top">
-                            <h6 className="modal-top-header">{header}</h6>
-                            <button className="modal-close" onClick={handleClose}>
-                                <XIcon color={"var(--cream-500)"} size={30} />
+                            <h5 className="modal-top-header heading-l">{header}</h5>
+                            <button
+                                className="modal-close"
+                                onClick={handleClose}
+                            >
+                                <XIcon color={"var(--cream)"} size={30} />
                             </button>
                         </div>
 
                         <div className="modal-content">
                             {content.map((c, idx) => (
-                                <div className="modal-content-section" key={idx}>
-                                    <p className="modal-content-title eyebrow">{c.title}</p>
-                                    <p className="modal-content-body">{c.body}</p>
+                                <div
+                                    className="modal-content-section"
+                                    key={idx}
+                                >
+                                    <p className="modal-content-title eyebrow">
+                                        {c.title}
+                                    </p>
+                                    <p className="modal-content-body">
+                                        {c.body}
+                                    </p>
+
+                                    {c.button && <Button btnSettings={{type: 'link', ...c.button}} variant="outline" colorScheme="cream" size="small"/> }
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </motion.div>
                 </motion.div>
             )}
         </AnimatePresence>,

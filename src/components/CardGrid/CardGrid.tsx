@@ -1,22 +1,20 @@
 "use client";
 
-import ReactMarkdown from "react-markdown";
 
 import { LenisLink } from "../../hooks/LenisLink";
 import mergeRefs from "../../hooks/mergeRefs";
 import { useFadeInChildren } from "../../hooks/useFadeIn";
 import { WithHTMLProps } from "../../types/props";
 
-import "./CardGrid.scss";
 import { LinkSettings, ModalSettings } from "@/types/buttons";
-import ArrowBox from "../ArrowBox/ArrowBox";
 import { useState } from "react";
-import Modal from "../Modal/Modal";
+import ArrowBox from "../ArrowBox/ArrowBox";
+import Modal from "@/components/Modal/Modal";
+import "./CardGrid.scss";
 
 // #region --- Card ---------------------------------------------
 
-// type CardType = 'link' | 'modal' | 'visual';
-
+// #region --- Types ---------------------------------------------
 type CardTextProps = {
     eyebrow?: string;
     title: string;
@@ -42,10 +40,13 @@ type VisualCardsProps = WithHTMLProps & {
 
 type CardTypeProps = LinkCardsProps | ModalCardsProps | VisualCardsProps;
 
+
 type CardProps = WithHTMLProps & {
     text: CardTextProps;
     cardType: CardTypeProps;
 };
+
+// #endregion ---
 
 export function Cards({
     cardType,
@@ -75,6 +76,7 @@ export function Cards({
     }
 }
 
+// #region --- Sub Card Components ---------------------------------------------
 type LinkCardProps = WithHTMLProps & {
     text: CardTextProps;
     linkSettings: LinkSettings;
@@ -89,7 +91,7 @@ function LinkCard({
     return (
         <LenisLink
             {...htmlProps}
-            className={`card link_card ${className ?? ""}`}
+            className={`card link_card card-hover ${className ?? ""}`}
             href={linkSettings.link ?? "/"}
             target={linkSettings.target ?? "_self"}
         >
@@ -111,14 +113,16 @@ function ModalCard({
 }: ModalCardProps) {
     const [modalOpen, setModalOpen] = useState(false);
 
+    console.log("modalSettings.modalContent ", modalSettings.modalContent)
+
     return (
-        <>
-            <button onClick={() => setModalOpen(true)} className={`card modal_card ${className ?? ""}`}>
+        <div {...htmlProps} className={`modal_card-wrapper ${className ?? ""}`}>
+            <button  onClick={() => setModalOpen(true)} className={`card modal_card card-hover`}>
                 <CardContent text={text} includeArrow={true} />
             </button>
 
             <Modal {...modalSettings.modalContent} id={modalSettings.modalID} isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-        </>
+        </div>
     );
 }
 
@@ -133,6 +137,10 @@ function VisualCard({ text, className, ...htmlProps }: VisualCardProps) {
         </div>
     );
 }
+
+// #endregion ---
+
+// #region --- Card Content Components ---------------------------------------------
 
 type CardContentProps = {
     text: CardTextProps;
@@ -153,7 +161,7 @@ function CardContent({ text, includeArrow = false }: CardContentProps) {
                         <p className="heading-m">{title}</p>
                     </div>
 
-                    {includeArrow && <ArrowBox />}
+                    {includeArrow && <ArrowBox size={26} />}
                 </div>
 
                 <p className="">{body}</p>
@@ -164,7 +172,7 @@ function CardContent({ text, includeArrow = false }: CardContentProps) {
     );
 }
 
-// function
+// #endregion ---
 
 // #endregion -------------------------------------------------------
 

@@ -2,14 +2,14 @@
 
 import { PropsWithChildren, useEffect, useRef } from "react";
 
-import Drinks from "../../components/Drinks/Drinks";
-import { DrinkConfig, DrinkConfig2 } from "../../components/Drinks/drinks.type";
-import { WithHTMLProps } from "../../types/props";
-import { NonEmptyArray } from "../../types/utility";
+import Drinks from "../../../components/Drinks/Drinks";
+import { DrinkConfig, DrinkConfig2 } from "../../../components/Drinks/drinks.type";
+import { WithHTMLProps } from "../../../types/props";
+import { NonEmptyArray } from "../../../types/utility";
 import gsap from "gsap";
 
 import "./ParallaxingDrinkSection.scss";
-import generateSectionClass from "../../hooks/generateSectionClass";
+import generateSectionClass from "../../../hooks/generateSectionClass";
 
 // #region --- Default Drinks -----------------------------
 
