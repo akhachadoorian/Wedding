@@ -57,7 +57,16 @@ export default function Accommodations({
                 <CardGrid {...content.hotels.hotelCards} />
             </section>
 
-            <ComponentGuard id="accommodations-transportation">
+            <ComponentGuard
+                id="accommodations-transportation"
+                fallback={
+                    <ComingSoonSection
+                        eyebrow="eyebrow"
+                        title="Transportation section coming soon!"
+                        body="It will contain information regarding how to get and from the venue, venue parking, and the arranged bus service."
+                    />
+                }
+            >
                 <section
                     id="transportation"
                     className="base_section transportation-section"
