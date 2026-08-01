@@ -150,7 +150,7 @@ function CardContent({ text, includeArrow = false }: CardContentProps) {
 
     return (
         <>
-            <div className="card-text">
+            <div className="card-text text-cream">
                 <div className="card-upper">
                     <div className="card-upper-text">
                         {eyebrow && <p className="eyebrow">{eyebrow}</p>}
@@ -161,7 +161,7 @@ function CardContent({ text, includeArrow = false }: CardContentProps) {
                     {includeArrow && <ArrowBox size={26} />}
                 </div>
 
-                <p className="">{body}</p>
+                <p className="font-sans text-base">{body}</p>
             </div>
 
             <p className="card-letter">{letter}</p>
