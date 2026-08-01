@@ -35,16 +35,22 @@ export default function Button({
     className, // pulled out because this components constructs it for LenisLink
     ...rest // includes a11yProps and HTMLProps
 }: ButtonProps) {
-    const decorationColor = ColorSchemeMap.DECORATION.get(colorScheme, variant);
-    const decorationHoverColor =
-        ColorSchemeMap.DECORATION_HOVER.tryGet(colorScheme, variant) ??
-        decorationColor;
-
     const resolvedHoverScheme = resolveHoverScheme(
         variant,
         colorScheme,
         hoverScheme,
     );
+
+    // self-hover "flip" state: colorScheme and hoverScheme resolve to the same
+    // scheme, so the button's own fill/text relationship inverts (see SELF_HOVER_TEXT
+    // in button.variants.ts) — decoration should flip along with it. Excludes `lines`,
+    // whose hover options are self-only for every scheme (not a special "flip" state).
+    const isFlipped = variant !== "lines" && resolvedHoverScheme === colorScheme;
+
+    const decorationColor = ColorSchemeMap.DECORATION.get(colorScheme, variant);
+    const decorationHoverColor = isFlipped
+        ? ColorSchemeMap.DECORATION.tryGet(colorScheme, `${variant}-flip`) ?? decorationColor
+        : ColorSchemeMap.DECORATION_HOVER.tryGet(colorScheme, variant) ?? decorationColor;
 
     const btnClass = cn(
         "btn",

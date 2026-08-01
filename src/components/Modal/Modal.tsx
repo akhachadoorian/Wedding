@@ -135,7 +135,7 @@ export default function Modal({
                                                     type: 'arrow'
                                                 }
                                             }}
-                                            variant="solid"
+                                            variant="outline"
                                             colorScheme="cream"
                                             hoverScheme="cream"
                                             size="small"

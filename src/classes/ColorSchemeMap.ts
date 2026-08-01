@@ -35,12 +35,21 @@ export class ColorSchemeMap {
         /**
          * Color map for Button decoration. Keyed by `colorScheme` → `variant`.
          *
+         * `${variant}-flip` keys cover the self-hover "flip" state (`colorScheme` and
+         * `hoverScheme` resolve to the same scheme — see `SELF_HOVER_TEXT` in
+         * button.variants.ts), where the button's own text/fill relationship inverts.
+         * Only cream currently has a flip state, since it's the only scheme with a
+         * self-hover option defined.
+         *
          * @example
          * ColorSchemeMap.DECORATION.get("cabernet", "solid") // → CssColor("--cream-500")
          */
         static readonly DECORATION = new ColorSchemeMap(
             {
-                cream: { solid: "--black-1000", outline: "--cream", lines: "--cream" },
+                cream: {
+                    solid: "--black-1000", outline: "--cream", lines: "--cream",
+                    "solid-flip": "--wine-600", "outline-flip": "--wine-600",
+                },
                 burgundy: { solid: "--cream", outline: "--cream", lines: "--cream" },
                 cabernet: { solid: "--cream", outline: "--cream", lines: "--cream" },
             },

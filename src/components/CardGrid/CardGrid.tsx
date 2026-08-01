@@ -18,7 +18,7 @@ import "./CardGrid.scss";
 type CardTextProps = {
     eyebrow?: string;
     title: string;
-    body: string;
+    body?: string;
     letter?: string;
 };
 
@@ -161,7 +161,7 @@ function CardContent({ text, includeArrow = false }: CardContentProps) {
                     {includeArrow && <ArrowBox size={26} />}
                 </div>
 
-                <p className="font-sans text-base">{body}</p>
+                {body && <p className="font-sans text-base">{body}</p>}
             </div>
 
             <p className="card-letter">{letter}</p>
