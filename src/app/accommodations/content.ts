@@ -51,14 +51,6 @@ const hero: Omit<ImageOverlayHeroProps, "loaded" | "styleOptions"> = {
                 type: "arrow",
             },
         },
-        {
-            type: "link",
-            text: "Transport Details",
-            link: "/accommodations#transportation",
-            decoration: {
-                type: "arrow",
-            },
-        },
     ],
 };
 
