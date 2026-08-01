@@ -17,7 +17,7 @@ import Button from "../Buttons/Button";
 type ModalContentProps = {
     title: string;
     body: string;
-    button?: Omit<LinkButtonSettings, 'type'>;
+    button?: Omit<LinkButtonSettings, "type">;
 };
 
 export type ModalProps = WithHTMLProps & {
@@ -63,8 +63,6 @@ export default function Modal({
 
     if (!mounted) return null;
 
-    console.log("header", header)
-
     return createPortal(
         <AnimatePresence onExitComplete={onClose}>
             {isVisible && (
@@ -104,7 +102,9 @@ export default function Modal({
                         }}
                     >
                         <div className="modal-top">
-                            <h5 className="modal-top-header heading-l">{header}</h5>
+                            <h5 className="modal-top-header heading-l">
+                                {header}
+                            </h5>
                             <button
                                 className="modal-close"
                                 onClick={handleClose}
@@ -116,17 +116,31 @@ export default function Modal({
                         <div className="modal-content">
                             {content.map((c, idx) => (
                                 <div
-                                    className="modal-content-section"
+                                    className="modal-content-section  not-last-of-type:pb-300  not-last-of-type:border-b  not-last-of-type:border-b-solid  not-last-of-type:border-b-cream"
                                     key={idx}
                                 >
-                                    <p className="modal-content-title eyebrow">
+                                    <p className="modal-content-title eyebrow text-cream">
                                         {c.title}
                                     </p>
-                                    <p className="modal-content-body">
+                                    <p className="modal-content-body text-cream font-sans ">
                                         {c.body}
                                     </p>
 
-                                    {c.button && <Button btnSettings={{type: 'link', ...c.button}} variant="outline" colorScheme="cream" size="small"/> }
+                                    {c.button && (
+                                        <Button
+                                            btnSettings={{
+                                                type: "link",
+                                                ...c.button,
+                                                decoration: {
+                                                    type: 'arrow'
+                                                }
+                                            }}
+                                            variant="solid"
+                                            colorScheme="cream"
+                                            hoverScheme="cream"
+                                            size="small"
+                                        />
+                                    )}
                                 </div>
                             ))}
                         </div>

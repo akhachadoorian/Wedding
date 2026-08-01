@@ -53,10 +53,10 @@
             flex-direction: column;
             gap: $space-200;
 
-            &:not(:last-of-type) {
-                padding-bottom: $space-300;
-                border-bottom: 1.5px solid $black-700;
-            }
+            // &:not(:last-of-type) {
+            //     padding-bottom: $space-300;
+            //     border-bottom: 1.5px solid $cream;
+            // }
         }
     }
 

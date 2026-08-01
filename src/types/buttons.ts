@@ -126,6 +126,7 @@ export type ButtonSettingProps = LinkButtonSettings | ModalButtonSettings | Visu
 //     target?: "_blank" | "_self";
 // };
 
+export type BtnSize = 'default' | 'small';
 
 /**
  *
@@ -139,10 +140,12 @@ export type ButtonProps = WithHTMLProps &
         variant?: BtnVariants;
         /** Color theme applied to the button and arrow */
         colorScheme?: BtnColorScheme;
+        /** Hover color override — must be a valid option for the chosen variant/colorScheme (see {@link HOVER_OPTIONS}), otherwise falls back to the default */
+        hoverScheme?: BtnHoverToken;
         /** Adds optional full-width class */
         fullWidth?: boolean;
         /** */
-        size?: 'default' | 'small'
+        size?: BtnSize
     };
 
 
@@ -170,36 +173,74 @@ export type BtnVariantMap<N extends number> = RequireX<BtnVariants, N>;
 /**
  *
  */
-export type BtnColorScheme = "gold" | "cream" | "black" | 'burgundy' | 'cabernet';
+export type BtnColorScheme = "cream" | "black" | 'burgundy' | 'cabernet';
 
-// export type BtnColorSchemeBase = "gold" | "cream" | "black" | "burgundy" | "cabernet";
+/** Hover color tokens. Currently identical to `BtnColorScheme`, kept distinct in case a future hover shade isn't a full scheme on its own (e.g. a `gold-600`-style tint). */
+export type BtnHoverToken = BtnColorScheme;
 
-// export type BtnColorScheme =
-//     | BtnColorSchemeBase
-//     | readonly [base: BtnColorSchemeBase, hover: BtnColorSchemeBase];
-// const BTN_HOVER_OPTIONS = {
-//     // gold: ["gold-hover"],       // or whatever the single allowed hover is
-//     cream: [ "burgundy", "cabernet"],
-//     black: ["cream"],
-//     burgundy: ["cabernet"],
-//     cabernet: ["burgundy"],
-// } as const satisfies Record<BtnColorSchemeBase, readonly BtnColorSchemeBase[]>;
+/**
+ * Valid hover options per `(variant, colorScheme)` pair. The first entry in each array is
+ * the default used when no `hoverScheme` is passed — see {@link resolveHoverScheme}.
+ * A `variant`/`colorScheme` combo with no entry here (e.g. outline + black) gets no hover
+ * color from this table at all.
+ */
+export const HOVER_OPTIONS = {
+    solid: {
+        cream: ["cabernet", "burgundy", "cream"],
+        black: ["cabernet"],
+        burgundy: ["cabernet"],
+        cabernet: ["burgundy"],
+    },
+    outline: {
+        cream: ["cabernet", "burgundy", "cream"],
+        burgundy: ["cream"],
+        cabernet: ["cream"],
+    },
+    lines: {
+        cream: ["cream"],
+        black: ["black"],
+        burgundy: ["burgundy"],
+        cabernet: ["cabernet"],
+    },
+} as const satisfies Partial<Record<BtnVariants, Partial<Record<BtnColorScheme, readonly BtnHoverToken[]>>>>;
 
-// type BtnColorSchemeBase =  "cream" | "black" | "burgundy" | "cabernet";
+/**
+ * Resolves the effective hover token for a `variant`/`colorScheme` pair. An explicit
+ * `hoverScheme` is honored only if it's a valid option for that pair — otherwise (including
+ * when it's omitted) this falls back to the pair's default (the first entry in {@link HOVER_OPTIONS}).
+ */
+export function resolveHoverScheme(variant: BtnVariants, colorScheme: BtnColorScheme, hoverScheme?: BtnHoverToken): BtnHoverToken {
+    const variantOptions = (HOVER_OPTIONS as Partial<Record<BtnVariants, Partial<Record<BtnColorScheme, readonly BtnHoverToken[]>>>>)[variant];
+    const options: readonly BtnHoverToken[] = variantOptions?.[colorScheme] ?? [colorScheme];
 
-// type BtnColorSchemePair = {
-//     [B in keyof typeof BTN_HOVER_OPTIONS]: readonly [B, (typeof BTN_HOVER_OPTIONS)[B][number]];
-// }[BtnColorSchemeBase];
-
-// export type BtnColorScheme = BtnColorSchemeBase | BtnColorSchemePair;
-
+    return hoverScheme && options.includes(hoverScheme) ? hoverScheme : options[0];
+}
 
 
 /**
  *
  * @template N - The required number of elements
  */
-export type BtnColorSchemeMap<N extends number> = RequireX<BtnColorScheme, N>;
+// export type BtnSchemeMap<N extends number> = RequireX<BtnColorScheme, N>;
+
+// export type BtnFullSchemeMap<N extends number> = {
+//   colorScheme: RequireX<BtnColorScheme, N>,
+//   hoverScheme: RequireX<BtnColorScheme, N> 
+// }
+
+export type BtnSchemeMap<N extends number> = {
+  kind: 'simple';
+  scheme: RequireX<BtnColorScheme, N>;
+};
+
+export type BtnFullSchemeMap<N extends number> = {
+  kind: 'full';
+  colorScheme: BtnSchemeMap<N>;
+  hoverScheme: BtnSchemeMap<N>;
+};
+
+export type BtnAnySchemeMap<N extends number> = BtnSchemeMap<N> | BtnFullSchemeMap<N>;
+
 // #endregion
 
 // #region Button Decoration
@@ -218,7 +259,20 @@ export type BtnDecoration = BtnArrowSettings | BtnIconSettings;
 
 export type BtnDecorationMap<N extends number> = NonEmptyMaxX<BtnDecoration, N>;
 
-// #endregion 
+export type BtnDecorationTypes = BtnDecoration['type'];
+
+export const BTN_DECORATION_SIZE: Record<BtnSize, Record<BtnDecorationTypes, number>> = {
+    default: {
+        icon: 24,
+        arrow: 20
+    },
+    small: {
+        icon: 20,
+        arrow: 18
+    },
+}
+
+// #endregion
 
 // #region Button Groups
 export type TwoButtonsArray = NonEmptyMaxX<ButtonSettingProps, 2>;
@@ -227,7 +281,7 @@ export type TwoButtonsProps = WithHTMLProps & {
     buttons: TwoButtonsArray;
 
     customVariantMap?: BtnVariantMap<2>;
-    customColorSchemeMap?: BtnColorSchemeMap<2>;
+    customColorSchemeMap?: BtnAnySchemeMap<2>;
     customDecorationMap?: BtnDecorationMap<2>;
     noDecorationMap?: boolean;
 };
@@ -241,7 +295,7 @@ export type ThreeButtonsProps = WithHTMLProps & {
     buttons: ThreeButtonsArray;
 
     customVariantMap?: BtnVariantMap<3>;
-    customColorSchemeMap?: BtnColorSchemeMap<3>;
+    customColorSchemeMap?: BtnAnySchemeMap<3>;
     customDecorationMap?: BtnDecorationMap<3>;
     noDecorationMap?: boolean;
 };

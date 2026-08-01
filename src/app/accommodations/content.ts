@@ -77,10 +77,40 @@ const hotelCards: CardGridProps = {
     cards: [
         {
             text: {
-                // eyebrow: "Jacksonville / St. Johns Town Center",
-                // eyebrow: "CHWKPW",
                 title: "Homewood Suites",
                 body: "10434 Midtown Parkway, Jacksonville, Florida 32246",
+            },
+            cardType: {
+                type: "modal",
+                modalSettings: {
+                    modalID: "hotel-1",
+                    modalContent: {
+                        header: "Homewood Suites",
+                        content: [
+                            {
+                                title: "Address",
+                                body: "10434 Midtown Parkway, Jacksonville, Florida 32246",
+                                button: {
+                                    text: 'book now',
+                                     link: "https://www.hilton.com/en/book/reservation/deeplink/?ctyhocn=JAXHWHW&groupCode=CHWKPW&arrivaldate=2026-10-30&departuredate=2026-11-01&cid=OM,WW,HILTONLINK,EN,DirectLink&fromId=HILTONLINKDIRECT",
+                    target: "_blank",
+
+                                }
+                            },
+                            {
+                                title: "Group Code",
+                                body: "CHWKPW",
+                            },
+                        ],
+                    },
+                },
+            },
+        },
+        {
+            text: {
+                // eyebrow: "Jacksonville / St. Johns Town Center",
+                title: "Hyatt Place",
+                body: "4742 Town Center Parkway, Jacksonville, FL 32246",
             },
             cardType: {
                 type: "modal",
@@ -110,24 +140,10 @@ const hotelCards: CardGridProps = {
             // cardType: {
             //     type: "link",
             //     linkSettings: {
-                    // link: "https://www.hilton.com/en/book/reservation/deeplink/?ctyhocn=JAXHWHW&groupCode=CHWKPW&arrivaldate=2026-10-30&departuredate=2026-11-01&cid=OM,WW,HILTONLINK,EN,DirectLink&fromId=HILTONLINKDIRECT",
-                    // target: "_blank",
+            //         link: "https://www.hyatt.com/shop/rooms/jaxzs?checkinDate=2026-10-30&checkoutDate=2026-11-01&rooms=1&adults=1&kids=0&corp_id=G-PAKH&accessibilityCheck=false",
+            //         target: "_blank",
             //     },
             // },
-        },
-        {
-            text: {
-                // eyebrow: "Jacksonville / St. Johns Town Center",
-                title: "Hyatt Place",
-                body: "4742 Town Center Parkway, Jacksonville, FL 32246",
-            },
-            cardType: {
-                type: "link",
-                linkSettings: {
-                    link: "https://www.hyatt.com/shop/rooms/jaxzs?checkinDate=2026-10-30&checkoutDate=2026-11-01&rooms=1&adults=1&kids=0&corp_id=G-PAKH&accessibilityCheck=false",
-                    target: "_blank",
-                },
-            },
         },
         {
             text: {

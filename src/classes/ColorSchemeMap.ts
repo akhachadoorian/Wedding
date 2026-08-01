@@ -14,11 +14,11 @@ export type ColorSchemeMapType = Record<string, Record<string, ColorVariables>>;
  *
  * @example
  * // Named access
- * ColorSchemeMap.DECORATION.get("gold", "solid")
+ * ColorSchemeMap.DECORATION.get("cabernet", "solid")
  *
  * @example
  * // String-keyed access
- * ColorSchemeMap.lookup("DECORATION", "gold", "solid")
+ * ColorSchemeMap.lookup("DECORATION", "cabernet", "solid")
  */
 export class ColorSchemeMap {
     /**
@@ -36,12 +36,11 @@ export class ColorSchemeMap {
          * Color map for Button decoration. Keyed by `colorScheme` → `variant`.
          *
          * @example
-         * ColorSchemeMap.DECORATION.get("gold", "solid") // → CssColor("--cream-500")
+         * ColorSchemeMap.DECORATION.get("cabernet", "solid") // → CssColor("--cream-500")
          */
         static readonly DECORATION = new ColorSchemeMap(
             {
-                cream: { solid: "--gold-500", outline: "--cream", lines: "--cream" },
-                gold: { solid: "--cream", outline: "--gold-500", lines: "--gold-500" },
+                cream: { solid: "--black-1000", outline: "--cream", lines: "--cream" },
                 burgundy: { solid: "--cream", outline: "--cream", lines: "--cream" },
                 cabernet: { solid: "--cream", outline: "--cream", lines: "--cream" },
             },
@@ -57,7 +56,7 @@ export class ColorSchemeMap {
          *
          * @example
          * ColorSchemeMap.DECORATION_HOVER.tryGet("cream", "outline") // → CssColor("--wine-800")
-         * ColorSchemeMap.DECORATION_HOVER.tryGet("gold", "solid") // → undefined
+         * ColorSchemeMap.DECORATION_HOVER.tryGet("cream", "solid") // → undefined
          */
         static readonly DECORATION_HOVER = new ColorSchemeMap(
             {

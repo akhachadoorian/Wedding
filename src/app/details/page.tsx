@@ -83,7 +83,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                 />
                 <div className="rehearsal-right">
                     <Button
-                        colorScheme="gold"
+                        colorScheme="cabernet"
                         variant="solid"
                         fullWidth={true}
                         {...content.rehearsalMixer.button}

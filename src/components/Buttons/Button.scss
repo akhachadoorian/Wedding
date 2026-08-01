@@ -35,46 +35,8 @@ $size-btn: (
     // #endregion ---------------------------------
 
     // #region --- Line Button ---------------------------
-
-        $line-btn: (
-            "gold": (
-                "default": (
-                    "lines-color": $gold,
-                    "color": $gold,
-                ),
-                "hover": (
-                    "color": $gold,
-                )
-            ),
-            "cream": (
-                "default": (
-                    "lines-color": $cream,
-                    "color": $cream,
-                ),
-                "hover": (
-                    "color": $cream,
-                )
-            ),
-            "burgundy": (
-                "default": (
-                    "lines-color": $burgundy,
-                    "color": $cream,
-                ),
-                "hover": (
-                    "color": $cream,
-                )
-            ),
-            "cabernet": (
-                "default": (
-                    "lines-color": $cabernet,
-                    "color": $cream,
-                ),
-                "hover": (
-                    "color": $cabernet,
-                )
-            ),
-        );
-
+        // Colors and pseudo-element positioning for this variant are driven by cva
+        // (see button.variants.ts) and applied as Tailwind utility classes.
     // #endregion ---------------------------------
 
 // #endregion -------------------------------------------------------------------
@@ -90,7 +52,7 @@ $size-btn: (
     text-decoration: none;
     // transition: $transition;
 
-    &-text {
+    // &-text {
         // font-family: $font-sans;
         // font-size: var(--text-s);
         // font-weight: 500;
@@ -102,7 +64,7 @@ $size-btn: (
         // @include big {
         //     font-size: var(--text-base);
         // }
-    }
+    // }
 
     // #region --- Size ---
 
@@ -140,58 +102,8 @@ $size-btn: (
 
     // #region --- Variants -------------------------------------------
 
-    &-variant {
-        // solid & outline: border-width/style, colors, and hover colors are
-        // applied via cva utility classes (see button.variants.ts)
-
-        &-lines {
-            // padding: var(--space-100) var(--space-075);
-            // padding: $btnMobileTB $btnMobileLR;
-            position: relative;
-
-            &::before,
-            &::after {
-                content: "";
-                height: 1px;
-                width: 0;
-
-                position: absolute;
-
-                transition: $transition;
-            }
-
-            &::before {
-                top: 0;
-                left: 0;
-            }
-
-            &::after {
-                bottom: 0;
-                right: 0;
-            }
-
-            // &:hover {
-            //     &::before,
-            //     &::after {
-            //         width: 100%;
-            //     }
-            // }
-
-            @each $theme, $states in $line-btn {
-                $default: map.get($states, "default");
-                // $hover: map.get($states, "hover");
-
-                &.btn-color_scheme-#{$theme} {
-                    color: map.get($default, "color");
-                    
-                    &::before,
-                    &::after {
-                        background-color: map.get($default, "lines-color");
-                    }
-                }
-            }
-        }
-    }
+    // solid, outline & lines: sizing, colors, and hover states are all applied
+    // via cva utility classes (see button.variants.ts)
 
     // #endregion ------------------------------------------------------
     
@@ -223,28 +135,7 @@ a.btn, button.btn {
 
     // #region --- Variants -------------------------------------------
 
-    &-variant {
-        // solid & outline hover colors are applied via cva utility classes (see button.variants.ts)
-
-        &-lines {
-            &:hover {
-                &::before,
-                &::after {
-                    width: 100%;
-                }
-
-                @each $theme, $states in $line-btn {
-                    $hover: map.get($states, "hover");
-
-                    &.btn-color_scheme-#{$theme} {
-                        &:hover {
-                            color: map.get($hover, "color");
-                        }
-                    }
-                }
-            }
-        }
-    }
+    // solid, outline & lines hover colors are applied via cva utility classes (see button.variants.ts)
 
     // #endregion ------------------------------------------------------
 }

@@ -5,7 +5,7 @@ import React, { useRef, useState } from "react";
 import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";
 import {
-    BtnColorSchemeMap,
+    BtnSchemeMap,
     ThreeButtonsArray
 } from "../../types/buttons";
 import { WithHTMLProps } from "../../types/props";
@@ -13,9 +13,9 @@ import { WithHTMLProps } from "../../types/props";
 import ImageHolder from "@/components/ImageHolder/ImageHolder";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
 import mergeRefs from "@/hooks/mergeRefs";
+import { useFadeInChildren } from "@/hooks/useFadeIn";
 import { CustomImageProps } from "@/types/images";
 import "./ImageOverlayHero.scss";
-import { useFadeInChildren } from "@/hooks/useFadeIn";
 
 type ImageOverlayHeroStyleProps = {
     variation: "left" | "center" | "columns";
@@ -159,11 +159,12 @@ function RightContentImageOverlayHero({
     if (!subtitle && !body && !buttons) return;
 
     // const customVariantMap: BtnVariantMap<3> = ["solid", "solid", "solid"];
-    const customColorSchemeMap: BtnColorSchemeMap<3> = [
-        "burgundy",
-        "burgundy",
-        "burgundy",
-    ];
+    // FIXME:
+    // const customColorSchemeMap: BtnSchemeMap<3> = [
+    //     "burgundy",
+    //     "burgundy",
+    //     "burgundy",
+    // ];
 
     const bodyStyle = {
         "--body-margin-top": subtitle ? "var(--space-300)" : "0px",
@@ -193,7 +194,7 @@ function RightContentImageOverlayHero({
                     className="img_overlay_hero-btns btns mwc-animate"
                     noDecorationMap={true}
                     buttons={buttons ?? []}
-                    customColorSchemeMap={customColorSchemeMap}
+                    // customColorSchemeMap={customColorSchemeMap}
                     // customVariantMap={customVariantMap}
                 />
             )}
