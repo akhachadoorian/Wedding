@@ -9,7 +9,7 @@ import { WithHTMLProps } from "../../types/props";
 import { LinkSettings, ModalSettings } from "@/types/buttons";
 import { useState } from "react";
 import ArrowBox from "../ArrowBox/ArrowBox";
-import Modal from "@/components/Modal/Modal";
+import CenteredModal from "@/components/Modal/CenteredModal";
 import "./CardGrid.scss";
 
 // #region --- Card ---------------------------------------------
@@ -118,7 +118,7 @@ function ModalCard({
                 <CardContent text={text} includeArrow={true} />
             </button>
 
-            <Modal {...modalSettings.modalContent} id={modalSettings.modalID} isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+            <CenteredModal {...modalSettings.modalContent} id={modalSettings.modalID} isOpen={modalOpen} onClose={() => setModalOpen(false)} />
         </div>
     );
 }

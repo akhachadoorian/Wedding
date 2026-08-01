@@ -12,6 +12,11 @@ import Image from "next/image";
 import "./Navigation.scss";
 import { LenisLink } from "@/hooks/LenisLink";
 import { useLenis } from "lenis/react";
+import { cn } from "@/utils/cn";
+
+const LINE_BEFORE = "before:bg-cream before:h-px before:w-[0px] before:absolute before:top-px before:left-px before:transition-all before:duration-300 before:ease-in-out hover:before:w-full";
+
+const LINE_AFTER = "after:bg-cream after:h-px after:w-[0px] after:absolute after:bottom-px after:right-px after:transition-all after:duration-300 after:ease-in-out hover:after:w-full";
 
 function renderNavItem(
     item: NavItem,
@@ -44,7 +49,7 @@ function renderNavItem(
     }
 
     return (
-        <LenisLink href={item.link} className="nav-link" onClick={onNavigate}>
+        <LenisLink href={item.link} className={cn("nav-link relative py-100", LINE_BEFORE, LINE_AFTER )} onClick={onNavigate}>
             <p className="nav-text">{item.text}</p>
         </LenisLink>
     );

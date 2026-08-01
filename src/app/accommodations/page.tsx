@@ -57,12 +57,7 @@ export default function Accommodations({
                 <CardGrid {...content.hotels.hotelCards} />
             </section>
 
-            <ComingSoonSection 
-                eyebrow="eyebrow"
-                title="Transportation section coming soon!"
-                body="It will contain information regarding how to get and from the venue, venue parking, and the arranged bus service."
-            />
-            {/* <ComponentGuard id="accommodations-transportation">
+            <ComponentGuard id="accommodations-transportation">
                 <section
                     id="transportation"
                     className="base_section transportation-section"
@@ -70,7 +65,7 @@ export default function Accommodations({
                 >
                     <SplitInfo {...content.transportation} />
                 </section>
-            </ComponentGuard> */}
+            </ComponentGuard>
         </PageGuard>
     );
 }

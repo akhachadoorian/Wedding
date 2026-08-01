@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import Modal from "@/components/Modal/Modal";
+import Modal from "@/components/Modal/CenteredModal";
 import { Icon } from "@phosphor-icons/react";
 import { LenisLink } from "../../hooks/LenisLink";
 import {
