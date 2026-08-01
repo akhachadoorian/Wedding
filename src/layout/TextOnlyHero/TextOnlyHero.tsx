@@ -26,9 +26,18 @@ const DEFAULT_STYLE = {
 
 // FIXME:
 const THEME_COLOR_MAPS: Record<TextOnlyHeroThemes, BtnSchemeMap<3>> = {
-    default: ["cabernet", "cabernet", "cabernet"],
-    black: ["cabernet", "cabernet", "cabernet"],
-    black_gradient: ["cabernet", "cabernet", "cabernet"],
+    default: {
+        kind: "simple",
+        scheme: ["cabernet", "cabernet", "cabernet"],
+    },
+    black: {
+        kind: "simple",
+        scheme: ["cabernet", "cabernet", "cabernet"],
+    },
+    black_gradient: {
+        kind: "simple",
+        scheme: ["cabernet", "cabernet", "cabernet"],
+    },
 };
 
 export type TextOnlyHeroProps = WithHTMLProps & {
@@ -130,12 +139,12 @@ function RightContentTextOnlyHero({
     subtitle,
     body,
     buttons,
-    theme
+    theme,
 }: {
     subtitle?: string;
     body?: string;
     buttons?: ThreeButtonsArray;
-    theme: TextOnlyHeroThemes
+    theme: TextOnlyHeroThemes;
 }) {
     if (!subtitle && !body && !buttons) return;
 
@@ -171,7 +180,7 @@ type SubTextOnlyHeroProps = {
     subtitle?: string;
     body?: string;
     buttons?: ThreeButtonsArray;
-    theme: TextOnlyHeroThemes
+    theme: TextOnlyHeroThemes;
 };
 
 function CenterTextOnlyHero({
@@ -180,8 +189,8 @@ function CenterTextOnlyHero({
     subtitle,
     body,
     buttons,
-    theme
-}:SubTextOnlyHeroProps) {
+    theme,
+}: SubTextOnlyHeroProps) {
     return (
         <div
             className={`text_only_hero-content text_only_hero-variation-center`}
@@ -208,7 +217,7 @@ function LeftTextOnlyHero({
     subtitle,
     body,
     buttons,
-    theme
+    theme,
 }: SubTextOnlyHeroProps) {
     return (
         <div className={`text_only_hero-content text_only_hero-variation-left`}>
@@ -234,8 +243,8 @@ function ColumnsTextOnlyHero({
     subtitle,
     body,
     buttons,
-    theme
-}:SubTextOnlyHeroProps) {
+    theme,
+}: SubTextOnlyHeroProps) {
     return (
         <div
             className={`text_only_hero-content text_only_hero-variation-columns`}
