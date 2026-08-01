@@ -26,10 +26,12 @@ type ArrowBoxProps = {
     color?: ColorVariables | CssColor;
     /** Color the arrow (and its box border) transitions to when an ancestor with `:hover` sets it. @default same as `color`, i.e. no change */
     hoverColor?: ColorVariables | CssColor;
+    /** Outer box size in pixels. Everything else (arrow, icon, slide distance) scales proportionally. @default 20 */
+    size?: number;
 };
 
 
-export default function ArrowBox({ color = "--cream-500", hoverColor, arrowDirection = "top-right" }: ArrowBoxProps) {
+export default function ArrowBox({ color = "--cream-500", hoverColor, arrowDirection = "top-right", size = 20 }: ArrowBoxProps) {
     const Arrow = ARROW_MAP[arrowDirection];
 
     const resolvedColor = color ? CssColor.resolve(color) : CssColor.of("--cream-500");
@@ -41,6 +43,7 @@ export default function ArrowBox({ color = "--cream-500", hoverColor, arrowDirec
     const wrapperStyle = {
         "--arrow-color-base": resolvedColor.toCssVar(),
         "--arrow-color-hover": resolvedHoverColor.toCssVar(),
+        "--arrow-box-size": `${size}px`,
     } as React.CSSProperties;
 
     return (
@@ -48,11 +51,11 @@ export default function ArrowBox({ color = "--cream-500", hoverColor, arrowDirec
             <div className={`arrow_box-inner`}>
                 <div className={`arrow_box-grid ${arrowDirection}`}>
                     <div className="arrow start">
-                        <Arrow color="var(--arrow-color)" size={16} />
+                        <Arrow color="var(--arrow-color)" size="100%" />
                     </div>
 
                     <div className="arrow end">
-                        <Arrow color="var(--arrow-color)" size={16} />
+                        <Arrow color="var(--arrow-color)" size="100%" />
                     </div>
                 </div>
             </div>

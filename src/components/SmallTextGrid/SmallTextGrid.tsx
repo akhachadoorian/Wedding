@@ -3,12 +3,11 @@
 import { ButtonSettingProps } from "@/types/buttons";
 import mergeRefs from "../../hooks/mergeRefs";
 import { useFadeInChildren } from "../../hooks/useFadeIn";
-import { useBreakpoints } from "../../hooks/useWindowWidth";
 import { WithHTMLProps } from "../../types/props";
-import { AlignmentProps, NonEmptyArray } from "../../types/utility";
+import { NonEmptyArray } from "../../types/utility";
 
-import "./SmallTextGrid.scss";
 import Button from "../Buttons/Button";
+import "./SmallTextGrid.scss";
 
 export type SmallTextProps = WithHTMLProps & {
     eyebrow?: string;

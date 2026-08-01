@@ -3,7 +3,9 @@ import GothHero from '../GothHero/GothHero';
 import './ComingSoon.scss'
 import Eyebrow from '@/components/Eyebrow/Eyebrow';
 import Image from 'next/image';
+import { WithHTMLProps } from '@/types/props';
 
+// #region --- Coming Soon Header -----------------
 type ComingSoonProps = {
     pageTitle?: string;
     header?: string;
@@ -34,3 +36,24 @@ export default function ComingSoon({
             </section>
         );
 }
+
+// #endregion ---
+
+// #region --- Coming Soon Section -----------------
+
+type ComingSoonSectionProps = WithHTMLProps & {
+    eyebrow?: string;
+    title: string;
+    body?: string;
+}
+
+export function ComingSoonSection({eyebrow, title, body, className}:ComingSoonSectionProps) {
+    return (
+        <section className={`coming_soon_section ${className ?? ''}`}>
+            <CopyOnly eyebrow={eyebrow} header={title} body={body} styleOptions={{variation: 'center', headingLevel: 'h2', headingClass: 'heading-l'}} />
+        </section>
+    )
+}
+
+
+// #endregion ---

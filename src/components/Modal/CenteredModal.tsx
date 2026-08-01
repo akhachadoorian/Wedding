@@ -5,30 +5,13 @@ import { createPortal } from "react-dom";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useLenis } from "lenis/react";
-import { WithHTMLProps } from "../../types/props";
-import { NonEmptyArray } from "../../types/utility";
 
 import { XIcon } from "@phosphor-icons/react";
-import "./Modal.scss";
-import { ButtonSettingProps, LinkButtonSettings } from "@/types/buttons";
-import { button } from "motion/react-client";
+import "./CenteredModal.scss";
 import Button from "../Buttons/Button";
+import { ModalProps } from "./Modal";
 
-export type ModalContentProps = {
-    title: string;
-    body: string;
-    button?: Omit<LinkButtonSettings, "type">;
-};
-
-export type ModalProps = WithHTMLProps & {
-    header: string;
-    content: NonEmptyArray<ModalContentProps>;
-
-    isOpen: boolean;
-    onClose: () => void;
-};
-
-export default function Modal({
+export default function CenteredModal({
     header,
     content,
 
@@ -67,62 +50,60 @@ export default function Modal({
         <AnimatePresence onExitComplete={onClose}>
             {isVisible && (
                 <motion.div
-                    style={{ overflow: "hidden" }}
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1, transition: { duration: 0.3 } }}
+                    animate={{ opacity: 1, transition: { duration: 0.25 } }}
                     exit={{
                         opacity: 0,
-                        transition: { duration: 0.3, delay: 0.3 },
+                        transition: { duration: 0.25, delay: 0.1 },
                     }}
-                    // onAnimationComplete={onClose}
                     {...rest}
                     id={id}
-                    className={`modal ${className ?? ""} ${isVisible ? "modal-open" : "modal-closed"}`}
+                    className={`centered_modal ${className ?? ""} ${isVisible ? "centered_modal-open" : "centered_modal-closed"}`}
                 >
-                    {/* overlay */}
-                    <div className="modal-overlay" onClick={handleClose}></div>
+                    <div className="centered_modal-overlay" onClick={handleClose}></div>
 
                     <motion.div
-                        className="modal-inner"
-                        initial={{ translateX: "100%" }}
+                        className="centered_modal-card"
+                        initial={{ opacity: 0, scale: 0.96, translateY: 8 }}
                         animate={{
-                            translateX: "0%",
+                            opacity: 1,
+                            scale: 1,
+                            translateY: 0,
                             transition: {
-                                duration: 0.45,
-                                delay: 0.2,
+                                duration: 0.35,
                                 ease: [0.16, 1, 0.3, 1],
                             },
                         }}
                         exit={{
-                            translateX: "100%",
+                            opacity: 0,
+                            scale: 0.97,
+                            translateY: 6,
                             transition: {
-                                duration: 0.35,
+                                duration: 0.2,
                                 ease: [0.7, 0, 0.84, 0],
                             },
                         }}
                     >
-                        <div className="modal-top">
-                            <h5 className="modal-top-header heading-l">
+                        <div className="centered_modal-top">
+                            <h5 className="centered_modal-top-header heading-s">
                                 {header}
                             </h5>
                             <button
-                                className="modal-close"
+                                className="centered_modal-close"
                                 onClick={handleClose}
+                                aria-label="Close"
                             >
-                                <XIcon color={"var(--cream)"} size={30} />
+                                <XIcon color="var(--wine-800)" size={20} weight="bold" />
                             </button>
                         </div>
 
-                        <div className="modal-content">
+                        <div className="centered_modal-content">
                             {content.map((c, idx) => (
-                                <div
-                                    className="modal-content-section  not-last-of-type:pb-300  not-last-of-type:border-b  not-last-of-type:border-b-solid  not-last-of-type:border-b-cream"
-                                    key={idx}
-                                >
-                                    <p className="modal-content-title eyebrow text-cream">
+                                <div className="centered_modal-content-section" key={idx}>
+                                    <p className="centered_modal-content-title eyebrow">
                                         {c.title}
                                     </p>
-                                    <p className="modal-content-body text-cream font-sans ">
+                                    <p className="centered_modal-content-body font-sans">
                                         {c.body}
                                     </p>
 
@@ -132,12 +113,12 @@ export default function Modal({
                                                 type: "link",
                                                 ...c.button,
                                                 decoration: {
-                                                    type: 'arrow'
-                                                }
+                                                    type: "arrow",
+                                                },
                                             }}
-                                            variant="outline"
-                                            colorScheme="cream"
-                                            hoverScheme="cream"
+                                            variant="solid"
+                                            colorScheme="cabernet"
+                                            hoverScheme="burgundy"
                                             size="small"
                                         />
                                     )}

@@ -46,8 +46,11 @@ export type NonEmptyArray<T> = [T, ...T[]];
  * @example Type that dynamically passes number
  * type StyleMap<N extends number> = RequireX<BtnStyles, N>;
  */
-export type RequireX<T, N extends number, A extends T[] = []> = A["length"] extends N ? A : RequireX<T, N, [...A, T]>;
-
+// export type RequireX<T, N extends number, A extends T[] = []> = A["length"] extends N ? A : RequireX<T, N, [...A, T]>;
+export type RequireX<T, N extends number, A extends T[] = []> =
+  number extends N
+    ? T[]
+    : A["length"] extends N ? A : RequireX<T, N, [...A, T]>;
 
 /**
  * Internal helper that builds a union of integers from 0 to N-1.

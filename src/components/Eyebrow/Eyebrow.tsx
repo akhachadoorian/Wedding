@@ -23,13 +23,17 @@ type EyebrowStyleProps = {
     color?: ColorVariables;
     /** When true, adds bottom margin below the eyebrow. */
     includeMargin?: boolean;
-    // includeStar?: boolean;
+    includeStar?: boolean;
+    /** CSS variable token for the eyebrow label color. */
+    starColor?: ColorVariables;
 };
 
 const DEFAULT_STYLE = {
     variation: "left",
     color: "--cream",
     includeMargin: true,
+    includeStar: true,
+    starColor: '--wine-600'
 } satisfies EyebrowStyleProps;
 
 type EyebrowProps = WithHTMLProps & {
@@ -108,16 +112,17 @@ export default function Eyebrow({ styleOptions = DEFAULT_STYLE, text, doubleText
 
     if (styleOptions.variation == "center") {
         return (
-            <CenterEyebrow text={text} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
+            <CenterEyebrow text={text} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} includeStar={styleOptions?.includeStar ?? DEFAULT_STYLE.includeStar} starColor={styleOptions?.starColor ?? DEFAULT_STYLE.starColor} />
         );
-    } else if (styleOptions.variation == "double" && doubleText != null) {
+    } 
+    else if (styleOptions.variation == "double" && doubleText != null) {
         return (
-            <DoubleEyebrow text={text} doubleText={doubleText} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
+            <DoubleEyebrow text={text} doubleText={doubleText} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} includeStar={styleOptions?.includeStar ?? DEFAULT_STYLE.includeStar} starColor={styleOptions?.starColor ?? DEFAULT_STYLE.starColor} />
         );
     }
 
     return (
-        <LeftEyebrow text={text} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} />
+        <LeftEyebrow text={text} color={color} includeMargin={styleOptions?.includeMargin ?? DEFAULT_STYLE.includeMargin} ref={ref} className={className ?? ''} includeStar={styleOptions?.includeStar ?? DEFAULT_STYLE.includeStar} starColor={styleOptions?.starColor ?? DEFAULT_STYLE.starColor} />
     );
 }
 
@@ -153,19 +158,26 @@ function DiamondDivider({ color }: { color: ColorVariables }) {
     );
 }
 
+type SubEyebrowProps = {
+    text: string;
+    color: ColorVariables;
+    includeMargin: boolean;
+    includeStar?: boolean;
+    starColor: ColorVariables;
+
+    ref?: React.Ref<HTMLDivElement>;
+    className?: string;
+}
+
 function LeftEyebrow({
     text,
     color,
     includeMargin,
+    includeStar,
+    starColor,
     ref,
     className,
-}: {
-    text: string;
-    color: ColorVariables;
-    includeMargin: boolean;
-    ref?: React.Ref<HTMLDivElement>;
-    className?: string;
-}) {
+}: SubEyebrowProps) {
     return (
         <div
             ref={ref}
@@ -186,7 +198,7 @@ function LeftEyebrow({
                 }}
                 color={color}
             /> */}
-            <Star />
+            {includeStar && <Star color={starColor} />}
             <p className="eyebrow" style={{ color: `var(${color})` }}>
                 {text}
             </p>
@@ -198,27 +210,23 @@ function CenterEyebrow({
     text,
     color,
     includeMargin,
+    includeStar,
+    starColor,
     ref,
     className,
-}: {
-    text: string;
-    color: ColorVariables;
-    includeMargin: boolean;
-    ref?: React.Ref<HTMLDivElement>;
-    className?: string;
-}) {
+}:SubEyebrowProps) {
     return (
         <div
             ref={ref}
             className={`eyebrow-component eyebrow-center ${className ?? ""} ${includeMargin ? "eyebrow-margin" : ""}`}
         >
-            <Star />
+            {includeStar && <Star color={starColor} />}
 
             <p className="eyebrow" style={{ color: `var(${color})` }}>
                 {text}
             </p>
 
-            <Star />
+           {includeStar && <Star color={starColor} />}
         </div>
     );
 }
@@ -228,16 +236,11 @@ function DoubleEyebrow({
     doubleText,
     color,
     includeMargin,
+    includeStar,
+    starColor,
     ref,
     className,
-}: {
-    text: string;
-    doubleText: string;
-    color: ColorVariables;
-    includeMargin: boolean;
-    ref?: React.Ref<HTMLDivElement>;
-    className?: string;
-}) {
+}:SubEyebrowProps & {doubleText: string}) {
     return (
         <div
             ref={ref}

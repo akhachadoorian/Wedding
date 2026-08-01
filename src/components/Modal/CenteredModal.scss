@@ -1,0 +1,131 @@
+@use "@/styles/variables" as *;
+
+.centered_modal {
+    box-sizing: border-box;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100dvw;
+    height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-200);
+
+    @include big {
+        padding: var(--space-300);
+    }
+
+    &-overlay {
+        position: absolute;
+        inset: 0;
+        background: $overlay-bg;
+    }
+
+    &-card {
+        position: relative;
+        z-index: 1;
+
+        background-color: var(--cream-100);
+        border-radius: 6px;
+        box-shadow: 0 12px 40px rgba(#000, 0.25);
+
+        width: min(100%, 34rem);
+        max-height: 85dvh;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-top {
+        flex: 0 0 auto;
+
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--space-300);
+
+        padding: var(--space-300) var(--space-300) var(--space-200);
+
+        @include big {
+            padding: var(--space-400) var(--space-400) var(--space-300);
+        }
+
+        &-header {
+            color: $cabernet;
+        }
+    }
+
+    &-close {
+        flex: 0 0 auto;
+
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        transition: $transition;
+
+        &:hover {
+            background-color: var(--cream-600);
+        }
+    }
+
+    &-content {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+
+        padding: 0 var(--space-300) var(--space-300);
+
+        @include big {
+            padding: 0 var(--space-400) var(--space-400);
+        }
+
+        display: flex;
+        flex-direction: column;
+        gap: $space-300;
+
+        &-section {
+            display: flex;
+            flex-direction: column;
+            gap: $space-100;
+
+            &:not(:last-of-type) {
+                padding-bottom: $space-300;
+                border-bottom: 1px solid var(--cream-700);
+            }
+        }
+
+        &-title {
+            color: $cabernet;
+        }
+
+        &-body {
+            color: $black-700;
+        }
+    }
+
+    // ---- Open vs Closed state -------------------------------------------
+    &-closed {
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0;
+    }
+
+    &-open {
+        opacity: 1;
+        z-index: 999;
+        pointer-events: auto;
+    }
+}

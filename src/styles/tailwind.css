@@ -1,0 +1,67 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/*
+ * Button colors (src/components/Buttons/button.variants.ts) are built via string
+ * interpolation (`border-${base}`, `hover:bg-${hover}`, ...) from a runtime data table,
+ * so Tailwind's static source scanner can never discover the resulting class names —
+ * it only detects complete literal strings. This forces generation of the full set
+ * regardless of which combinations actually appear literally in source.
+ */
+@source inline("{border,bg,text,hover:border,hover:bg,hover:text,before:bg,after:bg}-{cream,black,burgundy,cabernet}");
+
+@theme {
+    /* Semantic Colors */
+    --color-cream: var(--cream);
+    --color-black: var(--black-1000);
+    --color-burgundy: var(--wine-600);
+    --color-cabernet: var(--wine-800);
+    --color-gray: var(--gray);
+    --color-gold: var(--gold-500);
+
+    /* --color-gray: var(--gray);
+    --color-gold: var(--gold-500);
+    --color-gold-600: var(--gold-600);
+    --color-burgundy: var(--wine-600);
+    --color-cabernet: var(--wine-800); */
+
+    /* Breakpoints */
+    /* --breakpoint-mob: 450px; */ /* sm */
+    /* --breakpoint-tab: 768px; */ /* md */
+    /* --breakpoint-dsk: 1024px; */ /* lg */
+
+    /* Fonts */
+    --font-goth: var(--font-respira-black);
+    --font-sans: var(--font-unbounded);
+
+    /* Text Sizes */
+    --font-size-xs: var(--text-xs);
+    --font-size-s: var(--text-s);
+    --font-size-base: var(--text-base);
+    --font-size-md: var(--text-md);
+    --font-size-lg: var(--text-lg);
+    --font-size-xl: var(--text-xl);
+    --font-size-2xl: var(--text-2xl);
+    --font-size-3xl: var(--text-3xl);
+    --font-size-4xl: var(--text-4xl);
+    --font-size-5xl: var(--text-5xl);
+
+    /* Spacing */
+    --spacing-0: var(--space-0); /* 0px */
+    --spacing-025: var(--space-025); /* 2px */
+    --spacing-050: var(--space-050); /* 4px */
+    --spacing-075: var(--space-075); /* 6px */
+    --spacing-100: var(--space-100); /* 8px */
+    --spacing-150: var(--space-150); /* 12px */
+    --spacing-200: var(--space-200); /* 16px */
+    --spacing-250: var(--space-250); /* 20px */
+    --spacing-300: var(--space-300); /* 24px */
+    --spacing-400: var(--space-400); /* 32px */
+    --spacing-500: var(--space-500); /* 40px */
+    --spacing-600: var(--space-600); /* 48px */
+    --spacing-700: var(--space-700); /* 56px */
+    --spacing-750: var(--space-750); /* 60px */
+    --spacing-800: var(--space-800); /* 64px */
+    --spacing-1000: var(--space-1000); /* 80px */
+    --spacing-1500: var(--space-1500); /* 120px */
+}

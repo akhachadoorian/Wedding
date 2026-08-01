@@ -257,7 +257,7 @@ export default function SplitHero({ loaded, heading, eyebrow, btn, image }: Spli
                             </h1>
                         </div>
 
-                        {btn && <Button variant="solid" colorScheme="gold" btnSettings={btn} />}
+                        {btn && <Button variant="solid" colorScheme="cabernet" btnSettings={btn} />}
                     </div>
                 </div>
 

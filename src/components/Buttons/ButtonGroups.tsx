@@ -1,32 +1,35 @@
-'use client'
+"use client";
 
-import { BtnDecoration, ButtonSettingProps, ThreeButtonsProps, TwoButtonsProps } from "../../types/buttons";
+import {
+    BtnAnySchemeMap,
+    BtnDecoration,
+    BtnFullSchemeMap,
+    BtnSchemeMap,
+    ButtonSettingProps,
+    ThreeButtonsProps,
+    TwoButtonsProps,
+} from "../../types/buttons";
 import Button from "./Button";
 import { THREE_BUTTON_DEFAULTS, TWO_BUTTON_DEFAULTS } from "./defaults";
 
-function mapButtonSettings({ 
-    settings, 
-    decoration
-    // noDecorationMap 
+function mapButtonSettings({
+    settings,
+    decoration,
 }: {
-    settings:ButtonSettingProps;
+    settings: ButtonSettingProps;
     decoration?: BtnDecoration | false;
-    // noDecorationMap: boolean;
-
 }) {
-    // let b;
-
     if (settings.type === "modal") {
         return {
-            type: 'modal',
+            type: "modal",
             text: settings.text,
             decoration: decoration ? decoration : settings.decoration,
             modalID: settings.modalID,
-            modalContent: settings.modalContent
+            modalContent: settings.modalContent,
         } satisfies ButtonSettingProps;
     } else if (settings.type === "link") {
         return {
-            type: 'link',
+            type: "link",
             text: settings.text,
             decoration: decoration ? decoration : settings.decoration,
             link: settings.link,
@@ -50,14 +53,19 @@ export function TwoButtons({
     return (
         <div {...htmlProps} className={`btns ${htmlProps.className ?? ""}`}>
             {buttons?.map((btn, idx) => {
-                let settings = mapButtonSettings({settings: btn, decoration: noDecorationMap ? false : customDecorationMap[idx]});
+                let settings = mapButtonSettings({
+                    settings: btn,
+                    decoration: noDecorationMap
+                        ? false
+                        : customDecorationMap[idx],
+                });
                 if (settings == null) return;
 
                 return (
                     <Button
                         key={idx}
                         variant={customVariantMap[idx]}
-                        colorScheme={customColorSchemeMap[idx]}
+                        colorScheme={customColorSchemeMap.kind === 'full' ? customColorSchemeMap.colorScheme.scheme[idx] : customColorSchemeMap.scheme[idx]}
                         btnSettings={settings}
                     />
                 );
@@ -79,14 +87,23 @@ export function ThreeButtons({
     return (
         <div {...htmlProps} className={`btns ${htmlProps.className ?? ""}`}>
             {buttons?.map((btn, idx) => {
-                let settings = mapButtonSettings({settings: btn, decoration: noDecorationMap ? false : customDecorationMap[idx]});
+                let settings = mapButtonSettings({
+                    settings: btn,
+                    decoration: noDecorationMap
+                        ? false
+                        : customDecorationMap[idx],
+                });
                 if (settings == null) return;
 
                 return (
                     <Button
                         key={idx}
                         variant={customVariantMap[idx]}
-                        colorScheme={customColorSchemeMap[idx]}
+                        colorScheme={customColorSchemeMap.kind === 'full' ? customColorSchemeMap.colorScheme.scheme[idx] : customColorSchemeMap.scheme[idx]}
+                        // colorScheme={resolveColorScheme(
+                        //     customColorSchemeMap,
+                        //     idx,
+                        // )}
                         btnSettings={settings}
                     />
                 );

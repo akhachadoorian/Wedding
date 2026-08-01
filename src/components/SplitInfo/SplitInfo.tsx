@@ -100,7 +100,7 @@ function ContentSplitInfo({ content }: ContentSplitInfoProps) {
                     {c.buttons && (
                         <div className="split_info-content-section-btns btns">
                             {c.buttons.map((b, idx) => (
-                                <Button btnSettings={b} key={idx} colorScheme="gold" variant="outline" />
+                                <Button btnSettings={b} key={idx} colorScheme="cabernet" variant="outline" />
                             ))}
                         </div>
                     )}

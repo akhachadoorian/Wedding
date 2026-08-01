@@ -4,7 +4,7 @@
 import mergeRefs from "../../hooks/mergeRefs";
 import { useFadeInChildren } from "../../hooks/useFadeIn";
 import {
-    BtnColorSchemeMap,
+    BtnAnySchemeMap,
     BtnVariantMap,
     ThreeButtonsArray,
 } from "../../types/buttons";
@@ -32,7 +32,7 @@ type CopyOnlyStyleProps = {
     headingClass?: HeadingClassProps;
     eyebrowColor?: ColorVariables;
     customBtnVariantMap?: BtnVariantMap<3>;
-    customBtnColorSchemeMap?: BtnColorSchemeMap<3>;
+    customBtnColorSchemeMap?: BtnAnySchemeMap<3>;
 };
 
 const DEFAULT_STYLE = {
@@ -371,7 +371,7 @@ function BtnsCopyOnly({
 }: {
     buttons: ThreeButtonsArray;
     customBtnVariantMap?: BtnVariantMap<3>;
-    customBtnColorSchemeMap?: BtnColorSchemeMap<3>;
+    customBtnColorSchemeMap?: BtnAnySchemeMap<3>;
 }) {
     return (
         <ThreeButtons

@@ -20,7 +20,7 @@ export default function Footer({}) {
                                 href={item.link}
                                 className="footer-link"
                             >
-                                <p className="">{item.text}</p>
+                                <p className="text-cream">{item.text}</p>
                             </LenisLink>
                         </React.Fragment>
                     ))}
@@ -33,7 +33,7 @@ export default function Footer({}) {
                     target="_self"
                     className="footer-link"
                 >
-                    <p className="body-xs">alexmaxwedding.com</p>
+                    <p className="body-xs text-cream">alexmaxwedding.com</p>
                 </LenisLink> 
             </div>
         </footer>

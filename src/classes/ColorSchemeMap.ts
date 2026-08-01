@@ -14,11 +14,11 @@ export type ColorSchemeMapType = Record<string, Record<string, ColorVariables>>;
  *
  * @example
  * // Named access
- * ColorSchemeMap.DECORATION.get("gold", "solid")
+ * ColorSchemeMap.DECORATION.get("cabernet", "solid")
  *
  * @example
  * // String-keyed access
- * ColorSchemeMap.lookup("DECORATION", "gold", "solid")
+ * ColorSchemeMap.lookup("DECORATION", "cabernet", "solid")
  */
 export class ColorSchemeMap {
     /**
@@ -35,13 +35,21 @@ export class ColorSchemeMap {
         /**
          * Color map for Button decoration. Keyed by `colorScheme` → `variant`.
          *
+         * `${variant}-flip` keys cover the self-hover "flip" state (`colorScheme` and
+         * `hoverScheme` resolve to the same scheme — see `SELF_HOVER_TEXT` in
+         * button.variants.ts), where the button's own text/fill relationship inverts.
+         * Only cream currently has a flip state, since it's the only scheme with a
+         * self-hover option defined.
+         *
          * @example
-         * ColorSchemeMap.DECORATION.get("gold", "solid") // → CssColor("--cream-500")
+         * ColorSchemeMap.DECORATION.get("cabernet", "solid") // → CssColor("--cream-500")
          */
         static readonly DECORATION = new ColorSchemeMap(
             {
-                cream: { solid: "--gold-500", outline: "--cream", lines: "--cream" },
-                gold: { solid: "--cream", outline: "--gold-500", lines: "--gold-500" },
+                cream: {
+                    solid: "--black-1000", outline: "--cream", lines: "--cream",
+                    "solid-flip": "--wine-600", "outline-flip": "--wine-600",
+                },
                 burgundy: { solid: "--cream", outline: "--cream", lines: "--cream" },
                 cabernet: { solid: "--cream", outline: "--cream", lines: "--cream" },
             },
@@ -57,7 +65,7 @@ export class ColorSchemeMap {
          *
          * @example
          * ColorSchemeMap.DECORATION_HOVER.tryGet("cream", "outline") // → CssColor("--wine-800")
-         * ColorSchemeMap.DECORATION_HOVER.tryGet("gold", "solid") // → undefined
+         * ColorSchemeMap.DECORATION_HOVER.tryGet("cream", "solid") // → undefined
          */
         static readonly DECORATION_HOVER = new ColorSchemeMap(
             {

@@ -65,39 +65,44 @@
             right: -25px;
         }
     }
-}
 
-.link_card {
-    text-decoration: none;
-    transition: transform ease-in-out 300ms;
+    &-hover {
+        transition: transform ease-in-out 300ms;
 
-    &:hover {
-        transform: translateY(-5px);
+        &:hover {
+            transform: translateY(-5px);
+            cursor: pointer;
 
-        @each $dir, $t in $arrow-hover-transforms {
-            .arrow_box-grid.#{$dir} {
-                transform: $t;
+            @each $dir, $t in $arrow-hover-transforms {
+                .arrow_box-grid.#{$dir} {
+                    transform: $t;
+                }
             }
-        }
 
-        .card-text {
-            // background-color: $black-800;
-            background-color: $cabernet;
-        }
+            .card-text {
+                background-color: $cabernet;
+            }
 
-        .card-letter {
-            bottom: -20px;
+            .card-letter {
+                bottom: -20px;
+            }
         }
     }
 }
 
+.link_card {
+    text-decoration: none;
+}
+
 .modal_card {
-    &:hover {
-        @each $dir, $t in $arrow-hover-transforms {
-            .arrow_box-grid.#{$dir} {
-                transform: $t;
-            }
-        }
+    appearance: none;
+    border: none;
+    width: 100%;
+    padding: 0;
+    text-align: left;
+
+    &-wrapper {
+        transition: transform ease-in-out 300ms;
     }
 }
 
@@ -115,12 +120,14 @@
         gap: var(--layout-column-gutter);
     }
 
-    .card {
+    .link_card,
+    .visual_card,
+    .modal_card-wrapper {
         // grid-column: span 4;
         flex: 1 0 350px;
 
         @include big {
-           flex: 1 0 420px; 
+            flex: 1 0 420px;
         }
     }
 }

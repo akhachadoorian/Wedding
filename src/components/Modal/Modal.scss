@@ -12,7 +12,8 @@
     justify-content: flex-end;
 
     &-inner {
-        background-color: $black;
+        // background-color: $black;
+        background-color: $cabernet;
         width: 56.319vw;
         padding: var(--space-750) var(--layout-column-margin);
 
@@ -27,13 +28,15 @@
         justify-content: space-between;
         gap: var(--layout-column-gap);
 
-        &-header {
-            color: $gold;
-        }
+        // &-header {
+        //     color: $gold;
+        // }
     }
 
     &-close {
-        background-color: $black-700;
+        // TODO: decide color and hover
+        // background-color: $black-700;
+        background-color: transparent;
         border: none;
         padding: var(--space-050, 4px);
         height: 38px;
@@ -50,10 +53,10 @@
             flex-direction: column;
             gap: $space-200;
 
-            &:not(:last-of-type) {
-                padding-bottom: $space-300;
-                border-bottom: 1.5px solid $black-700;
-            }
+            // &:not(:last-of-type) {
+            //     padding-bottom: $space-300;
+            //     border-bottom: 1.5px solid $cream;
+            // }
         }
     }
 

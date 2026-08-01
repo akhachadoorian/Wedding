@@ -4,7 +4,7 @@ import React from "react";
 
 import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";
-import { BtnColorSchemeMap, ThreeButtonsArray } from "../../types/buttons";
+import { BtnSchemeMap, ThreeButtonsArray } from "../../types/buttons";
 import { WithHTMLProps } from "../../types/props";
 
 import "./TextOnlyHero.scss";
@@ -24,10 +24,11 @@ const DEFAULT_STYLE = {
     // inset: false,
 } satisfies TextOnlyHeroStyleProps;
 
-const THEME_COLOR_MAPS: Record<TextOnlyHeroThemes, BtnColorSchemeMap<3>> = {
-    default: ["gold", "gold", "gold"],
-    black: ["gold", "gold", "gold"],
-    black_gradient: ["gold", "gold", "gold"],
+// FIXME:
+const THEME_COLOR_MAPS: Record<TextOnlyHeroThemes, BtnSchemeMap<3>> = {
+    default: ["cabernet", "cabernet", "cabernet"],
+    black: ["cabernet", "cabernet", "cabernet"],
+    black_gradient: ["cabernet", "cabernet", "cabernet"],
 };
 
 export type TextOnlyHeroProps = WithHTMLProps & {

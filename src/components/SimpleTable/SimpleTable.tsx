@@ -126,7 +126,7 @@ type SimpleTableElementButtonProps = {
 function SimpleTableElementButton({ type, button }: SimpleTableElementButtonProps) {
     return (
         <div className="simple_table_element simple_table_element-btn">
-            <Button className="" btnSettings={button} colorScheme="gold" variant="outline" />
+            <Button className="" btnSettings={button} colorScheme="cabernet" variant="outline" />
         </div>
     );
 }

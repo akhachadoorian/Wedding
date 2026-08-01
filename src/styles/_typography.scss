@@ -5,15 +5,15 @@
 
 p {
     margin: 0;
-    // font-family: $font-sans;
-    @extend %body-base;
+    font-family: $font-sans;
+    // @extend %body-base;
     // color: var(--cream-500);
 }
 
 a {
     margin: 0;
     font-family: $font-sans;
-    color: var(--cream-500);
+    // color: var(--cream-500);
 }
 
 h1,
@@ -93,8 +93,7 @@ h6,
 
 // ── Body ──────────────────────────────────────────────────────
 
-.body,
-p {
+.body {
     @extend %body-base;
     font-size: var(--text-base);
 }

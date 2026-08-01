@@ -1,6 +1,7 @@
 import Footer from "@/layout/Footer/Footer";
 import Navigation from "@/layout/Navigation/Navigation";
 import "@/styles/main.scss";
+import "@/styles/tailwind.css";
 import type { Metadata } from "next";
 import { Unbounded } from 'next/font/google';
 import localFont from 'next/font/local';

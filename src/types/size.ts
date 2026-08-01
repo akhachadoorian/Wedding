@@ -18,7 +18,7 @@ export type ResponsiveClampSize = {
 /**
  * Type to hold a single size variable for desktop and mobile
  */
-export type ResponsiveSize = {
-    desktop: string;
-    mobile?: string;
+export interface ResponsiveSize {
+    desktop: string | number;
+    mobile?: string | number;
 }
