@@ -22,6 +22,8 @@
 
     &-inner {
         display: flex;
+        flex-direction: column;
+        gap: $space-600;
 
         @include big {
             flex-direction: row;
@@ -126,6 +128,157 @@
                 height: 2px;
                 background-color: $gold-700;
             }
+        }
+    }
+}
+
+// #endregion ------------------------------------------------
+
+// #region --- Step One Search Form ---------------------------
+
+.step_one_search {
+    display: flex;
+    flex-direction: column;
+    gap: $space-400;
+
+    margin-top: $space-600;
+
+    @include big {
+        margin-top: 0;
+    }
+
+    &-fields {
+        display: flex;
+        flex-direction: column;
+        gap: $space-300;
+
+        @include big {
+            flex-direction: row;
+        }
+    }
+
+    &-field {
+        display: flex;
+        flex-direction: column;
+        gap: $space-150;
+        flex: 1 1 0;
+    }
+
+    &-label {
+        color: $cream-700;
+        font-family: $font-sans;
+        font-size: var(--text-s);
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+    }
+
+    &-input {
+        padding: $space-200 $space-300;
+        background: $black;
+        border: 1.5px solid $black-800;
+        width: 100%;
+
+        color: $cream;
+        font-family: $font-sans;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%;
+
+        &::placeholder {
+            color: $cream-900;
+            opacity: 1;
+            font-family: $font-sans;
+            font-size: var(--text-base);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+
+            transition: $transition;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: $gold;
+
+            &::placeholder {
+                opacity: 0;
+            }
+        }
+    }
+
+    &-submit {
+        align-self: flex-start;
+
+        appearance: none;
+        background: transparent;
+        border: 2px solid $cream;
+        padding: $space-200 $space-400;
+        width: fit-content;
+
+        color: $cream;
+        font-family: $font-sans;
+        font-size: var(--text-s);
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+
+        transition: $transition;
+
+        &:hover:not(:disabled) {
+            background: $cream;
+            color: $black;
+        }
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+    }
+}
+
+// #endregion ------------------------------------------------
+
+// #region --- Step One Results -------------------------------
+
+.rsvp_step-results {
+    margin-top: $space-700;
+
+    &-header {
+        display: flex;
+        align-items: center;
+        gap: $space-200;
+
+        color: $gold;
+        text-align: center;
+
+        &-line {
+            width: 100%;
+            height: 2px;
+            background-color: $gold-700;
+        }
+    }
+
+    &-content {
+        margin-top: $space-400;
+    }
+
+    &-placeholder {
+        color: $cream-700;
+    }
+
+    &-error {
+        color: $negative;
+    }
+
+    &-result {
+        padding: $space-300 0;
+        border-bottom: 1px solid $black-800;
+
+        &:last-child {
+            border-bottom: none;
         }
     }
 }

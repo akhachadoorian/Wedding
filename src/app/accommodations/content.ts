@@ -3,7 +3,6 @@ import {
     ArtDecoCardGridProps,
     ArtDecoCardProps,
 } from "../../components/ArtDecoCardGrid/ArtDecoCardGrid";
-import { CopyOnlyProps } from "../../components/CopyOnly/CopyOnly";
 import { SplitInfoProps } from "../../components/SplitInfo/SplitInfo";
 import { TextOnlyHeroProps } from "../../layout/TextOnlyHero/TextOnlyHero";
 import { NonEmptyArray } from "../../types/utility";
@@ -14,6 +13,7 @@ import {
 } from "@phosphor-icons/react";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
 import { CardGridProps } from "@/components/CardGrid/CardGrid";
+import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
 
 // #region --- Hero -----------------------------------------------
 

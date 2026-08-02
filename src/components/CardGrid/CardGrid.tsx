@@ -6,11 +6,12 @@ import mergeRefs from "../../hooks/mergeRefs";
 import { useFadeInChildren } from "../../hooks/useFadeIn";
 import { WithHTMLProps } from "../../types/props";
 
+import CenteredModal from "@/components/Modal/CenteredModal";
 import { LinkSettings, ModalSettings } from "@/types/buttons";
 import { useState } from "react";
 import ArrowBox from "../ArrowBox/ArrowBox";
-import CenteredModal from "@/components/Modal/CenteredModal";
 import "./CardGrid.scss";
+import { CardTypeProps } from "./card";
 
 // #region --- Card ---------------------------------------------
 
@@ -21,24 +22,6 @@ type CardTextProps = {
     body?: string;
     letter?: string;
 };
-
-type LinkCardsProps = WithHTMLProps & {
-    type: "link";
-    // text: CardTextProps;
-    linkSettings: LinkSettings;
-};
-
-type ModalCardsProps = WithHTMLProps & {
-    type: "modal";
-    // text: CardTextProps;
-    modalSettings: ModalSettings;
-};
-
-type VisualCardsProps = WithHTMLProps & {
-    type: "visual";
-};
-
-type CardTypeProps = LinkCardsProps | ModalCardsProps | VisualCardsProps;
 
 
 type CardProps = WithHTMLProps & {

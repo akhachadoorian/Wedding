@@ -1,15 +1,214 @@
 // _wedding.scss
-@use "@/styles/variables" as *;;
+@use "@/styles/variables" as *;
 
 .venue-section {
-    margin: var(--layout-section-padding) auto;
+    @include section-stack;
+    // margin: var(--layout-section-padding) auto;
 
-    .section-inner {
-        background-color: var(--black-900);
+    // .section-inner {
+    //     background-color: var(--black-900);
 
-        @include section-stack;
+    //     @include section-stack;
+    // }
+}
+
+.venue-framed {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-600);
+
+    @include big {
+        flex-direction: row;
+        align-items: stretch;
+        gap: 6.25vw;
+    }
+
+    // Frame/photo styling itself lives in the shared ImageHolderBorder
+    // component now — this just places it within the row on desktop.
+    &-media {
+        @include big {
+            flex: 0 0 36%;
+        }
+    }
+
+    &-text {
+        display: flex;
+        flex-direction: column;
+
+        @include big {
+            flex: 1 1 auto;
+            justify-content: center;
+        }
+    }
+
+    &-header {
+        margin-top: $space-200;
+    }
+
+    &-subtitle {
+        margin-top: $space-200;
+    }
+
+    &-body {
+        margin-top: $space-200;
+    }
+
+    &-actions {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: $space-300;
+        margin-top: $space-500;
+
+        @include big {
+            margin-top: $space-600;
+        }
     }
 }
+
+// .v4 .venue-warning {
+//     margin-top: $space-500;
+
+//     @include big {
+//         margin-top: $space-600;
+//         max-width: none;
+//     }
+// }
+
+.venue-side_cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-600);
+
+    @include big {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 6.25vw;
+    }
+
+    &-text {
+        display: flex;
+        flex-direction: column;
+        gap: $space-500;
+
+        @include big {
+            flex: 2 1 710px;
+            
+        }
+    }
+
+    &-cards {
+        @include big {
+            flex: 1 1 530px;
+        }
+
+        // Override CardGrid's default large, row-wrapping cards so this
+        // reads as a compact stacked sidebar next to the copy.
+        .card_grid {
+            flex-direction: column;
+            flex-wrap: nowrap;
+            gap: $space-300;
+        }
+
+        .link_card,
+        .visual_card,
+        .modal_card-wrapper {
+            flex: none !important;
+            width: 100%;
+        }
+
+        .card-text {
+            min-height: auto;
+            padding: $space-400;
+            gap: $space-050;
+        }
+
+        .card-letter {
+            font-size: 90px;
+            bottom: -10px;
+            right: -10px;
+        }
+    }
+}
+
+// Small icon cards for the side-cards variation, framed with the same
+// offset cabernet double-border used around the photo in the framed
+// variation — intentionally distinct from CardGrid's filled cards +
+// giant background letter.
+// .venue-mini_cards {
+//     display: flex;
+//     flex-direction: column;
+//     gap: $space-500;
+// }
+
+
+// .venue-mini_card {
+//     position: relative;
+//     display: block;
+
+//     box-sizing: border-box;
+//     width: 100%;
+//     margin: $space-150;
+
+//     appearance: none;
+//     background: transparent;
+//     border: none;
+//     padding: 0;
+//     color: $cream;
+//     text-align: left;
+//     text-decoration: none;
+//     cursor: pointer;
+
+//     &:hover {
+//         .venue-mini_card-content {
+//             background-color: $cabernet;
+//         }
+
+//         .venue-mini_card-icon {
+//             color: $cream;
+//         }
+//     }
+
+//     &-frame {
+//         position: absolute;
+//         border: 2px solid $cabernet;
+//     }
+
+//     &-frame-a {
+//         inset: calc(#{$space-150} * -1) $space-150 $space-150 calc(#{$space-150} * -1);
+//     }
+
+//     &-frame-b {
+//         inset: $space-150 calc(#{$space-150} * -1) calc(#{$space-150} * -1) $space-150;
+//     }
+
+//     &-content {
+//         position: relative;
+//         z-index: 2;
+
+//         display: flex;
+//         flex-direction: column;
+//         gap: $space-100;
+
+//         background-color: $black-900;
+//         padding: $space-400;
+//         transition: $transition;
+//     }
+
+//     &-icon {
+//         color: $cream-500;
+//         transition: $transition;
+//     }
+
+//     &-title {
+//         margin-top: $space-100;
+//         color: $cream;
+//     }
+
+//     &-body {
+//         color: $cream-700;
+//     }
+// }
 
 .timeline-section .parallaxing_drink-content {
     @include section-stack;

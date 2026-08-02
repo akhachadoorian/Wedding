@@ -1,14 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEvent } from "react";
 
-import GUEST_LIST from "../../data/guestList";
-import toHtmlId from "../../hooks/toHtmlId";
-import RSVP from "../../app/rsvp/page";
-import { party } from "../../types/guestList";
-import { WithHTMLProps } from "../../types/props";
-import { NonEmptyArray } from "../../types/utility";
-import Eyebrow from "../Eyebrow/Eyebrow";
+import GUEST_LIST from "../../../data/guestList";
+import toHtmlId from "../../../hooks/toHtmlId";
+import RSVP from "../page";
+import { party } from "../../../types/guestList";
+import { WithHTMLProps } from "../../../types/props";
+import { NonEmptyArray } from "../../../types/utility";
+import Eyebrow from "../../../components/Eyebrow/Eyebrow";
 
 import "./RSVPForm.scss";
 
@@ -56,27 +56,13 @@ export default function RSVPForm({
     // };
 
     return (
-        <section
-            {...htmlProps}
-            className={`rsvp_form base_section ${className ?? ""}`}
-        >
+        <div {...htmlProps} className={`rsvp_form  ${className ?? ""}`}>
             {/* <RSVPProgressBar texts={progressBar} currStep={step} /> */}
 
             <div className="rsvp_form-steps">
-                <div className=""></div>
-                {/* <RSVPStep
-                    textContent={steps[step].textContent}
-                    type={steps[step].type}
-                    searchQuery={searchQuery}
-                    setSearchQuery={setSearchQuery}
-                    handleSearch={handleSearch}
-                    searchResult={searchResult}
-                    searchError={searchError}
-                    searching={searching}
-                /> */}
-                {/* TODO: nav buttons */}
+                <StepOne />
             </div>
-        </section>
+        </div>
     );
 }
 
@@ -275,19 +261,159 @@ const STEP_ONE_TEXT: RSVPStepTextProps = {
 };
 
 function StepOne({}) {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [searchResult, setSearchResult] = useState<party[]>([]);
+    const [searchError, setSearchError] = useState("");
+    const [searching, setSearching] = useState(false);
+
+    const handleSearch = (e: FormEvent) => {
+        e.preventDefault();
+
+        setSearching(true);
+        setSearchError("");
+        setSearchResult([]);
+
+        setTimeout(() => {
+            const first = firstName.trim().toLowerCase();
+            const last = lastName.trim().toLowerCase();
+
+            const found = GUEST_LIST.filter((p) =>
+                p.guests.some(
+                    (g) =>
+                        g.lastName?.toLowerCase() === last &&
+                        (!first || g.firstName.toLowerCase() === first),
+                ),
+            );
+
+            if (found.length > 0) {
+                setSearchResult(found);
+            } else {
+                setSearchError("We couldn't find that name. Please try again.");
+            }
+            setSearching(false);
+        }, 600);
+    };
+
     return (
-        <div className="rsvp_form_step step_one">
-            <div className="step_one-left">
-                <Eyebrow text={`Step ${STEP_ONE_TEXT.stepNumber}`} />
-                <h2 className="heading-l rsvp_step_text-title">
-                    {STEP_ONE_TEXT.title}
-                </h2>
-                <p className="">{STEP_ONE_TEXT.body}</p>
+        <div className="rsvp_step">
+            <div className="rsvp_step-inner">
+                <div className="rsvp_step-left">
+                    <RSVPStepText {...STEP_ONE_TEXT} />
+                </div>
+
+                <div className="rsvp_step-right">
+                    <StepOneInputs
+                        firstName={firstName}
+                        setFirstName={setFirstName}
+                        lastName={lastName}
+                        setLastName={setLastName}
+                        handleSearchSubmit={handleSearch}
+                    />
+                </div>
             </div>
-            <div className="step_one-right">
-                <div className=""></div>
-                <div className=""></div>
+
+            <div className="rsvp_step-results">
+                <div className="rsvp_step-results-header">
+                    <div className="rsvp_step-results-header-line" />
+                    <p className="eyebrow">Results</p>
+                    <div className="rsvp_step-results-header-line" />
+                </div>
+
+                <div className="rsvp_step-results-content">
+                    {!searching &&
+                        searchResult.length === 0 &&
+                        !searchError && (
+                            <p className="body rsvp_step-results-placeholder">
+                                Results will appear here.
+                            </p>
+                        )}
+
+                    {searching && <p className="body">Searching...</p>}
+
+                    {searchError && (
+                        <p className="body rsvp_step-results-error">
+                            {searchError}
+                        </p>
+                    )}
+
+                    {searchResult.map((party, idx) => (
+                        <div key={idx} className="rsvp_step-results-result">
+                            {party.guests.map((guest, gIdx) => (
+                                <p key={gIdx} className="body">
+                                    {guest.placeholder
+                                        ? "Guest"
+                                        : `${guest.firstName}${guest.lastName ? ` ${guest.lastName}` : ""}`}
+                                </p>
+                            ))}
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
+    );
+}
+
+interface StepOneInputsProps {
+    firstName: string;
+    setFirstName: (value: string) => void;
+    lastName: string;
+    setLastName: (value: string) => void;
+    handleSearchSubmit: (e: FormEvent) => void;
+}
+
+function StepOneInputs({
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    handleSearchSubmit,
+}: StepOneInputsProps) {
+    return (
+        <form onSubmit={handleSearchSubmit} className="step_one_search">
+            <div className="step_one_search-fields">
+                <div className="step_one_search-field">
+                    <label
+                        className="step_one_search-label"
+                        htmlFor="first-name-search"
+                    >
+                        First Name
+                    </label>
+                    <input
+                        id="first-name-search"
+                        className="step_one_search-input"
+                        type="text"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        placeholder="Jane"
+                    />
+                </div>
+
+                <div className="step_one_search-field">
+                    <label
+                        className="step_one_search-label"
+                        htmlFor="last-name-search"
+                    >
+                        Last Name
+                    </label>
+                    <input
+                        id="last-name-search"
+                        className="step_one_search-input"
+                        type="text"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        placeholder="Doe"
+                    />
+                </div>
+            </div>
+
+            <button
+                type="submit"
+                className="step_one_search-submit"
+                disabled={!lastName.trim()}
+            >
+                Search
+            </button>
+        </form>
     );
 }

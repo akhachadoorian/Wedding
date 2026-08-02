@@ -1,5 +1,5 @@
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
-import { RSVPFormProps, RSVPStepProps } from "../../components/RSVPForm/RSVPForm";
+import { RSVPFormProps, RSVPStepProps } from "./RSVPForm/RSVPForm";
 import { TextOnlyHeroProps } from "../../layout/TextOnlyHero/TextOnlyHero";
 import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero/ImageOverlayHero";
 

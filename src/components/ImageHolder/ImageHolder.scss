@@ -15,103 +15,39 @@
 
 // $border
 
+// Offset double-border "picture frame" treatment: two cabernet rectangles
+// staggered top-left/bottom-right behind the photo. `aspect-ratio` is a
+// sensible default for when this is dropped in without extra layout CSS —
+// override it (or set an explicit height) from the consuming page as needed.
 .img-holder-border {
-    width: 100%;
-    height: 100%;
     position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    margin: $space-300;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    &-frame {
+        position: absolute;
+        border: 3px solid $cabernet;
+    }
 
-    .img-border-long {
+    &-frame-a {
+        inset: calc(#{$space-300} * -1) $space-300 $space-300 calc(#{$space-300} * -1);
+    }
+
+    &-frame-b {
+        inset: $space-300 calc(#{$space-300} * -1) calc(#{$space-300} * -1) $space-300;
+    }
+
+    &-photo {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+    }
+
+    &-img {
         width: 100%;
-        // height: 100%;
-        height: calc(100% - 20px);
-
-        border: 5px solid $cabernet;
-        padding: 0 20px;
-    }
-
-    .img-border-tall {
-        // width: 100%;
-        width: calc(100% - 20px);
         height: 100%;
-        
-        border: 5px solid $cabernet;
-        padding: 20px 0;
     }
-
-    .img-holder {
-        margin: $space-400;
-                width: calc(100% - (2 * #{$space-400}));
-        height: calc(100% - (2 * #{$space-400}));
-    }
-
-
-
-    // .img-holder {
-    //     // aspect-ratio: 1;
-    //     margin: $space-400;
-    //     // width: auto;
-    //     width: calc(100% - (2 * #{$space-400}));
-    //     height: calc(100% - (2 * #{$space-400}));
-    // }
-
-    // .img-border {
-    //     border: 5px solid $cabernet;
-    //     // width: calc(100% - 10px);
-    //     // height: calc(100% - 10px);
-    //     width: 100%;
-    //     height: 100%;
-
-    //     position: absolute;
-    //     z-index: 2;
-    //     top: 50%;
-    //     left: 50%;
-    //     transform: translate(-50%, -50%);
-
-    //     &.img-border-long {
-    //         // top: 50%;
-    //         // left: 50%;
-    //         // transform: translate(-50%, -50%);
-    //         // top: 0px;
-    //         // left: -40px;
-    //         padding: 10px 40px;
-    //     }
-
-    //     &.img-border-tall {
-    //         // top: -40px;
-    //         // left: -10px;
-    //         padding: 40px 10px;
-    //     }
-    // }
-
-    // .img-border {
-    //     border: 5px solid $cabernet;
-    //     width: calc(100% - 10px);
-    //     height: calc(100% - 10px);
-
-    //     position: absolute;
-    //     top: -40px;
-    //     left: -10px;
-    //     z-index: 2;
-
-    //     padding: 40px 10px;
-    // }
-
-    //  .img-border2 {
-    //     border: 5px solid $cabernet;
-    //     width: calc(100% - 10px);
-    //     height: calc(100% - 10px);
-
-    //     position: absolute;
-    //     top: -10px;
-    //     left: -40px;
-    //     z-index: 2;
-
-    //     padding: 10px 40px;
-    // }
 }
 
 // .img-tooltip_hover {
@@ -173,7 +109,11 @@
         padding: var(--space-075) var(--space-150);
         // margin: 0 var(--space-200);
         border-radius: 6px;
-        max-width: calc(100% - var(--space-150) - var(--space-150) - var(--space-200) - var(--space-200));
+        max-width: calc(
+            100% - var(--space-150) - var(--space-150) - var(--space-200) - var(
+                    --space-200
+                )
+        );
         width: 100%;
         margin: 0 $space-100;
 

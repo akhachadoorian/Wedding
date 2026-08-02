@@ -1,4 +1,3 @@
-import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
 import { DashedCopyGridProps } from "@/components/DashedCopy/DashedCopy";
 import { DrinkCardGridProps } from "@/components/DrinkCardGrid/DrinkCardGrid";
 import { SmallTextProps } from "@/components/SmallTextGrid/SmallTextGrid";
@@ -15,6 +14,7 @@ import {
 import { GothHeroProps } from "@/layout/GothHero/GothHero";
 import { ScrollRevealHeroProps } from "@/layout/archive/ScrollRevealHero/ScrollRevealHero";
 import { CardGridProps } from "@/components/CardGrid/CardGrid";
+import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
 
 // #region --- ARCHIVE -----------------------------------------------
 

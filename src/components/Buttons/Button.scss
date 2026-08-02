@@ -68,35 +68,35 @@ $size-btn: (
 
     // #region --- Size ---
 
-    &-size {
-        &-default {
-            padding: map.get($size-btn, "default", "mobile");
+    // &-size {
+    //     &-default {
+    //         padding: map.get($size-btn, "default", "mobile");
 
-            @include big {
-                padding: map.get($size-btn, "default", "desktop");
-            }
+    //         @include big {
+    //             padding: map.get($size-btn, "default", "desktop");
+    //         }
 
-            .btn-text {
-                font-size: var(--text-s);
+    //         .btn-text {
+    //             font-size: var(--text-s);
 
-                @include big {
-                    font-size: var(--text-base);
-                }
-            }
-        }
+    //             @include big {
+    //                 font-size: var(--text-base);
+    //             }
+    //         }
+    //     }
 
-        &-small {
-            padding: map.get($size-btn, "small", "mobile");
+    //     &-small {
+    //         padding: map.get($size-btn, "small", "mobile");
 
-            @include big {
-                padding: map.get($size-btn, "small", "desktop");
-            }
+    //         @include big {
+    //             padding: map.get($size-btn, "small", "desktop");
+    //         }
 
-            .btn-text {
-                font-size: var(--text-s);
-            }
-        }
-    }
+    //         .btn-text {
+    //             font-size: var(--text-s);
+    //         }
+    //     }
+    // }
 
     // #endregion ---
 
@@ -114,6 +114,12 @@ $size-btn: (
         // }
 
     // #endregion ------------------------------------------------------
+}
+
+button.btn {
+    appearance: none;
+    background: transparent;
+    border: none;
 }
 
 // #endregion -------------------------------------------------------------------

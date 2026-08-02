@@ -67,53 +67,24 @@ export function ImageHolderBorder({
     style: wrapperStyle,
     ...htmlProps
 }: ImageHolderProps) {
-    const { caption, imgPositionResponsive, style, ...imageProps } = img;
-
-    const divStyle = {
-        "--img-object-position": imgPositionResponsive?.desktop ?? "center",
-        "--img-object-position-mobile":
-            imgPositionResponsive?.mobile ??
-            imgPositionResponsive?.desktop ??
-            "center",
-        ...wrapperStyle,
-    } as React.CSSProperties;
-
     return (
-        <div {...htmlProps} className={`img-holder-border ${className ?? ""}`}>
-            <div className="img-border-long">
-                <div className="img-border-tall">
-                    <div className="img-holder" style={divStyle}>
-                        <Image
-                            {...imageProps}
-                            className={`img-bw ${customImageClass ?? ""}`}
-                            style={style}
-                        />
+        <div
+            {...htmlProps}
+            className={`img-holder-border ${className ?? ""}`}
+            style={wrapperStyle}
+        >
+            <div className="img-holder-border-frame img-holder-border-frame-a" />
+            <div className="img-holder-border-frame img-holder-border-frame-b" />
 
-                        {includeOverlay && (
-                            <div
-                                className={`img-overlay ${customOverlayClass ?? ""}`}
-                            />
-                        )}
-                    </div>
-                </div>
-            </div>
-
-            {/* <div className="img-border img-border-long" /> */}
-            {/* <div className="img-border img-border-tall" /> */}
-
-            {/* <div className="img-holder" style={divStyle}>
-                <Image
-                    {...imageProps}
-                    className={`img-bw ${customImageClass ?? ""}`}
-                    style={style}
+            <div className="img-holder-border-photo">
+                <ImageHolder
+                    img={img}
+                    includeOverlay={includeOverlay}
+                    customImageClass={customImageClass}
+                    customOverlayClass={customOverlayClass}
+                    className="img-holder-border-img"
                 />
-
-                {includeOverlay && (
-                    <div
-                        className={`img-overlay ${customOverlayClass ?? ""}`}
-                    />
-                )}
-            </div> */}
+            </div>
         </div>
     );
 }
