@@ -25,6 +25,13 @@ export interface ModalSettings {
     modalContent: Omit<ModalProps, 'isOpen' | 'onClose'>;
 }
 
+export interface OnClickSettings {
+    /** Label displayed inside the button */
+    text?: string;
+    /** Handler invoked when the button is clicked */
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+
 /**
  * Text content, destination, and link behavior for a single button.
  *
@@ -113,7 +120,17 @@ export type VisualButtonSettings = {
     decoration?: BtnDecoration;
 }
 
-export type ButtonSettingProps = LinkButtonSettings | ModalButtonSettings | VisualButtonSettings;
+export interface OnClickButtonSettings extends OnClickSettings {
+    type: 'on-click';
+    /** Label displayed inside the button */
+    text: string;
+    /** Button decoration (icon, arrow) or left blank for none */
+    decoration?: BtnDecoration;
+}
+
+export type ButtonSettingProps = LinkButtonSettings | ModalButtonSettings | VisualButtonSettings | OnClickButtonSettings;
+
+export type ButtonTypes = ButtonSettingProps['type'];
 
 // export type ButtonSettingProps = {
 //     /** Label displayed inside the button */

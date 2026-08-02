@@ -4,7 +4,7 @@ import React from "react";
 import "./RSVP.scss";
 import content from "./content";
 import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
-import RSVPForm from "./RSVPForm/RSVPForm";
+import RSVPForm from "../../components/RSVPForm/RSVPForm";
 import ComingSoon from "@/layout/ComingSoon/ComingSoon";
 import PageGuard from "@/components/PageGuard/PageGuard";
 import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
@@ -32,11 +32,11 @@ export default function RSVP({ loaded = true }: { loaded?: boolean }) {
             <ImageOverlayHero {...content.hero} loaded={loaded} styleOptions={{variation: 'columns'}}/>
 
             <section className="base_section">
-                <div className="mb-300 text-center">
+                {/* <div className="mb-300 text-center">
                     <h2>RSVP</h2>
-                </div>
+                </div> */}
 
-                <RSVPForm {...content.form} />
+                <RSVPForm />
             </section>
             
         </PageGuard>

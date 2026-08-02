@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
 
 import Modal from "@/components/Modal/CenteredModal";
 import { Icon } from "@phosphor-icons/react";
@@ -12,8 +12,9 @@ import {
     ButtonProps,
     LinkButtonSettings,
     ModalButtonSettings,
+    OnClickButtonSettings,
     VisualButtonSettings,
-    resolveHoverScheme
+    resolveHoverScheme,
 } from "../../types/buttons";
 import ArrowBox, { ArrowDirectionProps } from "../ArrowBox/ArrowBox";
 
@@ -45,12 +46,15 @@ export default function Button({
     // scheme, so the button's own fill/text relationship inverts (see SELF_HOVER_TEXT
     // in button.variants.ts) — decoration should flip along with it. Excludes `lines`,
     // whose hover options are self-only for every scheme (not a special "flip" state).
-    const isFlipped = variant !== "lines" && resolvedHoverScheme === colorScheme;
+    const isFlipped =
+        variant !== "lines" && resolvedHoverScheme === colorScheme;
 
     const decorationColor = ColorSchemeMap.DECORATION.get(colorScheme, variant);
     const decorationHoverColor = isFlipped
-        ? ColorSchemeMap.DECORATION.tryGet(colorScheme, `${variant}-flip`) ?? decorationColor
-        : ColorSchemeMap.DECORATION_HOVER.tryGet(colorScheme, variant) ?? decorationColor;
+        ? (ColorSchemeMap.DECORATION.tryGet(colorScheme, `${variant}-flip`) ??
+          decorationColor)
+        : (ColorSchemeMap.DECORATION_HOVER.tryGet(colorScheme, variant) ??
+          decorationColor);
 
     const btnClass = cn(
         "btn",
@@ -67,32 +71,45 @@ export default function Button({
         className,
     );
 
-    if (btnSettings.type === "modal")
-        return (
-            <ModalButton
-                btnClass={btnClass}
-                btnSettings={btnSettings}
-                decorationColor={decorationColor}
-                decorationHoverColor={decorationHoverColor}
-                size={size}
-                {...rest}
-            />
-        );
-
-    if (btnSettings.type === "link")
-        return (
-            <LinkButton
-                btnClass={btnClass}
-                btnSettings={btnSettings}
-                decorationColor={decorationColor}
-                decorationHoverColor={decorationHoverColor}
-                size={size}
-                {...rest}
-            />
-        );
-
-    return (
-        <VisualButton
+    switch (btnSettings.type) {
+        case "modal":
+            return (
+                <ModalButton
+                    btnClass={btnClass}
+                    btnSettings={btnSettings}
+                    decorationColor={decorationColor}
+                    decorationHoverColor={decorationHoverColor}
+                    size={size}
+                    {...rest}
+                />
+            );
+        case "link":
+            return (
+                <LinkButton
+                    btnClass={btnClass}
+                    btnSettings={btnSettings}
+                    decorationColor={decorationColor}
+                    decorationHoverColor={decorationHoverColor}
+                    size={size}
+                    {...rest}
+                />
+            );
+        case 'on-click': 
+            return (
+                <OnClickButton
+                    btnClass={btnClass}
+                    btnSettings={btnSettings}
+                    decorationColor={decorationColor}
+                    decorationHoverColor={decorationHoverColor}
+                    size={size}
+                    {...rest}
+                />
+            )
+        
+        case 'visual':
+        default:
+            return (
+                <VisualButton
             btnClass={btnClass}
             btnSettings={btnSettings}
             decorationColor={decorationColor}
@@ -100,7 +117,9 @@ export default function Button({
             size={size}
             {...rest}
         />
-    );
+            )
+    }
+
 }
 // #region --- Button Types Rendering ---------------------------------------------
 
@@ -109,7 +128,7 @@ interface ButtonVariantComponentProps {
     // btnSettings: ButtonSettingProps;
     decorationColor: CssColor;
     decorationHoverColor: CssColor;
-    size: BtnSize
+    size: BtnSize;
 }
 
 function ModalButton({
@@ -120,7 +139,7 @@ function ModalButton({
     size,
     ...rest
 }: ButtonVariantComponentProps & {
-    btnSettings: ModalButtonSettings
+    btnSettings: ModalButtonSettings;
 }) {
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -158,7 +177,7 @@ function LinkButton({
     size,
     ...rest
 }: ButtonVariantComponentProps & {
-    btnSettings: LinkButtonSettings
+    btnSettings: LinkButtonSettings;
 }) {
     return (
         <LenisLink
@@ -186,7 +205,7 @@ function VisualButton({
     size,
     ...rest
 }: ButtonVariantComponentProps & {
-    btnSettings: VisualButtonSettings
+    btnSettings: VisualButtonSettings;
 }) {
     return (
         <div {...rest} className={btnClass}>
@@ -198,6 +217,29 @@ function VisualButton({
                 size={size}
             />
         </div>
+    );
+}
+
+function OnClickButton({
+    btnClass,
+    btnSettings,
+    decorationColor,
+    decorationHoverColor,
+    size,
+    ...rest
+}: ButtonVariantComponentProps & {
+    btnSettings: OnClickButtonSettings;
+}) {
+    return (
+        <button {...rest} className={btnClass} onClick={btnSettings.onClick}>
+            <ButtonInner
+                text={btnSettings.text}
+                decoration={btnSettings.decoration}
+                decorationColor={decorationColor}
+                decorationHoverColor={decorationHoverColor}
+                size={size}
+            />
+        </button>
     );
 }
 
@@ -214,7 +256,7 @@ interface ButtonInnerProps {
     decorationColor: CssColor;
     decorationHoverColor: CssColor;
     // decorationSize: number;
-    size: BtnSize
+    size: BtnSize;
 }
 
 function ButtonInner({
@@ -222,7 +264,7 @@ function ButtonInner({
     decoration,
     decorationColor,
     decorationHoverColor,
-    size
+    size,
 }: ButtonInnerProps) {
     const decSize = BTN_DECORATION_SIZE[size];
 
@@ -240,7 +282,7 @@ function ButtonInner({
                           ? "left"
                           : "top-right"
                 }
-                arrowSize={decSize['arrow']}
+                arrowSize={decSize["arrow"]}
             />
         );
 
@@ -250,7 +292,8 @@ function ButtonInner({
                 text={text}
                 icon={decoration.icon}
                 iconColor={decorationColor}
-                iconSize={decSize['icon']}
+                iconHoverColor={decorationHoverColor}
+                iconSize={decSize["icon"]}
             />
         );
 
@@ -261,17 +304,30 @@ function IconButtonInner({
     text,
     icon,
     iconColor,
-    iconSize
+    iconHoverColor,
+    iconSize,
 }: {
     text: string;
     icon: Icon;
     iconColor: CssColor;
+    iconHoverColor: CssColor;
     iconSize?: number;
 }) {
     const IconComponent = icon;
+
+    // Named "-base"/"-hover" (not "--btn-icon-color" itself) so the hover swap, done in
+    // Button.scss via a stylesheet rule on `--btn-icon-color`, isn't shadowed by this
+    // inline style — inline styles always beat stylesheet rules, :hover included.
+    const wrapperStyle = {
+        "--btn-icon-color-base": iconColor.toCssVar(),
+        "--btn-icon-color-hover": iconHoverColor.toCssVar(),
+    } as CSSProperties;
+
     return (
         <>
-            <IconComponent size={iconSize} color={iconColor.toCssVar()} />
+            <span className="btn_icon-wrapper flex justify-center items-center" style={wrapperStyle}>
+                <IconComponent size={iconSize} color="var(--btn-icon-color)" />
+            </span>
             <p className={BTN_TEXT_CLASSES}>{text}</p>
         </>
     );
@@ -283,7 +339,7 @@ function ArrowButtonInner({
     arrowDirection,
     arrowColor,
     arrowHoverColor,
-    arrowSize
+    arrowSize,
 }: {
     text: string;
     arrowSide: "left" | "right";
