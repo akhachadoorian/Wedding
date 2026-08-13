@@ -2,6 +2,8 @@
 
 // #region --- RSVP Form ------------------------------------
 
+$insetBorder: $space-300;
+
 .rsvp_form {
     // display: flex;
     // flex-direction: column;
@@ -11,7 +13,7 @@
     flex-direction: column;
     gap: $space-1000;
 
-    padding: $space-1500 $space-750;
+    // padding: $space-1500 $space-750;
     // background-color: $black;
     background-color: $cabernet;
     // border: 2px solid $black-800;
@@ -27,13 +29,21 @@
     }
 
     &-frame-a {
-        inset: calc(#{$space-150} * -1) $space-150 $space-150
-            calc(#{$space-150} * -1);
+        inset: calc(#{$insetBorder} * -1) $insetBorder $insetBorder
+            calc(#{$insetBorder} * -1);
+
+        // inset: calc(#{$space-150} * -1) $space-150 $space-150
+        //     calc(#{$space-150} * -1);
+
+        
     }
 
     &-frame-b {
-        inset: $space-150 calc(#{$space-150} * -1) calc(#{$space-150} * -1)
-            $space-150;
+        inset: $insetBorder calc(#{$insetBorder} * -1) calc(#{$insetBorder} * -1)
+            $insetBorder;
+
+        // inset: $space-150 calc(#{$space-150} * -1) calc(#{$space-150} * -1)
+        //     $space-150;
     }
 
     &-status {
@@ -57,121 +67,121 @@
 
 // #region --- RSVP Step -------------------------------------
 
-.rsvp_step {
-    &-inner {
-        display: flex;
-        flex-direction: column;
-        gap: $space-500;
+// .rsvp_step {
+    // &-inner {
+    //     display: flex;
+    //     flex-direction: column;
+    //     gap: $space-500;
 
-        @include big {
-            flex-direction: row;
-            align-items: center;
-            // gap: var(--spacing-col-gutter);
-            gap: $space-600;
-        }
-    }
+    //     @include big {
+    //         flex-direction: row;
+    //         align-items: center;
+    //         // gap: var(--spacing-col-gutter);
+    //         gap: $space-600;
+    //     }
+    // }
 
-    &-left {
-        @include big {
-            flex: 2 1 600px;
-        }
-    }
+    // &-left {
+    //     @include big {
+    //         flex: 2 1 600px;
+    //     }
+    // }
 
-    &-right {
-        @include big {
-            flex: 1 1 500px;
-        }
-    }
-}
+    // &-right {
+    //     @include big {
+    //         flex: 1 1 500px;
+    //     }
+    // }
+// }
 
-.search_step {
-    display: flex;
+// .search_step {
+//     display: flex;
 
-    @include big {
-        flex-direction: row;
-        align-items: center;
-        gap: 9.722vw;
-    }
+//     @include big {
+//         flex-direction: row;
+//         align-items: center;
+//         gap: 9.722vw;
+//     }
 
-    &-left {
-        @include big {
-            flex: 1 1 546px;
-        }
-    }
+//     &-left {
+//         @include big {
+//             flex: 1 1 546px;
+//         }
+//     }
 
-    &-search {
-        width: 100%;
-        margin-top: $space-600;
+//     &-search {
+//         width: 100%;
+//         margin-top: $space-600;
 
-        &-label {
-            color: $cream-700;
-            font-family: $font-sans;
-            font-size: var(--text-s);
-            font-weight: 600;
-            line-height: normal;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
+//         &-label {
+//             color: $cream-700;
+//             font-family: $font-sans;
+//             font-size: var(--text-s);
+//             font-weight: 600;
+//             line-height: normal;
+//             letter-spacing: 0.6px;
+//             text-transform: uppercase;
 
-            margin-bottom: $space-150;
-        }
+//             margin-bottom: $space-150;
+//         }
 
-        &-input {
-            box-sizing: border-box;
-            padding: $space-200 $space-300;
-            background: $black-950;
-            border: 1.5px solid $black-800;
-            width: 100%;
+//         &-input {
+//             box-sizing: border-box;
+//             padding: $space-200 $space-300;
+//             background: $black-950;
+//             border: 1.5px solid $black-800;
+//             width: 100%;
 
-            color: $cream;
-            font-family: $font-sans;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 150%;
+//             color: $cream;
+//             font-family: $font-sans;
+//             font-style: normal;
+//             font-weight: 400;
+//             line-height: 150%;
 
-            &::placeholder {
-                color: $cream-900;
-                opacity: 1;
-                font-family: $font-sans;
-                font-size: var(--text-base);
-                font-style: normal;
-                font-weight: 400;
-                line-height: 150%;
+//             &::placeholder {
+//                 color: $cream-900;
+//                 opacity: 1;
+//                 font-family: $font-sans;
+//                 font-size: var(--text-base);
+//                 font-style: normal;
+//                 font-weight: 400;
+//                 line-height: 150%;
 
-                transition: $transition;
-            }
+//                 transition: $transition;
+//             }
 
-            &:focus {
-                outline: none;
-                border-color: $gold;
+//             &:focus {
+//                 outline: none;
+//                 border-color: $gold;
 
-                &::placeholder {
-                    opacity: 0;
-                }
-            }
-        }
-    }
+//                 &::placeholder {
+//                     opacity: 0;
+//                 }
+//             }
+//         }
+//     }
 
-    &-results {
-        @include big {
-            flex: 1 1 546px;
-        }
+//     &-results {
+//         @include big {
+//             flex: 1 1 546px;
+//         }
 
-        &-header {
-            display: flex;
-            align-items: center;
-            gap: $space-200;
+//         &-header {
+//             display: flex;
+//             align-items: center;
+//             gap: $space-200;
 
-            color: $gold;
-            text-align: center;
+//             color: $gold;
+//             text-align: center;
 
-            &-line {
-                width: 100%;
-                height: 2px;
-                background-color: $gold-700;
-            }
-        }
-    }
-}
+//             &-line {
+//                 width: 100%;
+//                 height: 2px;
+//                 background-color: $gold-700;
+//             }
+//         }
+//     }
+// }
 
 // #endregion ------------------------------------------------
 
@@ -179,55 +189,55 @@
 
 // #region --- Step One Results -------------------------------
 
-.rsvp_step-results {
-    margin-top: $space-700;
+// .rsvp_step-results {
+//     margin-top: $space-700;
 
-    &-header {
-        display: flex;
-        align-items: center;
-        gap: $space-200;
+//     &-header {
+//         display: flex;
+//         align-items: center;
+//         gap: $space-200;
 
-        color: $gold;
-        text-align: center;
+//         color: $gold;
+//         text-align: center;
 
-        &-line {
-            width: 100%;
-            height: 2px;
-            background-color: $gold-700;
-        }
-    }
+//         &-line {
+//             width: 100%;
+//             height: 2px;
+//             background-color: $gold-700;
+//         }
+//     }
 
-    &-content {
-        margin-top: $space-400;
-    }
+//     &-content {
+//         margin-top: $space-400;
+//     }
 
-    &-placeholder {
-        color: $cream-700;
-    }
+//     &-placeholder {
+//         color: $cream-700;
+//     }
 
-    &-error {
-        // color: $negative;
-    }
+//     &-error {
+//         // color: $negative;
+//     }
 
-    &-result {
-        padding: $space-300 0;
-        border-bottom: 1px solid $black-800;
+//     &-result {
+//         padding: $space-300 0;
+//         border-bottom: 1px solid $black-800;
 
-        &:last-child {
-            border-bottom: none;
-        }
-    }
-}
+//         &:last-child {
+//             border-bottom: none;
+//         }
+//     }
+// }
 
 // #endregion ------------------------------------------------
 
 // #region --- RSVP Step Text -------------------------------
 
-.rsvp_step_text {
-    &-body {
-        margin-top: $space-200;
-    }
-}
+// .rsvp_step_text {
+//     &-body {
+//         margin-top: $space-200;
+//     }
+// }
 
 // #endregion ------------------------------------------------
 

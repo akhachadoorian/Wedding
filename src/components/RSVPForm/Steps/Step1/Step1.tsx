@@ -1,18 +1,19 @@
 import Eyebrow from "@/components/Eyebrow/Eyebrow";
-import { WarningIcon } from "@phosphor-icons/react";
-import { getFindMatchingGuests, GuestEntry, Guests, RSVPStepTextProps } from "../../types";
-import { STEP_ONE_TEXT, UNABLE_TO_FIND } from "../../content";
-import { SubmitEvent, useState } from "react";
 import Star from "@/icons/Star";
-import './Step1.scss'
-import RSVPStep, { RSVPStepText } from "../RSVPStep";
+import { WarningIcon } from "@phosphor-icons/react";
+import { Dispatch, SetStateAction, SubmitEvent, useState } from "react";
+import { UNABLE_TO_FIND } from "../../content";
+import { getFindMatchingGuests, GuestParty, Guests, StepProps } from "../../types";
+import RSVPStepHorizontal, { RSVPStepVertical } from "../RSVPStep";
+import './Step1.scss';
 
-interface StepOneProps {
+interface StepOneProps extends StepProps {
     guests: Guests | null;
+    setParty: Dispatch<SetStateAction<GuestParty | null>>;
     // guestsLoading: boolean;
 }
 
-export default function StepOne({ guests }: StepOneProps) {
+export default function StepOne({ guests, setParty, goToNextStep }: StepOneProps) {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [searchResult, setSearchResult] = useState<Guests | null>(null);
@@ -45,10 +46,10 @@ export default function StepOne({ guests }: StepOneProps) {
             if (found && found?.length > 0) {
                 setSearchResult(found);
 
-                // * debug
-                console.group("found results");
-                console.log("found ", found);
-                console.groupEnd();
+                // // * debug
+                // console.group("found results");
+                // console.log("found ", found);
+                // console.groupEnd();
             } else {
                 setSearchError(UNABLE_TO_FIND);
             }
@@ -57,8 +58,9 @@ export default function StepOne({ guests }: StepOneProps) {
     };
 
     return (
-        <RSVPStep currStep={1}>
+        <RSVPStepVertical currStep={1}>
             <>
+            {/* TODO: error? */}
              {searching ? (
                         <StepOneLoading />
                     ) : searchResult == null ? (
@@ -72,11 +74,57 @@ export default function StepOne({ guests }: StepOneProps) {
                             error={searchError}
                         />
                     ) : (
-                        <StepOneSuccess matches={searchResult} />
+                        <StepOneSuccess matches={searchResult} setParty={setParty} goToNextStep={goToNextStep}/>
                     )}
             </>
-        </RSVPStep>
+        </RSVPStepVertical>
     );
+
+
+    // return (
+    //     <RSVPStepVertical currStep={1}>
+    //         <>
+    //         {/* TODO: error? */}
+    //          {searching ? (
+    //                     <StepOneLoading />
+    //                 ) : searchResult == null ? (
+    //                     <StepOneInputs
+    //                         firstName={firstName}
+    //                         setFirstName={setFirstName}
+    //                         lastName={lastName}
+    //                         setLastName={setLastName}
+    //                         handleSearchSubmit={handleSearch}
+    //                         searching={searching}
+    //                         error={searchError}
+    //                     />
+    //                 ) : (
+    //                     <StepOneSuccess matches={searchResult} setParty={setParty} goToNextStep={goToNextStep}/>
+    //                 )}
+    //         </>
+    //     </RSVPStepVertical>
+    // );
+
+    // return (
+    //     <RSVPStepHorizontal currStep={1}>
+    //         <>
+    //          {searching ? (
+    //                     <StepOneLoading />
+    //                 ) : searchResult == null ? (
+    //                     <StepOneInputs
+    //                         firstName={firstName}
+    //                         setFirstName={setFirstName}
+    //                         lastName={lastName}
+    //                         setLastName={setLastName}
+    //                         handleSearchSubmit={handleSearch}
+    //                         searching={searching}
+    //                         error={searchError}
+    //                     />
+    //                 ) : (
+    //                     <StepOneSuccess matches={searchResult} />
+    //                 )}
+    //         </>
+    //     </RSVPStepHorizontal>
+    // );
 }
 
 // #region --- Inputs ---
@@ -196,26 +244,34 @@ function StepOneLoading() {
 
 // #region --- Success ---
 
-function getNameString(guest: GuestEntry): string {
+function getNameString(guest: GuestParty): string {
     // If only one name
-    if (guest.lastNameG2 === "" && guest.firstNameG2 === "" ) {
-        return `${guest.firstNameG1} ${guest.lastNameG1}`
+    if (!guest.guest2?.lastName && !guest.guest2?.firstName ) {
+        return `${guest.guest1.firstName} ${guest.guest1.lastName}`
     }
 
     // If have same last
-    if (guest.lastNameG2 === guest.lastNameG1) {
-        return `${guest.firstNameG1} & ${guest.firstNameG2} ${guest.lastNameG1}`
+    if (guest.guest2.lastName === guest.guest1.lastName) {
+        return `${guest.guest1.firstName} & ${guest.guest2.firstName} ${guest.guest1.lastName}`
     }
 
-    return `${guest.firstNameG1} ${guest.lastNameG1} & ${guest.firstNameG2}  ${guest.lastNameG2}`
+    return `${guest.guest1.firstName} ${guest.guest1.lastName} & ${guest.guest2.firstName}  ${guest.guest2.lastName}`
 }
 
 
 interface StepOneSuccessProps {
     matches: Guests;
+    setParty: Dispatch<SetStateAction<GuestParty | null>>;
+    goToNextStep: Dispatch<SetStateAction<number>>;
 }
 
-function StepOneSuccess({ matches }: StepOneSuccessProps) {
+function StepOneSuccess({ matches, setParty, goToNextStep }: StepOneSuccessProps) {
+    const handleButtonPress = (party: GuestParty) => {
+        setParty(party);
+        goToNextStep(2);
+    }
+
+    // TODO: style and layout of buttons
     return (
         <div className="step_one-success">
             <Eyebrow
@@ -229,7 +285,7 @@ function StepOneSuccess({ matches }: StepOneSuccessProps) {
 
                     // TODO: save party and navigate to next page
                     return (
-                        <button className="rsvp_party">
+                        <button key={m.id} className="rsvp_party" onClick={() => handleButtonPress(m)}>
                             <p>{name}</p>
                         </button>
                     )
