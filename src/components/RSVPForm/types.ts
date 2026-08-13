@@ -93,6 +93,7 @@ export function getFindMatchingGuests(
     lastName: string,
 ): Guests | null {
     if (guests === null) return null;
+    console.log("guests ", guests)
 
     const exactMatches = guests.filter(
         (p) =>
@@ -107,10 +108,10 @@ export function getFindMatchingGuests(
 
     const matches = guests.filter(
         (g) =>
-            g.guest1.firstName === firstName ||
-            g.guest1.lastName === lastName ||
-            g.guest2?.firstName === firstName ||
-            g.guest2?.lastName === lastName,
+            g.guest1.firstName?.toLowerCase() === firstName.toLowerCase() ||
+            g.guest1.lastName?.toLowerCase() === lastName.toLowerCase() ||
+            g.guest2?.firstName?.toLowerCase() === firstName.toLowerCase() ||
+            g.guest2?.lastName?.toLowerCase() === lastName.toLowerCase(),
     );
 
     console.log("matches ", matches);
@@ -154,12 +155,20 @@ export function getPartyFromId(
 export interface StepProps {
     goToNextStep: Dispatch<SetStateAction<number>>;
     // setLoading: Dispatch<SetStateAction<boolean>>; // FIXME:
+    draft: RSVPDraft;
+    setDraft: Dispatch<SetStateAction<RSVPDraft>>;
 }
 
+export type RSVPDraft = {
+    attendance: Partial<Record<"guest1" | "guest2", boolean>>;
+    // meal?: Partial<Record<"guest1" | "guest2", string>>;
+    // rehearsalMixer?: Partial<Record<"guest1" | "guest2", boolean>>;
+};
 
-type RSVPResponse = {
-    partyId: string;
-    firstName: string;
-    lastName: string;
-    wedding: boolean;
-}
+
+// type RSVPResponse = {
+//     partyId: string;
+//     firstName: string;
+//     lastName: string;
+//     wedding: boolean;
+// }

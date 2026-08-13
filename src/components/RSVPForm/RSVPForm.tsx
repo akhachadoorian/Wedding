@@ -12,7 +12,7 @@ import "./RSVPForm.scss";
 import StepOne from "./Steps/Step1/Step1";
 import { number } from "motion";
 import StepTwo from "./Steps/Step2/Step2";
-import { getPartyFromId, GuestParty, Guests } from "./types";
+import { getPartyFromId, GuestParty, Guests, RSVPDraft, StepProps } from "./types";
 
 // TODO: after rsvp date close
 
@@ -36,6 +36,8 @@ export default function RSVPForm({
 
     const [party, setParty] = useState<GuestParty | null>(null)
 
+    const [draft, setDraft] = useState<RSVPDraft>({ attendance: {} });
+
     // const [partyId, setPartyId] = useState<string | null>(null)
     // console.log("partyId", partyId)
 
@@ -52,7 +54,7 @@ export default function RSVPForm({
                 <RSVPFormError key="error" errorMessage={guestsError} onRetry={refetchGuests} />
             ) : (
                 <div key="steps" className="rsvp_form-steps rsvp_form-status">
-                    <RenderSteps currStep={step} goToNextStep={setStep}  refetchGuests={refetchGuests}  guests={guests} setParty={setParty} party={party}  />
+                    <RenderSteps currStep={step} goToNextStep={setStep} draft={draft}  setDraft={setDraft} refetchGuests={refetchGuests}  guests={guests} setParty={setParty} party={party}  />
                 </div>
             )}
         </div>
@@ -111,26 +113,27 @@ function RSVPFormLoading({loadingText}:{loadingText?: string}) {
     );
 }
 
-interface RenderStepsProps {
+interface RenderStepsProps extends StepProps {
     currStep: number;
-    goToNextStep: Dispatch<SetStateAction<number>>;
+    // goToNextStep: Dispatch<SetStateAction<number>>;
+    // setDraft: Dispatch<SetStateAction<RSVPDraft>>;
     refetchGuests: () => Promise<void>
 
     guests:  Guests | null;
     setParty: Dispatch<SetStateAction<GuestParty | null>>;
-    party: string | null;
+    party: GuestParty | null;
 }
 
-function RenderSteps({currStep, goToNextStep, refetchGuests, guests, setParty, party}:RenderStepsProps) {
+function RenderSteps({currStep, goToNextStep, draft, setDraft, refetchGuests, guests, setParty, party}:RenderStepsProps) {
     // TODO: null guests?
 
 
 
     switch (currStep) {
         case 1:
-            return <StepOne guests={guests} setParty={setParty} goToNextStep={goToNextStep} />
+            return <StepOne draft={draft} setDraft={setDraft} guests={guests} setParty={setParty} goToNextStep={goToNextStep} />
         case 2:
-            return <StepTwo  party={party} />
+            return <StepTwo draft={draft}  setDraft={setDraft} party={party} goToNextStep={goToNextStep} />
         default:
             return <RSVPFormError key="error" errorMessage={"Error"} onRetry={refetchGuests} /> // TODO: add error message
 

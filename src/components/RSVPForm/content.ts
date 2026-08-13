@@ -54,7 +54,7 @@ export const STEP_FIVE_TEXT: RSVPStepTextProps = {
 
 // #region --- Thank you ---
 
-const FORM_THANK_YOU = {
+export const FORM_THANK_YOU = {
     yes: {
         eyebrow: "Thank you",
         header: "You're all set!",

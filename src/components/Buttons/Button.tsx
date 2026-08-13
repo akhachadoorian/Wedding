@@ -247,7 +247,7 @@ function OnClickButton({
 
 // #region --- Button Inner Rendering ---------------------------------------------
 
-const BTN_TEXT_CLASSES =
+export const BTN_TEXT_CLASSES =
     "btn-text font-sans font-medium leading-[130%] tracking-wide uppercase";
 
 interface ButtonInnerProps {
