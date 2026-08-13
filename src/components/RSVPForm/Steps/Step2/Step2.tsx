@@ -68,11 +68,19 @@ interface RSVPSwitchProps {
 
 function RSVPSwitch({ handleClick, selected }: RSVPSwitchProps) {
     return (
-        <div className="flex gap-050 border border-cream p-100">
+        <div className="rsvp_switch_group relative flex border border-cream p-100">
+            <span
+                className={cn(
+                    "rsvp_switch_group-thumb",
+                    selected === false && "rsvp_switch_group-thumb-no",
+                )}
+                style={{ opacity: selected === undefined ? 0 : 1 }}
+                aria-hidden="true"
+            />
 
             <RSVPSwitchBtn handleClick={() => handleClick(true)} text="Yes" isActive={selected === true} />
 
-                <RSVPSwitchBtn handleClick={() => handleClick(false)} text="No" isActive={selected === false} />
+            <RSVPSwitchBtn handleClick={() => handleClick(false)} text="No" isActive={selected === false} />
         </div>
     );
 }
@@ -88,12 +96,12 @@ function RSVPSwitchBtn({ handleClick, text, isActive }: RSVPSwitchBtnProps) {
         <button
                 className={cn(
                     "rsvp_switch",
-                    isActive && "bg-cream!",
+                    "relative flex-1 justify-center",
                     buttonColorVariants({ size: "small" }),
                 )}
                 onClick={handleClick}
             >
-                <p className={cn(BTN_TEXT_CLASSES, isActive ? 'text-cabernet' : "text-cream")}>{text}</p>
+                <p className={cn(BTN_TEXT_CLASSES, "rsvp_switch-text", isActive ? 'text-cabernet' : "text-cream")}>{text}</p>
             </button>
     )
 }
