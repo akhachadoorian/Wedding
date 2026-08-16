@@ -82,7 +82,7 @@ $insetBorder: $space-300;
     }
 }
 
-button.rsvp_switch {
+label.rsvp_switch {
     appearance: none;
     background: none;
     border: none;
@@ -90,6 +90,11 @@ button.rsvp_switch {
 
     &-text {
         transition: color 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    &:has(.rsvp_switch-input:focus-visible) {
+        outline: 2px solid $cream;
+        outline-offset: 2px;
     }
 }
 

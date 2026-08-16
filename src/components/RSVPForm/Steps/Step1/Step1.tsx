@@ -42,11 +42,6 @@ export default function StepOne() {
 
             if (found && found?.length > 0) {
                 setSearchResult(found);
-
-                // // * debug
-                // console.group("found results");
-                // console.log("found ", found);
-                // console.groupEnd();
             } else {
                 setSearchError(UNABLE_TO_FIND);
             }

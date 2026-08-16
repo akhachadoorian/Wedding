@@ -29,7 +29,8 @@ export default function RSVP({ loaded = true }: { loaded?: boolean }) {
                 }}
             /> */}
 
-            <ImageOverlayHero {...content.hero} loaded={loaded} styleOptions={{variation: 'columns'}}/>
+            {/* FIXME: add hero back */}
+            {/* <ImageOverlayHero {...content.hero} loaded={loaded} styleOptions={{variation: 'columns'}}/> */}
 
             <section className="base_section">
                 {/* <div className="mb-300 text-center">

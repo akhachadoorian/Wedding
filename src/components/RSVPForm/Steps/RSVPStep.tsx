@@ -1,6 +1,7 @@
 import Eyebrow from "@/components/Eyebrow/Eyebrow";
 import {
     getStepText,
+    Guest,
     RSVPStepProps,
     RSVPStepTextProps,
     STEP_TEXT_MAP,
@@ -131,19 +132,31 @@ interface RSVPNavButtonProps {
     disabled: boolean;
 }
 
-// TODO: add override to thank you
-interface RSVPNavButtonsProps {
-    back: RSVPNavButtonProps;
-    next: RSVPNavButtonProps;
+export interface OverrideProps extends RSVPNavButtonProps {
+    coming: boolean
+    text?: string
 }
 
-export function RSVPNavButtons({ back, next }: RSVPNavButtonsProps) {
+// TODO: add override to thank you
+interface RSVPNavButtonsProps {
+    back?: RSVPNavButtonProps;
+    next: RSVPNavButtonProps;
+    overrideNext?: OverrideProps
+}
+
+/** Resolves which step a form submission should advance to, given an optional override (e.g. declining branches to the "not coming" thank-you step). */
+export function resolveNextStep(step: number, overrideNext?: OverrideProps): number {
+    if (overrideNext) return overrideNext.coming ? -2 : -1;
+    return step + 1;
+}
+
+export function RSVPNavButtons({ back = {disabled: false, hidden: false}, next, overrideNext }: RSVPNavButtonsProps) {
     const { step, goToStep } = useRSVPForm();
 
     return (
         <div className="flex items-center justify-between gap-300 mt-500">
-            {/* Back */}
-            {!back.hidden && (
+            {/* Back: type="button" so it can't trigger the enclosing form's submit */}
+            {back && !back.hidden && (
                 <Button
                     variant="outline"
                     colorScheme="cream"
@@ -152,13 +165,27 @@ export function RSVPNavButtons({ back, next }: RSVPNavButtonsProps) {
                         text: "Back",
                         disabled: back.disabled,
                         onClick: () => goToStep(step - 1),
+                        htmlType: 'button'
                     }}
+
                 />
             )}
 
-            {/* Next */}
-            {!next.hidden && (
-                <Button
+            {/* Next: type="submit" so it drives the enclosing form's onSubmit (which should call resolveNextStep) */}
+            {overrideNext ?
+                (<Button
+                    variant="solid"
+                    colorScheme="cream"
+                    hoverScheme="burgundy"
+                    btnSettings={{
+                        type: "native",
+                        text: overrideNext.text ?? 'Next',
+                        disabled: overrideNext.disabled,
+                        htmlType: 'submit',
+                    }}
+                />)
+                  :
+                  !next.hidden ?(<Button
                     variant="solid"
                     colorScheme="cream"
                     hoverScheme="burgundy"
@@ -166,13 +193,33 @@ export function RSVPNavButtons({ back, next }: RSVPNavButtonsProps) {
                         type: "native",
                         text: "Next",
                         disabled: next.disabled,
-                        onClick: () => goToStep(step + 1),
+                        htmlType: 'submit',
                     }}
-                />
-            )}
+                />) : null
+        }
         </div>
     )
 }
+
+interface GuestLabelInputWrapperProps {
+    guest: Guest;
+    children: React.ReactNode;
+}
+
+export function GuestLabelInputWrapper({guest, children}: GuestLabelInputWrapperProps) {
+    return (
+            <div className="flex flex-col gap-200">
+                <h4>
+                    {guest.firstName} {guest.lastName}
+                </h4>
+
+                {children}
+            </div>
+        );
+}
+
+
+
 
 export function RSVPStepLoading(loadingText?: string) {
     return (

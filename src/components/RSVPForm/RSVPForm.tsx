@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Star from "@/icons/Star";
 import { ArrowClockwiseIcon, WarningIcon } from "@phosphor-icons/react";
@@ -11,8 +11,10 @@ import Button from "@/components/Buttons/Button";
 import "./RSVPForm.scss";
 import { RSVPFormProvider, useRSVPForm } from "./RSVPFormContext";
 import StepOne from "./Steps/Step1/Step1";
-import StepTwo from "./Steps/Step2/Step2";
+import StepTwo from "./Steps/Step2";
 import { GuestParty, RSVPDraft } from "./types";
+import StepThree from "./Steps/Step3";
+import RSVPThankYou from "./RSVPThankYou";
 
 // TODO: after rsvp date close
 
@@ -35,14 +37,18 @@ export default function RSVPForm({
         setStep(step)
 
     }
+    // FIXME:
     // const goToStep = (step: number) => setStep(step);
 
     const { guests, guestsLoading, guestsError, refetchGuests } = useGuests();
-    console.log("guests", guests)
+    // console.log("guests", guests)    
 
     const [party, setParty] = useState<GuestParty | null>(null)
 
-    const [draft, setDraft] = useState<RSVPDraft>({ attendance: {} });
+    const [draft, setDraft] = useState<RSVPDraft>({ attendance: {}});
+    useEffect(() => {
+        console.log("draft changed", draft)
+    }, [draft])
 
     // const [partyId, setPartyId] = useState<string | null>(null)
     // console.log("partyId", partyId)
@@ -130,10 +136,16 @@ function RenderSteps() {
     const { step, refetchGuests } = useRSVPForm();
 
     switch (step) {
+        case -2:
+            return <RSVPThankYou coming={true} />
+        case -1:
+            return <RSVPThankYou coming={false} />
         case 1:
             return <StepOne />
         case 2:
             return <StepTwo />
+        case 3: 
+            return <StepThree />
         default:
             return <RSVPFormError key="error" errorMessage={"Error"} onRetry={refetchGuests} /> // TODO: add error message
 

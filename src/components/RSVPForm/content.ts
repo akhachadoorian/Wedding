@@ -21,6 +21,12 @@ export const STEP_ONE_TEXT: RSVPStepTextProps = {
 
 // #region --- 2 ---
 
+// export const WEDDING_RSVP: RSVPStepTextProps = {
+//     stepNumber: 2,
+//     title: "Who's Coming?",
+//     body: "Let us know who from your party will be joining us on the day.",
+// };
+
 export const STEP_TWO_TEXT: RSVPStepTextProps = {
     stepNumber: 2,
     title: "Who's Coming?",
@@ -28,12 +34,13 @@ export const STEP_TWO_TEXT: RSVPStepTextProps = {
 };
 // #endregion ---
 
-// #region ---  ---
+// #region --- 3 ---
 export const STEP_THREE_TEXT: RSVPStepTextProps = {
     stepNumber: 3,
     title: "Meal Selection",
     body: "Please choose a meal preference for each guest attending. Let us know about any dietary restrictions or allergies in the field below.",
 };
+
 // #endregion ---
 
 // #region --- 4 ---

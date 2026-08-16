@@ -100,3 +100,14 @@ export type AlignmentProps = {
 }
 
 // export type BreakpointProps = 'mobile' | 'tablet' | 'desktop' | 'large-desktop';
+
+
+export interface TextValueOption {
+  text: string;
+  value: string;
+}
+
+
+export type InvertRecord<T extends Record<string, PropertyKey>> = {
+  [K in keyof T as T[K]]: K;
+};

@@ -1,5 +1,7 @@
 import { WithHTMLProps } from "@/types/props";
-import { STEP_ONE_TEXT, STEP_TWO_TEXT } from "./content";
+import { InvertRecord, NonEmptyArray } from "@/types/utility";
+import { STEP_ONE_TEXT, STEP_THREE_TEXT, STEP_TWO_TEXT } from "./content";
+import { ExpandedTextValueOptions } from "./FormInputs";
 
 export const HEADER_MAP = {
     "Party ID": "id",
@@ -13,9 +15,9 @@ export type MappedHeaderKey = (typeof HEADER_MAP)[keyof typeof HEADER_MAP];
 
 export type GuestParty1 = Record<MappedHeaderKey, string>;
 
-type Guest = {
-    firstName?: string;
-    lastName?: string;
+export type Guest = {
+    firstName: string;
+    lastName: string;
 };
 
 export type GuestParty = {
@@ -23,6 +25,8 @@ export type GuestParty = {
     guest1: Guest;
     guest2?: Guest;
 };
+
+export type GuestKey = keyof Omit<GuestParty, "id">; // "guest1" | "guest2"
 
 export type Guests = GuestParty[];
 
@@ -92,7 +96,7 @@ export function getFindMatchingGuests(
     lastName: string,
 ): Guests | null {
     if (guests === null) return null;
-    console.log("guests ", guests)
+    // console.log("guests ", guests)
 
     const exactMatches = guests.filter(
         (p) =>
@@ -102,7 +106,7 @@ export function getFindMatchingGuests(
                 p.guest2?.lastName?.toLowerCase() === lastName.toLowerCase()),
     );
 
-    console.log("exactMatches ", exactMatches);
+    // console.log("exactMatches ", exactMatches);
     if (exactMatches.length > 0) return exactMatches;
 
     const matches = guests.filter(
@@ -113,7 +117,7 @@ export function getFindMatchingGuests(
             g.guest2?.lastName?.toLowerCase() === lastName.toLowerCase(),
     );
 
-    console.log("matches ", matches);
+    // console.log("matches ", matches);
     if (matches.length > 0) return matches;
 
     return null;
@@ -135,6 +139,7 @@ export type RSVPStepProps = WithHTMLProps & {
 export const STEP_TEXT_MAP = {
     1: STEP_ONE_TEXT,
     2: STEP_TWO_TEXT,
+    3: STEP_THREE_TEXT
 } as const satisfies Record<number, RSVPStepTextProps>;
 
 export type StepTextKeys = keyof typeof STEP_TEXT_MAP;
@@ -151,16 +156,86 @@ export function getPartyFromId(
     return guests?.find((g) => g.id === partyId) ?? null;
 }
 
+type AttendanceResponse = Partial<Record<GuestKey, boolean>>;
+
+// FIXME: add subtext and another area for more text?
+
+
+export const MEAL_OPTIONS: NonEmptyArray<ExpandedTextValueOptions> = [
+    {
+        text: 'Pepper Seared Sirloin Steak',
+        value: 'steak',
+        subtext: 'with Jus Lié',
+        note: 'Cooked medium rare'
+    }
+]
+
+export type Meal = {
+    selectedEntree: 'steak' | 'chicken' | 'fish'
+    dietaryNotes?: string;
+}
+
+type WeddingMealResponse = Partial<Record<GuestKey, Meal>>;
+
+type BusHotel = {
+    hotel: 'opt1' // FIXME: add options
+    takingBus: boolean
+}
+
+type TransportationResponse = Partial<Record<GuestKey, BusHotel>>;
+
+type RehearsalMixerResponse = Partial<Record<GuestKey, boolean>>;
+
+export type Responses = AttendanceResponse | WeddingMealResponse | TransportationResponse | RehearsalMixerResponse
+
 export type RSVPDraft = {
-    attendance: Partial<Record<"guest1" | "guest2", boolean>>;
-    // meal?: Partial<Record<"guest1" | "guest2", string>>;
-    // rehearsalMixer?: Partial<Record<"guest1" | "guest2", boolean>>;
+    attendance: AttendanceResponse // {} // todo: determine if empty record or something else
+    meal?: WeddingMealResponse;
+    transportation?: TransportationResponse
+    rehearsalMixer?: RehearsalMixerResponse // todo: add dinner?
 };
 
+export type RSVPDraftKey = keyof RSVPDraft
 
-// type RSVPResponse = {
-//     partyId: string;
-//     firstName: string;
-//     lastName: string;
-//     wedding: boolean;
+export const RSVP_STEP_BY_KEY = {
+  attendance: 2,
+  meal: 3,
+  transportation: 4,
+  rehearsalMixer: 5,
+} as const satisfies Record<RSVPDraftKey, number>;
+
+export const RSVP_KEY_BY_STEP = Object.fromEntries(
+  Object.entries(RSVP_STEP_BY_KEY).map(([key, step]) => [step, key])
+) as InvertRecord<typeof RSVP_STEP_BY_KEY>;
+
+// export const RSVP_KEY_BY_STEP: Map<number, RSVPDraftKey> = new Map(
+//   Object.entries(RSVP_STEP_BY_KEY).map(([key, step]) => [step, key as RSVPDraftKey])
+// );
+
+export function partyGuestCount(party: GuestParty) {
+    // const hasTwo = party.guest1 && party.guest2
+    return party.guest1 && party.guest2 ? 2 : 1
+}
+
+export function hasAnsweredQuestion(party: GuestParty, draft: RSVPDraft, key: RSVPDraftKey): boolean {
+    const value = draft[key];
+    if (!value) return false;
+
+    const guest1Answered = value.guest1 !== undefined;
+    const guest2Answered = !party.guest2 || value.guest2 !== undefined;
+    return guest1Answered && guest2Answered;
+}
+
+export function getQuestionAnswerParty<K extends RSVPDraftKey>(draft: RSVPDraft, key: K): NonNullable<RSVPDraft[K]> | null {
+    const value = draft[key];
+    if (!value) return null
+
+    return value
+}
+
+// export function getQuestionAnswerGuest(guest: 'guest1' | 'guest2', draft: RSVPDraft, key: RSVPDraftKey)   {
+//     const value = draft[key];
+//     if (!value || value === null) null
+
+//     return value?[guest]
 // }
