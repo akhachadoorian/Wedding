@@ -12,7 +12,7 @@ import {
     ButtonProps,
     LinkButtonSettings,
     ModalButtonSettings,
-    OnClickButtonSettings,
+    NativeButtonSettings,
     VisualButtonSettings,
     resolveHoverScheme,
 } from "../../types/buttons";
@@ -22,7 +22,28 @@ import { ColorSchemeMap } from "../../classes/ColorSchemeMap";
 import { CssColor } from "../../classes/CssColor";
 import { cn } from "../../utils/cn";
 import "./Button.scss";
-import { buttonColorVariants } from "./button.variants";
+import { buttonVariants } from "./button.variants";
+import { VariantProps } from "class-variance-authority";
+import { Slot } from "radix-ui/slot";
+
+export function Btn({
+    className,
+    variant,
+    colorScheme,
+    size,
+    asChild = false,
+    ...props
+}:React.ComponentProps<'button'> & VariantProps<typeof buttonVariants> & {asChild?: boolean}) {
+    const Comp = asChild ? Slot : 'button'
+
+    return (
+        <Comp 
+            data-slot="button"
+            className={cn(buttonVariants({ variant, colorScheme, size}), className, BTN_TEXT_CLASSES, 'btn')}
+            {...props}
+        />
+    )
+}
 
 export default function Button({
     btnSettings,
@@ -60,7 +81,7 @@ export default function Button({
         "btn",
         // `btn-variant-${variant}`,
         // `btn-color_scheme-${colorScheme}`,
-        buttonColorVariants({
+        buttonVariants({
             variant,
             colorScheme,
             hoverScheme: resolvedHoverScheme,
@@ -94,9 +115,9 @@ export default function Button({
                     {...rest}
                 />
             );
-        case 'on-click': 
+        case 'native':
             return (
-                <OnClickButton
+                <NativeButton
                     btnClass={btnClass}
                     btnSettings={btnSettings}
                     decorationColor={decorationColor}
@@ -220,7 +241,7 @@ function VisualButton({
     );
 }
 
-function OnClickButton({
+function NativeButton({
     btnClass,
     btnSettings,
     decorationColor,
@@ -228,13 +249,20 @@ function OnClickButton({
     size,
     ...rest
 }: ButtonVariantComponentProps & {
-    btnSettings: OnClickButtonSettings;
+    btnSettings: NativeButtonSettings;
 }) {
+    const { text, decoration, type: _type, htmlType, ...nativeProps } = btnSettings;
+
     return (
-        <button {...rest} className={btnClass} onClick={btnSettings.onClick}>
+        <button
+            {...rest}
+            {...nativeProps}
+            type={htmlType ?? "button"}
+            className={btnClass}
+        >
             <ButtonInner
-                text={btnSettings.text}
-                decoration={btnSettings.decoration}
+                text={text}
+                decoration={decoration}
                 decorationColor={decorationColor}
                 decorationHoverColor={decorationHoverColor}
                 size={size}

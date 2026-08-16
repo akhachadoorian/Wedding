@@ -9,6 +9,7 @@ import { cn } from "@/utils/cn";
 import Star from "@/icons/Star";
 import { useState } from "react";
 import { useRSVPForm } from "../RSVPFormContext";
+import Button from "@/components/Buttons/Button";
 
 export default function RSVPStepHorizontal({
     currStep,
@@ -136,24 +137,38 @@ interface RSVPNavButtonsProps {
     next: RSVPNavButtonProps;
 }
 
-// FIXME: buttons
 export function RSVPNavButtons({ back, next }: RSVPNavButtonsProps) {
     const { step, goToStep } = useRSVPForm();
 
     return (
-        <div className="">
+        <div className="flex items-center justify-between gap-300 mt-500">
             {/* Back */}
             {!back.hidden && (
-                <button disabled={back.disabled} onClick={() => goToStep(step - 1)}>
-                    Back
-                </button>
+                <Button
+                    variant="outline"
+                    colorScheme="cream"
+                    btnSettings={{
+                        type: "native",
+                        text: "Back",
+                        disabled: back.disabled,
+                        onClick: () => goToStep(step - 1),
+                    }}
+                />
             )}
 
             {/* Next */}
             {!next.hidden && (
-                <button disabled={next.disabled} onClick={() => goToStep(step + 1)}>
-                    Next
-                </button>
+                <Button
+                    variant="solid"
+                    colorScheme="cream"
+                    hoverScheme="burgundy"
+                    btnSettings={{
+                        type: "native",
+                        text: "Next",
+                        disabled: next.disabled,
+                        onClick: () => goToStep(step + 1),
+                    }}
+                />
             )}
         </div>
     )

@@ -116,10 +116,10 @@ $size-btn: (
     // #endregion ------------------------------------------------------
 }
 
-button.btn {
-    // appearance: none;
-    // background: transparent;
-    // border: none;
+button:disabled {
+    opacity: 50%;
+    cursor: default;
+    pointer-events: none;
 }
 
 // #endregion -------------------------------------------------------------------

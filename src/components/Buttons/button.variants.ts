@@ -67,7 +67,7 @@ const LINE_BEFORE = "before:h-px before:w-[0px] before:absolute before:top-px be
 
 const LINE_AFTER = "after:h-px after:w-[0px] after:absolute after:bottom-px after:right-px after:transition-all after:duration-300 after:ease-in-out hover:after:w-full";
 
-export const buttonColorVariants = cva("flex items-center gap-150 transition-all duration-300 ease-in-out", {
+export const buttonVariants = cva("flex items-center gap-150 transition-all duration-300 ease-in-out", {
     variants: {
         size: {
             default: 'py-100 px-200 md:py-150 md:px-300 text-s md:text-base',

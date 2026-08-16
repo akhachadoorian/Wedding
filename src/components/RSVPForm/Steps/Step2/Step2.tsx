@@ -1,6 +1,6 @@
 import { cn } from "@/utils/cn";
 import { RSVPNavButtons, RSVPStepVertical } from "../RSVPStep";
-import { buttonColorVariants } from "@/components/Buttons/button.variants";
+import { buttonVariants } from "@/components/Buttons/button.variants";
 import { BTN_TEXT_CLASSES } from "@/components/Buttons/Button";
 import { useRSVPForm } from "../../RSVPFormContext";
 
@@ -23,11 +23,23 @@ export default function StepTwo() {
     };
 
     const guest1Answer = draft.attendance.guest1; // boolean | undefined
+    const guest2Answer = draft.attendance.guest2;
 
     // todo: is next disabled?
     // unanswered
-    // const allAnswered = 
+    const hasTwoGuests = guest1 !== undefined && guest2  !== undefined;
+    console.log("hasTwoGuests", hasTwoGuests)
 
+    let allAnswered = false;
+
+    if (hasTwoGuests) {
+        allAnswered = guest1Answer !== undefined && guest2Answer !== undefined
+    }
+    else {
+        allAnswered = guest1Answer !== undefined
+    }
+
+    console.log("allAnswered", allAnswered)
 
 
     return (
@@ -61,7 +73,7 @@ export default function StepTwo() {
             </div> */}
 
             {/* Back / Next */}
-            <RSVPNavButtons back={{disabled: false, }} next={{disabled: true,}} />
+            <RSVPNavButtons back={{disabled: false, }} next={{disabled: !allAnswered,}} />
         </RSVPStepVertical>
     );
 }
@@ -106,7 +118,7 @@ function RSVPSwitchBtn({ handleClick, text, isActive }: RSVPSwitchBtnProps) {
                 className={cn(
                     "rsvp_switch",
                     "relative flex-1 justify-center",
-                    buttonColorVariants({ size: "small" }),
+                    buttonVariants({ size: "small" }),
                 )}
                 onClick={handleClick}
             >

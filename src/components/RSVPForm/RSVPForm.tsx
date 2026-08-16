@@ -30,7 +30,12 @@ export default function RSVPForm({
     ...htmlProps
 }: RSVPFormProps) {
     const [step, setStep] = useState(1);
-    const goToStep = (step: number) => setStep(step);
+    const goToStep = (step: number) => {
+        console.log("go to step ", step)
+        setStep(step)
+
+    }
+    // const goToStep = (step: number) => setStep(step);
 
     const { guests, guestsLoading, guestsError, refetchGuests } = useGuests();
     console.log("guests", guests)
@@ -42,6 +47,11 @@ export default function RSVPForm({
     // const [partyId, setPartyId] = useState<string | null>(null)
     // console.log("partyId", partyId)
 
+    const onRetry = async () => {
+        setStep(1)
+        await refetchGuests()
+    }
+
     return (
         <div {...htmlProps} className={`rsvp_form  ${className ?? ""}`}>
             {/* <RSVPProgressBar texts={progressBar} currStep={step} /> */}
@@ -52,9 +62,9 @@ export default function RSVPForm({
             {guestsLoading ? (
                 <RSVPFormLoading key="loading" />
             ) : guestsError ? (
-                <RSVPFormError key="error" errorMessage={guestsError} onRetry={refetchGuests} />
+                <RSVPFormError key="error" errorMessage={guestsError} onRetry={onRetry} />
             ) : (
-                <RSVPFormProvider value={{ step, goToStep, draft, setDraft, guests, party, setParty, refetchGuests }}>
+                <RSVPFormProvider value={{ step, goToStep, draft, setDraft, guests, party, setParty, refetchGuests: onRetry }}>
                     <div key="steps" className="rsvp_form-steps rsvp_form-status">
                         <RenderSteps />
                     </div>
@@ -82,7 +92,7 @@ function RSVPFormError({ errorMessage, onRetry }: RSVPFormErrorProps) {
                 colorScheme="cream"
                 hoverScheme="burgundy"
                 btnSettings={{
-                    type: "on-click",
+                    type: "native",
                     text: "Refresh page",
                     onClick: onRetry,
                     decoration: {

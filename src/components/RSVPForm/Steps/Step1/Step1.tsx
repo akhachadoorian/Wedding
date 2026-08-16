@@ -7,6 +7,7 @@ import { UNABLE_TO_FIND } from "../../content";
 import { getFindMatchingGuests, GuestParty, Guests } from "../../types";
 import RSVPStepHorizontal, { RSVPStepVertical } from "../RSVPStep";
 import './Step1.scss';
+import Button from "@/components/Buttons/Button";
 
 export default function StepOne() {
     const { guests } = useRSVPForm();
@@ -146,7 +147,6 @@ function StepOneInputs({
 }: StepOneInputsProps) {
     const isDisabled = searching || (firstName === "" && lastName === "");
     const hasError = !!error;
-
     return (
         <div className="step_one_search flex flex-col gap-400">
             <form
@@ -189,13 +189,16 @@ function StepOneInputs({
                     </div>
                 </div>
 
-                <button
-                    type="submit"
-                    className="step_one_search-submit"
-                    disabled={isDisabled} // FIXME:
-                >
-                    Search
-                </button>
+                <Button
+                    variant="outline"
+                    colorScheme="cream"
+                    btnSettings={{
+                        type: "native",
+                        text: "Search",
+                        htmlType: "submit",
+                        disabled: isDisabled,
+                    }}
+                />
             </form>
 
             {hasError && (
