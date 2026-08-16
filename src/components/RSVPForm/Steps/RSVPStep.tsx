@@ -8,6 +8,7 @@ import {
 import { cn } from "@/utils/cn";
 import Star from "@/icons/Star";
 import { useState } from "react";
+import { useRSVPForm } from "../RSVPFormContext";
 
 export default function RSVPStepHorizontal({
     currStep,
@@ -123,6 +124,41 @@ function RSVPStepTextCentered({
     );
 }
 
+
+interface RSVPNavButtonProps {
+    hidden?: boolean;
+    disabled: boolean;
+}
+
+// TODO: add override to thank you
+interface RSVPNavButtonsProps {
+    back: RSVPNavButtonProps;
+    next: RSVPNavButtonProps;
+}
+
+// FIXME: buttons
+export function RSVPNavButtons({ back, next }: RSVPNavButtonsProps) {
+    const { step, goToStep } = useRSVPForm();
+
+    return (
+        <div className="">
+            {/* Back */}
+            {!back.hidden && (
+                <button disabled={back.disabled} onClick={() => goToStep(step - 1)}>
+                    Back
+                </button>
+            )}
+
+            {/* Next */}
+            {!next.hidden && (
+                <button disabled={next.disabled} onClick={() => goToStep(step + 1)}>
+                    Next
+                </button>
+            )}
+        </div>
+    )
+}
+
 export function RSVPStepLoading(loadingText?: string) {
     return (
         <div className="rsvp_form-status step_one_loading">
@@ -141,6 +177,8 @@ export function RSVPStepLoading(loadingText?: string) {
         </div>
     );
 }
+
+
 
 // function RSVPFormError({ errorMessage, onRetry }: RSVPFormErrorProps) {
 //     return (

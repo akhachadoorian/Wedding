@@ -1,21 +1,18 @@
 import { cn } from "@/utils/cn";
-import { GuestParty, Guests, StepProps } from "../../types";
-import { RSVPStepVertical } from "../RSVPStep";
+import { RSVPNavButtons, RSVPStepVertical } from "../RSVPStep";
 import { buttonColorVariants } from "@/components/Buttons/button.variants";
 import { BTN_TEXT_CLASSES } from "@/components/Buttons/Button";
+import { useRSVPForm } from "../../RSVPFormContext";
 
-interface Step2Props extends StepProps {
-    // guests: GuestParty | null;
-    // partyId: string | null;
-    party: GuestParty | null;
-}
-
-export default function StepTwo({ party, draft, setDraft }: Step2Props) {
+export default function StepTwo() {
+    const { party, draft, setDraft } = useRSVPForm();
     // return error if null?
     if (party === null) return null; // todo: display error
 
     // Get party
     const { guest1, guest2 } = party;
+
+    console.log(`guest1: ${guest1} guest2: ${guest2}`)
 
     const handleGuest1Updates = (coming: boolean) => {
         console.log("guest 1 update")
@@ -26,6 +23,11 @@ export default function StepTwo({ party, draft, setDraft }: Step2Props) {
     };
 
     const guest1Answer = draft.attendance.guest1; // boolean | undefined
+
+    // todo: is next disabled?
+    // unanswered
+    // const allAnswered = 
+
 
 
     return (
@@ -57,9 +59,16 @@ export default function StepTwo({ party, draft, setDraft }: Step2Props) {
             {/* <div className="">
                 
             </div> */}
+
+            {/* Back / Next */}
+            <RSVPNavButtons back={{disabled: false, }} next={{disabled: true,}} />
         </RSVPStepVertical>
     );
 }
+
+
+
+
 
 interface RSVPSwitchProps {
     handleClick: (value: boolean) => void;

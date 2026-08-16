@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 
 import Star from "@/icons/Star";
 import { ArrowClockwiseIcon, WarningIcon } from "@phosphor-icons/react";
@@ -9,10 +9,10 @@ import { WithHTMLProps } from "../../types/props";
 
 import Button from "@/components/Buttons/Button";
 import "./RSVPForm.scss";
+import { RSVPFormProvider, useRSVPForm } from "./RSVPFormContext";
 import StepOne from "./Steps/Step1/Step1";
-import { number } from "motion";
 import StepTwo from "./Steps/Step2/Step2";
-import { getPartyFromId, GuestParty, Guests, RSVPDraft, StepProps } from "./types";
+import { GuestParty, RSVPDraft } from "./types";
 
 // TODO: after rsvp date close
 
@@ -30,6 +30,7 @@ export default function RSVPForm({
     ...htmlProps
 }: RSVPFormProps) {
     const [step, setStep] = useState(1);
+    const goToStep = (step: number) => setStep(step);
 
     const { guests, guestsLoading, guestsError, refetchGuests } = useGuests();
     console.log("guests", guests)
@@ -53,9 +54,11 @@ export default function RSVPForm({
             ) : guestsError ? (
                 <RSVPFormError key="error" errorMessage={guestsError} onRetry={refetchGuests} />
             ) : (
-                <div key="steps" className="rsvp_form-steps rsvp_form-status">
-                    <RenderSteps currStep={step} goToNextStep={setStep} draft={draft}  setDraft={setDraft} refetchGuests={refetchGuests}  guests={guests} setParty={setParty} party={party}  />
-                </div>
+                <RSVPFormProvider value={{ step, goToStep, draft, setDraft, guests, party, setParty, refetchGuests }}>
+                    <div key="steps" className="rsvp_form-steps rsvp_form-status">
+                        <RenderSteps />
+                    </div>
+                </RSVPFormProvider>
             )}
         </div>
     );
@@ -113,29 +116,16 @@ function RSVPFormLoading({loadingText}:{loadingText?: string}) {
     );
 }
 
-interface RenderStepsProps extends StepProps {
-    currStep: number;
-    // goToNextStep: Dispatch<SetStateAction<number>>;
-    // setDraft: Dispatch<SetStateAction<RSVPDraft>>;
-    refetchGuests: () => Promise<void>
+function RenderSteps() {
+    const { step, refetchGuests } = useRSVPForm();
 
-    guests:  Guests | null;
-    setParty: Dispatch<SetStateAction<GuestParty | null>>;
-    party: GuestParty | null;
-}
-
-function RenderSteps({currStep, goToNextStep, draft, setDraft, refetchGuests, guests, setParty, party}:RenderStepsProps) {
-    // TODO: null guests?
-
-
-
-    switch (currStep) {
+    switch (step) {
         case 1:
-            return <StepOne draft={draft} setDraft={setDraft} guests={guests} setParty={setParty} goToNextStep={goToNextStep} />
+            return <StepOne />
         case 2:
-            return <StepTwo draft={draft}  setDraft={setDraft} party={party} goToNextStep={goToNextStep} />
+            return <StepTwo />
         default:
             return <RSVPFormError key="error" errorMessage={"Error"} onRetry={refetchGuests} /> // TODO: add error message
 
-    } 
+    }
 }

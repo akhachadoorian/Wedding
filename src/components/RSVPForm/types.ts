@@ -1,6 +1,5 @@
 import { WithHTMLProps } from "@/types/props";
 import { STEP_ONE_TEXT, STEP_TWO_TEXT } from "./content";
-import { Dispatch, SetStateAction } from "react";
 
 export const HEADER_MAP = {
     "Party ID": "id",
@@ -150,13 +149,6 @@ export function getPartyFromId(
 ): GuestParty | null {
     if (guests === null || partyId === null) return null;
     return guests?.find((g) => g.id === partyId) ?? null;
-}
-
-export interface StepProps {
-    goToNextStep: Dispatch<SetStateAction<number>>;
-    // setLoading: Dispatch<SetStateAction<boolean>>; // FIXME:
-    draft: RSVPDraft;
-    setDraft: Dispatch<SetStateAction<RSVPDraft>>;
 }
 
 export type RSVPDraft = {

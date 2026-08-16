@@ -9,7 +9,7 @@ export default function RSVPThankYou({coming}:{coming: boolean}) {
 
     return (
         <div className="">
-            <Eyebrow text={eyebrow} />
+            <Eyebrow text={eyebrow} styleOptions={{variation: 'left',includeMargin: true}} />
             <h2>{header}</h2>
             <p>{body}</p>
         </div>

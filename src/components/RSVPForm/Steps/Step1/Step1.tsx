@@ -1,19 +1,15 @@
 import Eyebrow from "@/components/Eyebrow/Eyebrow";
 import Star from "@/icons/Star";
 import { WarningIcon } from "@phosphor-icons/react";
-import { Dispatch, SetStateAction, SubmitEvent, useState } from "react";
+import { SubmitEvent, useState } from "react";
+import { useRSVPForm } from "../../RSVPFormContext";
 import { UNABLE_TO_FIND } from "../../content";
-import { getFindMatchingGuests, GuestParty, Guests, StepProps } from "../../types";
+import { getFindMatchingGuests, GuestParty, Guests } from "../../types";
 import RSVPStepHorizontal, { RSVPStepVertical } from "../RSVPStep";
 import './Step1.scss';
 
-interface StepOneProps extends StepProps {
-    guests: Guests | null;
-    setParty: Dispatch<SetStateAction<GuestParty | null>>;
-    // guestsLoading: boolean;
-}
-
-export default function StepOne({ guests, setParty, goToNextStep }: StepOneProps) {
+export default function StepOne() {
+    const { guests } = useRSVPForm();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [searchResult, setSearchResult] = useState<Guests | null>(null);
@@ -74,7 +70,7 @@ export default function StepOne({ guests, setParty, goToNextStep }: StepOneProps
                             error={searchError}
                         />
                     ) : (
-                        <StepOneSuccess matches={searchResult} setParty={setParty} goToNextStep={goToNextStep}/>
+                        <StepOneSuccess matches={searchResult} />
                     )}
             </>
         </RSVPStepVertical>
@@ -261,14 +257,14 @@ function getNameString(guest: GuestParty): string {
 
 interface StepOneSuccessProps {
     matches: Guests;
-    setParty: Dispatch<SetStateAction<GuestParty | null>>;
-    goToNextStep: Dispatch<SetStateAction<number>>;
 }
 
-function StepOneSuccess({ matches, setParty, goToNextStep }: StepOneSuccessProps) {
+function StepOneSuccess({ matches }: StepOneSuccessProps) {
+    const { setParty, goToStep } = useRSVPForm();
+
     const handleButtonPress = (party: GuestParty) => {
         setParty(party);
-        goToNextStep(2);
+        goToStep(2);
     }
 
     // TODO: style and layout of buttons
