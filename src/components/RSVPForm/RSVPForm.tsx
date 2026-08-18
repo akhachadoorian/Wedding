@@ -1,293 +1,153 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import GUEST_LIST from "../../data/guestList";
-import toHtmlId from "../../hooks/toHtmlId";
-import RSVP from "../../app/rsvp/page";
-import { party } from "../../types/guestList";
+import Star from "@/icons/Star";
+import { ArrowClockwiseIcon, WarningIcon } from "@phosphor-icons/react";
+import useGuests from "../../hooks/useGuests";
 import { WithHTMLProps } from "../../types/props";
-import { NonEmptyArray } from "../../types/utility";
-import Eyebrow from "../Eyebrow/Eyebrow";
 
+import Button from "@/components/Buttons/Button";
 import "./RSVPForm.scss";
+import { RSVPFormProvider, useRSVPForm } from "./RSVPFormContext";
+import StepOne from "./Steps/Step1/Step1";
+import StepTwo from "./Steps/Step2";
+import { GuestParty, RSVPDraft } from "./types";
+import StepThree from "./Steps/Step3";
+import RSVPThankYou from "./RSVPThankYou";
+
+// TODO: after rsvp date close
 
 export type RSVPFormProps = WithHTMLProps & {
-    progressBar: NonEmptyArray<string>;
-    steps: NonEmptyArray<RSVPStepProps>;
+    // progressBar: NonEmptyArray<string>;
+    // steps: NonEmptyArray<RSVPStepProps>;
 };
 
+
 export default function RSVPForm({
-    progressBar,
-    steps,
+    // progressBar,
+    // steps,
 
     className,
     ...htmlProps
 }: RSVPFormProps) {
-    const [step, setStep] = useState(0);
+    const [step, setStep] = useState(1);
+    const goToStep = (step: number) => {
+        console.log("go to step ", step)
+        setStep(step)
 
+    }
+    // FIXME:
+    // const goToStep = (step: number) => setStep(step);
+
+    const { guests, guestsLoading, guestsError, refetchGuests } = useGuests();
+    // console.log("guests", guests)    
+
+    const [party, setParty] = useState<GuestParty | null>(null)
+
+    const [draft, setDraft] = useState<RSVPDraft>({ attendance: {}});
     useEffect(() => {
-        fetch("/api/guests")
-            .then((res) => res.json())
-            .then((data) => console.log("guests", data));
-    }, []);
+        console.log("draft changed", draft)
+    }, [draft])
 
-    // const [searchQuery, setSearchQuery] = useState("");
-    // const [searchResult, setSearchResult] = useState<party[]>([]);
-    // const [searchError, setSearchError] = useState("");
-    // const [searching, setSearching] = useState(false);
+    // const [partyId, setPartyId] = useState<string | null>(null)
+    // console.log("partyId", partyId)
 
-    // const handleSearch = () => {
-    //     setSearching(true);
-    //     setSearchError("");
-    //     setSearchResult([]);
-    //     setTimeout(() => {
-    //         const q = searchQuery.trim().toLowerCase();
-
-    //         const found = GUEST_LIST.filter((p) => p.guests.some((g) => g.lastName?.toLowerCase() === q));
-
-    //         if (found.length > 0) {
-    //             setSearchResult(found);
-    //         } else {
-    //             setSearchError("We couldn't find that name. Please try again.");
-    //         }
-    //         setSearching(false);
-    //     }, 600);
-    // };
+    const onRetry = async () => {
+        setStep(1)
+        await refetchGuests()
+    }
 
     return (
-        <section
-            {...htmlProps}
-            className={`rsvp_form base_section ${className ?? ""}`}
-        >
+        <div {...htmlProps} className={`rsvp_form  ${className ?? ""}`}>
             {/* <RSVPProgressBar texts={progressBar} currStep={step} /> */}
 
-            <div className="rsvp_form-steps">
-                <div className=""></div>
-                {/* <RSVPStep
-                    textContent={steps[step].textContent}
-                    type={steps[step].type}
-                    searchQuery={searchQuery}
-                    setSearchQuery={setSearchQuery}
-                    handleSearch={handleSearch}
-                    searchResult={searchResult}
-                    searchError={searchError}
-                    searching={searching}
-                /> */}
-                {/* TODO: nav buttons */}
-            </div>
-        </section>
-    );
-}
+            <div className="rsvp_form-frame rsvp_form-frame-a" />
+            <div className="rsvp_form-frame rsvp_form-frame-b" />
 
-// #region --- Progress Bar -----------------------------------------------
-
-type RSVPProgressBarProps = {
-    texts: NonEmptyArray<string>;
-    currStep: number;
-};
-
-function RSVPProgressBar({ texts, currStep }: RSVPProgressBarProps) {
-    console.log("currStep", currStep);
-
-    return (
-        <div className="rsvp_progress_bar">
-            {texts.map((t, idx) => {
-                let id = toHtmlId(t);
-
-                return (
-                    <div
-                        key={idx}
-                        id={`pb-${id}`}
-                        className={`rsvp_progress_bar-element ${idx <= currStep ? "active" : ""}`}
-                    >
-                        <div className="rsvp_progress_bar-element-line" />
-
-                        <p className="rsvp_progress_bar-element-text">{t}</p>
-                    </div>
-                );
-            })}
-        </div>
-    );
-}
-
-// #endregion -------------------------------------------------------------
-
-// #region --- Step Text -------------------------------------------------
-
-type RSVPStepTextProps = {
-    stepNumber: number;
-    title: string;
-    body?: string;
-};
-
-function RSVPStepText({ stepNumber, title, body }: RSVPStepTextProps) {
-    return (
-        <div className="rsvp_step_text">
-            <Eyebrow
-                text={`Step ${stepNumber}`}
-                styleOptions={{
-                    variation: "left",
-                }}
-            />
-
-            <h2 className="heading-l rsvp_step_text-title">{title}</h2>
-
-            {body && <p className="body rsvp_step_text-body">{body}</p>}
-        </div>
-    );
-}
-
-function RSVPStep({
-    type,
-    textContent,
-    searchQuery,
-    setSearchQuery,
-    handleSearch,
-    searchResult,
-    searchError,
-    searching,
-}: RSVPStepProps) {
-    return (
-        <div className={`rsvp_step`}>
-            {type === "search" &&
-            searchQuery !== undefined &&
-            setSearchQuery &&
-            handleSearch ? (
-                <SearchStep
-                    textContent={textContent}
-                    searchQuery={searchQuery}
-                    setSearchQuery={setSearchQuery}
-                    handleSearch={handleSearch}
-                    searchResult={searchResult ?? []}
-                    searchError={searchError ?? ""}
-                    searching={searching ?? false}
-                />
+            {guestsLoading ? (
+                <RSVPFormLoading key="loading" />
+            ) : guestsError ? (
+                <RSVPFormError key="error" errorMessage={guestsError} onRetry={onRetry} />
             ) : (
-                <>
-                    <div className="rsvp_step-inner">
-                        <div className="rsvp_step-left">
-                            <RSVPStepText {...textContent} />
-                        </div>
-
-                        <div className="rsvp_step-right"></div>
+                <RSVPFormProvider value={{ step, goToStep, draft, setDraft, guests, party, setParty, refetchGuests: onRetry }}>
+                    <div key="steps" className="rsvp_form-steps rsvp_form-status">
+                        <RenderSteps />
                     </div>
-
-                    <div className="rsvp_step-nav_btns"></div>
-                </>
+                </RSVPFormProvider>
             )}
         </div>
     );
 }
 
-// #endregion -------------------------------------------------------------
-
-// #region --- Search -------------------------------------------------
-
-type SearchStepPassthroughProps = {
-    searchQuery: string;
-    setSearchQuery: (value: string) => void;
-    handleSearch: () => void;
-    searchResult: party[];
-    searchError: string;
-    searching: boolean;
+type RSVPFormErrorProps = {
+    errorMessage: string;
+    onRetry: () => void;
 };
 
-export type RSVPStepProps = {
-    type?: "search";
-    textContent: RSVPStepTextProps;
-} & Partial<SearchStepPassthroughProps>;
-
-function SearchStep({
-    textContent,
-    searchQuery,
-    setSearchQuery,
-    handleSearch,
-    searchResult,
-    searchError,
-    searching,
-}: { textContent: RSVPStepTextProps } & SearchStepPassthroughProps) {
+function RSVPFormError({ errorMessage, onRetry }: RSVPFormErrorProps) {
     return (
-        <div className={`search_step`}>
-            <div className="search_step-left">
-                <RSVPStepText {...textContent} />
+        <div className="rsvp_form-status flex flex-col items-center gap-200 text-center">
+            <WarningIcon size={56} weight="bold" color="var(--cream)" />
 
-                <div className="search_step-search">
-                    <p className="search_step-search-label">Last Name</p>
-                    <input
-                        className="search_step-search-input"
-                        type="text"
-                        placeholder="Smith"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                    />
-                </div>
-            </div>
+            <h3 className="heading-l">An Error has Occurred</h3>
+            <p className="body-lg">{errorMessage}</p>
 
-            <div className="search_step-right search_step-results">
-                <div className="search_step-results-header">
-                    <div className="search_step-results-header-line" />
-
-                    <p className="eyebrow">Results</p>
-
-                    <div className="search_step-results-header-line" />
-                </div>
-
-                <div className="search_step-results-content">
-                    {!searching &&
-                        searchResult.length === 0 &&
-                        !searchError && (
-                            <p className="body search_step-placeholder">
-                                Results will appear here.
-                            </p>
-                        )}
-
-                    {searching && <p className="body">Searching...</p>}
-
-                    {searchError && (
-                        <p className="body search_step-error">{searchError}</p>
-                    )}
-
-                    {searchResult.map((party, idx) => (
-                        <div key={idx} className="search_step-result">
-                            {party.guests.map((guest, gIdx) => (
-                                <p key={gIdx} className="body">
-                                    {guest.placeholder
-                                        ? "Guest"
-                                        : `${guest.firstName}${guest.lastName ? ` ${guest.lastName}` : ""}`}
-                                </p>
-                            ))}
-                        </div>
-                    ))}
-                </div>
-            </div>
+            <Button
+                variant="solid"
+                colorScheme="cream"
+                hoverScheme="burgundy"
+                btnSettings={{
+                    type: "native",
+                    text: "Refresh page",
+                    onClick: onRetry,
+                    decoration: {
+                        type: 'icon',
+                        icon: ArrowClockwiseIcon
+                    }
+                }}
+                
+                className="mt-200"
+            ></Button>
         </div>
     );
 }
 
-// #endregion -------------------------------------------------------------
-
-const STEP_ONE_TEXT: RSVPStepTextProps = {
-    stepNumber: 1,
-    title: "Find Your Party",
-    body: "Enter your name to find your reservation.",
-};
-
-function StepOne({}) {
+function RSVPFormLoading({loadingText}:{loadingText?: string}) {
     return (
-        <div className="rsvp_form_step step_one">
-            <div className="step_one-left">
-                <Eyebrow text={`Step ${STEP_ONE_TEXT.stepNumber}`} />
-                <h2 className="heading-l rsvp_step_text-title">
-                    {STEP_ONE_TEXT.title}
-                </h2>
-                <p className="">{STEP_ONE_TEXT.body}</p>
+        <div className="rsvp_form-status step_one_loading">
+            <div className="step_one_loading-spinner">
+                <Star color="--wine-500" />
             </div>
-            <div className="step_one-right">
-                <div className=""></div>
-                <div className=""></div>
-            </div>
+
+            <p className="step_one_loading-text">
+                {loadingText ?? "Loading"}
+                <span className="step_one_loading-dots">
+                    <span>.</span>
+                    <span>.</span>
+                    <span>.</span>
+                </span>
+            </p>
         </div>
     );
+}
+
+function RenderSteps() {
+    const { step, refetchGuests } = useRSVPForm();
+
+    switch (step) {
+        case -2:
+            return <RSVPThankYou coming={true} />
+        case -1:
+            return <RSVPThankYou coming={false} />
+        case 1:
+            return <StepOne />
+        case 2:
+            return <StepTwo />
+        case 3: 
+            return <StepThree />
+        default:
+            return <RSVPFormError key="error" errorMessage={"Error"} onRetry={refetchGuests} /> // TODO: add error message
+
+    }
 }

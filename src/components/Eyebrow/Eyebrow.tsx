@@ -7,6 +7,7 @@ import Diamond from "../Diamond/Diamond";
 
 import "./Eyebrow.scss";
 import { WithHTMLProps } from "@/types/props";
+import Star from "@/icons/Star";
 
 /**
  * Controls the visual layout and color treatment of the Eyebrow component.
@@ -79,25 +80,6 @@ type EyebrowProps = WithHTMLProps & {
 //     );
 // }
 
-function Star({color = '--wine-600'}:{color?: ColorVariables;}) {
-    return (
-        <div className="eyebrow-star">
-            <svg
-                width="100%"
-                height="100%"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <path
-                    d="M12 0C12 6.5 6.5 12 0 12C6.5 12 12 17.5 12 24C12 17.5 17.5 12 24 12C17.5 12 12 6.5 12 0Z"
-                    fill={`var(${color})`}
-                    // fill="#800020"
-                ></path>
-            </svg>
-        </div>
-    );
-}
 
 /**
  * Decorative section label rendered above headings.

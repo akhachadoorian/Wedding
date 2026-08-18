@@ -58,15 +58,20 @@
     --wine-700: #4c242a;
     --wine-750: #442227;
     --wine-800: #3c2025; // Cabernet
+    --wine-850: #261216;
+    --wine-900: #15080a;
+
     // #660033
 
     // Semantics
-    --positive: #7e9568;
-    --positive-bg: rgba(126, 149, 104, 0.14);
-    --negative: #b0685a;
-    --negative-bg: rgba(176, 104, 90, 0.14);
-    --info: #6e8ba6;
-    --info-bg: rgba(110, 139, 166, 0.12);
+    // --positive: #7e9568;
+    // --positive-bg: rgba(126, 149, 104, 0.14);
+    // --negative: #b0685a;
+    // --negative: rgb(141, 36, 48) ;
+    // --negative: oklch(47.547% 0.19512 29.223 / 0.541)  ;
+    // --negative-bg: rgba(176, 104, 90, 0.14);
+    // --info: #6e8ba6;
+    // --info-bg: rgba(110, 139, 166, 0.12);
 
     --max-width: 1600px;
 }
@@ -126,6 +131,8 @@ $wine-650: var(--wine-650);
 $wine-700: var(--wine-700);
 $wine-750: var(--wine-750);
 $wine-800: var(--wine-800);
+$wine-850: var(--wine-850);
+$wine-900: var(--wine-900);
 
 // ──── Semantic aliases ────────────────────────
 // Keep these for quick access to your most-used values

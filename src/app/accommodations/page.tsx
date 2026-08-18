@@ -9,12 +9,12 @@ import SplitInfo from "../../components/SplitInfo/SplitInfo";
 import ArtDecoCardGrid, {
     ArtDecoCard,
 } from "../../components/ArtDecoCardGrid/ArtDecoCardGrid";
-import CopyOnly from "../../components/CopyOnly/CopyOnly";
 import ComingSoon, { ComingSoonSection } from "@/layout/ComingSoon/ComingSoon";
 import PageGuard from "@/components/PageGuard/PageGuard";
 import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
 import CardGrid from "@/components/CardGrid/CardGrid";
 import ComponentGuard from "@/components/ComponentGuard/ComponentGuard";
+import CopyOnly from "@/components/CopyOnly/CopyOnly";
 
 export default function Accommodations({
     loaded = true,

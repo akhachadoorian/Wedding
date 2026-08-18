@@ -1,3 +1,4 @@
+import React from "react";
 import { ArrowDirectionProps } from "../components/ArrowBox/ArrowBox";
 import { ModalProps } from "@/components/Modal/Modal";
 import { WithA11yProps, WithHTMLProps } from "./props";
@@ -24,6 +25,7 @@ export interface ModalSettings {
     /** */
     modalContent: Omit<ModalProps, 'isOpen' | 'onClose'>;
 }
+
 
 /**
  * Text content, destination, and link behavior for a single button.
@@ -113,7 +115,24 @@ export type VisualButtonSettings = {
     decoration?: BtnDecoration;
 }
 
-export type ButtonSettingProps = LinkButtonSettings | ModalButtonSettings | VisualButtonSettings;
+/**
+ * Backed by a real native `<button>` — exposes the full set of native button
+ * attributes (`type`, `disabled`, `form`, `onClick`, etc.) so it can act as either
+ * a JS-driven click handler or a plain form submit/reset button.
+ */
+export interface NativeButtonSettings extends Omit<React.ComponentProps<'button'>, 'className' | 'children' | 'type'> {
+    type: 'native';
+    /** Label displayed inside the button */
+    text: string;
+    /** Button decoration (icon, arrow) or left blank for none */
+    decoration?: BtnDecoration;
+    /** Native `type` attribute — 'button' avoids accidental form submits unless opted into @default 'button' */
+    htmlType?: 'button' | 'submit' | 'reset';
+}
+
+export type ButtonSettingProps = LinkButtonSettings | ModalButtonSettings | VisualButtonSettings | NativeButtonSettings;
+
+export type ButtonTypes = ButtonSettingProps['type'];
 
 // export type ButtonSettingProps = {
 //     /** Label displayed inside the button */

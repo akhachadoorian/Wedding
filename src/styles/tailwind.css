@@ -13,7 +13,8 @@
 @theme {
     /* Semantic Colors */
     --color-cream: var(--cream);
-    --color-black: var(--black-1000);
+    --color-black: var(--black-900);
+    --color-black-bg: var(--black-1000);
     --color-burgundy: var(--wine-600);
     --color-cabernet: var(--wine-800);
     --color-gray: var(--gray);
@@ -26,6 +27,7 @@
     --color-cabernet: var(--wine-800); */
 
     /* Breakpoints */
+    --breakpoint-max: 1600px;
     /* --breakpoint-mob: 450px; */ /* sm */
     /* --breakpoint-tab: 768px; */ /* md */
     /* --breakpoint-dsk: 1024px; */ /* lg */
@@ -64,4 +66,48 @@
     --spacing-800: var(--space-800); /* 64px */
     --spacing-1000: var(--space-1000); /* 80px */
     --spacing-1500: var(--space-1500); /* 120px */
+
+    /* Layout */
+    --spacing-col-margin: var(--layout-column-margin);
+    --spacing-col-gutter: var(--layout-column-gutter);
+    --spacing-section-padding: var(--layout-section-padding);
+
+    --width-col: var(--layout-column-width);
+    --width-content: var(--layout-content-width);
+
+    --max-width-container: var(--layout-container-max-width);
 }
+
+/*
+  Design token -> Tailwind spacing utility reference
+  Tailwind default spacing scale = 4px per unit (n * 0.25rem)
+  15 of 17 tokens match an existing Tailwind class exactly - no config needed
+  Use the suffix below in place of p-, m-, gap-, w-, h-, top-, inset-, etc.
+
+  --space-0     0px    -> 0     (exact)
+  --space-025   2px    -> 0.5   (exact)
+  --space-050   4px    -> 1     (exact)
+  --space-075   6px    -> 1.5   (exact)
+  --space-100   8px    -> 2     (exact)
+  --space-150   12px   -> 3     (exact)
+  --space-200   16px   -> 4     (exact)
+  --space-250   20px   -> 5     (exact)
+  --space-300   24px   -> 6     (exact)
+  --space-400   32px   -> 8     (exact)
+  --space-500   40px   -> 10    (exact)
+  --space-600   48px   -> 12    (exact)
+  --space-700   56px   -> 14    (exact)
+  --space-750   60px   -> no match, nearest 14 (56px) or 16 (64px)
+  --space-800   64px   -> 16    (exact)
+  --space-1000  80px   -> 20    (exact)
+  --space-1500  120px  -> no match, nearest 28 (112px) or 32 (128px)
+
+  Applies to: p- px- py- pt- pr- pb- pl- ps- pe-
+  m- mx- my- mt- mr- mb- ml-
+  gap- gap-x- gap-y-
+  w- h- size- min-w- max-w- min-h- max-h-
+  top- right- bottom- left- inset- inset-x- inset-y- start- end-
+  space-x- space-y- translate-x- translate-y- scroll-m- scroll-p-
+
+  Assumes root font-size = 16px (1rem = 16px, no override)
+*/

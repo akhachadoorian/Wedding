@@ -1,5 +1,5 @@
 import { google } from "googleapis";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 
 const GUEST_RANGE = "Guests!A:E"
@@ -25,7 +25,13 @@ async function getGuests() {
     return response.data.values;
 }
 
-export async function GET() {
+// Testing error
+export async function GET(request: NextRequest) {
+    // Dev-only escape hatch to exercise the error flow: /api/guests?error=1
+    if (process.env.NODE_ENV !== "production" && request.nextUrl.searchParams.has("error")) {
+        return NextResponse.json({ error: "Forced error for testing" }, { status: 500 });
+    }
+
     try {
         const data = await getGuests();
         return NextResponse.json(data ?? []);

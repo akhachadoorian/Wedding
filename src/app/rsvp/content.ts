@@ -1,5 +1,5 @@
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
-import { RSVPFormProps, RSVPStepProps } from "../../components/RSVPForm/RSVPForm";
+import { RSVPFormProps } from "../../components/RSVPForm/RSVPForm";
 import { TextOnlyHeroProps } from "../../layout/TextOnlyHero/TextOnlyHero";
 import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero/ImageOverlayHero";
 
@@ -31,29 +31,29 @@ const hero: Omit<ImageOverlayHeroProps, "loaded" | "styleOptions"> = {
 
 // #region --- RSVP Form --------------------------------------------------
 
-const step1: RSVPStepProps = {
-    // progressBarText: "Find Party",
-    type: 'search',
-    textContent: {
-        stepNumber: 1,
-        title: "Find Your Party",
-        body: 'Enter your name to find your reservation.'
-    },
-};
+// const step1: RSVPStepProps = {
+//     // progressBarText: "Find Party",
+//     type: 'search',
+//     textContent: {
+//         stepNumber: 1,
+//         title: "Find Your Party",
+//         body: 'Enter your name to find your reservation.'
+//     },
+// };
 
-const step2: RSVPStepProps = {
-    // progressBarText: "Attending",
-    textContent: {
-        stepNumber: 2,
-        title: "Who's Coming?",
-        body: 'Let us know who from your party will be joining us on the day.'
-    },
-};
+// const step2: RSVPStepProps = {
+//     // progressBarText: "Attending",
+//     textContent: {
+//         stepNumber: 2,
+//         title: "Who's Coming?",
+//         body: 'Let us know who from your party will be joining us on the day.'
+//     },
+// };
 
-const rsvpForm: RSVPFormProps = {
-    progressBar: ['Find Party', 'Attending'],
-    steps: [step1, step2],
-};
+// const rsvpForm: RSVPFormProps = {
+//     progressBar: ['Find Party', 'Attending'],
+//     steps: [step1, step2],
+// };
 
 // #endregion --------------------------------------------------------
 
@@ -61,7 +61,7 @@ const rsvpForm: RSVPFormProps = {
 
 const rsvpContent = {
     hero: hero,
-    form: rsvpForm,
+    // form: rsvpForm,
 };
 
 export default rsvpContent;

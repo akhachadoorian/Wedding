@@ -29,9 +29,17 @@ export default function RSVP({ loaded = true }: { loaded?: boolean }) {
                 }}
             /> */}
 
-            <ImageOverlayHero {...content.hero} loaded={loaded} styleOptions={{variation: 'columns'}}/>
+            {/* FIXME: add hero back */}
+            {/* <ImageOverlayHero {...content.hero} loaded={loaded} styleOptions={{variation: 'columns'}}/> */}
 
-            <RSVPForm {...content.form} />
+            <section className="base_section">
+                {/* <div className="mb-300 text-center">
+                    <h2>RSVP</h2>
+                </div> */}
+
+                <RSVPForm />
+            </section>
+            
         </PageGuard>
     );
 }

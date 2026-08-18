@@ -147,9 +147,6 @@ h6,
     &.centered {
         text-align: center;
     }
-    &.gold {
-        color: var(--gold-500);
-    }
     &.white {
         color: var(--cream-500);
     }
@@ -161,22 +158,7 @@ h6,
     @extend %subheading-base;
     font-size: var(--text-lg);
     font-size: typo.fluid(20, 24);
-    color: $cream-700;
-    // font-weight: 700;
-
-    &-extra {
-        padding: var(--space-100) var(--space-075);
-        border-top: 1px solid $gold;
-        border-bottom: 1px solid $gold;
-        width: fit-content;
-
-        // font-family: $font-sans;
-        // font-size: var(--text-md);
-        // font-weight: 600;
-        // line-height: normal;
-        // letter-spacing: 0.6px;
-        text-transform: uppercase;
-    }
+    color: $cream;
 }
 
 .subtitle-extra {
@@ -187,8 +169,8 @@ h6,
     text-transform: uppercase;
 
     padding: var(--space-100) var(--space-075);
-        border-top: 1px solid $gold;
-        border-bottom: 1px solid $gold;
+        border-top: 2px solid $cabernet;
+        border-bottom: 2px solid $cabernet;
         width: fit-content;
 }
 

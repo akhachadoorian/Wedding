@@ -68,35 +68,35 @@ $size-btn: (
 
     // #region --- Size ---
 
-    &-size {
-        &-default {
-            padding: map.get($size-btn, "default", "mobile");
+    // &-size {
+    //     &-default {
+    //         padding: map.get($size-btn, "default", "mobile");
 
-            @include big {
-                padding: map.get($size-btn, "default", "desktop");
-            }
+    //         @include big {
+    //             padding: map.get($size-btn, "default", "desktop");
+    //         }
 
-            .btn-text {
-                font-size: var(--text-s);
+    //         .btn-text {
+    //             font-size: var(--text-s);
 
-                @include big {
-                    font-size: var(--text-base);
-                }
-            }
-        }
+    //             @include big {
+    //                 font-size: var(--text-base);
+    //             }
+    //         }
+    //     }
 
-        &-small {
-            padding: map.get($size-btn, "small", "mobile");
+    //     &-small {
+    //         padding: map.get($size-btn, "small", "mobile");
 
-            @include big {
-                padding: map.get($size-btn, "small", "desktop");
-            }
+    //         @include big {
+    //             padding: map.get($size-btn, "small", "desktop");
+    //         }
 
-            .btn-text {
-                font-size: var(--text-s);
-            }
-        }
-    }
+    //         .btn-text {
+    //             font-size: var(--text-s);
+    //         }
+    //     }
+    // }
 
     // #endregion ---
 
@@ -116,12 +116,33 @@ $size-btn: (
     // #endregion ------------------------------------------------------
 }
 
+button:disabled {
+    opacity: 50%;
+    cursor: default;
+    pointer-events: none;
+}
+
+// #endregion -------------------------------------------------------------------
+
+// #region --- Icon Decoration Styling -------------------------------------------
+
+.btn_icon-wrapper {
+    --btn-icon-color: var(--btn-icon-color-base);
+
+    display: inline-flex;
+
+    svg path {
+        transition: $transition;
+    }
+}
+
 // #endregion -------------------------------------------------------------------
 
 // #region --- Hover Effects -------------------------------------------
 
 a.btn, button.btn {
     &:hover {
+        cursor: pointer;
         @each $dir, $t in $arrow-hover-transforms {
             .arrow_box-grid.#{$dir} {
                 transform: $t;
@@ -130,6 +151,10 @@ a.btn, button.btn {
 
         .arrow_box-wrapper {
             --arrow-color: var(--arrow-color-hover);
+        }
+
+        .btn_icon-wrapper {
+            --btn-icon-color: var(--btn-icon-color-hover);
         }
     }
 
