@@ -1,24 +1,14 @@
-import { google } from "googleapis";
 import { NextRequest, NextResponse } from "next/server";
+import { getSheetsClient, getSpreadsheetId } from "@/lib/googleSheets";
 
 
 const GUEST_RANGE = "Guests!A:E"
 
 async function getGuests() {
-    const rawKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY;
-    // Handle both literal \n (from .env without quotes) and already-escaped newlines
-    const privateKey = rawKey?.includes("\\n") ? rawKey.replace(/\\n/g, "\n") : rawKey;
+    const sheets = getSheetsClient();
 
-    const auth = new google.auth.JWT({
-        email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
-        key: privateKey,
-        scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-    });
-
-    const glSheets = google.sheets({ version: "v4", auth });
-
-    const response = await glSheets.spreadsheets.values.get({
-        spreadsheetId: process.env.GOOGLE_SHEET_ID,
+    const response = await sheets.spreadsheets.values.get({
+        spreadsheetId: getSpreadsheetId(),
         range: GUEST_RANGE,
     });
 
