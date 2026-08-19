@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSheetsClient, getSpreadsheetId } from "@/lib/googleSheets";
 import { Guest, GuestKey, GuestParty } from "@/components/RSVPForm/types";
 
-const RSVP_ROW_RANGE = "RSVP!A2:F";
-const LOG_RANGE = "Log!A:F";
+const RSVP_ROW_RANGE = "RSVPs!A:F";
+const LOG_RANGE = "Logs!A:F";
 
 type LogType =
     | "First Submission"
@@ -190,8 +190,11 @@ export async function POST(request: NextRequest) {
             spreadsheetId,
             range: RSVP_ROW_RANGE,
         });
+        console.log("idColumn", idColumn)
         const rows = idColumn.data.values ?? [];
+        console.log("rows", rows)
         const idx = rows.findIndex((r) => r[0] === partyId);
+        console.log("idx", idx)
 
         if (idx === -1) {
             await appendLogRows(partyId, party, attendance, "Not Found");
