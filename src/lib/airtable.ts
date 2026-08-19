@@ -96,6 +96,25 @@ export async function findRecordByField<T extends AirtableFields = AirtableField
     return page.records[0] ?? null;
 }
 
+export async function findRecordByNumberField<T extends AirtableFields = AirtableFields>(
+    table: string,
+    field: string,
+    value: number,
+): Promise<AirtableRecord<T> | null> {
+    const formula = `{${field}}=${value}`;
+    const params = new URLSearchParams({
+        filterByFormula: formula,
+        maxRecords: "1",
+    });
+
+    const page = await airtableRequest<{ records: AirtableRecord<T>[] }>(
+        table,
+        `?${params.toString()}`,
+    );
+
+    return page.records[0] ?? null;
+}
+
 export async function updateRecord<T extends AirtableFields = AirtableFields>(
     table: string,
     recordId: string,

@@ -1,22 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { listRecords } from "@/lib/airtable";
+import { GUESTS_TABLE, GuestFields, PARTIES_TABLE, PartyFields } from "@/lib/airtableSchema";
 import { GuestParty, Guests } from "@/components/RSVPForm/types";
-
-const GUESTS_TABLE = "Guests";
-const PARTIES_TABLE = "Parties";
-
-type GuestFields = {
-    "First Name": string;
-    "Last Name": string;
-    Attending?: "Yes" | "No";
-};
-
-type PartyFields = {
-    "Party ID": string;
-    "Guest 1": string[];
-    "Guest 2"?: string[];
-    "Updated At"?: string;
-};
 
 async function getGuests(): Promise<Guests> {
     const [guestRecords, partyRecords] = await Promise.all([
@@ -27,20 +12,19 @@ async function getGuests(): Promise<Guests> {
     const guestById = new Map(
         guestRecords.map((r) => [
             r.id,
-            { firstName: r.fields["First Name"], lastName: r.fields["Last Name"] },
+            { firstName: r.fields.firstName, lastName: r.fields.lastName },
         ]),
     );
 
     return partyRecords.reduce<Guests>((parties, record) => {
-        const guest1Id = record.fields["Guest 1"]?.[0];
-        const guest2Id = record.fields["Guest 2"]?.[0];
+        const [guest1Id, guest2Id] = record.fields.Guests ?? [];
         const guest1 = guest1Id ? guestById.get(guest1Id) : undefined;
         if (!guest1) return parties;
 
         const guest2 = guest2Id ? guestById.get(guest2Id) : undefined;
 
         const party: GuestParty = {
-            id: record.fields["Party ID"],
+            id: String(record.fields.Id),
             guest1,
             ...(guest2 ? { guest2 } : {}),
         };

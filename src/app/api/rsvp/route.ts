@@ -2,28 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import {
     AirtableRecord,
     // createRecords,
-    findRecordByField,
+    findRecordByNumberField,
     getRecord,
     updateRecord,
 } from "@/lib/airtable";
+import { GUESTS_TABLE, GuestFields, PARTIES_TABLE, PartyFields } from "@/lib/airtableSchema";
 import { Guest, GuestKey, GuestParty } from "@/components/RSVPForm/types";
 
-const PARTIES_TABLE = "Parties";
-const GUESTS_TABLE = "Guests";
 // const LOGS_TABLE = "Logs"; // TODO: re-enable once a Logs table exists
-
-type GuestFields = {
-    "First Name": string;
-    "Last Name": string;
-    Attending?: "Yes" | "No";
-};
-
-type PartyFields = {
-    "Party ID": string;
-    "Guest 1": string[];
-    "Guest 2"?: string[];
-    "Updated At"?: string;
-};
 
 // TODO: re-enable once a Logs table exists
 // type LogType =
@@ -115,6 +101,8 @@ function validateRsvpBody(body: unknown): ValidationResult {
 
     const { id, guest1, guest2 } = party as Record<string, unknown>;
 
+    console.log("party", party)
+
     if (typeof id !== "string" || id.trim() === "") {
         return invalid("party.id is required", typeof id === "string" ? id : null);
     }
@@ -197,8 +185,12 @@ export async function POST(request: NextRequest) {
     let guest2Record: AirtableRecord<GuestFields> | null = null;
     const priorAttending: Partial<Record<GuestKey, string | undefined>> = {};
 
+    const numericPartyId = Number(partyId);
+
     try {
-        const found = await findRecordByField<PartyFields>(PARTIES_TABLE, "Party ID", partyId);
+        const found = Number.isFinite(numericPartyId)
+            ? await findRecordByNumberField<PartyFields>(PARTIES_TABLE, "Id", numericPartyId)
+            : null;
 
         if (!found) {
             // await appendLogRows(partyId, party, attendance, "Not Found");
@@ -210,8 +202,7 @@ export async function POST(request: NextRequest) {
 
         partyRecord = found;
 
-        const guest1Id = partyRecord.fields["Guest 1"]?.[0];
-        const guest2Id = partyRecord.fields["Guest 2"]?.[0];
+        const [guest1Id, guest2Id] = partyRecord.fields.Guests ?? [];
 
         if (!guest1Id) {
             // await appendLogRows(partyId, party, attendance, "Not Found");
@@ -222,11 +213,11 @@ export async function POST(request: NextRequest) {
         }
 
         guest1Record = await getRecord<GuestFields>(GUESTS_TABLE, guest1Id);
-        priorAttending.guest1 = guest1Record.fields.Attending;
+        priorAttending.guest1 = guest1Record.fields.attending;
 
         if (guest2Id) {
             guest2Record = await getRecord<GuestFields>(GUESTS_TABLE, guest2Id);
-            priorAttending.guest2 = guest2Record.fields.Attending;
+            priorAttending.guest2 = guest2Record.fields.attending;
         }
     } catch (err) {
         console.error("POST /api/rsvp lookup error:", err);
@@ -241,18 +232,16 @@ export async function POST(request: NextRequest) {
 
     try {
         await updateRecord<GuestFields>(GUESTS_TABLE, guest1Record.id, {
-            Attending: attendance.guest1 ? "Yes" : "No",
+            attending: attendance.guest1 ? "Attending" : "Not Attending",
+            updatedOn: updatedAt,
         });
 
         if (guest2Record && party.guest2) {
             await updateRecord<GuestFields>(GUESTS_TABLE, guest2Record.id, {
-                Attending: attendance.guest2 ? "Yes" : "No",
+                attending: attendance.guest2 ? "Attending" : "Not Attending",
+                updatedOn: updatedAt,
             });
         }
-
-        await updateRecord<PartyFields>(PARTIES_TABLE, partyRecord.id, {
-            "Updated At": updatedAt,
-        });
     } catch (err) {
         console.error("POST /api/rsvp update error:", err);
         // await appendLogRows(partyId, party, attendance, "Airtable Error");
