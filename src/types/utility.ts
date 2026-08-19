@@ -102,9 +102,9 @@ export type AlignmentProps = {
 // export type BreakpointProps = 'mobile' | 'tablet' | 'desktop' | 'large-desktop';
 
 
-export interface TextValueOption {
+export interface TextValueOption<V = string> {
   text: string;
-  value: string;
+  value: V;
 }
 
 

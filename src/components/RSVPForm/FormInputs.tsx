@@ -102,26 +102,26 @@ function YesNoBooleanSwitchOption({
 // #region --- Radio Buttons ---
 
 // TODO: name better
-export interface ExpandedTextValueOptions extends TextValueOption {
+export interface ExpandedTextValueOptions<V = string> extends TextValueOption<V> {
     subtext?: string;
     note?: string;
 }
 
-interface RadioButtonsProps {
+interface RadioButtonsProps<V = string> {
     name: string;
     label?: string;
-    options: NonEmptyArray<ExpandedTextValueOptions>;
-    onChange: (value: string) => void;
-    currValue?: string;
+    options: NonEmptyArray<ExpandedTextValueOptions<V>>;
+    onChange: (value: V) => void;
+    currValue?: V;
 }
 
-export function RadioButtons({
+export function RadioButtons<V = string>({
     name,
     label,
     options,
     onChange,
     currValue,
-}: RadioButtonsProps) {
+}: RadioButtonsProps<V>) {
     return (
         <div className="flex flex-col gap-300" role="radiogroup">
             {label && <p className="eyebrow">{label}</p>}
@@ -129,7 +129,7 @@ export function RadioButtons({
             {options.map((opt) => {
                 return (
                     <RadioButton
-                        key={opt.value}
+                        key={String(opt.value)}
                         name={name}
                         option={opt}
                         onChange={onChange}
@@ -141,14 +141,14 @@ export function RadioButtons({
     );
 }
 
-interface RadioButtonProps {
+interface RadioButtonProps<V = string> {
     name: string;
-    option: ExpandedTextValueOptions;
-    onChange: (value: string) => void;
+    option: ExpandedTextValueOptions<V>;
+    onChange: (value: V) => void;
     isSelected: boolean;
 }
 
-function RadioButton({ name, option, onChange, isSelected }: RadioButtonProps) {
+function RadioButton<V = string>({ name, option, onChange, isSelected }: RadioButtonProps<V>) {
     const { text, value, subtext, note } = option;
 
     const id = `${name}-${value}`;
@@ -158,7 +158,7 @@ function RadioButton({ name, option, onChange, isSelected }: RadioButtonProps) {
                 id={id}
                 name={name}
                 type="radio"
-                value={value}
+                value={String(value)}
                 onChange={() => onChange(value)}
                 checked={isSelected}
             />

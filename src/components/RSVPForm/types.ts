@@ -1,6 +1,6 @@
 import { WithHTMLProps } from "@/types/props";
 import { InvertRecord, NonEmptyArray } from "@/types/utility";
-import { STEP_ONE_TEXT, STEP_THREE_TEXT, STEP_TWO_TEXT } from "./content";
+import { STEP_FIVE_TEXT, STEP_FOUR_TEXT, STEP_ONE_TEXT, STEP_THREE_TEXT, STEP_TWO_TEXT } from "./content";
 import { ExpandedTextValueOptions } from "./FormInputs";
 
 export type Guest = {
@@ -67,7 +67,9 @@ export type RSVPStepProps = WithHTMLProps & {
 export const STEP_TEXT_MAP = {
     1: STEP_ONE_TEXT,
     2: STEP_TWO_TEXT,
-    3: STEP_THREE_TEXT
+    3: STEP_THREE_TEXT,
+    4: STEP_FOUR_TEXT,
+    5: STEP_FIVE_TEXT
 } as const satisfies Record<number, RSVPStepTextProps>;
 
 export type StepTextKeys = keyof typeof STEP_TEXT_MAP;
@@ -89,35 +91,52 @@ type AttendanceResponse = Partial<Record<GuestKey, boolean>>;
 // FIXME: add subtext and another area for more text?
 
 
-export const MEAL_OPTIONS: NonEmptyArray<ExpandedTextValueOptions> = [
+export const MEAL_OPTIONS: NonEmptyArray<ExpandedTextValueOptions<MealValues>> = [
     {
         text: 'Herb Roasted French Style Chicken Breast',
-        value: 'Chicken',
+        value: 'Chicken' as const,
         subtext: 'with Jus Lié',
         // note: 'Cooked medium rare'
     },
     {
         text: 'Pepper Seared Sirloin Steak',
-        value: 'Steak',
+        value: 'Steak' as const,
         subtext: 'with Horseradish Cream',
         note: 'Cooked medium rare'
     },
     {
         text: 'Chili Garlic Salmon Seared',
-        value: 'Salmon',
+        value: 'Salmon' as const,
         subtext: 'with an Asian Trinity* a house specialty',
         // note: 'Cooked medium rare'
     },
 ]
 
-export type MealValues = 'Steak' | 'Chicken' | 'Fish'
+export type MealValues = 'Steak' | 'Chicken' | 'Salmon'
 
 export type Meal = {
-    selectedEntree: 'steak' | 'chicken' | 'fish'
+    selectedEntree: MealValues
     dietaryNotes?: string;
 }
 
 type WeddingMealResponse = Partial<Record<GuestKey, Meal>>;
+
+// export type Hotels = 'Homewood' | 'Hyatt' | 'AC' | 'N/A'
+
+type HotelValues = 'homewoodSuites' | 'hyattPlace' | 'acHotel' | 'notSure' | 'other'
+
+export const HOTEL_LABELS = {
+    homewoodSuites: 'Homewood Suites By Hilton',
+    hyattPlace: 'Hyatt Place',
+    acHotel: 'AC Hotel',
+    notSure: 'Not Sure Yet',
+    other: 'N/A',
+} as const satisfies Record<HotelValues, string>;
+
+export type HotelStrings = (typeof HOTEL_LABELS)[keyof typeof HOTEL_LABELS];
+
+export const HOTEL_OPTIONS: NonEmptyArray<ExpandedTextValueOptions<HotelValues>> =
+    Object.entries(HOTEL_LABELS).map(([value, text]) => ({ value, text })) as NonEmptyArray<ExpandedTextValueOptions<HotelValues>>;
 
 type BusHotel = {
     hotel: 'opt1' // FIXME: add options
