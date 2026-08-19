@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from "react";
-import { Guests, mapGuestData } from "../components/RSVPForm/types";
+import { Guests } from "../components/RSVPForm/types";
 import { NO_GUESTS } from "../components/RSVPForm/content";
 
 // Floor on how long the loading state stays visible, so a fast response
@@ -23,9 +23,9 @@ export default function useGuests() {
             //const res = await fetch("/api/guests?error=1"); // * debug: error testing
             if (!res.ok)
                 throw new Error(`Failed to fetch guests: ${res.status}`);
-            const data = await res.json();
+            const data: Guests = await res.json();
 
-            setGuests(mapGuestData(data)); // remove headers
+            setGuests(data);
         } catch (err) {
             setGuestsError(
                 err instanceof Error

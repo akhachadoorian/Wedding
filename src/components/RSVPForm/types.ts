@@ -3,18 +3,6 @@ import { InvertRecord, NonEmptyArray } from "@/types/utility";
 import { STEP_ONE_TEXT, STEP_THREE_TEXT, STEP_TWO_TEXT } from "./content";
 import { ExpandedTextValueOptions } from "./FormInputs";
 
-export const HEADER_MAP = {
-    "Party ID": "id",
-    "Last Name Guest 1": "lastNameG1",
-    "First Name Guest 1": "firstNameG1",
-    "Last Name Guest 2": "lastNameG2",
-    "First Name Guest 2": "firstNameG2",
-} as const satisfies Record<string, string>;
-
-export type MappedHeaderKey = (typeof HEADER_MAP)[keyof typeof HEADER_MAP];
-
-export type GuestParty1 = Record<MappedHeaderKey, string>;
-
 export type Guest = {
     firstName: string;
     lastName: string;
@@ -29,66 +17,6 @@ export type GuestParty = {
 export type GuestKey = keyof Omit<GuestParty, "id">; // "guest1" | "guest2"
 
 export type Guests = GuestParty[];
-
-export function mapGuestData(data: string[][]): Guests | null {
-    if (data.length === 0 || data.length === 1) return null;
-    // remove headers
-    const headers = data[0];
-    const keys = headers.map(
-        (h) => HEADER_MAP[h as keyof typeof HEADER_MAP] ?? h,
-    );
-    // * debug
-    // console.log("headers ", headers);
-    // console.log("keys ", keys);
-
-    const guests = data.slice(1);
-    // * debug
-    // console.log("guests ", guests);
-
-    // index lookups so we're not dependent on column order
-    const idIdx = keys.indexOf("id");
-    const lastNameG1Idx = keys.indexOf("lastNameG1");
-    const firstNameG1Idx = keys.indexOf("firstNameG1");
-    const lastNameG2Idx = keys.indexOf("lastNameG2");
-    const firstNameG2Idx = keys.indexOf("firstNameG2");
-
-    // TODO: determine if lowercase okay?
-    // const map = guests
-    //     .map(
-    //         (row) =>
-    //             Object.fromEntries(
-    //                 keys.map((h, i) => [h, row[i]?.toLowerCase()]),
-    //             ) as GuestParty1,
-    //     )
-    //     .filter(
-    //         (guest) => guest.firstNameG1?.trim() && guest.lastNameG1?.trim(),
-    //     );
-
-    const map2 = guests.map((row) => {
-        const firstNameG1 = row[firstNameG1Idx];
-        const lastNameG1 = row[lastNameG1Idx];
-        const firstNameG2 = row[firstNameG2Idx];
-        const lastNameG2 = row[lastNameG2Idx];
-
-        return {
-            id: row[idIdx],
-            guest1: {
-                firstName: firstNameG1,
-                lastName: lastNameG1,
-            },
-            guest2:
-                firstNameG2 || lastNameG2
-                    ? { firstName: firstNameG2, lastName: lastNameG2 }
-                    : undefined,
-        } as GuestParty;
-    });
-
-    // * debug
-    // console.log("map ", map);
-    // console.log("map2 ", map2);
-
-    return map2;
-}
 
 export function getFindMatchingGuests(
     guests: Guests | null,
