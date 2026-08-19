@@ -17,14 +17,14 @@ async function getGuests(): Promise<Guests> {
     );
 
     return partyRecords.reduce<Guests>((parties, record) => {
-        const [guest1Id, guest2Id] = record.fields.Guests ?? [];
+        const [guest1Id, guest2Id] = record.fields.guests ?? [];
         const guest1 = guest1Id ? guestById.get(guest1Id) : undefined;
         if (!guest1) return parties;
 
         const guest2 = guest2Id ? guestById.get(guest2Id) : undefined;
 
         const party: GuestParty = {
-            id: String(record.fields.Id),
+            id: String(record.fields.id),
             guest1,
             ...(guest2 ? { guest2 } : {}),
         };

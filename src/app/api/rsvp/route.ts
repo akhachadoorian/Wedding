@@ -202,7 +202,7 @@ export async function POST(request: NextRequest) {
 
         partyRecord = found;
 
-        const [guest1Id, guest2Id] = partyRecord.fields.Guests ?? [];
+        const [guest1Id, guest2Id] = partyRecord.fields.guests ?? [];
 
         if (!guest1Id) {
             // await appendLogRows(partyId, party, attendance, "Not Found");

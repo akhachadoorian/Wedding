@@ -1,3 +1,5 @@
+import { MealValues } from "@/components/RSVPForm/types";
+
 export const PARTIES_TABLE = "Parties";
 export const GUESTS_TABLE = "Guests";
 
@@ -5,12 +7,13 @@ export type GuestFields = {
     firstName: string;
     lastName: string;
     attending?: "Attending" | "Not Attending" | "Unknown";
+    mealChoice?: MealValues;
     updatedOn?: string;
 };
 
 export type PartyFields = {
-    Id: number;
+    id: number;
     // Linked Guests records, in the order they were added to the party
     // (first = guest1, second = guest2).
-    Guests: string[];
+    guests: string[];
 };

@@ -91,12 +91,26 @@ type AttendanceResponse = Partial<Record<GuestKey, boolean>>;
 
 export const MEAL_OPTIONS: NonEmptyArray<ExpandedTextValueOptions> = [
     {
-        text: 'Pepper Seared Sirloin Steak',
-        value: 'steak',
+        text: 'Herb Roasted French Style Chicken Breast',
+        value: 'Chicken',
         subtext: 'with Jus Lié',
+        // note: 'Cooked medium rare'
+    },
+    {
+        text: 'Pepper Seared Sirloin Steak',
+        value: 'Steak',
+        subtext: 'with Horseradish Cream',
         note: 'Cooked medium rare'
-    }
+    },
+    {
+        text: 'Chili Garlic Salmon Seared',
+        value: 'Salmon',
+        subtext: 'with an Asian Trinity* a house specialty',
+        // note: 'Cooked medium rare'
+    },
 ]
+
+export type MealValues = 'Steak' | 'Chicken' | 'Fish'
 
 export type Meal = {
     selectedEntree: 'steak' | 'chicken' | 'fish'

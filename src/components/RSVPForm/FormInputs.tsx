@@ -10,9 +10,16 @@ interface YesNoBooleanSwitchProps {
     currValue: boolean | undefined;
 }
 
-export function YesNoBooleanSwitch({name, onChange, currValue}:YesNoBooleanSwitchProps) {
-return (
-        <div className="rsvp_switch_group relative flex border border-cream p-100" role="radiogroup">
+export function YesNoBooleanSwitch({
+    name,
+    onChange,
+    currValue,
+}: YesNoBooleanSwitchProps) {
+    return (
+        <div
+            className="rsvp_switch_group relative flex border border-cream p-100"
+            role="radiogroup"
+        >
             <span
                 className={cn(
                     "rsvp_switch_group-thumb",
@@ -46,10 +53,16 @@ interface YesNoBooleanSwitchOptionProps {
     value: string;
     onChange: () => void;
     text: string;
-    isActive: boolean
+    isActive: boolean;
 }
 
-function YesNoBooleanSwitchOption({name, value, onChange, text, isActive}:YesNoBooleanSwitchOptionProps) {
+function YesNoBooleanSwitchOption({
+    name,
+    value,
+    onChange,
+    text,
+    isActive,
+}: YesNoBooleanSwitchOptionProps) {
     const id = `${name}-${value}`;
 
     return (
@@ -91,59 +104,107 @@ function YesNoBooleanSwitchOption({name, value, onChange, text, isActive}:YesNoB
 // TODO: name better
 export interface ExpandedTextValueOptions extends TextValueOption {
     subtext?: string;
-    note?: string
+    note?: string;
 }
-
 
 interface RadioButtonsProps {
     name: string;
     label?: string;
-    options: NonEmptyArray<ExpandedTextValueOptions>
+    options: NonEmptyArray<ExpandedTextValueOptions>;
     onChange: (value: string) => void;
     currValue?: string;
 }
 
-export function RadioButtons({ name, label, options, onChange, currValue }: RadioButtonsProps) {
+export function RadioButtons({
+    name,
+    label,
+    options,
+    onChange,
+    currValue,
+}: RadioButtonsProps) {
     return (
         <div className="flex flex-col gap-300" role="radiogroup">
             {label && <p className="eyebrow">{label}</p>}
 
-            {options.map(opt => {
+            {options.map((opt) => {
                 return (
-                    <RadioButton key={opt.value} name={name} option={opt} onChange={onChange} isSelected={currValue === opt.value} />
-                )
+                    <RadioButton
+                        key={opt.value}
+                        name={name}
+                        option={opt}
+                        onChange={onChange}
+                        isSelected={currValue === opt.value}
+                    />
+                );
             })}
         </div>
-    )
+    );
 }
 
 interface RadioButtonProps {
     name: string;
-    option: ExpandedTextValueOptions
+    option: ExpandedTextValueOptions;
     onChange: (value: string) => void;
-    isSelected: boolean
+    isSelected: boolean;
 }
 
-function RadioButton({name, option}:RadioButtonProps) {
-    const {text, value, subtext, note } = option
+function RadioButton({ name, option, onChange, isSelected }: RadioButtonProps) {
+    const { text, value, subtext, note } = option;
 
     const id = `${name}-${value}`;
     return (
         <label htmlFor={id} className="flex gap-100">
-            <input id={id} type="radio" value={value} />
+            <input
+                id={id}
+                name={name}
+                type="radio"
+                value={value}
+                onChange={() => onChange(value)}
+                checked={isSelected}
+            />
 
             <div className="">
                 <p>{text}</p>
             </div>
         </label>
-    )
+    );
 }
-
 
 // #endregion ---
 
-
 // #region --- Text Area ---
+
+interface TextAreaProps {
+    name: string;
+    label: string;
+    placeholder?: string;
+    rows?: number;
+    cols?: number;
+}
+
+export function TextArea({
+    name,
+    label,
+    placeholder,
+    rows = 5,
+    cols = 40,
+}: TextAreaProps) {
+    return (
+        <div className="flex flex-col gap-300">
+            <label htmlFor={name} className="eyebrow">
+                {label}
+            </label>
+
+            <textarea
+                id={name}
+                name={name}
+                placeholder={placeholder ? placeholder : ""}
+                rows={rows}
+                cols={cols}
+            />
+        </div>
+    );
+}
 
 // #endregion ---
 

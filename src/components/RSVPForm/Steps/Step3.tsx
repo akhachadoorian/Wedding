@@ -1,6 +1,7 @@
-import { RadioButtons } from "../FormInputs";
+import { guest } from "@/types/guestList";
+import { RadioButtons, TextArea } from "../FormInputs";
 import { useRSVPForm } from "../RSVPFormContext";
-import { getQuestionAnswerParty, Meal, MEAL_OPTIONS, RSVP_KEY_BY_STEP, RSVPDraftKey } from "../types";
+import { getQuestionAnswerParty, Guest, GuestKey, hasAnsweredQuestion, Meal, MEAL_OPTIONS, RSVP_KEY_BY_STEP, RSVPDraftKey } from "../types";
 import { GuestLabelInputWrapper, RSVPNavButtons, RSVPStepVertical } from "./RSVPStep";
 import { useHandleGuestUpdate } from "./useHandleGuestUpdate";
 import { useStepSubmit } from "./useStepSubmit";
@@ -22,27 +23,56 @@ export default function StepThree() {
         canAdvance: true,
     });
 
-    const { handleGuestUpdate, handleGuestFieldUpdate } = useHandleGuestUpdate();
 
     // Get party
     const { guest1, guest2 } = party;
     const answers = getQuestionAnswerParty(draft, "meal");
-    
+
+    const allAnswered = hasAnsweredQuestion(party, draft, KEY);
+    console.log("allAnswered", allAnswered)
+
     return (
         <RSVPStepVertical currStep={STEP_NUM}>
             <form onSubmit={handleSubmit} className="w-full flex flex-col gap-500">
-                <div className="">
+                <div className="flex flex-col gap-500">
                     {/* Guest 1 */}
-                    <GuestLabelInputWrapper guest={guest1}>
-                        {/* FIXME: FIX THE VALUE type cast */}
-                        <RadioButtons label='Meal' name="meal-guest1" options={MEAL_OPTIONS} onChange={(value: string) => handleGuestFieldUpdate(KEY, 'guest1', 'selectedEntree', value as Meal['selectedEntree'])} currValue={answers?.guest1?.selectedEntree} />
-                    </GuestLabelInputWrapper>
+                    <StepThreeInputs guest={guest1} guestKey="guest1" answer={answers?.guest1}/>
 
+                    {guest2 && (
+                       <StepThreeInputs guest={guest2} guestKey="guest2" answer={answers?.guest2}/>
+                    )}
                 </div>
 
-                <RSVPNavButtons back={{disabled: false}} next={{disabled: true}}  />
+                <RSVPNavButtons back={{disabled: false}} next={{disabled: !allAnswered}}  />
             </form>
         </RSVPStepVertical>
     )
 }
 
+interface StepThreeInputsProps {
+    guest: Guest
+    guestKey: GuestKey
+    answer: Meal | undefined
+}
+
+function StepThreeInputs({guest, guestKey, answer}:StepThreeInputsProps) {
+    const mealInputName = `meal-${guestKey}`
+    const dietaryInputName = `dietary-${guestKey}`
+
+    const { handleGuestFieldUpdate } = useHandleGuestUpdate();
+
+    return (
+        <div className="">
+            <GuestLabelInputWrapper guest={guest}>
+                <div className="flex flex-col gap-500">
+                    {/* FIXME: FIX THE VALUE type cast */}
+                    <RadioButtons label='Meal' name={mealInputName} options={MEAL_OPTIONS} onChange={(value: string) => handleGuestFieldUpdate(KEY, guestKey, 'selectedEntree', value as Meal['selectedEntree'])} currValue={answer?.selectedEntree} />
+
+
+                    <TextArea name={dietaryInputName} label="Dietary Notes" placeholder="Allergic to dairy" /> 
+                    {/* FIXME: fix placeholder */}
+                </div>
+            </GuestLabelInputWrapper>
+        </div>
+    )
+}
