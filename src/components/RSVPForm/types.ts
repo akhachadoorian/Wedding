@@ -123,14 +123,18 @@ type WeddingMealResponse = Partial<Record<GuestKey, Meal>>;
 
 // export type Hotels = 'Homewood' | 'Hyatt' | 'AC' | 'N/A'
 
-type HotelValues = 'homewoodSuites' | 'hyattPlace' | 'acHotel' | 'notSure' | 'other'
+const HOTEL_OPTS = ['homewoodSuites', 'hyattPlace', 'acHotel'] as const
+type HotelOpts = (typeof HOTEL_OPTS)[number]
+
+type AlternateHotelOpts =  'notSure' | 'other'
+type HotelValues = HotelOpts | AlternateHotelOpts
 
 export const HOTEL_LABELS = {
     homewoodSuites: 'Homewood Suites By Hilton',
     hyattPlace: 'Hyatt Place',
     acHotel: 'AC Hotel',
+    other: 'Another Hotel Not on This List',
     notSure: 'Not Sure Yet',
-    other: 'N/A',
 } as const satisfies Record<HotelValues, string>;
 
 export type HotelStrings = (typeof HOTEL_LABELS)[keyof typeof HOTEL_LABELS];
@@ -138,12 +142,19 @@ export type HotelStrings = (typeof HOTEL_LABELS)[keyof typeof HOTEL_LABELS];
 export const HOTEL_OPTIONS: NonEmptyArray<ExpandedTextValueOptions<HotelValues>> =
     Object.entries(HOTEL_LABELS).map(([value, text]) => ({ value, text })) as NonEmptyArray<ExpandedTextValueOptions<HotelValues>>;
 
-type BusHotel = {
-    hotel: 'opt1' // FIXME: add options
+export function isStayingAtHotel(answer?: HotelValues): boolean {
+    if (!answer) return false
+
+    return (HOTEL_OPTS as readonly string[]).includes(answer)
+}
+
+
+export type Transportation = {
+    stayingAt: HotelValues
     takingBus: boolean
 }
 
-type TransportationResponse = Partial<Record<GuestKey, BusHotel>>;
+type TransportationResponse = Partial<Record<GuestKey, Transportation>>;
 
 type RehearsalMixerResponse = Partial<Record<GuestKey, boolean>>;
 
@@ -178,12 +189,26 @@ export function partyGuestCount(party: GuestParty) {
     return party.guest1 && party.guest2 ? 2 : 1
 }
 
+function isGuestAnswerComplete(key: RSVPDraftKey, value: unknown): boolean {
+    if (value === undefined) return false;
+
+    if (key === "transportation") {
+        const transportation = value as Transportation;
+        if (!transportation.stayingAt) return false;
+        if (isStayingAtHotel(transportation.stayingAt) && transportation.takingBus === undefined) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 export function hasAnsweredQuestion(party: GuestParty, draft: RSVPDraft, key: RSVPDraftKey): boolean {
     const value = draft[key];
     if (!value) return false;
 
-    const guest1Answered = value.guest1 !== undefined;
-    const guest2Answered = !party.guest2 || value.guest2 !== undefined;
+    const guest1Answered = isGuestAnswerComplete(key, value.guest1);
+    const guest2Answered = !party.guest2 || isGuestAnswerComplete(key, value.guest2);
     return guest1Answered && guest2Answered;
 }
 

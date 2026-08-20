@@ -4,16 +4,61 @@ import { buttonVariants } from "../Buttons/button.variants";
 import { NonEmptyArray, TextValueOption } from "@/types/utility";
 
 // #region -- Yes/No Boolean Switch ---
+
+interface YesNoBooleanSwitchFieldProps {
+    layout?: "row" | "column";
+    label?: string;
+    note?: string;
+    switchProps: YesNoBooleanSwitchProps;
+}
+
+export function YesNoBooleanSwitchField({
+    layout = "column",
+    label,
+    note,
+    switchProps,
+}: YesNoBooleanSwitchFieldProps) {
+    if (layout === "row") {
+        return (
+            <div className="flex flex-col md:flex-row gap:">
+                {(label || note) && (
+                    <div className="flex flex-col gap-200">
+                    {label && <p className="eyebrow">{label}</p>}
+                    {note && <p className="">{note}</p>}
+                </div>
+                )}
+                
+
+                <YesNoBooleanSwitch {...switchProps} />
+            </div>
+        );
+    }
+
+    return (
+        <div className="flex flex-col gap-200">
+            <div className="flex flex-col gap-400">
+            {label && <p className="eyebrow">{label}</p>}
+
+            <YesNoBooleanSwitch {...switchProps} />
+            </div>
+
+            {note && <p className="text-sm italic">{note}</p>}
+        </div>
+    );
+}
+
 interface YesNoBooleanSwitchProps {
     name: string;
     onChange: (value: boolean) => void;
     currValue: boolean | undefined;
+    disabled?: boolean
 }
 
 export function YesNoBooleanSwitch({
     name,
     onChange,
     currValue,
+    disabled = false
 }: YesNoBooleanSwitchProps) {
     return (
         <div
@@ -35,6 +80,7 @@ export function YesNoBooleanSwitch({
                 onChange={() => onChange(true)}
                 text="Yes"
                 isActive={currValue === true}
+                disabled={disabled}
             />
 
             <YesNoBooleanSwitchOption
@@ -43,6 +89,7 @@ export function YesNoBooleanSwitch({
                 onChange={() => onChange(false)}
                 text="No"
                 isActive={currValue === false}
+                disabled={disabled}
             />
         </div>
     );
@@ -54,6 +101,7 @@ interface YesNoBooleanSwitchOptionProps {
     onChange: () => void;
     text: string;
     isActive: boolean;
+    disabled?: boolean;
 }
 
 function YesNoBooleanSwitchOption({
@@ -62,6 +110,7 @@ function YesNoBooleanSwitchOption({
     onChange,
     text,
     isActive,
+    disabled = false,
 }: YesNoBooleanSwitchOptionProps) {
     const id = `${name}-${value}`;
 
@@ -72,6 +121,7 @@ function YesNoBooleanSwitchOption({
                 "rsvp_switch",
                 "relative flex-1 justify-center cursor-pointer",
                 buttonVariants({ size: "small" }),
+                disabled && "cursor-not-allowed opacity-50",
             )}
         >
             <input
@@ -82,6 +132,7 @@ function YesNoBooleanSwitchOption({
                 value={value}
                 checked={isActive}
                 onChange={onChange}
+                disabled={disabled}
             />
 
             <p
@@ -102,7 +153,9 @@ function YesNoBooleanSwitchOption({
 // #region --- Radio Buttons ---
 
 // TODO: name better
-export interface ExpandedTextValueOptions<V = string> extends TextValueOption<V> {
+export interface ExpandedTextValueOptions<
+    V = string,
+> extends TextValueOption<V> {
     subtext?: string;
     note?: string;
 }
@@ -148,7 +201,12 @@ interface RadioButtonProps<V = string> {
     isSelected: boolean;
 }
 
-function RadioButton<V = string>({ name, option, onChange, isSelected }: RadioButtonProps<V>) {
+function RadioButton<V = string>({
+    name,
+    option,
+    onChange,
+    isSelected,
+}: RadioButtonProps<V>) {
     const { text, value, subtext, note } = option;
 
     const id = `${name}-${value}`;
