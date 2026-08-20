@@ -25,7 +25,6 @@ export default function StepThree() {
         canAdvance: allAnswered,
     });
 
-
     return (
         <RSVPStepVertical currStep={STEP_NUM}>
             <form onSubmit={handleSubmit} className="w-full flex flex-col gap-500">

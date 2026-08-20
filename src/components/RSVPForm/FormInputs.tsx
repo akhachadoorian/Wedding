@@ -7,7 +7,7 @@ import { NonEmptyArray, TextValueOption } from "@/types/utility";
 
 interface YesNoBooleanSwitchFieldProps {
     layout?: "row" | "column";
-    label?: string;
+    label?: string; // todo: label class?
     note?: string;
     switchProps: YesNoBooleanSwitchProps;
 }

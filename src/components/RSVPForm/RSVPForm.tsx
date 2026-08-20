@@ -16,6 +16,7 @@ import { GuestParty, RSVPDraft } from "./types";
 import StepThree from "./Steps/Step3";
 import RSVPThankYou from "./RSVPThankYou";
 import StepFour from "./Steps/Step4";
+import StepFive from "./Steps/Step5";
 
 // TODO: after rsvp date close
 
@@ -149,6 +150,8 @@ function RenderSteps() {
             return <StepThree />
         case 4:
             return <StepFour />
+        case 5:
+            return <StepFive />
         default:
             return <RSVPFormError key="error" errorMessage={"Error"} onRetry={refetchGuests} /> // TODO: add error message
 
