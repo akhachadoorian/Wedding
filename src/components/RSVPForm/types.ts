@@ -1,19 +1,7 @@
 import { WithHTMLProps } from "@/types/props";
 import { InvertRecord, NonEmptyArray } from "@/types/utility";
-import { STEP_ONE_TEXT, STEP_THREE_TEXT, STEP_TWO_TEXT } from "./content";
+import { STEP_FIVE_TEXT, STEP_FOUR_TEXT, STEP_ONE_TEXT, STEP_THREE_TEXT, STEP_TWO_TEXT } from "./content";
 import { ExpandedTextValueOptions } from "./FormInputs";
-
-export const HEADER_MAP = {
-    "Party ID": "id",
-    "Last Name Guest 1": "lastNameG1",
-    "First Name Guest 1": "firstNameG1",
-    "Last Name Guest 2": "lastNameG2",
-    "First Name Guest 2": "firstNameG2",
-} as const satisfies Record<string, string>;
-
-export type MappedHeaderKey = (typeof HEADER_MAP)[keyof typeof HEADER_MAP];
-
-export type GuestParty1 = Record<MappedHeaderKey, string>;
 
 export type Guest = {
     firstName: string;
@@ -29,66 +17,6 @@ export type GuestParty = {
 export type GuestKey = keyof Omit<GuestParty, "id">; // "guest1" | "guest2"
 
 export type Guests = GuestParty[];
-
-export function mapGuestData(data: string[][]): Guests | null {
-    if (data.length === 0 || data.length === 1) return null;
-    // remove headers
-    const headers = data[0];
-    const keys = headers.map(
-        (h) => HEADER_MAP[h as keyof typeof HEADER_MAP] ?? h,
-    );
-    // * debug
-    // console.log("headers ", headers);
-    // console.log("keys ", keys);
-
-    const guests = data.slice(1);
-    // * debug
-    // console.log("guests ", guests);
-
-    // index lookups so we're not dependent on column order
-    const idIdx = keys.indexOf("id");
-    const lastNameG1Idx = keys.indexOf("lastNameG1");
-    const firstNameG1Idx = keys.indexOf("firstNameG1");
-    const lastNameG2Idx = keys.indexOf("lastNameG2");
-    const firstNameG2Idx = keys.indexOf("firstNameG2");
-
-    // TODO: determine if lowercase okay?
-    // const map = guests
-    //     .map(
-    //         (row) =>
-    //             Object.fromEntries(
-    //                 keys.map((h, i) => [h, row[i]?.toLowerCase()]),
-    //             ) as GuestParty1,
-    //     )
-    //     .filter(
-    //         (guest) => guest.firstNameG1?.trim() && guest.lastNameG1?.trim(),
-    //     );
-
-    const map2 = guests.map((row) => {
-        const firstNameG1 = row[firstNameG1Idx];
-        const lastNameG1 = row[lastNameG1Idx];
-        const firstNameG2 = row[firstNameG2Idx];
-        const lastNameG2 = row[lastNameG2Idx];
-
-        return {
-            id: row[idIdx],
-            guest1: {
-                firstName: firstNameG1,
-                lastName: lastNameG1,
-            },
-            guest2:
-                firstNameG2 || lastNameG2
-                    ? { firstName: firstNameG2, lastName: lastNameG2 }
-                    : undefined,
-        } as GuestParty;
-    });
-
-    // * debug
-    // console.log("map ", map);
-    // console.log("map2 ", map2);
-
-    return map2;
-}
 
 export function getFindMatchingGuests(
     guests: Guests | null,
@@ -139,7 +67,9 @@ export type RSVPStepProps = WithHTMLProps & {
 export const STEP_TEXT_MAP = {
     1: STEP_ONE_TEXT,
     2: STEP_TWO_TEXT,
-    3: STEP_THREE_TEXT
+    3: STEP_THREE_TEXT,
+    4: STEP_FOUR_TEXT,
+    5: STEP_FIVE_TEXT
 } as const satisfies Record<number, RSVPStepTextProps>;
 
 export type StepTextKeys = keyof typeof STEP_TEXT_MAP;
@@ -161,28 +91,70 @@ type AttendanceResponse = Partial<Record<GuestKey, boolean>>;
 // FIXME: add subtext and another area for more text?
 
 
-export const MEAL_OPTIONS: NonEmptyArray<ExpandedTextValueOptions> = [
+export const MEAL_OPTIONS: NonEmptyArray<ExpandedTextValueOptions<MealValues>> = [
+    {
+        text: 'Herb Roasted French Style Chicken Breast',
+        value: 'Chicken' as const,
+        subtext: 'with Jus Lié',
+        // note: 'Cooked medium rare'
+    },
     {
         text: 'Pepper Seared Sirloin Steak',
-        value: 'steak',
-        subtext: 'with Jus Lié',
+        value: 'Steak' as const,
+        subtext: 'with Horseradish Cream',
         note: 'Cooked medium rare'
-    }
+    },
+    {
+        text: 'Chili Garlic Salmon Seared',
+        value: 'Salmon' as const,
+        subtext: 'with an Asian Trinity* a house specialty',
+        // note: 'Cooked medium rare'
+    },
 ]
 
+export type MealValues = 'Steak' | 'Chicken' | 'Salmon'
+
 export type Meal = {
-    selectedEntree: 'steak' | 'chicken' | 'fish'
+    selectedEntree: MealValues
     dietaryNotes?: string;
 }
 
 type WeddingMealResponse = Partial<Record<GuestKey, Meal>>;
 
-type BusHotel = {
-    hotel: 'opt1' // FIXME: add options
+// export type Hotels = 'Homewood' | 'Hyatt' | 'AC' | 'N/A'
+
+const HOTEL_OPTS = ['homewoodSuites', 'hyattPlace', 'acHotel'] as const
+type HotelOpts = (typeof HOTEL_OPTS)[number]
+
+type AlternateHotelOpts =  'notSure' | 'other'
+type HotelValues = HotelOpts | AlternateHotelOpts
+
+export const HOTEL_LABELS = {
+    homewoodSuites: 'Homewood Suites By Hilton',
+    hyattPlace: 'Hyatt Place',
+    acHotel: 'AC Hotel',
+    other: 'Another Hotel Not on This List',
+    notSure: 'Not Sure Yet',
+} as const satisfies Record<HotelValues, string>;
+
+export type HotelStrings = (typeof HOTEL_LABELS)[keyof typeof HOTEL_LABELS];
+
+export const HOTEL_OPTIONS: NonEmptyArray<ExpandedTextValueOptions<HotelValues>> =
+    Object.entries(HOTEL_LABELS).map(([value, text]) => ({ value, text })) as NonEmptyArray<ExpandedTextValueOptions<HotelValues>>;
+
+export function isStayingAtHotel(answer?: HotelValues): boolean {
+    if (!answer) return false
+
+    return (HOTEL_OPTS as readonly string[]).includes(answer)
+}
+
+
+export type Transportation = {
+    stayingAt: HotelValues
     takingBus: boolean
 }
 
-type TransportationResponse = Partial<Record<GuestKey, BusHotel>>;
+type TransportationResponse = Partial<Record<GuestKey, Transportation>>;
 
 type RehearsalMixerResponse = Partial<Record<GuestKey, boolean>>;
 
@@ -217,12 +189,26 @@ export function partyGuestCount(party: GuestParty) {
     return party.guest1 && party.guest2 ? 2 : 1
 }
 
+function isGuestAnswerComplete(key: RSVPDraftKey, value: unknown): boolean {
+    if (value === undefined) return false;
+
+    if (key === "transportation") {
+        const transportation = value as Transportation;
+        if (!transportation.stayingAt) return false;
+        if (isStayingAtHotel(transportation.stayingAt) && transportation.takingBus === undefined) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 export function hasAnsweredQuestion(party: GuestParty, draft: RSVPDraft, key: RSVPDraftKey): boolean {
     const value = draft[key];
     if (!value) return false;
 
-    const guest1Answered = value.guest1 !== undefined;
-    const guest2Answered = !party.guest2 || value.guest2 !== undefined;
+    const guest1Answered = isGuestAnswerComplete(key, value.guest1);
+    const guest2Answered = !party.guest2 || isGuestAnswerComplete(key, value.guest2);
     return guest1Answered && guest2Answered;
 }
 

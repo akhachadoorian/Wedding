@@ -1,18 +1,36 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSheetsClient, getSpreadsheetId } from "@/lib/googleSheets";
+import { listRecords } from "@/lib/airtable";
+import { GUESTS_TABLE, GuestFields, PARTIES_TABLE, PartyFields } from "@/lib/airtableSchema";
+import { GuestParty, Guests } from "@/components/RSVPForm/types";
 
+async function getGuests(): Promise<Guests> {
+    const [guestRecords, partyRecords] = await Promise.all([
+        listRecords<GuestFields>(GUESTS_TABLE),
+        listRecords<PartyFields>(PARTIES_TABLE),
+    ]);
 
-const GUEST_RANGE = "Guests!A:E"
+    const guestById = new Map(
+        guestRecords.map((r) => [
+            r.id,
+            { firstName: r.fields.firstName, lastName: r.fields.lastName },
+        ]),
+    );
 
-async function getGuests() {
-    const sheets = getSheetsClient();
+    return partyRecords.reduce<Guests>((parties, record) => {
+        const [guest1Id, guest2Id] = record.fields.guests ?? [];
+        const guest1 = guest1Id ? guestById.get(guest1Id) : undefined;
+        if (!guest1) return parties;
 
-    const response = await sheets.spreadsheets.values.get({
-        spreadsheetId: getSpreadsheetId(),
-        range: GUEST_RANGE,
-    });
+        const guest2 = guest2Id ? guestById.get(guest2Id) : undefined;
 
-    return response.data.values;
+        const party: GuestParty = {
+            id: String(record.fields.id),
+            guest1,
+            ...(guest2 ? { guest2 } : {}),
+        };
+        parties.push(party);
+        return parties;
+    }, []);
 }
 
 // Testing error
@@ -24,7 +42,7 @@ export async function GET(request: NextRequest) {
 
     try {
         const data = await getGuests();
-        return NextResponse.json(data ?? []);
+        return NextResponse.json(data);
     } catch (err) {
         console.error("GET /api/guests error:", err);
         return NextResponse.json({ error: "Failed to fetch guests" }, { status: 500 });

@@ -1,65 +1,66 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSheetsClient, getSpreadsheetId } from "@/lib/googleSheets";
+import {
+    AirtableRecord,
+    // createRecords,
+    findRecordByNumberField,
+    getRecord,
+    updateRecord,
+} from "@/lib/airtable";
+import { GUESTS_TABLE, GuestFields, PARTIES_TABLE, PartyFields } from "@/lib/airtableSchema";
 import { Guest, GuestKey, GuestParty } from "@/components/RSVPForm/types";
 
-const RSVP_ROW_RANGE = "RSVPs!A:F";
-const LOG_RANGE = "Logs!A:F";
+// const LOGS_TABLE = "Logs"; // TODO: re-enable once a Logs table exists
 
-type LogType =
-    | "First Submission"
-    | "Edit"
-    | "Validation Error"
-    | "Not Found"
-    | "Sheets Error";
-
-async function appendLogRows(
-    partyId: string | null,
-    party: GuestParty | null,
-    attendance: Partial<Record<GuestKey, boolean>> | null,
-    type: LogType | ((guestKey: GuestKey) => LogType),
-) {
-    const now = new Date();
-    const date = now.toISOString().slice(0, 10);
-    const time = now.toTimeString().slice(0, 8);
-
-    const resolveType = (guestKey: GuestKey) =>
-        typeof type === "function" ? type(guestKey) : type;
-
-    const rows: (string | boolean)[][] = [];
-
-    if (party && attendance) {
-        (["guest1", "guest2"] as const).forEach((key) => {
-            const guest = party[key];
-            const attending = attendance[key];
-            if (!guest || attending === undefined) return;
-            rows.push([
-                partyId ?? "",
-                `${guest.firstName} ${guest.lastName}`.trim(),
-                attending,
-                date,
-                time,
-                resolveType(key),
-            ]);
-        });
-    }
-
-    if (rows.length === 0) {
-        rows.push([partyId ?? "", "", "", date, time, resolveType("guest1")]);
-    }
-
-    try {
-        const sheets = getSheetsClient();
-        await sheets.spreadsheets.values.append({
-            spreadsheetId: getSpreadsheetId(),
-            range: LOG_RANGE,
-            valueInputOption: "USER_ENTERED",
-            insertDataOption: "INSERT_ROWS",
-            requestBody: { values: rows },
-        });
-    } catch (err) {
-        console.error("Failed to append to Log sheet:", err);
-    }
-}
+// TODO: re-enable once a Logs table exists
+// type LogType =
+//     | "First Submission"
+//     | "Edit"
+//     | "Validation Error"
+//     | "Not Found"
+//     | "Airtable Error";
+//
+// async function appendLogRows(
+//     partyId: string | null,
+//     party: GuestParty | null,
+//     attendance: Partial<Record<GuestKey, boolean>> | null,
+//     type: LogType | ((guestKey: GuestKey) => LogType),
+// ) {
+//     const timestamp = new Date().toISOString();
+//
+//     const resolveType = (guestKey: GuestKey) =>
+//         typeof type === "function" ? type(guestKey) : type;
+//
+//     const rows: Record<string, string | boolean>[] = [];
+//
+//     if (party && attendance) {
+//         (["guest1", "guest2"] as const).forEach((key) => {
+//             const guest = party[key];
+//             const attending = attendance[key];
+//             if (!guest || attending === undefined) return;
+//             rows.push({
+//                 "Party ID": partyId ?? "",
+//                 "Guest Name": `${guest.firstName} ${guest.lastName}`.trim(),
+//                 Attending: attending ? "Yes" : "No",
+//                 Timestamp: timestamp,
+//                 Type: resolveType(key),
+//             });
+//         });
+//     }
+//
+//     if (rows.length === 0) {
+//         rows.push({
+//             "Party ID": partyId ?? "",
+//             Timestamp: timestamp,
+//             Type: resolveType("guest1"),
+//         });
+//     }
+//
+//     try {
+//         await createRecords(LOGS_TABLE, rows);
+//     } catch (err) {
+//         console.error("Failed to append to Logs table:", err);
+//     }
+// }
 
 function isValidGuest(value: unknown): value is Guest {
     return (
@@ -99,6 +100,8 @@ function validateRsvpBody(body: unknown): ValidationResult {
     }
 
     const { id, guest1, guest2 } = party as Record<string, unknown>;
+
+    console.log("party", party)
 
     if (typeof id !== "string" || id.trim() === "") {
         return invalid("party.id is required", typeof id === "string" ? id : null);
@@ -151,7 +154,7 @@ function validateRsvpBody(body: unknown): ValidationResult {
 export async function POST(request: NextRequest) {
     // Dev-only escape hatch to exercise the error flow: /api/rsvp?error=1
     if (process.env.NODE_ENV !== "production" && request.nextUrl.searchParams.has("error")) {
-        await appendLogRows(null, null, null, "Sheets Error");
+        // await appendLogRows(null, null, null, "Airtable Error");
         return NextResponse.json(
             { success: false, error: "Forced error for testing" },
             { status: 500 },
@@ -167,7 +170,7 @@ export async function POST(request: NextRequest) {
 
     const validation = validateRsvpBody(body);
     if (!validation.ok) {
-        await appendLogRows(validation.partyId, validation.party, validation.attendance, "Validation Error");
+        // await appendLogRows(validation.partyId, validation.party, validation.attendance, "Validation Error");
         return NextResponse.json(
             { success: false, error: validation.error },
             { status: 400 },
@@ -177,40 +180,48 @@ export async function POST(request: NextRequest) {
     const { party, attendance } = validation;
     const partyId = party.id;
 
-    let sheets: ReturnType<typeof getSheetsClient>;
-    let spreadsheetId: string;
-    let row: number;
-    const priorAttending: Partial<Record<GuestKey, string>> = {};
+    let partyRecord: AirtableRecord<PartyFields>;
+    let guest1Record: AirtableRecord<GuestFields>;
+    let guest2Record: AirtableRecord<GuestFields> | null = null;
+    const priorAttending: Partial<Record<GuestKey, string | undefined>> = {};
+
+    const numericPartyId = Number(partyId);
 
     try {
-        sheets = getSheetsClient();
-        spreadsheetId = getSpreadsheetId();
+        const found = Number.isFinite(numericPartyId)
+            ? await findRecordByNumberField<PartyFields>(PARTIES_TABLE, "Id", numericPartyId)
+            : null;
 
-        const idColumn = await sheets.spreadsheets.values.get({
-            spreadsheetId,
-            range: RSVP_ROW_RANGE,
-        });
-        console.log("idColumn", idColumn)
-        const rows = idColumn.data.values ?? [];
-        console.log("rows", rows)
-        const idx = rows.findIndex((r) => r[0] === partyId);
-        console.log("idx", idx)
-
-        if (idx === -1) {
-            await appendLogRows(partyId, party, attendance, "Not Found");
+        if (!found) {
+            // await appendLogRows(partyId, party, attendance, "Not Found");
             return NextResponse.json(
                 { success: false, error: "Party not found" },
                 { status: 404 },
             );
         }
 
-        row = idx + 2; // +2: range starts at row 2, array is 0-indexed
-        const existingRow = rows[idx];
-        priorAttending.guest1 = existingRow[2] ?? "";
-        priorAttending.guest2 = existingRow[4] ?? "";
+        partyRecord = found;
+
+        const [guest1Id, guest2Id] = partyRecord.fields.guests ?? [];
+
+        if (!guest1Id) {
+            // await appendLogRows(partyId, party, attendance, "Not Found");
+            return NextResponse.json(
+                { success: false, error: "Party not found" },
+                { status: 404 },
+            );
+        }
+
+        guest1Record = await getRecord<GuestFields>(GUESTS_TABLE, guest1Id);
+        priorAttending.guest1 = guest1Record.fields.attending;
+
+        if (guest2Id) {
+            guest2Record = await getRecord<GuestFields>(GUESTS_TABLE, guest2Id);
+            priorAttending.guest2 = guest2Record.fields.attending;
+        }
     } catch (err) {
         console.error("POST /api/rsvp lookup error:", err);
-        await appendLogRows(partyId, party, attendance, "Sheets Error");
+        // await appendLogRows(partyId, party, attendance, "Airtable Error");
         return NextResponse.json(
             { success: false, error: "Failed to look up party" },
             { status: 500 },
@@ -220,36 +231,29 @@ export async function POST(request: NextRequest) {
     const updatedAt = new Date().toISOString();
 
     try {
-        await sheets.spreadsheets.values.update({
-            spreadsheetId,
-            range: `RSVP!B${row}:F${row}`,
-            valueInputOption: "USER_ENTERED",
-            requestBody: {
-                values: [
-                    [
-                        `${party.guest1.firstName} ${party.guest1.lastName}`.trim(),
-                        attendance.guest1 ?? "",
-                        party.guest2
-                            ? `${party.guest2.firstName} ${party.guest2.lastName}`.trim()
-                            : "",
-                        party.guest2 ? attendance.guest2 ?? "" : "",
-                        updatedAt,
-                    ],
-                ],
-            },
+        await updateRecord<GuestFields>(GUESTS_TABLE, guest1Record.id, {
+            attending: attendance.guest1 ? "Attending" : "Not Attending",
+            updatedOn: updatedAt,
         });
+
+        if (guest2Record && party.guest2) {
+            await updateRecord<GuestFields>(GUESTS_TABLE, guest2Record.id, {
+                attending: attendance.guest2 ? "Attending" : "Not Attending",
+                updatedOn: updatedAt,
+            });
+        }
     } catch (err) {
         console.error("POST /api/rsvp update error:", err);
-        await appendLogRows(partyId, party, attendance, "Sheets Error");
+        // await appendLogRows(partyId, party, attendance, "Airtable Error");
         return NextResponse.json(
             { success: false, error: "Failed to update attendance" },
             { status: 500 },
         );
     }
 
-    await appendLogRows(partyId, party, attendance, (guestKey) =>
-        priorAttending[guestKey] ? "Edit" : "First Submission",
-    );
+    // await appendLogRows(partyId, party, attendance, (guestKey) =>
+    //     priorAttending[guestKey] ? "Edit" : "First Submission",
+    // );
 
     return NextResponse.json({ success: true, partyId, updatedAt });
 }

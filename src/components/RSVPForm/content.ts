@@ -46,7 +46,7 @@ export const STEP_THREE_TEXT: RSVPStepTextProps = {
 // #region --- 4 ---
 export const STEP_FOUR_TEXT: RSVPStepTextProps = {
     stepNumber: 4,
-    title: "",
+    title: "Hotel / Bus", // FIXME: 
     body: "",
 };
 // #endregion ---
