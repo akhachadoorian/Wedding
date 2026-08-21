@@ -54,6 +54,11 @@ $text-5xl: (
     mid: 90,
     max: 120,
 );
+$text-6xl: (
+    min: 70,
+    mid: 100,
+    max: 180,
+);
 
 @function fluid($min, $max, $vp-start: $vp-min, $vp-end: $vp-max) {
     $v: math.div(($max - $min), ($vp-end - $vp-start)) * 100;
@@ -89,6 +94,7 @@ $text-5xl: (
     @include fluid-multi(--text-3xl, map.get($text-3xl, min), map.get($text-3xl, mid), map.get($text-3xl, max));
     @include fluid-multi(--text-4xl, map.get($text-4xl, min), map.get($text-4xl, mid), map.get($text-4xl, max));
     @include fluid-multi(--text-5xl, map.get($text-5xl, min), map.get($text-5xl, mid), map.get($text-5xl, max));
+    @include fluid-multi(--text-6xl, map.get($text-6xl, min), map.get($text-6xl, mid), map.get($text-6xl, max));
 }
 
 // $viewport-width: 1440;

@@ -24,11 +24,6 @@ export default function StepOne() {
 
     const handleSearch = (e: SubmitEvent) => {
         e.preventDefault();
-        // * debug
-        console.group("submitting");
-        console.log("firstName ", firstName);
-        console.log("lastName", lastName);
-        console.groupEnd();
 
         setSearching(true);
         setSearchError("");

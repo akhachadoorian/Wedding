@@ -6,6 +6,7 @@ export const GUESTS_TABLE = "Guests";
 export type GuestFields = {
     firstName: string;
     lastName: string;
+    fullName: string;
 
     attending?: "Attending" | "Not Attending" | "Unknown";
 

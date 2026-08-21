@@ -93,7 +93,7 @@ export default function StepTwo() {
             >
                 {/* Wedding RSVP */}
                 <div className="w-full">
-                    <div className="flex flex-col gap-200 border-b pb-200 mb-200">
+                    <div className="flex flex-col gap-200 border-b border-gray pb-200 mb-200">
                         {/* TODO: details and fix switch*/}
                         <p className="eyebrow">Event details</p>
                         <h3 className="heading-s">
@@ -101,7 +101,7 @@ export default function StepTwo() {
                         </h3>
                     </div>
 
-                    <div className="">
+                    <div className="flex flex-col gap-500 divide-y divide-gray">
                         {/* Guest 1 */}
                         <GuestLabelInputWrapper guest={guest1}>
                             <YesNoBooleanSwitch
