@@ -10,6 +10,7 @@ import {
     BtnDecoration,
     BtnSize,
     ButtonProps,
+    DecorationSide,
     LinkButtonSettings,
     ModalButtonSettings,
     NativeButtonSettings,
@@ -322,6 +323,7 @@ function ButtonInner({
                 iconColor={decorationColor}
                 iconHoverColor={decorationHoverColor}
                 iconSize={decSize["icon"]}
+                iconSide={decoration.iconSide ?? 'left'}
             />
         );
 
@@ -334,12 +336,14 @@ function IconButtonInner({
     iconColor,
     iconHoverColor,
     iconSize,
+    iconSide
 }: {
     text: string;
     icon: Icon;
     iconColor: CssColor;
     iconHoverColor: CssColor;
     iconSize?: number;
+    iconSide: DecorationSide
 }) {
     const IconComponent = icon;
 
@@ -353,10 +357,16 @@ function IconButtonInner({
 
     return (
         <>
-            <span className="btn_icon-wrapper flex justify-center items-center" style={wrapperStyle}>
+        {iconSide === 'left' && (<span className="btn_icon-wrapper flex justify-center items-center" style={wrapperStyle}>
                 <IconComponent size={iconSize} color="var(--btn-icon-color)" />
-            </span>
+            </span>)}
+            
             <p className={BTN_TEXT_CLASSES}>{text}</p>
+
+            {iconSide === 'right' && (<span className="btn_icon-wrapper flex justify-center items-center" style={wrapperStyle}>
+                <IconComponent size={iconSize} color="var(--btn-icon-color)" />
+            </span>)}
+            
         </>
     );
 }

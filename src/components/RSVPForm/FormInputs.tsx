@@ -299,7 +299,7 @@ export function TextInput({
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder={placeholder}
-                className={`box-border w-full border-[1.5px] bg-black px-200 py-200 font-sans leading-normal text-cream placeholder:font-sans placeholder:text-base placeholder:tex-cream placeholder:transition placeholder:duration-300 focus:outline-none focus:placeholder:opacity-0 ${hasError ? "border-burgundy" : "border-(--black-850) focus:border-cream"}`}
+                className={`box-border w-full border-[1.5px] bg-black px-200 py-200 font-sans leading-normal text-cream placeholder:font-sans placeholder:text-base placeholder:tex-cream placeholder:transition placeholder:duration-300 focus:outline-none focus:placeholder:opacity-0 autofill:shadow-[0_0_0px_1000px_var(--gray)_inset] autofill:[-webkit-text-fill-color:var(--cream)] ${hasError ? "border-burgundy" : "border-(--black-850) focus:border-cream"}`}
             />
         </div>
     );

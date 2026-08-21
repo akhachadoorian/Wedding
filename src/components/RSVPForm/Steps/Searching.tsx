@@ -4,7 +4,7 @@ import { getFindMatchingGuests, GuestParty, Guests } from "../types";
 import { UNABLE_TO_FIND } from "../content";
 import { RSVPStepVertical } from "./RSVPStep";
 import Button from "@/components/Buttons/Button";
-import { WarningIcon } from "@phosphor-icons/react";
+import { MagnifyingGlassIcon, WarningIcon } from "@phosphor-icons/react";
 import {
     Dialog,
     DialogContent,
@@ -35,7 +35,6 @@ export default function SearchRSVP() {
     const [resultsOpen, setResultsOpen] = useState(false);
 
     const { guests, setParty, goToStep } = useRSVPForm();
-    // console.log("guests", guests)
 
     const handleSearch = (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -148,7 +147,7 @@ function SearchInputs({
                         name="last-name-search"
                         label="Last Name"
                         value={lastName}
-                        onChange={setFirstName}
+                        onChange={setLastName}
                         placeholder="Doe"
                         hasError={hasError}
                     />
@@ -162,6 +161,11 @@ function SearchInputs({
                         text: "Search",
                         htmlType: "submit",
                         disabled: isDisabled,
+                        decoration: {
+                            type: 'icon',
+                            icon: MagnifyingGlassIcon,
+                            // iconSide: 'right'
+                        }
                     }}
                 />
             </form>
