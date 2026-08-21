@@ -1,6 +1,7 @@
 import { YesNoBooleanSwitch } from "../FormInputs";
 import { useRSVPForm } from "../RSVPFormContext";
 import {
+    determineNotComing,
     getQuestionAnswerParty,
     hasAnsweredQuestion,
     partyGuestCount,
@@ -15,17 +16,6 @@ import {
 } from "./RSVPStep";
 import { useHandleGuestUpdate } from "./useHandleGuestUpdate";
 import { useStepSubmit } from "./useStepSubmit";
-
-function determineNotComing(answer: Responses | null, hasTwoGuests: boolean) {
-    if (hasTwoGuests) {
-        const g1Coming = answer?.guest1 && !answer.guest1;
-        const g2Coming = answer?.guest2 && !answer.guest2;
-
-        return g1Coming && g2Coming;
-    }
-
-    return !answer?.guest1;
-}
 
 // const STEP_TWO_DRAFT_KEY = 'attendance'
 const STEP_NUM = 2
@@ -66,7 +56,7 @@ export default function StepTwo() {
     const allAnswered = hasAnsweredQuestion(party, draft, "attendance");
     const notComing = determineNotComing(
         answers,
-        partyGuestCount(party) === 2 ? true : false,
+        party
     );
     // console.log("allAnswered", allAnswered);
     // console.log("notComing", notComing);

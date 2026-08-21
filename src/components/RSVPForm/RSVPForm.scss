@@ -27,6 +27,22 @@
     }
 }
 
+@keyframes rsvp-star-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.rsvp_star_spin {
+    animation: rsvp-star-spin 1.4s linear infinite;
+
+    .eyebrow-star {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+}
+
 .rsvp_switch_group {
     &-thumb {
         position: absolute;
