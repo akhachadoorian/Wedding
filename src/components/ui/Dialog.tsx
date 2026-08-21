@@ -71,7 +71,7 @@ function DialogContent({
                     <DialogPrimitive.Close
                         data-slot="dialog-close"
                         aria-label="Close"
-                        className="absolute top-300 right-300 flex h-[34px] w-[34px] items-center justify-center rounded-full text-cabernet transition-colors duration-300 hover:bg-[var(--cream-600)] focus:outline-none md:top-400 md:right-400"
+                        className="absolute top-300 right-300 flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-full border-none bg-transparent text-cabernet transition-colors duration-300 hover:bg-[var(--cream-600)] focus:outline-none md:top-400 md:right-400"
                     >
                         <XIcon size={20} weight="bold" />
                         <span className="sr-only">Close</span>
