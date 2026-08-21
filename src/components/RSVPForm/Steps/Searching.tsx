@@ -7,6 +7,7 @@ import Button from "@/components/Buttons/Button";
 import { MagnifyingGlassIcon, WarningIcon } from "@phosphor-icons/react";
 import {
     Dialog,
+    DialogBody,
     DialogContent,
     DialogDescription,
     DialogHeader,
@@ -87,18 +88,18 @@ export default function SearchRSVP() {
                             </DialogDescription>
                         </DialogHeader>
 
-                        <div className="flex flex-col gap-150">
+                        <DialogBody className="gap-150">
                             {searchResult?.map((party) => (
                                 <button
                                     key={party.id}
                                     type="button"
                                     onClick={() => handleSelectParty(party)}
-                                    className="border border-cream/20 px-300 py-200 text-left font-sans text-cream transition-colors duration-300 hover:bg-cream/10"
+                                    className="border border-[var(--cream-700)] px-300 py-200 text-left font-sans text-[var(--black-700)] transition-colors duration-300 hover:bg-[var(--cream-600)]"
                                 >
                                     {getNameString(party)}
                                 </button>
                             ))}
-                        </div>
+                        </DialogBody>
                     </DialogContent>
                 </Dialog>
             </>
