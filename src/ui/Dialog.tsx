@@ -110,6 +110,29 @@ function DialogBody({ className, ...props }: React.ComponentProps<"div">) {
     );
 }
 
+function DialogSection({ className, ...props }: React.ComponentProps<"div">) {
+    return (
+        <div
+            data-slot="dialog-section"
+            className={cn(
+                "flex flex-col gap-100 not-last-of-type:border-b not-last-of-type:border-[var(--cream-700)] not-last-of-type:pb-300",
+                className,
+            )}
+            {...props}
+        />
+    );
+}
+
+function DialogSubheader({ className, ...props }: React.ComponentProps<"p">) {
+    return (
+        <p
+            data-slot="dialog-subheader"
+            className={cn("eyebrow text-cabernet", className)}
+            {...props}
+        />
+    );
+}
+
 function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
     return (
         <div
@@ -160,6 +183,8 @@ export {
     DialogHeader,
     DialogOverlay,
     DialogPortal,
+    DialogSection,
+    DialogSubheader,
     DialogTitle,
     DialogTrigger,
 };
