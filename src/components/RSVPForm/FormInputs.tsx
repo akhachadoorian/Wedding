@@ -23,11 +23,10 @@ export function YesNoBooleanSwitchField({
             <div className="flex flex-col md:flex-row gap:">
                 {(label || note) && (
                     <div className="flex flex-col gap-200">
-                    {label && <p className="eyebrow">{label}</p>}
-                    {note && <p className="">{note}</p>}
-                </div>
+                        {label && <p className="eyebrow">{label}</p>}
+                        {note && <p className="">{note}</p>}
+                    </div>
                 )}
-                
 
                 <YesNoBooleanSwitch {...switchProps} />
             </div>
@@ -37,9 +36,9 @@ export function YesNoBooleanSwitchField({
     return (
         <div className="flex flex-col gap-200">
             <div className="flex flex-col gap-400">
-            {label && <p className="eyebrow">{label}</p>}
+                {label && <p className="eyebrow">{label}</p>}
 
-            <YesNoBooleanSwitch {...switchProps} />
+                <YesNoBooleanSwitch {...switchProps} />
             </div>
 
             {note && <p className="text-sm italic">{note}</p>}
@@ -51,14 +50,14 @@ interface YesNoBooleanSwitchProps {
     name: string;
     onChange: (value: boolean) => void;
     currValue: boolean | undefined;
-    disabled?: boolean
+    disabled?: boolean;
 }
 
 export function YesNoBooleanSwitch({
     name,
     onChange,
     currValue,
-    disabled = false
+    disabled = false,
 }: YesNoBooleanSwitchProps) {
     return (
         <div
@@ -266,6 +265,44 @@ export function TextArea({
 
 // #endregion ---
 
-// #region ---
+// #region --- Text Field ---
+
+interface TextInputProps {
+    name: string;
+    label: string;
+    placeholder?: string;
+    onChange: (value: string) => void;
+    value: string;
+    hasError: boolean;
+}
+
+export function TextInput({
+    name,
+    label,
+    placeholder,
+    onChange,
+    value,
+    hasError,
+}: TextInputProps) {
+    return (
+        <div className="flex min-w-0 flex-1 flex-col gap-150">
+            <label
+                className="font-sans text-s font-semibold leading-normal tracking-[0.6px] text-cream uppercase"
+                htmlFor={name}
+            >
+                {label}
+            </label>
+            <input
+                id={name}
+                name={name}
+                type="text"
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                placeholder={placeholder}
+                className={`box-border w-full border-[1.5px] bg-black px-200 py-200 font-sans leading-normal text-cream placeholder:font-sans placeholder:text-base placeholder:tex-cream placeholder:transition placeholder:duration-300 focus:outline-none focus:placeholder:opacity-0 ${hasError ? "border-burgundy" : "border-(--black-850) focus:border-cream"}`}
+            />
+        </div>
+    );
+}
 
 // #endregion ---

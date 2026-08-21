@@ -56,7 +56,7 @@ export function RSVPStepVertical({
             {...htmlProps}
             className={cn(
                 "rsvp_step rsvp_step-vertical flex py-800 px-750",
-                "flex-col gap-500 ",
+                "flex-col gap-700 md:gap-1000",
                 "md:items-center md:space-600 md:max-w-[60.625vw] md:mx-auto",
                 className,
             )}
@@ -108,18 +108,10 @@ function RSVPStepTextCentered({
 }: RSVPStepTextProps) {
     return (
         <div {...htmlProps} className={cn("rsvp_step_text text-center", className)}>
-            {/* <p className="eyebrow">Step {eyebrow}</p> */}
-            {/* <Eyebrow
-                text={`Step ${stepNumber}`}
-                styleOptions={{
-                    variation: "center",
-                    starColor: "--cream-700",
-                }}
-            /> */}
+            <p className="uppercase mb-400! font-sans! font-semibold md:text-xl text-md!">{eyebrow}</p>
+            <h2 className="text-6xl!">{title}</h2>
 
-            <h2 className="heading-xxl rsvp_step_text-title">{title}</h2>
-
-            <p className="eyebrow mt-200!">{eyebrow}</p> 
+            {/* <p className="eyebrow mt-200!">{eyebrow}</p>  */}
 
             {body && <p className="body rsvp_step_text-body mt-200">{body}</p>}
         </div>

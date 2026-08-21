@@ -47,6 +47,7 @@
     --font-size-3xl: var(--text-3xl);
     --font-size-4xl: var(--text-4xl);
     --font-size-5xl: var(--text-5xl);
+    --font-size-6xl: var(--text-6xl);
 
     /* Spacing */
     --spacing-0: var(--space-0); /* 0px */

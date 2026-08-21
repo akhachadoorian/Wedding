@@ -28,7 +28,7 @@ export default function StepThree() {
     return (
         <RSVPStepVertical currStep={STEP_NUM}>
             <form onSubmit={handleSubmit} className="w-full flex flex-col gap-500">
-                <div className="flex flex-col gap-500">
+                <div className="flex flex-col gap-500 divide-y divide-gray">
                     <StepThreeInputs guest={guest1} guestKey="guest1" answer={answers?.guest1}/>
 
                     {guest2 && (

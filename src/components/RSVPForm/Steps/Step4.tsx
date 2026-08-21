@@ -46,7 +46,7 @@ export default function StepFour() {
                 onSubmit={handleSubmit}
                 className="w-full flex flex-col gap-500"
             >
-                <div className="flex flex-col gap-500">
+                <div className="flex flex-col gap-500 divide-y divide-gray">
                     <StepFourInputs
                         guest={guest1}
                         guestKey="guest1"

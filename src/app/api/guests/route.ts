@@ -9,10 +9,13 @@ async function getGuests(): Promise<Guests> {
         listRecords<PartyFields>(PARTIES_TABLE),
     ]);
 
+    // console.log("partyRecords", partyRecords[0])
+    // console.log("guestRecords", guestRecords)
+
     const guestById = new Map(
         guestRecords.map((r) => [
             r.id,
-            { firstName: r.fields.firstName, lastName: r.fields.lastName },
+            { firstName: r.fields.firstName, lastName: r.fields.lastName, fullName: r.fields.fullName },
         ]),
     );
 
@@ -42,6 +45,7 @@ export async function GET(request: NextRequest) {
 
     try {
         const data = await getGuests();
+        console.log("data", data)    
         return NextResponse.json(data);
     } catch (err) {
         console.error("GET /api/guests error:", err);

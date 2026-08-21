@@ -17,6 +17,7 @@ import StepThree from "./Steps/Step3";
 import RSVPThankYou from "./RSVPThankYou";
 import StepFour from "./Steps/Step4";
 import StepFive from "./Steps/Step5";
+import SearchRSVP from "./Steps/Searching";
 
 // TODO: after rsvp date close
 
@@ -63,9 +64,6 @@ export default function RSVPForm({
     return (
         <div {...htmlProps} className={`rsvp_form  ${className ?? ""}`}>
             {/* <RSVPProgressBar texts={progressBar} currStep={step} /> */}
-
-            <div className="rsvp_form-frame rsvp_form-frame-a" />
-            <div className="rsvp_form-frame rsvp_form-frame-b" />
 
             {guestsLoading ? (
                 <RSVPFormLoading key="loading" />
@@ -143,7 +141,7 @@ function RenderSteps() {
         case -1:
             return <RSVPThankYou coming={false} />
         case 1:
-            return <StepOne />
+            return <SearchRSVP />
         case 2:
             return <StepTwo />
         case 3: 
