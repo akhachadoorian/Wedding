@@ -66,6 +66,12 @@ export default function SearchRSVP() {
         goToStep(2);
     };
 
+    const handleClear = () => {
+        setFirstName("");
+        setLastName("");
+        setSearchError("");
+    };
+
     return (
         <RSVPStepVertical currStep={1}>
             <>
@@ -75,6 +81,7 @@ export default function SearchRSVP() {
                     lastName={lastName}
                     setLastName={setLastName}
                     handleSearchSubmit={handleSearch}
+                    handleClear={handleClear}
                     searching={searching}
                     error={searchError}
                 />
@@ -113,6 +120,7 @@ interface SearchInputsProps {
     lastName: string;
     setLastName: (value: string) => void;
     handleSearchSubmit: (e: SubmitEvent<HTMLFormElement>) => void;
+    handleClear: () => void;
     searching: boolean;
     error?: string;
 }
@@ -123,10 +131,12 @@ function SearchInputs({
     lastName,
     setLastName,
     handleSearchSubmit,
+    handleClear,
     searching,
     error,
 }: SearchInputsProps) {
-    const isDisabled = searching || (firstName === "" && lastName === "");
+    const fieldsEmpty = firstName === "" && lastName === "";
+    const isDisabled = searching || fieldsEmpty;
     const hasError = !!error;
     return (
         <div className="flex flex-col gap-400">
@@ -154,21 +164,34 @@ function SearchInputs({
                     />
                 </div>
 
-                <Button
-                    variant="outline"
-                    colorScheme="cream"
-                    btnSettings={{
-                        type: "native",
-                        text: "Search",
-                        htmlType: "submit",
-                        disabled: isDisabled,
-                        decoration: {
-                            type: 'icon',
-                            icon: MagnifyingGlassIcon,
-                            // iconSide: 'right'
-                        }
-                    }}
-                />
+                <div className="flex items-center gap-200">
+                    <Button
+                        variant="outline"
+                        colorScheme="cream"
+                        btnSettings={{
+                            type: "native",
+                            text: "Search",
+                            htmlType: "submit",
+                            disabled: isDisabled,
+                            decoration: {
+                                type: 'icon',
+                                icon: MagnifyingGlassIcon,
+                                // iconSide: 'right'
+                            }
+                        }}
+                    />
+
+                    <Button
+                        variant="lines"
+                        colorScheme="cream"
+                        btnSettings={{
+                            type: "native",
+                            text: "Clear",
+                            disabled: fieldsEmpty,
+                            onClick: handleClear,
+                        }}
+                    />
+                </div>
             </form>
 
             {hasError && (

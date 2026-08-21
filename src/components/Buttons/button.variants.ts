@@ -76,7 +76,7 @@ export const buttonVariants = cva("flex items-center gap-150 transition-all dura
         variant: {
             solid: "border-2 border-solid",
             outline: "border-2 border-solid bg-transparent",
-            lines: `relative ${LINE_BEFORE} ${LINE_AFTER}`,
+            lines: `relative border-none bg-transparent ${LINE_BEFORE} ${LINE_AFTER}`,
         } satisfies Record<BtnVariants, string>,
         colorScheme: {
             cream: "",
