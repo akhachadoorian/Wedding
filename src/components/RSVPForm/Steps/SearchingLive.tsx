@@ -20,54 +20,62 @@ function getNameString(guest: GuestParty): string {
     return `${guest.guest1.firstName} ${guest.guest1.lastName} & ${guest.guest2.firstName} ${guest.guest2.lastName}`;
 }
 
+// Splits a single search query into the firstName/lastName params
+// getFindMatchingGuests expects: a lone word is checked against both,
+// so it matches on first name OR last name; multiple words split into
+// a leading first name and the remaining text as the last name.
+function splitQuery(query: string): { first: string; last: string } {
+    const tokens = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    const first = tokens[0] ?? "";
+    const last = tokens.length > 1 ? tokens.slice(1).join(" ") : first;
+    return { first, last };
+}
+
 export default function SearchRSVPLive() {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [debounced, setDebounced] = useState({ firstName: "", lastName: "" });
+    const [query, setQuery] = useState("");
+    const [debouncedQuery, setDebouncedQuery] = useState("");
     const [searchResult, setSearchResult] = useState<Guests | null>(null);
 
     const { guests, setParty, goToStep } = useRSVPForm();
 
-    // Debounce: only commit the typed name to `debounced` after typing pauses.
+    // Debounce: only commit the typed query after typing pauses.
     useEffect(() => {
         const timer = setTimeout(() => {
-            setDebounced({ firstName, lastName });
+            setDebouncedQuery(query);
         }, SEARCH_DEBOUNCE_MS);
 
         return () => clearTimeout(timer);
-    }, [firstName, lastName]);
+    }, [query]);
 
     // Search fires automatically once the debounced value settles.
     useEffect(() => {
-        const first = debounced.firstName.trim().toLowerCase();
-        const last = debounced.lastName.trim().toLowerCase();
-
-        if ((first + last).length < MIN_SEARCH_LENGTH) {
+        if (debouncedQuery.trim().length < MIN_SEARCH_LENGTH) {
             setSearchResult(null);
             return;
         }
 
+        const { first, last } = splitQuery(debouncedQuery);
         setSearchResult(getFindMatchingGuests(guests, first, last) ?? []);
-    }, [debounced, guests]);
+    }, [debouncedQuery, guests]);
 
     const handleSelectParty = (party: GuestParty) => {
         setParty(party);
         goToStep(2);
     };
 
-    const trimmedLength = (firstName + lastName).trim().length;
-    const isPending =
-        trimmedLength >= MIN_SEARCH_LENGTH &&
-        (firstName !== debounced.firstName || lastName !== debounced.lastName);
+    const trimmedLength = query.trim().length;
+    const isPending = trimmedLength >= MIN_SEARCH_LENGTH && query !== debouncedQuery;
 
     return (
         <RSVPStepVertical currStep={1}>
             <>
-                <SearchInputs
-                    firstName={firstName}
-                    setFirstName={setFirstName}
-                    lastName={lastName}
-                    setLastName={setLastName}
+                <TextInput
+                    name="party-search"
+                    label="Search by Name"
+                    value={query}
+                    onChange={setQuery}
+                    placeholder="Jane Doe"
+                    hasError={false}
                 />
 
                 <SearchResults
@@ -78,42 +86,6 @@ export default function SearchRSVPLive() {
                 />
             </>
         </RSVPStepVertical>
-    );
-}
-
-interface SearchInputsProps {
-    firstName: string;
-    setFirstName: (value: string) => void;
-    lastName: string;
-    setLastName: (value: string) => void;
-}
-
-function SearchInputs({
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-}: SearchInputsProps) {
-    return (
-        <div className="flex flex-col gap-100 md:flex-row w-full">
-            <TextInput
-                name="first-name-search"
-                label="First Name"
-                value={firstName}
-                onChange={setFirstName}
-                placeholder="Jane"
-                hasError={false}
-            />
-
-            <TextInput
-                name="last-name-search"
-                label="Last Name"
-                value={lastName}
-                onChange={setLastName}
-                placeholder="Doe"
-                hasError={false}
-            />
-        </div>
     );
 }
 
