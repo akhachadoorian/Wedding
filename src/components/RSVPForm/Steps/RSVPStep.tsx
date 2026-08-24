@@ -13,7 +13,7 @@ import { useRSVPForm } from "../RSVPFormContext";
 import Button from "@/components/Buttons/Button";
 import RSVPThankYou from "../RSVPThankYou";
 import { RSVPFormError } from "../RSVPForm";
-import SearchRSVP from "./Searching";
+import SearchRSVP from "./SearchingLive";
 import StepTwo from "./Step2";
 import StepThree from "./Step3";
 import StepFour from "./Step4";

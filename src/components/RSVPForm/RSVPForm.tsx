@@ -15,7 +15,6 @@ import StepThree from "./Steps/Step3";
 import RSVPThankYou from "./RSVPThankYou";
 import StepFour from "./Steps/Step4";
 import StepFive from "./Steps/Step5";
-import SearchRSVP from "./Steps/Searching";
 import Star from "@/icons/Star";
 import { RenderSteps } from "./Steps/RSVPStep";
 
