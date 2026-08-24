@@ -69,6 +69,12 @@ export default function SearchRSVP() {
         goToStep(2);
     };
 
+    const handleClear = () => {
+        setFirstName("");
+        setLastName("");
+        setSearchError("");
+    };
+
     const hasError = !!searchError;
 
     return (
@@ -80,6 +86,7 @@ export default function SearchRSVP() {
                     lastName={lastName}
                     setLastName={setLastName}
                     handleSearchSubmit={handleSearch}
+                    handleClear={handleClear}
                     searching={searching}
                 />
 
@@ -160,6 +167,7 @@ interface SearchInputsProps {
     lastName: string;
     setLastName: (value: string) => void;
     handleSearchSubmit: (e: SubmitEvent<HTMLFormElement>) => void;
+    handleClear: () => void;
     searching: boolean;
     // error?: string;
 }
@@ -170,11 +178,13 @@ function SearchInputs({
     lastName,
     setLastName,
     handleSearchSubmit,
+    handleClear,
     searching,
     // error,
 }: SearchInputsProps) {
-    const isDisabled = searching || (firstName === "" && lastName === "");
-    // const hasError = !!error;
+    const fieldsEmpty = firstName === "" && lastName === "";
+    const isDisabled = searching || fieldsEmpty;
+    const hasError = !!error;
     return (
         <div className="flex flex-col gap-400">
             <form
@@ -203,24 +213,47 @@ function SearchInputs({
                     />
                 </div>
 
-                <Button
-                    variant="outline"
-                    colorScheme="cream"
-                    btnSettings={{
-                        type: "native",
-                        text: "Search",
-                        htmlType: "submit",
-                        disabled: isDisabled,
-                        decoration: {
-                            type: 'icon',
-                            icon: MagnifyingGlassIcon,
-                            // iconSide: 'right'
-                        }
-                    }}
-                />
+                <div className="flex items-center gap-200">
+                    <Button
+                        variant="outline"
+                        colorScheme="cream"
+                        btnSettings={{
+                            type: "native",
+                            text: "Search",
+                            htmlType: "submit",
+                            disabled: isDisabled,
+                            decoration: {
+                                type: 'icon',
+                                icon: MagnifyingGlassIcon,
+                                // iconSide: 'right'
+                            }
+                        }}
+                    />
+
+                    <Button
+                        variant="lines"
+                        colorScheme="cream"
+                        btnSettings={{
+                            type: "native",
+                            text: "Clear",
+                            disabled: fieldsEmpty,
+                            onClick: handleClear,
+                        }}
+                    />
+                </div>
             </form>
 
-            
+            {hasError && (
+                <div className="flex items-center gap-150 rounded-md bg-[var(--cream-100)] px-300 py-200 font-sans text-s leading-[1.5] font-medium text-[var(--black-700)] shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+                    <WarningIcon
+                        size={18}
+                        weight="bold"
+                        color="var(--wine-800)"
+                    />
+
+                    <span>{error}</span>
+                </div>
+            )}
         </div>
     );
 }
