@@ -11,6 +11,13 @@ import Star from "@/icons/Star";
 import { useState } from "react";
 import { useRSVPForm } from "../RSVPFormContext";
 import Button from "@/components/Buttons/Button";
+import RSVPThankYou from "../RSVPThankYou";
+import { RSVPFormError } from "../RSVPForm";
+import SearchRSVP from "./SearchingLive";
+import StepTwo from "./Step2";
+import StepThree from "./Step3";
+import StepFour from "./Step4";
+import StepFive from "./Step5";
 
 export default function RSVPStepHorizontal({
     currStep,
@@ -210,54 +217,26 @@ export function GuestLabelInputWrapper({guest, children}: GuestLabelInputWrapper
         );
 }
 
+export function RenderSteps() {
+    const { step, refetchGuests } = useRSVPForm();
 
+    switch (step) {
+        case -2:
+            return <RSVPThankYou coming={true} />
+        case -1:
+            return <RSVPThankYou coming={false} />
+        case 1:
+            return <SearchRSVP />
+        case 2:
+            return <StepTwo />
+        case 3: 
+            return <StepThree />
+        case 4:
+            return <StepFour />
+        case 5:
+            return <StepFive />
+        default:
+            return <RSVPFormError key="error" errorMessage={"Error"} onRetry={refetchGuests} /> // TODO: add error message
 
-
-export function RSVPStepLoading(loadingText?: string) {
-    return (
-        <div className="rsvp_form-status step_one_loading">
-            <div className="step_one_loading-spinner">
-                <Star color="--wine-500" />
-            </div>
-
-            <p className="step_one_loading-text">
-                {loadingText ?? "Loading"}
-                <span className="step_one_loading-dots">
-                    <span>.</span>
-                    <span>.</span>
-                    <span>.</span>
-                </span>
-            </p>
-        </div>
-    );
+    }
 }
-
-
-
-// function RSVPFormError({ errorMessage, onRetry }: RSVPFormErrorProps) {
-//     return (
-//         <div className="rsvp_form-status flex flex-col items-center gap-200 text-center">
-//             <WarningIcon size={56} weight="bold" color="var(--cream)" />
-
-//             <h3 className="heading-l">An Error has Occurred</h3>
-//             <p className="body-lg">{errorMessage}</p>
-
-//             <Button
-//                 variant="solid"
-//                 colorScheme="cream"
-//                 hoverScheme="burgundy"
-//                 btnSettings={{
-//                     type: "on-click",
-//                     text: "Refresh page",
-//                     onClick: onRetry,
-//                     decoration: {
-//                         type: 'icon',
-//                         icon: ArrowClockwiseIcon
-//                     }
-//                 }}
-                
-//                 className="mt-200"
-//             ></Button>
-//         </div>
-//     );
-// }

@@ -27,25 +27,6 @@ import { buttonVariants } from "./button.variants";
 import { VariantProps } from "class-variance-authority";
 import { Slot } from "radix-ui/slot";
 
-export function Btn({
-    className,
-    variant,
-    colorScheme,
-    size,
-    asChild = false,
-    ...props
-}:React.ComponentProps<'button'> & VariantProps<typeof buttonVariants> & {asChild?: boolean}) {
-    const Comp = asChild ? Slot : 'button'
-
-    return (
-        <Comp 
-            data-slot="button"
-            className={cn(buttonVariants({ variant, colorScheme, size}), className, BTN_TEXT_CLASSES, 'btn')}
-            {...props}
-        />
-    )
-}
-
 export default function Button({
     btnSettings,
 
