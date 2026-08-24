@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRSVPForm } from "../RSVPFormContext";
-import { getFindMatchingGuests, GuestParty, Guests, partyGuestCount } from "../types";
+import { Guest, GuestParty, Guests, partyGuestCount } from "../types";
 import { RSVPStepVertical } from "./RSVPStep";
 import Button from "@/components/Buttons/Button";
 import { TextInput } from "../FormInputs";
@@ -20,15 +20,30 @@ function getNameString(guest: GuestParty): string {
     return `${guest.guest1.firstName} ${guest.guest1.lastName} & ${guest.guest2.firstName} ${guest.guest2.lastName}`;
 }
 
-// Splits a single search query into the firstName/lastName params
-// getFindMatchingGuests expects: a lone word is checked against both,
-// so it matches on first name OR last name; multiple words split into
-// a leading first name and the remaining text as the last name.
-function splitQuery(query: string): { first: string; last: string } {
+// Matches as the user types: every typed token must be a *prefix* of either
+// the first or last name of the same guest (e.g. "ni" matches "Nick"), rather
+// than requiring the full name to be typed out.
+function guestMatchesTokens(guest: Guest, tokens: string[]): boolean {
+    return tokens.every(
+        (token) =>
+            guest.firstName?.toLowerCase().startsWith(token) ||
+            guest.lastName?.toLowerCase().startsWith(token),
+    );
+}
+
+function findMatchingGuestsByPrefix(guests: Guests | null, query: string): Guests | null {
+    if (guests === null) return null;
+
     const tokens = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
-    const first = tokens[0] ?? "";
-    const last = tokens.length > 1 ? tokens.slice(1).join(" ") : first;
-    return { first, last };
+    if (tokens.length === 0) return null;
+
+    const matches = guests.filter(
+        (party) =>
+            guestMatchesTokens(party.guest1, tokens) ||
+            (party.guest2 && guestMatchesTokens(party.guest2, tokens)),
+    );
+
+    return matches;
 }
 
 export default function SearchRSVPLive() {
@@ -54,8 +69,7 @@ export default function SearchRSVPLive() {
             return;
         }
 
-        const { first, last } = splitQuery(debouncedQuery);
-        setSearchResult(getFindMatchingGuests(guests, first, last) ?? []);
+        setSearchResult(findMatchingGuestsByPrefix(guests, debouncedQuery) ?? []);
     }, [debouncedQuery, guests]);
 
     const handleSelectParty = (party: GuestParty) => {
