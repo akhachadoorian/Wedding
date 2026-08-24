@@ -29,7 +29,8 @@ export const STEP_ONE_TEXT: RSVPStepTextProps = {
 
 export const STEP_TWO_TEXT: RSVPStepTextProps = {
     stepNumber: 2,
-    title: "Who's Coming?",
+    eyebrow: "Attendance",
+    title: "Who's Joining Us?",
     body: "Let us know who from your party will be joining us on the day.",
 };
 // #endregion ---

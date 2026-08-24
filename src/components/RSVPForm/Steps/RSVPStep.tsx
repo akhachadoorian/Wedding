@@ -116,11 +116,10 @@ function RSVPStepTextCentered({
     return (
         <div {...htmlProps} className={cn("rsvp_step_text text-center", className)}>
             <p className="uppercase mb-400! font-sans! font-semibold md:text-xl text-md!">{eyebrow}</p>
-            <h2 className="text-6xl!">{title}</h2>
+            
+            <h2 className="text-6xl! leading-[130%]!">{title}</h2>
 
-            {/* <p className="eyebrow mt-200!">{eyebrow}</p>  */}
-
-            {body && <p className="body rsvp_step_text-body mt-200">{body}</p>}
+            {body && <p className="body-l rsvp_step_text-body mt-300!">{body}</p>}
         </div>
     );
 }
