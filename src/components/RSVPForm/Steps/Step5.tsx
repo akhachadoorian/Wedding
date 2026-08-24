@@ -47,6 +47,8 @@ export default function StepFive() {
                                     'guest1',
                                     value,
                                 ),
+                        option_1: { label: "Yes", value: true },
+                        option_2: { label: "No", value: false },
                         currValue: answers?.guest1
                     }} />
 
@@ -60,6 +62,8 @@ export default function StepFive() {
                                     'guest2',
                                     value,
                                 ),
+                        option_1: { label: "Yes", value: true },
+                        option_2: { label: "No", value: false },
                         currValue: answers?.guest2
                     }} />
                            )}

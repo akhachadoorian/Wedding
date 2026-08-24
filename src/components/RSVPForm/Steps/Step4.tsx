@@ -124,6 +124,8 @@ function StepFourInputs({ guest, guestKey, answer }: StepFourInputsProps) {
                                     "takingBus",
                                     value,
                                 ),
+                            option_1: { label: "Yes", value: true },
+                            option_2: { label: "No", value: false },
                             currValue: answer?.takingBus,
                             disabled: !canTakeBus
                         }}
