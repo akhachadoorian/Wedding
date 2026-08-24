@@ -17,7 +17,7 @@ import StepThree from "./Steps/Step3";
 import RSVPThankYou from "./RSVPThankYou";
 import StepFour from "./Steps/Step4";
 import StepFive from "./Steps/Step5";
-import SearchRSVP from "./Steps/Searching";
+import SearchRSVP from "./Steps/SearchingLive";
 
 // TODO: after rsvp date close
 
