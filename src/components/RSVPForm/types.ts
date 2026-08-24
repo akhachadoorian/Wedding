@@ -219,6 +219,15 @@ export function getQuestionAnswerParty<K extends RSVPDraftKey>(draft: RSVPDraft,
     return value
 }
 
+export function determineNotComing(answer: Responses | null, party: GuestParty) {
+    const { guest2 } = party;
+
+    const g1NotComing = answer?.guest1 === false;
+    const g2NotComing = !guest2 || answer?.guest2 === false;
+
+    return g1NotComing && g2NotComing;
+}
+
 // export function getQuestionAnswerGuest(guest: 'guest1' | 'guest2', draft: RSVPDraft, key: RSVPDraftKey)   {
 //     const value = draft[key];
 //     if (!value || value === null) null

@@ -263,15 +263,19 @@ export type BtnAnySchemeMap<N extends number> = BtnSchemeMap<N> | BtnFullSchemeM
 // #endregion
 
 // #region Button Decoration
+
+export type DecorationSide = "left" | "right";
+
 export type BtnArrowSettings = {
     type: 'arrow';
-    arrowSide?: "left" | "right";
+    arrowSide?: DecorationSide
     arrowDirection?: ArrowDirectionProps;
 };
 
 type BtnIconSettings = {
     type: "icon";
     icon: Icon;
+    iconSide?: DecorationSide;
 }
 
 export type BtnDecoration = BtnArrowSettings | BtnIconSettings;

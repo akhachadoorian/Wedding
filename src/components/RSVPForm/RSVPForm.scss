@@ -2,49 +2,13 @@
 
 // #region --- RSVP Form ------------------------------------
 
-$insetBorder: $space-300;
-
 .rsvp_form {
-    // display: flex;
-    // flex-direction: column;
-    // gap: $space-700;
-
-     display: flex;
+    display: flex;
     flex-direction: column;
     gap: $space-1000;
 
-    // padding: $space-1500 $space-750;
-    // background-color: $black;
-    background-color: $cabernet;
-    // border: 2px solid $black-800;
-
     position: relative;
     z-index: 50;
-
-     &-frame {
-        position: absolute;
-        border: 2px solid $cabernet;
-        transition: $transition;
-        pointer-events: none;
-    }
-
-    &-frame-a {
-        inset: calc(#{$insetBorder} * -1) $insetBorder $insetBorder
-            calc(#{$insetBorder} * -1);
-
-        // inset: calc(#{$space-150} * -1) $space-150 $space-150
-        //     calc(#{$space-150} * -1);
-
-        
-    }
-
-    &-frame-b {
-        inset: $insetBorder calc(#{$insetBorder} * -1) calc(#{$insetBorder} * -1)
-            $insetBorder;
-
-        // inset: $space-150 calc(#{$space-150} * -1) calc(#{$space-150} * -1)
-        //     $space-150;
-    }
 
     &-status {
         animation: rsvp_form-status-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -60,6 +24,22 @@ $insetBorder: $space-300;
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes rsvp-star-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.rsvp_star_spin {
+    animation: rsvp-star-spin 1.4s linear infinite;
+
+    .eyebrow-star {
+        display: block;
+        width: 100%;
+        height: 100%;
     }
 }
 

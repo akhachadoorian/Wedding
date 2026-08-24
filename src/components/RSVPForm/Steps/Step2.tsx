@@ -1,6 +1,7 @@
 import { YesNoBooleanSwitch } from "../FormInputs";
 import { useRSVPForm } from "../RSVPFormContext";
 import {
+    determineNotComing,
     getQuestionAnswerParty,
     hasAnsweredQuestion,
     partyGuestCount,
@@ -15,17 +16,6 @@ import {
 } from "./RSVPStep";
 import { useHandleGuestUpdate } from "./useHandleGuestUpdate";
 import { useStepSubmit } from "./useStepSubmit";
-
-function determineNotComing(answer: Responses | null, hasTwoGuests: boolean) {
-    if (hasTwoGuests) {
-        const g1Coming = answer?.guest1 && !answer.guest1;
-        const g2Coming = answer?.guest2 && !answer.guest2;
-
-        return g1Coming && g2Coming;
-    }
-
-    return !answer?.guest1;
-}
 
 // const STEP_TWO_DRAFT_KEY = 'attendance'
 const STEP_NUM = 2
@@ -66,7 +56,7 @@ export default function StepTwo() {
     const allAnswered = hasAnsweredQuestion(party, draft, "attendance");
     const notComing = determineNotComing(
         answers,
-        partyGuestCount(party) === 2 ? true : false,
+        party
     );
     // console.log("allAnswered", allAnswered);
     // console.log("notComing", notComing);
@@ -93,7 +83,7 @@ export default function StepTwo() {
             >
                 {/* Wedding RSVP */}
                 <div className="w-full">
-                    <div className="flex flex-col gap-200 border-b pb-200 mb-200">
+                    <div className="flex flex-col gap-200 border-b border-gray pb-200 mb-200">
                         {/* TODO: details and fix switch*/}
                         <p className="eyebrow">Event details</p>
                         <h3 className="heading-s">
@@ -101,7 +91,7 @@ export default function StepTwo() {
                         </h3>
                     </div>
 
-                    <div className="">
+                    <div className="flex flex-col gap-500 divide-y divide-gray">
                         {/* Guest 1 */}
                         <GuestLabelInputWrapper guest={guest1}>
                             <YesNoBooleanSwitch

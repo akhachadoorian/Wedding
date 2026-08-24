@@ -21,7 +21,9 @@ const hero: Omit<ImageOverlayHeroProps, "loaded" | "styleOptions"> = {
         },
     },
     eyebrow: "RSVP",
-    header: "Let Us Know You're Coming",
+    // header: "Let Us Know You're Coming",
+    // header: "Confirm & Celebrate",
+    header: "Reply & Revel",
     subtitle: "Kindly respond by Oct 1st",
     body: "We'd love to have you there. Find your reservation below and let us know if you'll be joining us!",
 }

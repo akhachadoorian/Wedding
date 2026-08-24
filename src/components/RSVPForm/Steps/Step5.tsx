@@ -38,7 +38,7 @@ export default function StepFive() {
                 onSubmit={handleSubmit}
                 className="w-full flex flex-col gap-500"
             >
-                <div className="flex flex-col gap-500">
+                <div className="flex flex-col gap-500 divide-y divide-gray">
                     <YesNoBooleanSwitchField layout="row" switchProps={{
                         name: "rehearsalMixer-guest1",
                         onChange:(value) =>

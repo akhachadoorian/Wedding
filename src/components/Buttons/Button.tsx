@@ -10,6 +10,7 @@ import {
     BtnDecoration,
     BtnSize,
     ButtonProps,
+    DecorationSide,
     LinkButtonSettings,
     ModalButtonSettings,
     NativeButtonSettings,
@@ -25,25 +26,6 @@ import "./Button.scss";
 import { buttonVariants } from "./button.variants";
 import { VariantProps } from "class-variance-authority";
 import { Slot } from "radix-ui/slot";
-
-export function Btn({
-    className,
-    variant,
-    colorScheme,
-    size,
-    asChild = false,
-    ...props
-}:React.ComponentProps<'button'> & VariantProps<typeof buttonVariants> & {asChild?: boolean}) {
-    const Comp = asChild ? Slot : 'button'
-
-    return (
-        <Comp 
-            data-slot="button"
-            className={cn(buttonVariants({ variant, colorScheme, size}), className, BTN_TEXT_CLASSES, 'btn')}
-            {...props}
-        />
-    )
-}
 
 export default function Button({
     btnSettings,
@@ -322,6 +304,7 @@ function ButtonInner({
                 iconColor={decorationColor}
                 iconHoverColor={decorationHoverColor}
                 iconSize={decSize["icon"]}
+                iconSide={decoration.iconSide ?? 'left'}
             />
         );
 
@@ -334,12 +317,14 @@ function IconButtonInner({
     iconColor,
     iconHoverColor,
     iconSize,
+    iconSide
 }: {
     text: string;
     icon: Icon;
     iconColor: CssColor;
     iconHoverColor: CssColor;
     iconSize?: number;
+    iconSide: DecorationSide
 }) {
     const IconComponent = icon;
 
@@ -353,10 +338,16 @@ function IconButtonInner({
 
     return (
         <>
-            <span className="btn_icon-wrapper flex justify-center items-center" style={wrapperStyle}>
+        {iconSide === 'left' && (<span className="btn_icon-wrapper flex justify-center items-center" style={wrapperStyle}>
                 <IconComponent size={iconSize} color="var(--btn-icon-color)" />
-            </span>
+            </span>)}
+            
             <p className={BTN_TEXT_CLASSES}>{text}</p>
+
+            {iconSide === 'right' && (<span className="btn_icon-wrapper flex justify-center items-center" style={wrapperStyle}>
+                <IconComponent size={iconSize} color="var(--btn-icon-color)" />
+            </span>)}
+            
         </>
     );
 }
