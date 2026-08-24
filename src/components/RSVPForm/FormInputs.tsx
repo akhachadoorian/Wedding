@@ -5,19 +5,19 @@ import { NonEmptyArray, TextValueOption } from "@/types/utility";
 
 // #region -- Yes/No Boolean Switch ---
 
-interface SwitchFieldProps {
+interface SwitchFieldProps<V = string> {
     layout?: "row" | "column";
     label?: string; // todo: label class?
     note?: string;
-    switchProps: SwitchProps;
+    switchProps: SwitchProps<V>;
 }
 
-export function SwitchField({
+export function SwitchField<V = string>({
     layout = "column",
     label,
     note,
     switchProps,
-}: SwitchFieldProps) {
+}: SwitchFieldProps<V>) {
     if (layout === "row") {
         return (
             <div className="flex flex-col md:flex-row gap:">
@@ -48,39 +48,35 @@ export function SwitchField({
 
 
 
-interface SwitchProps {
+interface SwitchOption<V> {
+    label: string;
+    value: V;
+}
+
+interface SwitchProps<V = string> {
     name: string;
-    onChange: (value: string) => void;
-    currValue: string | undefined;
-    option_1?: {
-        label?: string;
-        value?: string;
-    }
-    option_2?: {
-        label?: string;
-        value?: string;
-    }
+    onChange: (value: V) => void;
+    currValue: V | undefined;
+    option_1: SwitchOption<V>;
+    option_2: SwitchOption<V>;
     disabled?: boolean;
 }
 
-export function Switch({
+export function Switch<V = string>({
     name,
     onChange,
     currValue,
     disabled = false,
     option_1,
-    option_2
-}: SwitchProps) {
-    const opt_1_value = option_1?.value ?? 'yes'
-    const opt_2_value = option_2?.value ?? 'no'
-
+    option_2,
+}: SwitchProps<V>) {
     return (
         <div
             className="rsvp_switch_group relative flex border border-cream p-100"
             role="radiogroup"
         >
             {/* FIXME: FIX */}
-            {/* <span 
+            {/* <span
                 className={cn(
                     "rsvp_switch_group-thumb",
                     currValue === false && "rsvp_switch_group-thumb-no",
@@ -89,44 +85,44 @@ export function Switch({
                 aria-hidden="true"
             /> */}
 
-            <SwitchOption
+            <SwitchOptionInput
                 name={name}
-                value={opt_1_value}
-                onChange={() => onChange(opt_1_value)}
-                text={option_1?.label ?? 'Yes'}
-                isActive={currValue === opt_1_value}
+                value={String(option_1.value)}
+                onChange={() => onChange(option_1.value)}
+                text={option_1.label}
+                isActive={currValue === option_1.value}
                 disabled={disabled}
             />
 
-            <SwitchOption
+            <SwitchOptionInput
                 name={name}
-                value={opt_2_value}
-                onChange={() => onChange(opt_2_value)}
-                text={option_2?.label ?? 'No'}
-                isActive={currValue === opt_2_value}
+                value={String(option_2.value)}
+                onChange={() => onChange(option_2.value)}
+                text={option_2.label}
+                isActive={currValue === option_2.value}
                 disabled={disabled}
             />
         </div>
     );
 }
 
-interface SwitchOptionProps {
+interface SwitchOptionInputProps {
     name: string;
     value: string;
-    onChange: (value: string) => void;
+    onChange: () => void;
     text: string;
     isActive: boolean;
     disabled?: boolean;
 }
 
-function SwitchOption({
+function SwitchOptionInput({
     name,
     value,
     onChange,
     text,
     isActive,
     disabled = false,
-}: SwitchOptionProps) {
+}: SwitchOptionInputProps) {
     const id = `${name}-${value}`;
 
     return (
@@ -146,7 +142,7 @@ function SwitchOption({
                 name={name}
                 value={value}
                 checked={isActive}
-                onChange={() => onChange(value)}
+                onChange={onChange}
                 disabled={disabled}
             />
 

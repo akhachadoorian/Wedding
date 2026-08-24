@@ -206,7 +206,7 @@ interface GuestLabelInputWrapperProps {
 
 export function GuestLabelInputWrapper({guest, children}: GuestLabelInputWrapperProps) {
     return (
-            <div className="flex flex-col gap-200">
+            <div className="flex flex-col md:flex-row gap-200">
                 <h4>
                     {guest.firstName} {guest.lastName}
                 </h4>

@@ -2,13 +2,13 @@ import { cn } from "@/utils/cn";
 import { Switch } from "../FormInputs";
 import { useRSVPForm } from "../RSVPFormContext";
 import {
+    Attendance,
     determineNotComing,
     getQuestionAnswerParty,
     hasAnsweredQuestion,
     partyGuestCount,
     Responses,
     RSVP_KEY_BY_STEP,
-    RSVPDraftKey,
 } from "../types";
 import {
     GuestLabelInputWrapper,
@@ -20,7 +20,7 @@ import { useStepSubmit } from "./useStepSubmit";
 
 // const STEP_TWO_DRAFT_KEY = 'attendance'
 const STEP_NUM = 2;
-const KEY: RSVPDraftKey = RSVP_KEY_BY_STEP[STEP_NUM];
+const KEY = RSVP_KEY_BY_STEP[STEP_NUM];
 
 export default function StepTwo() {
     const { party, draft } = useRSVPForm();
@@ -54,9 +54,14 @@ export default function StepTwo() {
     const eyebrowClass =
         "flex-1 font-sans text-xs md:text-md uppercase font-normal leading-[140%] tracking-[1px] md:tracking-[2px] ";
 
-    const option_1 = {
+    const option_1: { label: string; value: Attendance } = {
         label: 'Attending',
-        value: 'attending'
+        value: 'Attending',
+    }
+
+    const option_2: { label: string; value: Attendance } = {
+        label: 'Declining',
+        value: 'Declining',
     }
 
     return (
@@ -100,6 +105,7 @@ export default function StepTwo() {
                                     handleGuestUpdate(KEY, "guest1", value)
                                 }
                                 option_1={option_1}
+                                option_2={option_2}
                                 currValue={answers?.guest1}
                             />
                         </GuestLabelInputWrapper>
@@ -112,6 +118,8 @@ export default function StepTwo() {
                                     onChange={(value) =>
                                         handleGuestUpdate(KEY, "guest2", value)
                                     }
+                                    option_1={option_1}
+                                    option_2={option_2}
                                     currValue={answers?.guest2}
                                 />
                             </GuestLabelInputWrapper>
