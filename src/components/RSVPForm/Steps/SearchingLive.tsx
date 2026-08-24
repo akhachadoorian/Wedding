@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { useRSVPForm } from "../RSVPFormContext";
 import { Guest, GuestParty, Guests, partyGuestCount } from "../types";
 import { RSVPStepVertical } from "./RSVPStep";
@@ -140,29 +141,36 @@ function SearchResults({
 
     return (
         <div className="flex flex-col gap-150">
-            {searchResult.map((party) => (
-                <div
-                    key={party.id}
-                    className="flex items-center justify-between gap-200 border border-[var(--cream-700)] px-300 py-200 font-sans text-[var(--black-700)]"
-                >
-                    <div className="flex flex-col">
-                        <span>{getNameString(party)}</span>
-                        <span className="text-s opacity-70">
-                            Party of {partyGuestCount(party)}
-                        </span>
-                    </div>
+            <AnimatePresence>
+                {searchResult.map((party, index) => (
+                    <motion.div
+                        key={party.id}
+                        layout
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.25, ease: "easeOut", delay: index * 0.05 }}
+                        className="flex items-center justify-between gap-200 border border-[var(--cream-700)] px-300 py-200 font-sans text-[var(--black-700)]"
+                    >
+                        <div className="flex flex-col">
+                            <span>{getNameString(party)}</span>
+                            <span className="text-s opacity-70">
+                                Party of {partyGuestCount(party)}
+                            </span>
+                        </div>
 
-                    <Button
-                        variant="outline"
-                        colorScheme="cream"
-                        btnSettings={{
-                            type: "native",
-                            text: "This is us",
-                            onClick: () => onSelectParty(party),
-                        }}
-                    />
-                </div>
-            ))}
+                        <Button
+                            variant="outline"
+                            colorScheme="cream"
+                            btnSettings={{
+                                type: "native",
+                                text: "This is us",
+                                onClick: () => onSelectParty(party),
+                            }}
+                        />
+                    </motion.div>
+                ))}
+            </AnimatePresence>
         </div>
     );
 }
