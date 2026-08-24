@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 import { ArrowClockwiseIcon, WarningIcon } from "@phosphor-icons/react";
 import useGuests from "../../hooks/useGuests";
@@ -25,6 +26,18 @@ export type RSVPFormProps = WithHTMLProps & {
     // steps: NonEmptyArray<RSVPStepProps>;
 };
 
+const stepVariants = {
+    enter: (direction: number) => ({ opacity: 0, x: direction >= 0 ? 24 : -24 }),
+    center: { opacity: 1, x: 0 },
+    exit: (direction: number) => ({ opacity: 0, x: direction >= 0 ? -24 : 24 }),
+};
+
+const reducedMotionStepVariants = {
+    enter: { opacity: 0 },
+    center: { opacity: 1 },
+    exit: { opacity: 0 },
+};
+
 
 export default function RSVPForm({
     // progressBar,
@@ -34,9 +47,12 @@ export default function RSVPForm({
     ...htmlProps
 }: RSVPFormProps) {
     const [step, setStep] = useState(1);
-    const goToStep = (step: number) => {
-        console.log("go to step ", step)
-        setStep(step)
+    const [direction, setDirection] = useState(1);
+    const prefersReducedMotion = useReducedMotion();
+    const goToStep = (nextStep: number) => {
+        console.log("go to step ", nextStep)
+        setDirection(nextStep < 0 ? 1 : nextStep >= step ? 1 : -1);
+        setStep(nextStep)
 
     }
     // FIXME:
@@ -70,9 +86,20 @@ export default function RSVPForm({
                 <RSVPFormError key="error" errorMessage={guestsError} onRetry={onRetry} />
             ) : (
                 <RSVPFormProvider value={{ step, goToStep, draft, setDraft, guests, party, setParty, refetchGuests: onRetry }}>
-                    <div key="steps" className="rsvp_form-steps rsvp_form-status">
-                        <RenderSteps />
-                    </div>
+                    <AnimatePresence mode="wait" custom={direction}>
+                        <motion.div
+                            key={step}
+                            custom={direction}
+                            variants={prefersReducedMotion ? reducedMotionStepVariants : stepVariants}
+                            initial="enter"
+                            animate="center"
+                            exit="exit"
+                            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                            className="rsvp_form-steps"
+                        >
+                            <RenderSteps />
+                        </motion.div>
+                    </AnimatePresence>
                 </RSVPFormProvider>
             )}
         </div>
