@@ -1,4 +1,5 @@
-import { YesNoBooleanSwitch } from "../FormInputs";
+import { cn } from "@/utils/cn";
+import { Switch } from "../FormInputs";
 import { useRSVPForm } from "../RSVPFormContext";
 import {
     determineNotComing,
@@ -7,7 +8,7 @@ import {
     partyGuestCount,
     Responses,
     RSVP_KEY_BY_STEP,
-    RSVPDraftKey
+    RSVPDraftKey,
 } from "../types";
 import {
     GuestLabelInputWrapper,
@@ -18,8 +19,8 @@ import { useHandleGuestUpdate } from "./useHandleGuestUpdate";
 import { useStepSubmit } from "./useStepSubmit";
 
 // const STEP_TWO_DRAFT_KEY = 'attendance'
-const STEP_NUM = 2
-const KEY: RSVPDraftKey = RSVP_KEY_BY_STEP[STEP_NUM] 
+const STEP_NUM = 2;
+const KEY: RSVPDraftKey = RSVP_KEY_BY_STEP[STEP_NUM];
 
 export default function StepTwo() {
     const { party, draft } = useRSVPForm();
@@ -28,38 +29,13 @@ export default function StepTwo() {
 
     // Get party
     const { guest1, guest2 } = party;
-
-    // console.log(`guest1: ${guest1} guest2: ${guest2}`);
-
-    // const handleGuestUpdate = (guestKey: GuestKey, coming: boolean) => {
-    //     // console.log("draft ", draft);
-    //     setDraft((prev) => ({
-    //         ...prev,
-    //         attendance: { ...prev.attendance, [guestKey]: coming },
-    //     }));
-    //     // console.log("draft ", draft);
-    // };
     const { handleGuestUpdate } = useHandleGuestUpdate();
-
 
     const answers = getQuestionAnswerParty(draft, "attendance");
 
-    // const guest1Answer = draft.attendance?.guest1; // boolean | undefined
-    // const guest2Answer = draft.attendance?.guest2;
-
-    // todo: is next disabled?
-    // unanswered
-    // const hasTwoGuests = guest1 !== undefined && guest2  !== undefined;
-    // const hasTwoGuests = partyGuestCount(party) === 2 ? true : false;
-    // console.log("hasTwoGuests", hasTwoGuests);
 
     const allAnswered = hasAnsweredQuestion(party, draft, "attendance");
-    const notComing = determineNotComing(
-        answers,
-        party
-    );
-    // console.log("allAnswered", allAnswered);
-    // console.log("notComing", notComing);
+    const notComing = determineNotComing(answers, party);
 
     const overrideNext =
         allAnswered && notComing
@@ -75,6 +51,14 @@ export default function StepTwo() {
         overrideNext,
     });
 
+    const eyebrowClass =
+        "flex-1 font-sans text-xs md:text-md uppercase font-normal leading-[140%] tracking-[1px] md:tracking-[2px] ";
+
+    const option_1 = {
+        label: 'Attending',
+        value: 'attending'
+    }
+
     return (
         <RSVPStepVertical currStep={STEP_NUM}>
             <form
@@ -82,11 +66,27 @@ export default function StepTwo() {
                 className="w-full flex flex-col gap-500"
             >
                 {/* Wedding RSVP */}
-                <div className="w-full">
-                    <div className="flex flex-col gap-200 border-b border-gray pb-200 mb-200">
-                        {/* TODO: details and fix switch*/}
-                        <p className="eyebrow">Event details</p>
-                        <h3 className="heading-s">
+                <div className="w-full overflow-hidden flex flex-col gap-500">
+                    <div className="flex flex-col gap-200 min-w-0 ">
+                        <div className="flex gap-(--layout-column-gutter) px-200 min-w-0">
+                            <p className={cn(eyebrowClass, "min-w-0")}>
+                                Saturday
+                                <br />
+                                October 31st
+                            </p>
+                            <p className={cn(eyebrowClass, "text-center min-w-0")}>
+                                The Clay Theatre
+                                <br />
+                                Green Cove, Fl{" "}
+                            </p>
+                            <p className={cn(eyebrowClass, "text-right min-w-0")}>
+                                Ceremony 5:00 PM
+                                <br />
+                                Until 10:30 PM
+                            </p>
+                        </div>
+
+                        <h3 className="font-sans! text-xl font-semibold leading-normal tracking-[1.4px] uppercase text-center">
                             Wedding Ceremony & Reception
                         </h3>
                     </div>
@@ -94,11 +94,12 @@ export default function StepTwo() {
                     <div className="flex flex-col gap-500 divide-y divide-gray">
                         {/* Guest 1 */}
                         <GuestLabelInputWrapper guest={guest1}>
-                            <YesNoBooleanSwitch
+                            <Switch
                                 name={"attendance-guest1"}
-                                onChange={(coming) =>
-                                    handleGuestUpdate(KEY, "guest1", coming)
+                                onChange={(value) =>
+                                    handleGuestUpdate(KEY, "guest1", value)
                                 }
+                                option_1={option_1}
                                 currValue={answers?.guest1}
                             />
                         </GuestLabelInputWrapper>
@@ -106,10 +107,10 @@ export default function StepTwo() {
                         {/* Guest 2 */}
                         {guest2 && (
                             <GuestLabelInputWrapper guest={guest2}>
-                                <YesNoBooleanSwitch
+                                <Switch
                                     name={"attendance-guest2"}
-                                    onChange={(coming) =>
-                                        handleGuestUpdate(KEY, "guest2", coming)
+                                    onChange={(value) =>
+                                        handleGuestUpdate(KEY, "guest2", value)
                                     }
                                     currValue={answers?.guest2}
                                 />

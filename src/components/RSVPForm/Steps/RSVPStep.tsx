@@ -64,7 +64,7 @@ export function RSVPStepVertical({
             className={cn(
                 "rsvp_step rsvp_step-vertical flex py-800 px-750",
                 "flex-col gap-700 md:gap-1000",
-                "md:items-center md:space-600 md:max-w-[60.625vw] md:mx-auto",
+                "md:items-center md:space-600  md:mx-auto",
                 className,
             )}
         >
@@ -89,7 +89,7 @@ export function RSVPStepText({
     ...htmlProps
 }: RSVPStepTextProps) {
     return (
-        <div {...htmlProps} className={cn("rsvp_step_text", className)}>
+        <div {...htmlProps} className={cn("rsvp_step_text md:max-w-[60.417]", className)}>
             <Eyebrow
                 text={`Step ${stepNumber}`}
                 styleOptions={{
@@ -114,7 +114,7 @@ function RSVPStepTextCentered({
     ...htmlProps
 }: RSVPStepTextProps) {
     return (
-        <div {...htmlProps} className={cn("rsvp_step_text text-center", className)}>
+        <div {...htmlProps} className={cn("rsvp_step_text text-center md:max-w-[60.417vw]", className)}>
             <p className="uppercase mb-400! font-sans! font-semibold md:text-xl text-md!">{eyebrow}</p>
             
             <h2 className="text-6xl! leading-[130%]!">{title}</h2>

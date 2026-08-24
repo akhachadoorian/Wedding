@@ -86,7 +86,9 @@ export function getPartyFromId(
     return guests?.find((g) => g.id === partyId) ?? null;
 }
 
-type AttendanceResponse = Partial<Record<GuestKey, boolean>>;
+export type Attendance = "Attending" | "Declining" | "Unknown";
+
+type AttendanceResponse = Partial<Record<GuestKey, Attendance>>;
 
 // FIXME: add subtext and another area for more text?
 
