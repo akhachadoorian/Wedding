@@ -86,7 +86,9 @@ export function getPartyFromId(
     return guests?.find((g) => g.id === partyId) ?? null;
 }
 
-type AttendanceResponse = Partial<Record<GuestKey, boolean>>;
+export type Attendance = "Attending" | "Declining" | "Unknown";
+
+type AttendanceResponse = Partial<Record<GuestKey, Attendance>>;
 
 // FIXME: add subtext and another area for more text?
 
@@ -222,8 +224,8 @@ export function getQuestionAnswerParty<K extends RSVPDraftKey>(draft: RSVPDraft,
 export function determineNotComing(answer: Responses | null, party: GuestParty) {
     const { guest2 } = party;
 
-    const g1NotComing = answer?.guest1 === false;
-    const g2NotComing = !guest2 || answer?.guest2 === false;
+    const g1NotComing = answer?.guest1 === "Declining";
+    const g2NotComing = !guest2 || answer?.guest2 === "Declining";
 
     return g1NotComing && g2NotComing;
 }

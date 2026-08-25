@@ -1,4 +1,4 @@
-import { YesNoBooleanSwitchField } from "../FormInputs";
+import { SwitchField } from "../FormInputs";
 import { useRSVPForm } from "../RSVPFormContext";
 import {
     getQuestionAnswerParty,
@@ -39,7 +39,7 @@ export default function StepFive() {
                 className="w-full flex flex-col gap-500"
             >
                 <div className="flex flex-col gap-500 divide-y divide-gray">
-                    <YesNoBooleanSwitchField layout="row" switchProps={{
+                    <SwitchField layout="row" switchProps={{
                         name: "rehearsalMixer-guest1",
                         onChange:(value) =>
                                 handleGuestUpdate(
@@ -47,12 +47,14 @@ export default function StepFive() {
                                     'guest1',
                                     value,
                                 ),
+                        option_1: { label: "Yes", value: true },
+                        option_2: { label: "No", value: false },
                         currValue: answers?.guest1
                     }} />
 
        
                            {guest2 && (
-                            <YesNoBooleanSwitchField layout="row" switchProps={{
+                            <SwitchField layout="row" switchProps={{
                         name: "rehearsalMixer-guest2",
                         onChange:(value) =>
                                 handleGuestUpdate(
@@ -60,6 +62,8 @@ export default function StepFive() {
                                     'guest2',
                                     value,
                                 ),
+                        option_1: { label: "Yes", value: true },
+                        option_2: { label: "No", value: false },
                         currValue: answers?.guest2
                     }} />
                            )}

@@ -37,17 +37,17 @@
     --font-sans: var(--font-unbounded);
 
     /* Text Sizes */
-    --font-size-xs: var(--text-xs);
-    --font-size-s: var(--text-s);
-    --font-size-base: var(--text-base);
-    --font-size-md: var(--text-md);
-    --font-size-lg: var(--text-lg);
-    --font-size-xl: var(--text-xl);
-    --font-size-2xl: var(--text-2xl);
-    --font-size-3xl: var(--text-3xl);
-    --font-size-4xl: var(--text-4xl);
-    --font-size-5xl: var(--text-5xl);
-    --font-size-6xl: var(--text-6xl);
+    --text-xs: var(--text-xs);
+    --text-s: var(--text-s);
+    --text-base: var(--text-base);
+    --text-md: var(--text-md);
+    --text-lg: var(--text-lg);
+    --text-xl: var(--text-xl);
+    --text-2xl: var(--text-2xl);
+    --text-3xl: var(--text-3xl);
+    --text-4xl: var(--text-4xl);
+    --text-5xl: var(--text-5xl);
+    --text-6xl: var(--text-6xl);
 
     /* Spacing */
     --spacing-0: var(--space-0); /* 0px */
