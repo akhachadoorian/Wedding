@@ -1,7 +1,7 @@
 import { WithHTMLProps } from "@/types/props";
-import { InvertRecord, NonEmptyArray } from "@/types/utility";
+import { InvertRecord, NonEmptyArray, TextValueOption } from "@/types/utility";
 import { STEP_FIVE_TEXT, STEP_FOUR_TEXT, STEP_ONE_TEXT, STEP_THREE_TEXT, STEP_TWO_TEXT } from "./content";
-import { ExpandedTextValueOptions } from "./FormInputs";
+import { ExpandedTextValueOptions, SwitchOption } from "./FormInputs";
 
 export type Guest = {
     firstName: string;
@@ -86,7 +86,27 @@ export function getPartyFromId(
     return guests?.find((g) => g.id === partyId) ?? null;
 }
 
-export type Attendance = "Attending" | "Declining" | "Unknown";
+export const ATTENDANCE_OPTIONS = [
+    {
+        text: "Attending",
+        value: "Attending",
+    },
+    {
+        text: "Declining",
+        value: "Declining",
+    },
+    {
+        text: "Unknown",
+        value: "Unknown",
+    },
+] as const satisfies NonEmptyArray<TextValueOption>;
+
+export type Attendance = (typeof ATTENDANCE_OPTIONS)[number]["value"];
+
+export type AttendanceOption = SwitchOption<Attendance>;
+
+
+
 
 type AttendanceResponse = Partial<Record<GuestKey, Attendance>>;
 
@@ -158,7 +178,7 @@ export type Transportation = {
 
 type TransportationResponse = Partial<Record<GuestKey, Transportation>>;
 
-type RehearsalMixerResponse = Partial<Record<GuestKey, boolean>>;
+type RehearsalMixerResponse = Partial<Record<GuestKey, Attendance>>;
 
 export type Responses = AttendanceResponse | WeddingMealResponse | TransportationResponse | RehearsalMixerResponse
 

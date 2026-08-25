@@ -48,7 +48,7 @@ export function SwitchField<V = string>({
 
 
 
-interface SwitchOption<V> {
+export interface SwitchOption<V> {
     label: string;
     value: V;
 }

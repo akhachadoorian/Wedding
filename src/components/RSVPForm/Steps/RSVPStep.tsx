@@ -112,9 +112,9 @@ function RSVPStepTextCentered({
 }: RSVPStepTextProps) {
     return (
         <div {...htmlProps} className={cn("rsvp_step_text text-center md:max-w-[60.417vw]", className)}>
-            <p className="uppercase mb-400! font-sans! font-semibold md:text-xl text-md!">{eyebrow}</p>
+            {eyebrow && (<Eyebrow text={eyebrow} styleOptions={{variation: 'center', includeMargin: false}} className={"mb-400!"}  />)}            
             
-            <h2 className={cn("leading-[130%]!", stepNumber === 1 ? "text-[200px]" : "text-6xl!")}>{title}</h2>
+            <h2 className={cn( stepNumber === 1 ? "md:text-[175px]!" : "text-6xl!", "leading-[130%]!")}>{title}</h2>
 
             {body && <p className="body-l rsvp_step_text-body mt-300!">{body}</p>}
         </div>
@@ -206,7 +206,7 @@ interface GuestLabelInputWrapperProps {
 export function GuestLabelInputWrapper({guest, children, layout = "column", className}: GuestLabelInputWrapperProps) {
     if (layout === 'row') {
         return (
-            <div className={cn("flex flex-col md:flex-row md:justify-between gap-200", className)}>
+            <div className={cn("flex flex-col md:flex-row md:justify-center gap-700", className)}>
                 <h4>
                     {guest.firstName} {guest.lastName}
                 </h4>
