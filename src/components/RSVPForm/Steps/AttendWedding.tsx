@@ -1,13 +1,9 @@
 import { cn } from "@/utils/cn";
 import { Switch } from "../FormInputs";
-import { useRSVPForm } from "../RSVPFormContext";
 import {
     ATTENDING_OPTION,
     DECLINING_OPTION,
     determineFullPartyComing,
-    determineGuestComing,
-    getQuestionAnswerParty,
-    hasAnsweredQuestion,
     RSVP_KEY_BY_STEP
 } from "../types";
 import {
@@ -16,26 +12,19 @@ import {
     RSVPStepVertical,
 } from "./RSVPStep";
 import { useHandleGuestUpdate } from "./useHandleGuestUpdate";
+import { useStepAnswers } from "./useStepAnswers";
 import { useStepSubmit } from "./useStepSubmit";
 
-// const STEP_TWO_DRAFT_KEY = 'attendance'
 const STEP_NUM = 2;
 const KEY = RSVP_KEY_BY_STEP[STEP_NUM];
 
 export default function AttendWedding() {
-    const { party, draft } = useRSVPForm();
-    // return error if null?
-    if (party === null) return null; // todo: display error
+    const stepAnswers = useStepAnswers("attendance", { skipGating: true });
+    if (!stepAnswers) return null;
 
-    // Get party
-    const { guest1, guest2 } = party;
+    const { party, guest1, guest2, answers, allAnswered } = stepAnswers;
     const { handleGuestUpdate } = useHandleGuestUpdate();
 
-    const answers = getQuestionAnswerParty(draft, "attendance");
-    const g = determineGuestComing('guest2', draft)
-    console.log("G", g)
-
-    const allAnswered = hasAnsweredQuestion(party, draft, "attendance", {renderGuestOne: true, renderGuestTwo: true});
     const notComing = determineFullPartyComing(answers, party);
 
     const overrideNext =

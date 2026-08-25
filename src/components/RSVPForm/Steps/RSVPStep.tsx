@@ -14,7 +14,6 @@ import AttendRehearsalMixer from "./AttendRehearsalMixer";
 import AttendWedding from "./AttendWedding";
 import MealSelection from "./MealSelection";
 import SearchRSVP from "./SearchingLive";
-import StepFour from "./Transportation";
 import Transportation from "./Transportation";
 
 export default function RSVPStepHorizontal({

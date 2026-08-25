@@ -1,28 +1,20 @@
-import { guest } from "@/types/guestList";
 import { RadioButtons, TextArea } from "../FormInputs";
-import { useRSVPForm } from "../RSVPFormContext";
-import { getQuestionAnswerParty, Guest, GuestKey, hasAnsweredQuestion, Meal, MEAL_OPTIONS, renderFieldsForGuest, RSVP_KEY_BY_STEP, RSVPDraftKey } from "../types";
+import { Guest, GuestKey, Meal, MEAL_OPTIONS, RSVP_KEY_BY_STEP } from "../types";
 import { GuestLabelInputWrapper, RSVPNavButtons, RSVPStepVertical } from "./RSVPStep";
 import { useHandleGuestUpdate } from "./useHandleGuestUpdate";
+import { useStepAnswers } from "./useStepAnswers";
 import { useStepSubmit } from "./useStepSubmit";
 import { cn } from "@/utils/cn";
 
 const STEP_NUM = 3
-const KEY = RSVP_KEY_BY_STEP[STEP_NUM] 
+const KEY = RSVP_KEY_BY_STEP[STEP_NUM]
 
 export default function MealSelection() {
-    const { party, draft } = useRSVPForm();
-    if (party === null) return null; // todo: display error
-    
-    // Get party
-    const { guest1, guest2 } = party;
-    const answers = getQuestionAnswerParty(draft, KEY);
-    const {renderGuestOne, renderGuestTwo} = renderFieldsForGuest(draft, party) // todo: if both undefined error
+    const stepAnswers = useStepAnswers(KEY);
+    if (!stepAnswers) return null;
 
-    const allAnswered = hasAnsweredQuestion(party, draft, KEY, {renderGuestOne, renderGuestTwo})
-    console.log("allAnswered", allAnswered)
-
-     const { handleSubmit } = useStepSubmit({
+    const { guest1, guest2, answers, renderGuestOne, renderGuestTwo, allAnswered } = stepAnswers;
+    const { handleSubmit } = useStepSubmit({
         canAdvance: allAnswered,
     });
 

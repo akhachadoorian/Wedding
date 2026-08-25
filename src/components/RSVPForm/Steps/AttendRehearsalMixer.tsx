@@ -1,12 +1,8 @@
 import { cn } from "@/utils/cn";
 import { Switch } from "../FormInputs";
-import { useRSVPForm } from "../RSVPFormContext";
 import {
     ATTENDING_OPTION,
     DECLINING_OPTION,
-    getQuestionAnswerParty,
-    hasAnsweredQuestion,
-    renderFieldsForGuest,
     RSVP_KEY_BY_STEP
 } from "../types";
 import {
@@ -15,6 +11,7 @@ import {
     RSVPStepVertical,
 } from "./RSVPStep";
 import { useHandleGuestUpdate } from "./useHandleGuestUpdate";
+import { useStepAnswers } from "./useStepAnswers";
 import { useStepSubmit } from "./useStepSubmit";
 
 const STEP_NUM = 5;
@@ -22,17 +19,11 @@ const STEP_NUM = 5;
 const KEY = RSVP_KEY_BY_STEP[STEP_NUM];
 
 export default function AttendRehearsalMixer() {
-    const { party, draft } = useRSVPForm();
-    if (party === null) return null; // todo: display error
+    const stepAnswers = useStepAnswers(KEY);
+    if (!stepAnswers) return null;
 
-    // Get party
-    const { guest1, guest2 } = party;
-    const answers = getQuestionAnswerParty(draft, KEY);
-
+    const { guest1, guest2, answers, allAnswered } = stepAnswers;
     const { handleGuestUpdate } = useHandleGuestUpdate();
-     const {renderGuestOne, renderGuestTwo} = renderFieldsForGuest(draft, party) // todo: if both undefined error
-
-    const allAnswered = hasAnsweredQuestion(party, draft, KEY,  {renderGuestOne, renderGuestTwo});
     const overrideNext = allAnswered
         ? { disabled: false, coming: true }
         : undefined;

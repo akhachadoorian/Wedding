@@ -265,7 +265,7 @@ function RadioButton<V = string>({
                 />
             </span> */}
 
-            <div className="flex flex-col justify-center gap-100 text-center h-full">
+            <div className="flex flex-col justify-center gap-100 text-center h-full w-full">
                 <p className="text-md">{text}</p>
                 {/* {subtext && (<p className="italic  text-s text-cream/60">{subtext}</p>)} */}
                 {subtext && (

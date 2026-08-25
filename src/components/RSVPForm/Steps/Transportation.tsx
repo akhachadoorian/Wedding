@@ -2,13 +2,9 @@ import {
     RadioButtons,
     SwitchField,
 } from "../FormInputs";
-import { useRSVPForm } from "../RSVPFormContext";
 import {
-    getQuestionAnswerParty,
-    hasAnsweredQuestion,
     HOTEL_OPTIONS,
     isStayingAtHotel,
-    renderFieldsForGuest,
     RSVP_KEY_BY_STEP,
 } from "../types";
 import type { Guest, GuestKey, Transportation as TransportationAnswer } from "../types";
@@ -18,6 +14,7 @@ import {
     RSVPStepVertical,
 } from "./RSVPStep";
 import { useHandleGuestUpdate } from "./useHandleGuestUpdate";
+import { useStepAnswers } from "./useStepAnswers";
 import { useStepSubmit } from "./useStepSubmit";
 
 const STEP_NUM = 4;
@@ -25,19 +22,13 @@ const STEP_NUM = 4;
 const KEY = RSVP_KEY_BY_STEP[STEP_NUM];
 
 export default function Transportation() {
-    const { party, draft } = useRSVPForm();
-    if (party === null) return null; // todo: display error
+    const stepAnswers = useStepAnswers(KEY);
+    if (!stepAnswers) return null;
 
-    // Get party
-    const { guest1, guest2 } = party;
-    const answers = getQuestionAnswerParty(draft, KEY);
-    const {renderGuestOne, renderGuestTwo} = renderFieldsForGuest(draft, party) // todo: if both undefined error
-
-    const allAnswered = hasAnsweredQuestion(party, draft, KEY, {renderGuestOne, renderGuestTwo});
+    const { guest1, guest2, answers, renderGuestOne, renderGuestTwo, allAnswered } = stepAnswers;
     const { handleSubmit } = useStepSubmit({
         canAdvance: allAnswered,
     });
-    console.log("allAnswered", allAnswered)
 
     return (
         <RSVPStepVertical currStep={STEP_NUM}>
