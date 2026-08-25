@@ -47,6 +47,8 @@ function findMatchingGuestsByPrefix(guests: Guests | null, query: string): Guest
     return matches;
 }
 
+const MAX_WIDTH = '650px'
+
 export default function SearchRSVPLive() {
     const [query, setQuery] = useState("");
     const [debouncedQuery, setDebouncedQuery] = useState("");
@@ -83,7 +85,7 @@ export default function SearchRSVPLive() {
 
     return (
         <RSVPStepVertical currStep={1}>
-            <>
+            <div className="flex flex-col items-center gap-150">
                 <TextInput
                     name="party-search"
                     label="Search by Name"
@@ -91,6 +93,11 @@ export default function SearchRSVPLive() {
                     onChange={setQuery}
                     placeholder="Jane Doe"
                     hasError={false}
+                    className="max-w-[650px] w-full"
+                    styleOptions={{
+                        centerContent: true,
+                        maxInputWidth: MAX_WIDTH
+                    }}
                 />
 
                 <SearchResults
@@ -99,7 +106,7 @@ export default function SearchRSVPLive() {
                     searchResult={searchResult}
                     onSelectParty={handleSelectParty}
                 />
-            </>
+            </div>
         </RSVPStepVertical>
     );
 }
@@ -119,7 +126,7 @@ function SearchResults({
 }: SearchResultsProps) {
     if (trimmedLength < MIN_SEARCH_LENGTH) {
         return (
-            <p className="font-sans text-s text-[var(--cream-700)]">
+            <p className="font-sans body-xs italic! text-cream mt-200! opacity-55 text-center w-full">
                 Keep typing your name to search…
             </p>
         );
@@ -127,21 +134,21 @@ function SearchResults({
 
     if (isPending) {
         return (
-            <p className="font-sans text-s text-[var(--cream-700)]">Searching…</p>
+            <p className="font-sans body-xs italic! text-cream mt-200! opacity-55 text-center w-full">Searching…</p>
         );
     }
 
     if (searchResult === null || searchResult.length === 0) {
         return (
-            <p className="font-sans text-s text-[var(--cream-700)]">
+            <p className="font-sans body-xs italic! text-cream mt-200! opacity-55 text-center w-full">
                 No matches yet — check the spelling of your name.
             </p>
         );
     }
 
     return (
-        <div className="flex flex-col gap-150">
-            <AnimatePresence>
+        <div className="flex items-center flex-col gap-150 max-w-[650px] w-full overflow-x-hidden">
+            <AnimatePresence mode="popLayout">
                 {searchResult.map((party, index) => (
                     <motion.div
                         key={party.id}
@@ -150,10 +157,10 @@ function SearchResults({
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.25, ease: "easeOut", delay: index * 0.05 }}
-                        className="flex items-center justify-between gap-200 border border-[var(--cream-700)] px-300 py-200 font-sans text-[var(--black-700)]"
+                        className="box-border flex items-center justify-between gap-200 border border-cream px-300 py-200 font-sans text-(--black-700) w-full"
                     >
-                        <div className="flex flex-col">
-                            <span>{getNameString(party)}</span>
+                        <div className="flex flex-col min-w-0">
+                            <span className="truncate">{getNameString(party)}</span>
                             <span className="text-s opacity-70">
                                 Party of {partyGuestCount(party)}
                             </span>
@@ -167,6 +174,7 @@ function SearchResults({
                                 text: "This is us",
                                 onClick: () => onSelectParty(party),
                             }}
+                            className="shrink-0"
                         />
                     </motion.div>
                 ))}

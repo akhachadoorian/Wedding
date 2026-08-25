@@ -1,7 +1,6 @@
 import {
     RadioButtons,
-    YesNoBooleanSwitch,
-    YesNoBooleanSwitchField,
+    SwitchField,
 } from "../FormInputs";
 import { useRSVPForm } from "../RSVPFormContext";
 import {
@@ -112,7 +111,7 @@ function StepFourInputs({ guest, guestKey, answer }: StepFourInputsProps) {
                         currValue={answer?.stayingAt}
                     />
 
-                    <YesNoBooleanSwitchField
+                    <SwitchField
                         label="Will you use the complimentary shuttle to/from the venue?"
                         note="Please note: You must be staying at the three listed hotels"
                         switchProps={{
@@ -124,6 +123,8 @@ function StepFourInputs({ guest, guestKey, answer }: StepFourInputsProps) {
                                     "takingBus",
                                     value,
                                 ),
+                            option_1: { label: "Yes", value: true },
+                            option_2: { label: "No", value: false },
                             currValue: answer?.takingBus,
                             disabled: !canTakeBus
                         }}
