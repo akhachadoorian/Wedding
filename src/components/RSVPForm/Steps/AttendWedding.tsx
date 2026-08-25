@@ -22,7 +22,7 @@ import { useStepSubmit } from "./useStepSubmit";
 const STEP_NUM = 2;
 const KEY = RSVP_KEY_BY_STEP[STEP_NUM];
 
-export default function StepTwo() {
+export default function AttendWedding() {
     const { party, draft } = useRSVPForm();
     // return error if null?
     if (party === null) return null; // todo: display error
@@ -96,9 +96,9 @@ export default function StepTwo() {
                         </h3>
                     </div>
 
-                    <div className="flex flex-col gap-500 divide-y divide-gray">
+                    <div className="flex flex-col gap-500">
                         {/* Guest 1 */}
-                        <GuestLabelInputWrapper guest={guest1}>
+                        <GuestLabelInputWrapper guest={guest1} layout="row" >
                             <Switch
                                 name={"attendance-guest1"}
                                 onChange={(value) =>
@@ -112,7 +112,7 @@ export default function StepTwo() {
 
                         {/* Guest 2 */}
                         {guest2 && (
-                            <GuestLabelInputWrapper guest={guest2}>
+                            <GuestLabelInputWrapper guest={guest2} layout="row" className="border-t border-gray pt-500">
                                 <Switch
                                     name={"attendance-guest2"}
                                     onChange={(value) =>
