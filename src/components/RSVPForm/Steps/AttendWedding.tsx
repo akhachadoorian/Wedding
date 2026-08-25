@@ -2,13 +2,13 @@ import { cn } from "@/utils/cn";
 import { Switch } from "../FormInputs";
 import { useRSVPForm } from "../RSVPFormContext";
 import {
-    AttendanceOption,
-    determineNotComing,
+    ATTENDING_OPTION,
+    DECLINING_OPTION,
+    determineFullPartyComing,
+    determineGuestComing,
     getQuestionAnswerParty,
     hasAnsweredQuestion,
-    partyGuestCount,
-    Responses,
-    RSVP_KEY_BY_STEP,
+    RSVP_KEY_BY_STEP
 } from "../types";
 import {
     GuestLabelInputWrapper,
@@ -32,10 +32,11 @@ export default function AttendWedding() {
     const { handleGuestUpdate } = useHandleGuestUpdate();
 
     const answers = getQuestionAnswerParty(draft, "attendance");
+    const g = determineGuestComing('guest2', draft)
+    console.log("G", g)
 
-
-    const allAnswered = hasAnsweredQuestion(party, draft, "attendance");
-    const notComing = determineNotComing(answers, party);
+    const allAnswered = hasAnsweredQuestion(party, draft, "attendance", {renderGuestOne: true, renderGuestTwo: true});
+    const notComing = determineFullPartyComing(answers, party);
 
     const overrideNext =
         allAnswered && notComing
@@ -53,16 +54,6 @@ export default function AttendWedding() {
 
     const eyebrowClass =
         "flex-1 font-sans text-xs md:text-base uppercase font-normal leading-[140%] tracking-[1px] md:tracking-[2px] ";
-
-    const option_1: AttendanceOption = {
-        label: 'Attending',
-        value: 'Attending',
-    }
-
-    const option_2: AttendanceOption = {
-        label: 'Declining',
-        value: 'Declining',
-    }
 
     return (
         <RSVPStepVertical currStep={STEP_NUM}>
@@ -96,7 +87,7 @@ export default function AttendWedding() {
                         </h3>
                     </div>
 
-                    <div className="flex flex-col gap-500">
+                    <div className="flex flex-col gap-700">
                         {/* Guest 1 */}
                         <GuestLabelInputWrapper guest={guest1} layout="row" >
                             <Switch
@@ -104,22 +95,22 @@ export default function AttendWedding() {
                                 onChange={(value) =>
                                     handleGuestUpdate(KEY, "guest1", value)
                                 }
-                                option_1={option_1}
-                                option_2={option_2}
+                                option_1={ATTENDING_OPTION}
+                                option_2={DECLINING_OPTION}
                                 currValue={answers?.guest1}
                             />
                         </GuestLabelInputWrapper>
 
                         {/* Guest 2 */}
                         {guest2 && (
-                            <GuestLabelInputWrapper guest={guest2} layout="row" className="border-t border-gray pt-500">
+                            <GuestLabelInputWrapper guest={guest2} layout="row" className="border-t border-gray pt-700">
                                 <Switch
                                     name={"attendance-guest2"}
                                     onChange={(value) =>
                                         handleGuestUpdate(KEY, "guest2", value)
                                     }
-                                    option_1={option_1}
-                                    option_2={option_2}
+                                    option_1={ATTENDING_OPTION}
+                                    option_2={DECLINING_OPTION}
                                     currValue={answers?.guest2}
                                 />
                             </GuestLabelInputWrapper>

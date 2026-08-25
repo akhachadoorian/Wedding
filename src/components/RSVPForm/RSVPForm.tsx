@@ -11,10 +11,10 @@ import "./RSVPForm.scss";
 import { RSVPFormProvider, useRSVPForm } from "./RSVPFormContext";
 import StepTwo from "./Steps/AttendWedding";
 import { GuestParty, RSVPDraft } from "./types";
-import StepThree from "./Steps/Step3";
+import StepThree from "./Steps/MealSelection";
 import RSVPThankYou from "./RSVPThankYou";
-import StepFour from "./Steps/Step4";
-import StepFive from "./Steps/Step5";
+import StepFour from "./Steps/Transportation";
+import StepFive from "./Steps/AttendRehearsalMixer";
 import Star from "@/icons/Star";
 import { RenderSteps } from "./Steps/RSVPStep";
 

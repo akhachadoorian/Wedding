@@ -147,7 +147,7 @@ function SearchResults({
     }
 
     return (
-        <div className="flex items-center flex-col gap-150 max-w-[650px] w-full overflow-x-hidden">
+        <div className="flex items-center flex-col gap-150 max-w-[650px] w-full overflow-hidden">
             <AnimatePresence mode="popLayout">
                 {searchResult.map((party, index) => (
                     <motion.div

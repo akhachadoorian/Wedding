@@ -235,13 +235,13 @@ export async function POST(request: NextRequest) {
 
     try {
         await updateRecord<GuestFields>(GUESTS_TABLE, guest1Record.id, {
-            attending: attendance.guest1 ? "Attending" : "Declining",
+            attending: attendance.guest1 ? "attending" : "declining",
             updatedOn: updatedAt,
         });
 
         if (guest2Record && party.guest2) {
             await updateRecord<GuestFields>(GUESTS_TABLE, guest2Record.id, {
-                // attending: attendance.guest2 === 'attending' ? "Attending" : "Declining",
+                attending: attendance.guest2 ? "attending" : "declining",
                 updatedOn: updatedAt,
             });
         }
