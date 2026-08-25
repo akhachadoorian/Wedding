@@ -1,6 +1,5 @@
 import {
     RadioButtons,
-    Switch,
     SwitchField,
 } from "../FormInputs";
 import { useRSVPForm } from "../RSVPFormContext";
