@@ -77,14 +77,14 @@ export default function RSVPForm({
                 <RSVPFormError key="error" errorMessage={guestsError} onRetry={onRetry} />
             ) : (
                 <RSVPFormProvider value={{ step, goToStep, draft, setDraft, guests, party, setParty, refetchGuests: onRetry }}>
-                    <AnimatePresence mode="wait">
+                    <AnimatePresence mode="popLayout">
                         <motion.div
                             key={step}
                             variants={stepVariants}
                             initial="enter"
                             animate="center"
                             exit="exit"
-                            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                            transition={{ duration: 0.35, ease: "easeInOut" }}
                             className="rsvp_form-steps"
                         >
                             <RenderSteps />
