@@ -27,9 +27,9 @@ export type RSVPFormProps = WithHTMLProps & {
 };
 
 const stepVariants = {
-    enter: { opacity: 0 },
-    center: { opacity: 1 },
-    exit: { opacity: 0 },
+    enter: { opacity: 0, y: 12 },
+    center: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -12 },
 };
 
 
@@ -85,7 +85,7 @@ export default function RSVPForm({
                                 initial="enter"
                                 animate="center"
                                 exit="exit"
-                                transition={{ duration: 0.4, ease: "easeInOut" }}
+                                transition={{ duration: 0.28, ease: "easeOut" }}
                                 className="rsvp_form-steps [grid-area:1/1]"
                             >
                                 <RenderSteps step={step} />
