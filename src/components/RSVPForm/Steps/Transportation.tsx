@@ -2,42 +2,33 @@ import {
     RadioButtons,
     SwitchField,
 } from "../FormInputs";
-import { useRSVPForm } from "../RSVPFormContext";
 import {
-    getQuestionAnswerParty,
-    Guest,
-    GuestKey,
-    hasAnsweredQuestion,
     HOTEL_OPTIONS,
     isStayingAtHotel,
     RSVP_KEY_BY_STEP,
-    Transportation,
 } from "../types";
+import type { Guest, GuestKey, Transportation as TransportationAnswer } from "../types";
 import {
     GuestLabelInputWrapper,
     RSVPNavButtons,
     RSVPStepVertical,
 } from "./RSVPStep";
 import { useHandleGuestUpdate } from "./useHandleGuestUpdate";
+import { useStepAnswers } from "./useStepAnswers";
 import { useStepSubmit } from "./useStepSubmit";
 
 const STEP_NUM = 4;
 
 const KEY = RSVP_KEY_BY_STEP[STEP_NUM];
 
-export default function StepFour() {
-    const { party, draft } = useRSVPForm();
-    if (party === null) return null; // todo: display error
+export default function Transportation() {
+    const stepAnswers = useStepAnswers(KEY);
+    if (!stepAnswers) return null;
 
-    // Get party
-    const { guest1, guest2 } = party;
-    const answers = getQuestionAnswerParty(draft, KEY);
-
-    const allAnswered = hasAnsweredQuestion(party, draft, KEY);
+    const { guest1, guest2, answers, renderGuestOne, renderGuestTwo, allAnswered } = stepAnswers;
     const { handleSubmit } = useStepSubmit({
         canAdvance: allAnswered,
     });
-    console.log("allAnswered", allAnswered)
 
     return (
         <RSVPStepVertical currStep={STEP_NUM}>
@@ -46,13 +37,14 @@ export default function StepFour() {
                 className="w-full flex flex-col gap-500"
             >
                 <div className="flex flex-col gap-500 divide-y divide-gray">
-                    <StepFourInputs
+                    {renderGuestOne && ( <StepFourInputs
                         guest={guest1}
                         guestKey="guest1"
                         answer={answers?.guest1}
-                    />
+                    />)}
+                   
 
-                    {guest2 && (
+                    {guest2 && renderGuestTwo && (
                         <StepFourInputs
                             guest={guest2}
                             guestKey="guest2"
@@ -73,7 +65,7 @@ export default function StepFour() {
 interface StepFourInputsProps {
     guest: Guest;
     guestKey: GuestKey;
-    answer: Transportation | undefined;
+    answer: TransportationAnswer | undefined;
 }
 
 function StepFourInputs({ guest, guestKey, answer }: StepFourInputsProps) {
@@ -86,7 +78,7 @@ function StepFourInputs({ guest, guestKey, answer }: StepFourInputsProps) {
 
     return (
         <div className="">
-            <GuestLabelInputWrapper guest={guest}>
+            <GuestLabelInputWrapper guest={guest} centerHeader={true}>
                 <div className="flex flex-col gap-500">
                     <RadioButtons
                         label="Hotel"
@@ -123,8 +115,8 @@ function StepFourInputs({ guest, guestKey, answer }: StepFourInputsProps) {
                                     "takingBus",
                                     value,
                                 ),
-                            option_1: { label: "Yes", value: true },
-                            option_2: { label: "No", value: false },
+                            option_1: { text: "Yes", value: true },
+                            option_2: { text: "No", value: false },
                             currValue: answer?.takingBus,
                             disabled: !canTakeBus
                         }}

@@ -10,11 +10,11 @@ import {
     RSVPStepProps,
     RSVPStepTextProps
 } from "../types";
+import AttendRehearsalMixer from "./AttendRehearsalMixer";
 import AttendWedding from "./AttendWedding";
+import MealSelection from "./MealSelection";
 import SearchRSVP from "./SearchingLive";
-import StepThree from "./Step3";
-import StepFour from "./Step4";
-import StepFive from "./Step5";
+import Transportation from "./Transportation";
 
 export default function RSVPStepHorizontal({
     currStep,
@@ -200,14 +200,15 @@ interface GuestLabelInputWrapperProps {
     guest: Guest;
     children: React.ReactNode;
     layout?: 'row' | 'column'
+    centerHeader?: boolean
     className?: string
 }
 
-export function GuestLabelInputWrapper({guest, children, layout = "column", className}: GuestLabelInputWrapperProps) {
+export function GuestLabelInputWrapper({guest, children, layout = "column", centerHeader = false, className}: GuestLabelInputWrapperProps) {
     if (layout === 'row') {
         return (
             <div className={cn("flex flex-col md:flex-row md:justify-center gap-700", className)}>
-                <h4>
+                <h4 className={cn("heading-l", centerHeader && 'text-center')}>
                     {guest.firstName} {guest.lastName}
                 </h4>
 
@@ -217,8 +218,8 @@ export function GuestLabelInputWrapper({guest, children, layout = "column", clas
     }
 
     return (
-            <div className={cn("flex flex-col  gap-200", className)}>
-                <h4>
+            <div className={cn("flex flex-col gap-400", className)}>
+                <h4 className={cn("heading-l", centerHeader && 'text-center')}>
                     {guest.firstName} {guest.lastName}
                 </h4>
 
@@ -240,11 +241,11 @@ export function RenderSteps({ step }: { step: number }) {
         case 2:
             return <AttendWedding />
         case 3: 
-            return <StepThree />
+            return <MealSelection />
         case 4:
-            return <StepFour />
+            return <Transportation />
         case 5:
-            return <StepFive />
+            return <AttendRehearsalMixer />
         default:
             return <RSVPFormError key="error" errorMessage={"Error"} onRetry={refetchGuests} /> // TODO: add error message
 

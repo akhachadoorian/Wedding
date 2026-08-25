@@ -1,14 +1,10 @@
 import { cn } from "@/utils/cn";
 import { Switch } from "../FormInputs";
-import { useRSVPForm } from "../RSVPFormContext";
 import {
-    AttendanceOption,
-    determineNotComing,
-    getQuestionAnswerParty,
-    hasAnsweredQuestion,
-    partyGuestCount,
-    Responses,
-    RSVP_KEY_BY_STEP,
+    ATTENDING_OPTION,
+    DECLINING_OPTION,
+    determineFullPartyComing,
+    RSVP_KEY_BY_STEP
 } from "../types";
 import {
     GuestLabelInputWrapper,
@@ -16,26 +12,20 @@ import {
     RSVPStepVertical,
 } from "./RSVPStep";
 import { useHandleGuestUpdate } from "./useHandleGuestUpdate";
+import { useStepAnswers } from "./useStepAnswers";
 import { useStepSubmit } from "./useStepSubmit";
 
-// const STEP_TWO_DRAFT_KEY = 'attendance'
 const STEP_NUM = 2;
 const KEY = RSVP_KEY_BY_STEP[STEP_NUM];
 
 export default function AttendWedding() {
-    const { party, draft } = useRSVPForm();
-    // return error if null?
-    if (party === null) return null; // todo: display error
+    const stepAnswers = useStepAnswers("attendance", { skipGating: true });
+    if (!stepAnswers) return null;
 
-    // Get party
-    const { guest1, guest2 } = party;
+    const { party, guest1, guest2, answers, allAnswered } = stepAnswers;
     const { handleGuestUpdate } = useHandleGuestUpdate();
 
-    const answers = getQuestionAnswerParty(draft, "attendance");
-
-
-    const allAnswered = hasAnsweredQuestion(party, draft, "attendance");
-    const notComing = determineNotComing(answers, party);
+    const notComing = determineFullPartyComing(answers, party);
 
     const overrideNext =
         allAnswered && notComing
@@ -53,16 +43,6 @@ export default function AttendWedding() {
 
     const eyebrowClass =
         "flex-1 font-sans text-xs md:text-base uppercase font-normal leading-[140%] tracking-[1px] md:tracking-[2px] ";
-
-    const option_1: AttendanceOption = {
-        label: 'Attending',
-        value: 'Attending',
-    }
-
-    const option_2: AttendanceOption = {
-        label: 'Declining',
-        value: 'Declining',
-    }
 
     return (
         <RSVPStepVertical currStep={STEP_NUM}>
@@ -96,7 +76,7 @@ export default function AttendWedding() {
                         </h3>
                     </div>
 
-                    <div className="flex flex-col gap-500">
+                    <div className="flex flex-col gap-700">
                         {/* Guest 1 */}
                         <GuestLabelInputWrapper guest={guest1} layout="row" >
                             <Switch
@@ -104,22 +84,22 @@ export default function AttendWedding() {
                                 onChange={(value) =>
                                     handleGuestUpdate(KEY, "guest1", value)
                                 }
-                                option_1={option_1}
-                                option_2={option_2}
+                                option_1={ATTENDING_OPTION}
+                                option_2={DECLINING_OPTION}
                                 currValue={answers?.guest1}
                             />
                         </GuestLabelInputWrapper>
 
                         {/* Guest 2 */}
                         {guest2 && (
-                            <GuestLabelInputWrapper guest={guest2} layout="row" className="border-t border-gray pt-500">
+                            <GuestLabelInputWrapper guest={guest2} layout="row" className="border-t border-gray pt-700">
                                 <Switch
                                     name={"attendance-guest2"}
                                     onChange={(value) =>
                                         handleGuestUpdate(KEY, "guest2", value)
                                     }
-                                    option_1={option_1}
-                                    option_2={option_2}
+                                    option_1={ATTENDING_OPTION}
+                                    option_2={DECLINING_OPTION}
                                     currValue={answers?.guest2}
                                 />
                             </GuestLabelInputWrapper>

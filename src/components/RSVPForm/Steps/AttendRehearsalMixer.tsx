@@ -1,11 +1,9 @@
 import { cn } from "@/utils/cn";
-import { Switch, SwitchField } from "../FormInputs";
-import { useRSVPForm } from "../RSVPFormContext";
+import { Switch } from "../FormInputs";
 import {
-    AttendanceOption,
-    getQuestionAnswerParty,
-    hasAnsweredQuestion,
-    RSVP_KEY_BY_STEP,
+    ATTENDING_OPTION,
+    DECLINING_OPTION,
+    RSVP_KEY_BY_STEP
 } from "../types";
 import {
     GuestLabelInputWrapper,
@@ -13,23 +11,19 @@ import {
     RSVPStepVertical,
 } from "./RSVPStep";
 import { useHandleGuestUpdate } from "./useHandleGuestUpdate";
+import { useStepAnswers } from "./useStepAnswers";
 import { useStepSubmit } from "./useStepSubmit";
 
 const STEP_NUM = 5;
 
 const KEY = RSVP_KEY_BY_STEP[STEP_NUM];
 
-export default function StepFive() {
-    const { party, draft } = useRSVPForm();
-    if (party === null) return null; // todo: display error
+export default function AttendRehearsalMixer() {
+    const stepAnswers = useStepAnswers(KEY);
+    if (!stepAnswers) return null;
 
-    // Get party
-    const { guest1, guest2 } = party;
-    const answers = getQuestionAnswerParty(draft, KEY);
-
+    const { guest1, guest2, answers, allAnswered } = stepAnswers;
     const { handleGuestUpdate } = useHandleGuestUpdate();
-
-    const allAnswered = hasAnsweredQuestion(party, draft, KEY);
     const overrideNext = allAnswered
         ? { disabled: false, coming: true }
         : undefined;
@@ -38,17 +32,7 @@ export default function StepFive() {
         overrideNext,
     });
 
-    const option_1: AttendanceOption = {
-        label: "Attending",
-        value: "Attending",
-    };
-
-    const option_2: AttendanceOption = {
-        label: "Declining",
-        value: "Declining",
-    };
-
-       const eyebrowClass =
+    const eyebrowClass =
         "flex-1 font-sans text-xs md:text-base uppercase font-normal leading-[140%] tracking-[1px] md:tracking-[2px] ";
 
     return (
@@ -73,7 +57,7 @@ export default function StepFive() {
                             >
                                 Maggiano's Little Italy
                                 <br />
-                               St. Johns Town Center
+                                St. Johns Town Center
                             </p>
                             <p
                                 className={cn(
@@ -87,9 +71,8 @@ export default function StepFive() {
                             </p>
                         </div>
 
-                        <h3 
+                        <h3
                             className="font-sans! text-4xl! font-semibold leading-normal tracking-[1.4px] uppercase text-center text-burgundy"
-                            // className="font-sans! text-xl font-semibold leading-normal tracking-[1.4px] uppercase text-center"
                         >
                             Rehearsal Mixer
                         </h3>
@@ -103,8 +86,8 @@ export default function StepFive() {
                                 onChange={(value) =>
                                     handleGuestUpdate(KEY, "guest1", value)
                                 }
-                                option_1={option_1}
-                                option_2={option_2}
+                                option_1={ATTENDING_OPTION}
+                                option_2={DECLINING_OPTION}
                                 currValue={answers?.guest1}
                             />
                         </GuestLabelInputWrapper>
@@ -121,8 +104,8 @@ export default function StepFive() {
                                     onChange={(value) =>
                                         handleGuestUpdate(KEY, "guest2", value)
                                     }
-                                    option_1={option_1}
-                                    option_2={option_2}
+                                    option_1={ATTENDING_OPTION}
+                                    option_2={DECLINING_OPTION}
                                     currValue={answers?.guest2}
                                 />
                             </GuestLabelInputWrapper>
