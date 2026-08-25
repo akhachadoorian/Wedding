@@ -77,19 +77,21 @@ export default function RSVPForm({
                 <RSVPFormError key="error" errorMessage={guestsError} onRetry={onRetry} />
             ) : (
                 <RSVPFormProvider value={{ step, goToStep, draft, setDraft, guests, party, setParty, refetchGuests: onRetry }}>
-                    <AnimatePresence mode="popLayout">
-                        <motion.div
-                            key={step}
-                            variants={stepVariants}
-                            initial="enter"
-                            animate="center"
-                            exit="exit"
-                            transition={{ duration: 0.35, ease: "easeInOut" }}
-                            className="rsvp_form-steps"
-                        >
-                            <RenderSteps />
-                        </motion.div>
-                    </AnimatePresence>
+                    <div className="relative grid">
+                        <AnimatePresence>
+                            <motion.div
+                                key={step}
+                                variants={stepVariants}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
+                                transition={{ duration: 0.4, ease: "easeInOut" }}
+                                className="rsvp_form-steps [grid-area:1/1]"
+                            >
+                                <RenderSteps step={step} />
+                            </motion.div>
+                        </AnimatePresence>
+                    </div>
                 </RSVPFormProvider>
             )}
         </div>
