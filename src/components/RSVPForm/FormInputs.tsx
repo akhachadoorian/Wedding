@@ -413,7 +413,7 @@ export function TextArea({
                 placeholder={placeholder ? placeholder : ""}
                 rows={rows}
                 cols={cols}
-                className="bg-black p-200 font-sans text-base resize-y"
+                className="bg-black p-200 font-sans text-base resize-y max-w-[650px] w-full mx-auto"
             />
         </div>
     );

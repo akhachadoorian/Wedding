@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 import { ArrowClockwiseIcon, WarningIcon } from "@phosphor-icons/react";
 import useGuests from "../../hooks/useGuests";
@@ -25,6 +26,12 @@ export type RSVPFormProps = WithHTMLProps & {
     // steps: NonEmptyArray<RSVPStepProps>;
 };
 
+const stepVariants = {
+    enter: { opacity: 0, y: 12 },
+    center: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -12 },
+};
+
 
 export default function RSVPForm({
     // progressBar,
@@ -34,9 +41,9 @@ export default function RSVPForm({
     ...htmlProps
 }: RSVPFormProps) {
     const [step, setStep] = useState(1);
-    const goToStep = (step: number) => {
-        console.log("go to step ", step)
-        setStep(step)
+    const goToStep = (nextStep: number) => {
+        console.log("go to step ", nextStep)
+        setStep(nextStep)
 
     }
     // FIXME:
@@ -70,8 +77,20 @@ export default function RSVPForm({
                 <RSVPFormError key="error" errorMessage={guestsError} onRetry={onRetry} />
             ) : (
                 <RSVPFormProvider value={{ step, goToStep, draft, setDraft, guests, party, setParty, refetchGuests: onRetry }}>
-                    <div key="steps" className="rsvp_form-steps rsvp_form-status">
-                        <RenderSteps />
+                    <div className="relative grid">
+                        <AnimatePresence>
+                            <motion.div
+                                key={step}
+                                variants={stepVariants}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
+                                transition={{ duration: 0.28, ease: "easeOut" }}
+                                className="rsvp_form-steps [grid-area:1/1]"
+                            >
+                                <RenderSteps step={step} />
+                            </motion.div>
+                        </AnimatePresence>
                     </div>
                 </RSVPFormProvider>
             )}

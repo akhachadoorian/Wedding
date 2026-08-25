@@ -228,8 +228,8 @@ export function GuestLabelInputWrapper({guest, children, layout = "column", cent
         );
 }
 
-export function RenderSteps() {
-    const { step, refetchGuests } = useRSVPForm();
+export function RenderSteps({ step }: { step: number }) {
+    const { refetchGuests } = useRSVPForm();
 
     switch (step) {
         case -2:
