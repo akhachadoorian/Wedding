@@ -48,7 +48,7 @@ export function SwitchField<V = string>({
 
 
 
-interface SwitchOption<V> {
+export interface SwitchOption<V> {
     label: string;
     value: V;
 }
@@ -75,15 +75,15 @@ export function Switch<V = string>({
             className="rsvp_switch_group relative flex border border-cream p-100"
             role="radiogroup"
         >
-            {/* FIXME: FIX */}
-            {/* <span
+            <span
                 className={cn(
                     "rsvp_switch_group-thumb",
-                    currValue === false && "rsvp_switch_group-thumb-no",
+                    currValue === option_2.value &&
+                        "rsvp_switch_group-thumb-active",
                 )}
                 style={{ opacity: currValue === undefined ? 0 : 1 }}
                 aria-hidden="true"
-            /> */}
+            />
 
             <SwitchOptionInput
                 name={name}

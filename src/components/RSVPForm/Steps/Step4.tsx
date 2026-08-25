@@ -89,7 +89,7 @@ function StepFourInputs({ guest, guestKey, answer }: StepFourInputsProps) {
             <GuestLabelInputWrapper guest={guest}>
                 <div className="flex flex-col gap-500">
                     <RadioButtons
-                        label="Meal"
+                        label="Hotel"
                         name={hotelInputName}
                         options={HOTEL_OPTIONS}
                         onChange={(value) => {

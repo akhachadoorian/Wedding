@@ -21,12 +21,6 @@ export const STEP_ONE_TEXT: RSVPStepTextProps = {
 
 // #region --- 2 ---
 
-// export const WEDDING_RSVP: RSVPStepTextProps = {
-//     stepNumber: 2,
-//     title: "Who's Coming?",
-//     body: "Let us know who from your party will be joining us on the day.",
-// };
-
 export const STEP_TWO_TEXT: RSVPStepTextProps = {
     stepNumber: 2,
     eyebrow: "Attendance",
@@ -38,7 +32,8 @@ export const STEP_TWO_TEXT: RSVPStepTextProps = {
 // #region --- 3 ---
 export const STEP_THREE_TEXT: RSVPStepTextProps = {
     stepNumber: 3,
-    title: "Meal Selection",
+    eyebrow: "Meal Selection",
+    title: "What's on the Menu?",
     body: "Please choose a meal preference for each guest attending. Let us know about any dietary restrictions or allergies in the field below.",
 };
 
@@ -47,17 +42,21 @@ export const STEP_THREE_TEXT: RSVPStepTextProps = {
 // #region --- 4 ---
 export const STEP_FOUR_TEXT: RSVPStepTextProps = {
     stepNumber: 4,
-    title: "Hotel / Bus", // FIXME: 
-    body: "",
+    eyebrow: "Transportation",
+    title: "Riding the Bus?", 
+    body: "If you're staying at one of our hotel blocks, let us know if you'd like a seat on the complimentary bus to the venue.",
 };
 // #endregion ---
 
 // #region --- 5 ---
+
 export const STEP_FIVE_TEXT: RSVPStepTextProps = {
     stepNumber: 5,
-    title: "Rehearsal Mixer",
-    body: "You've been invited to join us the evening before the wedding — Friday, October 30th from 8:30–11 PM at Maggiano's Little Italy for drinks and snacks. Will you be joining us?",
+    eyebrow: "Rehearsal Mixer",
+    title: 'Join Us Friday?',
+    // body: "You've been invited to join us the evening before the wedding — Friday, October 30th from 8:30–11 PM at Maggiano's Little Italy for drinks and snacks. Will you be joining us?",
 };
+
 // #endregion ---
 
 // #region --- Thank you ---
