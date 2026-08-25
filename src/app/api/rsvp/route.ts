@@ -7,7 +7,7 @@ import {
     updateRecord,
 } from "@/lib/airtable";
 import { GUESTS_TABLE, GuestFields, PARTIES_TABLE, PartyFields } from "@/lib/airtableSchema";
-import { Guest, GuestKey, GuestParty } from "@/components/RSVPForm/types";
+import { Attendance, Guest, GuestKey, GuestParty } from "@/components/RSVPForm/types";
 
 // const LOGS_TABLE = "Logs"; // TODO: re-enable once a Logs table exists
 
@@ -133,11 +133,14 @@ function validateRsvpBody(body: unknown): ValidationResult {
 
     const { guest1: g1Attending, guest2: g2Attending } = attendance as Record<string, unknown>;
 
-    if (typeof g1Attending !== "boolean") {
+    const isAnsweredAttendance = (value: unknown): value is Extract<Attendance, "Attending" | "Declining"> =>
+        value === "Attending" || value === "Declining";
+
+    if (!isAnsweredAttendance(g1Attending)) {
         return invalid("draft.attendance.guest1 is required", id, validParty);
     }
 
-    if (validParty.guest2 && typeof g2Attending !== "boolean") {
+    if (validParty.guest2 && !isAnsweredAttendance(g2Attending)) {
         return invalid("draft.attendance.guest2 is required", id, validParty);
     }
 
@@ -145,8 +148,8 @@ function validateRsvpBody(body: unknown): ValidationResult {
         ok: true,
         party: validParty,
         attendance: {
-            guest1: g1Attending,
-            ...(typeof g2Attending === "boolean" ? { guest2: g2Attending } : {}),
+            guest1: g1Attending === "Attending",
+            ...(isAnsweredAttendance(g2Attending) ? { guest2: g2Attending === "Attending" } : {}),
         },
     };
 }

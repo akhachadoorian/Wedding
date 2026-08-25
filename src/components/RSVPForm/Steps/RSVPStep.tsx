@@ -1,20 +1,17 @@
+import Button from "@/components/Buttons/Button";
 import Eyebrow from "@/components/Eyebrow/Eyebrow";
+import { cn } from "@/utils/cn";
+import { RSVPFormError } from "../RSVPForm";
+import { useRSVPForm } from "../RSVPFormContext";
+import RSVPThankYou from "../RSVPThankYou";
 import {
     getStepText,
     Guest,
     RSVPStepProps,
-    RSVPStepTextProps,
-    STEP_TEXT_MAP,
+    RSVPStepTextProps
 } from "../types";
-import { cn } from "@/utils/cn";
-import Star from "@/icons/Star";
-import { useState } from "react";
-import { useRSVPForm } from "../RSVPFormContext";
-import Button from "@/components/Buttons/Button";
-import RSVPThankYou from "../RSVPThankYou";
-import { RSVPFormError } from "../RSVPForm";
+import AttendWedding from "./AttendWedding";
 import SearchRSVP from "./SearchingLive";
-import StepTwo from "./Step2";
 import StepThree from "./Step3";
 import StepFour from "./Step4";
 import StepFive from "./Step5";
@@ -63,7 +60,7 @@ export function RSVPStepVertical({
             {...htmlProps}
             className={cn(
                 "rsvp_step rsvp_step-vertical flex py-800 px-750",
-                "flex-col gap-700 md:gap-1000",
+                "flex-col gap-700 md:gap-1500",
                 "md:items-center md:space-600  md:mx-auto",
                 className,
             )}
@@ -115,9 +112,9 @@ function RSVPStepTextCentered({
 }: RSVPStepTextProps) {
     return (
         <div {...htmlProps} className={cn("rsvp_step_text text-center md:max-w-[60.417vw]", className)}>
-            <p className="uppercase mb-400! font-sans! font-semibold md:text-xl text-md!">{eyebrow}</p>
+            {eyebrow && (<Eyebrow text={eyebrow} styleOptions={{variation: 'center', includeMargin: false}} className={"mb-400!"}  />)}            
             
-            <h2 className="text-6xl! leading-[130%]!">{title}</h2>
+            <h2 className={cn( stepNumber === 1 ? "md:text-[175px]!" : "text-6xl!", "leading-[130%]!")}>{title}</h2>
 
             {body && <p className="body-l rsvp_step_text-body mt-300!">{body}</p>}
         </div>
@@ -202,11 +199,25 @@ export function RSVPNavButtons({ back = {disabled: false, hidden: false}, next, 
 interface GuestLabelInputWrapperProps {
     guest: Guest;
     children: React.ReactNode;
+    layout?: 'row' | 'column'
+    className?: string
 }
 
-export function GuestLabelInputWrapper({guest, children}: GuestLabelInputWrapperProps) {
+export function GuestLabelInputWrapper({guest, children, layout = "column", className}: GuestLabelInputWrapperProps) {
+    if (layout === 'row') {
+        return (
+            <div className={cn("flex flex-col md:flex-row md:justify-center gap-700", className)}>
+                <h4>
+                    {guest.firstName} {guest.lastName}
+                </h4>
+
+                {children}
+            </div>
+        );
+    }
+
     return (
-            <div className="flex flex-col md:flex-row gap-200">
+            <div className={cn("flex flex-col  gap-200", className)}>
                 <h4>
                     {guest.firstName} {guest.lastName}
                 </h4>
@@ -227,7 +238,7 @@ export function RenderSteps() {
         case 1:
             return <SearchRSVP />
         case 2:
-            return <StepTwo />
+            return <AttendWedding />
         case 3: 
             return <StepThree />
         case 4:

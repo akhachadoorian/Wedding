@@ -10,7 +10,7 @@ import { WithHTMLProps } from "../../types/props";
 import Button from "@/components/Buttons/Button";
 import "./RSVPForm.scss";
 import { RSVPFormProvider, useRSVPForm } from "./RSVPFormContext";
-import StepTwo from "./Steps/Step2";
+import StepTwo from "./Steps/AttendWedding";
 import { GuestParty, RSVPDraft } from "./types";
 import StepThree from "./Steps/Step3";
 import RSVPThankYou from "./RSVPThankYou";

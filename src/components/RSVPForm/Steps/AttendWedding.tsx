@@ -2,7 +2,7 @@ import { cn } from "@/utils/cn";
 import { Switch } from "../FormInputs";
 import { useRSVPForm } from "../RSVPFormContext";
 import {
-    Attendance,
+    AttendanceOption,
     determineNotComing,
     getQuestionAnswerParty,
     hasAnsweredQuestion,
@@ -22,7 +22,7 @@ import { useStepSubmit } from "./useStepSubmit";
 const STEP_NUM = 2;
 const KEY = RSVP_KEY_BY_STEP[STEP_NUM];
 
-export default function StepTwo() {
+export default function AttendWedding() {
     const { party, draft } = useRSVPForm();
     // return error if null?
     if (party === null) return null; // todo: display error
@@ -52,14 +52,14 @@ export default function StepTwo() {
     });
 
     const eyebrowClass =
-        "flex-1 font-sans text-xs md:text-md uppercase font-normal leading-[140%] tracking-[1px] md:tracking-[2px] ";
+        "flex-1 font-sans text-xs md:text-base uppercase font-normal leading-[140%] tracking-[1px] md:tracking-[2px] ";
 
-    const option_1: { label: string; value: Attendance } = {
+    const option_1: AttendanceOption = {
         label: 'Attending',
         value: 'Attending',
     }
 
-    const option_2: { label: string; value: Attendance } = {
+    const option_2: AttendanceOption = {
         label: 'Declining',
         value: 'Declining',
     }
@@ -71,7 +71,7 @@ export default function StepTwo() {
                 className="w-full flex flex-col gap-500"
             >
                 {/* Wedding RSVP */}
-                <div className="w-full overflow-hidden flex flex-col gap-500">
+                <div className="w-full overflow-hidden flex flex-col gap-700">
                     <div className="flex flex-col gap-200 min-w-0 ">
                         <div className="flex gap-(--layout-column-gutter) px-200 min-w-0">
                             <p className={cn(eyebrowClass, "min-w-0")}>
@@ -91,14 +91,14 @@ export default function StepTwo() {
                             </p>
                         </div>
 
-                        <h3 className="font-sans! text-xl font-semibold leading-normal tracking-[1.4px] uppercase text-center">
+                        <h3 className="font-sans! text-xl font-semibold leading-normal tracking-[1.4px] uppercase text-center text-burgundy">
                             Wedding Ceremony & Reception
                         </h3>
                     </div>
 
-                    <div className="flex flex-col gap-500 divide-y divide-gray">
+                    <div className="flex flex-col gap-500">
                         {/* Guest 1 */}
-                        <GuestLabelInputWrapper guest={guest1}>
+                        <GuestLabelInputWrapper guest={guest1} layout="row" >
                             <Switch
                                 name={"attendance-guest1"}
                                 onChange={(value) =>
@@ -112,7 +112,7 @@ export default function StepTwo() {
 
                         {/* Guest 2 */}
                         {guest2 && (
-                            <GuestLabelInputWrapper guest={guest2}>
+                            <GuestLabelInputWrapper guest={guest2} layout="row" className="border-t border-gray pt-500">
                                 <Switch
                                     name={"attendance-guest2"}
                                     onChange={(value) =>
