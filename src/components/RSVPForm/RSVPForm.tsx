@@ -46,11 +46,8 @@ export default function RSVPForm({
         setStep(nextStep)
 
     }
-    // FIXME:
-    // const goToStep = (step: number) => setStep(step);
 
     const { guests, guestsLoading, guestsError, refetchGuests } = useGuests();
-    // console.log("guests", guests)    
 
     const [party, setParty] = useState<GuestParty | null>(null)
 
@@ -59,8 +56,6 @@ export default function RSVPForm({
         console.log("draft changed", draft)
     }, [draft])
 
-    // const [partyId, setPartyId] = useState<string | null>(null)
-    // console.log("partyId", partyId)
 
     const onRetry = async () => {
         setStep(1)

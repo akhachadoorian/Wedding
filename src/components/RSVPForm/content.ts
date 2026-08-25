@@ -23,9 +23,19 @@ export const STEP_ONE_TEXT: RSVPStepTextProps = {
 
 export const STEP_TWO_TEXT: RSVPStepTextProps = {
     stepNumber: 2,
-    eyebrow: "Attendance",
+    // eyebrow: "Attendance",
+    eyebrow: "Wedding Ceremony & Reception",
     title: "Who's Joining Us?",
-    body: "Let us know who from your party will be joining us on the day.",
+    // body: "Let us know who from your party will be joining us on the day.",
+    body: {
+        left: 'Saturday\nOctober 31st',
+        center: 'The Clay Theatre\nGreen Cove, Fl',
+        right: 'Ceremony 5:00 PM\nUntil 10:30 PM'
+    }
+    // eyebrows: {
+    //     left: "October 31st, 2026\nCeremony at 5pm",
+    //     right: "The Clay Theatre\nGreen Cove, Fl",
+    // },
 };
 // #endregion ---
 
@@ -55,6 +65,11 @@ export const STEP_FIVE_TEXT: RSVPStepTextProps = {
     eyebrow: "Rehearsal Mixer",
     title: 'Join Us Friday?',
     // body: "You've been invited to join us the evening before the wedding — Friday, October 30th from 8:30–11 PM at Maggiano's Little Italy for drinks and snacks. Will you be joining us?",
+    body: {
+        left: 'Friday\nOctober 30th',
+        center: "Maggiano's Little Italy\nSt. Johns Town Center",
+        right: 'From 8:30 PM\nUntil 10:30 PM'
+    }
 };
 
 // #endregion ---

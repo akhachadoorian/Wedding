@@ -16,36 +16,6 @@ import MealSelection from "./MealSelection";
 import SearchRSVP from "./SearchingLive";
 import Transportation from "./Transportation";
 
-export default function RSVPStepHorizontal({
-    currStep,
-    children,
-    className,
-    ...htmlProps
-}: RSVPStepProps) {
-    const { stepNumber, title, body } = getStepText(currStep);
-
-    return (
-        <div
-            {...htmlProps}
-            className={cn(
-                "rsvp_step rsvp_step_horizontal flex py-1500 px-750",
-                "flex-col gap-500 ",
-                "md:flex-row md:items-center md:space-600",
-                className,
-            )}
-        >
-            <RSVPStepText
-                className="rsvp_step-left md:flex-[2_1_600px]"
-                stepNumber={stepNumber}
-                title={title}
-                body={body}
-            />
-
-            <div className="rsvp_step-right md:flex[1_1_500px]">{children}</div>
-        </div>
-    );
-}
-
 export function RSVPStepVertical({
     currStep,
     children,
@@ -59,9 +29,9 @@ export function RSVPStepVertical({
         <div
             {...htmlProps}
             className={cn(
-                "rsvp_step rsvp_step-vertical flex py-800 px-750",
+                "rsvp_step rsvp_step-vertical flex py-500 px-400",
                 "flex-col gap-700 md:gap-1500",
-                "md:items-center md:space-600  md:mx-auto",
+                "md:items-center md:space-600  md:mx-auto md:py-800 md:px-750",
                 className,
             )}
         >
@@ -78,29 +48,8 @@ export function RSVPStepVertical({
     );
 }
 
-export function RSVPStepText({
-    stepNumber,
-    title,
-    body,
-    className,
-    ...htmlProps
-}: RSVPStepTextProps) {
-    return (
-        <div {...htmlProps} className={cn("rsvp_step_text md:max-w-[60.417]", className)}>
-            <Eyebrow
-                text={`Step ${stepNumber}`}
-                styleOptions={{
-                    variation: "left",
-                    starColor: "--cream-700",
-                }}
-            />
-
-            <h2 className="heading-xl rsvp_step_text-title">{title}</h2>
-
-            {body && <p className="body rsvp_step_text-body mt-200">{body}</p>}
-        </div>
-    );
-}
+ const eyebrowClass =
+        "flex-1 font-sans text-xs md:text-base uppercase font-normal leading-[140%] tracking-[1px] md:tracking-[2px] ";
 
 function RSVPStepTextCentered({
     stepNumber,
@@ -114,12 +63,37 @@ function RSVPStepTextCentered({
         <div {...htmlProps} className={cn("rsvp_step_text text-center md:max-w-[60.417vw]", className)}>
             {eyebrow && (<Eyebrow text={eyebrow} styleOptions={{variation: 'center', includeMargin: false}} className={"mb-400!"}  />)}            
             
-            <h2 className={cn( stepNumber === 1 ? "md:text-[175px]!" : "text-6xl!", "leading-[130%]!")}>{title}</h2>
+            <h2 className={cn( stepNumber === 1 ? "text-6xl! lg:text-[175px]!" : "text-6xl!", "leading-[130%]!")}>{title}</h2>
 
-            {body && <p className="body-l rsvp_step_text-body mt-300!">{body}</p>}
+            {/* {body && <p className="body-l rsvp_step_text-body mt-300!">{body}</p>} */}
+            {body && (
+            typeof body === 'string'
+                ? <p className="body-l rsvp_step_text-body mt-300!">{body}</p>
+                : <div className="mt-300 flex gap-(--layout-column-gutter) px-200 min-w-0">
+                            {body.left && (
+                                <p className={cn(eyebrowClass, "min-w-0")}>
+                                {body.left}
+                            </p>
+                            )}
+                            {body.center && (
+                                <p className={cn(eyebrowClass, "min-w-0 text-center")}>
+                                {body.center}
+                            </p>
+                            )}
+
+                            {body.right && (
+                                <p className={cn(eyebrowClass, "min-w-0 text-right")}>
+                                {body.right}
+                            </p>
+                            )}
+                          
+                        </div>
+            )}
         </div>
     );
 }
+
+
 
 
 interface RSVPNavButtonProps {
@@ -207,7 +181,7 @@ interface GuestLabelInputWrapperProps {
 export function GuestLabelInputWrapper({guest, children, layout = "column", centerHeader = false, className}: GuestLabelInputWrapperProps) {
     if (layout === 'row') {
         return (
-            <div className={cn("flex flex-col md:flex-row md:justify-center gap-700", className)}>
+            <div className={cn("flex flex-col md:flex-row md:items-center md:justify-center gap-400", className)}>
                 <h4 className={cn("heading-l", centerHeader && 'text-center')}>
                     {guest.firstName} {guest.lastName}
                 </h4>
@@ -251,3 +225,57 @@ export function RenderSteps({ step }: { step: number }) {
 
     }
 }
+
+// export default function RSVPStepHorizontal({
+//     currStep,
+//     children,
+//     className,
+//     ...htmlProps
+// }: RSVPStepProps) {
+//     const { stepNumber, title, body } = getStepText(currStep);
+
+//     return (
+//         <div
+//             {...htmlProps}
+//             className={cn(
+//                 "rsvp_step rsvp_step_horizontal flex py-1500 px-750",
+//                 "flex-col gap-500 ",
+//                 "md:flex-row md:items-center md:space-600",
+//                 className,
+//             )}
+//         >
+//             <RSVPStepText
+//                 className="rsvp_step-left md:flex-[2_1_600px]"
+//                 stepNumber={stepNumber}
+//                 title={title}
+//                 body={body}
+//             />
+
+//             <div className="rsvp_step-right md:flex[1_1_500px]">{children}</div>
+//         </div>
+//     );
+// }
+
+// export function RSVPStepText({
+//     stepNumber,
+//     title,
+//     body,
+//     className,
+//     ...htmlProps
+// }: RSVPStepTextProps) {
+//     return (
+//         <div {...htmlProps} className={cn("rsvp_step_text md:max-w-[60.417]", className)}>
+//             <Eyebrow
+//                 text={`Step ${stepNumber}`}
+//                 styleOptions={{
+//                     variation: "left",
+//                     starColor: "--cream-700",
+//                 }}
+//             />
+
+//             <h2 className="heading-xl rsvp_step_text-title">{title}</h2>
+
+//             {body && <p className="body rsvp_step_text-body mt-200">{body}</p>}
+//         </div>
+//     );
+// }

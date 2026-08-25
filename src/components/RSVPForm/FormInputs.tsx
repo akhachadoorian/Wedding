@@ -126,6 +126,7 @@ function SwitchOptionInput({
                 "rsvp_switch",
                 "relative flex-1 justify-center cursor-pointer",
                 buttonVariants({ size: "small" }),
+                !isActive && !disabled && "rsvp_switch-hoverable",
                 disabled && "cursor-not-allowed opacity-50",
             )}
         >

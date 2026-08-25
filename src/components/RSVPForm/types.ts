@@ -61,7 +61,7 @@ export type RSVPStepTextProps = WithHTMLProps & {
     stepNumber: number;
     eyebrow?: string;
     title: string;
-    body?: string;
+    body?: string | {left?: string, center?: string, right: string};
 };
 
 export type RSVPStepProps = WithHTMLProps & {

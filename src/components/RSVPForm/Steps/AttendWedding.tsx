@@ -36,13 +36,14 @@ export default function AttendWedding() {
               }
             : undefined;
 
+    console.log("allAnswered", allAnswered)
+
     const { handleSubmit } = useStepSubmit({
         canAdvance: allAnswered,
         overrideNext,
     });
 
-    const eyebrowClass =
-        "flex-1 font-sans text-xs md:text-base uppercase font-normal leading-[140%] tracking-[1px] md:tracking-[2px] ";
+   
 
     return (
         <RSVPStepVertical currStep={STEP_NUM}>
@@ -52,8 +53,8 @@ export default function AttendWedding() {
             >
                 {/* Wedding RSVP */}
                 <div className="w-full overflow-hidden flex flex-col gap-700">
-                    <div className="flex flex-col gap-200 min-w-0 ">
-                        <div className="flex gap-(--layout-column-gutter) px-200 min-w-0">
+                    {/* <div className="flex flex-col gap-200 min-w-0 "> */}
+                        {/* <div className="flex gap-(--layout-column-gutter) px-200 min-w-0">
                             <p className={cn(eyebrowClass, "min-w-0")}>
                                 Saturday
                                 <br />
@@ -69,12 +70,12 @@ export default function AttendWedding() {
                                 <br />
                                 Until 10:30 PM
                             </p>
-                        </div>
+                        </div> */}
 
-                        <h3 className="font-sans! text-xl font-semibold leading-normal tracking-[1.4px] uppercase text-center text-burgundy">
+                        {/* <h3 className="font-sans! text-xl font-semibold leading-normal tracking-[1.4px] uppercase text-center text-burgundy">
                             Wedding Ceremony & Reception
                         </h3>
-                    </div>
+                    </div> */}
 
                     <div className="flex flex-col gap-700">
                         {/* Guest 1 */}
