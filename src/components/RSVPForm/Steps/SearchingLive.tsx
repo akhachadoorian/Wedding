@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useRSVPForm } from "../RSVPFormContext";
-import { Guest, GuestParty, Guests, partyGuestCount } from "../types";
+import { buildDraftFromParty, Guest, GuestParty, Guests, partyGuestCount } from "../types";
 import { RSVPStepVertical } from "./RSVPStep";
 import Button from "@/components/Buttons/Button";
 import { TextInput } from "../FormInputs";
@@ -32,6 +32,18 @@ function guestMatchesTokens(guest: Guest, tokens: string[]): boolean {
     );
 }
 
+// A party is "submitted" once any guest in it has an `updatedOn` timestamp from a prior RSVP write.
+function getPartyUpdatedAt(party: GuestParty): Date | null {
+    const timestamps = [party.guest1.updatedOn, party.guest2?.updatedOn]
+        .filter((value): value is string => Boolean(value))
+        .map((value) => new Date(value).getTime())
+        .filter((time) => !Number.isNaN(time));
+
+    if (timestamps.length === 0) return null;
+
+    return new Date(Math.max(...timestamps));
+}
+
 function findMatchingGuestsByPrefix(guests: Guests | null, query: string): Guests | null {
     if (guests === null) return null;
 
@@ -54,7 +66,7 @@ export default function SearchRSVPLive() {
     const [debouncedQuery, setDebouncedQuery] = useState("");
     const [searchResult, setSearchResult] = useState<Guests | null>(null);
 
-    const { guests, setParty, goToStep } = useRSVPForm();
+    const { guests, setParty, setDraft, goToStep } = useRSVPForm();
 
     // Debounce: only commit the typed query after typing pauses.
     useEffect(() => {
@@ -77,6 +89,7 @@ export default function SearchRSVPLive() {
 
     const handleSelectParty = (party: GuestParty) => {
         setParty(party);
+        setDraft(buildDraftFromParty(party));
         goToStep(2);
     };
 
@@ -149,7 +162,10 @@ function SearchResults({
     return (
         <div className="relative flex items-center flex-col gap-150 max-w-[650px] w-full overflow-hidden">
             <AnimatePresence mode="popLayout">
-                {searchResult.map((party, index) => (
+                {searchResult.map((party, index) => {
+                    const updatedAt = getPartyUpdatedAt(party);
+
+                    return (
                     <motion.div
                         key={party.id}
                         layout
@@ -160,10 +176,24 @@ function SearchResults({
                         className="box-border flex flex-col md:flex-row items-center md:justify-between gap-200 border border-cream px-300 py-200 font-sans text-cream w-full"
                     >
                         <div className="flex flex-col gap-050 min-w-0 md:text-left text-center">
-                            <span className="truncate">{getNameString(party)}</span>
-                            <span className="text-s opacity-60">
+                             <p className="eyebrow text-xs! opacity-75 ">
                                 Party of {partyGuestCount(party)}
-                            </span>
+                            </p>
+
+                            <p className="truncate text-base">{getNameString(party)}</p>
+
+                            {/* <span className="truncate"></span> */}
+                           
+                            {updatedAt && (
+                                <p className="text-s opacity-60 italic">
+                                    Already submitted — last updated{" "}
+                                    {updatedAt.toLocaleDateString(undefined, {
+                                        month: "short",
+                                        day: "numeric",
+                                        year: "numeric",
+                                    })}
+                                </p>
+                            )}
                         </div>
 
                         <Button
@@ -177,7 +207,8 @@ function SearchResults({
                             className="shrink-0"
                         />
                     </motion.div>
-                ))}
+                    );
+                })}
             </AnimatePresence>
         </div>
     );

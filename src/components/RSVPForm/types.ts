@@ -10,8 +10,17 @@ import {
 import { ExpandedTextValueOptions } from "./FormInputs";
 
 export type Guest = {
+    fullName: string,
     firstName: string;
     lastName: string;
+    /** Previously-saved RSVP answers, if this guest has submitted before. */
+    attending?: Attendance;
+    mealChoice?: MealValues;
+    dietaryNotes?: string;
+    stayingAt?: HotelValues;
+    ridingBus?: RidingBus;
+    rehearsalMixer?: Attendance;
+    updatedOn?: string;
 };
 
 export type GuestParty = {
@@ -302,7 +311,44 @@ export function determineGuestComing(guestKey: GuestKey, draft: RSVPDraft): bool
     const answers = getQuestionAnswerParty(draft, "attendance");
     if (answers === null) return undefined
 
-    return answers[guestKey] === 'declining' ? false : true 
+    return answers[guestKey] === 'declining' ? false : true
+}
+
+/** Seeds a fresh draft from a guest's previously-saved answers, so returning to edit an RSVP doesn't start blank. */
+export function buildDraftFromParty(party: GuestParty): RSVPDraft {
+    const draft: RSVPDraft = { attendance: {} };
+
+    (["guest1", "guest2"] as const).forEach((key) => {
+        const guest = party[key];
+        if (!guest) return;
+
+        if (guest.attending === "attending" || guest.attending === "declining") {
+            draft.attendance[key] = guest.attending;
+        }
+
+        if (guest.mealChoice) {
+            draft.meal = {
+                ...draft.meal,
+                [key]: {
+                    selectedEntree: guest.mealChoice,
+                    ...(guest.dietaryNotes ? { dietaryNotes: guest.dietaryNotes } : {}),
+                },
+            };
+        }
+
+        if ((guest.ridingBus === "riding" || guest.ridingBus === "declining") && guest.stayingAt) {
+            draft.transportation = {
+                ...draft.transportation,
+                [key]: { ridingBus: guest.ridingBus, stayingAt: guest.stayingAt },
+            };
+        }
+
+        if (guest.rehearsalMixer === "attending" || guest.rehearsalMixer === "declining") {
+            draft.rehearsalMixer = { ...draft.rehearsalMixer, [key]: guest.rehearsalMixer };
+        }
+    });
+
+    return draft;
 }
 
 // type RenderFieldsForGuest: Record<GuestKey, >

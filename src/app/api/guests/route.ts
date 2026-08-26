@@ -13,10 +13,28 @@ async function getGuests(): Promise<Guests> {
     // console.log("guestRecords", guestRecords)
 
     const guestById = new Map(
-        guestRecords.map((r) => [
-            r.id,
-            { firstName: r.fields.firstName, lastName: r.fields.lastName, fullName: r.fields.fullName },
-        ]),
+        guestRecords.map((r) => {
+            const rehearsalMixer = r.fields.rehearsalMixer;
+
+            return [
+                r.id,
+                {
+                    fullName: r.fields.fullName,
+                    firstName: r.fields.firstName,
+                    lastName: r.fields.lastName,
+                    attending: r.fields.attending,
+                    mealChoice: r.fields.mealChoice,
+                    dietaryNotes: r.fields.dietaryNotes,
+                    stayingAt: r.fields.stayingAt,
+                    ridingBus: r.fields.ridingBus,
+                    updatedOn: r.fields.updatedOn,
+                    rehearsalMixer:
+                        rehearsalMixer === "attending" || rehearsalMixer === "declining"
+                            ? rehearsalMixer
+                            : undefined,
+                },
+            ] as const;
+        }),
     );
 
     return partyRecords.reduce<Guests>((parties, record) => {
