@@ -9,21 +9,6 @@ $imgHeight: 100dvh;
     width: 100dvw;
     overflow: hidden;
 
-    // &-body {
-    //     // margin-top: $space-200;
-    //     margin-top: var(--body-margin-top-mobile);
-
-    //     @include big {
-    //         // margin-top: $space-300;
-    //         margin-top: var(--body-margin-top);
-    //     }
-    // }
-
-    // &-subtitle {
-    //     border-bottom: 1px solid $cream-600;
-    //     padding-bottom: $space-200;
-    // }
-
     &-btns {
         margin-top: $space-300;
 
@@ -40,13 +25,14 @@ $imgHeight: 100dvh;
         z-index: 5;
 
         padding: $space-1000 var(--layout-column-margin); // $space-400;
-        min-height: calc(#{$imgHeight} - #{$space-400} - #{$space-400});
+        min-height: $imgHeight;
+        height: 100%;
 
         display: flex;
 
         @include big {
             max-width: var(--max-width);
-            min-height: calc(#{$imgHeight} - #{$space-1500} - #{$space-1500});
+            min-height: $imgHeight;
             padding: $space-1500 var(--layout-column-margin);
             margin: auto;
         }
