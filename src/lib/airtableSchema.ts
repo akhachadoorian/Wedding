@@ -1,4 +1,4 @@
-import { Attendance, HotelStrings, MealValues } from "@/components/RSVPForm/types";
+import { Attendance, HotelValues, MealValues, RidingBus } from "@/components/RSVPForm/types";
 
 export const PARTIES_TABLE = "Parties";
 export const GUESTS_TABLE = "Guests";
@@ -13,7 +13,10 @@ export type GuestFields = {
     mealChoice?: MealValues;
     dietaryNotes?: string;
 
-    hotel?: HotelStrings
+    stayingAt?: HotelValues;
+    ridingBus?: RidingBus;
+
+    rehearsalMixer?: string;
 
     updatedOn?: string;
 };

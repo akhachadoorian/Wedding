@@ -122,18 +122,18 @@ function buildOptions<V extends string>(
 
 // #region --- Meal ---
 
-export type MealValues = "Steak" | "Chicken" | "Salmon";
+export type MealValues = "steak" | "chicken" | "salmon";
 
 export const MEAL_LABELS = {
-    Chicken: "Herb Roasted French Style Chicken Breast",
-    Steak: "Pepper Seared Sirloin Steak",
-    Salmon: "Chili Garlic Salmon Seared",
+    chicken: "Herb Roasted French Style Chicken Breast",
+    steak: "Pepper Seared Sirloin Steak",
+    salmon: "Chili Garlic Salmon Seared",
 } as const satisfies Record<MealValues, string>;
 
 const MEAL_SUBTEXT = {
-    Chicken: "with Jus Lié",
-    Steak: "with Horseradish Cream",
-    Salmon: "with an Asian Trinity* a house specialty",
+    chicken: "with Jus Lié",
+    steak: "with Horseradish Cream",
+    salmon: "with an Asian Trinity* a house specialty",
 } as const satisfies Record<MealValues, string>;
 
 export const MEAL_OPTIONS = buildOptions(MEAL_LABELS, MEAL_SUBTEXT);
@@ -153,7 +153,7 @@ const HOTEL_OPTS = ["homewoodSuites", "hyattPlace", "acHotel"] as const;
 type HotelOpts = (typeof HOTEL_OPTS)[number];
 
 type AlternateHotelOpts = "notSure" | "other";
-type HotelValues = HotelOpts | AlternateHotelOpts;
+export type HotelValues = HotelOpts | AlternateHotelOpts;
 
 export const HOTEL_LABELS = {
     homewoodSuites: "Homewood Suites By Hilton",
@@ -196,9 +196,11 @@ export function isStayingAtHotel(answer?: HotelValues): boolean {
 
 // #endregion ---
 
+export type RidingBus = 'riding' | 'declining' | 'unknown'
+
 export type Transportation = {
     stayingAt: HotelValues;
-    takingBus: boolean;
+    ridingBus: RidingBus;
 };
 
 type TransportationResponse = Partial<Record<GuestKey, Transportation>>;
@@ -245,9 +247,9 @@ function isGuestAnswerComplete(key: RSVPDraftKey, value: unknown): boolean {
 
     if (key === "transportation") {
         const transportation = value as Transportation;
-        if (transportation.takingBus === undefined) return false;
+        if (transportation.ridingBus === undefined) return false;
 
-        if (transportation.takingBus && !transportation.stayingAt) return false;
+        if (transportation.ridingBus && !transportation.stayingAt) return false;
     }
 
     return true;

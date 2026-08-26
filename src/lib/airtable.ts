@@ -37,6 +37,11 @@ async function airtableRequest<T>(
 
     if (!res.ok) {
         const body = await res.text().catch(() => "");
+        console.error("Airtable request failed", {
+            url,
+            requestBody: init?.body,
+            responseBody: body,
+        });
         throw new Error(`Airtable request failed (${res.status}): ${body}`);
     }
 

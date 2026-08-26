@@ -56,7 +56,14 @@ function StepThreeInputs({guest, guestKey, answer,className}:StepThreeInputsProp
 
                     {/* <hr className="w-full border-0 border-t border-gray" /> */}
 
-                    <TextArea name={dietaryInputName} label="Dietary Notes" placeholder="e.g. Dairy-free, vegan, gluten intolerance" rows={3} /> 
+                    <TextArea
+                        name={dietaryInputName}
+                        label="Dietary Notes"
+                        placeholder="e.g. Dairy-free, vegan, gluten intolerance"
+                        rows={3}
+                        value={answer?.dietaryNotes ?? ""}
+                        onChange={(value) => handleGuestFieldUpdate(KEY, guestKey, 'dietaryNotes', value)}
+                    />
                 </div>
             </GuestLabelInputWrapper>
         </div>

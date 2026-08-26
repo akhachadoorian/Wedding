@@ -10,6 +10,7 @@ import {
 import type {
     Guest,
     GuestKey,
+    RidingBus,
     Transportation as TransportationAnswer,
 } from "../types";
 import {
@@ -46,33 +47,35 @@ export default function Transportation() {
 
     const { handleGuestFieldUpdate } = useHandleGuestUpdate();
 
-    const handleBusUpdate = (value: boolean) => {
+    const handleBusUpdate = (v: RidingBus) => {
         if (renderGuestOne) {
-            handleGuestFieldUpdate(KEY, "guest1", "takingBus", value);
+            handleGuestFieldUpdate(KEY, "guest1", "ridingBus", v);
+
+            if (v === 'declining') {
+                handleHotelUpdate('other')
+            }
         }
         if (renderGuestTwo) {
-            handleGuestFieldUpdate(KEY, "guest2", "takingBus", value);
+            handleGuestFieldUpdate(KEY, "guest2", "ridingBus", v);
+
+            if (v === 'declining') {
+                handleHotelUpdate('other')
+            }
         }
     };
 
     const handleHotelUpdate = (value: TransportationAnswer["stayingAt"]) => {
         if (renderGuestOne) {
             handleGuestFieldUpdate(KEY, "guest1", "stayingAt", value);
-            // if (!isStayingAtHotel(value)) {
-            //     handleGuestFieldUpdate(KEY, 'guest1', "takingBus", false);
-            // }
         }
         if (renderGuestTwo) {
             handleGuestFieldUpdate(KEY, "guest2", "stayingAt", value);
-            // if (!isStayingAtHotel(value)) {
-            //     handleGuestFieldUpdate(KEY, 'guest2', "takingBus", false);
-            // }
         }
     };
 
-    const takingBus = renderGuestOne
-        ? answers?.guest1?.takingBus
-        : answers?.guest2?.takingBus;
+    const ridingBus = renderGuestOne
+        ? answers?.guest1?.ridingBus
+        : answers?.guest2?.ridingBus;
 
     // const hotelOpts = takingBus ? HOTEL_OPTIONS : ALTERNATE_HOTEL_OPTIONS
 
@@ -89,12 +92,12 @@ export default function Transportation() {
                             note="Please note: You must be staying at the three listed hotels"
                             switchProps={{
                                 name: "taking_bus",
-                                onChange: (value) => handleBusUpdate(value),
-                                option_1: { text: "Yes", value: true },
-                                option_2: { text: "No", value: false },
+                                onChange: (value) => handleBusUpdate(value as RidingBus),
+                                option_1: { text: "Yes", value: 'riding' },
+                                option_2: { text: "No", value: 'declining' },
                                 currValue: renderGuestOne
-                                    ? answers?.guest1?.takingBus
-                                    : answers?.guest2?.takingBus,
+                                    ? answers?.guest1?.ridingBus
+                                    : answers?.guest2?.ridingBus,
                                 // disabled: !canTakeBus
                             }}
                         />
@@ -102,13 +105,13 @@ export default function Transportation() {
                         <div
                             className={cn(
                                 "grid transition-[grid-template-rows] duration-300 ease-in-out",
-                                takingBus === undefined
+                                ridingBus === undefined
                                     ? "grid-rows-[0fr]"
                                     : "grid-rows-[1fr]",
                             )}
                         >
                             <div className="overflow-hidden">
-                                {takingBus === true && (
+                                {ridingBus === 'riding' && (
                                     <FadeIn key="hotel">
                                         <RadioButtons
                                             label="Select Hotel for Pickup/Drop Off"
@@ -124,7 +127,7 @@ export default function Transportation() {
                                     </FadeIn>
                                 )}
 
-                                {takingBus === false && (
+                                {ridingBus === 'declining' && (
                                     <FadeIn key="warning">
                                         <div className="flex flex-col gap-200 border-2 p-300 bg-cabernet text-center  max-w-[800px] w-full mx-auto min-w-0">
                                             <p className="eyebrow">

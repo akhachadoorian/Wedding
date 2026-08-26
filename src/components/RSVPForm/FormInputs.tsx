@@ -398,6 +398,8 @@ interface TextAreaProps {
     placeholder?: string;
     rows?: number;
     cols?: number;
+    value: string;
+    onChange: (value: string) => void;
 }
 
 export function TextArea({
@@ -406,6 +408,8 @@ export function TextArea({
     placeholder,
     rows = 5,
     cols = 40,
+    value,
+    onChange,
 }: TextAreaProps) {
     return (
         <div className="flex flex-col gap-300">
@@ -419,7 +423,9 @@ export function TextArea({
                 placeholder={placeholder ? placeholder : ""}
                 rows={rows}
                 cols={cols}
-                className="bg-black p-200 font-sans text-base resize-y max-w-[650px] w-full mx-auto"
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                className="bg-black p-200 font-sans text-base resize-y max-w-[650px] w-full mx-auto text-cream"
             />
         </div>
     );
