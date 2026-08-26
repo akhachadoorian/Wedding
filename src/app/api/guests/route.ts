@@ -44,8 +44,7 @@ export async function GET(request: NextRequest) {
     }
 
     try {
-        const data = await getGuests();
-        console.log("data", data)    
+        const data = await getGuests();   
         return NextResponse.json(data);
     } catch (err) {
         console.error("GET /api/guests error:", err);

@@ -162,9 +162,9 @@ export const HOTEL_LABELS = {
 } as const satisfies Record<HotelOpts, string>;
 
 const HOTEL_SUBTEXT = {
-    homewoodSuites: "Lorem ipsum dolor sit amet",
-    hyattPlace: "Lorem ipsum dolor sit amet",
-    acHotel: "Lorem ipsum dolor sit amet",
+    homewoodSuites: "10434 Midtown Parkway,\nJacksonville, Florida 32246",
+    hyattPlace: "4742 Town Center Parkway,\nJacksonville, FL 32246",
+    acHotel: "5323 Big Island Drive,\nJacksonville, FL, 32246",
 } as const satisfies Record<HotelOpts, string>;
 
 export const HOTEL_OPTIONS = buildOptions(HOTEL_LABELS, HOTEL_SUBTEXT);

@@ -126,7 +126,7 @@ export default function Transportation() {
 
                                 {takingBus === false && (
                                     <FadeIn key="warning">
-                                        <div className="flex flex-col gap-200 border-2 p-300 bg-cabernet text-center  max-w-[800px] w-full mx-auto">
+                                        <div className="flex flex-col gap-200 border-2 p-300 bg-cabernet text-center  max-w-[800px] w-full mx-auto min-w-0">
                                             <p className="eyebrow">
                                                 Rideshare Warning
                                             </p>

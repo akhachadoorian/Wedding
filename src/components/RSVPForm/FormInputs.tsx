@@ -3,6 +3,7 @@ import { BTN_TEXT_CLASSES } from "../Buttons/Button";
 import { buttonVariants } from "../Buttons/button.variants";
 import { NonEmptyArray, TextValueOption } from "@/types/utility";
 import Eyebrow from "../Eyebrow/Eyebrow";
+import React from "react";
 
 // #region -- Yes/No Boolean Switch ---
 
@@ -39,7 +40,7 @@ export function SwitchField<V = string>({
             <div className="flex flex-col gap-400">
                 {label && <p className="eyebrow text-center">{label}</p>}
 
-                <Switch {...switchProps} />
+                <Switch {...switchProps} className="" />
             </div>
 
             {note && <p className="text-sm italic text-center">{note}</p>}
@@ -54,6 +55,7 @@ interface SwitchProps<V = string> {
     option_1: TextValueOption<V>;
     option_2: TextValueOption<V>;
     disabled?: boolean;
+    className?: string;
 }
 
 export function Switch<V = string>({
@@ -63,10 +65,14 @@ export function Switch<V = string>({
     disabled = false,
     option_1,
     option_2,
+    className,
 }: SwitchProps<V>) {
     return (
         <div
-            className="rsvp_switch_group relative flex border border-cream p-100"
+            className={cn(
+                "rsvp_switch_group relative flex border border-cream p-100",
+                className,
+            )}
             role="radiogroup"
         >
             <span
@@ -190,7 +196,16 @@ export function RadioButtons<V = string>({
     return (
         <div className={cn("flex flex-col gap-150", className)}>
             <div className={cn("flex flex-col gap-300")} role="radiogroup">
-                {label && <p className={cn("eyebrow text-center", disabled && 'opacity-50')}>{label}</p>}
+                {label && (
+                    <p
+                        className={cn(
+                            "eyebrow text-center",
+                            disabled && "opacity-50",
+                        )}
+                    >
+                        {label}
+                    </p>
+                )}
 
                 <div className="flex flex-wrap gap-x-(--layout-column-gutter) gap-y-300">
                     {options.map((opt) => {
@@ -231,6 +246,7 @@ function RadioButton<V = string>({
     className,
 }: RadioButtonProps<V>) {
     const { text, value, subtext, note } = option; // FIXME: do subnotes
+    console.log("subtext", subtext);
 
     const id = `${name}-${value}`;
     return (
@@ -239,8 +255,10 @@ function RadioButton<V = string>({
             className={cn(
                 "group relative flex items-start gap-200 border-2 p-300 transition-colors duration-300 ease-in-out cursor-pointer md:py-400 md:px-300",
                 isSelected
-                    ? "border-cream bg-cabernet" : disabled ? "border-(--black-850)"
-                    : "border-(--black-850) hover:border-cream/60",
+                    ? "border-cream bg-cabernet"
+                    : disabled
+                      ? "border-(--black-850)"
+                      : "border-(--black-850) hover:border-cream/60",
                 disabled && "cursor-not-allowed opacity-50",
                 className,
             )}
@@ -256,29 +274,16 @@ function RadioButton<V = string>({
                 disabled={disabled}
             />
 
-            {/* <span
-                aria-hidden="true"
-                className={cn(
-                    "mt-025 flex size-200 shrink-0 items-center justify-center rounded-full border-2 transition-colors duration-300",
-                    isSelected
-                        ? "border-cream"
-                        : "border-cream/40 group-hover:border-cream/70",
-                )}
-            >
-                <span
-                    className={cn(
-                        "size-100 rounded-full bg-cream transition-transform duration-300",
-                        isSelected ? "scale-100" : "scale-0",
-                    )}
-                />
-            </span> */}
-
             <div className="flex flex-col justify-center gap-100 text-center h-full w-full">
-                <p className="text-md">{text}</p>
-                {/* {subtext && (<p className="italic  text-s text-cream/60">{subtext}</p>)} */}
+                <p className="text-md lg:text-lg">{text}</p>
                 {subtext && (
                     <p className="uppercase text-xs text-cream/60 font-medium">
-                        {subtext}
+                        {subtext.split("\n").map((line, i) => (
+                            <React.Fragment key={i}>
+                                {line}
+                                {i < subtext.split("\n").length - 1 && <br />}
+                            </React.Fragment>
+                        ))}
                     </p>
                 )}
                 {note && (

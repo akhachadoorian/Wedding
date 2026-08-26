@@ -22,14 +22,13 @@ export function RSVPStepVertical({
     className,
     ...htmlProps
 }: RSVPStepProps) {
-    // const [loading, setLoading] = useState(false);
     const { stepNumber, eyebrow, title, body } = getStepText(currStep);
 
     return (
         <div
             {...htmlProps}
             className={cn(
-                "rsvp_step rsvp_step-vertical flex py-500 px-400",
+                "rsvp_step rsvp_step-vertical flex py-500 px-0",
                 "flex-col gap-700 md:gap-1500",
                 "md:items-center md:space-600  md:mx-auto md:py-800 md:px-750",
                 className,
@@ -60,18 +59,19 @@ function RSVPStepTextCentered({
     ...htmlProps
 }: RSVPStepTextProps) {
     return (
-        <div {...htmlProps} className={cn("rsvp_step_text text-center md:max-w-[60.417vw]", className)}>
-            {eyebrow && (<Eyebrow text={eyebrow} styleOptions={{variation: 'center', includeMargin: false}} className={"mb-400!"}  />)}            
+        <div {...htmlProps} className={cn("text-center w-full", className)}>
+            <div className="lg:max-w-[60.417vw] lg:mx-auto">
+                {eyebrow && (<Eyebrow text={eyebrow} styleOptions={{variation: 'center', includeMargin: false}} className={"mb-400!"}  />)}            
             
-            <h2 className={cn( stepNumber === 1 ? "text-6xl! lg:text-[175px]!" : "text-6xl!", "leading-[130%]!")}>{title}</h2>
+                <h2 className={cn( stepNumber === 1 ? "text-6xl! lg:text-[175px]! " : "text-6xl!", "leading-[130%]!")}>{title}</h2>
+            </div>
 
-            {/* {body && <p className="body-l rsvp_step_text-body mt-300!">{body}</p>} */}
             {body && (
             typeof body === 'string'
                 ? <p className="body-l rsvp_step_text-body mt-300!">{body}</p>
-                : <div className="mt-300 flex gap-(--layout-column-gutter) px-200 min-w-0">
+                : <div className="mt-300 flex gap-(--layout-column-gutter) lg:px-200 min-w-0 w-full ">
                             {body.left && (
-                                <p className={cn(eyebrowClass, "min-w-0")}>
+                                <p className={cn(eyebrowClass, "min-w-0 text-left")}>
                                 {body.left}
                             </p>
                             )}
