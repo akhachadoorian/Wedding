@@ -93,7 +93,7 @@ export default function SearchRSVPLive() {
                     onChange={setQuery}
                     placeholder="Jane Doe"
                     hasError={false}
-                    className="max-w-[650px] w-full"
+                    className="max-w-162. w-full"
                     styleOptions={{
                         centerContent: true,
                         maxInputWidth: MAX_WIDTH
