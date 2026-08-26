@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
@@ -26,12 +29,20 @@
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.1.0",
+    "@vitest/coverage-v8": "^4.1.11",
     "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
-    "typescript": "^5"
+    "jsdom": "^30.0.1",
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.1.11"
   }
 }
