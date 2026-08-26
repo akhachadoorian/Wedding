@@ -16,10 +16,10 @@ export default function RSVPThankYou({coming}:{coming: boolean}) {
     }
 
     return (
-        <div className="flex flex-col md:items-center md:space-600 py-800 px-750 md:max-w-[60.625vw] md:mx-auto">
-            <Eyebrow text={eyebrow} styleOptions={{variation: 'left',includeMargin: true}} />
-            <h2>{header}</h2>
-            <p className="mt-300!">{body}</p>
+        <div className="flex flex-col items-center md:space-600 md:py-800 md:px-750 py-500 px-0 md:max-w-[60.625vw] md:mx-auto">
+            <Eyebrow text={eyebrow} styleOptions={{variation: 'center',includeMargin: true}} />
+            <h2 className="text-6xl! leading-[130%] text-center">{header}</h2>
+            <p className="mt-300! text-center body-l">{body}</p>
 
             <Button
                 variant="outline"
