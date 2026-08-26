@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { GuestParty, RSVPDraft } from "../types";
-import { StepTestHarness } from "./testUtils";
+import { StepTestHarness } from "@/testing/rsvpFormTestUtils";
 import AttendWedding from "./AttendWedding";
 
 const jane = { fullName: "Jane Doe", firstName: "Jane", lastName: "Doe" };

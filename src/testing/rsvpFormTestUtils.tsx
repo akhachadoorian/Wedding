@@ -1,7 +1,7 @@
 import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { vi } from "vitest";
-import { RSVPFormProvider } from "../RSVPFormContext";
-import { GuestParty, RSVPDraft } from "../types";
+import { RSVPFormProvider } from "@/components/RSVPForm/RSVPFormContext";
+import { GuestParty, RSVPDraft } from "@/components/RSVPForm/types";
 
 interface StepTestHarnessProps {
     party: GuestParty | null;
@@ -15,8 +15,8 @@ interface StepTestHarnessProps {
     children: ReactNode;
 }
 
-/** Minimal RSVPFormProvider wrapper for rendering a single step in isolation, with a
- * real (stateful) draft so step components can read back their own updates. */
+/** Minimal RSVPFormProvider wrapper for rendering a single RSVPForm step in isolation,
+ * with a real (stateful) draft so step components can read back their own updates. */
 export function StepTestHarness({
     party,
     initialDraft,
