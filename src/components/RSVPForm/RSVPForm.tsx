@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 import { ArrowClockwiseIcon, WarningIcon } from "@phosphor-icons/react";
@@ -49,6 +49,16 @@ export default function RSVPForm({
     // FIXME:
     // const goToStep = (step: number) => setStep(step);
 
+    const formRef = useRef<HTMLDivElement>(null);
+    const isFirstRender = useRef(true);
+    useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+        formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, [step]);
+
     const { guests, guestsLoading, guestsError, refetchGuests } = useGuests();
     // console.log("guests", guests)    
 
@@ -68,7 +78,7 @@ export default function RSVPForm({
     }
 
     return (
-        <div {...htmlProps} className={`rsvp_form  ${className ?? ""}`}>
+        <div ref={formRef} {...htmlProps} className={`rsvp_form  ${className ?? ""}`}>
             {/* <RSVPProgressBar texts={progressBar} currStep={step} /> */}
 
             {guestsLoading ? (
