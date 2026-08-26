@@ -10,7 +10,7 @@ type PageGuardProps = {
 
 export default function PageGuard({ route, children, fallback }: PageGuardProps) {
     const status = PAGE_STATUS[route] ?? "live";
-    const isProduction = process.env.NODE_ENV === "production";
+    const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
 
     if (status === "in-progress" && isProduction) {
         return <>{fallback ?? <ComingSoon />}</>;
