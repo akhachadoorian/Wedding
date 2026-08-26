@@ -1,28 +1,39 @@
-import { google } from "googleapis";
 import { NextRequest, NextResponse } from "next/server";
+import { listRecords } from "@/lib/airtable";
+import { GUESTS_TABLE, GuestFields, PARTIES_TABLE, PartyFields } from "@/lib/airtableSchema";
+import { GuestParty, Guests } from "@/components/RSVPForm/types";
 
+async function getGuests(): Promise<Guests> {
+    const [guestRecords, partyRecords] = await Promise.all([
+        listRecords<GuestFields>(GUESTS_TABLE),
+        listRecords<PartyFields>(PARTIES_TABLE),
+    ]);
 
-const GUEST_RANGE = "Guests!A:E"
+    // console.log("partyRecords", partyRecords[0])
+    // console.log("guestRecords", guestRecords)
 
-async function getGuests() {
-    const rawKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY;
-    // Handle both literal \n (from .env without quotes) and already-escaped newlines
-    const privateKey = rawKey?.includes("\\n") ? rawKey.replace(/\\n/g, "\n") : rawKey;
+    const guestById = new Map(
+        guestRecords.map((r) => [
+            r.id,
+            { firstName: r.fields.firstName, lastName: r.fields.lastName, fullName: r.fields.fullName },
+        ]),
+    );
 
-    const auth = new google.auth.JWT({
-        email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
-        key: privateKey,
-        scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-    });
+    return partyRecords.reduce<Guests>((parties, record) => {
+        const [guest1Id, guest2Id] = record.fields.guests ?? [];
+        const guest1 = guest1Id ? guestById.get(guest1Id) : undefined;
+        if (!guest1) return parties;
 
-    const glSheets = google.sheets({ version: "v4", auth });
+        const guest2 = guest2Id ? guestById.get(guest2Id) : undefined;
 
-    const response = await glSheets.spreadsheets.values.get({
-        spreadsheetId: process.env.GOOGLE_SHEET_ID,
-        range: GUEST_RANGE,
-    });
-
-    return response.data.values;
+        const party: GuestParty = {
+            id: String(record.fields.id),
+            guest1,
+            ...(guest2 ? { guest2 } : {}),
+        };
+        parties.push(party);
+        return parties;
+    }, []);
 }
 
 // Testing error
@@ -33,8 +44,8 @@ export async function GET(request: NextRequest) {
     }
 
     try {
-        const data = await getGuests();
-        return NextResponse.json(data ?? []);
+        const data = await getGuests();   
+        return NextResponse.json(data);
     } catch (err) {
         console.error("GET /api/guests error:", err);
         return NextResponse.json({ error: "Failed to fetch guests" }, { status: 500 });

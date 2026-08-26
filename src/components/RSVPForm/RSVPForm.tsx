@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
-import Star from "@/icons/Star";
 import { ArrowClockwiseIcon, WarningIcon } from "@phosphor-icons/react";
 import useGuests from "../../hooks/useGuests";
 import { WithHTMLProps } from "../../types/props";
@@ -10,17 +10,26 @@ import { WithHTMLProps } from "../../types/props";
 import Button from "@/components/Buttons/Button";
 import "./RSVPForm.scss";
 import { RSVPFormProvider, useRSVPForm } from "./RSVPFormContext";
-import StepOne from "./Steps/Step1/Step1";
-import StepTwo from "./Steps/Step2";
+import StepTwo from "./Steps/AttendWedding";
 import { GuestParty, RSVPDraft } from "./types";
-import StepThree from "./Steps/Step3";
+import StepThree from "./Steps/MealSelection";
 import RSVPThankYou from "./RSVPThankYou";
+import StepFour from "./Steps/Transportation";
+import StepFive from "./Steps/AttendRehearsalMixer";
+import Star from "@/icons/Star";
+import { RenderSteps } from "./Steps/RSVPStep";
 
 // TODO: after rsvp date close
 
 export type RSVPFormProps = WithHTMLProps & {
     // progressBar: NonEmptyArray<string>;
     // steps: NonEmptyArray<RSVPStepProps>;
+};
+
+const stepVariants = {
+    enter: { opacity: 0, y: 12 },
+    center: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -12 },
 };
 
 
@@ -32,16 +41,23 @@ export default function RSVPForm({
     ...htmlProps
 }: RSVPFormProps) {
     const [step, setStep] = useState(1);
-    const goToStep = (step: number) => {
-        console.log("go to step ", step)
-        setStep(step)
+    const goToStep = (nextStep: number) => {
+        console.log("go to step ", nextStep)
+        setStep(nextStep)
 
     }
-    // FIXME:
-    // const goToStep = (step: number) => setStep(step);
+
+    const formRef = useRef<HTMLDivElement>(null);
+    const isFirstRender = useRef(true);
+    useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+        formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, [step]);
 
     const { guests, guestsLoading, guestsError, refetchGuests } = useGuests();
-    // console.log("guests", guests)    
 
     const [party, setParty] = useState<GuestParty | null>(null)
 
@@ -50,8 +66,6 @@ export default function RSVPForm({
         console.log("draft changed", draft)
     }, [draft])
 
-    // const [partyId, setPartyId] = useState<string | null>(null)
-    // console.log("partyId", partyId)
 
     const onRetry = async () => {
         setStep(1)
@@ -59,23 +73,55 @@ export default function RSVPForm({
     }
 
     return (
-        <div {...htmlProps} className={`rsvp_form  ${className ?? ""}`}>
+        <div ref={formRef} {...htmlProps} className={`rsvp_form  ${className ?? ""}`}>
             {/* <RSVPProgressBar texts={progressBar} currStep={step} /> */}
 
-            <div className="rsvp_form-frame rsvp_form-frame-a" />
-            <div className="rsvp_form-frame rsvp_form-frame-b" />
-
             {guestsLoading ? (
-                <RSVPFormLoading key="loading" />
+                <RSVPStepLoading key="loading" />
             ) : guestsError ? (
                 <RSVPFormError key="error" errorMessage={guestsError} onRetry={onRetry} />
             ) : (
                 <RSVPFormProvider value={{ step, goToStep, draft, setDraft, guests, party, setParty, refetchGuests: onRetry }}>
-                    <div key="steps" className="rsvp_form-steps rsvp_form-status">
-                        <RenderSteps />
+                    <div className="relative grid">
+                        <AnimatePresence>
+                            <motion.div
+                                key={step}
+                                variants={stepVariants}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
+                                transition={{ duration: 0.28, ease: "easeOut" }}
+                                className="rsvp_form-steps [grid-area:1/1]"
+                            >
+                                <RenderSteps step={step} />
+                            </motion.div>
+                        </AnimatePresence>
                     </div>
                 </RSVPFormProvider>
             )}
+        </div>
+    );
+}
+
+
+
+
+
+function RSVPStepLoading({ loadingText }: { loadingText?: string }) {
+    return (
+        <div className="rsvp_form-status flex min-h-[220px] flex-col items-center justify-center gap-300">
+            <div className="size-14 rsvp_star_spin">
+                <Star color="--wine-500" />
+            </div>
+
+            <p className="flex items-center justify-center gap-025 font-sans text-lg font-semibold tracking-[0.6px] text-(--cream-700) uppercase">
+                {loadingText ?? "Loading"}
+                <span className="flex">
+                    <span className="animate-pulse">.</span>
+                    <span className="animate-pulse [animation-delay:0.2s]">.</span>
+                    <span className="animate-pulse [animation-delay:0.4s]">.</span>
+                </span>
+            </p>
         </div>
     );
 }
@@ -85,18 +131,18 @@ type RSVPFormErrorProps = {
     onRetry: () => void;
 };
 
-function RSVPFormError({ errorMessage, onRetry }: RSVPFormErrorProps) {
+export function RSVPFormError({ errorMessage, onRetry }: RSVPFormErrorProps) {
     return (
         <div className="rsvp_form-status flex flex-col items-center gap-200 text-center">
-            <WarningIcon size={56} weight="bold" color="var(--cream)" />
+            <WarningIcon size={56} weight="bold" color="var(--wine-500)" />
 
             <h3 className="heading-l">An Error has Occurred</h3>
             <p className="body-lg">{errorMessage}</p>
 
             <Button
                 variant="solid"
-                colorScheme="cream"
-                hoverScheme="burgundy"
+                colorScheme="burgundy"
+                hoverScheme="cabernet"
                 btnSettings={{
                     type: "native",
                     text: "Refresh page",
@@ -111,43 +157,4 @@ function RSVPFormError({ errorMessage, onRetry }: RSVPFormErrorProps) {
             ></Button>
         </div>
     );
-}
-
-function RSVPFormLoading({loadingText}:{loadingText?: string}) {
-    return (
-        <div className="rsvp_form-status step_one_loading">
-            <div className="step_one_loading-spinner">
-                <Star color="--wine-500" />
-            </div>
-
-            <p className="step_one_loading-text">
-                {loadingText ?? "Loading"}
-                <span className="step_one_loading-dots">
-                    <span>.</span>
-                    <span>.</span>
-                    <span>.</span>
-                </span>
-            </p>
-        </div>
-    );
-}
-
-function RenderSteps() {
-    const { step, refetchGuests } = useRSVPForm();
-
-    switch (step) {
-        case -2:
-            return <RSVPThankYou coming={true} />
-        case -1:
-            return <RSVPThankYou coming={false} />
-        case 1:
-            return <StepOne />
-        case 2:
-            return <StepTwo />
-        case 3: 
-            return <StepThree />
-        default:
-            return <RSVPFormError key="error" errorMessage={"Error"} onRetry={refetchGuests} /> // TODO: add error message
-
-    }
 }

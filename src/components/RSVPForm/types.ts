@@ -1,19 +1,13 @@
 import { WithHTMLProps } from "@/types/props";
-import { InvertRecord, NonEmptyArray } from "@/types/utility";
-import { STEP_ONE_TEXT, STEP_THREE_TEXT, STEP_TWO_TEXT } from "./content";
+import { InvertRecord, NonEmptyArray, TextValueOption } from "@/types/utility";
+import {
+    STEP_FIVE_TEXT,
+    STEP_FOUR_TEXT,
+    STEP_ONE_TEXT,
+    STEP_THREE_TEXT,
+    STEP_TWO_TEXT,
+} from "./content";
 import { ExpandedTextValueOptions } from "./FormInputs";
-
-export const HEADER_MAP = {
-    "Party ID": "id",
-    "Last Name Guest 1": "lastNameG1",
-    "First Name Guest 1": "firstNameG1",
-    "Last Name Guest 2": "lastNameG2",
-    "First Name Guest 2": "firstNameG2",
-} as const satisfies Record<string, string>;
-
-export type MappedHeaderKey = (typeof HEADER_MAP)[keyof typeof HEADER_MAP];
-
-export type GuestParty1 = Record<MappedHeaderKey, string>;
 
 export type Guest = {
     firstName: string;
@@ -29,66 +23,6 @@ export type GuestParty = {
 export type GuestKey = keyof Omit<GuestParty, "id">; // "guest1" | "guest2"
 
 export type Guests = GuestParty[];
-
-export function mapGuestData(data: string[][]): Guests | null {
-    if (data.length === 0 || data.length === 1) return null;
-    // remove headers
-    const headers = data[0];
-    const keys = headers.map(
-        (h) => HEADER_MAP[h as keyof typeof HEADER_MAP] ?? h,
-    );
-    // * debug
-    // console.log("headers ", headers);
-    // console.log("keys ", keys);
-
-    const guests = data.slice(1);
-    // * debug
-    // console.log("guests ", guests);
-
-    // index lookups so we're not dependent on column order
-    const idIdx = keys.indexOf("id");
-    const lastNameG1Idx = keys.indexOf("lastNameG1");
-    const firstNameG1Idx = keys.indexOf("firstNameG1");
-    const lastNameG2Idx = keys.indexOf("lastNameG2");
-    const firstNameG2Idx = keys.indexOf("firstNameG2");
-
-    // TODO: determine if lowercase okay?
-    // const map = guests
-    //     .map(
-    //         (row) =>
-    //             Object.fromEntries(
-    //                 keys.map((h, i) => [h, row[i]?.toLowerCase()]),
-    //             ) as GuestParty1,
-    //     )
-    //     .filter(
-    //         (guest) => guest.firstNameG1?.trim() && guest.lastNameG1?.trim(),
-    //     );
-
-    const map2 = guests.map((row) => {
-        const firstNameG1 = row[firstNameG1Idx];
-        const lastNameG1 = row[lastNameG1Idx];
-        const firstNameG2 = row[firstNameG2Idx];
-        const lastNameG2 = row[lastNameG2Idx];
-
-        return {
-            id: row[idIdx],
-            guest1: {
-                firstName: firstNameG1,
-                lastName: lastNameG1,
-            },
-            guest2:
-                firstNameG2 || lastNameG2
-                    ? { firstName: firstNameG2, lastName: lastNameG2 }
-                    : undefined,
-        } as GuestParty;
-    });
-
-    // * debug
-    // console.log("map ", map);
-    // console.log("map2 ", map2);
-
-    return map2;
-}
 
 export function getFindMatchingGuests(
     guests: Guests | null,
@@ -127,7 +61,7 @@ export type RSVPStepTextProps = WithHTMLProps & {
     stepNumber: number;
     eyebrow?: string;
     title: string;
-    body?: string;
+    body?: string | {left?: string, center?: string, right: string};
 };
 
 export type RSVPStepProps = WithHTMLProps & {
@@ -139,7 +73,9 @@ export type RSVPStepProps = WithHTMLProps & {
 export const STEP_TEXT_MAP = {
     1: STEP_ONE_TEXT,
     2: STEP_TWO_TEXT,
-    3: STEP_THREE_TEXT
+    3: STEP_THREE_TEXT,
+    4: STEP_FOUR_TEXT,
+    5: STEP_FIVE_TEXT,
 } as const satisfies Record<number, RSVPStepTextProps>;
 
 export type StepTextKeys = keyof typeof STEP_TEXT_MAP;
@@ -156,56 +92,143 @@ export function getPartyFromId(
     return guests?.find((g) => g.id === partyId) ?? null;
 }
 
-type AttendanceResponse = Partial<Record<GuestKey, boolean>>;
+export const ATTENDING_OPTION = { text: "Attending", value: "attending" } as const satisfies TextValueOption;
+export const DECLINING_OPTION = { text: "Declining", value: "declining" } as const satisfies TextValueOption;
+export const UNKNOWN_OPTION = { text: "Unknown", value: "unknown" } as const satisfies TextValueOption;
 
-// FIXME: add subtext and another area for more text?
+export const ATTENDANCE_OPTIONS = [ATTENDING_OPTION, DECLINING_OPTION, UNKNOWN_OPTION] as const satisfies NonEmptyArray<TextValueOption>;
 
 
-export const MEAL_OPTIONS: NonEmptyArray<ExpandedTextValueOptions> = [
-    {
-        text: 'Pepper Seared Sirloin Steak',
-        value: 'steak',
-        subtext: 'with Jus Lié',
-        note: 'Cooked medium rare'
-    }
-]
+export type Attendance = (typeof ATTENDANCE_OPTIONS)[number]["value"];
+
+export type AttendanceOption = TextValueOption<Attendance>;
+
+type AttendanceResponse = Partial<Record<GuestKey, Attendance>>;
+
+// #region --- Radio Option Builder ---
+
+function buildOptions<V extends string>(
+    labels: Record<V, string>,
+    subtext: Record<V, string>,
+): NonEmptyArray<ExpandedTextValueOptions<V>> {
+    return Object.entries<string>(labels).map(([value, text]) => ({
+        value: value as V,
+        text,
+        subtext: subtext[value as V],
+    })) as NonEmptyArray<ExpandedTextValueOptions<V>>;
+}
+
+// #endregion ---
+
+// #region --- Meal ---
+
+export type MealValues = "Steak" | "Chicken" | "Salmon";
+
+export const MEAL_LABELS = {
+    Chicken: "Herb Roasted French Style Chicken Breast",
+    Steak: "Pepper Seared Sirloin Steak",
+    Salmon: "Chili Garlic Salmon Seared",
+} as const satisfies Record<MealValues, string>;
+
+const MEAL_SUBTEXT = {
+    Chicken: "with Jus Lié",
+    Steak: "with Horseradish Cream",
+    Salmon: "with an Asian Trinity* a house specialty",
+} as const satisfies Record<MealValues, string>;
+
+export const MEAL_OPTIONS = buildOptions(MEAL_LABELS, MEAL_SUBTEXT);
 
 export type Meal = {
-    selectedEntree: 'steak' | 'chicken' | 'fish'
+    selectedEntree: MealValues;
     dietaryNotes?: string;
-}
+};
 
 type WeddingMealResponse = Partial<Record<GuestKey, Meal>>;
 
-type BusHotel = {
-    hotel: 'opt1' // FIXME: add options
-    takingBus: boolean
+// #endregion ---
+
+// #region --- Hotel ---
+
+const HOTEL_OPTS = ["homewoodSuites", "hyattPlace", "acHotel"] as const;
+type HotelOpts = (typeof HOTEL_OPTS)[number];
+
+type AlternateHotelOpts = "notSure" | "other";
+type HotelValues = HotelOpts | AlternateHotelOpts;
+
+export const HOTEL_LABELS = {
+    homewoodSuites: "Homewood Suites By Hilton",
+    hyattPlace: "Hyatt Place",
+    acHotel: "AC Hotel",
+} as const satisfies Record<HotelOpts, string>;
+
+const HOTEL_SUBTEXT = {
+    homewoodSuites: "10434 Midtown Parkway,\nJacksonville, Florida 32246",
+    hyattPlace: "4742 Town Center Parkway,\nJacksonville, FL 32246",
+    acHotel: "5323 Big Island Drive,\nJacksonville, FL, 32246",
+} as const satisfies Record<HotelOpts, string>;
+
+export const HOTEL_OPTIONS = buildOptions(HOTEL_LABELS, HOTEL_SUBTEXT);
+
+export const ALTERNATE_HOTEL_LABELS = {
+    other: "Another Hotel/Accommodation",
+    notSure: "Not Sure Yet",
+} as const satisfies Record<AlternateHotelOpts, string>;
+
+const ALTERNATE_HOTEL_SUBTEXT = {
+    other: "Please arrange your own transport",
+    notSure: "Lorem ipsum dolor sit amet",
+} as const satisfies Record<AlternateHotelOpts, string>;
+
+export const ALTERNATE_HOTEL_OPTIONS = buildOptions(
+    ALTERNATE_HOTEL_LABELS,
+    ALTERNATE_HOTEL_SUBTEXT,
+);
+
+export type HotelStrings =
+    | (typeof HOTEL_LABELS)[keyof typeof HOTEL_LABELS]
+    | (typeof ALTERNATE_HOTEL_LABELS)[keyof typeof ALTERNATE_HOTEL_LABELS];
+
+export function isStayingAtHotel(answer?: HotelValues): boolean {
+    if (!answer) return false;
+
+    return (HOTEL_OPTS as readonly string[]).includes(answer);
 }
 
-type TransportationResponse = Partial<Record<GuestKey, BusHotel>>;
+// #endregion ---
 
-type RehearsalMixerResponse = Partial<Record<GuestKey, boolean>>;
-
-export type Responses = AttendanceResponse | WeddingMealResponse | TransportationResponse | RehearsalMixerResponse
-
-export type RSVPDraft = {
-    attendance: AttendanceResponse // {} // todo: determine if empty record or something else
-    meal?: WeddingMealResponse;
-    transportation?: TransportationResponse
-    rehearsalMixer?: RehearsalMixerResponse // todo: add dinner?
+export type Transportation = {
+    stayingAt: HotelValues;
+    takingBus: boolean;
 };
 
-export type RSVPDraftKey = keyof RSVPDraft
+type TransportationResponse = Partial<Record<GuestKey, Transportation>>;
+
+type RehearsalMixerResponse = Partial<Record<GuestKey, Attendance>>;
+
+export type Responses =
+    | AttendanceResponse
+    | WeddingMealResponse
+    | TransportationResponse
+    | RehearsalMixerResponse;
+
+export type RSVPDraft = {
+    attendance: AttendanceResponse; // {} // todo: determine if empty record or something else
+    meal?: WeddingMealResponse;
+    transportation?: TransportationResponse;
+    rehearsalMixer?: RehearsalMixerResponse; // todo: add dinner?
+};
+
+export type RSVPDraftKey = keyof RSVPDraft;
 
 export const RSVP_STEP_BY_KEY = {
-  attendance: 2,
-  meal: 3,
-  transportation: 4,
-  rehearsalMixer: 5,
+    attendance: 2,
+    meal: 3,
+    transportation: 4,
+    rehearsalMixer: 5,
 } as const satisfies Record<RSVPDraftKey, number>;
 
 export const RSVP_KEY_BY_STEP = Object.fromEntries(
-  Object.entries(RSVP_STEP_BY_KEY).map(([key, step]) => [step, key])
+    Object.entries(RSVP_STEP_BY_KEY).map(([key, step]) => [step, key]),
 ) as InvertRecord<typeof RSVP_STEP_BY_KEY>;
 
 // export const RSVP_KEY_BY_STEP: Map<number, RSVPDraftKey> = new Map(
@@ -214,28 +237,85 @@ export const RSVP_KEY_BY_STEP = Object.fromEntries(
 
 export function partyGuestCount(party: GuestParty) {
     // const hasTwo = party.guest1 && party.guest2
-    return party.guest1 && party.guest2 ? 2 : 1
+    return party.guest1 && party.guest2 ? 2 : 1;
 }
 
-export function hasAnsweredQuestion(party: GuestParty, draft: RSVPDraft, key: RSVPDraftKey): boolean {
+function isGuestAnswerComplete(key: RSVPDraftKey, value: unknown): boolean {
+    if (value === undefined) return false;
+
+    if (key === "transportation") {
+        const transportation = value as Transportation;
+        if (transportation.takingBus === undefined) return false;
+
+        if (transportation.takingBus && !transportation.stayingAt) return false;
+    }
+
+    return true;
+}
+
+export function hasAnsweredQuestion(
+    party: GuestParty,
+    draft: RSVPDraft,
+    key: RSVPDraftKey,
+    renders: RenderFieldsForGuest
+): boolean {
     const value = draft[key];
     if (!value) return false;
 
-    const guest1Answered = value.guest1 !== undefined;
-    const guest2Answered = !party.guest2 || value.guest2 !== undefined;
+    const { renderGuestOne, renderGuestTwo } = renders
+
+    // let guest1Answered, guest2Answered;
+
+    const guest1Answered = renderGuestOne ? isGuestAnswerComplete(key, value.guest1) : true
+    console.log("guest1Answered", guest1Answered)
+    
+    const guest2Answered = renderGuestTwo && party.guest2 !== undefined ? isGuestAnswerComplete(key, value.guest2) : true
+        console.log("guest2Answered", guest2Answered)
     return guest1Answered && guest2Answered;
 }
 
-export function getQuestionAnswerParty<K extends RSVPDraftKey>(draft: RSVPDraft, key: K): NonNullable<RSVPDraft[K]> | null {
+export function getQuestionAnswerParty<K extends RSVPDraftKey>(
+    draft: RSVPDraft,
+    key: K,
+): NonNullable<RSVPDraft[K]> | null {
     const value = draft[key];
-    if (!value) return null
+    if (!value) return null;
 
-    return value
+    return value;
 }
 
-// export function getQuestionAnswerGuest(guest: 'guest1' | 'guest2', draft: RSVPDraft, key: RSVPDraftKey)   {
-//     const value = draft[key];
-//     if (!value || value === null) null
+export function determineFullPartyComing(
+    answer: Responses | null,
+    party: GuestParty,
+) {
+    const { guest2 } = party;
 
-//     return value?[guest]
-// }
+    const g1NotComing = answer?.guest1 === "declining";
+    const g2NotComing = !guest2 || answer?.guest2 === "declining";
+
+    return g1NotComing && g2NotComing;
+}
+
+export function determineGuestComing(guestKey: GuestKey, draft: RSVPDraft): boolean | undefined {
+    const answers = getQuestionAnswerParty(draft, "attendance");
+    if (answers === null) return undefined
+
+    return answers[guestKey] === 'declining' ? false : true 
+}
+
+// type RenderFieldsForGuest: Record<GuestKey, >
+type RenderFieldsForGuest = {
+    renderGuestOne: boolean,
+    renderGuestTwo: boolean
+}
+
+export function renderFieldsForGuest(draft: RSVPDraft, party: GuestParty):RenderFieldsForGuest {
+    const G1 = determineGuestComing('guest1', draft)
+
+    const G2 = party.guest2 && determineGuestComing('guest2', draft)
+
+    return {
+        renderGuestOne: G1 ?? false,
+        renderGuestTwo: G2 ?? false
+    }
+}

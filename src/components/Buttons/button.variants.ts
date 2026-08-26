@@ -70,13 +70,13 @@ const LINE_AFTER = "after:h-px after:w-[0px] after:absolute after:bottom-px afte
 export const buttonVariants = cva("flex items-center gap-150 transition-all duration-300 ease-in-out", {
     variants: {
         size: {
-            default: 'py-100 px-200 md:py-150 md:px-300 text-s md:text-base',
+            default: 'py-100 px-200 md:py-150 md:px-300 text-base ',
             small: 'text-s py-100 px-200'
         },
         variant: {
             solid: "border-2 border-solid",
             outline: "border-2 border-solid bg-transparent",
-            lines: `relative ${LINE_BEFORE} ${LINE_AFTER}`,
+            lines: `relative border-none bg-transparent ${LINE_BEFORE} ${LINE_AFTER}`,
         } satisfies Record<BtnVariants, string>,
         colorScheme: {
             cream: "",

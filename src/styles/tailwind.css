@@ -2,6 +2,22 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 
 /*
+ * Only theme.css and utilities.css are imported above (not the full
+ * "tailwindcss" entrypoint), so Tailwind's preflight reset never runs and
+ * box-sizing defaults to the browser's content-box everywhere. That silently
+ * overflows any element combining a percentage width with padding/border
+ * (e.g. w-full + p-* + border-*), which only becomes visible once the
+ * container is narrow enough for the padding/border to matter.
+ */
+@layer base {
+    *,
+    ::before,
+    ::after {
+        box-sizing: border-box;
+    }
+}
+
+/*
  * Button colors (src/components/Buttons/button.variants.ts) are built via string
  * interpolation (`border-${base}`, `hover:bg-${hover}`, ...) from a runtime data table,
  * so Tailwind's static source scanner can never discover the resulting class names —
@@ -37,16 +53,17 @@
     --font-sans: var(--font-unbounded);
 
     /* Text Sizes */
-    --font-size-xs: var(--text-xs);
-    --font-size-s: var(--text-s);
-    --font-size-base: var(--text-base);
-    --font-size-md: var(--text-md);
-    --font-size-lg: var(--text-lg);
-    --font-size-xl: var(--text-xl);
-    --font-size-2xl: var(--text-2xl);
-    --font-size-3xl: var(--text-3xl);
-    --font-size-4xl: var(--text-4xl);
-    --font-size-5xl: var(--text-5xl);
+    --text-xs: var(--text-xs);
+    --text-s: var(--text-s);
+    --text-base: var(--text-base);
+    --text-md: var(--text-md);
+    --text-lg: var(--text-lg);
+    --text-xl: var(--text-xl);
+    --text-2xl: var(--text-2xl);
+    --text-3xl: var(--text-3xl);
+    --text-4xl: var(--text-4xl);
+    --text-5xl: var(--text-5xl);
+    --text-6xl: var(--text-6xl);
 
     /* Spacing */
     --spacing-0: var(--space-0); /* 0px */
