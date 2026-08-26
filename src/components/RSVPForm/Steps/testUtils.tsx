@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { vi } from "vitest";
 import { RSVPFormProvider } from "../RSVPFormContext";
 import { GuestParty, RSVPDraft } from "../types";
@@ -11,7 +11,7 @@ interface StepTestHarnessProps {
     /** Defaults to `[party]` (or `null` when there's no party). Override for steps like
      * SearchingLive that need a guest list independent of the current party. */
     guests?: GuestParty[] | null;
-    setParty?: (party: GuestParty | null) => void;
+    setParty?: Dispatch<SetStateAction<GuestParty | null>>;
     children: ReactNode;
 }
 
