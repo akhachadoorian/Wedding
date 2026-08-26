@@ -38,7 +38,7 @@ export default function AttendWedding() {
 
     console.log("allAnswered", allAnswered)
 
-    const { handleSubmit } = useStepSubmit({
+    const { handleSubmit, submitting } = useStepSubmit({
         canAdvance: allAnswered,
         overrideNext,
     });
@@ -113,6 +113,7 @@ export default function AttendWedding() {
                     back={{ disabled: false }}
                     next={{ disabled: !allAnswered }}
                     overrideNext={overrideNext}
+                    submitting={submitting}
                 />
             </form>
         </RSVPStepVertical>

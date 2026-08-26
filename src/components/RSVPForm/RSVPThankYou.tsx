@@ -7,12 +7,13 @@ import { FORM_THANK_YOU } from "./content"
 export default function RSVPThankYou({coming}:{coming: boolean}) {
 
     const {eyebrow, header, body} = coming ? FORM_THANK_YOU.yes : FORM_THANK_YOU.no
-    const { goToStep, setDraft, setParty } = useRSVPForm()
+    const { goToStep, setDraft, setParty, refetchGuests } = useRSVPForm()
 
     const handleReturnToStart = () => {
         setParty(null)
         setDraft({ attendance: {} })
         goToStep(1)
+        refetchGuests()
     }
 
     return (

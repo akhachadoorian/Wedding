@@ -38,7 +38,7 @@ export default function Transportation() {
         renderGuestTwo,
         allAnswered,
     } = stepAnswers;
-    const { handleSubmit } = useStepSubmit({
+    const { handleSubmit, submitting } = useStepSubmit({
         canAdvance: allAnswered,
     });
 
@@ -152,6 +152,7 @@ export default function Transportation() {
                 <RSVPNavButtons
                     back={{ disabled: false }}
                     next={{ disabled: !allAnswered }}
+                    submitting={submitting}
                 />
             </form>
         </RSVPStepVertical>

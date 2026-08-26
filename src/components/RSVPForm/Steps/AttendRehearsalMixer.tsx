@@ -27,7 +27,7 @@ export default function AttendRehearsalMixer() {
     const overrideNext = allAnswered
         ? { disabled: false, coming: true }
         : undefined;
-    const { handleSubmit } = useStepSubmit({
+    const { handleSubmit, submitting } = useStepSubmit({
         canAdvance: allAnswered,
         overrideNext,
     });
@@ -116,6 +116,7 @@ export default function AttendRehearsalMixer() {
                 <RSVPNavButtons
                     back={{ disabled: false }}
                     next={{ disabled: !allAnswered }}
+                    submitting={submitting}
                 />
             </form>
         </RSVPStepVertical>

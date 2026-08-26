@@ -151,7 +151,7 @@ function SwitchOptionInput({
                 className={cn(
                     BTN_TEXT_CLASSES,
                     "rsvp_switch-text",
-                    isActive ? "text-cabernet" : "text-cream",
+                    isActive ? "text-cream" : "text-cream",
                 )}
             >
                 {text}
@@ -246,7 +246,6 @@ function RadioButton<V = string>({
     className,
 }: RadioButtonProps<V>) {
     const { text, value, subtext, note } = option; // FIXME: do subnotes
-    console.log("subtext", subtext);
 
     const id = `${name}-${value}`;
     return (

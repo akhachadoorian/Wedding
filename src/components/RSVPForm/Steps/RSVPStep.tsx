@@ -139,6 +139,8 @@ interface RSVPNavButtonsProps {
     back?: RSVPNavButtonProps;
     next: RSVPNavButtonProps;
     overrideNext?: OverrideProps;
+    /** True while the step's submission (e.g. the final RSVP write) is in flight — disables nav and swaps the Next label. */
+    submitting?: boolean;
 }
 
 /** Resolves which step a form submission should advance to, given an optional override (e.g. declining branches to the "not coming" thank-you step). */
@@ -154,6 +156,7 @@ export function RSVPNavButtons({
     back = { disabled: false, hidden: false },
     next,
     overrideNext,
+    submitting = false,
 }: RSVPNavButtonsProps) {
     const { step, goToStep } = useRSVPForm();
 
@@ -167,7 +170,7 @@ export function RSVPNavButtons({
                     btnSettings={{
                         type: "native",
                         text: "Back",
-                        disabled: back.disabled,
+                        disabled: back.disabled || submitting,
                         onClick: () => goToStep(step - 1),
                         htmlType: "button",
                     }}
@@ -182,8 +185,10 @@ export function RSVPNavButtons({
                     hoverScheme="burgundy"
                     btnSettings={{
                         type: "native",
-                        text: overrideNext.text ?? "Next",
-                        disabled: overrideNext.disabled,
+                        text: submitting
+                            ? "Submitting…"
+                            : (overrideNext.text ?? "Next"),
+                        disabled: overrideNext.disabled || submitting,
                         htmlType: "submit",
                     }}
                 />
@@ -194,8 +199,8 @@ export function RSVPNavButtons({
                     hoverScheme="burgundy"
                     btnSettings={{
                         type: "native",
-                        text: "Next",
-                        disabled: next.disabled,
+                        text: submitting ? "Submitting…" : "Next",
+                        disabled: next.disabled || submitting,
                         htmlType: "submit",
                     }}
                 />

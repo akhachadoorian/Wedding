@@ -14,7 +14,7 @@ export default function MealSelection() {
     if (!stepAnswers) return null;
 
     const { guest1, guest2, answers, renderGuestOne, renderGuestTwo, allAnswered } = stepAnswers;
-    const { handleSubmit } = useStepSubmit({
+    const { handleSubmit, submitting } = useStepSubmit({
         canAdvance: allAnswered,
     });
 
@@ -29,7 +29,7 @@ export default function MealSelection() {
                     )}
                 </div>
 
-                <RSVPNavButtons back={{disabled: false}} next={{disabled: !allAnswered}}  />
+                <RSVPNavButtons back={{disabled: false}} next={{disabled: !allAnswered}} submitting={submitting} />
             </form>
         </RSVPStepVertical>
     )

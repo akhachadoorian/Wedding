@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { CheckCircleIcon } from "@phosphor-icons/react";
 import { useRSVPForm } from "../RSVPFormContext";
 import { buildDraftFromParty, Guest, GuestParty, Guests, partyGuestCount } from "../types";
 import { RSVPStepVertical } from "./RSVPStep";
@@ -173,20 +174,21 @@ function SearchResults({
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.25, ease: "easeOut", delay: index * 0.05 }}
-                        className="box-border flex flex-col md:flex-row items-center md:justify-between gap-200 border border-cream px-300 py-200 font-sans text-cream w-full"
+                        className="box-border flex flex-col md:flex-row md:justify-between items-center gap-200 border border-cream px-300 py-200 font-sans text-cream w-full"
                     >
-                        <div className="flex flex-col gap-050 min-w-0 md:text-left text-center">
-                             <p className="eyebrow text-xs! opacity-75 ">
+                        <div className="flex-1 flex flex-col gap-075 min-w-0 md:text-left">
+                            <p className="eyebrow text-xs! opacity-75 text-center">
                                 Party of {partyGuestCount(party)}
                             </p>
 
-                            <p className="truncate text-base">{getNameString(party)}</p>
+                            <p className="truncate text-base font-medium  text-center">{getNameString(party)}</p>
 
-                            {/* <span className="truncate"></span> */}
-                           
+                            
+
                             {updatedAt && (
-                                <p className="text-s opacity-60 italic">
-                                    Already submitted — last updated{" "}
+                                <p className="flex items-center justify-center gap-050 text-xs opacity-75  text-center">
+                                    <CheckCircleIcon size={14} weight="fill" />
+                                    Submitted{" "}
                                     {updatedAt.toLocaleDateString(undefined, {
                                         month: "short",
                                         day: "numeric",
@@ -203,6 +205,11 @@ function SearchResults({
                                 type: "native",
                                 text: "This is us",
                                 onClick: () => onSelectParty(party),
+                                decoration: {
+                                    
+                                        type: 'arrow'
+                                    
+                                }
                             }}
                             className="shrink-0"
                         />
