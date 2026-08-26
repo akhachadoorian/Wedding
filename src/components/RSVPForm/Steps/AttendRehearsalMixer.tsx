@@ -42,7 +42,7 @@ export default function AttendRehearsalMixer() {
                 className="w-full flex flex-col gap-500"
             >
                 <div className="w-full overflow-hidden flex flex-col gap-700">
-                    <div className="flex flex-col gap-200 min-w-0 ">
+                    {/* <div className="flex flex-col gap-200 min-w-0 ">
                         <div className="flex gap-(--layout-column-gutter) px-200 min-w-0">
                             <p className={cn(eyebrowClass, "min-w-0")}>
                                 Friday
@@ -76,7 +76,7 @@ export default function AttendRehearsalMixer() {
                         >
                             Rehearsal Mixer
                         </h3>
-                    </div>
+                    </div> */}
 
                     <div className="flex flex-col gap-500">
                         {/* Guest 1 */}

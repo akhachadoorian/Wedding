@@ -157,18 +157,18 @@ function SearchResults({
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.25, ease: "easeOut", delay: index * 0.05 }}
-                        className="box-border flex items-center justify-between gap-200 border border-cream px-300 py-200 font-sans text-(--black-700) w-full"
+                        className="box-border flex flex-col md:flex-row items-center md:justify-between gap-200 border border-cream px-300 py-200 font-sans text-cream w-full"
                     >
-                        <div className="flex flex-col min-w-0">
+                        <div className="flex flex-col gap-050 min-w-0 md:text-left text-center">
                             <span className="truncate">{getNameString(party)}</span>
-                            <span className="text-s opacity-70">
+                            <span className="text-s opacity-60">
                                 Party of {partyGuestCount(party)}
                             </span>
                         </div>
 
                         <Button
-                            variant="outline"
-                            colorScheme="cream"
+                            variant="solid"
+                            colorScheme="burgundy"
                             btnSettings={{
                                 type: "native",
                                 text: "This is us",

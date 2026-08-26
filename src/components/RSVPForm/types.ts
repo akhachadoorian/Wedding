@@ -61,7 +61,7 @@ export type RSVPStepTextProps = WithHTMLProps & {
     stepNumber: number;
     eyebrow?: string;
     title: string;
-    body?: string;
+    body?: string | {left?: string, center?: string, right: string};
 };
 
 export type RSVPStepProps = WithHTMLProps & {
@@ -105,31 +105,38 @@ export type AttendanceOption = TextValueOption<Attendance>;
 
 type AttendanceResponse = Partial<Record<GuestKey, Attendance>>;
 
-// FIXME: add subtext and another area for more text?
+// #region --- Radio Option Builder ---
 
-export const MEAL_OPTIONS: NonEmptyArray<ExpandedTextValueOptions<MealValues>> =
-    [
-        {
-            text: "Herb Roasted French Style Chicken Breast",
-            value: "Chicken" as const,
-            subtext: "with Jus Lié",
-            // note: ''
-        },
-        {
-            text: "Pepper Seared Sirloin Steak",
-            value: "Steak" as const,
-            subtext: "with Horseradish Cream",
-            // note: "Cooked medium rare",
-        },
-        {
-            text: "Chili Garlic Salmon Seared",
-            value: "Salmon" as const,
-            subtext: "with an Asian Trinity* a house specialty",
-            // note: ''
-        },
-    ];
+function buildOptions<V extends string>(
+    labels: Record<V, string>,
+    subtext: Record<V, string>,
+): NonEmptyArray<ExpandedTextValueOptions<V>> {
+    return Object.entries<string>(labels).map(([value, text]) => ({
+        value: value as V,
+        text,
+        subtext: subtext[value as V],
+    })) as NonEmptyArray<ExpandedTextValueOptions<V>>;
+}
+
+// #endregion ---
+
+// #region --- Meal ---
 
 export type MealValues = "Steak" | "Chicken" | "Salmon";
+
+export const MEAL_LABELS = {
+    Chicken: "Herb Roasted French Style Chicken Breast",
+    Steak: "Pepper Seared Sirloin Steak",
+    Salmon: "Chili Garlic Salmon Seared",
+} as const satisfies Record<MealValues, string>;
+
+const MEAL_SUBTEXT = {
+    Chicken: "with Jus Lié",
+    Steak: "with Horseradish Cream",
+    Salmon: "with an Asian Trinity* a house specialty",
+} as const satisfies Record<MealValues, string>;
+
+export const MEAL_OPTIONS = buildOptions(MEAL_LABELS, MEAL_SUBTEXT);
 
 export type Meal = {
     selectedEntree: MealValues;
@@ -137,6 +144,10 @@ export type Meal = {
 };
 
 type WeddingMealResponse = Partial<Record<GuestKey, Meal>>;
+
+// #endregion ---
+
+// #region --- Hotel ---
 
 const HOTEL_OPTS = ["homewoodSuites", "hyattPlace", "acHotel"] as const;
 type HotelOpts = (typeof HOTEL_OPTS)[number];
@@ -148,24 +159,42 @@ export const HOTEL_LABELS = {
     homewoodSuites: "Homewood Suites By Hilton",
     hyattPlace: "Hyatt Place",
     acHotel: "AC Hotel",
-    other: "Another Hotel Not on This List",
+} as const satisfies Record<HotelOpts, string>;
+
+const HOTEL_SUBTEXT = {
+    homewoodSuites: "10434 Midtown Parkway,\nJacksonville, Florida 32246",
+    hyattPlace: "4742 Town Center Parkway,\nJacksonville, FL 32246",
+    acHotel: "5323 Big Island Drive,\nJacksonville, FL, 32246",
+} as const satisfies Record<HotelOpts, string>;
+
+export const HOTEL_OPTIONS = buildOptions(HOTEL_LABELS, HOTEL_SUBTEXT);
+
+export const ALTERNATE_HOTEL_LABELS = {
+    other: "Another Hotel/Accommodation",
     notSure: "Not Sure Yet",
-} as const satisfies Record<HotelValues, string>;
+} as const satisfies Record<AlternateHotelOpts, string>;
 
-export type HotelStrings = (typeof HOTEL_LABELS)[keyof typeof HOTEL_LABELS];
+const ALTERNATE_HOTEL_SUBTEXT = {
+    other: "Please arrange your own transport",
+    notSure: "Lorem ipsum dolor sit amet",
+} as const satisfies Record<AlternateHotelOpts, string>;
 
-export const HOTEL_OPTIONS: NonEmptyArray<
-    ExpandedTextValueOptions<HotelValues>
-> = Object.entries(HOTEL_LABELS).map(([value, text]) => ({
-    value,
-    text,
-})) as NonEmptyArray<ExpandedTextValueOptions<HotelValues>>;
+export const ALTERNATE_HOTEL_OPTIONS = buildOptions(
+    ALTERNATE_HOTEL_LABELS,
+    ALTERNATE_HOTEL_SUBTEXT,
+);
+
+export type HotelStrings =
+    | (typeof HOTEL_LABELS)[keyof typeof HOTEL_LABELS]
+    | (typeof ALTERNATE_HOTEL_LABELS)[keyof typeof ALTERNATE_HOTEL_LABELS];
 
 export function isStayingAtHotel(answer?: HotelValues): boolean {
     if (!answer) return false;
 
     return (HOTEL_OPTS as readonly string[]).includes(answer);
 }
+
+// #endregion ---
 
 export type Transportation = {
     stayingAt: HotelValues;
@@ -216,13 +245,9 @@ function isGuestAnswerComplete(key: RSVPDraftKey, value: unknown): boolean {
 
     if (key === "transportation") {
         const transportation = value as Transportation;
-        if (!transportation.stayingAt) return false;
-        if (
-            isStayingAtHotel(transportation.stayingAt) &&
-            transportation.takingBus === undefined
-        ) {
-            return false;
-        }
+        if (transportation.takingBus === undefined) return false;
+
+        if (transportation.takingBus && !transportation.stayingAt) return false;
     }
 
     return true;

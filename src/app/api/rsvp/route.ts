@@ -101,8 +101,6 @@ function validateRsvpBody(body: unknown): ValidationResult {
 
     const { id, guest1, guest2 } = party as Record<string, unknown>;
 
-    console.log("party", party)
-
     if (typeof id !== "string" || id.trim() === "") {
         return invalid("party.id is required", typeof id === "string" ? id : null);
     }
@@ -133,8 +131,8 @@ function validateRsvpBody(body: unknown): ValidationResult {
 
     const { guest1: g1Attending, guest2: g2Attending } = attendance as Record<string, unknown>;
 
-    const isAnsweredAttendance = (value: unknown): value is Extract<Attendance, "Attending" | "Declining"> =>
-        value === "Attending" || value === "Declining";
+    const isAnsweredAttendance = (value: unknown): value is Extract<Attendance, "attending" | "declining"> =>
+        value === "attending" || value === "declining";
 
     if (!isAnsweredAttendance(g1Attending)) {
         return invalid("draft.attendance.guest1 is required", id, validParty);
@@ -148,8 +146,8 @@ function validateRsvpBody(body: unknown): ValidationResult {
         ok: true,
         party: validParty,
         attendance: {
-            guest1: g1Attending === "Attending",
-            ...(isAnsweredAttendance(g2Attending) ? { guest2: g2Attending === "Attending" } : {}),
+            guest1: g1Attending === "attending",
+            ...(isAnsweredAttendance(g2Attending) ? { guest2: g2Attending === "attending" } : {}),
         },
     };
 }

@@ -3,6 +3,7 @@ import { BTN_TEXT_CLASSES } from "../Buttons/Button";
 import { buttonVariants } from "../Buttons/button.variants";
 import { NonEmptyArray, TextValueOption } from "@/types/utility";
 import Eyebrow from "../Eyebrow/Eyebrow";
+import React from "react";
 
 // #region -- Yes/No Boolean Switch ---
 
@@ -23,7 +24,7 @@ export function SwitchField<V = string>({
         return (
             <div className="flex flex-col md:flex-row gap:">
                 {(label || note) && (
-                    <div className="flex flex-col gap-200">
+                    <div className="flex flex-col gap-200 text-center">
                         {label && <p className="eyebrow">{label}</p>}
                         {note && <p className="">{note}</p>}
                     </div>
@@ -35,14 +36,14 @@ export function SwitchField<V = string>({
     }
 
     return (
-        <div className="flex flex-col gap-200">
+        <div className="flex flex-col gap-150">
             <div className="flex flex-col gap-400">
-                {label && <p className="eyebrow">{label}</p>}
+                {label && <p className="eyebrow text-center">{label}</p>}
 
-                <Switch {...switchProps} />
+                <Switch {...switchProps} className="" />
             </div>
 
-            {note && <p className="text-sm italic">{note}</p>}
+            {note && <p className="text-sm italic text-center">{note}</p>}
         </div>
     );
 }
@@ -54,6 +55,7 @@ interface SwitchProps<V = string> {
     option_1: TextValueOption<V>;
     option_2: TextValueOption<V>;
     disabled?: boolean;
+    className?: string;
 }
 
 export function Switch<V = string>({
@@ -63,10 +65,14 @@ export function Switch<V = string>({
     disabled = false,
     option_1,
     option_2,
+    className,
 }: SwitchProps<V>) {
     return (
         <div
-            className="rsvp_switch_group relative flex border border-cream p-100"
+            className={cn(
+                "rsvp_switch_group relative flex border border-cream p-100",
+                className,
+            )}
             role="radiogroup"
         >
             <span
@@ -126,6 +132,7 @@ function SwitchOptionInput({
                 "rsvp_switch",
                 "relative flex-1 justify-center cursor-pointer",
                 buttonVariants({ size: "small" }),
+                !isActive && !disabled && "rsvp_switch-hoverable",
                 disabled && "cursor-not-allowed opacity-50",
             )}
         >
@@ -172,6 +179,7 @@ interface RadioButtonsProps<V = string> {
     options: NonEmptyArray<ExpandedTextValueOptions<V>>;
     onChange: (value: V) => void;
     currValue?: V;
+    disabled?: boolean;
     className?: string;
 }
 
@@ -182,14 +190,24 @@ export function RadioButtons<V = string>({
     options,
     onChange,
     currValue,
+    disabled,
     className,
 }: RadioButtonsProps<V>) {
     return (
         <div className={cn("flex flex-col gap-150", className)}>
             <div className={cn("flex flex-col gap-300")} role="radiogroup">
-                {label && <p className="eyebrow text-center">{label}</p>}
+                {label && (
+                    <p
+                        className={cn(
+                            "eyebrow text-center",
+                            disabled && "opacity-50",
+                        )}
+                    >
+                        {label}
+                    </p>
+                )}
 
-                <div className="flex flex-wrap gap-(--layout-column-gutter)">
+                <div className="flex flex-wrap gap-x-(--layout-column-gutter) gap-y-300">
                     {options.map((opt) => {
                         return (
                             <RadioButton
@@ -198,7 +216,8 @@ export function RadioButtons<V = string>({
                                 option={opt}
                                 onChange={onChange}
                                 isSelected={currValue === opt.value}
-                                className="flex-1"
+                                className="flex-[1_0_300px]"
+                                disabled={disabled}
                             />
                         );
                     })}
@@ -214,6 +233,7 @@ interface RadioButtonProps<V = string> {
     option: ExpandedTextValueOptions<V>;
     onChange: (value: V) => void;
     isSelected: boolean;
+    disabled?: boolean;
     className?: string;
 }
 
@@ -222,9 +242,11 @@ function RadioButton<V = string>({
     option,
     onChange,
     isSelected,
+    disabled,
     className,
 }: RadioButtonProps<V>) {
     const { text, value, subtext, note } = option; // FIXME: do subnotes
+    console.log("subtext", subtext);
 
     const id = `${name}-${value}`;
     return (
@@ -234,7 +256,10 @@ function RadioButton<V = string>({
                 "group relative flex items-start gap-200 border-2 p-300 transition-colors duration-300 ease-in-out cursor-pointer md:py-400 md:px-300",
                 isSelected
                     ? "border-cream bg-cabernet"
-                    : "border-(--black-850) hover:border-cream/60",
+                    : disabled
+                      ? "border-(--black-850)"
+                      : "border-(--black-850) hover:border-cream/60",
+                disabled && "cursor-not-allowed opacity-50",
                 className,
             )}
         >
@@ -246,37 +271,119 @@ function RadioButton<V = string>({
                 onChange={() => onChange(value)}
                 checked={isSelected}
                 className="sr-only"
+                disabled={disabled}
             />
 
-            {/* <span
-                aria-hidden="true"
-                className={cn(
-                    "mt-025 flex size-200 shrink-0 items-center justify-center rounded-full border-2 transition-colors duration-300",
-                    isSelected
-                        ? "border-cream"
-                        : "border-cream/40 group-hover:border-cream/70",
-                )}
-            >
-                <span
-                    className={cn(
-                        "size-100 rounded-full bg-cream transition-transform duration-300",
-                        isSelected ? "scale-100" : "scale-0",
-                    )}
-                />
-            </span> */}
-
             <div className="flex flex-col justify-center gap-100 text-center h-full w-full">
-                <p className="text-md">{text}</p>
-                {/* {subtext && (<p className="italic  text-s text-cream/60">{subtext}</p>)} */}
+                <p className="text-md lg:text-lg">{text}</p>
                 {subtext && (
                     <p className="uppercase text-xs text-cream/60 font-medium">
-                        {subtext}
+                        {subtext.split("\n").map((line, i) => (
+                            <React.Fragment key={i}>
+                                {line}
+                                {i < subtext.split("\n").length - 1 && <br />}
+                            </React.Fragment>
+                        ))}
                     </p>
                 )}
                 {note && (
                     <p className="text-xs uppercase text-cream/60">{note}</p>
                 )}
             </div>
+        </label>
+    );
+}
+
+// #endregion ---
+
+// #region --- Checkbox ---
+
+interface CheckboxFieldProps {
+    label?: string;
+    note?: string;
+    checkboxProps: CheckboxProps;
+    className?: string;
+}
+
+export function CheckboxField({
+    label,
+    note,
+    checkboxProps,
+    className,
+}: CheckboxFieldProps) {
+    return (
+        <div className={cn("flex flex-col gap-150", className)}>
+            {label && <p className="eyebrow text-center">{label}</p>}
+
+            <Checkbox {...checkboxProps} />
+
+            {note && <p className="text-sm italic text-center">{note}</p>}
+        </div>
+    );
+}
+
+interface CheckboxProps {
+    name: string;
+    text: string;
+    checked: boolean | undefined;
+    onChange: (value: boolean) => void;
+    disabled?: boolean;
+}
+
+export function Checkbox({
+    name,
+    text,
+    checked = false,
+    onChange,
+    disabled = false,
+}: CheckboxProps) {
+    const id = `${name}-checkbox`;
+
+    return (
+        <label
+            htmlFor={id}
+            className={cn(
+                "group flex items-start gap-200 border-2 p-300 cursor-pointer transition-colors duration-300 ease-in-out",
+                checked
+                    ? "border-cream bg-cabernet"
+                    : "border-(--black-850) hover:border-cream/60",
+                disabled && "cursor-not-allowed opacity-50",
+            )}
+        >
+            <input
+                id={id}
+                name={name}
+                type="checkbox"
+                checked={checked}
+                onChange={(e) => onChange(e.target.checked)}
+                disabled={disabled}
+                className="sr-only"
+            />
+
+            <span
+                aria-hidden="true"
+                className={cn(
+                    "mt-025 flex size-200 shrink-0 items-center justify-center border-2 transition-colors duration-300",
+                    checked
+                        ? "border-cream bg-cream"
+                        : "border-cream/40 group-hover:border-cream/70",
+                )}
+            >
+                {checked && (
+                    <svg
+                        viewBox="0 0 16 16"
+                        className="size-150 fill-none stroke-cabernet stroke-[2.5]"
+                    >
+                        <path
+                            d="M3 8.5L6.5 12L13 4.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </svg>
+                )}
+            </span>
+
+            <p className="text-sm leading-normal text-left">{text}</p>
         </label>
     );
 }
@@ -312,7 +419,7 @@ export function TextArea({
                 placeholder={placeholder ? placeholder : ""}
                 rows={rows}
                 cols={cols}
-                className="bg-black p-200 font-sans text-base resize-y"
+                className="bg-black p-200 font-sans text-base resize-y max-w-[650px] w-full mx-auto"
             />
         </div>
     );
@@ -360,7 +467,7 @@ export function TextInput({
         >
             <label
                 className={cn(
-                    "font-sans text-s font-semibold leading-normal tracking-[0.6px] text-cream uppercase",
+                    "font-sans text-s font-semibold leading-normal tracking-[0.6px] text-cream uppercase text-center",
                     styleOptions?.centerContent && "text-center",
                 )}
                 htmlFor={name}
@@ -380,7 +487,7 @@ export function TextInput({
                         : undefined
                 }
                 className={cn(
-                    "box-border w-full border-[1.5px] bg-black px-200 py-200 font-sans leading-normal text-cream placeholder:font-sans placeholder:text-base placeholder:text-cream  placeholder:italic placeholder:transition placeholder:duration-300 focus:outline-none focus:placeholder:opacity-0 autofill:shadow-[0_0_0px_1000px_var(--gray)_inset] autofill:[-webkit-text-fill-color:var(--cream)]",
+                    "box-border w-full border-[1.5px] bg-black px-200 py-200 font-sans text-base leading-normal text-cream placeholder:font-sans placeholder:text-base placeholder:text-cream/60  placeholder:italic placeholder:transition placeholder:duration-300 focus:outline-none focus:placeholder:opacity-0 autofill:shadow-[0_0_0px_1000px_var(--gray)_inset] autofill:[-webkit-text-fill-color:var(--cream)]",
                     hasError
                         ? "border-burgundy"
                         : "border-(--black-850) focus:border-cream",
