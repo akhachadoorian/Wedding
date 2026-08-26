@@ -5,5 +5,5 @@ export const PAGE_STATUS: Record<string, 'live' | 'in-progress'> = {
     "/accommodations": "live",
     "/details": "in-progress",
     "/registry": "live",
-    "/rsvp": "in-progress",
+    "/rsvp": "live",
 }
