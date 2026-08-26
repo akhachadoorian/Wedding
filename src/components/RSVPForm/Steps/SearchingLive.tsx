@@ -93,7 +93,7 @@ export default function SearchRSVPLive() {
                     onChange={setQuery}
                     placeholder="Jane Doe"
                     hasError={false}
-                    className="max-w-[650px] w-full"
+                    className="max-w-162. w-full"
                     styleOptions={{
                         centerContent: true,
                         maxInputWidth: MAX_WIDTH
@@ -147,7 +147,7 @@ function SearchResults({
     }
 
     return (
-        <div className="flex items-center flex-col gap-150 max-w-[650px] w-full overflow-hidden">
+        <div className="relative flex items-center flex-col gap-150 max-w-[650px] w-full overflow-hidden">
             <AnimatePresence mode="popLayout">
                 {searchResult.map((party, index) => (
                     <motion.div
