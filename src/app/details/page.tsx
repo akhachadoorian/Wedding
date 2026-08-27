@@ -55,7 +55,6 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
 
             <VenueWatermark venueRef={venueRef} />
 
-
             <ComponentGuard
                 id="details-timeline"
                 fallback={
@@ -80,7 +79,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                     />
                 </section>
 
-                <ParallaxingDrinkSection
+                {/* <ParallaxingDrinkSection
                     className="timeline-section"
                     ref={timelineRef}
                     id="timeline"
@@ -93,21 +92,39 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                         {...content.timeline.copyOnly}
                     />
                     <SimpleTable {...content.timeline.simpleTable} />
-                </ParallaxingDrinkSection>
+                </ParallaxingDrinkSection> */}
             </ComponentGuard>
-
 
             <ComponentGuard
                 id="details-dress_code"
                 fallback={
                     <ComingSoonSection
-            theme="gray"
-                eyebrow="More to Come"
-                title="Dress code coming soon!"
-            />
+                        theme="gray"
+                        eyebrow="More to Come"
+                        title="Dress code coming soon!"
+                    />
                 }
             >
-                <section
+
+                <SlantedSection
+                    ref={rehearsalRef}
+                    sectionPrefix="rehearsal"
+                    fill={"--wine-800"}
+                    slantSettings={{
+                        depth: "large",
+                        flipped: true,
+                    }}
+                >
+                    <CopyOnly
+                        styleOptions={{
+                            variation: "left",
+                            headingLevel: "h2",
+                        }}
+                        {...content.dressCode.copyOnly}
+                    />
+                </SlantedSection>
+
+                {/* <section
                     ref={dressCodeRef}
                     id="dress_code"
                     className="dress_code-section base_section"
@@ -119,29 +136,30 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                         }}
                         {...content.dressCode.copyOnly}
                     />
-                </section>
+                </section> */}
             </ComponentGuard>
-
-            
 
             <ComponentGuard
                 id="details-faqs"
                 fallback={
                     <ComingSoonSection
-                theme='black'
-                eyebrow="More to Come"
-                title="FAQs coming soon!"
-            />
+                        theme="black"
+                        eyebrow="More to Come"
+                        title="FAQs coming soon!"
+                    />
                 }
             >
-                <InsetBackgroundSection
+                {/* <InsetBackgroundSection
                     sectionPrefix="faqs"
                     ref={faqsRef}
                     backgroundImage="/assets/DiamondPattern.svg"
                     backgroundSize="60vw"
                     backgroundRepeat="repeat"
                     backgroundPosition="center"
-                >
+                > */}
+                <section  ref={faqsRef}
+                    id="faqs"
+                    className="faqs-section base_section">
                     <CopyOnly
                         styleOptions={{
                             variation: "center",
@@ -150,21 +168,20 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                         {...content.faqs.copyOnly}
                     />
                     <Accordions {...content.faqs.accordions} />
-                </InsetBackgroundSection>
+                    </section>
+                {/* </InsetBackgroundSection> */}
             </ComponentGuard>
-
-            
 
             <ComponentGuard
                 id="details-rehearsal_mixer"
                 fallback={
                     <ComingSoonSection
-                eyebrow="More to Come"
-                title="Rehearsal mixer details coming soon!"
-            />
+                        eyebrow="More to Come"
+                        title="Rehearsal mixer details coming soon!"
+                    />
                 }
             >
-                <SlantedSection
+                {/* <SlantedSection
                     ref={rehearsalRef}
                     sectionPrefix="rehearsal"
                     fill={"--wine-800"}
@@ -172,7 +189,10 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                         depth: "large",
                         flipped: true,
                     }}
-                >
+                > */}
+                    <section ref={rehearsalRef}
+                    id="rehearsal"
+                    className="rehearsal-section base_section">
                     <CopyOnly
                         styleOptions={{
                             variation: "left",
@@ -192,7 +212,8 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                             {...content.rehearsalMixer.smallTextGrid}
                         />
                     </div>
-                </SlantedSection>
+                    </section>
+                {/* </SlantedSection> */}
             </ComponentGuard>
         </PageGuard>
     );
