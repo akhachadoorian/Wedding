@@ -107,6 +107,68 @@ const dateTime: WatermarkTextProps = {
 
 // #region --- Summary / Venue ---
 
+const watermarkVenue: WatermarkTextProps = {
+    watermarkText: "Clay Theatre",
+    subheader: "the Venue",
+    captions: {
+        left: {
+            lines: ["SHUTTLE SERVICE", "FOR CERTAIN HOTELS"],
+            button: {
+                    type: "link",
+                    text: "Transportation",
+                    link: "/accommodations#transportation",
+                    target: "_self" as const,
+                    decoration: {
+                        type: "icon",
+                        icon: VanIcon,
+                    },
+                },
+        },
+        center: {
+            lines: ["326 Walnut St", "Green Cove Springs, FL 32043"],
+            button: {
+                    type: "link",
+                    text: "View Directions",
+                    link: "https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUqDwgAEAAYQxjjAhiABBiKBTIPCAAQABhDGOMCGIAEGIoFMhIIARAuGEMYrwEYxwEYgAQYigUyDQgCEC4YgwEYsQMYgAQyDQgDEAAYgwEYsQMYgAQyBggEEEUYOTIGCAUQRRg8MgYIBhBFGDwyBggHEEUYPNIBCDE1NjRqMGo0qAIAsAIB&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=KZ00Fx6y0OWIMRYGQ-r5b-pC&daddr=326+Walnut+St,+Green+Cove+Springs,+FL+32043",
+                    target: "_blank" as const,
+                    decoration: {
+                        type: "icon",
+                        icon: MapTrifoldIcon,
+                    },
+                },
+        },
+        right: {
+            lines: ["VENUE PARKING", "INFORMATION"],
+            button: {
+                    type: "modal",
+                    text: "parking",
+                    decoration: {
+                        type: "icon",
+                        icon: LetterCirclePIcon,
+                    },
+                    modalID: "parking_modal",
+                    modalContent: {
+                        header: "Parking",
+                        content: [
+                            {
+                                title: "Grass Lot Parking",
+                                body: "Free parking is available in the grass lot connected to Clay Theatre, conveniently located right next to the venue for easy access.",
+                            },
+                            {
+                                title: "On-Street Parking",
+                                body: "On-street parking and public parking along Spring Park are both available and just a short walk from the venue.",
+                            },
+                            {
+                                title: "City Hall Parking",
+                                body: "City Hall is just across the street from the venue. Per the venue, guests are welcome to park in their lot as the building is closed on Saturdays.",
+                            },
+                        ],
+                    },
+                },
+        },
+    }
+};
+
 const date: SplitInfoProps["intro"] = {
     upperText: {
         eyebrow: "Wedding Day",
@@ -693,6 +755,7 @@ const detailsContent = {
     venueFramed: venueFramed,
     venueMiniCards: venueMiniCards,
     summary: summary,
+    watermarkVenue: watermarkVenue,
     timeline: timeline,
     dressCode: dressCode,
     weddingParty: weddingParty,

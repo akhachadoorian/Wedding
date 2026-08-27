@@ -4,6 +4,7 @@ import './ComingSoon.scss'
 import Eyebrow from '@/components/Eyebrow/Eyebrow';
 import Image from 'next/image';
 import { WithHTMLProps } from '@/types/props';
+import { cn } from '@/utils/cn';
 
 // #region --- Coming Soon Header -----------------
 type ComingSoonProps = {
@@ -41,15 +42,27 @@ export default function ComingSoon({
 
 // #region --- Coming Soon Section -----------------
 
+type ComingSoonSectionThemes = 'cabernet' | 'gray' | 'black'
+
 type ComingSoonSectionProps = WithHTMLProps & {
     eyebrow?: string;
     title: string;
     body?: string;
+    theme?: ComingSoonSectionThemes
 }
 
-export function ComingSoonSection({eyebrow, title, body, className}:ComingSoonSectionProps) {
+const THEME_MAP: Record<ComingSoonSectionThemes, string> = {
+    cabernet: "bg-cabernet",
+    gray: "bg-black",
+    black: 'bg-black-bg'
+}
+
+export function ComingSoonSection({eyebrow, title, body, theme = 'cabernet', className}:ComingSoonSectionProps) {
+
+
     return (
-        <section className={`coming_soon_section ${className ?? ''}`}>
+        <section className={
+            cn("coming_soon_section", THEME_MAP[theme], className)}>
             <CopyOnly eyebrow={eyebrow} header={title} body={body} styleOptions={{variation: 'center', headingLevel: 'h2', headingClass: 'heading-l'}} />
         </section>
     )

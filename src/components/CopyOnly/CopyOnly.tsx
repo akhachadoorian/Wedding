@@ -31,6 +31,7 @@ type CopyOnlyStyleProps = {
     headingLevel?: Exclude<HeadingLevelProps, 'h1'>;
     headingClass?: HeadingClassProps;
     eyebrowColor?: ColorVariables;
+    starColor?: ColorVariables;
     customBtnVariantMap?: BtnVariantMap<3>;
     customBtnColorSchemeMap?: BtnAnySchemeMap<3>;
 };
@@ -40,6 +41,7 @@ const DEFAULT_STYLE = {
     headingLevel: "h2",
     headingClass: "heading-xl",
     eyebrowColor: "--cream",
+    starColor: "--wine-600",
     // textColor: "light",
 } satisfies CopyOnlyStyleProps;
 
@@ -164,6 +166,7 @@ function ColumnsCopyOnly({
                 <EyebrowHeaderCopyOnly
                     eyebrow={eyebrow}
                     eyebrowColor={styleOptions.eyebrowColor}
+                    starColor={styleOptions.starColor}
                     header={header}
                     headingLevel={styleOptions.headingLevel}
                     headingClass={styleOptions.headingClass}
@@ -215,6 +218,7 @@ function CenterCopyOnly({
                         eyebrow={eyebrow}
                         eyebrowVariation="center"
                         eyebrowColor={styleOptions.eyebrowColor}
+                        starColor={styleOptions.starColor}
                         header={header}
                         headingLevel={styleOptions.headingLevel}
                         headingClass={styleOptions.headingClass}
@@ -264,6 +268,7 @@ function LeftCopyOnly({
                     <EyebrowHeaderCopyOnly
                         eyebrow={eyebrow}
                         eyebrowColor={styleOptions.eyebrowColor}
+                        starColor={styleOptions.starColor}
                         header={header}
                         headingLevel={styleOptions.headingLevel}
                         headingClass={styleOptions.headingClass}
@@ -305,6 +310,7 @@ function EyebrowHeaderCopyOnly({
     eyebrow,
     eyebrowVariation = "left",
     eyebrowColor = DEFAULT_STYLE.eyebrowColor,
+    starColor = DEFAULT_STYLE.starColor,
 
     header,
     headingLevel = "h2",
@@ -313,6 +319,7 @@ function EyebrowHeaderCopyOnly({
     eyebrow?: string;
     eyebrowVariation?: "left" | "center";
     eyebrowColor?: ColorVariables;
+    starColor?: ColorVariables;
     header: string;
     headingLevel?: Exclude<HeadingLevelProps, 'h1'>;
     headingClass?: HeadingClassProps;
@@ -326,6 +333,7 @@ function EyebrowHeaderCopyOnly({
                     styleOptions={{
                         variation: eyebrowVariation,
                         color: eyebrowColor,
+                        starColor: starColor
                     }}
                     text={eyebrow}
                     className={"mwc-animate"}

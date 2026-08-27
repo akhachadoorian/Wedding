@@ -13,6 +13,7 @@ import { ButtonSettingProps } from "@/types/buttons";
 import { NonEmptyArray } from "@/types/utility";
 import Button from "../Buttons/Button";
 import { useFitLongestWord } from "@/hooks/useFitLongestWord";
+import { cn } from "@/utils/cn";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,9 +33,9 @@ export type WatermarkTextProps = WithHTMLProps & {
 };
 
 const BUTTON_STYLE = {
-    colorScheme: 'cream' as const,
-    variation: 'outline' as const
-}
+    colorScheme: "cream" as const,
+    variation: "outline" as const,
+};
 
 export default function WatermarkText({
     watermarkText,
@@ -120,90 +121,55 @@ export default function WatermarkText({
             )}
 
             <div className="watermark_text-title" ref={watermarkTextRef}>
-                    <h2 ref={fitTextRef}>October 31st</h2>
+                <h2 ref={fitTextRef}>{watermarkText}</h2>
             </div>
 
             {captions && (
                 <div className="watermark_text-captions">
-                    {captions.left && (
-                        <div
-                            className="watermark_text-captions-left  watermark_text-caption"
-                            ref={captionLeftRef}
-                        >
-                            <div className="watermark_text-caption-lines">
-                                {captions.left.lines.map((l, idx) => (
-                                    <p
-                                        className="watermark_text-caption-line"
-                                        key={idx}
-                                    >
-                                        {l}
-                                    </p>
-                                ))}
-                            </div>
-
-                            {captions.left.button && (
-                                <Button
-                                    className="watermark_text-caption-btn"
-                                    btnSettings={captions.left.button}
-                                    colorScheme={BUTTON_STYLE.colorScheme}
-                                    variant={BUTTON_STYLE.variation}
-                                />
-                            )}
-                        </div>
-                    )}
+                    {captions.left && <WatermarkCaption {...captions.left} />}
                     {captions.center && (
-                        <div
-                            className="watermark_text-captions-center  watermark_text-caption"
-                            ref={captionCenterRef}
-                        >
-                            <div className="watermark_text-caption-lines">
-                                {captions.center.lines.map((l, idx) => (
-                                    <p
-                                        className="watermark_text-caption-line"
-                                        key={idx}
-                                    >
-                                        {l}
-                                    </p>
-                                ))}
-                            </div>
-
-                            {captions.center.button && (
-                                <Button
-                                    className="watermark_text-caption-btn"
-                                    btnSettings={captions.center.button}
-                                    colorScheme={BUTTON_STYLE.colorScheme}
-                                    variant={BUTTON_STYLE.variation}
-                                />
-                            )}
-                        </div>
+                        <WatermarkCaption {...captions.center} />
                     )}
-                    {captions.right && (
-                        <div
-                            className="watermark_text-captions-right  watermark_text-caption"
-                            ref={captionRightRef}
-                        >
-                            <div className="watermark_text-caption-lines">
-                                {captions.right.lines.map((l, idx) => (
-                                    <p
-                                        className="watermark_text-caption-line"
-                                        key={idx}
-                                    >
-                                        {l}
-                                    </p>
-                                ))}
-                            </div>
-
-                            {captions.right.button && (
-                                <Button
-                                    className="watermark_text-caption-btn"
-                                    btnSettings={captions.right.button}
-                                    colorScheme={BUTTON_STYLE.colorScheme}
-                                    variant={BUTTON_STYLE.variation}
-                                />
-                            )}
-                        </div>
-                    )}
+                    {captions.right && <WatermarkCaption {...captions.right} />}
                 </div>
+            )}
+        </div>
+    );
+}
+
+type WatermarkCaptionProps = Caption & WithHTMLProps;
+
+function WatermarkCaption({
+    lines,
+    button,
+    ref,
+    className,
+    ...htmlProps
+}: WatermarkCaptionProps) {
+    return (
+        <div
+            {...htmlProps}
+            ref={ref}
+            className={cn(
+                "flex flex-col justify-between gap-200 md:gap-(--layout-column-gutter) flex-1 border-b border-[#666765] pb-400 md:border-0 md:pb-0 last-of-type:pb-0 last-of-type:border-0",
+                className,
+            )}
+        >
+            <div className="watermark_text-caption-lines flex-1 h-full justify-end">
+                {lines.map((l, idx) => (
+                    <p className="watermark_text-caption-line" key={idx}>
+                        {l}
+                    </p>
+                ))}
+            </div>
+
+            {button && (
+                <Button
+                    className="watermark_text-caption-btn"
+                    btnSettings={button}
+                    colorScheme={BUTTON_STYLE.colorScheme}
+                    variant={BUTTON_STYLE.variation}
+                />
             )}
         </div>
     );

@@ -9,7 +9,7 @@ type ComponentGuardProps = {
 
 export default function ComponentGuard({ id, children, fallback = null }: ComponentGuardProps) {
     const status = COMPONENT_STATUS[id] ?? "live";
-    const isProduction = process.env.NODE_ENV === "production";
+    const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
 
     if (status === "in-progress" && isProduction) {
         return <>{fallback}</>;

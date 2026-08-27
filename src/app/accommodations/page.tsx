@@ -61,7 +61,7 @@ export default function Accommodations({
                 id="accommodations-transportation"
                 fallback={
                     <ComingSoonSection
-                        eyebrow="eyebrow"
+                        eyebrow="More to Come"
                         title="Transportation section coming soon!"
                         body="It will contain information regarding how to get and from the venue, venue parking, and the arranged bus service."
                     />
