@@ -59,6 +59,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                 id="details-timeline"
                 fallback={
                     <ComingSoonSection
+                    theme='black'
                         eyebrow="More to Come"
                         title="Day of Schedule coming soon!"
                         body="It will outline the general timeline for the day of."
