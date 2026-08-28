@@ -165,22 +165,8 @@ function LeftEyebrow({
             ref={ref}
             className={`eyebrow-component left ${className ?? ""} ${includeMargin ? "eyebrow-margin" : ""}`}
         >
-            {/* <Diamond
-                size={{
-                    size: {
-                        minSize: 18,
-                        desiredSize: 20,
-                        maxSize: 22,
-                    },
-                    mobileSize: {
-                        minSize: 16,
-                        desiredSize: 18,
-                        maxSize: 20,
-                    },
-                }}
-                color={color}
-            /> */}
-            {includeStar && <Star color={starColor} />}
+            {includeStar && <Star color={starColor} className="eyebrow-star" />}
+            
             <p className="eyebrow" style={{ color: `var(${color})` }}>
                 {text}
             </p>
@@ -202,13 +188,13 @@ function CenterEyebrow({
             ref={ref}
             className={`eyebrow-component eyebrow-center ${className ?? ""} ${includeMargin ? "eyebrow-margin" : ""}`}
         >
-            {includeStar && <Star color={starColor} />}
+            {includeStar && <Star className="eyebrow-star" color={starColor} />}
 
             <p className="eyebrow" style={{ color: `var(${color})` }}>
                 {text}
             </p>
 
-           {includeStar && <Star color={starColor} />}
+           {includeStar && <Star className="eyebrow-star" color={starColor} />}
         </div>
     );
 }

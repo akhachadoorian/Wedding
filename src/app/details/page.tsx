@@ -26,6 +26,7 @@ import { Fragment } from "react";
 import content from "./content";
 import "./Details.scss";
 import ComponentGuard from "@/components/ComponentGuard/ComponentGuard";
+import Timeline from "@/components/Timeline/Timeline";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,9 +76,12 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                         styleOptions={{
                             variation: "center",
                             headingLevel: "h2",
+                            headingClass: 'heading-xl'
                         }}
                         {...content.timeline.copyOnly}
                     />
+
+                    <Timeline timelineElements={content.timeline.elements} />
                 </section>
 
                 {/* <ParallaxingDrinkSection
@@ -90,9 +94,9 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                             variation: "center",
                             headingLevel: "h2",
                         }}
-                        {...content.timeline.copyOnly}
+                        {...content.timelineTable.copyOnly}
                     />
-                    <SimpleTable {...content.timeline.simpleTable} />
+                    <SimpleTable {...content.timelineTable.simpleTable} />
                 </ParallaxingDrinkSection> */}
             </ComponentGuard>
 

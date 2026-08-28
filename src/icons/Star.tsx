@@ -1,8 +1,15 @@
 import { ColorVariables } from "@/types/colors";
+import { WithHTMLProps } from "@/types/props";
+import { cn } from "@/utils/cn";
 
-export default function Star({color = '--wine-600'}:{color?: ColorVariables;}) {
+interface StarProps extends WithHTMLProps{
+    color?: ColorVariables;
+    // size: 
+}
+
+export default function Star({color = '--wine-600', className}:StarProps) {
     return (
-        <div className="eyebrow-star">
+        <div className={cn("aspect-square", className)}>
             <svg
                 width="100%"
                 height="100%"

@@ -22,6 +22,7 @@ import {
     ModalSettings,
 } from "../../types/buttons";
 import { NonEmptyArray } from "@/types/utility";
+import { TimelineElementProps } from "@/components/Timeline/Timeline";
 
 // #region --- Hero ---
 
@@ -544,8 +545,51 @@ const venueMiniCards: NonEmptyArray<MiniCardData> = [
 const timelineCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     eyebrow: "Wedding Day",
     header: "Day of Schedule",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
+    body: "From first look to last dance — here's how our day will unfold.",
 };
+
+const timelineElements: NonEmptyArray<TimelineElementProps>= [
+    {
+        time: "4:30 PM",
+        title: "Guest Arrival",
+        body: "Arrive a little early to say hello and find your spot before things get started."
+    },
+    {
+        time: "5:00 PM",
+        title: "Ceremony Starts",
+        body: "Please be seated as we begin the ceremony and exchange our vows."
+    },
+    {
+        time: "5:30 PM",
+        title: "Cocktail Hour",
+        body: "Time to unwind. Grab a cocktail and enjoy the company."
+    },
+    {
+        time: "6:30 PM",
+        title: "Reception & Dinner",
+        body: "Take your seat — dinner, toasts, and celebration are about to begin."
+    },
+    // {
+    //     time: "",
+    //     title: "Cutting Cake",
+    //     body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus."
+    // },
+    // {
+    //     time: "",
+    //     title: "First Dances",
+    //     body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus."
+    // },
+    {
+        time: "10:30 PM",
+        title: "Reception Ends",
+        body: "That's a wrap! Thank you for dancing the night away with us."
+    },
+]
+
+const timeline = {
+    copyOnly: timelineCopyOnly,
+    elements: timelineElements
+}
 
 const timelineTable: SimpleTableProps = {
     rows: [
@@ -632,7 +676,8 @@ const timelineTable: SimpleTableProps = {
     ],
 };
 
-const timeline = {
+
+const timelineTableContent = {
     copyOnly: timelineCopyOnly,
     simpleTable: timelineTable,
 };
@@ -757,6 +802,7 @@ const detailsContent = {
     summary: summary,
     watermarkVenue: watermarkVenue,
     timeline: timeline,
+    timelineTable: timelineTableContent,
     dressCode: dressCode,
     weddingParty: weddingParty,
     rehearsalMixer: rehearsalMixer,
