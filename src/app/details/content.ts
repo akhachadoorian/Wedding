@@ -689,18 +689,22 @@ const timelineTableContent = {
 const dressCodeCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     eyebrow: "Dress Code",
     header: "Black Tie Optional",
-    // body: "Black Tie (Optional)",
+    body: "Black Tie Optional invites formal attire, but with a little more room to breathe than traditional black tie.",
 };
 
 const dressCodeCards: FrameCardGridProps = {
     frameCards: [
         {
+            
             title: "Ladies",
-            body: "",
+            subtitle: "Floor-Length Gowns",
+            body: "As the bride will be wearing black, we kindly ask that our lovely ladies avoid this color.",
         },
         {
+            
             title: "Gentlemen",
-            body: "",
+            subtitle: "Tuxedo or Dark Formal Suit",
+            body: "Please wear a tuxedo or a dark, formal suit (black, navy, or charcoal) with a tie.",
         },
     ],
 };
