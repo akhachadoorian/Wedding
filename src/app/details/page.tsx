@@ -27,6 +27,7 @@ import content from "./content";
 import "./Details.scss";
 import ComponentGuard from "@/components/ComponentGuard/ComponentGuard";
 import Timeline from "@/components/Timeline/Timeline";
+import FrameCardGrid from "@/components/CardGrid/FrameCardGrid";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -83,21 +84,6 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
 
                     <Timeline timelineElements={content.timeline.elements} />
                 </section>
-
-                {/* <ParallaxingDrinkSection
-                    className="timeline-section"
-                    ref={timelineRef}
-                    id="timeline"
-                >
-                    <CopyOnly
-                        styleOptions={{
-                            variation: "center",
-                            headingLevel: "h2",
-                        }}
-                        {...content.timelineTable.copyOnly}
-                    />
-                    <SimpleTable {...content.timelineTable.simpleTable} />
-                </ParallaxingDrinkSection> */}
             </ComponentGuard>
 
             <ComponentGuard
@@ -127,6 +113,8 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                         }}
                         {...content.dressCode.copyOnly}
                     />
+
+                <FrameCardGrid {...content.dressCode.frameCards}/>
                 </SlantedSection>
 
                 {/* <section
@@ -223,6 +211,9 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
         </PageGuard>
     );
 }
+
+
+
 
 function VenueMiniCards({
     venueRef,

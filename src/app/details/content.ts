@@ -23,6 +23,7 @@ import {
 } from "../../types/buttons";
 import { NonEmptyArray } from "@/types/utility";
 import { TimelineElementProps } from "@/components/Timeline/Timeline";
+import { FrameCardGridProps } from "@/components/CardGrid/FrameCardGrid";
 
 // #region --- Hero ---
 
@@ -115,59 +116,59 @@ const watermarkVenue: WatermarkTextProps = {
         left: {
             lines: ["SHUTTLE SERVICE", "FOR CERTAIN HOTELS"],
             button: {
-                    type: "link",
-                    text: "Transportation",
-                    link: "/accommodations#transportation",
-                    target: "_self" as const,
-                    decoration: {
-                        type: "icon",
-                        icon: VanIcon,
-                    },
+                type: "link",
+                text: "Transportation",
+                link: "/accommodations#transportation",
+                target: "_self" as const,
+                decoration: {
+                    type: "icon",
+                    icon: VanIcon,
                 },
+            },
         },
         center: {
             lines: ["326 Walnut St", "Green Cove Springs, FL 32043"],
             button: {
-                    type: "link",
-                    text: "View Directions",
-                    link: "https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUqDwgAEAAYQxjjAhiABBiKBTIPCAAQABhDGOMCGIAEGIoFMhIIARAuGEMYrwEYxwEYgAQYigUyDQgCEC4YgwEYsQMYgAQyDQgDEAAYgwEYsQMYgAQyBggEEEUYOTIGCAUQRRg8MgYIBhBFGDwyBggHEEUYPNIBCDE1NjRqMGo0qAIAsAIB&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=KZ00Fx6y0OWIMRYGQ-r5b-pC&daddr=326+Walnut+St,+Green+Cove+Springs,+FL+32043",
-                    target: "_blank" as const,
-                    decoration: {
-                        type: "icon",
-                        icon: MapTrifoldIcon,
-                    },
+                type: "link",
+                text: "View Directions",
+                link: "https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUqDwgAEAAYQxjjAhiABBiKBTIPCAAQABhDGOMCGIAEGIoFMhIIARAuGEMYrwEYxwEYgAQYigUyDQgCEC4YgwEYsQMYgAQyDQgDEAAYgwEYsQMYgAQyBggEEEUYOTIGCAUQRRg8MgYIBhBFGDwyBggHEEUYPNIBCDE1NjRqMGo0qAIAsAIB&um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=KZ00Fx6y0OWIMRYGQ-r5b-pC&daddr=326+Walnut+St,+Green+Cove+Springs,+FL+32043",
+                target: "_blank" as const,
+                decoration: {
+                    type: "icon",
+                    icon: MapTrifoldIcon,
                 },
+            },
         },
         right: {
             lines: ["VENUE PARKING", "INFORMATION"],
             button: {
-                    type: "modal",
-                    text: "parking",
-                    decoration: {
-                        type: "icon",
-                        icon: LetterCirclePIcon,
-                    },
-                    modalID: "parking_modal",
-                    modalContent: {
-                        header: "Parking",
-                        content: [
-                            {
-                                title: "Grass Lot Parking",
-                                body: "Free parking is available in the grass lot connected to Clay Theatre, conveniently located right next to the venue for easy access.",
-                            },
-                            {
-                                title: "On-Street Parking",
-                                body: "On-street parking and public parking along Spring Park are both available and just a short walk from the venue.",
-                            },
-                            {
-                                title: "City Hall Parking",
-                                body: "City Hall is just across the street from the venue. Per the venue, guests are welcome to park in their lot as the building is closed on Saturdays.",
-                            },
-                        ],
-                    },
+                type: "modal",
+                text: "parking",
+                decoration: {
+                    type: "icon",
+                    icon: LetterCirclePIcon,
                 },
+                modalID: "parking_modal",
+                modalContent: {
+                    header: "Parking",
+                    content: [
+                        {
+                            title: "Grass Lot Parking",
+                            body: "Free parking is available in the grass lot connected to Clay Theatre, conveniently located right next to the venue for easy access.",
+                        },
+                        {
+                            title: "On-Street Parking",
+                            body: "On-street parking and public parking along Spring Park are both available and just a short walk from the venue.",
+                        },
+                        {
+                            title: "City Hall Parking",
+                            body: "City Hall is just across the street from the venue. Per the venue, guests are welcome to park in their lot as the building is closed on Saturdays.",
+                        },
+                    ],
+                },
+            },
         },
-    }
+    },
 };
 
 const date: SplitInfoProps["intro"] = {
@@ -548,26 +549,26 @@ const timelineCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     body: "From first look to last dance — here's how our day will unfold.",
 };
 
-const timelineElements: NonEmptyArray<TimelineElementProps>= [
+const timelineElements: NonEmptyArray<TimelineElementProps> = [
     {
         time: "4:30 PM",
         title: "Guest Arrival",
-        body: "Arrive a little early to say hello and find your spot before things get started."
+        body: "Arrive a little early to say hello and find your spot before things get started.",
     },
     {
         time: "5:00 PM",
         title: "Ceremony Starts",
-        body: "Please be seated as we begin the ceremony and exchange our vows."
+        body: "Please be seated as we begin the ceremony and exchange our vows.",
     },
     {
         time: "5:30 PM",
         title: "Cocktail Hour",
-        body: "Time to unwind. Grab a cocktail and enjoy the company."
+        body: "Time to unwind. Grab a cocktail and enjoy the company.",
     },
     {
         time: "6:30 PM",
         title: "Reception & Dinner",
-        body: "Take your seat — dinner, toasts, and celebration are about to begin."
+        body: "Take your seat — dinner, toasts, and celebration are about to begin.",
     },
     // {
     //     time: "",
@@ -582,14 +583,14 @@ const timelineElements: NonEmptyArray<TimelineElementProps>= [
     {
         time: "10:30 PM",
         title: "Reception Ends",
-        body: "That's a wrap! Thank you for dancing the night away with us."
+        body: "That's a wrap! Thank you for dancing the night away with us.",
     },
-]
+];
 
 const timeline = {
     copyOnly: timelineCopyOnly,
-    elements: timelineElements
-}
+    elements: timelineElements,
+};
 
 const timelineTable: SimpleTableProps = {
     rows: [
@@ -676,7 +677,6 @@ const timelineTable: SimpleTableProps = {
     ],
 };
 
-
 const timelineTableContent = {
     copyOnly: timelineCopyOnly,
     simpleTable: timelineTable,
@@ -688,12 +688,26 @@ const timelineTableContent = {
 
 const dressCodeCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     eyebrow: "Dress Code",
-    header: "What to Wear",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
+    header: "Black Tie Optional",
+    // body: "Black Tie (Optional)",
+};
+
+const dressCodeCards: FrameCardGridProps = {
+    frameCards: [
+        {
+            title: "Ladies",
+            body: "",
+        },
+        {
+            title: "Gentlemen",
+            body: "",
+        },
+    ],
 };
 
 const dressCode = {
     copyOnly: dressCodeCopyOnly,
+    frameCards: dressCodeCards
 };
 
 // #endregion ---

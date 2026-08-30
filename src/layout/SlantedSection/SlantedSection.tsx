@@ -7,6 +7,7 @@ import { ColorVariables } from "../../types/colors";
 import { WithHTMLProps } from "../../types/props";
 
 import "./SlantedSection.scss";
+import { cn } from "@/utils/cn";
 
 type SlantedSectionProps = WithHTMLProps &
     PropsWithChildren & {
@@ -35,7 +36,7 @@ export default function SlantedSection({
 
     return (
         <section {...htmlProps} id={id ? id : sectionPrefix ? sectionPrefix : ""} className={`slanted-section ${outerClass}`}>
-            <Slant fill={fill} edge="top" {...slantSettings} />
+            <Slant fill={fill} edge="top" {...slantSettings} className="-mb-1" />
 
             <div className="slanted-wrapper" style={{ backgroundColor: `var(${fill})` }}>
                 <div className={`slanted ${sectionPrefix ?? ""}`} >
@@ -43,7 +44,7 @@ export default function SlantedSection({
                 </div>
             </div>
 
-            <Slant fill={fill} edge="bottom" {...slantSettings} />
+            <Slant fill={fill} edge="bottom" {...slantSettings} className="-mt-1" />
         </section>
     );
 }
@@ -54,6 +55,7 @@ type SlantProps = {
     edge: "top" | "bottom";
     depth?: "small" | "large";
     flipped?: boolean;
+    className?: string;
 };
 
 function Slant({
@@ -62,6 +64,13 @@ function Slant({
     fill = "--black-900",
     depth = "small",
     flipped = false,
+    className
 }: SlantProps) {
-    return <div className={`slant slant-${depth} slant-${edge} ${flipped ? "slant-flipped" : ""}`} style={{ backgroundColor: `var(${fill})` }} />;
+    const depthClass = `slant-${depth}`
+    const edgeClass = `slant-${edge}`
+
+
+    return <div className={cn('slant', depthClass, edgeClass, flipped && "slant-flipped", className)} style={{ backgroundColor: `var(${fill})` }}></div>
+
+    // return <div className={`slant slant-${depth} slant-${edge} ${flipped ? "slant-flipped" : ""}`} style={{ backgroundColor: `var(${fill})` }} />;
 }
