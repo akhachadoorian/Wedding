@@ -17,10 +17,10 @@ const bottomFrameClasses = "top-3 -right-3 -bottom-3 left-3";
 
 function FrameCard({ title, body, subtitle }: FrameCardProps) {
     return (
-        <div className="flex-1 relative z-5 text-cabernet">
+        <div className="flex-1 relative z-5 text-cabernet mx-200 my-200">
             <div className={cn(frameClasses, topFrameClasses, "")} />
 
-            <div className="bg-cream py-500 px-400 flex flex-col justify-between gap-300">
+            <div className="bg-cream py-300 px-200 md:py-500 md:px-400 flex flex-col justify-between gap-300">
                 <p className="font-semibold text-lg uppercase">{title}</p>
                 
                 <div className="flex flex-col gap-100">
