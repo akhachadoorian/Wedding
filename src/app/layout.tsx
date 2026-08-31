@@ -19,8 +19,8 @@ const unbounded = Unbounded({ subsets: ['latin'], variable: '--font-unbounded' }
 
 const respiraBlack = localFont({
     src: [
-        { path: '../../public/fonts/Respira-Black.woff2' },
-        { path: '../../public/fonts/Respira-Black.woff' },
+        { path: '../../public/fonts/Respira-Black.woff2', weight: '800', style: 'normal' },
+        { path: '../../public/fonts/Respira-Black.woff', weight: '800', style: 'normal' },
     ],
     variable: '--font-respira-black',
 })
