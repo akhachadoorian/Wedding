@@ -16,6 +16,7 @@ import Eyebrow from "../Eyebrow/Eyebrow";
 import { HeadingClassProps, HeadingLevelProps } from "@/types/headings";
 import { THREE_BUTTON_DEFAULTS } from "../Buttons/defaults";
 import "./CopyOnly.scss";
+import { cn } from "@/utils/cn";
 
 /**
  * Controls the visual layout and color treatment of the CopyOnly component.
@@ -32,6 +33,8 @@ type CopyOnlyStyleProps = {
     headingClass?: HeadingClassProps;
     eyebrowColor?: ColorVariables;
     starColor?: ColorVariables;
+    subtitleExtra?: boolean;
+    subtitleExtraBorderColor?: ColorVariables;
     customBtnVariantMap?: BtnVariantMap<3>;
     customBtnColorSchemeMap?: BtnAnySchemeMap<3>;
 };
@@ -42,6 +45,8 @@ const DEFAULT_STYLE = {
     headingClass: "heading-xl",
     eyebrowColor: "--cream",
     starColor: "--wine-600",
+    subtitleExtra: false,
+    subtitleExtraBorderColor: "--wine-800"
     // textColor: "light",
 } satisfies CopyOnlyStyleProps;
 
@@ -174,7 +179,7 @@ function ColumnsCopyOnly({
             </div>
 
             <div className="copy-right_col">
-                {subtitle && <SubtitleCopyOnly subtitle={subtitle} />}
+                {subtitle && <SubtitleCopyOnly subtitle={subtitle} subtitleExtra={styleOptions.subtitleExtra ?? DEFAULT_STYLE.subtitleExtra} borderColor={styleOptions.subtitleExtraBorderColor ?? DEFAULT_STYLE.subtitleExtraBorderColor} />}
 
                 {body && (
                     <BodyCopyOnly
@@ -225,7 +230,7 @@ function CenterCopyOnly({
                     />
                 </div>
 
-                {subtitle && <SubtitleCopyOnly subtitle={subtitle} />}
+                {subtitle && <SubtitleCopyOnly subtitle={subtitle} subtitleExtra={styleOptions.subtitleExtra ?? DEFAULT_STYLE.subtitleExtra} borderColor={styleOptions.subtitleExtraBorderColor ?? DEFAULT_STYLE.subtitleExtraBorderColor} />}
 
                 {body && (
                     <BodyCopyOnly
@@ -275,7 +280,7 @@ function LeftCopyOnly({
                     />
                 </div>
 
-                {subtitle && <SubtitleCopyOnly subtitle={subtitle} />}
+                {subtitle && <SubtitleCopyOnly subtitle={subtitle} subtitleExtra={styleOptions.subtitleExtra ?? DEFAULT_STYLE.subtitleExtra} borderColor={styleOptions.subtitleExtraBorderColor ?? DEFAULT_STYLE.subtitleExtraBorderColor} />}
 
                 {body && (
                     <BodyCopyOnly
@@ -347,8 +352,9 @@ function EyebrowHeaderCopyOnly({
     );
 }
 
-function SubtitleCopyOnly({ subtitle }: { subtitle: string }) {
-    return <h5 className="subtitle mwc-animate">{subtitle}</h5>;
+function SubtitleCopyOnly({ subtitle, subtitleExtra, borderColor }: { subtitle: string, subtitleExtra: boolean, borderColor: ColorVariables }) {
+    console.log("borderColor")
+    return <h4 className={cn("mwc-animate", subtitleExtra ? "subtitle-extra" : "subtitle", )} style={{borderTop: `2px solid var(${borderColor})`,borderBottom: `2px solid var(${borderColor})`}}>{subtitle}</h4>;
 }
 
 function BodyCopyOnly({

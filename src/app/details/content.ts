@@ -688,7 +688,8 @@ const timelineTableContent = {
 
 const dressCodeCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     eyebrow: "Dress Code",
-    header: "Black Tie Optional",
+    header: "What to Wear",
+    subtitle: "Black Tie Optional",
     body: "Black Tie Optional invites formal attire, but with a little more room to breathe than traditional black tie.",
 };
 

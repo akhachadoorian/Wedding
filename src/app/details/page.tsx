@@ -110,6 +110,9 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                         styleOptions={{
                             variation: "left",
                             headingLevel: "h2",
+                            starColor: '--cream',
+                            subtitleExtra: true,
+                            subtitleExtraBorderColor: "--cream"
                         }}
                         {...content.dressCode.copyOnly}
                     />
