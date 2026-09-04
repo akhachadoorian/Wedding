@@ -26,7 +26,7 @@ function FrameCard({ title, body, subtitle }: FrameCardProps) {
                 <div className="flex flex-col gap-100">
                     {subtitle && <p className="text-base italic font-medium">{subtitle}</p>}
 
-                <p className="text-base ">{body}</p>
+                <p className="text-s md:text-base ">{body}</p>
                 </div>
             </div>
 
