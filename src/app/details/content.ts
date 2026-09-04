@@ -1,15 +1,18 @@
-import { AccordionsProps } from "@/components/Accordions/Accordions";
+import { AccordionGridProps } from "@/components/Accordions/Accordions";
 import { CardGridProps } from "@/components/CardGrid/CardGrid";
+import { FrameCardGridProps } from "@/components/CardGrid/FrameCardGrid";
 import { MiniCardData } from "@/components/CardGrid/MiniCardGrid";
 import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
 import { SimpleTableProps } from "@/components/SimpleTable/SimpleTable";
 import { SmallTextGridProps } from "@/components/SmallTextGrid/SmallTextGrid";
 import { SplitInfoProps } from "@/components/SplitInfo/SplitInfo";
+import { TimelineElementProps } from "@/components/Timeline/Timeline";
 import { WatermarkTextProps } from "@/components/WatermarkText/WatermarkText";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
 import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero/ImageOverlayHero";
 import { TextOnlyHeroProps } from "@/layout/TextOnlyHero/TextOnlyHero";
 import { CustomImageProps } from "@/types/images";
+import { NonEmptyArray } from "@/types/utility";
 import {
     Icon,
     LetterCirclePIcon,
@@ -21,9 +24,6 @@ import {
     ButtonSettingProps,
     ModalSettings,
 } from "../../types/buttons";
-import { NonEmptyArray } from "@/types/utility";
-import { TimelineElementProps } from "@/components/Timeline/Timeline";
-import { FrameCardGridProps } from "@/components/CardGrid/FrameCardGrid";
 
 // #region --- Hero ---
 
@@ -696,13 +696,11 @@ const dressCodeCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
 const dressCodeCards: FrameCardGridProps = {
     frameCards: [
         {
-            
             title: "Ladies",
             subtitle: "Floor-Length Gowns",
             body: "As the bride will be wearing black, we kindly ask that our lovely ladies avoid this color.",
         },
         {
-            
             title: "Gentlemen",
             subtitle: "Tuxedo or Dark Formal Suit",
             body: "Please wear a tuxedo or a dark, formal suit (black, navy, or charcoal) with a tie.",
@@ -712,22 +710,7 @@ const dressCodeCards: FrameCardGridProps = {
 
 const dressCode = {
     copyOnly: dressCodeCopyOnly,
-    frameCards: dressCodeCards
-};
-
-// #endregion ---
-
-// #region --- Wedding Party ---
-
-const weddingPartyCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> =
-    {
-        eyebrow: "Wedding Party",
-        header: "The People Behind the Big Day",
-        body: "Every great love story has an incredible supporting cast. Meet the special people who will be standing right there with us as we say I do.",
-    };
-
-const weddingParty = {
-    copyOnly: weddingPartyCopyOnly,
+    frameCards: dressCodeCards,
 };
 
 // #endregion ---
@@ -784,20 +767,54 @@ const rehearsalMixer = {
 // #region --- FAQs ---
 
 const fAQsCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
-    eyebrow: "FAQs",
-    header: "Frequently Asked Questions",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
+    eyebrow: "Frequently Asked Questions",
+    header: "Got Questions?",
+    body: "We've rounded up the answers to the most common questions — from attire to parking to what to expect on the day.",
 };
 
-const fAQItemsAccordions: Omit<AccordionsProps, "className"> = {
+// TODO: reorder and add btns
+const fAQItemsAccordions: AccordionGridProps = {
     accordions: [
         {
             question: "Are children allowed?",
-            answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
+            answer: "We love your little ones, but we've decided to keep our wedding adults-only. We hope this gives you a chance to relax and enjoy the night too!",
         },
         {
-            question: "Lorem ipsum",
-            answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
+            question: "What time should I arrive?",
+            answer: "Doors open to the venue at 4:30pm and the ceremony starts at 5pm. If you are traveling from Jacksonville, estimate 30-45 minutes for travel.",
+        },
+        {
+            question: "Is the ceremony and reception at the same location?",
+            answer: "Yes, both the ceremony and the reception will take place at the Clay Theatre. The ceremony will be in the outside courtyard and the reception will be inside the main building.",
+        },
+        {
+            question: "Can I bring a plus-one?",
+            answer: "Please refer to your invitation — it will indicate whether a plus-one is included. If you have questions, feel free to reach out to us directly.",
+        },
+        {
+            question: "What's the RSVP deadline?",
+            answer: "Please submit your RSVP by October 1st — our caterer needs a final headcount by this date. If you submit earlier, you're able to update your submission up until then.",
+        },
+        {
+            question: "What should I wear?",
+            answer: "Black tie optional. Gentlemen: tuxedo or dark, formal suit. Ladies: floor-length gowns — as Alex will be wearing black, we ask guests avoid that color.",
+        },
+        {
+            question: "Is there parking at the venue?",
+            answer: "There is multiple parking options at the venue. If you're staying at one of our partner hotels, a shuttle will run to and from The Clay Theatre — details are on the Accommodations page.",
+        },
+        {
+            question: "Is there a gift registry?",
+            answer: "Your presence is the only gift we need. For those who've asked, we're registered — details are on the Registry page.",
+            button: {
+                type: 'link',
+                text: "View Registry Page",
+                link: '/registry',
+                target: '_self',
+                decoration: {
+                    type: 'arrow'
+                }
+            }
         },
     ],
 };
@@ -823,7 +840,6 @@ const detailsContent = {
     timeline: timeline,
     timelineTable: timelineTableContent,
     dressCode: dressCode,
-    weddingParty: weddingParty,
     rehearsalMixer: rehearsalMixer,
     faqs: faqs,
 };

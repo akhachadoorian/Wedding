@@ -180,11 +180,12 @@
 }
 
 .faqs-section {
-    @include big {
-        margin-top: -12vw; // TODO: Fix the top margin to hug to the previous block
-        position: relative;
-        z-index: 1;
-    }
+    @include section-stack;
+    // @include big {
+    //     margin-top: -12vw; // TODO: Fix the top margin to hug to the previous block
+    //     position: relative;
+    //     z-index: 1;
+    // }
 }
 
 //  &-frame {

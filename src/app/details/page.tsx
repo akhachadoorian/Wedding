@@ -1,6 +1,6 @@
 "use client";
 
-import Accordions from "@/components/Accordions/Accordions";
+import Accordions from "@/components/Accordions/AccordionsOld";
 import Button from "@/components/Buttons/Button";
 import CardGrid from "@/components/CardGrid/CardGrid";
 import MiniCardGrid from "@/components/CardGrid/MiniCardGrid";
@@ -28,6 +28,7 @@ import "./Details.scss";
 import ComponentGuard from "@/components/ComponentGuard/ComponentGuard";
 import Timeline from "@/components/Timeline/Timeline";
 import FrameCardGrid from "@/components/CardGrid/FrameCardGrid";
+import { AccordionGrid } from "@/components/Accordions/Accordions";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -163,7 +164,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                         }}
                         {...content.faqs.copyOnly}
                     />
-                    <Accordions {...content.faqs.accordions} />
+                    <AccordionGrid {...content.faqs.accordions} />
                     </section>
                 {/* </InsetBackgroundSection> */}
             </ComponentGuard>
