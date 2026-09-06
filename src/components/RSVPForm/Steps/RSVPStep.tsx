@@ -11,6 +11,7 @@ import MealSelection from "./MealSelection";
 import SearchRSVP from "./SearchingLive";
 import Transportation from "./Transportation";
 import React from "react";
+import { useFitHeadline } from "@/hooks/useFitHeadline";
 
 export function RSVPStepVertical({
     currStep,
@@ -75,9 +76,18 @@ function RSVPStepTextCentered({
     className,
     ...htmlProps
 }: RSVPStepTextProps) {
+    const { containerRef, textRef, headlineStyle } = useFitHeadline({
+        desktopMax: stepNumber === 1 ? 250 : 400,
+        mobileMax: 100,
+        // lineMode: "multi",
+    });
+
     return (
         <div {...htmlProps} className={cn("text-center w-full", className)}>
-            <div className="lg:max-w-[60.417vw] lg:mx-auto">
+            <div
+                // className="lg:max-w-[60.417vw] lg:mx-auto"
+                ref={containerRef}
+            >
                 {eyebrow && (
                     <Eyebrow
                         text={eyebrow}
@@ -91,11 +101,13 @@ function RSVPStepTextCentered({
 
                 <h2
                     className={cn(
-                        stepNumber === 1
-                            ? "text-6xl! lg:text-[175px]! "
-                            : "text-6xl!",
+                        // stepNumber === 1
+                        //     ? "text-6xl! lg:text-[175px]! "
+                        //     : "text-6xl!",
                         "leading-[130%]!",
                     )}
+                    ref={textRef}
+                    style={headlineStyle}
                 >
                     {title}
                 </h2>

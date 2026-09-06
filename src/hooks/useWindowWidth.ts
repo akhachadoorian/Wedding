@@ -1,32 +1,39 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
-import { BREAKPOINT_DESKTOP, BREAKPOINT_MOBILE, BREAKPOINT_TABLET } from "../constants/breakpoints";
+import {
+    BREAKPOINT_DESKTOP,
+    BREAKPOINT_MOBILE,
+    BREAKPOINT_TABLET,
+} from "../constants/breakpoints";
 
 export default function useWindowWidth() {
-  const [width, setWidth] = useState(0);
+    const [width, setWidth] = useState(0);
 
-  useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    
-    // Cleanup listener on unmount
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    useEffect(() => {
+        const handleResize = () => setWidth(window.innerWidth);
+        handleResize(); // set the real width on mount
 
-  return width;
+        window.addEventListener("resize", handleResize);
+
+        // Cleanup listener on unmount
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    return width;
 }
 
 export function useBreakpoints() {
-  const width = useWindowWidth();
-  console.log("width ", width)
+    const width = useWindowWidth();
 
-  return {
-    isMobile: width < BREAKPOINT_MOBILE,
-    isTablet: width >= BREAKPOINT_MOBILE && width < BREAKPOINT_TABLET,
-    isDesktop: width >= BREAKPOINT_TABLET && width < BREAKPOINT_DESKTOP,
-    isLargeDesktop: width >= BREAKPOINT_DESKTOP,
-  };
+    return {
+        /** false until the client has measured the real viewport width */
+        ready: width !== 0,
+        isMobile: width < BREAKPOINT_MOBILE,
+        isTablet: width >= BREAKPOINT_MOBILE && width < BREAKPOINT_TABLET,
+        isDesktop: width >= BREAKPOINT_TABLET && width < BREAKPOINT_DESKTOP,
+        isLargeDesktop: width >= BREAKPOINT_DESKTOP,
+    };
 }
 
 // const BREAKPOINT_ORDER: BreakpointProps[] = ['mobile', 'tablet', 'desktop', 'large-desktop'];
@@ -46,4 +53,3 @@ export function useBreakpoints() {
 
 //     return BREAKPOINT_ORDER.slice(minIdx, maxIdx + 1).some(bp => breakpointMap[bp]);
 // }
-

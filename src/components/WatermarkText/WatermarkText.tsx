@@ -10,7 +10,7 @@ import gsap from "gsap";
 import { useLayoutEffect, useRef } from "react";
 import Button from "../Buttons/Button";
 import "./WatermarkText.scss";
-import { useFitText } from "react-use-fittext";
+import { useFitHeadline } from "@/hooks/useFitHeadline";
 
 type Caption = {
     lines: NonEmptyArray<string>;
@@ -50,11 +50,7 @@ export default function WatermarkText({
     const captionCenterRef = useRef<HTMLParagraphElement>(null);
     const captionRightRef = useRef<HTMLParagraphElement>(null);
 
-    const { containerRef, textRef, fontSize } = useFitText({
-        fitMode: "width",
-        lineMode: "single",
-        maxFontSize: 400,
-    });
+    const { containerRef, textRef, headlineStyle } = useFitHeadline();
 
     useLayoutEffect(() => {
         const el = wrapperRef.current;
@@ -122,15 +118,9 @@ export default function WatermarkText({
 
             <div
                 className="watermark_text-title"
-                ref={mergeRefs(
-                    watermarkTextRef,
-                    containerRef as React.RefObject<HTMLDivElement>,
-                )}
+                ref={mergeRefs(watermarkTextRef, containerRef)}
             >
-                <h2
-                    ref={textRef as React.RefObject<HTMLHeadingElement>}
-                    style={{ fontSize, lineHeight: 1 }}
-                >
+                <h2 ref={textRef} style={headlineStyle}>
                     {watermarkText}
                 </h2>
             </div>

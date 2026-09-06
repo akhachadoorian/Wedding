@@ -2,9 +2,9 @@ import { WithHTMLProps } from "@/types/props";
 import { RequireAtLeastOne } from "@/types/utility";
 import { cn } from "@/utils/cn";
 import { useFadeInChildren } from "@/hooks/useFadeIn";
+import { useFitHeadline } from "@/hooks/useFitHeadline";
 import mergeRefs from "@/hooks/mergeRefs";
 import { CenterColumn, Column, LeftColumn, RightColumn } from "./Column";
-import { useFitText } from "react-use-fittext";
 
 export type ThreeColumnCopyProps = WithHTMLProps & {
     header: string;
@@ -31,11 +31,7 @@ export function ThreeColumnCopy({
 
     const { leftCol, centerCol, rightCol } = columnContent;
 
-    const { containerRef, textRef, fontSize } = useFitText({
-        fitMode: "width",
-        lineMode: "single",
-        maxFontSize: 400,
-    });
+    const { containerRef, textRef, headlineStyle } = useFitHeadline();
 
     return (
         <div
@@ -49,20 +45,8 @@ export function ThreeColumnCopy({
                 {rightCol && <Column {...rightCol} />}
             </div>
 
-            {/* <div className="text-center" ref={containerRef}>
-                <h2 ref={textRef} style={{ fontSize, lineHeight: 1 }}>
-                    {header}
-                </h2>
-                {body && <p className="">{body}</p>}
-            </div> */}
-            <div
-                className="text-center"
-                ref={containerRef as React.RefObject<HTMLDivElement>}
-            >
-                <h2
-                    ref={textRef as React.RefObject<HTMLHeadingElement>}
-                    style={{ fontSize, lineHeight: 1 }}
-                >
+            <div className="text-center" ref={containerRef}>
+                <h2 ref={textRef} style={headlineStyle}>
                     {header}
                 </h2>
                 {body && <p className="">{body}</p>}

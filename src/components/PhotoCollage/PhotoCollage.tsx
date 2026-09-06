@@ -17,7 +17,7 @@ import mergeRefs from "@/hooks/mergeRefs";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ToolTipHoverImageHolder } from "../ImageHolder/ImageHolder";
-import { useFitText } from "react-use-fittext";
+import { useFitHeadline } from "@/hooks/useFitHeadline";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,11 +72,7 @@ export default function PhotoCollage({
         y: 24,
     });
 
-    const { containerRef, textRef, fontSize } = useFitText({
-        fitMode: "width",
-        lineMode: "single",
-        maxFontSize: 400,
-    });
+    const { containerRef, textRef, headlineStyle } = useFitHeadline();
 
     const headerParallaxRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -114,15 +110,12 @@ export default function PhotoCollage({
         >
             {header && styleOptions.headerTop && (
                 <div
-                    ref={mergeRefs(
-                        headerParallaxRef,
-                        containerRef as React.RefObject<HTMLDivElement>,
-                    )}
+                    ref={mergeRefs(headerParallaxRef, containerRef)}
                     className="photo_collage-header_top"
                 >
                     <h2
-                        ref={textRef as React.RefObject<HTMLHeadingElement>}
-                        style={{ fontSize, lineHeight: 1 }}
+                        ref={textRef}
+                        style={headlineStyle}
                         className="photo_collage-text mwc-animate"
                     >
                         {header}
