@@ -759,19 +759,19 @@ const rehearsalButton: ButtonProps = {
 
 const rehearsalMixer3Col: ThreeColumnCopyProps = {
     header: "Rehearsal Mixer",
-    body: "The evening before",
+    body: "Join us the evening before the wedding for cocktails and light hors d'oeuvres.",
     columnContent: {
         leftCol: {
             orientation: "left",
-            lines: ["8:30 PM - 11 PM"],
+            lines: ["Maggiano's Little Italy", "Saint Johns Town Center"],
         },
         centerCol: {
             orientation: "center",
-            lines: ["October 30th, 2026"],
+            lines: ["Friday, October 30th", "8:30 PM - 11 PM"],
         },
         rightCol: {
             orientation: "right",
-            lines: ["Maggiano’s Little Italy"],
+            lines: ["Casual Dress Code", "No Need To Dress Up"],
         },
     },
 };

@@ -39,17 +39,17 @@ export function ThreeColumnCopy({
             className={cn(className)}
             ref={mergeRefs(animRef, ref)}
         >
-            <div className="flex flex-row justify-between gap-col-gutter mb-400 md:mb-700">
+            <div className="flex flex-row items-end justify-between gap-col-gutter mb-400 md:mb-700">
                 {leftCol && <Column {...leftCol} />}
                 {centerCol && <Column {...centerCol} />}
                 {rightCol && <Column {...rightCol} />}
             </div>
 
-            <div className="text-center" ref={containerRef}>
+            <div className="text-center space-y-300" ref={containerRef}>
                 <h2 ref={textRef} style={headlineStyle}>
                     {header}
                 </h2>
-                {body && <p className="">{body}</p>}
+                {body && <p className="body-l">{body}</p>}
             </div>
         </div>
     );

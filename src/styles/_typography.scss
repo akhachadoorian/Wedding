@@ -11,7 +11,7 @@ p {
 }
 
 a {
-    margin: 0;
+    // margin: 0;
     font-family: $font-sans;
     // color: var(--cream-500);
 }
@@ -33,12 +33,13 @@ h6 {
     font-style: normal;
     font-weight: 300;
     line-height: 150%;
+    margin: 0;
 }
 
 %heading-base {
     // font-family: $font-serif;
     font-family: $font-goth;
-    font-feature-settings: 'ss01' on;
+    font-feature-settings: "ss01" on;
     font-weight: 800;
     line-height: 130%;
     overflow-wrap: break-word;
@@ -169,9 +170,9 @@ h6,
     text-transform: uppercase;
 
     padding: var(--space-100) var(--space-075);
-        border-top: 2px solid $cabernet;
-        border-bottom: 2px solid $cabernet;
-        width: fit-content;
+    border-top: 2px solid $cabernet;
+    border-bottom: 2px solid $cabernet;
+    width: fit-content;
 }
 
 // ── Utilities ─────────────────────────────────────────────────

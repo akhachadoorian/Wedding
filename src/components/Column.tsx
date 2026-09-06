@@ -20,6 +20,12 @@ export interface RightColumn extends BaseColumn {
     orientation: Extract<Alignment, "right">;
 }
 
+const ORIENTATION_CLASS_MAP = {
+    left: "text-left",
+    center: "text-center",
+    right: "text-right",
+} as const satisfies Record<Alignment, string>;
+
 export type ColumnProps = LeftColumn | CenterColumn | RightColumn;
 
 export function Column({
@@ -30,7 +36,11 @@ export function Column({
     ...htmlProps
 }: ColumnProps) {
     return (
-        <div {...htmlProps} className={cn(className)} ref={ref}>
+        <div
+            {...htmlProps}
+            className={cn(ORIENTATION_CLASS_MAP[orientation], className)}
+            ref={ref}
+        >
             <div className="flex flex-col gap-050">
                 {lines.map((line, idx) => (
                     <p
