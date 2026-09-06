@@ -16,8 +16,8 @@ import { useFadeInChildren } from "@/hooks/useFadeIn";
 import mergeRefs from "@/hooks/mergeRefs";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useFitText } from "@/hooks/useFitText";
 import { ToolTipHoverImageHolder } from "../ImageHolder/ImageHolder";
+import { useFitText } from "react-use-fittext";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -67,10 +67,15 @@ export default function PhotoCollage({
         ? "photo_collage-text_behind"
         : "photo_collage-text_front";
 
-    const useFitTextRef = useFitText<HTMLHeadingElement>({ mobile: true });
     const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", {
         stagger: 0.15,
         y: 24,
+    });
+
+    const { containerRef, textRef, fontSize } = useFitText({
+        fitMode: "width",
+        lineMode: "single",
+        maxFontSize: 400,
     });
 
     const headerParallaxRef = useRef<HTMLDivElement>(null);
@@ -109,11 +114,15 @@ export default function PhotoCollage({
         >
             {header && styleOptions.headerTop && (
                 <div
-                    ref={headerParallaxRef}
+                    ref={mergeRefs(
+                        headerParallaxRef,
+                        containerRef as React.RefObject<HTMLDivElement>,
+                    )}
                     className="photo_collage-header_top"
                 >
                     <h2
-                        ref={useFitTextRef}
+                        ref={textRef as React.RefObject<HTMLHeadingElement>}
+                        style={{ fontSize, lineHeight: 1 }}
                         className="photo_collage-text mwc-animate"
                     >
                         {header}
@@ -126,7 +135,9 @@ export default function PhotoCollage({
                 {leftSideImages && (
                     <div className="photo_collage-imgs-left photo_collage-imgs-side">
                         {leftSideImages.map((img, idx) => {
-                            const tallIndex = styleOptions.reverseImageShapes ? 1 : 0;
+                            const tallIndex = styleOptions.reverseImageShapes
+                                ? 1
+                                : 0;
                             return (
                                 <ToolTipHoverImageHolder
                                     key={idx}
@@ -149,16 +160,19 @@ export default function PhotoCollage({
                 {/* Right Column */}
                 {rightSideImages && (
                     <div className="photo_collage-imgs-right photo_collage-imgs-side">
-                        {rightSideImages.map((img, idx) =>  {
-                            const longIndex = styleOptions.reverseImageShapes ? 1 : 0;
+                        {rightSideImages.map((img, idx) => {
+                            const longIndex = styleOptions.reverseImageShapes
+                                ? 1
+                                : 0;
                             return (
-                            <ToolTipHoverImageHolder
-                                key={idx}
-                                className={`photo_collage-img photo_collage-img-${idx === longIndex ? "long" : "tall"} mwc-animate`}
-                                img={img}
-                                makeMouseHandlers={makeMouseHandlers}
-                            />
-                        )})}
+                                <ToolTipHoverImageHolder
+                                    key={idx}
+                                    className={`photo_collage-img photo_collage-img-${idx === longIndex ? "long" : "tall"} mwc-animate`}
+                                    img={img}
+                                    makeMouseHandlers={makeMouseHandlers}
+                                />
+                            );
+                        })}
                     </div>
                 )}
             </div>

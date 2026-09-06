@@ -3,19 +3,14 @@
 import { WithHTMLProps } from "../../types/props";
 
 import mergeRefs from "@/hooks/mergeRefs";
-import TextWithNewLine from "@/utils/TextWithNewLine";
-import { useFitText } from "@/hooks/useFitText";
-import { useEffect, useLayoutEffect, useRef } from "react";
-import "./WatermarkText.scss";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ButtonSettingProps } from "@/types/buttons";
 import { NonEmptyArray } from "@/types/utility";
-import Button from "../Buttons/Button";
-import { useFitLongestWord } from "@/hooks/useFitLongestWord";
 import { cn } from "@/utils/cn";
-
-gsap.registerPlugin(ScrollTrigger);
+import gsap from "gsap";
+import { useLayoutEffect, useRef } from "react";
+import Button from "../Buttons/Button";
+import "./WatermarkText.scss";
+import { useFitText } from "react-use-fittext";
 
 type Caption = {
     lines: NonEmptyArray<string>;
@@ -49,12 +44,17 @@ export default function WatermarkText({
     const wrapperRef = useRef<HTMLDivElement>(null);
     const subheaderRef = useRef<HTMLHeadingElement>(null);
     const watermarkTextRef = useRef<HTMLDivElement>(null);
-    const fitTextRef = useFitText<HTMLHeadingElement>();
     // const fitLongestWord = useFitLongestWord<HTMLHeadingElement>();
     // const parallaxRef = useRef<HTMLDivElement>(null);
     const captionLeftRef = useRef<HTMLParagraphElement>(null);
     const captionCenterRef = useRef<HTMLParagraphElement>(null);
     const captionRightRef = useRef<HTMLParagraphElement>(null);
+
+    const { containerRef, textRef, fontSize } = useFitText({
+        fitMode: "width",
+        lineMode: "single",
+        maxFontSize: 400,
+    });
 
     useLayoutEffect(() => {
         const el = wrapperRef.current;
@@ -120,8 +120,19 @@ export default function WatermarkText({
                 </h3>
             )}
 
-            <div className="watermark_text-title" ref={watermarkTextRef}>
-                <h2 ref={fitTextRef}>{watermarkText}</h2>
+            <div
+                className="watermark_text-title"
+                ref={mergeRefs(
+                    watermarkTextRef,
+                    containerRef as React.RefObject<HTMLDivElement>,
+                )}
+            >
+                <h2
+                    ref={textRef as React.RefObject<HTMLHeadingElement>}
+                    style={{ fontSize, lineHeight: 1 }}
+                >
+                    {watermarkText}
+                </h2>
             </div>
 
             {captions && (

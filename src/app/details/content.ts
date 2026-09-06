@@ -24,6 +24,7 @@ import {
     ButtonSettingProps,
     ModalSettings,
 } from "../../types/buttons";
+import { ThreeColumnCopyProps } from "@/components/ThreeColumnCopy";
 
 // #region --- Hero ---
 
@@ -756,10 +757,30 @@ const rehearsalButton: ButtonProps = {
     },
 };
 
+const rehearsalMixer3Col: ThreeColumnCopyProps = {
+    header: "Rehearsal Mixer",
+    body: "The evening before",
+    columnContent: {
+        leftCol: {
+            orientation: "left",
+            lines: ["8:30 PM - 11 PM"],
+        },
+        centerCol: {
+            orientation: "center",
+            lines: ["October 30th, 2026"],
+        },
+        rightCol: {
+            orientation: "right",
+            lines: ["Maggiano’s Little Italy"],
+        },
+    },
+};
+
 const rehearsalMixer = {
     copyOnly: rehearsalCopyOnly,
     smallTextGrid: rehearsalSmallTextGrid,
     button: rehearsalButton,
+    threeColCopy: rehearsalMixer3Col,
 };
 
 // #endregion ---
@@ -807,14 +828,14 @@ const fAQItemsAccordions: AccordionGridProps = {
             question: "Is there a gift registry?",
             answer: "Your presence is the only gift we need. For those who've asked, we're registered — details are on the Registry page.",
             button: {
-                type: 'link',
+                type: "link",
                 text: "View Registry Page",
-                link: '/registry',
-                target: '_self',
+                link: "/registry",
+                target: "_self",
                 decoration: {
-                    type: 'arrow'
-                }
-            }
+                    type: "arrow",
+                },
+            },
         },
     ],
 };

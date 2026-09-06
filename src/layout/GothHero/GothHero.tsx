@@ -2,16 +2,14 @@
 
 import { WithHTMLProps } from "../../types/props";
 
+import ImageHolder from "@/components/ImageHolder/ImageHolder";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
-import TextWithNewLine from "@/utils/TextWithNewLine";
 import { CustomImageProps } from "@/types/images";
-import "./GothHero.scss";
-import Image from "next/image";
-import { useLayoutEffect, useRef, useState } from "react";
+import TextWithNewLine from "@/utils/TextWithNewLine";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useFitText } from "@/hooks/useFitText";
-import ImageHolder from "@/components/ImageHolder/ImageHolder";
+import { useLayoutEffect, useRef, useState } from "react";
+import "./GothHero.scss";
 
 gsap.registerPlugin(ScrollTrigger);
 

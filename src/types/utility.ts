@@ -85,7 +85,11 @@ export type NumBetweenInclusive<U extends number, L extends number> = Exclude<En
  */
 export type NumBetweenExclusive<S extends number, E extends number> = Exclude<Enumerate<S>, Enumerate<E> | E>
 
-
+/** Utility alignment type */
+const ALIGNMENTS = [
+  'center', 'left','right'
+] as const
+export type Alignment = typeof ALIGNMENTS[number];
 
 /**
  * Utility alignment type
@@ -94,9 +98,9 @@ export type NumBetweenExclusive<S extends number, E extends number> = Exclude<En
  * Allows the user to pass both the desktop and mobile alignment an item
  * 
  */
-export type AlignmentProps = {
-    desktop: 'center' | 'left' | 'right';
-    mobile?: 'center' | 'left' | 'right';
+export type ResponsiveAlignment = {
+    desktop: Alignment;
+    mobile?: Alignment;
 }
 
 // export type BreakpointProps = 'mobile' | 'tablet' | 'desktop' | 'large-desktop';
@@ -111,3 +115,27 @@ export interface TextValueOption<V = string> {
 export type InvertRecord<T extends Record<string, PropertyKey>> = {
   [K in keyof T as T[K]]: K;
 };
+
+/**
+ * Requires at least one property of T to be present; the rest stay optional.
+ *
+ * @description
+ * Builds a union of variants, one per key of T, where that key is required
+ * (via Pick/Required) and every other key stays optional (via Partial/Pick).
+ * A value satisfies the union as long as at least one key is set.
+ *
+ * @template T - The object type whose keys should each be optional individually,
+ * but not all-optional together
+ * @template K - Internal accumulator, do not pass this yourself
+ *
+ * @example Requires at least one of leftCol/centerCol/rightCol
+ * type ColumnContent = RequireAtLeastOne<{
+ *   leftCol?: LeftColumn;
+ *   centerCol?: CenterColumn;
+ *   rightCol?: RightColumn;
+ * }>;
+ */
+export type RequireAtLeastOne<T, K extends keyof T = keyof T> = {
+  [P in K]-?: Required<Pick<T, P>> & Partial<Pick<T, Exclude<K, P>>>;
+}[K] &
+  Pick<T, Exclude<keyof T, K>>;

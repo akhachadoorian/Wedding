@@ -29,6 +29,7 @@ import ComponentGuard from "@/components/ComponentGuard/ComponentGuard";
 import Timeline from "@/components/Timeline/Timeline";
 import FrameCardGrid from "@/components/CardGrid/FrameCardGrid";
 import { AccordionGrid } from "@/components/Accordions/Accordions";
+import { ThreeColumnCopy } from "@/components/ThreeColumnCopy";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -190,7 +191,8 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                     <section ref={rehearsalRef}
                     id="rehearsal"
                     className="rehearsal-section base_section">
-                    <CopyOnly
+                    <ThreeColumnCopy {...content.rehearsalMixer.threeColCopy} />
+                    {/* <CopyOnly
                         styleOptions={{
                             variation: "left",
                             headingLevel: "h2",
@@ -208,7 +210,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                         <SmallTextGrid
                             {...content.rehearsalMixer.smallTextGrid}
                         />
-                    </div>
+                    </div> */}
                     </section>
                 {/* </SlantedSection> */}
             </ComponentGuard>
