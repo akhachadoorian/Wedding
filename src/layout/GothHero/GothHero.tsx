@@ -10,6 +10,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLayoutEffect, useRef, useState } from "react";
 import "./GothHero.scss";
+import { useFitHeadline } from "@/hooks/useFitHeadline";
+import mergeRefs from "@/hooks/mergeRefs";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -101,6 +103,10 @@ export default function GothHero({
         return () => ctx.revert();
     }, []);
 
+    const { containerRef, textRef, headlineStyle } = useFitHeadline({
+        lineMode: "single",
+    });
+
     return (
         <section
             ref={sectionRef}
@@ -154,15 +160,15 @@ export default function GothHero({
                 )}
 
                 <div
-                    className="goth_hero-text-title"
-                    ref={h1Ref}
+                    // className="goth_hero-text-title"
+                    ref={mergeRefs(h1Ref, containerRef)}
                     // style={{ visibility: "hidden" }}
                 >
                     {/* <h1 ref={alexUseFitText}>Alex</h1>
                         <p>&</p>
                         <h1 ref={maxUseFitText}>Max</h1> */}
 
-                    <h1>
+                    <h1 ref={textRef} style={headlineStyle}>
                         Alex <span>&</span> Max
                     </h1>
                 </div>
