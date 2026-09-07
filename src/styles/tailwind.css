@@ -1,21 +1,4 @@
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
-
-/*
- * Only theme.css and utilities.css are imported above (not the full
- * "tailwindcss" entrypoint), so Tailwind's preflight reset never runs and
- * box-sizing defaults to the browser's content-box everywhere. That silently
- * overflows any element combining a percentage width with padding/border
- * (e.g. w-full + p-* + border-*), which only becomes visible once the
- * container is narrow enough for the padding/border to matter.
- */
-@layer base {
-    *,
-    ::before,
-    ::after {
-        box-sizing: border-box;
-    }
-}
+@import "tailwindcss";
 
 /*
  * Button colors (src/components/Buttons/button.variants.ts) are built via string
