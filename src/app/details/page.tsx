@@ -63,7 +63,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                 id="details-timeline"
                 fallback={
                     <ComingSoonSection
-                    theme='black'
+                        theme="black"
                         eyebrow="More to Come"
                         title="Day of Schedule coming soon!"
                         body="It will outline the general timeline for the day of."
@@ -79,7 +79,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                         styleOptions={{
                             variation: "center",
                             headingLevel: "h2",
-                            headingClass: 'heading-xl'
+                            headingClass: "heading-xl",
                         }}
                         {...content.timeline.copyOnly}
                     />
@@ -98,7 +98,6 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                     />
                 }
             >
-
                 <SlantedSection
                     ref={rehearsalRef}
                     sectionPrefix="rehearsal"
@@ -112,14 +111,14 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                         styleOptions={{
                             variation: "left",
                             headingLevel: "h2",
-                            starColor: '--cream',
+                            starColor: "--cream",
                             subtitleExtra: true,
-                            subtitleExtraBorderColor: "--cream"
+                            subtitleExtraBorderColor: "--cream",
                         }}
                         {...content.dressCode.copyOnly}
                     />
 
-                <FrameCardGrid {...content.dressCode.frameCards}/>
+                    <FrameCardGrid {...content.dressCode.frameCards} />
                 </SlantedSection>
 
                 {/* <section
@@ -147,17 +146,11 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                     />
                 }
             >
-                {/* <InsetBackgroundSection
-                    sectionPrefix="faqs"
+                <section
                     ref={faqsRef}
-                    backgroundImage="/assets/DiamondPattern.svg"
-                    backgroundSize="60vw"
-                    backgroundRepeat="repeat"
-                    backgroundPosition="center"
-                > */}
-                <section  ref={faqsRef}
                     id="faqs"
-                    className="faqs-section base_section">
+                    className="faqs-section base_section"
+                >
                     <CopyOnly
                         styleOptions={{
                             variation: "center",
@@ -166,8 +159,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                         {...content.faqs.copyOnly}
                     />
                     <AccordionGrid {...content.faqs.accordions} />
-                    </section>
-                {/* </InsetBackgroundSection> */}
+                </section>
             </ComponentGuard>
 
             <ComponentGuard
@@ -179,47 +171,17 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                     />
                 }
             >
-                {/* <SlantedSection
+                <section
                     ref={rehearsalRef}
-                    sectionPrefix="rehearsal"
-                    fill={"--wine-800"}
-                    slantSettings={{
-                        depth: "large",
-                        flipped: true,
-                    }}
-                > */}
-                    <section ref={rehearsalRef}
                     id="rehearsal"
-                    className="rehearsal-section base_section">
+                    className="rehearsal-section base_section"
+                >
                     <ThreeColumnCopy {...content.rehearsalMixer.threeColCopy} />
-                    {/* <CopyOnly
-                        styleOptions={{
-                            variation: "left",
-                            headingLevel: "h2",
-                        }}
-                        className="rehearsal-left"
-                        {...content.rehearsalMixer.copyOnly}
-                    />
-                    <div className="rehearsal-right">
-                        <Button
-                            colorScheme="cabernet"
-                            variant="solid"
-                            fullWidth={true}
-                            {...content.rehearsalMixer.button}
-                        />
-                        <SmallTextGrid
-                            {...content.rehearsalMixer.smallTextGrid}
-                        />
-                    </div> */}
-                    </section>
-                {/* </SlantedSection> */}
+                </section>
             </ComponentGuard>
         </PageGuard>
     );
 }
-
-
-
 
 function VenueMiniCards({
     venueRef,

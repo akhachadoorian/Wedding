@@ -3,27 +3,43 @@
 
 // ── Base resets ──────────────────────────────────────────────
 
-p {
-    margin: 0;
-    font-family: $font-sans;
-    // @extend %body-base;
-    // color: var(--cream-500);
-}
+// p {
+//     font-family: $font-sans;
+//     margin-block-start: 0;
+//     margin-block-end: 0;
+// }
 
-a {
-    // margin: 0;
-    font-family: $font-sans;
-    // color: var(--cream-500);
-}
+// a {
+//     // margin: 0;
+//     font-family: $font-sans;
+//     // color: var(--cream-500);
+// }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    margin: 0;
-    // color: var(--cream-500);
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//     margin: 0;
+//     // color: var(--cream-500);
+// }
+
+@layer base {
+    p {
+        font-family: $font-sans;
+        margin-block-start: 0;
+        margin-block-end: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+    }
 }
 
 // ── Placeholders ──────────────────────────────────────
@@ -33,7 +49,7 @@ h6 {
     font-style: normal;
     font-weight: 300;
     line-height: 150%;
-    margin: 0;
+    // margin: 0;
 }
 
 %heading-base {
