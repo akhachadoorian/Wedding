@@ -1,6 +1,3 @@
-import { DashedCopyGridProps } from "@/components/DashedCopy/DashedCopy";
-import { DrinkCardGridProps } from "@/components/DrinkCardGrid/DrinkCardGrid";
-import { SmallTextProps } from "@/components/SmallTextGrid/SmallTextGrid";
 import { PhotoCollageProps } from "@/components/PhotoCollage/PhotoCollage";
 import { WatermarkTextProps } from "@/components/WatermarkText/WatermarkText";
 import {
@@ -12,123 +9,8 @@ import {
     DEFAULT_IMAGE_SUNGLASSES,
 } from "@/data/defaultImage";
 import { GothHeroProps } from "@/layout/GothHero/GothHero";
-import { ScrollRevealHeroProps } from "@/layout/archive/ScrollRevealHero/ScrollRevealHero";
 import { CardGridProps } from "@/components/CardGrid/CardGrid";
 import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
-
-// #region --- ARCHIVE -----------------------------------------------
-
-const welcomeDashedGrid: DashedCopyGridProps = {
-    dashedCopy: [
-        {
-            leftCopy: "Saturday, October 31st, 2026",
-            rightCopy: "Guests arrive at 4:30 PM",
-            link: "/details#timeline",
-            tooltipCaption: "View the timeline",
-        },
-        // {
-        //     leftCopy: "Ceremony starts at 5:00 PM",
-        //     rightCopy: "Reception ends at 10:30 PM",
-        // },
-        {
-            leftCopy: "The Clay Theatre",
-            rightCopy: "Green Cove Springs, Florida",
-            link: "/details#venue",
-            tooltipCaption: "Venue details",
-        },
-        // {
-        //     leftCopy: "Rehearsal Mixer",
-        //     rightCopy: "Green Cove Springs, Florida",
-        //     link: "/details#rehearsal-mixer",
-        //     tooltipCaption: "View the rehearsal mixer details",
-        // },
-    ],
-};
-
-const welcomeSmallText: Array<SmallTextProps> = [
-    {
-        eyebrow: "when",
-        title: "October 31st, 2026",
-        subtitle: "Guests arrive at 4:30 PM",
-        button: {
-            type: "link",
-            link: "/details#timeline",
-            text: "View the Timeline",
-        },
-    },
-];
-
-const oldHero: ScrollRevealHeroProps = {
-    header: "Alex & Max",
-    hideScrollHint: false,
-    scrollHintMessage: "Scroll for details",
-    endScrollMessage: "Hover on images for more!",
-    endScrollMessageMobile: "Touch the images for more!",
-    sideImages: [
-        {
-            src: "/images/Engagement.jpg",
-            alt: "Max proposing to Alex in the Japan Garden in Epcot",
-            caption: "Max proposing to Alex in the Japan Garden in Epcot",
-            borderStyle: "simple",
-            aspectRatio: "portrait",
-            width: 2000,
-            height: 2000,
-        },
-        {
-            src: "/images/Graduation.jpg",
-            alt: "Max and Alex at Max's college graduation",
-            caption: "Max's Graduation",
-            borderStyle: "double",
-            aspectRatio: "square",
-            width: 2000,
-            height: 2000,
-        },
-        {
-            src: "/images/Sunglasses.jpg",
-            alt: "",
-            caption: "",
-            borderStyle: "corner",
-            aspectRatio: "square",
-            width: 2000,
-            height: 2000,
-        },
-        {
-            src: "/images/Disney.jpg",
-            alt: "Max and Alex kissing in front of the Disney castle",
-            caption: "Disney Trip",
-            borderStyle: "diamond",
-            aspectRatio: "portrait",
-            width: 2000,
-            height: 2000,
-        },
-    ],
-};
-
-// const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
-//     eyebrow: "We're getting married",
-//     header: "Once upon a time, we found each other, and now we're counting down the days until we say **I do**. We would be thrilled to have you join us in this next chapter.",
-// };
-
-// const welcomeDashedGrid: DashedCopyGridProps = {
-//     dashedCopy: [
-//         {
-//             leftCopy: "Saturday, October 31st, 2026",
-//             rightCopy: "Guests arrive at 4:30 PM",
-//             link: '/details#timeline',
-//             tooltipCaption: 'View the timeline'
-//         },
-//         // {
-//         //   leftCopy: "Ceremony – Reception",
-//         //   rightCopy: "5:00 PM – 10:30 PM",
-//         // },
-//         {
-//             leftCopy: "The Clay Theatre",
-//             rightCopy: "Green Cove Springs, Florida",
-//         },
-//     ],
-// };
-
-// #endregion -----------------------------------------------
 
 // ----- Hero -----------------------------------------------
 
@@ -287,78 +169,9 @@ const qlCardGrid: CardGridProps = {
     ],
 };
 
-const drinkGrid: DrinkCardGridProps = {
-    drinkCards: [
-        {
-            eyebrow: "The Day",
-            title: "Details",
-            body: "Ceremony time, timeline, and what to expect on the day",
-            link: "/details",
-            target: "_self",
-            drinks: [
-                {
-                    type: "martini",
-                    rotate: "large",
-                    rotateNeg: true,
-                    hoverHeight: "high",
-                },
-                {
-                    type: "highball",
-                    rotate: "small",
-                    rotateNeg: false,
-                    hoverHeight: "low",
-                },
-            ],
-        },
-        {
-            eyebrow: "Accommodations",
-            title: "Stay & Travel",
-            body: "Hotel blocks, parking, and getting to The Clay Theatre",
-            link: "/accommodations",
-            target: "_self",
-            drinks: [
-                {
-                    type: "cocktail",
-                    rotate: "medium",
-                    rotateNeg: false,
-                    hoverHeight: "medium",
-                },
-                {
-                    type: "whiskey",
-                    rotate: "large",
-                    rotateNeg: true,
-                    hoverHeight: "high",
-                },
-            ],
-        },
-        {
-            eyebrow: "RSVP",
-            title: "You're Invited",
-            body: "Let us know if you are able to come!",
-            link: "/rsvp",
-            target: "_self",
-            drinks: [
-                {
-                    type: "coupe",
-                    rotate: "medium",
-                    rotateNeg: false,
-                    hoverHeight: "medium",
-                },
-                {
-                    type: "margarita",
-                    rotate: "large",
-                    rotateNeg: true,
-                    hoverHeight: "high",
-                },
-            ],
-        },
-    ],
-};
-
 const quickLinks = {
     copyOnly: qlCopyOnly,
     cardGrid: qlCardGrid,
-    // drinkGrid: drinkGrid,
 };
 
 // ----- Content -----------------------------------------------
@@ -367,7 +180,6 @@ const homeContent = {
     welcome: welcome,
     ourStory: ourStory,
     quickLinks: quickLinks,
-    oldHero: oldHero,
 };
 
 export default homeContent;

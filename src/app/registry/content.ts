@@ -1,7 +1,6 @@
 import { CardGridProps } from "@/components/CardGrid/CardGrid";
 import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
 import { ImageCalloutProps } from "@/components/ImageCallout/ImageCallout";
-import { MediaWithCopyProps } from "@/components/MediaWithCopy/MediaWithCopy";
 import { DEFAULT_IMAGE, IMAGE_BuckyJules } from "@/data/defaultImage";
 import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero/ImageOverlayHero";
 import { TextOnlyHeroProps } from "@/layout/TextOnlyHero/TextOnlyHero";
@@ -140,19 +139,6 @@ const registryLinks = {
 // #endregion ---------------------------------------
 
 
-const catLink: Omit<MediaWithCopyProps, 'styleOptions'> = {
-    eyebrow: "They’ve dealt with lots of wedding stress",
-    header: "Something for our cats, Bucky & Jules",
-    img: IMAGE_BuckyJules,
-    buttons: [
-        {
-            type: 'link',
-            text: "A gift they'll appreciate",
-            link: "https://www.zola.com/registry/maxandalexoctober31"
-        }
-    ]
-}
-
 const catImageCallout: Omit<ImageCalloutProps, 'styleOptions'> = {
     eyebrow: "They’ve dealt with lots of wedding stress",
     header: "Something for our cats, Bucky & Jules",
@@ -179,7 +165,6 @@ const registryContent = {
     thanks: thanksCopyOnly,
     honeymoon: honeymoonFund,
     registryLinks: registryLinks,
-    catLink: catLink,
     catImageCallout: catImageCallout
 };
 

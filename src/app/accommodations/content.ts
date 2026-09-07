@@ -1,8 +1,4 @@
 import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero/ImageOverlayHero";
-import {
-    ArtDecoCardGridProps,
-    ArtDecoCardProps,
-} from "../../components/ArtDecoCardGrid/ArtDecoCardGrid";
 import { SplitInfoProps } from "../../components/SplitInfo/SplitInfo";
 import { TextOnlyHeroProps } from "../../layout/TextOnlyHero/TextOnlyHero";
 import { NonEmptyArray } from "../../types/utility";

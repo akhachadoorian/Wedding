@@ -1,7 +1,6 @@
 "use client";
 
 import CopyOnly from "@/components/CopyOnly/CopyOnly";
-import DrinkCardGrid from "@/components/DrinkCardGrid/DrinkCardGrid";
 import { useFadeIn } from "@/hooks/useFadeIn";
 import content from "./content";
 
