@@ -15,7 +15,6 @@ import { SmallTextGrid } from "@/components/SmallTextGrid/SmallTextGrid";
 import SplitInfo from "@/components/SplitInfo/SplitInfo";
 import WatermarkText from "@/components/WatermarkText/WatermarkText";
 import { useFadeIn } from "@/hooks/useFadeIn";
-import ParallaxingDrinkSection from "@/layout/archive/ParallaxingDrinkSection/ParallaxingDrinkSection";
 import ComingSoon, { ComingSoonSection } from "@/layout/ComingSoon/ComingSoon";
 import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
 import InsetBackgroundSection from "@/layout/InsetBackgroundSection/InsetBackgroundSection";

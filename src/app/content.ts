@@ -12,7 +12,6 @@ import {
     DEFAULT_IMAGE_SUNGLASSES,
 } from "@/data/defaultImage";
 import { GothHeroProps } from "@/layout/GothHero/GothHero";
-import { ScrollRevealHeroProps } from "@/layout/archive/ScrollRevealHero/ScrollRevealHero";
 import { CardGridProps } from "@/components/CardGrid/CardGrid";
 import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
 
@@ -57,52 +56,6 @@ const welcomeSmallText: Array<SmallTextProps> = [
         },
     },
 ];
-
-const oldHero: ScrollRevealHeroProps = {
-    header: "Alex & Max",
-    hideScrollHint: false,
-    scrollHintMessage: "Scroll for details",
-    endScrollMessage: "Hover on images for more!",
-    endScrollMessageMobile: "Touch the images for more!",
-    sideImages: [
-        {
-            src: "/images/Engagement.jpg",
-            alt: "Max proposing to Alex in the Japan Garden in Epcot",
-            caption: "Max proposing to Alex in the Japan Garden in Epcot",
-            borderStyle: "simple",
-            aspectRatio: "portrait",
-            width: 2000,
-            height: 2000,
-        },
-        {
-            src: "/images/Graduation.jpg",
-            alt: "Max and Alex at Max's college graduation",
-            caption: "Max's Graduation",
-            borderStyle: "double",
-            aspectRatio: "square",
-            width: 2000,
-            height: 2000,
-        },
-        {
-            src: "/images/Sunglasses.jpg",
-            alt: "",
-            caption: "",
-            borderStyle: "corner",
-            aspectRatio: "square",
-            width: 2000,
-            height: 2000,
-        },
-        {
-            src: "/images/Disney.jpg",
-            alt: "Max and Alex kissing in front of the Disney castle",
-            caption: "Disney Trip",
-            borderStyle: "diamond",
-            aspectRatio: "portrait",
-            width: 2000,
-            height: 2000,
-        },
-    ],
-};
 
 // const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
 //     eyebrow: "We're getting married",
@@ -367,7 +320,6 @@ const homeContent = {
     welcome: welcome,
     ourStory: ourStory,
     quickLinks: quickLinks,
-    oldHero: oldHero,
 };
 
 export default homeContent;
