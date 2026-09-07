@@ -1,6 +1,5 @@
 "use client";
 
-import Accordions from "@/components/Accordions/AccordionsOld";
 import Button from "@/components/Buttons/Button";
 import CardGrid from "@/components/CardGrid/CardGrid";
 import MiniCardGrid from "@/components/CardGrid/MiniCardGrid";
@@ -10,8 +9,6 @@ import Eyebrow from "@/components/Eyebrow/Eyebrow";
 import { ImageHolderBorder } from "@/components/ImageHolder/ImageHolder";
 import Note from "@/components/Note/Note";
 import PageGuard from "@/components/PageGuard/PageGuard";
-import SimpleTable from "@/components/SimpleTable/SimpleTable";
-import { SmallTextGrid } from "@/components/SmallTextGrid/SmallTextGrid";
 import SplitInfo from "@/components/SplitInfo/SplitInfo";
 import WatermarkText from "@/components/WatermarkText/WatermarkText";
 import { useFadeIn } from "@/hooks/useFadeIn";

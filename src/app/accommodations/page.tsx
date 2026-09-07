@@ -6,9 +6,6 @@ import content from "./content";
 import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
 import { useFadeIn } from "../../hooks/useFadeIn";
 import SplitInfo from "../../components/SplitInfo/SplitInfo";
-import ArtDecoCardGrid, {
-    ArtDecoCard,
-} from "../../components/ArtDecoCardGrid/ArtDecoCardGrid";
 import ComingSoon, { ComingSoonSection } from "@/layout/ComingSoon/ComingSoon";
 import PageGuard from "@/components/PageGuard/PageGuard";
 import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";

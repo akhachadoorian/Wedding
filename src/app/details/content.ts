@@ -3,8 +3,6 @@ import { CardGridProps } from "@/components/CardGrid/CardGrid";
 import { FrameCardGridProps } from "@/components/CardGrid/FrameCardGrid";
 import { MiniCardData } from "@/components/CardGrid/MiniCardGrid";
 import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
-import { SimpleTableProps } from "@/components/SimpleTable/SimpleTable";
-import { SmallTextGridProps } from "@/components/SmallTextGrid/SmallTextGrid";
 import { SplitInfoProps } from "@/components/SplitInfo/SplitInfo";
 import { TimelineElementProps } from "@/components/Timeline/Timeline";
 import { WatermarkTextProps } from "@/components/WatermarkText/WatermarkText";
@@ -593,96 +591,6 @@ const timeline = {
     elements: timelineElements,
 };
 
-const timelineTable: SimpleTableProps = {
-    rows: [
-        {
-            row: [
-                {
-                    type: "time",
-                    time: "4:30 PM",
-                },
-                {
-                    type: "title",
-                    title: "Guest Arrival",
-                },
-                {
-                    type: "body",
-                    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
-                },
-            ],
-        },
-        {
-            row: [
-                {
-                    type: "time",
-                    time: "5:00 PM",
-                },
-                {
-                    type: "title",
-                    title: "I Do",
-                },
-                {
-                    type: "body",
-                    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
-                },
-            ],
-        },
-        {
-            row: [
-                {
-                    type: "time",
-                    time: "6:00 PM",
-                },
-                {
-                    type: "title",
-                    title: "Cocktail Hour",
-                },
-                {
-                    type: "body",
-                    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
-                },
-            ],
-        },
-        {
-            row: [
-                {
-                    type: "time",
-                    time: "7:00 PM",
-                },
-                {
-                    type: "title",
-                    title: "Dinner",
-                },
-                {
-                    type: "body",
-                    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
-                },
-            ],
-        },
-        // {
-        //     row: [
-        //         {
-        //             type: 'time',
-        //             time: ''
-        //         },
-        //         {
-        //             type: 'Title',
-        //             title: ''
-        //         },
-        //         {
-        //             type: 'body',
-        //             body: ''
-        //         },
-        //     ]
-        // },
-    ],
-};
-
-const timelineTableContent = {
-    copyOnly: timelineCopyOnly,
-    simpleTable: timelineTable,
-};
-
 // #endregion ---
 
 // #region --- Dress Code ---
@@ -724,27 +632,6 @@ const rehearsalCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis viverra nunc, id bibendum magna vehicula sed. In facilisis cursus neque nec luctus.",
 };
 
-const rehearsalSmallTextGrid: SmallTextGridProps = {
-    smallText: [
-        {
-            eyebrow: "Time",
-            title: "8:30 PM - 11 PM",
-        },
-        {
-            eyebrow: "Date",
-            title: "October 30th, 2026",
-        },
-        {
-            eyebrow: "Location",
-            title: "Maggiano’s Little Italy",
-        },
-        {
-            eyebrow: "Attire",
-            title: "Casual",
-        },
-    ],
-};
-
 const rehearsalButton: ButtonProps = {
     btnSettings: {
         type: "link",
@@ -778,7 +665,6 @@ const rehearsalMixer3Col: ThreeColumnCopyProps = {
 
 const rehearsalMixer = {
     copyOnly: rehearsalCopyOnly,
-    smallTextGrid: rehearsalSmallTextGrid,
     button: rehearsalButton,
     threeColCopy: rehearsalMixer3Col,
 };
@@ -859,7 +745,6 @@ const detailsContent = {
     summary: summary,
     watermarkVenue: watermarkVenue,
     timeline: timeline,
-    timelineTable: timelineTableContent,
     dressCode: dressCode,
     rehearsalMixer: rehearsalMixer,
     faqs: faqs,

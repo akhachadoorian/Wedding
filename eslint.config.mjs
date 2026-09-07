@@ -14,6 +14,7 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Archived/unused components kept outside src for reference only:
     "unused-layout-components/**",
+    "unused-components/**",
   ]),
 ]);
 
