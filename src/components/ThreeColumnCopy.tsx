@@ -8,6 +8,7 @@ import Column, { CenterColumn, LeftColumn, RightColumn } from "./Column";
 import Star from "@/icons/Star";
 import { ButtonSettingProps } from "@/types/buttons";
 import Button from "./Buttons/Button";
+import ColumnRow from "./ColumnRow";
 
 export type ThreeColumnCopyProps = WithHTMLProps & {
     header: string;
@@ -44,13 +45,11 @@ export function ThreeColumnCopy({
             className={cn(className)}
             ref={mergeRefs(animRef, ref)}
         >
-            <div className="flex flex-row items-center justify-between gap-col-gutter mb-400 md:mb-700">
-                {leftCol && <Column {...leftCol} className="self-end" />}
-                <Star className="size-6 md:size-8" />
-                {centerCol && <Column {...centerCol} className="self-end" />}
-                <Star className="size-6 md:size-8" />
-                {rightCol && <Column {...rightCol} className="self-end" />}
-            </div>
+            <ColumnRow
+                columnOne={leftCol}
+                columnTwo={centerCol}
+                columnThree={rightCol}
+            />
 
             <div className="flex flex-col items-center gap-500">
                 <div

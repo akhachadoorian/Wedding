@@ -94,7 +94,7 @@ const hero: Omit<ImageOverlayHeroProps, "loaded" | "styleOptions"> = {
         },
         {
             type: "link",
-            text: "View Rehearsal Mixer Details",
+            text: "Rehearsal Mixer Details",
             link: "/details#rehearsal",
             target: "_self",
             decoration: {
