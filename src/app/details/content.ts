@@ -83,15 +83,24 @@ const hero: Omit<ImageOverlayHeroProps, "loaded" | "styleOptions"> = {
                 type: "arrow",
             },
         },
-        // {
-        //     type: "link",
-        //     text: "View Timeline",
-        //     link: "/details#timeline",
-        //     target: "_self",
-        //     decoration: {
-        //         type: "arrow",
-        //     },
-        // },
+        {
+            type: "link",
+            text: "View Timeline",
+            link: "/details#timeline",
+            target: "_self",
+            decoration: {
+                type: "arrow",
+            },
+        },
+        {
+            type: "link",
+            text: "View Rehearsal Mixer Details",
+            link: "/details#rehearsal",
+            target: "_self",
+            decoration: {
+                type: "arrow",
+            },
+        },
     ],
 };
 
