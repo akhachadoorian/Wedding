@@ -2,6 +2,7 @@ import { ButtonSettingProps } from "@/types/buttons";
 import { WithHTMLProps } from "@/types/props";
 import { Alignment, NonEmptyArray } from "@/types/utility";
 import { cn } from "@/utils/cn";
+import Button from "./Buttons/Button";
 
 interface BaseColumn extends WithHTMLProps {
     lines: NonEmptyArray<string>;
@@ -30,6 +31,7 @@ export type ColumnProps = LeftColumn | CenterColumn | RightColumn;
 
 export function Column({
     lines,
+    button,
     orientation,
     ref,
     className,
@@ -50,6 +52,14 @@ export function Column({
                         {line}
                     </p>
                 ))}
+
+                {button && (
+                    <Button
+                        // variant="outline"
+                        // size={"small"}
+                        btnSettings={button}
+                    />
+                )}
             </div>
         </div>
     );

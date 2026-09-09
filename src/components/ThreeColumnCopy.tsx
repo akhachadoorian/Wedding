@@ -5,10 +5,14 @@ import { useFadeInChildren } from "@/hooks/useFadeIn";
 import { useFitHeadline } from "@/hooks/useFitHeadline";
 import mergeRefs from "@/hooks/mergeRefs";
 import { CenterColumn, Column, LeftColumn, RightColumn } from "./Column";
+import Star from "@/icons/Star";
+import { ButtonSettingProps } from "@/types/buttons";
+import Button from "./Buttons/Button";
 
 export type ThreeColumnCopyProps = WithHTMLProps & {
     header: string;
     body?: string;
+    button?: ButtonSettingProps;
     columnContent: RequireAtLeastOne<{
         leftCol?: LeftColumn;
         centerCol?: CenterColumn;
@@ -19,6 +23,7 @@ export type ThreeColumnCopyProps = WithHTMLProps & {
 export function ThreeColumnCopy({
     header,
     body,
+    button,
     columnContent,
     className,
     ref,
@@ -39,17 +44,26 @@ export function ThreeColumnCopy({
             className={cn(className)}
             ref={mergeRefs(animRef, ref)}
         >
-            <div className="flex flex-row items-end justify-between gap-col-gutter mb-400 md:mb-700">
-                {leftCol && <Column {...leftCol} />}
-                {centerCol && <Column {...centerCol} />}
-                {rightCol && <Column {...rightCol} />}
+            <div className="flex flex-row items-center justify-between gap-col-gutter mb-400 md:mb-700">
+                {leftCol && <Column {...leftCol} className="self-end" />}
+                <Star className="size-6 md:size-8" />
+                {centerCol && <Column {...centerCol} className="self-end" />}
+                <Star className="size-6 md:size-8" />
+                {rightCol && <Column {...rightCol} className="self-end" />}
             </div>
 
-            <div className="text-center space-y-300" ref={containerRef}>
-                <h2 ref={textRef} style={headlineStyle}>
-                    {header}
-                </h2>
-                {body && <p className="body-l">{body}</p>}
+            <div className="flex flex-col items-center gap-500">
+                <div className="text-center space-y-300" ref={containerRef}>
+                    <h2 ref={textRef} style={headlineStyle}>
+                        {header}
+                    </h2>
+
+                    {body && <p className="body-l">{body}</p>}
+                </div>
+
+                {button && (
+                    <Button colorScheme="burgundy" btnSettings={button} />
+                )}
             </div>
         </div>
     );

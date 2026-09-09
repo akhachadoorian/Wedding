@@ -647,6 +647,15 @@ const rehearsalButton: ButtonProps = {
 const rehearsalMixer3Col: ThreeColumnCopyProps = {
     header: "Rehearsal Mixer",
     body: "Join us the evening before the wedding for cocktails and light hors d'oeuvres.",
+    button: {
+        type: "link",
+        text: "View Directions",
+        link: "https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=us&sa=X&geocode=Kdf6yjxXteWIMdVw3e0vrM0V&daddr=St.+Johns+Town+Center,+10367+Mid+Town+Pkwy,+Jacksonville,+FL+32246",
+        target: "_blank",
+        decoration: {
+            type: "arrow",
+        },
+    },
     columnContent: {
         leftCol: {
             orientation: "left",
