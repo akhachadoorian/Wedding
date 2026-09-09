@@ -32,6 +32,15 @@ Contents:
 - `archive/` — components that were already archived inside
   `src/components/archive` before this reorganization (`Marquee`, `Note`,
   `WelcomeBlock`, `WelcomeBlockB`).
+- `archive/VenueSectionVariants/` — four alternate designs for the
+  "venue" section on the details page (`VenueMiniCards`, `VenueCopyMedia`,
+  `VenueCardGrid`, `VenueSplitInfo`), pulled out of
+  `src/app/details/page.tsx` where they sat as dead, never-called
+  functions. The page ships with a fifth variant, `VenueWatermark`, which
+  stayed live. Their content (`venue`, `venueFramed`, `venueMiniCards`,
+  `summary`, plus the `date`/`venueContent` that fed `summary`) was
+  inlined into the archived file rather than left in
+  `src/app/details/content.ts`, since it only ever fed these variants.
 
 If you want to bring one of these back into active use, move its folder
 back into `src/components`, fix up its imports, and wire it into a page.

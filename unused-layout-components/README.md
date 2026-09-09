@@ -13,6 +13,8 @@ Contents:
 
 - `BackgroundSection/`, `DraggableHero/`, `LoadingScreen/` — previously in
   `src/layout`, no longer referenced anywhere.
+- `InsetBackgroundSection/` — imported on the details page but never
+  rendered, and not referenced anywhere else in the app.
 - `archive/` — components that were already archived inside
   `src/layout/archive` before this reorganization (`Footer copy`, `FooterV1`,
   `NavigationV1`, `ParallaxingDrinkSection`, `ScrollRevealHero`,
