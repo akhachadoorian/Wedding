@@ -29,14 +29,14 @@ const ORIENTATION_CLASS_MAP = {
 
 export type ColumnProps = LeftColumn | CenterColumn | RightColumn;
 
-export function Column({
+export default function Column({
     lines,
     button,
     orientation,
     ref,
     className,
     ...htmlProps
-}: ColumnProps) {
+}: ColumnProps & WithHTMLProps) {
     return (
         <div
             {...htmlProps}

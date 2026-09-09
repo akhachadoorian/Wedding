@@ -4,7 +4,7 @@ import { cn } from "@/utils/cn";
 import { useFadeInChildren } from "@/hooks/useFadeIn";
 import { useFitHeadline } from "@/hooks/useFitHeadline";
 import mergeRefs from "@/hooks/mergeRefs";
-import { CenterColumn, Column, LeftColumn, RightColumn } from "./Column";
+import Column, { CenterColumn, LeftColumn, RightColumn } from "./Column";
 import Star from "@/icons/Star";
 import { ButtonSettingProps } from "@/types/buttons";
 import Button from "./Buttons/Button";
@@ -53,7 +53,10 @@ export function ThreeColumnCopy({
             </div>
 
             <div className="flex flex-col items-center gap-500">
-                <div className="text-center space-y-300" ref={containerRef}>
+                <div
+                    className="text-center space-y-300 w-full"
+                    ref={containerRef}
+                >
                     <h2 ref={textRef} style={headlineStyle}>
                         {header}
                     </h2>
