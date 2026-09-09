@@ -49,22 +49,33 @@ export function ThreeColumnCopy({
                 columnOne={leftCol}
                 columnTwo={centerCol}
                 columnThree={rightCol}
+                styleOptions={{
+                    includeStars: true,
+                }}
             />
 
             <div className="flex flex-col items-center gap-500">
                 <div
-                    className="text-center space-y-300 w-full"
+                    className="text-center space-y-300 w-full "
                     ref={containerRef}
                 >
-                    <h2 ref={textRef} style={headlineStyle}>
+                    <h2
+                        ref={textRef}
+                        style={headlineStyle}
+                        className="mwc-animate"
+                    >
                         {header}
                     </h2>
 
-                    {body && <p className="body-l">{body}</p>}
+                    {body && <p className="body-l mwc-animate">{body}</p>}
                 </div>
 
                 {button && (
-                    <Button colorScheme="burgundy" btnSettings={button} />
+                    <Button
+                        className="mwc-animate"
+                        colorScheme="burgundy"
+                        btnSettings={button}
+                    />
                 )}
             </div>
         </div>
