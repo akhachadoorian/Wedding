@@ -41,17 +41,27 @@ section.full-width {
 
 
 // ── Custom cursor ─────────────────────────────────────────────
-// .cursor {
-//     position: fixed;
-//     top: 0;
-//     left: 0;
-//     pointer-events: none;
-//     z-index: 9999;
-//     width: 20px;
-//     height: 20px;
-//     border: 1px solid var(--cream-500);
-//     background-color: $gold;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-// }
+.cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 22px;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+html.has-custom-cursor {
+    cursor: none;
+
+    * {
+        cursor: none;
+    }
+
+    .cursor {
+        display: flex;
+    }
+}

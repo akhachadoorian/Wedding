@@ -1,3 +1,4 @@
+import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/layout/Footer/Footer";
 import Navigation from "@/layout/Navigation/Navigation";
 import "@/styles/main.scss";
@@ -49,6 +50,7 @@ export default function RootLayout({
                 <meta name="theme-color" content="#000000" />
             </head>
             <body>
+                <CustomCursor />
                 <TooltipProvider>
                     <LenisProvider>
                         {/* <Navigation /> */}
