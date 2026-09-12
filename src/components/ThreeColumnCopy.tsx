@@ -52,6 +52,7 @@ export function ThreeColumnCopy({
                 styleOptions={{
                     includeStars: true,
                 }}
+                className="mb-400 md:mb-700"
             />
 
             <div className="flex flex-col items-center gap-500">

@@ -23,6 +23,17 @@ footer {
     }
 }
 
+.gradient-text {
+    background: linear-gradient(
+        180deg,
+        var(--Black-black-1000, #0b0c0c) -17.74%,
+        var(--New-group-wine-800, #3c2025) 77.34%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .footer {
     &-group {
         // flex: 1;

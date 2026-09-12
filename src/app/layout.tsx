@@ -1,12 +1,15 @@
-import Footer from "@/layout/Footer/Footer";
 import Navigation from "@/layout/Navigation/Navigation";
 import "@/styles/main.scss";
 import "@/styles/tailwind.css";
 import type { Metadata } from "next";
-import { Unbounded } from 'next/font/google';
-import localFont from 'next/font/local';
-import { GlobalTooltip, TooltipProvider } from "../layout/GlobalTooltip/GlobalTooltip";
+import { Unbounded } from "next/font/google";
+import localFont from "next/font/local";
+import {
+    GlobalTooltip,
+    TooltipProvider,
+} from "../layout/GlobalTooltip/GlobalTooltip";
 import LenisProvider from "../utils/LenisProvider";
+import Footer from "@/layout/Footer";
 
 export const metadata: Metadata = {
     title: "Alex & Max | October 31, 2026",
@@ -14,16 +17,26 @@ export const metadata: Metadata = {
         "Join us to celebrate the wedding of Alex & Max on October 31st, 2026 at The Clay Theatre in Green Cove Springs, Florida.",
 };
 
-
-const unbounded = Unbounded({ subsets: ['latin'], variable: '--font-unbounded' });
+const unbounded = Unbounded({
+    subsets: ["latin"],
+    variable: "--font-unbounded",
+});
 
 const respiraBlack = localFont({
     src: [
-        { path: '../../public/fonts/Respira-Black.woff2', weight: '800', style: 'normal' },
-        { path: '../../public/fonts/Respira-Black.woff', weight: '800', style: 'normal' },
+        {
+            path: "../../public/fonts/Respira-Black.woff2",
+            weight: "800",
+            style: "normal",
+        },
+        {
+            path: "../../public/fonts/Respira-Black.woff",
+            weight: "800",
+            style: "normal",
+        },
     ],
-    variable: '--font-respira-black',
-})
+    variable: "--font-respira-black",
+});
 
 export default function RootLayout({
     children,
@@ -31,7 +44,10 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" className={`${unbounded.variable} ${respiraBlack.variable}`}>
+        <html
+            lang="en"
+            className={`${unbounded.variable} ${respiraBlack.variable}`}
+        >
             <head>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link

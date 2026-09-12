@@ -8,12 +8,12 @@ import { ColorVariables } from "@/types/colors";
 
 interface ColumnRowStyleOptions {
     includeStars?: boolean;
-    starColors?: ColorVariables;
+    starColor?: ColorVariables;
 }
 
 const DEFAULT_STYLE_OPTIONS: ColumnRowStyleOptions = {
     includeStars: false,
-    starColors: "--wine-600",
+    starColor: "--wine-600",
 };
 
 const STAR_CLASSES = {
@@ -49,6 +49,7 @@ export default function ColumnRow({
 
     const displayFirstStar =
         displayStars && columnOne && (columnTwo || columnThree);
+
     const displaySecondStar = displayStars && columnTwo && columnThree;
 
     return (
@@ -56,7 +57,7 @@ export default function ColumnRow({
             {...htmlProps}
             ref={mergeRefs(animRef, ref)}
             className={cn(
-                "flex flex-col md:flex-row md:items-center justify-between gap-col-gutter mb-400 md:mb-700",
+                "flex flex-col md:flex-row md:items-center justify-between gap-col-gutter ",
                 className,
             )}
         >
@@ -66,8 +67,8 @@ export default function ColumnRow({
                 <div className="flex items-center gap-2">
                     <Star
                         color={
-                            styleOptions.starColors ??
-                            DEFAULT_STYLE_OPTIONS.starColors
+                            styleOptions.starColor ??
+                            DEFAULT_STYLE_OPTIONS.starColor
                         }
                         className={cn(
                             STAR_CLASSES.default,
@@ -88,8 +89,8 @@ export default function ColumnRow({
 
                     <Star
                         color={
-                            styleOptions.starColors ??
-                            DEFAULT_STYLE_OPTIONS.starColors
+                            styleOptions.starColor ??
+                            DEFAULT_STYLE_OPTIONS.starColor
                         }
                         className={cn(
                             STAR_CLASSES.default,
