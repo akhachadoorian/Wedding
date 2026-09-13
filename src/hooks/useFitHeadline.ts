@@ -67,7 +67,7 @@ export function useFitHeadline({
 
     const headlineStyle: CSSProperties = {
         fontSize,
-        lineHeight: 1,
+        lineHeight: "140%",
         visibility: ready ? "visible" : "hidden",
     };
 
