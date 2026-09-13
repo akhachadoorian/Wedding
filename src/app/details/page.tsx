@@ -26,6 +26,7 @@ import Timeline from "@/components/Timeline/Timeline";
 import FrameCardGrid from "@/components/CardGrid/FrameCardGrid";
 import { AccordionGrid } from "@/components/Accordions/Accordions";
 import { ThreeColumnCopy } from "@/components/ThreeColumnCopy";
+import Star from "@/icons/Star";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -327,6 +328,16 @@ function VenueWatermark({
             className="venue-section base_section"
         >
             <WatermarkText {...content.watermarkVenue} />
+
+            <div className="flex gap-050 md:max-w-[60vw] md:mx-auto">
+                <Star className="size-5" />
+                <p className="text-center italic text-base">
+                    Just a reminder that rideshares, while available to the
+                    venue, will be very difficult to find — if you can even find
+                    one — for the trip back. Please plan accordingly.
+                </p>
+                <Star className="size-5" />
+            </div>
         </section>
     );
 }

@@ -11,6 +11,8 @@ import { useLayoutEffect, useRef } from "react";
 import Button from "../Buttons/Button";
 import "./WatermarkText.scss";
 import { useFitHeadline } from "@/hooks/useFitHeadline";
+import ColumnRow from "../ColumnRow";
+import { ColumnProps } from "../Column";
 
 type Caption = {
     lines: NonEmptyArray<string>;
@@ -21,9 +23,9 @@ export type WatermarkTextProps = WithHTMLProps & {
     watermarkText: string;
     subheader?: string;
     captions?: {
-        left?: Caption;
-        center?: Caption;
-        right?: Caption;
+        left?: ColumnProps;
+        center?: ColumnProps;
+        right?: ColumnProps;
     };
 };
 
@@ -126,50 +128,10 @@ export default function WatermarkText({
             </div>
 
             {captions && (
-                <div className="watermark_text-captions">
-                    {captions.left && <WatermarkCaption {...captions.left} />}
-                    {captions.center && (
-                        <WatermarkCaption {...captions.center} />
-                    )}
-                    {captions.right && <WatermarkCaption {...captions.right} />}
-                </div>
-            )}
-        </div>
-    );
-}
-
-type WatermarkCaptionProps = Caption & WithHTMLProps;
-
-function WatermarkCaption({
-    lines,
-    button,
-    ref,
-    className,
-    ...htmlProps
-}: WatermarkCaptionProps) {
-    return (
-        <div
-            {...htmlProps}
-            ref={ref}
-            className={cn(
-                "flex flex-col justify-between gap-200 md:gap-(--layout-column-gutter) flex-1 border-b border-[#666765] pb-400 md:border-0 md:pb-0 last-of-type:pb-0 last-of-type:border-0",
-                className,
-            )}
-        >
-            <div className="watermark_text-caption-lines flex-1 h-full justify-end">
-                {lines.map((l, idx) => (
-                    <p className="watermark_text-caption-line" key={idx}>
-                        {l}
-                    </p>
-                ))}
-            </div>
-
-            {button && (
-                <Button
-                    className="watermark_text-caption-btn"
-                    btnSettings={button}
-                    colorScheme={BUTTON_STYLE.colorScheme}
-                    variant={BUTTON_STYLE.variation}
+                <ColumnRow
+                    columnOne={{ ...captions.left, orientation: "center" }}
+                    columnTwo={{ ...captions.center, orientation: "center" }}
+                    columnThree={{ ...captions.right, orientation: "center" }}
                 />
             )}
         </div>

@@ -2,14 +2,14 @@ import { ColorVariables } from "@/types/colors";
 import { WithHTMLProps } from "@/types/props";
 import { cn } from "@/utils/cn";
 
-interface StarProps extends WithHTMLProps{
+interface StarProps extends WithHTMLProps {
     color?: ColorVariables;
-    // size: 
+    // size:
 }
 
-export default function Star({color = '--wine-600', className}:StarProps) {
+export default function Star({ color = "--wine-600", className }: StarProps) {
     return (
-        <div className={cn("aspect-square", className)}>
+        <div className={cn("aspect-square grow-0 shrink-0", className)}>
             <svg
                 width="100%"
                 height="100%"

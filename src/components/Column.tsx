@@ -56,13 +56,16 @@ export default function Column({
     ...htmlProps
 }: ColumnProps & WithHTMLProps) {
     return (
-        <div {...htmlProps} className={cn(className)} ref={ref}>
-            <div
-                className={cn(
-                    "flex flex-col gap-050",
-                    ORIENTATION_CLASS_MAP.text[orientation],
-                )}
-            >
+        <div
+            {...htmlProps}
+            className={cn(
+                "flex flex-col justify-between gap-200",
+                ORIENTATION_CLASS_MAP.text[orientation],
+                className,
+            )}
+            ref={ref}
+        >
+            <div className={cn("flex flex-col gap-050")}>
                 {lines &&
                     lines.map((line, idx) => (
                         <p
@@ -72,14 +75,6 @@ export default function Column({
                             {line}
                         </p>
                     ))}
-
-                {button && (
-                    <Button
-                        // variant="outline"
-                        // size={"small"}
-                        btnSettings={button}
-                    />
-                )}
 
                 {links && (
                     <div
@@ -106,6 +101,18 @@ export default function Column({
                     </div>
                 )}
             </div>
+
+            {button && (
+                <Button
+                    variant="outline"
+                    className={cn(
+                        orientation === "center" &&
+                            "justify-center text-center w-full!",
+                    )}
+                    // size={"small"}
+                    btnSettings={button}
+                />
+            )}
         </div>
     );
 }

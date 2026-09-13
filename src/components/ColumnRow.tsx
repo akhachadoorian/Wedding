@@ -67,11 +67,13 @@ export default function ColumnRow({
             {...htmlProps}
             ref={mergeRefs(animRef, ref)}
             className={cn(
-                "flex flex-col md:flex-row md:items-center justify-between gap-col-gutter ",
+                "flex flex-col md:flex-row justify-between gap-col-gutter ",
                 className,
             )}
         >
-            {columnOne && <Column {...columnOne} className="mwc-animate" />}
+            {columnOne && (
+                <Column {...columnOne} className="mwc-animate flex-1" />
+            )}
 
             {displayFirstStar && (
                 <div className="flex items-center gap-2">
@@ -91,7 +93,9 @@ export default function ColumnRow({
                 </div>
             )}
 
-            {columnTwo && <Column {...columnTwo} className="mwc-animate" />}
+            {columnTwo && (
+                <Column {...columnTwo} className="mwc-animate  flex-1" />
+            )}
 
             {displaySecondStar && (
                 <div className="flex items-center gap-2">
@@ -111,7 +115,9 @@ export default function ColumnRow({
                 </div>
             )}
 
-            {columnThree && <Column {...columnThree} className="mwc-animate" />}
+            {columnThree && (
+                <Column {...columnThree} className="mwc-animate  flex-1" />
+            )}
         </div>
     );
 }
