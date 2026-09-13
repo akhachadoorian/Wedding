@@ -28,6 +28,32 @@ export default function LenisProvider({
     return () => gsap.ticker.remove(update)
   }, [])
 
+  // ScrollTrigger caches each trigger's position at creation time. Content
+  // below the fold (images, fonts, the fit-to-width headlines) keeps
+  // resizing after that, which silently stales those positions and can
+  // leave elements — most visibly the footer, since it sits after
+  // everything else on the page — stuck at their pre-animation opacity.
+  // Re-measuring whenever layout actually changes keeps triggers accurate.
+  useEffect(() => {
+    let raf = 0
+    const refresh = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => ScrollTrigger.refresh())
+    }
+
+    window.addEventListener('load', refresh)
+    document.fonts?.ready?.then(refresh)
+
+    const resizeObserver = new ResizeObserver(refresh)
+    resizeObserver.observe(document.body)
+
+    return () => {
+      window.removeEventListener('load', refresh)
+      resizeObserver.disconnect()
+      cancelAnimationFrame(raf)
+    }
+  }, [])
+
   return (
     <ReactLenis
       root

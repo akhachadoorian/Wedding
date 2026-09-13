@@ -55,6 +55,7 @@ export default function Footer({}) {
                         linksClassName: FOOTER_NAV_LINK_CLASSES,
                     }}
                     styleOptions={{ includeStars: true, starColor: "--cream" }}
+                    threshold={0}
                 />
 
                 {/* <div className="flex flex-col md:flex-row items-center md:items-stretch md:justify-between gap-400 md:gap-750 md:max-w-(--max-width) md:mx-auto">

@@ -26,6 +26,14 @@ interface ColumnRowProps extends WithHTMLProps {
     columnTwo?: ColumnProps;
     columnThree?: ColumnProps;
     styleOptions?: ColumnRowStyleOptions;
+    /**
+     * Fraction of the viewport the row must cross before it fades in
+     * (passed through to `useFadeInChildren`). Rows placed at the very
+     * bottom of the page (e.g. the footer) never scroll far enough for
+     * the default threshold's trigger point to become reachable, so
+     * callers there should pass a lower value (e.g. 0).
+     */
+    threshold?: number;
 }
 
 export default function ColumnRow({
@@ -33,6 +41,7 @@ export default function ColumnRow({
     columnTwo,
     columnThree,
     styleOptions = DEFAULT_STYLE_OPTIONS,
+    threshold,
     ref,
     className,
     ...htmlProps
@@ -42,6 +51,7 @@ export default function ColumnRow({
     const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", {
         stagger: 0.15,
         y: 24,
+        threshold,
     });
 
     const displayStars =
