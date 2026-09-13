@@ -95,8 +95,8 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                 }
             >
                 <SlantedSection
-                    ref={rehearsalRef}
-                    sectionPrefix="rehearsal"
+                    ref={dressCodeRef}
+                    sectionPrefix="dress_code"
                     fill={"--wine-800"}
                     slantSettings={{
                         depth: "large",
