@@ -21,6 +21,7 @@ interface UseFitHeadlineOptions {
     fitMode?: FitMode;
     /** Force maxFontSize, overriding both `desktopMax` and `mobileMax` */
     maxFontSize?: number;
+    lineHeight?: string | number;
 }
 
 /**
@@ -55,6 +56,7 @@ export function useFitHeadline({
     lineMode,
     fitMode = "width",
     maxFontSize,
+    lineHeight = "140%",
 }: UseFitHeadlineOptions = {}) {
     const { isMobile, isTablet, ready } = useBreakpoints();
     const mobile = isMobile || isTablet;
@@ -67,7 +69,7 @@ export function useFitHeadline({
 
     const headlineStyle: CSSProperties = {
         fontSize,
-        lineHeight: "140%",
+        lineHeight: lineHeight,
         visibility: ready ? "visible" : "hidden",
     };
 
