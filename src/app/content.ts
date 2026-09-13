@@ -48,6 +48,7 @@ const welcomeWatermarkText: WatermarkTextProps = {
     subheader: "We're getting married",
     captions: {
         left: {
+            orientation: "center",
             lines: ["The Clay Theatre", "Green Cove, Fl"],
             button: {
                 type: "link",
@@ -59,6 +60,7 @@ const welcomeWatermarkText: WatermarkTextProps = {
             },
         },
         center: {
+            orientation: "center",
             lines: ["Doors open at 4:30pm", "Ceremony at 5pm"],
             button: {
                 type: "link",
@@ -70,6 +72,7 @@ const welcomeWatermarkText: WatermarkTextProps = {
             },
         },
         right: {
+            orientation: "center",
             lines: ["RSVP by", "October 1st"],
             button: {
                 type: "link",
@@ -95,10 +98,7 @@ const welcome = {
 const ourStory: PhotoCollageProps = {
     header: "Our Story",
     mainImage: DEFAULT_IMAGE_ENGAGEMENT,
-    leftSideImages: [
-        DEFAULT_IMAGE_MaxAlexJules,
-        DEFAULT_IMAGE_GRADUATION,
-    ],
+    leftSideImages: [DEFAULT_IMAGE_MaxAlexJules, DEFAULT_IMAGE_GRADUATION],
     rightSideImages: [
         {
             ...DEFAULT_IMAGE_MaxHoldingBucky,
@@ -106,7 +106,7 @@ const ourStory: PhotoCollageProps = {
                 desktop: "center 15%",
             },
         },
-        DEFAULT_IMAGE_DISNEY, // 
+        DEFAULT_IMAGE_DISNEY, //
     ],
 };
 
@@ -117,7 +117,7 @@ const qlCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
     // eyebrow: "We've got you covered",
     // header: "Everything from the ceremony to where to stay, all in one place",
     eyebrow: "quick links",
-    header: "Everything you need, in one place"
+    header: "Everything you need, in one place",
 };
 
 const qlCardGrid: CardGridProps = {
