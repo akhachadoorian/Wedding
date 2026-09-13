@@ -65,7 +65,11 @@ export function TwoButtons({
                     <Button
                         key={idx}
                         variant={customVariantMap[idx]}
-                        colorScheme={customColorSchemeMap.kind === 'full' ? customColorSchemeMap.colorScheme.scheme[idx] : customColorSchemeMap.scheme[idx]}
+                        colorScheme={
+                            customColorSchemeMap.kind === "full"
+                                ? customColorSchemeMap.colorScheme.scheme[idx]
+                                : customColorSchemeMap.scheme[idx]
+                        }
                         btnSettings={settings}
                     />
                 );
@@ -99,11 +103,11 @@ export function ThreeButtons({
                     <Button
                         key={idx}
                         variant={customVariantMap[idx]}
-                        colorScheme={customColorSchemeMap.kind === 'full' ? customColorSchemeMap.colorScheme.scheme[idx] : customColorSchemeMap.scheme[idx]}
-                        // colorScheme={resolveColorScheme(
-                        //     customColorSchemeMap,
-                        //     idx,
-                        // )}
+                        colorScheme={
+                            customColorSchemeMap.kind === "full"
+                                ? customColorSchemeMap.colorScheme.scheme[idx]
+                                : customColorSchemeMap.scheme[idx]
+                        }
                         btnSettings={settings}
                     />
                 );

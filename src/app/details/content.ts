@@ -122,6 +122,7 @@ const watermarkVenue: WatermarkTextProps = {
     subheader: "the Venue",
     captions: {
         left: {
+            orientation: "center",
             lines: ["SHUTTLE SERVICE", "FOR CERTAIN HOTELS"],
             button: {
                 type: "link",
@@ -135,6 +136,7 @@ const watermarkVenue: WatermarkTextProps = {
             },
         },
         center: {
+            orientation: "center",
             lines: ["326 Walnut St", "Green Cove Springs, FL 32043"],
             button: {
                 type: "link",
@@ -148,6 +150,7 @@ const watermarkVenue: WatermarkTextProps = {
             },
         },
         right: {
+            orientation: "center",
             lines: ["VENUE PARKING", "INFORMATION"],
             button: {
                 type: "modal",

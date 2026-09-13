@@ -1,7 +1,7 @@
-@use "@/styles/variables" as *;;
+@use "@/styles/variables" as *;
 
-
-.hotels-section {
+.hotels-section,
+.transportation {
     @include section-stack;
 }
 

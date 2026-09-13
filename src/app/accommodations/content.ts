@@ -52,7 +52,7 @@ const hero: Omit<ImageOverlayHeroProps, "loaded" | "styleOptions"> = {
 
 // #endregion
 
-// --- Hotels -----------------------------------------------
+// #region --- Hotels -----------------------------------------------
 
 const hotelsCopyOnly: Omit<CopyOnlyProps, "styleOptions" | "className"> = {
     eyebrow: "Where to Stay",
@@ -204,7 +204,8 @@ const hotels = {
     hotelCards: hotelCards,
 };
 
-// ----- Transportation -----------------------------------------------
+// #endregion
+// #region ----- Transportation -----------------------------------------------
 
 const transportationIntro: SplitInfoProps["intro"] = {
     upperText: {
@@ -306,11 +307,81 @@ const transportation: SplitInfoProps = {
     content: transportationContent,
 };
 
+const transportationCopy: Omit<CopyOnlyProps, "styleOptions"> = {
+    eyebrow: "Getting There",
+    header: "Transportation to & From the Venue",
+    body: "Complimentary shuttle buses will run between the hotels listed above and the venue. If you'd like to take the bus,  please indicate this in your RSVP, along with which hotel you'll be picked up from and returned to, so we can plan accordingly.",
+    buttons: [
+        {
+            type: "modal",
+            text: "Bus Schedule",
+            decoration: {
+                type: "icon",
+                icon: BusIcon,
+            },
+            modalID: "bus_schedule_modal",
+            modalContent: {
+                header: "Bus Schedule",
+                content: [
+                    {
+                        title: "More Information Coming Soon",
+                        body: "A more detailed bus schedule will be available after the RSVPs are complete.",
+                    },
+                    {
+                        title: "To the Venue",
+                        body: "The bus will start picking up guests at 3:30pm. The hotel pick up order wil be available later.",
+                    },
+                    {
+                        title: "Return From the Venue",
+                        body: "The bus will depart from the venue at 10:30pm. The hotel drop off order will be available later.",
+                    },
+                ],
+            },
+        },
+        {
+            type: "modal",
+            text: "Venue parking",
+            decoration: {
+                type: "icon",
+                icon: LetterCirclePIcon,
+            },
+            modalID: "parking_modal",
+            modalContent: {
+                header: "Parking",
+                content: [
+                    {
+                        title: "Grass Lot Parking",
+                        body: "Free parking is available in the grass lot connected to Clay Theatre, conveniently located right next to the venue for easy access.",
+                    },
+                    {
+                        title: "On-Street Parking",
+                        body: "On-street parking and public parking along Spring Park are both available and just a short walk from the venue.",
+                    },
+                    {
+                        title: "City Hall Parking",
+                        body: "City Hall is just across the street from the venue. Per the venue, guests are welcome to park in their lot as the building is closed on Saturdays.",
+                    },
+                ],
+            },
+        },
+        {
+            type: "link",
+            text: "View Venue Details",
+            link: "/details#venue",
+            decoration: {
+                type: "arrow",
+            },
+            target: "_self",
+        },
+    ],
+};
+
+// #endregion
 // ----- Content -----------------------------------------------
 
 const accommodationsContent = {
     hero: hero,
-    transportation: transportation,
+    transportation: transportationCopy,
     hotels: hotels,
 };
 

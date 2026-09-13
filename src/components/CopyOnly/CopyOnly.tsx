@@ -1,6 +1,5 @@
 "use client";
 
-
 import mergeRefs from "../../hooks/mergeRefs";
 import { useFadeInChildren } from "../../hooks/useFadeIn";
 import {
@@ -17,6 +16,7 @@ import { HeadingClassProps, HeadingLevelProps } from "@/types/headings";
 import { THREE_BUTTON_DEFAULTS } from "../Buttons/defaults";
 import "./CopyOnly.scss";
 import { cn } from "@/utils/cn";
+import { BodyClassProps } from "@/types/body";
 
 /**
  * Controls the visual layout and color treatment of the CopyOnly component.
@@ -29,12 +29,19 @@ import { cn } from "@/utils/cn";
  */
 type CopyOnlyStyleProps = {
     variation: "left" | "center" | "columns";
-    headingLevel?: Exclude<HeadingLevelProps, 'h1'>;
-    headingClass?: HeadingClassProps;
+
     eyebrowColor?: ColorVariables;
+
+    headingLevel?: Exclude<HeadingLevelProps, "h1">;
+    headingClass?: HeadingClassProps;
+
+    bodyClass?: BodyClassProps;
+
     starColor?: ColorVariables;
+
     subtitleExtra?: boolean;
     subtitleExtraBorderColor?: ColorVariables;
+
     customBtnVariantMap?: BtnVariantMap<3>;
     customBtnColorSchemeMap?: BtnAnySchemeMap<3>;
 };
@@ -46,8 +53,8 @@ const DEFAULT_STYLE = {
     eyebrowColor: "--cream",
     starColor: "--wine-600",
     subtitleExtra: false,
-    subtitleExtraBorderColor: "--wine-800"
-    // textColor: "light",
+    subtitleExtraBorderColor: "--wine-800",
+    bodyClass: "body-l",
 } satisfies CopyOnlyStyleProps;
 
 /**
@@ -63,7 +70,7 @@ const DEFAULT_STYLE = {
  */
 export type CopyOnlyProps = WithHTMLProps & {
     // Style Options
-    styleOptions: CopyOnlyStyleProps;
+    styleOptions?: CopyOnlyStyleProps;
 
     // Fields
     eyebrow?: string;
@@ -179,15 +186,25 @@ function ColumnsCopyOnly({
             </div>
 
             <div className="copy-right_col">
-                {subtitle && <SubtitleCopyOnly subtitle={subtitle} subtitleExtra={styleOptions.subtitleExtra ?? DEFAULT_STYLE.subtitleExtra} borderColor={styleOptions.subtitleExtraBorderColor ?? DEFAULT_STYLE.subtitleExtraBorderColor} />}
+                {subtitle && (
+                    <SubtitleCopyOnly
+                        subtitle={subtitle}
+                        subtitleExtra={
+                            styleOptions.subtitleExtra ??
+                            DEFAULT_STYLE.subtitleExtra
+                        }
+                        borderColor={
+                            styleOptions.subtitleExtraBorderColor ??
+                            DEFAULT_STYLE.subtitleExtraBorderColor
+                        }
+                    />
+                )}
 
                 {body && (
                     <BodyCopyOnly
                         body={body}
                         bodySize={
-                            styleOptions.headingLevel === "h2"
-                                ? "body-l"
-                                : "body"
+                            styleOptions.bodyClass ?? DEFAULT_STYLE.bodyClass
                         }
                     />
                 )}
@@ -230,15 +247,25 @@ function CenterCopyOnly({
                     />
                 </div>
 
-                {subtitle && <SubtitleCopyOnly subtitle={subtitle} subtitleExtra={styleOptions.subtitleExtra ?? DEFAULT_STYLE.subtitleExtra} borderColor={styleOptions.subtitleExtraBorderColor ?? DEFAULT_STYLE.subtitleExtraBorderColor} />}
+                {subtitle && (
+                    <SubtitleCopyOnly
+                        subtitle={subtitle}
+                        subtitleExtra={
+                            styleOptions.subtitleExtra ??
+                            DEFAULT_STYLE.subtitleExtra
+                        }
+                        borderColor={
+                            styleOptions.subtitleExtraBorderColor ??
+                            DEFAULT_STYLE.subtitleExtraBorderColor
+                        }
+                    />
+                )}
 
                 {body && (
                     <BodyCopyOnly
                         body={body}
                         bodySize={
-                            styleOptions.headingLevel === "h2"
-                                ? "body-l"
-                                : "body"
+                            styleOptions.bodyClass ?? DEFAULT_STYLE.bodyClass
                         }
                     />
                 )}
@@ -280,15 +307,25 @@ function LeftCopyOnly({
                     />
                 </div>
 
-                {subtitle && <SubtitleCopyOnly subtitle={subtitle} subtitleExtra={styleOptions.subtitleExtra ?? DEFAULT_STYLE.subtitleExtra} borderColor={styleOptions.subtitleExtraBorderColor ?? DEFAULT_STYLE.subtitleExtraBorderColor} />}
+                {subtitle && (
+                    <SubtitleCopyOnly
+                        subtitle={subtitle}
+                        subtitleExtra={
+                            styleOptions.subtitleExtra ??
+                            DEFAULT_STYLE.subtitleExtra
+                        }
+                        borderColor={
+                            styleOptions.subtitleExtraBorderColor ??
+                            DEFAULT_STYLE.subtitleExtraBorderColor
+                        }
+                    />
+                )}
 
                 {body && (
                     <BodyCopyOnly
                         body={body}
                         bodySize={
-                            styleOptions.headingLevel === "h2"
-                                ? "body-l"
-                                : "body"
+                            styleOptions.bodyClass ?? DEFAULT_STYLE.bodyClass
                         }
                     />
                 )}
@@ -319,14 +356,14 @@ function EyebrowHeaderCopyOnly({
 
     header,
     headingLevel = "h2",
-    headingClass = "heading-xl"
+    headingClass = "heading-xl",
 }: {
     eyebrow?: string;
     eyebrowVariation?: "left" | "center";
     eyebrowColor?: ColorVariables;
     starColor?: ColorVariables;
     header: string;
-    headingLevel?: Exclude<HeadingLevelProps, 'h1'>;
+    headingLevel?: Exclude<HeadingLevelProps, "h1">;
     headingClass?: HeadingClassProps;
 }) {
     const Heading = headingLevel;
@@ -338,23 +375,45 @@ function EyebrowHeaderCopyOnly({
                     styleOptions={{
                         variation: eyebrowVariation,
                         color: eyebrowColor,
-                        starColor: starColor
+                        starColor: starColor,
                     }}
                     text={eyebrow}
                     className={"mwc-animate"}
                 />
             )}
 
-            <Heading className={`copy-header heading-md mwc-animate ${headingClass}`}>
+            <Heading
+                className={`copy-header heading-md mwc-animate ${headingClass}`}
+            >
                 {header}
             </Heading>
         </>
     );
 }
 
-function SubtitleCopyOnly({ subtitle, subtitleExtra, borderColor }: { subtitle: string, subtitleExtra: boolean, borderColor: ColorVariables }) {
-    console.log("borderColor")
-    return <h4 className={cn("mwc-animate", subtitleExtra ? "subtitle-extra" : "subtitle", )} style={{borderTop: `2px solid var(${borderColor})`,borderBottom: `2px solid var(${borderColor})`}}>{subtitle}</h4>;
+function SubtitleCopyOnly({
+    subtitle,
+    subtitleExtra,
+    borderColor,
+}: {
+    subtitle: string;
+    subtitleExtra: boolean;
+    borderColor: ColorVariables;
+}) {
+    return (
+        <h4
+            className={cn(
+                "mwc-animate",
+                subtitleExtra ? "subtitle-extra" : "subtitle",
+            )}
+            style={{
+                borderTop: `2px solid var(${borderColor})`,
+                borderBottom: `2px solid var(${borderColor})`,
+            }}
+        >
+            {subtitle}
+        </h4>
+    );
 }
 
 function BodyCopyOnly({
@@ -362,7 +421,7 @@ function BodyCopyOnly({
     bodySize = "body",
 }: {
     body: string;
-    bodySize?: "body-l" | "body";
+    bodySize?: BodyClassProps;
 }) {
     const hasHtmlTags = (body: string) => /<[a-z][\s\S]*>/i.test(body);
 
@@ -390,6 +449,7 @@ function BtnsCopyOnly({
     return (
         <ThreeButtons
             className="copy-btns btns mwc-animate"
+            noDecorationMap={true}
             buttons={buttons}
             customVariantMap={customBtnVariantMap}
             customColorSchemeMap={customBtnColorSchemeMap}

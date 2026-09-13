@@ -12,6 +12,8 @@ import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
 import CardGrid from "@/components/CardGrid/CardGrid";
 import ComponentGuard from "@/components/ComponentGuard/ComponentGuard";
 import CopyOnly from "@/components/CopyOnly/CopyOnly";
+import SlantedSection from "@/layout/SlantedSection/SlantedSection";
+import Star from "@/icons/Star";
 
 export default function Accommodations({
     loaded = true,
@@ -64,13 +66,38 @@ export default function Accommodations({
                     />
                 }
             >
-                <section
+                {/* <section
                     id="transportation"
                     className="base_section transportation-section"
                     ref={transportationRef}
                 >
                     <SplitInfo {...content.transportation} />
-                </section>
+                </section> */}
+
+                <SlantedSection
+                    ref={transportationRef}
+                    sectionPrefix="transportation"
+                >
+                    <CopyOnly
+                        {...content.transportation}
+                        styleOptions={{
+                            variation: "center",
+                            headingLevel: "h2",
+                            bodyClass: "body-l",
+                        }}
+                    />
+
+                    <div className="flex gap-050 md:max-w-[45vw] md:mx-auto">
+                        <Star className="size-5" color="--cream" />
+                        <p className="text-center italic body">
+                            Just a reminder that rideshares, while available to
+                            the venue, will be very difficult to find — if you
+                            can even find one — for the trip back. Please plan
+                            accordingly.
+                        </p>
+                        <Star className="size-5" color="--cream" />
+                    </div>
+                </SlantedSection>
             </ComponentGuard>
         </PageGuard>
     );
