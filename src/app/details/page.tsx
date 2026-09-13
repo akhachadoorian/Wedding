@@ -116,20 +116,6 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
 
                     <FrameCardGrid {...content.dressCode.frameCards} />
                 </SlantedSection>
-
-                {/* <section
-                    ref={dressCodeRef}
-                    id="dress_code"
-                    className="dress_code-section base_section"
-                >
-                    <CopyOnly
-                        styleOptions={{
-                            variation: "left",
-                            headingLevel: "h2",
-                        }}
-                        {...content.dressCode.copyOnly}
-                    />
-                </section> */}
             </ComponentGuard>
 
             <ComponentGuard

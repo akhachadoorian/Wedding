@@ -93,7 +93,6 @@
 
         @include big {
             flex: 2 1 710px;
-            
         }
     }
 
@@ -131,73 +130,9 @@
     }
 }
 
-
-
-.timeline-section {
-    @include section-stack;
-}
-
+.timeline-section,
+.faqs-section,
+.dress_code,
 .rehearsal {
     @include section-stack;
-    // &-section {
-    //     @include big {
-    //         position: relative;
-    //         z-index: 2;
-    //     }
-    // }
-
-    // display: flex;
-    // flex-direction: column;
-    // gap: var(--space-600);
-
-    // @include big {
-    //     flex-direction: row;
-    //     gap: 9.583vw;
-    // }
-
-    // &-left {
-    //     @include big {
-    //         flex: 1 1 546px;
-    //         max-width: none;
-    //     }
-    // }
-
-    // &-right {
-    //     display: flex;
-    //     flex-direction: column;
-    //     gap: $space-400;
-
-    //     @include big {
-    //         flex: 1 1 627px;
-    //     }
-
-    //     .btn {
-    //         @include big {
-    //             order: 2;
-    //         }
-    //     }
-    // }
 }
-
-.faqs-section {
-    @include section-stack;
-    // @include big {
-    //     margin-top: -12vw; // TODO: Fix the top margin to hug to the previous block
-    //     position: relative;
-    //     z-index: 1;
-    // }
-}
-
-//  &-frame {
-//         position: absolute;
-//         border: 2px solid $cabernet;
-//         transition: $transition;
-//     }
-
-//  &-frame-a {
-//         inset: calc(#{$space-150} * -1) $space-150 $space-150 calc(#{$space-150} * -1);
-//     }
-
-//     &-frame-b {
-//         inset: $space-150 calc(#{$space-150} * -1) calc(#{$space-150} * -1) $space-150;
-//     }
