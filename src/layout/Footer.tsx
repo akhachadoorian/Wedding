@@ -20,13 +20,14 @@ const FOOTER_NAV_LINK_CLASSES = "text-cream";
 
 export default function Footer({}) {
     const { containerRef, textRef, headlineStyle } = useFitHeadline({
+        lineMode: "single",
         lineHeight: 1,
     });
 
     return (
         <footer ref={containerRef} className="mt-section-padding">
             <h6
-                className="bg-linear-to-b from-black-bg from-[-17.74%] to-cabernet to-[77.34%] bg-clip-text text-transparent text-center -mb-20"
+                className="bg-linear-to-b from-black-bg from-[-17.74%] to-cabernet to-[77.34%] bg-clip-text text-transparent text-center -mb-5 md:-mb-20"
                 ref={textRef}
                 style={headlineStyle}
             >

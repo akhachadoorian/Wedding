@@ -89,7 +89,7 @@ export default function ColumnRow({
                         )}
                     />
 
-                    <div className="w-full h-px bg-burgundy md:hidden"></div>
+                    <div className="w-full h-px bg-cream md:hidden"></div>
                 </div>
             )}
 
@@ -99,7 +99,7 @@ export default function ColumnRow({
 
             {displaySecondStar && (
                 <div className="flex items-center gap-2">
-                    <div className="w-full h-px bg-burgundy  md:hidden"></div>
+                    <div className="w-full h-px bg-cream  md:hidden"></div>
 
                     <Star
                         color={

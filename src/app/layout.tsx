@@ -67,10 +67,9 @@ export default function RootLayout({
             <body>
                 <TooltipProvider>
                     <LenisProvider>
-                        {/* <Navigation /> */}
                         <Navigation />
 
-                        <main>{children}</main>
+                        <main className="min-h-dvh">{children}</main>
 
                         <Footer />
                     </LenisProvider>
