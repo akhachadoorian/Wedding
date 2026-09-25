@@ -4,7 +4,7 @@ import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
 import { TimelineElementProps } from "@/components/Timeline/Timeline";
 import { WatermarkTextProps } from "@/components/WatermarkText/WatermarkText";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
-import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero/ImageOverlayHero";
+import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero";
 import { NonEmptyArray } from "@/types/utility";
 import {
     LetterCirclePIcon,

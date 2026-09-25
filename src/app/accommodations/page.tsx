@@ -3,15 +3,15 @@
 import React from "react";
 import "./Accommodations.scss";
 import content from "./content";
-import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
+import TextOnlyHero from "../../layout/TextOnlyHero";
 import { useFadeIn } from "../../hooks/useFadeIn";
-import ComingSoon, { ComingSoonSection } from "@/layout/ComingSoon/ComingSoon";
+import ComingSoon, { ComingSoonSection } from "@/layout/ComingSoon";
 import PageGuard from "@/components/PageGuard/PageGuard";
-import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
+import ImageOverlayHero from "@/layout/ImageOverlayHero";
 import CardGrid from "@/components/CardGrid/CardGrid";
 import ComponentGuard from "@/components/ComponentGuard/ComponentGuard";
 import CopyOnly from "@/components/CopyOnly/CopyOnly";
-import SlantedSection from "@/layout/SlantedSection/SlantedSection";
+import SlantedSection from "@/layout/SlantedSection";
 import Star from "@/icons/Star";
 
 export default function Accommodations({

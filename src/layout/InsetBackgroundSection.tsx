@@ -1,10 +1,10 @@
 'use client'
 
 import { PropsWithChildren } from "react";
-import { WithHTMLProps } from "../../types/props"
-import { ColorVariables } from "../../types/colors";
-import { BackgroundCustomImageProps } from "../../types/images";
-import generateSectionClass from "../../hooks/generateSectionClass";
+import { WithHTMLProps } from "../types/props"
+import { ColorVariables } from "../types/colors";
+import { BackgroundCustomImageProps } from "../types/images";
+import generateSectionClass from "../hooks/generateSectionClass";
 import { cn } from "@/utils/cn";
 
 

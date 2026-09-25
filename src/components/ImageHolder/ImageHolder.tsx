@@ -4,7 +4,7 @@ import { WithHTMLProps } from "@/types/props";
 import "./ImageHolder.scss";
 import Image from "next/image";
 import { CustomImageProps } from "@/types/images";
-import { useTooltip } from "@/layout/GlobalTooltip/GlobalTooltip";
+import { useTooltip } from "@/layout/GlobalTooltip";
 import { useState, useEffect, useCallback } from "react";
 
 export interface ImageHolderProps extends WithHTMLProps {

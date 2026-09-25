@@ -3,8 +3,8 @@
 import ImageCallout from "@/components/ImageCallout/ImageCallout";
 import PageGuard from "@/components/PageGuard/PageGuard";
 import { useFadeIn } from "@/hooks/useFadeIn";
-import ComingSoon from "@/layout/ComingSoon/ComingSoon";
-import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
+import ComingSoon from "@/layout/ComingSoon";
+import ImageOverlayHero from "@/layout/ImageOverlayHero";
 import "./Registry.scss";
 import content from "./content";
 import CopyOnly from "@/components/CopyOnly/CopyOnly";
