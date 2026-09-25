@@ -5,7 +5,6 @@ import "./Accommodations.scss";
 import content from "./content";
 import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
 import { useFadeIn } from "../../hooks/useFadeIn";
-import SplitInfo from "../../components/SplitInfo/SplitInfo";
 import ComingSoon, { ComingSoonSection } from "@/layout/ComingSoon/ComingSoon";
 import PageGuard from "@/components/PageGuard/PageGuard";
 import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
@@ -66,14 +65,6 @@ export default function Accommodations({
                     />
                 }
             >
-                {/* <section
-                    id="transportation"
-                    className="base_section transportation-section"
-                    ref={transportationRef}
-                >
-                    <SplitInfo {...content.transportation} />
-                </section> */}
-
                 <SlantedSection
                     ref={transportationRef}
                     sectionPrefix="transportation"

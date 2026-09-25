@@ -97,9 +97,6 @@ export const FORM_THANK_YOU = {
 
 // #region --- Errors ---
 
-export const UNABLE_TO_FIND =
-    "We couldn't find any party with that name. Please try again.";
-
 export const NO_GUESTS =
     "Unable to fetch guests. Please try refreshing the page or try again later.";
 // #endregion ---

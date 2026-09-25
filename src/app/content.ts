@@ -6,7 +6,6 @@ import {
     DEFAULT_IMAGE_GRADUATION,
     DEFAULT_IMAGE_MaxAlexJules,
     DEFAULT_IMAGE_MaxHoldingBucky,
-    DEFAULT_IMAGE_SUNGLASSES,
 } from "@/data/defaultImage";
 import { GothHeroProps } from "@/layout/GothHero/GothHero";
 import { CardGridProps } from "@/components/CardGrid/CardGrid";
@@ -31,18 +30,6 @@ const hero: Omit<GothHeroProps, "loaded"> = {
 };
 
 // #region --- Overview --------------------------------
-const welcomeCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
-    eyebrow: "We're getting married",
-    header: "Til Death Do Us Part",
-    buttons: [
-        {
-            type: "link",
-            text: "View Full Details",
-            link: "/details",
-        },
-    ],
-};
-
 const welcomeWatermarkText: WatermarkTextProps = {
     watermarkText: "October 31st",
     subheader: "We're getting married",
@@ -87,7 +74,6 @@ const welcomeWatermarkText: WatermarkTextProps = {
 };
 
 const welcome = {
-    copyOnly: welcomeCopyOnly,
     welcomeWatermarkText: welcomeWatermarkText,
 };
 
