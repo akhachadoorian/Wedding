@@ -20,8 +20,8 @@ export default function ComingSoon({
     const headerText = header ? header : pageTitle ? `The ${pageTitle} page is coming soon!` : "This page is coming soon!";
 
     return (
-            <section className="relative flex items-center justify-center min-h-dvh">
-                <div className="img-holder absolute! z-1 w-full h-[calc(100dvh+var(--space-400))]">
+            <section className="relative flex items-center justify-center min-h-svh">
+                <div className="img-holder absolute! z-1 w-full h-[calc(100svh+var(--space-400))]">
                     <Image src={'/images/DipShot.jpg'} alt={"Max dipping Alex and kissing"} className="img-bw md:object-[center_20%]!" width={696} height={522} />
                     <div className="img-overlay bg-black-bg/80!"></div>
                 </div>

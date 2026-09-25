@@ -24,7 +24,7 @@ const CARET_WRAPPER = "flex items-center justify-center size-[18px] flex-[0_0_18
 const MOBILE_NAV_LINK = "flex justify-between gap-100 px-100 no-underline";
 
 // Classes toggled on <body> while the mobile menu is open to lock page scroll
-const BODY_LOCK_CLASSES = ["overflow-hidden", "h-dvh!"];
+const BODY_LOCK_CLASSES = ["overflow-hidden", "h-svh!"];
 
 function renderNavItem(
     item: NavItem,
@@ -209,7 +209,7 @@ export default function Navigation() {
 
     useEffect(() => {
         BODY_LOCK_CLASSES.forEach((c) => document.body.classList.toggle(c, mobileOpen));
-        // mobileOpen ? lenis?.stop() : lenis?.start();
+        mobileOpen ? lenis?.stop() : lenis?.start();
         return () => {
             document.body.classList.remove(...BODY_LOCK_CLASSES);
             lenis?.start();
@@ -322,7 +322,7 @@ export default function Navigation() {
 
             <div
                 className={cn(
-                    "fixed top-0 left-0 z-5 w-screen h-dvh bg-[var(--black-850)] transition-[opacity,translate] duration-300 ease-in-out md:hidden",
+                    "fixed top-0 left-0 z-5 w-screen h-svh bg-[var(--black-850)] transition-[opacity,translate] duration-300 ease-in-out md:hidden",
                     mobileOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-full pointer-events-none",
                 )}
             >

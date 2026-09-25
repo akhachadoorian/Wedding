@@ -321,6 +321,8 @@ function VenueWatermark({
 }: {
     venueRef?: React.Ref<HTMLDivElement>;
 }) {
+    const noteRef = useFadeIn<HTMLDivElement>();
+
     return (
         <section
             ref={venueRef}
@@ -329,7 +331,10 @@ function VenueWatermark({
         >
             <WatermarkText {...content.watermarkVenue} />
 
-            <div className="flex gap-050 md:max-w-[60vw] md:mx-auto">
+            <div
+                ref={noteRef}
+                className="flex gap-050 md:max-w-[60vw] md:mx-auto"
+            >
                 <Star className="size-5" />
                 <p className="text-center italic text-base">
                     Just a reminder that rideshares, while available to the

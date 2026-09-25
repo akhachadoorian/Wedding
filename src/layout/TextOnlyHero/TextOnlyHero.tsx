@@ -87,9 +87,9 @@ export default function TextOnlyHero({
     return (
         <section
             {...htmlProps}
-            className={cn("relative min-h-dvh w-dvw overflow-hidden", THEME_CLASSES[theme], loaded ? "is-loaded" : "is-hidden")}
+            className={cn("relative min-h-svh w-dvw overflow-hidden", THEME_CLASSES[theme], loaded ? "is-loaded" : "is-hidden")}
         >
-            <div className="relative flex items-center pt-200 pb-400 px-col-margin min-h-[calc(100dvh-var(--space-400)*2)] md:max-w-container md:mx-auto md:py-1500 md:min-h-[calc(100dvh-var(--space-1500)*2)]">
+            <div className="relative flex items-center pt-200 pb-400 px-col-margin min-h-[calc(100svh-var(--space-400)*2)] md:max-w-container md:mx-auto md:py-1500 md:min-h-[calc(100svh-var(--space-1500)*2)]">
                 {variation === "columns" ? (
                     <ColumnsTextOnlyHero
                         eyebrow={eyebrow}

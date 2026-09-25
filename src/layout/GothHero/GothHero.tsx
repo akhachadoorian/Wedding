@@ -15,7 +15,7 @@ import { cn } from "@/utils/cn";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const HERO_HEIGHT = "h-[calc(100dvh+var(--space-400))]";
+const HERO_HEIGHT = "h-[calc(100svh+var(--space-400))]";
 
 const EYEBROW_TEXT =
     "font-sans text-xs font-normal leading-[140%] tracking-[1px] uppercase md:text-md md:tracking-[2px]";
@@ -116,7 +116,7 @@ export default function GothHero({
         <section
             ref={sectionRef}
             {...htmlProps}
-            className={cn("relative flex items-end w-dvw overflow-hidden min-h-[calc(100dvh+var(--space-400))]", className)}
+            className={cn("relative flex items-end w-dvw overflow-hidden min-h-[calc(100svh+var(--space-400))]", className)}
         >
             <ImageHolder
                 className={cn("absolute! z-1 w-full", HERO_HEIGHT)}

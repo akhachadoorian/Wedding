@@ -69,7 +69,7 @@ export default function RootLayout({
                     <LenisProvider>
                         <Navigation />
 
-                        <main className="min-h-dvh">{children}</main>
+                        <main className="min-h-svh">{children}</main>
 
                         <Footer />
                     </LenisProvider>

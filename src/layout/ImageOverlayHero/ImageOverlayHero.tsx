@@ -22,6 +22,8 @@ type ImageOverlayHeroStyleProps = {
     // theme: "default" | "black" | "art-deco-bg";
 };
 
+// Hero heights use `svh`, not `dvh`: dvh changes live as the mobile address bar
+// collapses during scroll, shifting the hero's height mid-gesture.
 const CONTENT_BASE = "flex flex-col justify-center overflow-hidden";
 
 const VARIATION_CLASSES: Record<ImageOverlayHeroStyleProps["variation"], string> = {
@@ -80,10 +82,10 @@ export default function ImageOverlayHero({
         <section
             {...htmlProps}
             ref={mergeRefs(animRef, ref)}
-            className={cn("relative min-h-dvh w-dvw overflow-hidden", loaded ? "is-loaded" : "is-hidden", className)}
+            className={cn("relative min-h-svh w-dvw overflow-hidden", loaded ? "is-loaded" : "is-hidden", className)}
         >
             <ImageHolder
-                className="absolute! z-1 min-h-dvh h-full w-full"
+                className="absolute! z-1 min-h-svh h-full w-full"
                 customOverlayClass="bg-black-bg/70!"
                 ref={imgRef}
                 img={{
@@ -96,7 +98,7 @@ export default function ImageOverlayHero({
                 }}
             />
 
-            <div className="relative z-5 flex h-full min-h-dvh py-1000 px-col-margin md:max-w-container md:m-auto md:py-1500">
+            <div className="relative z-5 flex h-full min-h-svh py-1000 px-col-margin md:max-w-container md:m-auto md:py-1500">
                 {styleOptions?.variation === "columns" ? (
                     <ColumnsImageOverlayHero
                         eyebrow={eyebrow}
