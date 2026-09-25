@@ -9,11 +9,16 @@ import TextWithNewLine from "@/utils/TextWithNewLine";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLayoutEffect, useRef, useState } from "react";
-import "./GothHero.scss";
 import { useFitHeadline } from "@/hooks/useFitHeadline";
 import mergeRefs from "@/hooks/mergeRefs";
+import { cn } from "@/utils/cn";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const HERO_HEIGHT = "h-[calc(100dvh+var(--space-400))]";
+
+const EYEBROW_TEXT =
+    "font-sans text-xs font-normal leading-[140%] tracking-[1px] uppercase md:text-md md:tracking-[2px]";
 
 export type GothHeroProps = WithHTMLProps & {
     loaded: boolean;
@@ -111,10 +116,10 @@ export default function GothHero({
         <section
             ref={sectionRef}
             {...htmlProps}
-            className={` goth_hero ${className ?? ""}`}
+            className={cn("relative flex items-end w-dvw overflow-hidden min-h-[calc(100dvh+var(--space-400))]", className)}
         >
             <ImageHolder
-                className="goth_hero-img"
+                className={cn("absolute! z-1 w-full", HERO_HEIGHT)}
                 ref={imgRef}
                 img={{
                     ...img,
@@ -126,12 +131,12 @@ export default function GothHero({
                 }}
             />
 
-            <div className="goth_hero-text">
+            <div className="relative z-5 w-dvw overflow-hidden pt-200 pb-400 px-col-margin bg-[linear-gradient(180deg,rgba(16,17,17,0)_12.02%,rgba(16,17,17,0.6)_47.12%)]">
                 {eyebrows && (
-                    <div className="goth_hero-text-eyebrow">
+                    <div className="flex justify-between gap-col-gutter mx-auto mb-400 md:max-w-container md:mb-700">
                         {eyebrows.left && (
                             <p
-                                className="goth_hero-text-eyebrow-left"
+                                className={cn(EYEBROW_TEXT, "text-left md:invisible")}
                                 ref={eyebrowLeftRef}
                                 // style={{ visibility: "hidden" }}
                             >
@@ -140,7 +145,7 @@ export default function GothHero({
                         )}
                         {eyebrows.center && (
                             <p
-                                className="goth_hero-text-eyebrow-center"
+                                className={cn(EYEBROW_TEXT, "text-center md:invisible")}
                                 ref={eyebrowCenterRef}
                                 // style={{ visibility: "hidden" }}
                             >
@@ -149,7 +154,7 @@ export default function GothHero({
                         )}
                         {eyebrows.right && (
                             <p
-                                className="goth_hero-text-eyebrow-right"
+                                className={cn(EYEBROW_TEXT, "text-right md:invisible")}
                                 ref={eyebrowRightRef}
                                 // style={{ visibility: "hidden" }}
                             >

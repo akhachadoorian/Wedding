@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
 import Eyebrow from "../../components/Eyebrow/Eyebrow";
@@ -15,11 +15,20 @@ import { DEFAULT_IMAGE } from "@/data/defaultImage";
 import mergeRefs from "@/hooks/mergeRefs";
 import { useFadeInChildren } from "@/hooks/useFadeIn";
 import { CustomImageProps } from "@/types/images";
-import "./ImageOverlayHero.scss";
+import { cn } from "@/utils/cn";
 
 type ImageOverlayHeroStyleProps = {
     variation: "left" | "center" | "columns";
     // theme: "default" | "black" | "art-deco-bg";
+};
+
+const CONTENT_BASE = "flex flex-col justify-center overflow-hidden";
+
+const VARIATION_CLASSES: Record<ImageOverlayHeroStyleProps["variation"], string> = {
+    left: "m-0 md:max-w-[75.833vw] min-[109.375rem]:max-w-[60.417vw]",
+    center: "mx-auto w-full items-center text-center md:max-w-[60.417vw] md:m-auto",
+    columns:
+        "mx-auto w-full gap-300 lg:flex-row lg:justify-between lg:items-center lg:gap-col-gutter min-[109.375rem]:gap-1000",
 };
 
 const DEFAULT_STYLE = {
@@ -71,10 +80,11 @@ export default function ImageOverlayHero({
         <section
             {...htmlProps}
             ref={mergeRefs(animRef, ref)}
-            className={`img_overlay_hero ${loaded ? "is-loaded" : "is-hidden"} ${className ?? ''} `}
+            className={cn("relative min-h-dvh w-dvw overflow-hidden", loaded ? "is-loaded" : "is-hidden", className)}
         >
             <ImageHolder
-                className="img_overlay_hero-img"
+                className="absolute! z-1 min-h-dvh h-full w-full"
+                customOverlayClass="bg-black-bg/70!"
                 ref={imgRef}
                 img={{
                     ...image,
@@ -86,7 +96,7 @@ export default function ImageOverlayHero({
                 }}
             />
 
-            <div className={`img_overlay_hero-wrapper`}>
+            <div className="relative z-5 flex h-full min-h-dvh py-1000 px-col-margin md:max-w-container md:m-auto md:py-1500">
                 {styleOptions?.variation === "columns" ? (
                     <ColumnsImageOverlayHero
                         eyebrow={eyebrow}
@@ -132,7 +142,7 @@ function LeftContentImageOverlayHero({
         <>
             {eyebrow && (
                 <Eyebrow
-                    className={`img_overlay_hero-eyebrow mwc-animate`}
+                    className="mwc-animate"
                     text={eyebrow}
                     styleOptions={{
                         variation: eyebrowVariation ?? "left",
@@ -142,7 +152,7 @@ function LeftContentImageOverlayHero({
                 />
             )}
 
-            <h1 className={`img_overlay_hero-heading mwc-animate`}>{header}</h1>
+            <h1 className="mwc-animate">{header}</h1>
         </>
     );
 }
@@ -151,10 +161,12 @@ function RightContentImageOverlayHero({
     subtitle,
     body,
     buttons,
+    centered = false,
 }: {
     subtitle?: string;
     body?: string;
     buttons?: ThreeButtonsArray;
+    centered?: boolean;
 }) {
     if (!subtitle && !body && !buttons) return;
 
@@ -166,23 +178,18 @@ function RightContentImageOverlayHero({
     //     "burgundy",
     // ];
 
-    const bodyStyle = {
-        "--body-margin-top": subtitle ? "var(--space-300)" : "0px",
-        "--body-margin-top-mobile": subtitle ? "var(--space-200)" : "0px",
-    } as React.CSSProperties;
-
     return (
         <>
             {(subtitle || body) && (
-                <div className="img_overlay_hero-sb">
+                <div className="flex flex-col gap-200 md:gap-300">
                     {subtitle && (
-                        <p className="subtitle-extra img_overlay_hero-subtitle mwc-animate">
+                        <p className="subtitle-extra mwc-animate">
                             {subtitle}
                         </p>
                     )}
 
                     {body && (
-                        <p className="img_overlay_hero-body body mwc-animate">
+                        <p className="body mwc-animate">
                             {body}
                         </p>
                     )}
@@ -191,7 +198,7 @@ function RightContentImageOverlayHero({
 
             {buttons && (
                 <ThreeButtons
-                    className="img_overlay_hero-btns btns mwc-animate"
+                    className={cn("mt-300 md:mt-500 mwc-animate", centered && "justify-center")}
                     noDecorationMap={true}
                     buttons={buttons ?? []}
                     // customColorSchemeMap={customColorSchemeMap}
@@ -223,7 +230,7 @@ function CenterImageOverlayHero({
 }: SubImageOverlayHeroProps) {
     return (
         <div
-            className={`img_overlay_hero-content img_overlay_hero-variation-center`}
+            className={cn(CONTENT_BASE, VARIATION_CLASSES.center)}
         >
             <LeftContentImageOverlayHero
                 eyebrowVariation="center"
@@ -235,6 +242,7 @@ function CenterImageOverlayHero({
                 subtitle={subtitle}
                 body={body}
                 buttons={buttons}
+                centered
             />
         </div>
     );
@@ -249,7 +257,7 @@ function LeftImageOverlayHero({
 }: SubImageOverlayHeroProps) {
     return (
         <div
-            className={`img_overlay_hero-content img_overlay_hero-variation-left`}
+            className={cn(CONTENT_BASE, VARIATION_CLASSES.left)}
         >
             <LeftContentImageOverlayHero
                 eyebrowVariation="left"
@@ -275,9 +283,9 @@ function ColumnsImageOverlayHero({
 }: SubImageOverlayHeroProps) {
     return (
         <div
-            className={`img_overlay_hero-content img_overlay_hero-variation-columns`}
+            className={cn(CONTENT_BASE, VARIATION_CLASSES.columns)}
         >
-            <div className="img_overlay_hero-variation-columns-left">
+            <div className="lg:flex-[2_1_710px]">
                 <LeftContentImageOverlayHero
                     eyebrowVariation="left"
                     eyebrow={eyebrow}
@@ -285,7 +293,7 @@ function ColumnsImageOverlayHero({
                 />
             </div>
             {(subtitle || body || buttons) && (
-                <div className="img_overlay_hero-variation-columns-right">
+                <div className="overflow-hidden lg:flex-[1_1_530px]">
                     <RightContentImageOverlayHero
                         subtitle={subtitle}
                         body={body}

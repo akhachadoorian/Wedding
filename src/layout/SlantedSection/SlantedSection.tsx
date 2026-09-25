@@ -6,7 +6,6 @@ import generateSectionClass from "../../hooks/generateSectionClass";
 import { ColorVariables } from "../../types/colors";
 import { WithHTMLProps } from "../../types/props";
 
-import "./SlantedSection.scss";
 import { cn } from "@/utils/cn";
 
 type SlantedSectionProps = WithHTMLProps &
@@ -35,11 +34,11 @@ export default function SlantedSection({
         className && sectionPrefix ? generateSectionClass({ sectionPrefix: sectionPrefix, className: className }) : className ? className : sectionPrefix ? `${sectionPrefix}-section` : "";
 
     return (
-        <section {...htmlProps} id={id ? id : sectionPrefix ? sectionPrefix : ""} className={`slanted-section ${outerClass}`}>
+        <section {...htmlProps} id={id ? id : sectionPrefix ? sectionPrefix : ""} className={cn("relative", outerClass)}>
             <Slant fill={fill} edge="top" {...slantSettings} className="-mb-1" />
 
-            <div className="slanted-wrapper" style={{ backgroundColor: `var(${fill})` }}>
-                <div className={`slanted ${sectionPrefix ?? ""}`} >
+            <div className="px-col-margin py-section-padding" style={{ backgroundColor: `var(${fill})` }}>
+                <div className={cn("md:max-w-container md:mx-auto", sectionPrefix)}>
                     {children}
                 </div>
             </div>
@@ -48,6 +47,17 @@ export default function SlantedSection({
         </section>
     );
 }
+
+const SLANT_DEPTH: Record<"small" | "large", string> = {
+    small: "aspect-[821/63]",
+    large: "aspect-[619/95]",
+};
+
+// Bottom slants mirror vertically; a flipped slant mirrors horizontally (bottom + flipped cancels out the horizontal mirror)
+const SLANT_TRANSFORM: Record<"top" | "bottom", Record<"default" | "flipped", string>> = {
+    top: { default: "", flipped: "-scale-x-100" },
+    bottom: { default: "-scale-x-100 -scale-y-100", flipped: "-scale-y-100" },
+};
 
 type SlantProps = {
     // props: PropsWithChildren;
@@ -66,11 +76,17 @@ function Slant({
     flipped = false,
     className
 }: SlantProps) {
-    const depthClass = `slant-${depth}`
-    const edgeClass = `slant-${edge}`
-
-
-    return <div className={cn('slant', depthClass, edgeClass, flipped && "slant-flipped", className)} style={{ backgroundColor: `var(${fill})` }}></div>
+    return (
+        <div
+            className={cn(
+                "w-full h-full [clip-path:polygon(0_80%,100%_0,100%_100%,0%_100%)]",
+                SLANT_DEPTH[depth],
+                SLANT_TRANSFORM[edge][flipped ? "flipped" : "default"],
+                className,
+            )}
+            style={{ backgroundColor: `var(${fill})` }}
+        ></div>
+    );
 
     // return <div className={`slant slant-${depth} slant-${edge} ${flipped ? "slant-flipped" : ""}`} style={{ backgroundColor: `var(${fill})` }} />;
 }
