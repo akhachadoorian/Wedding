@@ -1,6 +1,7 @@
 @use "@/styles/variables" as *;
 
-$imgHeight: calc(100dvh + $space-400);
+// `svh`, not `dvh` — see ImageOverlayHero.scss for why.
+$imgHeight: calc(100svh + $space-400);
 
 .goth_hero {
     position: relative;

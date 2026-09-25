@@ -1,7 +1,11 @@
 @use "@/styles/variables" as *;
 @use "@/styles/tokens/typography" as typo;
 
-$imgHeight: 100dvh;
+// `svh` (not `dvh`) deliberately: `dvh` changes live as the mobile address
+// bar shows/hides during a scroll gesture, which shifts this hero's height
+// out from under the user mid-scroll and reads as a jump/snap. `svh` is
+// fixed at the collapsed-chrome size, so it never moves during scroll.
+$imgHeight: 100svh;
 
 .img_overlay_hero {
     position: relative;

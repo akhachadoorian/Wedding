@@ -201,7 +201,7 @@ export default function Navigation() {
 
     useEffect(() => {
         document.body.classList.toggle("mobile-nav-open", mobileOpen);
-        // mobileOpen ? lenis?.stop() : lenis?.start();
+        mobileOpen ? lenis?.stop() : lenis?.start();
         return () => {
             document.body.classList.remove("mobile-nav-open");
             lenis?.start();

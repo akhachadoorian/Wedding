@@ -1,13 +1,15 @@
 @use "@/styles/variables" as *;
 
-$imgHeight: calc(100dvh + $space-400);
+// `svh`, not `dvh` — dvh changes live as the mobile address bar collapses
+// during scroll, shifting this hero's height mid-gesture.
+$imgHeight: calc(100svh + $space-400);
 
 .not_found {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    min-height: 100dvh;
+    min-height: 100svh;
 
     @include big {
         // padding: $space-1500 0;

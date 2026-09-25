@@ -20,7 +20,7 @@ export default function Photos() {
             <section className="base_section photos-section">
                 <div
                     id="wedibox-embed"
-                    className="h-full min-h-[60dvh]"
+                    className="h-full min-h-[60svh]"
                     data-event="dd491f01-c495-4167-be04-874123d28fde"
                 />
                 <Script

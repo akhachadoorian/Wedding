@@ -8,7 +8,7 @@
     left: 0;
 
     width: 100dvw;
-    height: 100dvh;
+    height: 100svh;
 
     display: flex;
     align-items: center;
@@ -34,7 +34,7 @@
         box-shadow: 0 12px 40px rgba(#000, 0.25);
 
         width: min(100%, 34rem);
-        max-height: 85dvh;
+        max-height: 85svh;
 
         display: flex;
         flex-direction: column;

@@ -2,6 +2,7 @@
 
 html {
     height: auto;
+    background-color: var(--black-1000);
 }
 
 body {
@@ -28,7 +29,9 @@ section.base_section {
 
 .photos-section {
     #wedibox-embed iframe {
-        min-height: 80dvh;
+        // `svh`, not `dvh` — dvh changes live as the mobile address bar
+        // collapses during scroll, shifting this height mid-gesture.
+        min-height: 80svh;
         width: 100%;
     }
 }

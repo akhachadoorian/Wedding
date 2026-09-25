@@ -4,7 +4,9 @@
 
 body.mobile-nav-open {
     overflow: hidden;
-    height: 100dvh !important;
+    // `svh`, not `dvh` — avoids the lock height itself shifting if the
+    // browser chrome is mid-transition when the menu opens.
+    height: 100svh !important;
 }
 
 @keyframes fadeDown {
@@ -391,7 +393,7 @@ body.mobile-nav-open {
     z-index: 5;
 
     width: 100vw;
-    height: 100dvh;
+    height: 100svh;
     background-color: var(--black-850);
     opacity: 0;
     transform: translateY(-100%);
