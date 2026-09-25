@@ -1,9 +1,14 @@
+"use client";
+
 import Script from "next/script";
 import PageGuard from "@/components/PageGuard/PageGuard";
 import ComingSoon from "@/layout/ComingSoon/ComingSoon";
 import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
+import { useFadeIn } from "@/hooks/useFadeIn";
 
 export default function Photos() {
+    const photosRef = useFadeIn<HTMLDivElement>();
+
     return (
         <PageGuard
             route="/photos"
@@ -17,7 +22,7 @@ export default function Photos() {
                 body="We only saw our day from one spot, but you saw it from all of them. Upload your favorite photos below, from the ceremony to the last dance, and help us relive every moment."
             />
 
-            <section className="base_section photos-section">
+            <section ref={photosRef} className="base_section photos-section">
                 <div
                     id="wedibox-embed"
                     className="h-full min-h-[60svh]"

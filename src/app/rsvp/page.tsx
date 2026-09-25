@@ -8,8 +8,11 @@ import RSVPForm from "../../components/RSVPForm/RSVPForm";
 import ComingSoon from "@/layout/ComingSoon/ComingSoon";
 import PageGuard from "@/components/PageGuard/PageGuard";
 import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
+import { useFadeIn } from "@/hooks/useFadeIn";
 
 export default function RSVP({ loaded = true }: { loaded?: boolean }) {
+    const rsvpRef = useFadeIn<HTMLDivElement>();
+
     return (
         <PageGuard
             route="/rsvp"
@@ -32,7 +35,7 @@ export default function RSVP({ loaded = true }: { loaded?: boolean }) {
             {/* FIXME: add hero back */}
             <ImageOverlayHero {...content.hero} loaded={loaded} styleOptions={{variation: 'columns'}}/>
 
-            <section className="base_section">
+            <section ref={rsvpRef} className="base_section">
                 {/* <div className="mb-300 text-center">
                     <h2>RSVP</h2>
                 </div> */}
