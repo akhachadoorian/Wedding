@@ -25,7 +25,7 @@
     --gold-1000: #20160b;
 
     // Cream scale
-    --cream: #EBE7DC;
+    --cream: #ebe7dc;
     --cream-100: #f5f2ee;
     --cream-300: #ede9e3;
     --cream-500: #e6e2da;
@@ -48,13 +48,13 @@
     --black-950: #161818;
     --black-1000: #101111;
     //  --black-1000: #000;
-    --gray: #58585A;
+    --gray: #58585a;
 
     // Wine
     --wine-500: #a33e4d;
-    --wine-550: #8E202E;// #800020;
-    --wine-600: #672830; // Burgundy 
-    --wine-650: #59272E;
+    --wine-550: #8e202e; // #800020;
+    --wine-600: #672830; // Burgundy
+    --wine-650: #59272e;
     --wine-700: #4c242a;
     --wine-750: #442227;
     --wine-800: #3c2025; // Cabernet
@@ -73,12 +73,12 @@
     // --info: #6e8ba6;
     // --info-bg: rgba(110, 139, 166, 0.12);
 
-    --max-width: 1600px;
+    --max-width: 1750px;
 }
 
 // ── SCSS variables ────────────────────────────────────────────
 $max-width: var(--max-width);
-$max-width-bp: 1600px; // raw value for use in media queries
+$max-width-bp: 1750px; // raw value for use in media queries
 
 // ──── Fonts ───────────────────────────────────
 

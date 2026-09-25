@@ -12,7 +12,8 @@ export default function Photos() {
             <ImageOverlayHero
                 loaded={true}
                 styleOptions={{ variation: "columns" }}
-                header="Photos & Memories"
+                eyebrow="Photos"
+                header="Moments & Memories"
                 body="We only saw our day from one spot, but you saw it from all of them. Upload your favorite photos below, from the ceremony to the last dance, and help us relive every moment."
             />
 
@@ -20,7 +21,7 @@ export default function Photos() {
                 <div
                     id="wedibox-embed"
                     className="h-full min-h-[60dvh]"
-                    data-event="a5ac8186-254b-4fb3-aa4e-ef4c6bc9f08e"
+                    data-event="dd491f01-c495-4167-be04-874123d28fde"
                 />
                 <Script
                     src="https://embed.wedibox.com/widget.js"

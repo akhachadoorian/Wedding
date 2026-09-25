@@ -1,6 +1,6 @@
-@use '../mixins' as *;
+@use "../mixins" as *;
 
-@use 'sass:math';
+@use "sass:math";
 @use "sass:map";
 
 // breakpoints
@@ -47,7 +47,7 @@ $text-3xl: (
 $text-4xl: (
     min: 42,
     mid: 50,
-    max: 100
+    max: 100,
 );
 $text-5xl: (
     min: 60,
@@ -91,10 +91,30 @@ $text-6xl: (
     --text-xl: #{fluid(map.get($text-xl, min), map.get($text-xl, max))};
     --text-2xl: #{fluid(map.get($text-2xl, min), map.get($text-2xl, max))};
 
-    @include fluid-multi(--text-3xl, map.get($text-3xl, min), map.get($text-3xl, mid), map.get($text-3xl, max));
-    @include fluid-multi(--text-4xl, map.get($text-4xl, min), map.get($text-4xl, mid), map.get($text-4xl, max));
-    @include fluid-multi(--text-5xl, map.get($text-5xl, min), map.get($text-5xl, mid), map.get($text-5xl, max));
-    @include fluid-multi(--text-6xl, map.get($text-6xl, min), map.get($text-6xl, mid), map.get($text-6xl, max));
+    @include fluid-multi(
+        --text-3xl,
+        map.get($text-3xl, min),
+        map.get($text-3xl, mid),
+        map.get($text-3xl, max)
+    );
+    @include fluid-multi(
+        --text-4xl,
+        map.get($text-4xl, min),
+        map.get($text-4xl, mid),
+        map.get($text-4xl, max)
+    );
+    @include fluid-multi(
+        --text-5xl,
+        map.get($text-5xl, min),
+        map.get($text-5xl, mid),
+        map.get($text-5xl, max)
+    );
+    @include fluid-multi(
+        --text-6xl,
+        map.get($text-6xl, min),
+        map.get($text-6xl, mid),
+        map.get($text-6xl, max)
+    );
 }
 
 // $viewport-width: 1440;
@@ -162,4 +182,3 @@ $text-6xl: (
 //     --text-md: #{calcClamp(18, 20, 22)};
 //   }
 // }
-
