@@ -5,7 +5,7 @@ import { LinkSettings, ModalSettings } from "@/types/buttons";
 import { Icon } from "@phosphor-icons/react";
 import { NonEmptyArray } from "@/types/utility";
 import { CardTypeProps, LinkCardsProps } from "./card";
-import ArrowBox, { ARROW_HOVER_GROUP } from "../ArrowBox/ArrowBox";
+import ArrowBox, { ARROW_HOVER_GROUP } from "../ArrowBox";
 import { cn } from "@/utils/cn";
 
 const MINI_CARD =

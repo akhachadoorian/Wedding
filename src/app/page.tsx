@@ -1,12 +1,12 @@
 "use client";
 
-import CopyOnly from "@/components/CopyOnly/CopyOnly";
+import CopyOnly from "@/components/CopyOnly";
 import { useFadeIn } from "@/hooks/useFadeIn";
 import content from "./content";
 
-import PageGuard from "@/components/PageGuard/PageGuard";
-import PhotoCollage from "@/components/PhotoCollage/PhotoCollage";
-import WatermarkText from "@/components/WatermarkText/WatermarkText";
+import PageGuard from "@/components/PageGuard";
+import PhotoCollage from "@/components/PhotoCollage";
+import WatermarkText from "@/components/WatermarkText";
 import GothHero from "../layout/GothHero";
 import "./Home.scss";
 import CardGrid from "@/components/CardGrid/CardGrid";

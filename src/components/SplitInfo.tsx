@@ -1,13 +1,13 @@
 'use client'
 
 import React from "react";
-import { ButtonSettingProps } from "../../types/buttons";
-import { WithHTMLProps } from "../../types/props";
-import { NonEmptyArray } from "../../types/utility";
-import Button from "../Buttons/Button";
-import Eyebrow from "../Eyebrow/Eyebrow";
+import { ButtonSettingProps } from "../types/buttons";
+import { WithHTMLProps } from "../types/props";
+import { NonEmptyArray } from "../types/utility";
+import Button from "./Buttons/Button";
+import Eyebrow from "./Eyebrow";
 
-import { cn } from "../../utils/cn";
+import { cn } from "../utils/cn";
 
 const SIDE = "px-300 py-400 md:flex-[1_1_660px] md:px-700 md:py-600";
 

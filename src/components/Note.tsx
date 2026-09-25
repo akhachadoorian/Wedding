@@ -1,5 +1,5 @@
 import { cn } from "@/utils/cn";
-import Eyebrow from "../Eyebrow/Eyebrow";
+import Eyebrow from "./Eyebrow";
 import { WithHTMLProps } from "@/types/props";
 
 export type NoteProps = WithHTMLProps & {

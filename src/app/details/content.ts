@@ -1,8 +1,8 @@
-import { AccordionGridProps } from "@/components/Accordions/Accordions";
+import { AccordionGridProps } from "@/components/Accordions";
 import { FrameCardGridProps } from "@/components/CardGrid/FrameCardGrid";
-import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
-import { TimelineElementProps } from "@/components/Timeline/Timeline";
-import { WatermarkTextProps } from "@/components/WatermarkText/WatermarkText";
+import { CopyOnlyProps } from "@/components/CopyOnly";
+import { TimelineElementProps } from "@/components/Timeline";
+import { WatermarkTextProps } from "@/components/WatermarkText";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
 import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero";
 import { NonEmptyArray } from "@/types/utility";

@@ -9,7 +9,7 @@ import { WithHTMLProps } from "../../types/props";
 import CenteredModal from "@/components/Modal/CenteredModal";
 import { LinkSettings, ModalSettings } from "@/types/buttons";
 import { useState } from "react";
-import ArrowBox, { ARROW_HOVER_GROUP } from "../ArrowBox/ArrowBox";
+import ArrowBox, { ARROW_HOVER_GROUP } from "../ArrowBox";
 import { cn } from "../../utils/cn";
 import { CardTypeProps } from "./card";
 

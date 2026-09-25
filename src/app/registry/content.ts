@@ -1,5 +1,5 @@
-import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
-import { ImageCalloutProps } from "@/components/ImageCallout/ImageCallout";
+import { CopyOnlyProps } from "@/components/CopyOnly";
+import { ImageCalloutProps } from "@/components/ImageCallout";
 import { DEFAULT_IMAGE, IMAGE_BuckyJules } from "@/data/defaultImage";
 import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero";
 

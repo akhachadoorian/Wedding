@@ -1,6 +1,6 @@
 "use client";
 
-import { WithHTMLProps } from "../../types/props";
+import { WithHTMLProps } from "../types/props";
 
 import mergeRefs from "@/hooks/mergeRefs";
 import { ButtonSettingProps } from "@/types/buttons";
@@ -8,10 +8,10 @@ import { NonEmptyArray } from "@/types/utility";
 import { cn } from "@/utils/cn";
 import gsap from "gsap";
 import { useLayoutEffect, useRef } from "react";
-import Button from "../Buttons/Button";
+import Button from "./Buttons/Button";
 import { useFitHeadline } from "@/hooks/useFitHeadline";
-import ColumnRow from "../ColumnRow";
-import { ColumnProps } from "../Column";
+import ColumnRow from "./ColumnRow";
+import { ColumnProps } from "./Column";
 
 type Caption = {
     lines: NonEmptyArray<string>;

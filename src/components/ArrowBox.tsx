@@ -2,11 +2,11 @@
 
 import React from "react";
 
-import { ColorVariables } from "../../types/colors";
+import { ColorVariables } from "../types/colors";
 import { ArrowUpIcon, ArrowDownIcon, ArrowUpRightIcon, ArrowRightIcon, ArrowLeftIcon, ArrowUpLeftIcon, ArrowDownLeftIcon, ArrowDownRightIcon } from "@phosphor-icons/react";
 
-import { CssColor } from "../../classes/CssColor";
-import { cn } from "../../utils/cn";
+import { CssColor } from "../classes/CssColor";
+import { cn } from "../utils/cn";
 
 const ARROW_MAP = {
     up: ArrowUpIcon,

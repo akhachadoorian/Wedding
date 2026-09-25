@@ -2,7 +2,7 @@ import ComingSoon from "@/layout/ComingSoon";
 
 import "./NotFound.scss";
 import Image from "next/image";
-import Eyebrow from "@/components/Eyebrow/Eyebrow";
+import Eyebrow from "@/components/Eyebrow";
 
 export default function NotFound() {
     return (

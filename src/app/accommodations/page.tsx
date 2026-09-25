@@ -6,11 +6,11 @@ import content from "./content";
 import TextOnlyHero from "../../layout/TextOnlyHero";
 import { useFadeIn } from "../../hooks/useFadeIn";
 import ComingSoon, { ComingSoonSection } from "@/layout/ComingSoon";
-import PageGuard from "@/components/PageGuard/PageGuard";
+import PageGuard from "@/components/PageGuard";
 import ImageOverlayHero from "@/layout/ImageOverlayHero";
 import CardGrid from "@/components/CardGrid/CardGrid";
-import ComponentGuard from "@/components/ComponentGuard/ComponentGuard";
-import CopyOnly from "@/components/CopyOnly/CopyOnly";
+import ComponentGuard from "@/components/ComponentGuard";
+import CopyOnly from "@/components/CopyOnly";
 import SlantedSection from "@/layout/SlantedSection";
 import Star from "@/icons/Star";
 

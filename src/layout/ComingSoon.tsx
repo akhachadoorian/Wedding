@@ -1,6 +1,6 @@
-import CopyOnly from '@/components/CopyOnly/CopyOnly';
+import CopyOnly from '@/components/CopyOnly';
 import GothHero from './GothHero';
-import Eyebrow from '@/components/Eyebrow/Eyebrow';
+import Eyebrow from '@/components/Eyebrow';
 import Image from 'next/image';
 import { WithHTMLProps } from '@/types/props';
 import { cn } from '@/utils/cn';

@@ -15,7 +15,7 @@ import { useFadeInChildren } from "@/hooks/useFadeIn";
 import mergeRefs from "@/hooks/mergeRefs";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ToolTipHoverImageHolder } from "../ImageHolder/ImageHolder";
+import { ToolTipHoverImageHolder } from "./ImageHolder";
 import { useFitHeadline } from "@/hooks/useFitHeadline";
 import { cn } from "@/utils/cn";
 

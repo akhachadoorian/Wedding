@@ -1,19 +1,19 @@
 "use client";
 
-import mergeRefs from "../../hooks/mergeRefs";
-import { useFadeInChildren } from "../../hooks/useFadeIn";
+import mergeRefs from "../hooks/mergeRefs";
+import { useFadeInChildren } from "../hooks/useFadeIn";
 import {
     BtnAnySchemeMap,
     BtnVariantMap,
     ThreeButtonsArray,
-} from "../../types/buttons";
-import { ColorVariables } from "../../types/colors";
-import { WithHTMLProps } from "../../types/props";
-import { ThreeButtons } from "../Buttons/ButtonGroups";
-import Eyebrow from "../Eyebrow/Eyebrow";
+} from "../types/buttons";
+import { ColorVariables } from "../types/colors";
+import { WithHTMLProps } from "../types/props";
+import { ThreeButtons } from "./Buttons/ButtonGroups";
+import Eyebrow from "./Eyebrow";
 
 import { HeadingClassProps, HeadingLevelProps } from "@/types/headings";
-import { THREE_BUTTON_DEFAULTS } from "../Buttons/defaults";
+import { THREE_BUTTON_DEFAULTS } from "./Buttons/defaults";
 import { cn } from "@/utils/cn";
 import { BodyClassProps } from "@/types/body";
 

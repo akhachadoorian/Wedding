@@ -2,7 +2,7 @@ import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero";
 import { BusIcon, LetterCirclePIcon } from "@phosphor-icons/react";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
 import { CardGridProps } from "@/components/CardGrid/CardGrid";
-import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
+import { CopyOnlyProps } from "@/components/CopyOnly";
 
 // #region --- Hero -----------------------------------------------
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowDirectionProps } from "../components/ArrowBox/ArrowBox";
+import { ArrowDirectionProps } from "../components/ArrowBox";
 import { ModalProps } from "@/components/Modal/Modal";
 import { WithA11yProps, WithHTMLProps } from "./props";
 import { NonEmptyMaxX, RequireX } from "./utility";

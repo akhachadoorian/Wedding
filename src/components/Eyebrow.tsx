@@ -2,8 +2,8 @@
 
 import React, { forwardRef } from "react";
 
-import { ColorVariables } from "../../types/colors";
-import Diamond from "../Diamond/Diamond";
+import { ColorVariables } from "../types/colors";
+import Diamond from "./Diamond";
 
 import { WithHTMLProps } from "@/types/props";
 import { cn } from "@/utils/cn";

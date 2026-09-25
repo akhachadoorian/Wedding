@@ -1,18 +1,18 @@
 'use client'
 
-import { DEFAULT_IMAGE } from "../../data/defaultImage";
-import mergeRefs from "../../hooks/mergeRefs";
-import { useFadeInChildren } from "../../hooks/useFadeIn";
-import { ThreeButtonsArray } from "../../types/buttons";
-import { CustomImageProps } from "../../types/images";
-import { WithHTMLProps } from "../../types/props";
-import { ThreeButtons } from "../Buttons/ButtonGroups";
-import Eyebrow from "../Eyebrow/Eyebrow";
+import { DEFAULT_IMAGE } from "../data/defaultImage";
+import mergeRefs from "../hooks/mergeRefs";
+import { useFadeInChildren } from "../hooks/useFadeIn";
+import { ThreeButtonsArray } from "../types/buttons";
+import { CustomImageProps } from "../types/images";
+import { WithHTMLProps } from "../types/props";
+import { ThreeButtons } from "./Buttons/ButtonGroups";
+import Eyebrow from "./Eyebrow";
 import { sub } from "motion/react-client";
 
 import Image from "next/image";
-import ImageHolder from "../ImageHolder/ImageHolder";
-import { cn } from "../../utils/cn";
+import ImageHolder from "./ImageHolder";
+import { cn } from "../utils/cn";
 
 type ImageCalloutStyleProps = {
     variation: "full_width" | "inset" | "slant" | 'slant_inverse';

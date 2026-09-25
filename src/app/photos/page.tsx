@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import PageGuard from "@/components/PageGuard/PageGuard";
+import PageGuard from "@/components/PageGuard";
 import ComingSoon from "@/layout/ComingSoon";
 import ImageOverlayHero from "@/layout/ImageOverlayHero";
 import { useFadeIn } from "@/hooks/useFadeIn";

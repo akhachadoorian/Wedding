@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 
 import { NAV_ITEMS } from "@/data/navItems";
 import type { NavItem, NavDropdown } from "@/types/navigation";
-import ArrowBox from "@/components/ArrowBox/ArrowBox";
+import ArrowBox from "@/components/ArrowBox";
 import { CaretDownIcon } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";

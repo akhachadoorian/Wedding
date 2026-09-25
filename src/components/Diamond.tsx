@@ -2,10 +2,10 @@
 
 import React from "react";
 
-import { ColorVariables } from "../../types/colors";
-import { ResponsiveClampSize } from "../../types/size";
-import { CalculateClamp } from "../../hooks/calculateClamp";
-import { cn } from "../../utils/cn";
+import { ColorVariables } from "../types/colors";
+import { ResponsiveClampSize } from "../types/size";
+import { CalculateClamp } from "../hooks/calculateClamp";
+import { cn } from "../utils/cn";
 
 type DiamondProps = {
     color: ColorVariables;

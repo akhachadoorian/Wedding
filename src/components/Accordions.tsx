@@ -6,7 +6,7 @@ import { NonEmptyArray } from "@/types/utility";
 import { cn } from "@/utils/cn";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
-import Button from "../Buttons/Button";
+import Button from "./Buttons/Button";
 import Star from "@/icons/Star";
 
 type AccordionProps = {

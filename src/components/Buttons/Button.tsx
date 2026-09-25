@@ -17,7 +17,7 @@ import {
     VisualButtonSettings,
     resolveHoverScheme,
 } from "../../types/buttons";
-import ArrowBox, { ARROW_HOVER_GROUP, ArrowDirectionProps } from "../ArrowBox/ArrowBox";
+import ArrowBox, { ARROW_HOVER_GROUP, ArrowDirectionProps } from "../ArrowBox";
 
 import { ColorSchemeMap } from "../../classes/ColorSchemeMap";
 import { CssColor } from "../../classes/CssColor";

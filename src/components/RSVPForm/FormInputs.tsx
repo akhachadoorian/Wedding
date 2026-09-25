@@ -2,7 +2,7 @@ import { cn } from "@/utils/cn";
 import { BTN_TEXT_CLASSES } from "../Buttons/Button";
 import { buttonVariants } from "../Buttons/button.variants";
 import { NonEmptyArray, TextValueOption } from "@/types/utility";
-import Eyebrow from "../Eyebrow/Eyebrow";
+import Eyebrow from "../Eyebrow";
 import React from "react";
 
 // #region -- Yes/No Boolean Switch ---

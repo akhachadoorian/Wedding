@@ -6,7 +6,7 @@ import content from "./content";
 import TextOnlyHero from "../../layout/TextOnlyHero";
 import RSVPForm from "../../components/RSVPForm/RSVPForm";
 import ComingSoon from "@/layout/ComingSoon";
-import PageGuard from "@/components/PageGuard/PageGuard";
+import PageGuard from "@/components/PageGuard";
 import ImageOverlayHero from "@/layout/ImageOverlayHero";
 import { useFadeIn } from "@/hooks/useFadeIn";
 

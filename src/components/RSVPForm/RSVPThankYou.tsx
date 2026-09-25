@@ -1,5 +1,5 @@
 import Button from "@/components/Buttons/Button"
-import Eyebrow from "../Eyebrow/Eyebrow"
+import Eyebrow from "../Eyebrow"
 import { useRSVPForm } from "./RSVPFormContext"
 import { FORM_THANK_YOU } from "./content"
 
