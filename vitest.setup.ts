@@ -11,4 +11,11 @@ afterEach(() => {
 // where `Element` doesn't exist at all.
 if (typeof Element !== "undefined") {
     Element.prototype.scrollIntoView = vi.fn();
+
+    // jsdom does not implement ResizeObserver, which react-use-fittext (via useFitHeadline) needs.
+    globalThis.ResizeObserver ??= class {
+        observe() {}
+        unobserve() {}
+        disconnect() {}
+    } as unknown as typeof ResizeObserver;
 }
