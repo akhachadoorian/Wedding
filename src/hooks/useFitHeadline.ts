@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import type { CSSProperties, RefObject } from "react";
 import { useFitText } from "react-use-fittext";
 import type { FitMode, LineMode } from "react-use-fittext";
@@ -58,14 +59,32 @@ export function useFitHeadline({
     maxFontSize,
     lineHeight = "140%",
 }: UseFitHeadlineOptions = {}) {
-    const { isMobile, isTablet, ready } = useBreakpoints();
+    const { isMobile, isTablet, ready: breakpointReady } = useBreakpoints();
     const mobile = isMobile || isTablet;
+
+    // Custom display fonts load async (font-display: swap), so the very
+    // first fit-text measurement can run against fallback-font metrics.
+    // react-use-fittext caches font-size-per-text/width for 30s with no
+    // "fonts loaded" signal, so a wrong first measurement stays wrong for
+    // a while. Gating on this (see `ready` below, used to withhold the
+    // headline text itself) ensures the real string is never measured
+    // before its font is ready.
+    const [fontsReady, setFontsReady] = useState(false);
+    useEffect(() => {
+        if (!document.fonts?.ready) {
+            setFontsReady(true);
+            return;
+        }
+        document.fonts.ready.then(() => setFontsReady(true));
+    }, []);
 
     const { containerRef, textRef, fontSize } = useFitText({
         fitMode,
         lineMode: lineMode ?? (mobile ? "multi" : "single"),
         maxFontSize: maxFontSize ?? (mobile ? mobileMax : desktopMax),
     });
+
+    const ready = breakpointReady && fontsReady;
 
     const headlineStyle: CSSProperties = {
         fontSize,

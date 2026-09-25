@@ -253,8 +253,8 @@ export default function Navigation() {
     }
 
     return (
-        <header className="absolute top-0 z-100 flex justify-center w-dvw">
-            <div className="relative z-10 w-full px-col-margin py-200 animate-fade-down transition-colors duration-300 ease-in-out md:mx-auto md:max-w-container">
+        <header className="absolute top-0 z-100 flex justify-center w-dvw px-col-margin">
+            <div className="relative z-10 w-full py-200 animate-fade-down transition-colors duration-300 ease-in-out md:mx-auto md:max-w-container">
                 {/* <div className="navigation-upper"> */}
 
                 <nav className="flex items-center justify-between gap-200">

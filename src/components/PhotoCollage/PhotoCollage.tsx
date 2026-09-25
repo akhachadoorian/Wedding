@@ -72,7 +72,7 @@ export default function PhotoCollage({
         y: 24,
     });
 
-    const { containerRef, textRef, headlineStyle } = useFitHeadline();
+    const { containerRef, textRef, headlineStyle, ready } = useFitHeadline();
 
     const headerParallaxRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -118,7 +118,7 @@ export default function PhotoCollage({
                         style={headlineStyle}
                         className="photo_collage-text mwc-animate"
                     >
-                        {header}
+                        {ready && header}
                     </h2>
                 </div>
             )}

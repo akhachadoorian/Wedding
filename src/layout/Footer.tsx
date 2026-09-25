@@ -19,7 +19,7 @@ function toNavLink(item: (typeof NAV_ITEMS)[number]): ColumnLink {
 const FOOTER_NAV_LINK_CLASSES = "text-cream";
 
 export default function Footer({}) {
-    const { containerRef, textRef, headlineStyle } = useFitHeadline({
+    const { containerRef, textRef, headlineStyle, ready } = useFitHeadline({
         lineMode: "single",
         lineHeight: 1,
     });
@@ -31,7 +31,7 @@ export default function Footer({}) {
                 ref={textRef}
                 style={headlineStyle}
             >
-                Till Death
+                {ready && "Till Death"}
             </h6>
 
             <div className="bg-cabernet px-col-margin py-500">

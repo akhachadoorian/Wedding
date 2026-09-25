@@ -108,7 +108,7 @@ export default function GothHero({
         return () => ctx.revert();
     }, []);
 
-    const { containerRef, textRef, headlineStyle } = useFitHeadline({
+    const { containerRef, textRef, headlineStyle, ready } = useFitHeadline({
         lineMode: "single",
     });
 
@@ -174,7 +174,11 @@ export default function GothHero({
                         <h1 ref={maxUseFitText}>Max</h1> */}
 
                     <h1 ref={textRef} style={headlineStyle}>
-                        Alex <span>&</span> Max
+                        {ready && (
+                            <>
+                                Alex <span>&</span> Max
+                            </>
+                        )}
                     </h1>
                 </div>
 

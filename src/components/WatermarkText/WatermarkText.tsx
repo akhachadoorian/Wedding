@@ -52,7 +52,7 @@ export default function WatermarkText({
     const captionCenterRef = useRef<HTMLParagraphElement>(null);
     const captionRightRef = useRef<HTMLParagraphElement>(null);
 
-    const { containerRef, textRef, headlineStyle } = useFitHeadline();
+    const { containerRef, textRef, headlineStyle, ready } = useFitHeadline();
 
     useLayoutEffect(() => {
         const el = wrapperRef.current;
@@ -123,7 +123,7 @@ export default function WatermarkText({
                 ref={mergeRefs(watermarkTextRef, containerRef)}
             >
                 <h2 ref={textRef} style={headlineStyle}>
-                    {watermarkText}
+                    {ready && watermarkText}
                 </h2>
             </div>
 

@@ -37,7 +37,7 @@ export function ThreeColumnCopy({
 
     const { leftCol, centerCol, rightCol } = columnContent;
 
-    const { containerRef, textRef, headlineStyle } = useFitHeadline();
+    const { containerRef, textRef, headlineStyle, ready } = useFitHeadline();
 
     return (
         <div
@@ -65,7 +65,7 @@ export function ThreeColumnCopy({
                         style={headlineStyle}
                         className="mwc-animate"
                     >
-                        {header}
+                        {ready && header}
                     </h2>
 
                     {body && <p className="body-l mwc-animate">{body}</p>}

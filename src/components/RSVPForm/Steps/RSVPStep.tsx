@@ -76,7 +76,7 @@ function RSVPStepTextCentered({
     className,
     ...htmlProps
 }: RSVPStepTextProps) {
-    const { containerRef, textRef, headlineStyle } = useFitHeadline({
+    const { containerRef, textRef, headlineStyle, ready } = useFitHeadline({
         desktopMax: stepNumber === 1 ? 250 : 400,
         mobileMax: 100,
         // lineMode: "multi",
@@ -109,7 +109,7 @@ function RSVPStepTextCentered({
                     ref={textRef}
                     style={headlineStyle}
                 >
-                    {title}
+                    {ready && title}
                 </h2>
             </div>
 
