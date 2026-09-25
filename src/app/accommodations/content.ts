@@ -1,4 +1,4 @@
-import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero/ImageOverlayHero";
+import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero";
 import { BusIcon, LetterCirclePIcon } from "@phosphor-icons/react";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
 import { CardGridProps } from "@/components/CardGrid/CardGrid";

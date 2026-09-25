@@ -7,7 +7,7 @@ import {
     DEFAULT_IMAGE_MaxAlexJules,
     DEFAULT_IMAGE_MaxHoldingBucky,
 } from "@/data/defaultImage";
-import { GothHeroProps } from "@/layout/GothHero/GothHero";
+import { GothHeroProps } from "@/layout/GothHero";
 import { CardGridProps } from "@/components/CardGrid/CardGrid";
 import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
 

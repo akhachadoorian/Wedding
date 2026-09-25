@@ -2,9 +2,9 @@
 
 import { createContext, Dispatch, SetStateAction, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
-import ArrowBox from '../../components/ArrowBox/ArrowBox';
-import type { ArrowDirectionProps } from '../../components/ArrowBox/ArrowBox';
-import type { ColorVariables } from '../../types/colors';
+import ArrowBox from '../components/ArrowBox/ArrowBox';
+import type { ArrowDirectionProps } from '../components/ArrowBox/ArrowBox';
+import type { ColorVariables } from '../types/colors';
 import { cn } from '@/utils/cn';
 
 type TextContent      = { type: 'text';       caption: string };

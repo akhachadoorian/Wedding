@@ -5,7 +5,7 @@ import {
     DEFAULT_IMAGE_GRADUATION,
     DEFAULT_IMAGE_SUNGLASSES,
 } from "@/data/defaultImage";
-import { useTooltip } from "@/layout/GlobalTooltip/GlobalTooltip";
+import { useTooltip } from "@/layout/GlobalTooltip";
 import { CustomImageProps } from "@/types/images";
 import { WithHTMLProps } from "@/types/props";
 import { RequireX } from "@/types/utility";

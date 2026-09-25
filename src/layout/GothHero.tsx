@@ -1,6 +1,6 @@
 "use client";
 
-import { WithHTMLProps } from "../../types/props";
+import { WithHTMLProps } from "../types/props";
 
 import ImageHolder from "@/components/ImageHolder/ImageHolder";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";

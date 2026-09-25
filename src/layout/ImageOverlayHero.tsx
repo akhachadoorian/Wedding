@@ -2,13 +2,13 @@
 
 import { useRef, useState } from "react";
 
-import { ThreeButtons } from "../../components/Buttons/ButtonGroups";
-import Eyebrow from "../../components/Eyebrow/Eyebrow";
+import { ThreeButtons } from "../components/Buttons/ButtonGroups";
+import Eyebrow from "../components/Eyebrow/Eyebrow";
 import {
     BtnSchemeMap,
     ThreeButtonsArray
-} from "../../types/buttons";
-import { WithHTMLProps } from "../../types/props";
+} from "../types/buttons";
+import { WithHTMLProps } from "../types/props";
 
 import ImageHolder from "@/components/ImageHolder/ImageHolder";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";

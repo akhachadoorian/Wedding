@@ -1,4 +1,4 @@
-import Navigation from "@/layout/Navigation/Navigation";
+import Navigation from "@/layout/Navigation";
 import "@/styles/main.scss";
 import "@/styles/tailwind.css";
 import type { Metadata } from "next";
@@ -7,7 +7,7 @@ import localFont from "next/font/local";
 import {
     GlobalTooltip,
     TooltipProvider,
-} from "../layout/GlobalTooltip/GlobalTooltip";
+} from "../layout/GlobalTooltip";
 import LenisProvider from "../utils/LenisProvider";
 import Footer from "@/layout/Footer";
 

@@ -1,5 +1,5 @@
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
-import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero/ImageOverlayHero";
+import { ImageOverlayHeroProps } from "@/layout/ImageOverlayHero";
 
 // #region --- Hero --------------------------------------------------
 

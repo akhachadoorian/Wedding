@@ -2,9 +2,9 @@
 
 import { PropsWithChildren } from "react";
 
-import generateSectionClass from "../../hooks/generateSectionClass";
-import { ColorVariables } from "../../types/colors";
-import { WithHTMLProps } from "../../types/props";
+import generateSectionClass from "../hooks/generateSectionClass";
+import { ColorVariables } from "../types/colors";
+import { WithHTMLProps } from "../types/props";
 
 import { cn } from "@/utils/cn";
 

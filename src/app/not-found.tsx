@@ -1,4 +1,4 @@
-import ComingSoon from "@/layout/ComingSoon/ComingSoon";
+import ComingSoon from "@/layout/ComingSoon";
 
 import "./NotFound.scss";
 import Image from "next/image";

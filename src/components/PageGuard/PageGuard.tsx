@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { PAGE_STATUS } from "@/app/pageStatus";
-import ComingSoon from "@/layout/ComingSoon/ComingSoon";
+import ComingSoon from "@/layout/ComingSoon";
 
 type PageGuardProps = {
     route: string;

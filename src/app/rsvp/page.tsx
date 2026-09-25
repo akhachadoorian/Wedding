@@ -3,11 +3,11 @@
 import React from "react";
 import "./RSVP.scss";
 import content from "./content";
-import TextOnlyHero from "../../layout/TextOnlyHero/TextOnlyHero";
+import TextOnlyHero from "../../layout/TextOnlyHero";
 import RSVPForm from "../../components/RSVPForm/RSVPForm";
-import ComingSoon from "@/layout/ComingSoon/ComingSoon";
+import ComingSoon from "@/layout/ComingSoon";
 import PageGuard from "@/components/PageGuard/PageGuard";
-import ImageOverlayHero from "@/layout/ImageOverlayHero/ImageOverlayHero";
+import ImageOverlayHero from "@/layout/ImageOverlayHero";
 import { useFadeIn } from "@/hooks/useFadeIn";
 
 export default function RSVP({ loaded = true }: { loaded?: boolean }) {

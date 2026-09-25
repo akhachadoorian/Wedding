@@ -7,7 +7,7 @@ import content from "./content";
 import PageGuard from "@/components/PageGuard/PageGuard";
 import PhotoCollage from "@/components/PhotoCollage/PhotoCollage";
 import WatermarkText from "@/components/WatermarkText/WatermarkText";
-import GothHero from "../layout/GothHero/GothHero";
+import GothHero from "../layout/GothHero";
 import "./Home.scss";
 import CardGrid from "@/components/CardGrid/CardGrid";
 
