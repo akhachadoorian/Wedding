@@ -7,7 +7,7 @@ import Eyebrow from "../../components/Eyebrow/Eyebrow";
 import { BtnSchemeMap, ThreeButtonsArray } from "../../types/buttons";
 import { WithHTMLProps } from "../../types/props";
 
-import "./TextOnlyHero.scss";
+import { cn } from "@/utils/cn";
 
 type TextOnlyHeroThemes = "default" | "black" | "black_gradient";
 
@@ -23,6 +23,20 @@ const DEFAULT_STYLE = {
     theme: "default",
     // inset: false,
 } satisfies TextOnlyHeroStyleProps;
+
+const THEME_CLASSES: Record<TextOnlyHeroThemes, string> = {
+    default: "",
+    black: "bg-black",
+    black_gradient: "bg-linear-to-b from-[var(--black-850)] to-black-bg",
+};
+
+const CONTENT_BASE = "flex flex-col justify-center overflow-hidden";
+
+const VARIATION_CLASSES: Record<NonNullable<TextOnlyHeroStyleProps["variation"]>, string> = {
+    left: "md:max-w-[75.833vw] min-[109.375rem]:max-w-[60.417vw]",
+    center: "mx-auto text-center md:max-w-[60.417vw] md:m-auto",
+    columns: "mx-auto md:flex-row md:items-center md:gap-col-gutter min-[109.375rem]:gap-1000",
+};
 
 // FIXME:
 const THEME_COLOR_MAPS: Record<TextOnlyHeroThemes, BtnSchemeMap<3>> = {
@@ -73,9 +87,9 @@ export default function TextOnlyHero({
     return (
         <section
             {...htmlProps}
-            className={`text_only_hero text_only_hero-theme-${theme} ${loaded ? "is-loaded" : "is-hidden"} `}
+            className={cn("relative min-h-svh w-dvw overflow-hidden", THEME_CLASSES[theme], loaded ? "is-loaded" : "is-hidden")}
         >
-            <div className={`text_only_hero-wrapper`}>
+            <div className="relative flex items-center pt-200 pb-400 px-col-margin min-h-[calc(100svh-var(--space-400)*2)] md:max-w-container md:mx-auto md:py-1500 md:min-h-[calc(100svh-var(--space-1500)*2)]">
                 {variation === "columns" ? (
                     <ColumnsTextOnlyHero
                         eyebrow={eyebrow}
@@ -124,13 +138,12 @@ function LeftContentTextOnlyHero({
         <>
             {eyebrow && (
                 <Eyebrow
-                    className={`text_only_hero-eyebrow`}
                     text={eyebrow}
                     styleOptions={{ variation: eyebrowVariation ?? "left" }}
                 />
             )}
 
-            <h1 className={`text_only_hero-header`}>{header}</h1>
+            <h1>{header}</h1>
         </>
     );
 }
@@ -140,27 +153,29 @@ function RightContentTextOnlyHero({
     body,
     buttons,
     theme,
+    variation,
 }: {
     subtitle?: string;
     body?: string;
     buttons?: ThreeButtonsArray;
     theme: TextOnlyHeroThemes;
+    variation: NonNullable<TextOnlyHeroStyleProps["variation"]>;
 }) {
     if (!subtitle && !body && !buttons) return;
 
     return (
         <>
             {subtitle && (
-                <p className="subtitle-extra text_only_hero-subtitle">
+                <p className={cn("subtitle-extra mt-300", variation === "center" && "mx-auto", variation === "columns" && "md:mt-0")}>
                     {subtitle}
                 </p>
             )}
 
-            {body && <p className="text_only_hero-body body-l">{body}</p>}
+            {body && <p className="mt-300 body-l">{body}</p>}
 
             {buttons && (
                 <ThreeButtons
-                    className="text_only_hero-btns btns"
+                    className={cn("mt-500", variation === "center" && "justify-center")}
                     noDecorationMap={true}
                     buttons={buttons ?? []}
                     customColorSchemeMap={THEME_COLOR_MAPS[theme]}
@@ -193,7 +208,7 @@ function CenterTextOnlyHero({
 }: SubTextOnlyHeroProps) {
     return (
         <div
-            className={`text_only_hero-content text_only_hero-variation-center`}
+            className={cn(CONTENT_BASE, VARIATION_CLASSES.center)}
         >
             <LeftContentTextOnlyHero
                 eyebrowVariation="center"
@@ -206,6 +221,7 @@ function CenterTextOnlyHero({
                 body={body}
                 buttons={buttons}
                 theme={theme}
+                variation="center"
             />
         </div>
     );
@@ -220,7 +236,7 @@ function LeftTextOnlyHero({
     theme,
 }: SubTextOnlyHeroProps) {
     return (
-        <div className={`text_only_hero-content text_only_hero-variation-left`}>
+        <div className={cn(CONTENT_BASE, VARIATION_CLASSES.left)}>
             <LeftContentTextOnlyHero
                 eyebrowVariation="left"
                 eyebrow={eyebrow}
@@ -232,6 +248,7 @@ function LeftTextOnlyHero({
                 body={body}
                 buttons={buttons}
                 theme={theme}
+                variation="left"
             />
         </div>
     );
@@ -247,9 +264,9 @@ function ColumnsTextOnlyHero({
 }: SubTextOnlyHeroProps) {
     return (
         <div
-            className={`text_only_hero-content text_only_hero-variation-columns`}
+            className={cn(CONTENT_BASE, VARIATION_CLASSES.columns)}
         >
-            <div className="text_only_hero-variation-columns-left">
+            <div className="md:flex-[2_1_760px]">
                 <LeftContentTextOnlyHero
                     eyebrowVariation="left"
                     eyebrow={eyebrow}
@@ -257,12 +274,13 @@ function ColumnsTextOnlyHero({
                 />
             </div>
             {(subtitle || body || buttons) && (
-                <div className="text_only_hero-variation-columns-right">
+                <div className="md:flex-[1_1_530px]">
                     <RightContentTextOnlyHero
                         subtitle={subtitle}
                         body={body}
                         buttons={buttons}
                         theme={theme}
+                        variation="columns"
                     />
                 </div>
             )}

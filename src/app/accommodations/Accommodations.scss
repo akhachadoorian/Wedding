@@ -5,7 +5,7 @@
     @include section-stack;
 }
 
-.accommodations_hero.img_overlay_hero {
+.accommodations_hero {
     h1 {
         @include small {
             font-size: 48px !important;

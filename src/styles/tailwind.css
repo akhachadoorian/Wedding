@@ -76,6 +76,48 @@
     --width-content: var(--layout-content-width);
 
     --max-width-container: var(--layout-container-max-width);
+
+    /* Animations */
+    --animate-fade-down: fade-down 0.8s 0.2s ease both;
+    --animate-tooltip-in: tooltip-in 0.12s ease forwards;
+
+    @keyframes fade-down {
+        from {
+            opacity: 0;
+            transform: translateY(-8px);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes tooltip-in {
+        from {
+            opacity: 0;
+            transform: translateY(3px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/*
+ * Slides a descendant ArrowBox's arrow on hover (mirrors $arrow-hover-transforms in
+ * src/components/ArrowBox/_arrow-tokens.scss). !important is needed because ArrowBox.scss
+ * is unlayered and would otherwise always beat this utility layer rule.
+ */
+@utility arrow-hover {
+    &:hover .arrow_box-grid.top-right { transform: translate(0, calc(-1 * var(--arrow-inner-size))) !important; }
+    &:hover .arrow_box-grid.top-left { transform: translate(calc(-1 * var(--arrow-inner-size)), calc(-1 * var(--arrow-inner-size))) !important; }
+    &:hover .arrow_box-grid.bottom-right { transform: translate(0, 0) !important; }
+    &:hover .arrow_box-grid.bottom-left { transform: translate(calc(-1 * var(--arrow-inner-size)), 0) !important; }
+    &:hover .arrow_box-grid.right { transform: translate(0, 0) !important; }
+    &:hover .arrow_box-grid.left { transform: translate(calc(-1 * var(--arrow-inner-size)), 0) !important; }
+    &:hover .arrow_box-grid.up { transform: translate(0, calc(-1 * var(--arrow-inner-size))) !important; }
+    &:hover .arrow_box-grid.down { transform: translate(0, 0) !important; }
 }
 
 /*

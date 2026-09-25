@@ -1,6 +1,5 @@
 import CopyOnly from '@/components/CopyOnly/CopyOnly';
 import GothHero from '../GothHero/GothHero';
-import './ComingSoon.scss'
 import Eyebrow from '@/components/Eyebrow/Eyebrow';
 import Image from 'next/image';
 import { WithHTMLProps } from '@/types/props';
@@ -21,18 +20,18 @@ export default function ComingSoon({
     const headerText = header ? header : pageTitle ? `The ${pageTitle} page is coming soon!` : "This page is coming soon!";
 
     return (
-            <section className={`coming_soon`}>
-                <div className="img-holder coming_soon-img">
-                    <Image src={'/images/DipShot.jpg'} alt={"Max dipping Alex and kissing"} className="img-bw" width={696} height={522} />
-                    <div className="img-overlay"></div>
+            <section className="relative flex items-center justify-center min-h-svh">
+                <div className="img-holder absolute! z-1 w-full h-[calc(100svh+var(--space-400))]">
+                    <Image src={'/images/DipShot.jpg'} alt={"Max dipping Alex and kissing"} className="img-bw md:object-[center_20%]!" width={696} height={522} />
+                    <div className="img-overlay bg-black-bg/80!"></div>
                 </div>
     
-                <div className="coming_soon-text">
+                <div className="relative z-5 flex flex-col items-center text-center overflow-hidden pt-200 pb-400 px-col-margin md:max-w-container md:m-auto md:py-1500">
                     {pageTitle && <Eyebrow text={pageTitle} styleOptions={{variation: 'center', includeMargin: true}}/>}
 
-                    <h1 className='coming_soon-header'>{headerText}</h1>
+                    <h1 className='w-full'>{headerText}</h1>
                     
-                    {body && <p className='coming_soon-body body-l'>{body}</p>}
+                    {body && <p className='mt-300 body-l'>{body}</p>}
                 </div>
             </section>
         );
@@ -62,7 +61,7 @@ export function ComingSoonSection({eyebrow, title, body, theme = 'cabernet', cla
 
     return (
         <section className={
-            cn("coming_soon_section", THEME_MAP[theme], className)}>
+            cn("text-center px-col-margin py-section-padding my-section-padding mx-auto", THEME_MAP[theme], className)}>
             <CopyOnly eyebrow={eyebrow} header={title} body={body} styleOptions={{variation: 'center', headingLevel: 'h2', headingClass: 'heading-l'}} />
         </section>
     )

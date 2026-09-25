@@ -5,7 +5,7 @@ import type { ReactNode } from 'react';
 import ArrowBox from '../../components/ArrowBox/ArrowBox';
 import type { ArrowDirectionProps } from '../../components/ArrowBox/ArrowBox';
 import type { ColorVariables } from '../../types/colors';
-import './GlobalTooltip.scss';
+import { cn } from '@/utils/cn';
 
 type TextContent      = { type: 'text';       caption: string };
 type ArrowContent     = { type: 'arrow';      arrowDirection?: ArrowDirectionProps; color?: ColorVariables };
@@ -79,13 +79,16 @@ export function GlobalTooltip() {
     const { tooltip } = useContext(TooltipContext);
     if (!tooltip) return null;
 
-    const modifierClass =
-        tooltip.type === 'arrow'      ? ' global-tooltip--arrow' :
-        tooltip.type === 'text-arrow' ? ' global-tooltip--text-arrow' : '';
 
     return (
         <div
-            className={`global-tooltip${modifierClass}`}
+            className={cn(
+                'fixed z-9999 pointer-events-none animate-tooltip-in',
+                'bg-black text-[color:var(--cream-500)] font-sans text-xs font-semibold leading-normal tracking-[0.6px] uppercase text-center',
+                'px-150 py-075 max-w-[35vw] rounded-[6px] border border-white/8 shadow-[0_4px_16px_rgba(0,0,0,0.5)]',
+                tooltip.type === 'arrow' && 'bg-transparent border-0 shadow-none p-0 rounded-none max-w-none',
+                tooltip.type === 'text-arrow' && 'flex items-center gap-150 max-w-none',
+            )}
             style={{
                 left: Math.min(tooltip.x + 14, window.innerWidth * 0.8),
                 top: Math.min(tooltip.y + 14, window.innerHeight - 48),
