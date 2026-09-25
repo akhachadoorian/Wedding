@@ -23,6 +23,18 @@ interface UseFitHeadlineOptions {
     /** Force maxFontSize, overriding both `desktopMax` and `mobileMax` */
     maxFontSize?: number;
     lineHeight?: string | number;
+    /**
+     * Fraction of the fitted font size actually applied @default 0.95
+     * react-use-fittext measures against an off-screen clone, and its
+     * binary search converges to within half a pixel of the container
+     * width. Display fonts with swashes/ligatures (e.g. our blackletter
+     * headline font) can render a hair wider live than on the clone, so
+     * fitting flush to the edge intermittently trips the library's
+     * single-line `text-overflow: ellipsis` fallback and clips a
+     * character. This headroom keeps the fit comfortably inside the
+     * container instead of relying on that fallback never firing.
+     */
+    safetyMargin?: number;
 }
 
 /**
@@ -58,6 +70,7 @@ export function useFitHeadline({
     fitMode = "width",
     maxFontSize,
     lineHeight = "140%",
+    safetyMargin = 0.95,
 }: UseFitHeadlineOptions = {}) {
     const { isMobile, isTablet, ready: breakpointReady } = useBreakpoints();
     const mobile = isMobile || isTablet;
@@ -87,7 +100,8 @@ export function useFitHeadline({
     const ready = breakpointReady && fontsReady;
 
     const headlineStyle: CSSProperties = {
-        fontSize,
+        fontSize:
+            typeof fontSize === "number" ? fontSize * safetyMargin : fontSize,
         lineHeight: lineHeight,
         visibility: ready ? "visible" : "hidden",
     };
