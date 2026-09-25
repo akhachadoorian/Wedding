@@ -8,7 +8,6 @@ import useGuests from "../../hooks/useGuests";
 import { WithHTMLProps } from "../../types/props";
 
 import Button from "@/components/Buttons/Button";
-import "./RSVPForm.scss";
 import { RSVPFormProvider, useRSVPForm } from "./RSVPFormContext";
 import StepTwo from "./Steps/AttendWedding";
 import { GuestParty, RSVPDraft } from "./types";
@@ -17,6 +16,7 @@ import RSVPThankYou from "./RSVPThankYou";
 import StepFour from "./Steps/Transportation";
 import StepFive from "./Steps/AttendRehearsalMixer";
 import Star from "@/icons/Star";
+import { cn } from "@/utils/cn";
 import { RenderSteps } from "./Steps/RSVPStep";
 
 // TODO: after rsvp date close
@@ -73,7 +73,7 @@ export default function RSVPForm({
     }
 
     return (
-        <div ref={formRef} {...htmlProps} className={`rsvp_form  ${className ?? ""}`}>
+        <div ref={formRef} {...htmlProps} className={cn("relative z-50 flex flex-col gap-1000", className)}>
             {/* <RSVPProgressBar texts={progressBar} currStep={step} /> */}
 
             {guestsLoading ? (
@@ -91,7 +91,7 @@ export default function RSVPForm({
                                 animate="center"
                                 exit="exit"
                                 transition={{ duration: 0.28, ease: "easeOut" }}
-                                className="rsvp_form-steps [grid-area:1/1]"
+                                className="[grid-area:1/1]"
                             >
                                 <RenderSteps step={step} />
                             </motion.div>
@@ -109,8 +109,8 @@ export default function RSVPForm({
 
 function RSVPStepLoading({ loadingText }: { loadingText?: string }) {
     return (
-        <div className="rsvp_form-status flex min-h-[220px] flex-col items-center justify-center gap-300">
-            <div className="size-14 rsvp_star_spin">
+        <div className="animate-rsvp-status-in flex min-h-[220px] flex-col items-center justify-center gap-300">
+            <div className="size-14 animate-[spin_1.4s_linear_infinite]">
                 <Star color="--wine-500" />
             </div>
 
@@ -133,7 +133,7 @@ type RSVPFormErrorProps = {
 
 export function RSVPFormError({ errorMessage, onRetry }: RSVPFormErrorProps) {
     return (
-        <div className="rsvp_form-status flex flex-col items-center gap-200 text-center">
+        <div className="animate-rsvp-status-in flex flex-col items-center gap-200 text-center">
             <WarningIcon size={56} weight="bold" color="var(--wine-500)" />
 
             <h3 className="heading-l">An Error has Occurred</h3>

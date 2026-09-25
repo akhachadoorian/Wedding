@@ -10,14 +10,56 @@ import { ThreeButtons } from "../Buttons/ButtonGroups";
 import Eyebrow from "../Eyebrow/Eyebrow";
 import { sub } from "motion/react-client";
 
-import "./ImageCallout.scss";
 import Image from "next/image";
 import ImageHolder from "../ImageHolder/ImageHolder";
+import { cn } from "../../utils/cn";
 
 type ImageCalloutStyleProps = {
     variation: "full_width" | "inset" | "slant" | 'slant_inverse';
     textLayout: "left" | "center" | "columns";
 };
+
+type Variation = ImageCalloutStyleProps["variation"];
+type TextLayout = ImageCalloutStyleProps["textLayout"];
+
+const SECTION_VARIATION: Record<Variation, string> = {
+    full_width: "px-col-margin",
+    inset: "px-col-margin my-section-padding mx-col-margin md:mx-auto",
+    slant: "my-300 [clip-path:polygon(0_10%,100%_0%,100%_90%,0%_100%)]",
+    slant_inverse: "my-300 [clip-path:polygon(0%_0,100%_10%,100%_100%,0_90%)]",
+};
+
+// Gradients sit on the ImageHolder overlay. `!` beats the global `.img-overlay` background.
+const OVERLAY: Record<TextLayout, string> = {
+    left: "[background:linear-gradient(270deg,rgba(16,17,17,0)_25.3%,rgba(16,17,17,0.7)_80.25%),linear-gradient(0deg,rgba(16,17,17,0.4)_0%,rgba(16,17,17,0.4)_60%)]!",
+    center: "[background:linear-gradient(0deg,rgba(16,17,17,0.65)_0%,rgba(16,17,17,0.65)_100%)]!",
+    columns: "[background:linear-gradient(0deg,rgba(16,17,17,0.65)_0%,rgba(16,17,17,0.65)_100%)]!",
+};
+
+const TEXT_BASE = "relative z-2 flex flex-col justify-center py-1000 px-200 md:min-h-[45dvh] md:px-750";
+
+const TEXT_LAYOUT: Record<TextLayout, string> = {
+    left: "",
+    center: "text-center items-center",
+    columns: "gap-col-gutter md:flex-row md:items-center",
+};
+
+const TEXT_LAYOUT_WIDTH: Record<TextLayout, string> = {
+    left: "md:max-w-[calc(55%+var(--space-1000)*2)]",
+    center: "md:max-w-container md:mx-auto md:my-0",
+    columns: "",
+};
+
+// When a variation sets the text width/margins, it replaces the layout's own width classes.
+const TEXT_VARIATION: Record<Variation, string> = {
+    full_width: "md:max-w-container md:my-section-padding md:mx-auto",
+    inset: "",
+    slant: "md:max-w-container md:mx-auto md:my-0",
+    slant_inverse: "md:max-w-container md:mx-auto md:my-0",
+};
+
+const TEXT_INNER = "mt-300 flex flex-col gap-100";
+const BTNS = "mt-500 mwc-animate";
 
 const DEFAULT_STYLE: ImageCalloutStyleProps = {
     variation: "full_width",
@@ -50,10 +92,11 @@ export default function ImageCallout({
     ...htmlProps
 }: ImageCalloutProps) {
     const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", { stagger: 0.15, y: 24 });
-    const customOverlay = `img-overlay-${styleOptions.textLayout}`
+    const { textLayout, variation } = styleOptions;
+    const textClass = cn(TEXT_BASE, TEXT_LAYOUT[textLayout], TEXT_VARIATION[variation] || TEXT_LAYOUT_WIDTH[textLayout]);
 
     return (
-        <section {...htmlProps} ref={mergeRefs(animRef, ref)} className={`image_callout ${className ?? ""} image_callout-variation-${styleOptions.variation}`}>
+        <section {...htmlProps} ref={mergeRefs(animRef, ref)} className={cn("relative overflow-hidden", className, SECTION_VARIATION[styleOptions.variation])}>
             {/* <div className="image_callout"> */}
                 <ImageHolder img={{
                     ...image,
@@ -61,7 +104,13 @@ export default function ImageCallout({
                     sizes: "100vw",
                     fill: true,
                     style: { objectFit: "cover" },
-                }} customOverlayClass={customOverlay} className="image_callout-img_holder"/>
+                }}
+                    customOverlayClass={OVERLAY[styleOptions.textLayout]}
+                    className={cn(
+                        "absolute! top-0 left-0 z-1 w-full h-full",
+                        styleOptions.variation === "inset" && "md:w-[calc(100%-var(--layout-column-margin)*2)] md:left-col-margin",
+                    )}
+                />
                 {/* <div className="img-holder image_callout-img_holder">
                     <Image src={image.src} alt={image.alt} className="img-bw" />
 
@@ -69,11 +118,11 @@ export default function ImageCallout({
                 </div> */}
 
                 {styleOptions.textLayout === "center" ? (
-                    <CenterTextLayoutImageCallout eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
+                    <CenterTextLayoutImageCallout className={textClass} eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
                 ) : styleOptions.textLayout === "columns" ? (
-                    <ColumnsTextLayoutImageCallout eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
+                    <ColumnsTextLayoutImageCallout className={textClass} eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
                 ) : (
-                    <LeftTextLayoutImageCallout eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
+                    <LeftTextLayoutImageCallout className={textClass} eyebrow={eyebrow} header={header} subtitle={subtitle} body={body} buttons={buttons} />
                 )}
             {/* </div> */}
         </section>
@@ -81,6 +130,7 @@ export default function ImageCallout({
 }
 
 type TextLayoutProps = {
+    className: string;
     eyebrow?: string;
     header: string;
     subtitle?: string;
@@ -88,9 +138,9 @@ type TextLayoutProps = {
     buttons?: ThreeButtonsArray;
 };
 
-function LeftTextLayoutImageCallout({ eyebrow, header, subtitle, body, buttons }: TextLayoutProps) {
+function LeftTextLayoutImageCallout({ className, eyebrow, header, subtitle, body, buttons }: TextLayoutProps) {
     return (
-        <div className="image_callout-text image_callout-layout-left">
+        <div className={className}>
             {eyebrow && (
                 <Eyebrow
                     // className={"mwc-animate"}
@@ -102,25 +152,25 @@ function LeftTextLayoutImageCallout({ eyebrow, header, subtitle, body, buttons }
                 />
             )}
 
-            <h2 className="image_callout-header heading-l">{header}</h2>
+            <h2 className="heading-l">{header}</h2>
 
             {(body || subtitle) && (
-                <div className="image_callout-text-inner">
-                    {subtitle && <h3 className="image_callout-subtitle subtitle">{subtitle}</h3>}
+                <div className={TEXT_INNER}>
+                    {subtitle && <h3 className="subtitle">{subtitle}</h3>}
 
-                    {body && <div className="image_callout-body body">{body}</div>}
+                    {body && <div className="body">{body}</div>}
                 </div>
             )}
 
-            {buttons && <ThreeButtons className="image_callout-btns btns mwc-animate" buttons={buttons} />}
+            {buttons && <ThreeButtons className={BTNS} buttons={buttons} />}
         </div>
     );
 }
 
-function ColumnsTextLayoutImageCallout({ eyebrow, header, subtitle, body, buttons }: TextLayoutProps) {
+function ColumnsTextLayoutImageCallout({ className, eyebrow, header, subtitle, body, buttons }: TextLayoutProps) {
     return (
-        <div className="image_callout-text image_callout-layout-columns">
-            <div className="image_callout-text-left">
+        <div className={className}>
+            <div className="md:flex-[1_1_762px]">
                 {eyebrow && (
                     <Eyebrow
                         // className={"mwc-animate"}
@@ -132,29 +182,29 @@ function ColumnsTextLayoutImageCallout({ eyebrow, header, subtitle, body, button
                     />
                 )}
 
-                <h2 className="image_callout-header heading-l">{header}</h2>
+                <h2 className="heading-l">{header}</h2>
             </div>
 
             {(body || subtitle || buttons) && (
-                <div className="image_callout-text-right">
+                <div className="md:flex-[1_1_528px]">
                     {(body || subtitle) && (
-                        <div className="image_callout-text-inner">
-                            {subtitle && <h3 className="image_callout-subtitle subtitle">{subtitle}</h3>}
+                        <div className={cn(TEXT_INNER, "mt-0")}>
+                            {subtitle && <h3 className="subtitle">{subtitle}</h3>}
 
-                            {body && <div className="image_callout-body body">{body}</div>}
+                            {body && <div className="body">{body}</div>}
                         </div>
                     )}
 
-                    {buttons && <ThreeButtons className="image_callout-btns btns mwc-animate" buttons={buttons} />}
+                    {buttons && <ThreeButtons className={BTNS} buttons={buttons} />}
                 </div>
             )}
         </div>
     );
 }
 
-function CenterTextLayoutImageCallout({ eyebrow, header, subtitle, body, buttons }: TextLayoutProps) {
+function CenterTextLayoutImageCallout({ className, eyebrow, header, subtitle, body, buttons }: TextLayoutProps) {
     return (
-        <div className="image_callout-text image_callout-layout-center">
+        <div className={className}>
             {eyebrow && (
                 <Eyebrow
                     // className={"mwc-animate"}
@@ -166,17 +216,17 @@ function CenterTextLayoutImageCallout({ eyebrow, header, subtitle, body, buttons
                 />
             )}
 
-            <h2 className="image_callout-header heading-l">{header}</h2>
+            <h2 className="heading-l">{header}</h2>
 
             {(body || subtitle) && (
-                <div className="image_callout-text-inner">
-                    {subtitle && <h3 className="image_callout-subtitle subtitle">{subtitle}</h3>}
+                <div className={TEXT_INNER}>
+                    {subtitle && <h3 className="subtitle">{subtitle}</h3>}
 
-                    {body && <div className="image_callout-body body">{body}</div>}
+                    {body && <div className="body">{body}</div>}
                 </div>
             )}
 
-            {buttons && <ThreeButtons className="image_callout-btns btns mwc-animate" buttons={buttons} />}
+            {buttons && <ThreeButtons className={BTNS} buttons={buttons} />}
         </div>
     );
 }

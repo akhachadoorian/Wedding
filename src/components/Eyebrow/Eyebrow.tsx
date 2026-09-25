@@ -5,8 +5,8 @@ import React, { forwardRef } from "react";
 import { ColorVariables } from "../../types/colors";
 import Diamond from "../Diamond/Diamond";
 
-import "./Eyebrow.scss";
 import { WithHTMLProps } from "@/types/props";
+import { cn } from "@/utils/cn";
 import Star from "@/icons/Star";
 
 /**
@@ -110,11 +110,17 @@ export default function Eyebrow({ styleOptions = DEFAULT_STYLE, text, doubleText
 
 // ---- Sub-components --------------------------------------------------------
 
+const EYEBROW_ROW = "flex items-center gap-100 md:gap-200";
+const EYEBROW_MARGIN = "mb-200";
+const EYEBROW_STAR =
+    "flex items-center justify-center size-[18px] flex-[0_0_18px] aspect-square md:size-6 md:flex-[0_0_24px]";
+const DIVIDER_LINE = "h-px min-w-[100px] w-full bg-gold";
+
 function DiamondDivider({ color }: { color: ColorVariables }) {
     return (
-        <div className="diamond_divider">
+        <div className="flex items-center gap-075 w-full md:w-[calc(100%+40px)] md:gap-100">
             <div
-                className={`diamond_divider-underline`}
+                className={DIVIDER_LINE}
                 style={{ backgroundColor: `var(${color})` }}
             ></div>
             {/* <Diamond
@@ -133,7 +139,7 @@ function DiamondDivider({ color }: { color: ColorVariables }) {
                 color={color}
             /> */}
             <div
-                className={`diamond_divider-underline`}
+                className={DIVIDER_LINE}
                 style={{ backgroundColor: `var(${color})` }}
             ></div>
         </div>
@@ -163,9 +169,9 @@ function LeftEyebrow({
     return (
         <div
             ref={ref}
-            className={`eyebrow-component left ${className ?? ""} ${includeMargin ? "eyebrow-margin" : ""}`}
+            className={cn(EYEBROW_ROW, includeMargin && EYEBROW_MARGIN, className)}
         >
-            {includeStar && <Star color={starColor} className="eyebrow-star" />}
+            {includeStar && <Star color={starColor} className={EYEBROW_STAR} />}
             
             <p className="eyebrow" style={{ color: `var(${color})` }}>
                 {text}
@@ -186,15 +192,15 @@ function CenterEyebrow({
     return (
         <div
             ref={ref}
-            className={`eyebrow-component eyebrow-center ${className ?? ""} ${includeMargin ? "eyebrow-margin" : ""}`}
+            className={cn(EYEBROW_ROW, "justify-center text-center", includeMargin && EYEBROW_MARGIN, className)}
         >
-            {includeStar && <Star className="eyebrow-star" color={starColor} />}
+            {includeStar && <Star className={EYEBROW_STAR} color={starColor} />}
 
             <p className="eyebrow" style={{ color: `var(${color})` }}>
                 {text}
             </p>
 
-           {includeStar && <Star className="eyebrow-star" color={starColor} />}
+           {includeStar && <Star className={EYEBROW_STAR} color={starColor} />}
         </div>
     );
 }
@@ -212,15 +218,15 @@ function DoubleEyebrow({
     return (
         <div
             ref={ref}
-            className={`eyebrow-wrapper eyebrow-double ${className ?? ""} ${includeMargin ? "eyebrow-margin" : ""}`}
+            className={cn("flex flex-col items-center gap-075 w-fit md:flex-row md:gap-150", includeMargin && EYEBROW_MARGIN, className)}
         >
-            <p className="eyebrow" style={{ color: `var(${color})` }}>
+            <p className="eyebrow px-200 md:px-0" style={{ color: `var(${color})` }}>
                 {text}
             </p>
 
             <DiamondDivider color={color} />
 
-            <p className="eyebrow" style={{ color: `var(${color})` }}>
+            <p className="eyebrow px-200 md:px-0" style={{ color: `var(${color})` }}>
                 {doubleText}
             </p>
         </div>

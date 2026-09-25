@@ -9,11 +9,16 @@ import { WithHTMLProps } from "../../types/props";
 import CenteredModal from "@/components/Modal/CenteredModal";
 import { LinkSettings, ModalSettings } from "@/types/buttons";
 import { useState } from "react";
-import ArrowBox from "../ArrowBox/ArrowBox";
-import "./CardGrid.scss";
+import ArrowBox, { ARROW_HOVER_GROUP } from "../ArrowBox/ArrowBox";
+import { cn } from "../../utils/cn";
 import { CardTypeProps } from "./card";
 
 // #region --- Card ---------------------------------------------
+
+const CARD = "relative overflow-hidden";
+
+// Clickable cards lift, turn cabernet, nudge the letter up, and slide their arrow on hover.
+const CARD_HOVER = `group/card ${ARROW_HOVER_GROUP} transition-transform duration-300 ease-in-out hover:-translate-y-[5px] hover:cursor-pointer`;
 
 // #region --- Types ---------------------------------------------
 type CardTextProps = {
@@ -74,7 +79,7 @@ function LinkCard({
     return (
         <LenisLink
             {...htmlProps}
-            className={`card link_card card-hover ${className ?? ""}`}
+            className={cn(CARD, CARD_HOVER, "no-underline", className)}
             href={linkSettings.link ?? "/"}
             target={linkSettings.target ?? "_self"}
         >
@@ -96,8 +101,8 @@ function ModalCard({
 }: ModalCardProps) {
     const [modalOpen, setModalOpen] = useState(false);
     return (
-        <div {...htmlProps} className={`modal_card-wrapper ${className ?? ""}`}>
-            <button  onClick={() => setModalOpen(true)} className={`card modal_card card-hover`}>
+        <div {...htmlProps} className={cn("transition-transform duration-300 ease-in-out", className)}>
+            <button  onClick={() => setModalOpen(true)} className={cn(CARD, CARD_HOVER, "appearance-none border-none w-full h-full p-0 text-left")}>
                 <CardContent text={text} includeArrow={true} />
             </button>
 
@@ -112,7 +117,7 @@ type VisualCardProps = WithHTMLProps & {
 
 function VisualCard({ text, className, ...htmlProps }: VisualCardProps) {
     return (
-        <div {...htmlProps} className={`card visual_card ${className ?? ""}`}>
+        <div {...htmlProps} className={cn(CARD, className)}>
             <CardContent text={text} includeArrow={true} />
         </div>
     );
@@ -133,9 +138,9 @@ function CardContent({ text, includeArrow = false }: CardContentProps) {
 
     return (
         <>
-            <div className="card-text text-cream">
-                <div className="card-upper">
-                    <div className="card-upper-text">
+            <div className="flex flex-col justify-between gap-200 h-full min-h-[180px] p-500 bg-black text-cream transition-all duration-300 ease-in-out md:min-h-[281px] group-hover/card:bg-cabernet">
+                <div className="relative z-2 flex justify-between">
+                    <div className="flex flex-col gap-200">
                         {eyebrow && <p className="eyebrow">{eyebrow}</p>}
 
                         <p className="heading-m">{title}</p>
@@ -147,7 +152,9 @@ function CardContent({ text, includeArrow = false }: CardContentProps) {
                 {body && <p className="font-sans text-base">{body}</p>}
             </div>
 
-            <p className="card-letter">{letter}</p>
+            <p className="absolute z-1 -right-[15px] -bottom-[15px] font-goth text-[170px] leading-none uppercase text-cream opacity-15 transition-all duration-300 ease-in-out md:-right-[25px] md:-bottom-[25px] md:text-[200px] group-hover/card:-bottom-5">
+                {letter}
+            </p>
         </>
     );
 }
@@ -175,11 +182,11 @@ export default function CardGrid({
     });
 
     return (
-        <div {...htmlProps} ref={mergeRefs(animRef, ref)} className="card_grid">
+        <div {...htmlProps} ref={mergeRefs(animRef, ref)} className="flex flex-wrap gap-400 md:gap-col-gutter">
             {cards.map((d, idx) => (
                 <Cards 
                     key={idx} 
-                    className="mwc-animate" 
+                    className="mwc-animate flex-[1_0_350px] md:flex-[1_0_420px]"
                     {...d} 
                 />
             ))}

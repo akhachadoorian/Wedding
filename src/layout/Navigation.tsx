@@ -149,7 +149,7 @@ function renderMobileNavItem(
                             >
                                 <LenisLink
                                     href={item.link}
-                                    className="arrow-hover flex justify-center gap-200 p-075 no-underline border-y border-gold"
+                                    className="group/arrow flex justify-center gap-200 p-075 no-underline border-y border-gold"
                                     onClick={onNavigate}
                                 >
                                     <p className="eyebrow text-gold">
@@ -163,7 +163,7 @@ function renderMobileNavItem(
                                     <LenisLink
                                         key={child.link}
                                         href={child.link}
-                                        className="arrow-hover flex justify-between gap-400 px-100 py-200 no-underline border-b border-cream last-of-type:border-b-0"
+                                        className="group/arrow flex justify-between gap-400 px-100 py-200 no-underline border-b border-cream last-of-type:border-b-0"
                                         onClick={onNavigate}
                                     >
                                         <div>
@@ -191,7 +191,7 @@ function renderMobileNavItem(
     return (
         <LenisLink
             href={item.link}
-            className={cn(MOBILE_NAV_LINK, "arrow-hover py-400 border-b border-cream")}
+            className={cn(MOBILE_NAV_LINK, "group/arrow py-400 border-b border-cream")}
             onClick={onNavigate}
         >
             <p className="eyebrow text-cream">{item.text}</p>

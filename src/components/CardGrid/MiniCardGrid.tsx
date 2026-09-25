@@ -4,9 +4,17 @@ import { useState } from "react";
 import { LinkSettings, ModalSettings } from "@/types/buttons";
 import { Icon } from "@phosphor-icons/react";
 import { NonEmptyArray } from "@/types/utility";
-import "./MiniCard.scss";
 import { CardTypeProps, LinkCardsProps } from "./card";
-import ArrowBox from "../ArrowBox/ArrowBox";
+import ArrowBox, { ARROW_HOVER_GROUP } from "../ArrowBox/ArrowBox";
+import { cn } from "@/utils/cn";
+
+const MINI_CARD =
+    "relative block box-border w-full m-150 appearance-none bg-transparent border-none p-0 text-cream text-left no-underline cursor-pointer transition-all duration-300 ease-in-out";
+
+// Clickable mini cards lift and turn burgundy on hover.
+const MINI_CARD_HOVER = `group/mini ${ARROW_HOVER_GROUP} hover:-translate-y-[2.5px]`;
+
+const MINI_CARD_FRAME = "absolute border-2 border-cabernet transition-all duration-300 ease-in-out group-hover/mini:border-burgundy";
 
 export type MiniCardData = {
     icon: Icon;
@@ -23,7 +31,7 @@ export function MiniCard({ icon, title, body, cardType }: MiniCardData) {
             <>
                 <button
                     type="button"
-                    className="mini_card mini_card-hover"
+                    className={cn(MINI_CARD, MINI_CARD_HOVER)}
                     onClick={() => setModalOpen(true)}
                 >
                     <VenueMiniCardInner icon={icon} title={title} body={body} />
@@ -44,7 +52,7 @@ export function MiniCard({ icon, title, body, cardType }: MiniCardData) {
             <LenisLink
                 href={cardType.linkSettings.link}
                 target={cardType.linkSettings.target ?? "_self"}
-                className="mini_card mini_card-hover"
+                className={cn(MINI_CARD, MINI_CARD_HOVER)}
             >
                 <VenueMiniCardInner icon={icon} title={title} body={body} />
             </LenisLink>
@@ -52,7 +60,7 @@ export function MiniCard({ icon, title, body, cardType }: MiniCardData) {
     }
 
     return (
-        <div className="mini_card">
+        <div className={MINI_CARD}>
             <VenueMiniCardInner icon={icon} title={title} body={body} />
         </div>
     );
@@ -65,23 +73,23 @@ function VenueMiniCardInner({
 }: Pick<MiniCardData, "icon" | "title" | "body">) {
     return (
         <>
-            <div className="mini_card-frame mini_card-frame-a" />
-            <div className="mini_card-frame mini_card-frame-b" />
+            <div className={cn(MINI_CARD_FRAME, "-top-150 right-150 bottom-150 -left-150")} />
+            <div className={cn(MINI_CARD_FRAME, "top-150 -right-150 -bottom-150 left-150")} />
 
-            <div className="mini_card-content">
+            <div className="relative z-2 flex flex-col gap-100 bg-cabernet px-500 py-300 transition-all duration-300 ease-in-out group-hover/mini:bg-burgundy">
                 <div className="flex justify-between gap-100">
                     {/* <IconComp
-                    className="mini_card-icon"
+                    className="text-[color:var(--cream-500)] transition-all duration-300 ease-in-out group-hover/mini:text-cream"
                     size={22}
                     weight="light"
                 /> */}
 
-                    <p className="mini_card-title heading-xs">{title}</p>
+                    <p className="mt-100 text-cream heading-xs">{title}</p>
 
                     <ArrowBox />
                 </div>
 
-                <p className="mini_card-body body-xs">{body}</p>
+                <p className="text-[color:var(--cream-700)] body-xs">{body}</p>
             </div>
         </>
     );
