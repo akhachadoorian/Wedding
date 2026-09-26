@@ -7,6 +7,7 @@ import { useFitHeadline } from "@/hooks/useFitHeadline";
 import ColumnRow from "@/components/ColumnRow";
 import { ColumnLink } from "@/components/Column";
 import { NonEmptyArray } from "@/types/utility";
+import { EVENT } from "@/content/event";
 
 function toNavLink(item: (typeof NAV_ITEMS)[number]): ColumnLink {
     return {
@@ -46,8 +47,8 @@ export default function Footer({}) {
                     columnTwo={{
                         orientation: "center",
                         lines: [
-                            "Saturday, October 31st",
-                            "Ceremony Starts at 5pm",
+                            `${EVENT.wedding.weekday}, ${EVENT.wedding.date}`,
+                            `Ceremony Starts at ${EVENT.wedding.ceremonyShort}`,
                         ],
                     }}
                     columnThree={{

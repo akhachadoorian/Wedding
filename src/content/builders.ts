@@ -2,7 +2,7 @@ import { CardGridProps } from "@/components/CardGrid/CardGrid";
 import { LinkButtonSettings } from "@/types/buttons";
 import { Icon } from "@phosphor-icons/react";
 import { IMAGES } from "./images";
-import { Hotel } from "./hotels";
+import { Hotel, hotelAddress } from "./hotels";
 import { HeroContent } from "./types";
 
 /** Link button with the arrow decoration. External URLs open in a new tab. */
@@ -37,22 +37,22 @@ export const heroImage: HeroContent["image"] = {
 };
 
 /** Card that opens a modal with the hotel's address, booking link and group code. */
-export function hotelCard(hotel: Hotel): CardGridProps["cards"][number] {
+export function hotelCard(key: string, hotel: Hotel): CardGridProps["cards"][number] {
     return {
         text: {
             title: hotel.name,
-            body: hotel.address,
+            body: hotelAddress(hotel),
         },
         cardType: {
             type: "modal",
             modalSettings: {
-                modalID: `${hotel.id}-modal`,
+                modalID: `${key}-modal`,
                 modalContent: {
                     header: hotel.name,
                     content: [
                         {
                             title: "Address",
-                            body: hotel.address,
+                            body: hotelAddress(hotel),
                             button: {
                                 text: "book now",
                                 link: hotel.bookingUrl,

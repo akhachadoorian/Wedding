@@ -1,4 +1,3 @@
-import { cn } from "@/utils/cn";
 import { Switch } from "../FormInputs";
 import {
     ATTENDING_OPTION,
@@ -53,30 +52,6 @@ export default function AttendWedding() {
             >
                 {/* Wedding RSVP */}
                 <div className="w-full overflow-hidden flex flex-col gap-700">
-                    {/* <div className="flex flex-col gap-200 min-w-0 "> */}
-                        {/* <div className="flex gap-(--layout-column-gutter) px-200 min-w-0">
-                            <p className={cn(eyebrowClass, "min-w-0")}>
-                                Saturday
-                                <br />
-                                October 31st
-                            </p>
-                            <p className={cn(eyebrowClass, "text-center min-w-0")}>
-                                The Clay Theatre
-                                <br />
-                                Green Cove, Fl{" "}
-                            </p>
-                            <p className={cn(eyebrowClass, "text-right min-w-0")}>
-                                Ceremony 5:00 PM
-                                <br />
-                                Until 10:30 PM
-                            </p>
-                        </div> */}
-
-                        {/* <h3 className="font-sans! text-xl font-semibold leading-normal tracking-[1.4px] uppercase text-center text-burgundy">
-                            Wedding Ceremony & Reception
-                        </h3>
-                    </div> */}
-
                     <div className="flex flex-col gap-700">
                         {/* Guest 1 */}
                         <GuestLabelInputWrapper guest={guest1} layout="row" >

@@ -30,7 +30,7 @@ const hotelsIntro: CopyContent = {
 };
 
 const hotelCards: CardGridProps = {
-    cards: HOTELS.map(hotelCard),
+    cards: Object.entries(HOTELS).map(([key, hotel]) => hotelCard(key, hotel)),
 };
 
 // #endregion ---
