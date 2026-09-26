@@ -2,7 +2,7 @@ import { cn } from "@/utils/cn";
 import { BTN_TEXT_CLASSES } from "../Buttons/Button";
 import { buttonVariants } from "../Buttons/button.variants";
 import { NonEmptyArray, TextValueOption } from "@/types/utility";
-import Eyebrow from "../Eyebrow/Eyebrow";
+import Eyebrow from "../Eyebrow";
 import React from "react";
 
 // #region -- Yes/No Boolean Switch ---
@@ -70,16 +70,16 @@ export function Switch<V = string>({
     return (
         <div
             className={cn(
-                "rsvp_switch_group relative flex border border-cream p-100",
+                "relative flex border border-cream p-100",
                 className,
             )}
             role="radiogroup"
         >
             <span
                 className={cn(
-                    "rsvp_switch_group-thumb",
-                    currValue === option_2.value &&
-                        "rsvp_switch_group-thumb-active",
+                    "absolute top-100 bottom-100 left-100 z-0 w-[calc(50%-var(--space-100))] pointer-events-none",
+                    "bg-burgundy shadow-[0_1px_3px_rgba(0,0,0,0.35)] [transition:translate_0.4s_cubic-bezier(0.22,1,0.36,1),opacity_0.2s_ease]",
+                    currValue === option_2.value && "translate-x-full",
                 )}
                 style={{ opacity: currValue === undefined ? 0 : 1 }}
                 aria-hidden="true"
@@ -124,21 +124,25 @@ function SwitchOptionInput({
     disabled = false,
 }: SwitchOptionInputProps) {
     const id = `${name}-${value}`;
+    const hoverable = !isActive && !disabled;
 
     return (
         <label
             htmlFor={id}
             className={cn(
-                "rsvp_switch",
-                "relative flex-1 justify-center cursor-pointer",
                 buttonVariants({ size: "small" }),
-                !isActive && !disabled && "rsvp_switch-hoverable",
+                // After buttonVariants so the resets beat its default solid-variant border.
+                "group/switch relative z-1 flex-1 justify-center overflow-hidden cursor-pointer appearance-none [background:none] border-none",
+                "has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-cream has-[input:focus-visible]:outline-offset-2",
+                // Faint cream wash over options that can still be picked.
+                hoverable &&
+                    "before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:bg-cream before:opacity-0 before:[transition:opacity_0.3s_ease] hover:before:opacity-8",
                 disabled && "cursor-not-allowed opacity-50",
             )}
         >
             <input
                 id={id}
-                className="rsvp_switch-input sr-only"
+                className="sr-only"
                 type="radio"
                 name={name}
                 value={value}
@@ -150,8 +154,9 @@ function SwitchOptionInput({
             <p
                 className={cn(
                     BTN_TEXT_CLASSES,
-                    "rsvp_switch-text",
+                    "[transition:color_0.4s_cubic-bezier(0.22,1,0.36,1)]",
                     isActive ? "text-cream" : "text-cream",
+                    hoverable && "group-hover/switch:text-[color:var(--cream-100)]",
                 )}
             >
                 {text}

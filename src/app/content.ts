@@ -1,5 +1,5 @@
-import { PhotoCollageProps } from "@/components/PhotoCollage/PhotoCollage";
-import { WatermarkTextProps } from "@/components/WatermarkText/WatermarkText";
+import { PhotoCollageProps } from "@/components/PhotoCollage";
+import { WatermarkTextProps } from "@/components/WatermarkText";
 import {
     DEFAULT_IMAGE_DISNEY,
     DEFAULT_IMAGE_ENGAGEMENT,
@@ -9,7 +9,7 @@ import {
 } from "@/data/defaultImage";
 import { GothHeroProps } from "@/layout/GothHero";
 import { CardGridProps } from "@/components/CardGrid/CardGrid";
-import { CopyOnlyProps } from "@/components/CopyOnly/CopyOnly";
+import { CopyOnlyProps } from "@/components/CopyOnly";
 
 // ----- Hero -----------------------------------------------
 

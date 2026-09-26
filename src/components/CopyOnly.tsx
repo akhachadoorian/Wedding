@@ -1,20 +1,19 @@
 "use client";
 
-import mergeRefs from "../../hooks/mergeRefs";
-import { useFadeInChildren } from "../../hooks/useFadeIn";
+import mergeRefs from "../hooks/mergeRefs";
+import { useFadeInChildren } from "../hooks/useFadeIn";
 import {
     BtnAnySchemeMap,
     BtnVariantMap,
     ThreeButtonsArray,
-} from "../../types/buttons";
-import { ColorVariables } from "../../types/colors";
-import { WithHTMLProps } from "../../types/props";
-import { ThreeButtons } from "../Buttons/ButtonGroups";
-import Eyebrow from "../Eyebrow/Eyebrow";
+} from "../types/buttons";
+import { ColorVariables } from "../types/colors";
+import { WithHTMLProps } from "../types/props";
+import { ThreeButtons } from "./Buttons/ButtonGroups";
+import Eyebrow from "./Eyebrow";
 
 import { HeadingClassProps, HeadingLevelProps } from "@/types/headings";
-import { THREE_BUTTON_DEFAULTS } from "../Buttons/defaults";
-import "./CopyOnly.scss";
+import { THREE_BUTTON_DEFAULTS } from "./Buttons/defaults";
 import { cn } from "@/utils/cn";
 import { BodyClassProps } from "@/types/body";
 
@@ -44,6 +43,14 @@ type CopyOnlyStyleProps = {
 
     customBtnVariantMap?: BtnVariantMap<3>;
     customBtnColorSchemeMap?: BtnAnySchemeMap<3>;
+};
+
+// Resolved per variation: the columns layout drops the single-column max-width and uses the
+// column gutter, while center narrows to 60.417vw from the tablet breakpoint.
+const INNER_CLASSES: Record<CopyOnlyStyleProps["variation"], string> = {
+    left: "flex flex-col gap-500 md:max-w-[75.833vw] min-[109.375rem]:max-w-[60.417vw]",
+    center: "flex flex-col gap-500 items-center text-center md:max-w-[60.417vw] md:m-auto",
+    columns: "flex flex-col gap-col-gutter md:flex-row md:items-center",
 };
 
 const DEFAULT_STYLE = {
@@ -117,7 +124,7 @@ export default function CopyOnly({
         <div
             {...htmlProps}
             ref={mergeRefs(animRef, ref)}
-            className={`copy ${className ?? ""}`}
+            className={className}
         >
             {styleOptions.variation === "columns" ? (
                 <ColumnsCopyOnly
@@ -173,8 +180,8 @@ function ColumnsCopyOnly({
     styleOptions,
 }: SubFunctionCopyOnlyProps) {
     return (
-        <div className={`copy-inner copy-columns`}>
-            <div className="copy-left_col">
+        <div className={INNER_CLASSES.columns}>
+            <div className="flex flex-col gap-200 md:flex-[1_1_762px]">
                 <EyebrowHeaderCopyOnly
                     eyebrow={eyebrow}
                     eyebrowColor={styleOptions.eyebrowColor}
@@ -185,7 +192,7 @@ function ColumnsCopyOnly({
                 />
             </div>
 
-            <div className="copy-right_col">
+            <div className="flex flex-col gap-300 md:flex-[1_1_528px]">
                 {subtitle && (
                     <SubtitleCopyOnly
                         subtitle={subtitle}
@@ -233,9 +240,9 @@ function CenterCopyOnly({
     styleOptions,
 }: SubFunctionCopyOnlyProps) {
     return (
-        <div className={`copy-inner copy-center`}>
-            <div className="copy-text">
-                <div className="copy-upper">
+        <div className={INNER_CLASSES.center}>
+            <div className="flex flex-col gap-300 items-center">
+                <div className="flex flex-col gap-200 items-center">
                     <EyebrowHeaderCopyOnly
                         eyebrow={eyebrow}
                         eyebrowVariation="center"
@@ -278,6 +285,7 @@ function CenterCopyOnly({
                         styleOptions.customBtnColorSchemeMap
                     }
                     customBtnVariantMap={styleOptions.customBtnVariantMap}
+                    centered
                 />
             )}
         </div>
@@ -294,9 +302,9 @@ function LeftCopyOnly({
     styleOptions,
 }: SubFunctionCopyOnlyProps) {
     return (
-        <div className={`copy-inner copy-left`}>
-            <div className="copy-text">
-                <div className="copy-upper">
+        <div className={INNER_CLASSES.left}>
+            <div className="flex flex-col gap-300">
+                <div className="flex flex-col gap-200">
                     <EyebrowHeaderCopyOnly
                         eyebrow={eyebrow}
                         eyebrowColor={styleOptions.eyebrowColor}
@@ -383,7 +391,7 @@ function EyebrowHeaderCopyOnly({
             )}
 
             <Heading
-                className={`copy-header heading-md mwc-animate ${headingClass}`}
+                className={`heading-md mwc-animate ${headingClass} [&>strong]:font-normal [&>strong]:text-gold`}
             >
                 {header}
             </Heading>
@@ -428,27 +436,29 @@ function BodyCopyOnly({
     if (hasHtmlTags(body)) {
         return (
             <div
-                className={`copy-body mwc-animate ${bodySize}`}
+                className={`mwc-animate ${bodySize}`}
                 dangerouslySetInnerHTML={{ __html: body }}
             />
         );
     }
 
-    return <p className={`mwc-animate copy-body ${bodySize}`}>{body}</p>;
+    return <p className={`mwc-animate ${bodySize}`}>{body}</p>;
 }
 
 function BtnsCopyOnly({
     buttons,
     customBtnVariantMap = THREE_BUTTON_DEFAULTS.variantMap,
     customBtnColorSchemeMap = THREE_BUTTON_DEFAULTS.colorSchemeMap,
+    centered = false,
 }: {
     buttons: ThreeButtonsArray;
     customBtnVariantMap?: BtnVariantMap<3>;
     customBtnColorSchemeMap?: BtnAnySchemeMap<3>;
+    centered?: boolean;
 }) {
     return (
         <ThreeButtons
-            className="copy-btns btns mwc-animate"
+            className={cn("mwc-animate", centered && "justify-center")}
             noDecorationMap={true}
             buttons={buttons}
             customVariantMap={customBtnVariantMap}

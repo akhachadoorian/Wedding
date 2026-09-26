@@ -1,11 +1,18 @@
 "use client";
 
 import { WithHTMLProps } from "@/types/props";
-import "./ImageHolder.scss";
 import Image from "next/image";
 import { CustomImageProps } from "@/types/images";
 import { useTooltip } from "@/layout/GlobalTooltip";
 import { useState, useEffect, useCallback } from "react";
+import { cn } from "@/utils/cn";
+
+// `img-holder` stays as a hook for the global image styles in _utilities.scss. The focal
+// point needs `!` to beat that file's unlayered `.img-holder img { object-position }`.
+const IMG_HOLDER =
+    "img-holder cursor-pointer [&_img]:object-(--img-object-position-mobile)! md:[&_img]:object-(--img-object-position)!";
+
+const IMG_BORDER_FRAME = "absolute border-3 border-cabernet";
 
 export interface ImageHolderProps extends WithHTMLProps {
     img: CustomImageProps;
@@ -38,7 +45,7 @@ export default function ImageHolder({
     return (
         <div
             {...htmlProps}
-            className={`img-holder ${className ?? ""}`}
+            className={cn(IMG_HOLDER, className)}
             style={divStyle}
         >
             <Image
@@ -70,19 +77,19 @@ export function ImageHolderBorder({
     return (
         <div
             {...htmlProps}
-            className={`img-holder-border ${className ?? ""}`}
+            className={cn("relative w-full aspect-[4/5] m-300", className)}
             style={wrapperStyle}
         >
-            <div className="img-holder-border-frame img-holder-border-frame-a" />
-            <div className="img-holder-border-frame img-holder-border-frame-b" />
+            <div className={cn(IMG_BORDER_FRAME, "-top-300 right-300 bottom-300 -left-300")} />
+            <div className={cn(IMG_BORDER_FRAME, "top-300 -right-300 -bottom-300 left-300")} />
 
-            <div className="img-holder-border-photo">
+            <div className="absolute inset-0 z-2">
                 <ImageHolder
                     img={img}
                     includeOverlay={includeOverlay}
                     customImageClass={customImageClass}
                     customOverlayClass={customOverlayClass}
-                    className="img-holder-border-img"
+                    className="w-full h-full"
                 />
             </div>
         </div>
@@ -142,27 +149,51 @@ export function ToolTipHoverImageHolder({
     return (
         <div
             {...htmlProps}
-            className={` img-tooltip_hover ${isTouched ? " is-touched" : ""} ${className ?? ""}`}
+            className={cn("group/tip relative flex flex-col p-200", className)}
             style={wrapperStyle}
             {...(canHover && tooltipContent
                 ? makeMouseHandlers(tooltipContent)
                 : {})}
             onTouchEnd={toggleTap}
         >
-            <div className="img-holder" style={divStyle}>
+            <div
+                className={cn(IMG_HOLDER, "absolute! top-0 left-0 w-full h-full")}
+                style={divStyle}
+            >
+                {/* Hovering (fine pointers) or tapping reveals the photo in color. `!` beats the global `.img-bw` filter. */}
                 <Image
                     {...imageProps}
                     style={style}
-                    className={`img-bw ${customImageClass ?? ""}`}
+                    className={cn(
+                        "img-bw pointer-fine:group-hover/tip:grayscale-0!",
+                        isTouched && "grayscale-0!",
+                        customImageClass,
+                    )}
                 />
 
                 {includeOverlay && (
                     <div
-                        className={`img-overlay ${customOverlayClass ?? ""}`}
+                        className={cn(
+                            "img-overlay pointer-fine:group-hover/tip:opacity-0",
+                            isTouched && "opacity-0",
+                            customOverlayClass,
+                        )}
                     />
                 )}
             </div>
-            {img.caption && <p className="img-caption">{img.caption}</p>}
+            {img.caption && (
+                <p
+                    className={cn(
+                        "absolute left-1/2 -bottom-[25px] z-10 w-full max-w-[calc(100%-var(--space-150)*2-var(--space-200)*2)] mx-100",
+                        "bg-black text-[color:var(--cream-500)] font-sans text-xs font-semibold leading-normal tracking-[0.6px] uppercase text-center",
+                        "px-150 py-075 rounded-[6px] border border-white/8 shadow-[0_4px_16px_rgba(0,0,0,0.5)]",
+                        "-translate-x-1/2 transition-[opacity,translate] duration-200 ease-[ease] md:hidden",
+                        isTouched ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1",
+                    )}
+                >
+                    {img.caption}
+                </p>
+            )}
         </div>
     );
 }

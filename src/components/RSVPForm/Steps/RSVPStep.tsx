@@ -1,5 +1,5 @@
 import Button from "@/components/Buttons/Button";
-import Eyebrow from "@/components/Eyebrow/Eyebrow";
+import Eyebrow from "@/components/Eyebrow";
 import { cn } from "@/utils/cn";
 import { RSVPFormError } from "../RSVPForm";
 import { useRSVPForm } from "../RSVPFormContext";

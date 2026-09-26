@@ -11,15 +11,23 @@ import { WithHTMLProps } from "@/types/props";
 import { RequireX } from "@/types/utility";
 import Image from "next/image";
 import { useRef, useEffect } from "react";
-import "./PhotoCollage.scss";
 import { useFadeInChildren } from "@/hooks/useFadeIn";
 import mergeRefs from "@/hooks/mergeRefs";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ToolTipHoverImageHolder } from "../ImageHolder/ImageHolder";
+import { ToolTipHoverImageHolder } from "./ImageHolder";
 import { useFitHeadline } from "@/hooks/useFitHeadline";
+import { cn } from "@/utils/cn";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const SIDE_COLUMN =
+    "flex flex-row gap-col-gutter md:flex-col md:justify-center md:flex-[1_1_281px] md:py-col-gutter";
+
+const IMG_SHAPE = {
+    tall: "w-full aspect-square md:aspect-[136/151]",
+    long: "w-full aspect-[3/2] md:aspect-[94/61]",
+};
 
 export type PhotoCollageProps = WithHTMLProps & {
     header?: string;
@@ -63,9 +71,8 @@ export default function PhotoCollage({
 }: PhotoCollageProps) {
     const { makeMouseHandlers } = useTooltip();
 
-    let styleClasses = styleOptions.textBehind
-        ? "photo_collage-text_behind"
-        : "photo_collage-text_front";
+    // Stacks the fitted header either behind or in front of the photos.
+    const [textZ, imgsZ] = styleOptions.textBehind ? ["z-1", "z-2"] : ["z-2", "z-1"];
 
     const animRef = useFadeInChildren<HTMLDivElement>(".mwc-animate", {
         stagger: 0.15,
@@ -105,28 +112,34 @@ export default function PhotoCollage({
     return (
         <div
             {...htmlProps}
-            className={`photo_collage ${styleClasses} ${className ?? ""}`}
+            className={className}
             ref={mergeRefs(animRef, ref)}
         >
             {header && styleOptions.headerTop && (
                 <div
                     ref={mergeRefs(headerParallaxRef, containerRef)}
-                    className="photo_collage-header_top"
+                    className="md:-mb-20"
                 >
                     <h2
                         ref={textRef}
                         style={headlineStyle}
-                        className="photo_collage-text mwc-animate"
+                        className={cn("relative md:text-center mwc-animate", textZ)}
                     >
                         {ready && header}
                     </h2>
                 </div>
             )}
 
-            <div className="photo_collage-imgs">
+            <div
+                className={cn(
+                    "relative flex flex-col gap-col-gutter md:flex-row",
+                    "[&_img]:transition-all [&_img]:duration-300 [&_img]:ease-in-out [&_.img-overlay]:transition-all [&_.img-overlay]:duration-300 [&_.img-overlay]:ease-in-out",
+                    imgsZ,
+                )}
+            >
                 {/* Left Column */}
                 {leftSideImages && (
-                    <div className="photo_collage-imgs-left photo_collage-imgs-side">
+                    <div className={cn(SIDE_COLUMN, "items-end")}>
                         {leftSideImages.map((img, idx) => {
                             const tallIndex = styleOptions.reverseImageShapes
                                 ? 1
@@ -134,7 +147,7 @@ export default function PhotoCollage({
                             return (
                                 <ToolTipHoverImageHolder
                                     key={idx}
-                                    className={`photo_collage-img photo_collage-img-${idx === tallIndex ? "tall" : "long"} mwc-animate`}
+                                    className={cn(IMG_SHAPE[idx === tallIndex ? "tall" : "long"], "mwc-animate")}
                                     img={img}
                                     makeMouseHandlers={makeMouseHandlers}
                                 />
@@ -145,14 +158,14 @@ export default function PhotoCollage({
 
                 {/* Center Image */}
                 <ToolTipHoverImageHolder
-                    className="photo_collage-img photo_collage-imgs-main mwc-animate"
+                    className="aspect-[10/8] md:flex-[3_1_696px] md:aspect-auto mwc-animate"
                     img={mainImage}
                     makeMouseHandlers={makeMouseHandlers}
                 />
 
                 {/* Right Column */}
                 {rightSideImages && (
-                    <div className="photo_collage-imgs-right photo_collage-imgs-side">
+                    <div className={cn(SIDE_COLUMN, "items-start")}>
                         {rightSideImages.map((img, idx) => {
                             const longIndex = styleOptions.reverseImageShapes
                                 ? 1
@@ -160,7 +173,7 @@ export default function PhotoCollage({
                             return (
                                 <ToolTipHoverImageHolder
                                     key={idx}
-                                    className={`photo_collage-img photo_collage-img-${idx === longIndex ? "long" : "tall"} mwc-animate`}
+                                    className={cn(IMG_SHAPE[idx === longIndex ? "long" : "tall"], "mwc-animate")}
                                     img={img}
                                     makeMouseHandlers={makeMouseHandlers}
                                 />

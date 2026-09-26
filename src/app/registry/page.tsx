@@ -1,13 +1,13 @@
 "use client";
 
-import ImageCallout from "@/components/ImageCallout/ImageCallout";
-import PageGuard from "@/components/PageGuard/PageGuard";
+import ImageCallout from "@/components/ImageCallout";
+import PageGuard from "@/components/PageGuard";
 import { useFadeIn } from "@/hooks/useFadeIn";
 import ComingSoon from "@/layout/ComingSoon";
 import ImageOverlayHero from "@/layout/ImageOverlayHero";
 import "./Registry.scss";
 import content from "./content";
-import CopyOnly from "@/components/CopyOnly/CopyOnly";
+import CopyOnly from "@/components/CopyOnly";
 
 export default function Registry({ loaded = true }: { loaded?: boolean }) {
     const registryLinksRef = useFadeIn<HTMLDivElement>();

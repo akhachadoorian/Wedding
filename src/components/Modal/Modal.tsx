@@ -9,10 +9,10 @@ import { WithHTMLProps } from "../../types/props";
 import { NonEmptyArray } from "../../types/utility";
 
 import { XIcon } from "@phosphor-icons/react";
-import "./Modal.scss";
 import { ButtonSettingProps, LinkButtonSettings } from "@/types/buttons";
 import { button } from "motion/react-client";
 import Button from "../Buttons/Button";
+import { cn } from "@/utils/cn";
 
 export type ModalContentProps = {
     title: string;
@@ -77,13 +77,17 @@ export default function Modal({
                     // onAnimationComplete={onClose}
                     {...rest}
                     id={id}
-                    className={`modal ${className ?? ""} ${isVisible ? "modal-open" : "modal-closed"}`}
+                    className={cn(
+                        "fixed top-0 left-0 flex justify-end w-dvw h-svh",
+                        className,
+                        isVisible ? "opacity-100 z-999 pointer-events-auto" : "opacity-0 -z-1 pointer-events-none",
+                    )}
                 >
                     {/* overlay */}
-                    <div className="modal-overlay" onClick={handleClose}></div>
+                    <div className="flex-1 bg-[rgba(11,12,12,0.35)]" onClick={handleClose}></div>
 
                     <motion.div
-                        className="modal-inner"
+                        className="flex flex-col justify-between w-[56.319vw] py-750 px-col-margin bg-cabernet"
                         initial={{ translateX: "100%" }}
                         animate={{
                             translateX: "0%",
@@ -101,28 +105,28 @@ export default function Modal({
                             },
                         }}
                     >
-                        <div className="modal-top">
-                            <h5 className="modal-top-header heading-l">
+                        <div className="flex items-center justify-between">
+                            <h5 className="heading-l">
                                 {header}
                             </h5>
                             <button
-                                className="modal-close"
+                                className="h-[38px] aspect-square p-050 bg-transparent border-none"
                                 onClick={handleClose}
                             >
                                 <XIcon color={"var(--cream)"} size={30} />
                             </button>
                         </div>
 
-                        <div className="modal-content">
+                        <div className="flex flex-col gap-300">
                             {content.map((c, idx) => (
                                 <div
-                                    className="modal-content-section  not-last-of-type:pb-300  not-last-of-type:border-b  not-last-of-type:border-b-solid  not-last-of-type:border-b-cream"
+                                    className="flex flex-col gap-200 not-last-of-type:pb-300  not-last-of-type:border-b  not-last-of-type:border-b-solid  not-last-of-type:border-b-cream"
                                     key={idx}
                                 >
-                                    <p className="modal-content-title eyebrow text-cream">
+                                    <p className="eyebrow text-cream">
                                         {c.title}
                                     </p>
-                                    <p className="modal-content-body text-cream font-sans ">
+                                    <p className="text-cream font-sans">
                                         {c.body}
                                     </p>
 

@@ -3,14 +3,14 @@
 import { useRef, useState } from "react";
 
 import { ThreeButtons } from "../components/Buttons/ButtonGroups";
-import Eyebrow from "../components/Eyebrow/Eyebrow";
+import Eyebrow from "../components/Eyebrow";
 import {
     BtnSchemeMap,
     ThreeButtonsArray
 } from "../types/buttons";
 import { WithHTMLProps } from "../types/props";
 
-import ImageHolder from "@/components/ImageHolder/ImageHolder";
+import ImageHolder from "@/components/ImageHolder";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
 import mergeRefs from "@/hooks/mergeRefs";
 import { useFadeInChildren } from "@/hooks/useFadeIn";

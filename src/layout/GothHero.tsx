@@ -2,7 +2,7 @@
 
 import { WithHTMLProps } from "../types/props";
 
-import ImageHolder from "@/components/ImageHolder/ImageHolder";
+import ImageHolder from "@/components/ImageHolder";
 import { DEFAULT_IMAGE } from "@/data/defaultImage";
 import { CustomImageProps } from "@/types/images";
 import TextWithNewLine from "@/utils/TextWithNewLine";

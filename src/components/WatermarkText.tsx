@@ -1,6 +1,6 @@
 "use client";
 
-import { WithHTMLProps } from "../../types/props";
+import { WithHTMLProps } from "../types/props";
 
 import mergeRefs from "@/hooks/mergeRefs";
 import { ButtonSettingProps } from "@/types/buttons";
@@ -8,11 +8,10 @@ import { NonEmptyArray } from "@/types/utility";
 import { cn } from "@/utils/cn";
 import gsap from "gsap";
 import { useLayoutEffect, useRef } from "react";
-import Button from "../Buttons/Button";
-import "./WatermarkText.scss";
+import Button from "./Buttons/Button";
 import { useFitHeadline } from "@/hooks/useFitHeadline";
-import ColumnRow from "../ColumnRow";
-import { ColumnProps } from "../Column";
+import ColumnRow from "./ColumnRow";
+import { ColumnProps } from "./Column";
 
 type Caption = {
     lines: NonEmptyArray<string>;
@@ -110,19 +109,20 @@ export default function WatermarkText({
         <div
             {...htmlProps}
             ref={mergeRefs(ref, wrapperRef)}
-            className={`watermark_text ${className ?? ""}`}
+            className={cn("relative overflow-hidden flex flex-col gap-400", className)}
         >
             {subheader && (
-                <h3 className="watermark_text-subheader" ref={subheaderRef}>
+                <h3
+                    // `!` on the type styles beats the global `h3` heading rule.
+                    className="text-cream uppercase tracking-[1.08px] text-center font-sans! font-semibold! leading-[120%]! text-md! md:text-xl!"
+                    ref={subheaderRef}
+                >
                     {subheader}
                 </h3>
             )}
 
-            <div
-                className="watermark_text-title"
-                ref={mergeRefs(watermarkTextRef, containerRef)}
-            >
-                <h2 ref={textRef} style={headlineStyle}>
+            <div ref={mergeRefs(watermarkTextRef, containerRef)}>
+                <h2 ref={textRef} style={headlineStyle} className="text-[color:var(--wine-650)] text-center md:whitespace-nowrap">
                     {ready && watermarkText}
                 </h2>
             </div>

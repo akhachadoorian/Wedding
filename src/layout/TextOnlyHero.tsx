@@ -3,7 +3,7 @@
 import React from "react";
 
 import { ThreeButtons } from "../components/Buttons/ButtonGroups";
-import Eyebrow from "../components/Eyebrow/Eyebrow";
+import Eyebrow from "../components/Eyebrow";
 import { BtnSchemeMap, ThreeButtonsArray } from "../types/buttons";
 import { WithHTMLProps } from "../types/props";
 

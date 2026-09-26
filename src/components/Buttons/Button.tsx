@@ -17,12 +17,11 @@ import {
     VisualButtonSettings,
     resolveHoverScheme,
 } from "../../types/buttons";
-import ArrowBox, { ArrowDirectionProps } from "../ArrowBox/ArrowBox";
+import ArrowBox, { ARROW_HOVER_GROUP, ArrowDirectionProps } from "../ArrowBox";
 
 import { ColorSchemeMap } from "../../classes/ColorSchemeMap";
 import { CssColor } from "../../classes/CssColor";
 import { cn } from "../../utils/cn";
-import "./Button.scss";
 import { buttonVariants } from "./button.variants";
 import { VariantProps } from "class-variance-authority";
 import { Slot } from "radix-ui/slot";
@@ -60,7 +59,7 @@ export default function Button({
           decorationColor);
 
     const btnClass = cn(
-        "btn",
+        "w-fit no-underline",
         // `btn-variant-${variant}`,
         // `btn-color_scheme-${colorScheme}`,
         buttonVariants({
@@ -126,6 +125,9 @@ export default function Button({
 }
 // #region --- Button Types Rendering ---------------------------------------------
 
+// Interactive buttons (links, <button>s) slide their arrow and swap decoration colors on hover.
+const INTERACTIVE_BTN = `${ARROW_HOVER_GROUP} cursor-pointer`;
+
 interface ButtonVariantComponentProps {
     btnClass: string;
     // btnSettings: ButtonSettingProps;
@@ -150,7 +152,7 @@ function ModalButton({
         <>
             <button
                 {...rest}
-                className={btnClass}
+                className={cn(btnClass, INTERACTIVE_BTN)}
                 onClick={() => setModalOpen(true)}
             >
                 <ButtonInner
@@ -185,7 +187,7 @@ function LinkButton({
     return (
         <LenisLink
             {...rest}
-            className={btnClass}
+            className={cn(btnClass, INTERACTIVE_BTN)}
             href={btnSettings.link}
             target={btnSettings.target ?? "_self"}
         >
@@ -240,7 +242,7 @@ function NativeButton({
             {...rest}
             {...nativeProps}
             type={htmlType ?? "button"}
-            className={btnClass}
+            className={cn(btnClass, INTERACTIVE_BTN)}
         >
             <ButtonInner
                 text={text}
@@ -311,6 +313,9 @@ function ButtonInner({
     return <p className={BTN_TEXT_CLASSES}>{text}</p>;
 }
 
+const ICON_WRAPPER =
+    "inline-flex justify-center items-center [--btn-icon-color:var(--btn-icon-color-base)] group-hover/arrow:[--btn-icon-color:var(--btn-icon-color-hover)] [&_path]:transition-all [&_path]:duration-300 [&_path]:ease-in-out";
+
 function IconButtonInner({
     text,
     icon,
@@ -328,9 +333,9 @@ function IconButtonInner({
 }) {
     const IconComponent = icon;
 
-    // Named "-base"/"-hover" (not "--btn-icon-color" itself) so the hover swap, done in
-    // Button.scss via a stylesheet rule on `--btn-icon-color`, isn't shadowed by this
-    // inline style — inline styles always beat stylesheet rules, :hover included.
+    // Named "-base"/"-hover" (not "--btn-icon-color" itself) so the hover swap, a class on
+    // `--btn-icon-color`, isn't shadowed by this inline style — inline styles always beat
+    // stylesheet rules, :hover included.
     const wrapperStyle = {
         "--btn-icon-color-base": iconColor.toCssVar(),
         "--btn-icon-color-hover": iconHoverColor.toCssVar(),
@@ -338,13 +343,13 @@ function IconButtonInner({
 
     return (
         <>
-        {iconSide === 'left' && (<span className="btn_icon-wrapper flex justify-center items-center" style={wrapperStyle}>
+        {iconSide === 'left' && (<span className={ICON_WRAPPER} style={wrapperStyle}>
                 <IconComponent size={iconSize} color="var(--btn-icon-color)" />
             </span>)}
             
             <p className={BTN_TEXT_CLASSES}>{text}</p>
 
-            {iconSide === 'right' && (<span className="btn_icon-wrapper flex justify-center items-center" style={wrapperStyle}>
+            {iconSide === 'right' && (<span className={ICON_WRAPPER} style={wrapperStyle}>
                 <IconComponent size={iconSize} color="var(--btn-icon-color)" />
             </span>)}
             

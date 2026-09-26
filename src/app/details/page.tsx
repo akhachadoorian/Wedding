@@ -1,8 +1,8 @@
 "use client";
 
-import CopyOnly from "@/components/CopyOnly/CopyOnly";
-import PageGuard from "@/components/PageGuard/PageGuard";
-import WatermarkText from "@/components/WatermarkText/WatermarkText";
+import CopyOnly from "@/components/CopyOnly";
+import PageGuard from "@/components/PageGuard";
+import WatermarkText from "@/components/WatermarkText";
 import { useFadeIn } from "@/hooks/useFadeIn";
 import ComingSoon, { ComingSoonSection } from "@/layout/ComingSoon";
 import ImageOverlayHero from "@/layout/ImageOverlayHero";
@@ -12,10 +12,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import content from "./content";
 import "./Details.scss";
-import ComponentGuard from "@/components/ComponentGuard/ComponentGuard";
-import Timeline from "@/components/Timeline/Timeline";
+import ComponentGuard from "@/components/ComponentGuard";
+import Timeline from "@/components/Timeline";
 import FrameCardGrid from "@/components/CardGrid/FrameCardGrid";
-import { AccordionGrid } from "@/components/Accordions/Accordions";
+import { AccordionGrid } from "@/components/Accordions";
 import { ThreeColumnCopy } from "@/components/ThreeColumnCopy";
 import Star from "@/icons/Star";
 
