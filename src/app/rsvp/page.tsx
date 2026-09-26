@@ -17,10 +17,7 @@ export default function RSVP({ loaded = true }: { loaded?: boolean }) {
         <PageGuard
             route="/rsvp"
             fallback={
-                <ComingSoon
-                    pageTitle="RSVP"
-                    body="This page will be used to RSVP for the wedding and rehearsal mixer."
-                />
+                <ComingSoon {...content.comingSoon.page} />
             }
         >
             {/* <TextOnlyHero

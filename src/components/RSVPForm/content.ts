@@ -1,45 +1,27 @@
+import { EVENT } from "@/content/event";
 import { RSVPStepTextProps } from "./types";
 
-// #region --- 1 ---
+const { wedding, venue, rehearsal } = EVENT;
+
+// #region --- Steps ---
 
 export const STEP_ONE_TEXT: RSVPStepTextProps = {
     stepNumber: 1,
-    eyebrow: "Find you Invitation",
+    eyebrow: "Find Your Invitation",
     title: "RSVP",
-    // body: "",
 };
-
-// export const STEP_ONE_TEXT: RSVPStepTextProps = {
-//     stepNumber: 1,
-//     title: "Find Your Party",
-//     body: "Enter your name to find your reservation.",
-// };
-
-// #endregion ---
-
-// TODO: responding for which guests?
-
-// #region --- 2 ---
 
 export const STEP_TWO_TEXT: RSVPStepTextProps = {
     stepNumber: 2,
-    // eyebrow: "Attendance",
     eyebrow: "Wedding Ceremony & Reception",
     title: "Who's Joining Us?",
-    // body: "Let us know who from your party will be joining us on the day.",
     body: {
-        left: 'Saturday\nOctober 31st',
-        center: 'The Clay Theatre\nGreen Cove, Fl',
-        right: 'Ceremony 5:00 PM\nUntil 10:30 PM'
-    }
-    // eyebrows: {
-    //     left: "October 31st, 2026\nCeremony at 5pm",
-    //     right: "The Clay Theatre\nGreen Cove, Fl",
-    // },
+        left: `${wedding.weekday}\n${wedding.date}`,
+        center: `${venue.name}\n${venue.cityShort}`,
+        right: `Ceremony ${wedding.ceremony}\nUntil ${wedding.end}`,
+    },
 };
-// #endregion ---
 
-// #region --- 3 ---
 export const STEP_THREE_TEXT: RSVPStepTextProps = {
     stepNumber: 3,
     eyebrow: "Meal Selection",
@@ -47,51 +29,40 @@ export const STEP_THREE_TEXT: RSVPStepTextProps = {
     body: "Please choose a meal preference for each guest attending. Let us know about any dietary restrictions or allergies in the field below.",
 };
 
-// #endregion ---
-
-// #region --- 4 ---
 export const STEP_FOUR_TEXT: RSVPStepTextProps = {
     stepNumber: 4,
     eyebrow: "Transportation",
-    title: "Riding the Bus?", 
+    title: "Riding the Bus?",
     body: "If you're staying at one of our hotel blocks, let us know if you'd like a seat on the complimentary bus to the venue.",
 };
-// #endregion ---
-
-// #region --- 5 ---
 
 export const STEP_FIVE_TEXT: RSVPStepTextProps = {
     stepNumber: 5,
     eyebrow: "Rehearsal Mixer",
-    title: 'Join Us Friday?',
-    // body: "You've been invited to join us the evening before the wedding — Friday, October 30th from 8:30–11 PM at Maggiano's Little Italy for drinks and snacks. Will you be joining us?",
+    title: "Join Us Friday?",
     body: {
-        left: 'Friday\nOctober 30th',
-        center: "Maggiano's Little Italy\nSt. Johns Town Center",
-        right: 'From 8:30 PM\nUntil 10:30 PM'
-    }
+        left: `${rehearsal.weekday}\n${rehearsal.date}`,
+        center: `${rehearsal.place}\n${rehearsal.area}`,
+        right: `From ${rehearsal.start}\nUntil ${rehearsal.end}`,
+    },
 };
 
 // #endregion ---
 
-// #region --- Thank you ---
+// #region --- Thank You ---
 
 export const FORM_THANK_YOU = {
     yes: {
         eyebrow: "Thank you",
         header: "You're all set!",
-        body: "We've received your RSVP and can't wait to celebrate with you. See you on October 31st!",
+        body: `We've received your RSVP and can't wait to celebrate with you. See you on ${wedding.date}!`,
     },
     no: {
         eyebrow: "Thank you",
         header: "We'll miss you!",
-        body: "We're sorry you can't be there, but we appreciate you letting us know. ",
+        body: "We're sorry you can't be there, but we appreciate you letting us know.",
     },
 };
-
-// #endregion ---
-
-// #region --- Thank ---
 
 // #endregion ---
 
@@ -99,52 +70,5 @@ export const FORM_THANK_YOU = {
 
 export const NO_GUESTS =
     "Unable to fetch guests. Please try refreshing the page or try again later.";
+
 // #endregion ---
-
-// #region ---  ---
-// #endregion ---
-
-
-// // #region --- 2 ---
-
-// export const STEP_TWO_TEXT: RSVPStepTextProps = {
-//     stepNumber: 2,
-//     title: "Your Responding for",
-//     body: "Let us know who from your party will be joining us on the day.",
-// };
-
-// // #endregion ---
-
-// // #region --- 3 ---
-
-// export const STEP_THREE_TEXT: RSVPStepTextProps = {
-//     stepNumber: 2,
-//     title: "Who's Coming?",
-//     body: "Let us know who from your party will be joining us on the day.",
-// };
-
-// // #endregion ---
-
-// // #region --- 4 ---
-// export const STEP_FOUR_TEXT: RSVPStepTextProps = {
-//     stepNumber: 4,
-//     title: "Meal Selection",
-//     body: "Please choose a meal preference for each guest attending. Let us know about any dietary restrictions or allergies in the field below.",
-// };
-// // #endregion ---
-
-// // #region --- 5 ---
-// export const STEP_FIVE_TEXT: RSVPStepTextProps = {
-//     stepNumber: 5,
-//     title: "",
-//     body: "",
-// };
-// // #endregion ---
-
-// // #region --- 6 ---
-// export const STEP_SIX_TEXT: RSVPStepTextProps = {
-//     stepNumber: 6,
-//     title: "Rehearsal Mixer",
-//     body: "You've been invited to join us the evening before the wedding — Friday, October 30th from 8:30–11 PM at Maggiano's Little Italy for drinks and snacks. Will you be joining us?",
-// };
-// // #endregion ---

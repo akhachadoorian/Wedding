@@ -32,10 +32,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
         <PageGuard
             route="/details"
             fallback={
-                <ComingSoon
-                    pageTitle="Details"
-                    body="This page will have information about the venue, the day-of timeline, FAQs and more."
-                />
+                <ComingSoon {...content.comingSoon.page} />
             }
         >
             <ImageOverlayHero
@@ -51,9 +48,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                 fallback={
                     <ComingSoonSection
                         theme="black"
-                        eyebrow="More to Come"
-                        title="Day of Schedule coming soon!"
-                        body="It will outline the general timeline for the day of."
+                        {...content.comingSoon.timeline}
                     />
                 }
             >
@@ -68,10 +63,10 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                             headingLevel: "h2",
                             headingClass: "heading-xl",
                         }}
-                        {...content.timeline.copyOnly}
+                        {...content.timeline.intro}
                     />
 
-                    <Timeline timelineElements={content.timeline.elements} />
+                    <Timeline timelineElements={content.timeline.events} />
                 </section>
             </ComponentGuard>
 
@@ -80,8 +75,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                 fallback={
                     <ComingSoonSection
                         theme="gray"
-                        eyebrow="More to Come"
-                        title="Dress code coming soon!"
+                        {...content.comingSoon.dressCode}
                     />
                 }
             >
@@ -102,10 +96,10 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                             subtitleExtra: true,
                             subtitleExtraBorderColor: "--cream",
                         }}
-                        {...content.dressCode.copyOnly}
+                        {...content.dressCode.intro}
                     />
 
-                    <FrameCardGrid {...content.dressCode.frameCards} />
+                    <FrameCardGrid {...content.dressCode.cards} />
                 </SlantedSection>
             </ComponentGuard>
 
@@ -114,8 +108,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                 fallback={
                     <ComingSoonSection
                         theme="black"
-                        eyebrow="More to Come"
-                        title="FAQs coming soon!"
+                        {...content.comingSoon.faqs}
                     />
                 }
             >
@@ -129,19 +122,16 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                             variation: "center",
                             headingLevel: "h2",
                         }}
-                        {...content.faqs.copyOnly}
+                        {...content.faqs.intro}
                     />
-                    <AccordionGrid {...content.faqs.accordions} />
+                    <AccordionGrid {...content.faqs.items} />
                 </section>
             </ComponentGuard>
 
             <ComponentGuard
                 id="details-rehearsal_mixer"
                 fallback={
-                    <ComingSoonSection
-                        eyebrow="More to Come"
-                        title="Rehearsal mixer details coming soon!"
-                    />
+                    <ComingSoonSection {...content.comingSoon.rehearsal} />
                 }
             >
                 <section
@@ -149,7 +139,7 @@ export default function Details({ loaded = true }: { loaded?: boolean }) {
                     id="rehearsal"
                     className="rehearsal-section base_section"
                 >
-                    <ThreeColumnCopy {...content.rehearsalMixer.threeColCopy} />
+                    <ThreeColumnCopy {...content.rehearsal.columns} />
                 </section>
             </ComponentGuard>
         </PageGuard>
@@ -169,7 +159,7 @@ function VenueWatermark({
             id="venue"
             className="venue-section base_section"
         >
-            <WatermarkText {...content.watermarkVenue} />
+            <WatermarkText {...content.venue.watermark} />
 
             <div
                 ref={noteRef}
@@ -177,9 +167,7 @@ function VenueWatermark({
             >
                 <Star className="size-5" />
                 <p className="text-center italic text-base">
-                    Just a reminder that rideshares, while available to the
-                    venue, will be very difficult to find — if you can even find
-                    one — for the trip back. Please plan accordingly.
+                    {content.venue.note}
                 </p>
                 <Star className="size-5" />
             </div>

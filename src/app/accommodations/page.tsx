@@ -26,10 +26,7 @@ export default function Accommodations({
         <PageGuard
             route="/accommodations"
             fallback={
-                <ComingSoon
-                    pageTitle="Accommodations"
-                    body="This page will have information related to the hotel blocks and transportation to the venue."
-                />
+                <ComingSoon {...content.comingSoon.page} />
             }
         >
             <ImageOverlayHero
@@ -49,20 +46,16 @@ export default function Accommodations({
                         variation: "center",
                         headingLevel: "h2",
                     }}
-                    {...content.hotels.copyOnly}
+                    {...content.hotels.intro}
                 />
 
-                <CardGrid {...content.hotels.hotelCards} />
+                <CardGrid {...content.hotels.cards} />
             </section>
 
             <ComponentGuard
                 id="accommodations-transportation"
                 fallback={
-                    <ComingSoonSection
-                        eyebrow="More to Come"
-                        title="Transportation section coming soon!"
-                        body="It will contain information regarding how to get and from the venue, venue parking, and the arranged bus service."
-                    />
+                    <ComingSoonSection {...content.comingSoon.transportation} />
                 }
             >
                 <SlantedSection
@@ -70,7 +63,7 @@ export default function Accommodations({
                     sectionPrefix="transportation"
                 >
                     <CopyOnly
-                        {...content.transportation}
+                        {...content.transportation.intro}
                         styleOptions={{
                             variation: "center",
                             headingLevel: "h2",
@@ -81,10 +74,7 @@ export default function Accommodations({
                     <div className="flex gap-050 md:max-w-[45vw] md:mx-auto">
                         <Star className="size-5" color="--cream" />
                         <p className="text-center italic body">
-                            Just a reminder that rideshares, while available to
-                            the venue, will be very difficult to find — if you
-                            can even find one — for the trip back. Please plan
-                            accordingly.
+                            {content.transportation.note}
                         </p>
                         <Star className="size-5" color="--cream" />
                     </div>

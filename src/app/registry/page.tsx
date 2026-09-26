@@ -16,7 +16,7 @@ export default function Registry({ loaded = true }: { loaded?: boolean }) {
     return (
         <PageGuard
             route="/registry"
-            fallback={<ComingSoon pageTitle="Registry" />}
+            fallback={<ComingSoon {...content.comingSoon.page} />}
         >
             <ImageOverlayHero
                 {...content.hero}
@@ -36,12 +36,12 @@ export default function Registry({ loaded = true }: { loaded?: boolean }) {
                         headingClass: "heading-l",
                         variation: "center",
                     }}
-                    {...content.registryLinks.copyOnly}
+                    {...content.registryLinks.intro}
                 />
             </section>
 
             <ImageCallout
-                {...content.catImageCallout}
+                {...content.catGift}
                 styleOptions={{
                     variation: "inset",
                     textLayout: "center",
@@ -51,16 +51,6 @@ export default function Registry({ loaded = true }: { loaded?: boolean }) {
                 ref={catGiftRef}
             />
 
-            {/* <section id="cat_gift" ref={catGiftRef} className="base_section cat_gift-section">
-                <MediaWithCopy
-                    styleOptions={{
-                        mediaSide: "right",
-                        headingLevel: "h2",
-                        headingClass: 'heading-l'
-                    }}
-                    {...content.catLink}
-                />
-            </section> */}
         </PageGuard>
     );
 }
