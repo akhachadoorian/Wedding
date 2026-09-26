@@ -27,7 +27,7 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
                 id="welcome"
                 className="welcome-section base_section"
             >
-                <WatermarkText {...content.welcome.welcomeWatermarkText} />
+                <WatermarkText {...content.welcome.watermark} />
 
             </section>
 
@@ -52,10 +52,10 @@ export default function Home({ loaded = true }: { loaded?: boolean }) {
                         variation: "center",
                         headingLevel: "h2",
                     }}
-                    {...content.quickLinks.copyOnly}
+                    {...content.quickLinks.intro}
                 />
 
-                <CardGrid {...content.quickLinks.cardGrid} />
+                <CardGrid {...content.quickLinks.cards} />
             </section>
         </PageGuard>
     );

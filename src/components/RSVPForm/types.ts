@@ -8,6 +8,7 @@ import {
     STEP_TWO_TEXT,
 } from "./content";
 import { ExpandedTextValueOptions } from "./FormInputs";
+import { HOTEL_KEYS, HOTELS, HotelKey } from "@/content/hotels";
 
 export type Guest = {
     fullName: string,
@@ -158,23 +159,18 @@ type WeddingMealResponse = Partial<Record<GuestKey, Meal>>;
 
 // #region --- Hotel ---
 
-const HOTEL_OPTS = ["homewoodSuites", "hyattPlace", "acHotel"] as const;
-type HotelOpts = (typeof HOTEL_OPTS)[number];
+type HotelOpts = HotelKey;
 
 type AlternateHotelOpts = "notSure" | "other";
 export type HotelValues = HotelOpts | AlternateHotelOpts;
 
-export const HOTEL_LABELS = {
-    homewoodSuites: "Homewood Suites By Hilton",
-    hyattPlace: "Hyatt Place",
-    acHotel: "AC Hotel",
-} as const satisfies Record<HotelOpts, string>;
+export const HOTEL_LABELS = Object.fromEntries(
+    HOTEL_KEYS.map((key) => [key, HOTELS[key].fullName]),
+) as Record<HotelOpts, string>;
 
-const HOTEL_SUBTEXT = {
-    homewoodSuites: "10434 Midtown Parkway,\nJacksonville, Florida 32246",
-    hyattPlace: "4742 Town Center Parkway,\nJacksonville, FL 32246",
-    acHotel: "5323 Big Island Drive,\nJacksonville, FL, 32246",
-} as const satisfies Record<HotelOpts, string>;
+const HOTEL_SUBTEXT = Object.fromEntries(
+    HOTEL_KEYS.map((key) => [key, `${HOTELS[key].street},\n${HOTELS[key].cityStateZip}`]),
+) as Record<HotelOpts, string>;
 
 export const HOTEL_OPTIONS = buildOptions(HOTEL_LABELS, HOTEL_SUBTEXT);
 
@@ -200,7 +196,7 @@ export type HotelStrings =
 export function isStayingAtHotel(answer?: HotelValues): boolean {
     if (!answer) return false;
 
-    return (HOTEL_OPTS as readonly string[]).includes(answer);
+    return (HOTEL_KEYS as readonly string[]).includes(answer);
 }
 
 // #endregion ---

@@ -6,7 +6,7 @@ import { WithHTMLProps } from '@/types/props';
 import { cn } from '@/utils/cn';
 
 // #region --- Coming Soon Header -----------------
-type ComingSoonProps = {
+export type ComingSoonProps = {
     pageTitle?: string;
     header?: string;
     body?: string;
@@ -43,7 +43,7 @@ export default function ComingSoon({
 
 type ComingSoonSectionThemes = 'cabernet' | 'gray' | 'black'
 
-type ComingSoonSectionProps = WithHTMLProps & {
+export type ComingSoonSectionProps = WithHTMLProps & {
     eyebrow?: string;
     title: string;
     body?: string;

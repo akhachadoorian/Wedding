@@ -1,10 +1,4 @@
-import {
-    DEFAULT_IMAGE,
-    DEFAULT_IMAGE_DISNEY,
-    DEFAULT_IMAGE_ENGAGEMENT,
-    DEFAULT_IMAGE_GRADUATION,
-    DEFAULT_IMAGE_SUNGLASSES,
-} from "@/data/defaultImage";
+import { DEFAULT_IMAGE, IMAGES } from "@/content/images";
 import { useTooltip } from "@/layout/GlobalTooltip";
 import { CustomImageProps } from "@/types/images";
 import { WithHTMLProps } from "@/types/props";
@@ -49,13 +43,13 @@ const DEFAULT_STYLE_OPTIONS = {
 };
 
 const DEFAULT_LEFT_IMAGES: RequireX<CustomImageProps, 2> = [
-    DEFAULT_IMAGE_ENGAGEMENT,
-    DEFAULT_IMAGE_SUNGLASSES,
+    IMAGES.engagement,
+    IMAGES.sunglasses,
 ];
 
 const DEFAULT_RIGHT_IMAGES: RequireX<CustomImageProps, 2> = [
-    DEFAULT_IMAGE_DISNEY,
-    DEFAULT_IMAGE_GRADUATION,
+    IMAGES.disney,
+    IMAGES.graduation,
 ];
 
 export default function PhotoCollage({

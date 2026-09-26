@@ -1,6 +1,6 @@
 'use client'
 
-import { DEFAULT_IMAGE } from "../data/defaultImage";
+import { DEFAULT_IMAGE } from "@/content/images";
 import mergeRefs from "../hooks/mergeRefs";
 import { useFadeInChildren } from "../hooks/useFadeIn";
 import { ThreeButtonsArray } from "../types/buttons";

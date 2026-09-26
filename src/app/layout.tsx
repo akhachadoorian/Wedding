@@ -10,11 +10,13 @@ import {
 } from "../layout/GlobalTooltip";
 import LenisProvider from "../utils/LenisProvider";
 import Footer from "@/layout/Footer";
+import { EVENT } from "@/content/event";
+
+const { couple, wedding, venue } = EVENT;
 
 export const metadata: Metadata = {
-    title: "Alex & Max | October 31, 2026",
-    description:
-        "Join us to celebrate the wedding of Alex & Max on October 31st, 2026 at The Clay Theatre in Green Cove Springs, Florida.",
+    title: `${couple.bride} & ${couple.groom} | ${wedding.date}, ${wedding.year}`,
+    description: `Join us to celebrate the wedding of ${couple.bride} & ${couple.groom} on ${wedding.date}, ${wedding.year} at ${venue.name} in ${venue.city}.`,
 };
 
 const unbounded = Unbounded({

@@ -1,171 +1,136 @@
+import { CardGridProps } from "@/components/CardGrid/CardGrid";
 import { PhotoCollageProps } from "@/components/PhotoCollage";
 import { WatermarkTextProps } from "@/components/WatermarkText";
-import {
-    DEFAULT_IMAGE_DISNEY,
-    DEFAULT_IMAGE_ENGAGEMENT,
-    DEFAULT_IMAGE_GRADUATION,
-    DEFAULT_IMAGE_MaxAlexJules,
-    DEFAULT_IMAGE_MaxHoldingBucky,
-} from "@/data/defaultImage";
+import { arrowLink } from "@/content/builders";
+import { EVENT } from "@/content/event";
+import { IMAGES } from "@/content/images";
+import { CopyContent } from "@/content/types";
 import { GothHeroProps } from "@/layout/GothHero";
-import { CardGridProps } from "@/components/CardGrid/CardGrid";
-import { CopyOnlyProps } from "@/components/CopyOnly";
 
-// ----- Hero -----------------------------------------------
+const { wedding, venue, rsvp } = EVENT;
+
+// #region --- Hero ---
 
 const hero: Omit<GothHeroProps, "loaded"> = {
-    // header: '',
     img: {
-        src: "/images/DipShot.jpg",
-        alt: "Max dipping Alex and kissing.",
+        ...IMAGES.dipShot,
         imgPositionResponsive: {
             desktop: "center 25%",
             mobile: "35% center",
         },
     },
     eyebrows: {
-        left: "October 31st, 2026\nCeremony at 5pm",
-        right: "The Clay Theatre\nGreen Cove, Fl",
+        left: `${wedding.date}, ${wedding.year}\nCeremony at ${wedding.ceremonyShort}`,
+        right: `${venue.name}\n${venue.cityShort}`,
     },
 };
 
-// #region --- Overview --------------------------------
-const welcomeWatermarkText: WatermarkTextProps = {
-    watermarkText: "October 31st",
+// #endregion ---
+
+// #region --- Welcome ---
+
+const welcomeWatermark: WatermarkTextProps = {
+    watermarkText: wedding.date,
     subheader: "We're getting married",
     captions: {
         left: {
             orientation: "center",
-            lines: ["The Clay Theatre", "Green Cove, Fl"],
-            button: {
-                type: "link",
-                link: "/details#venue",
-                text: "View Venue Details",
-                decoration: {
-                    type: "arrow",
-                },
-            },
+            lines: [venue.name, venue.city],
+            button: arrowLink("View Venue Details", "/details#venue"),
         },
         center: {
             orientation: "center",
-            lines: ["Doors open at 4:30pm", "Ceremony at 5pm"],
-            button: {
-                type: "link",
-                link: "/details#timeline",
-                text: "View Timeline",
-                decoration: {
-                    type: "arrow",
-                },
-            },
+            lines: [`Doors open at ${wedding.doorsOpen}`, `Ceremony at ${wedding.ceremony}`],
+            button: arrowLink("View Timeline", "/details#timeline"),
         },
         right: {
             orientation: "center",
-            lines: ["RSVP by", "October 1st"],
-            button: {
-                type: "link",
-                link: "/rsvp",
-                text: "RSVP Now",
-                decoration: {
-                    type: "arrow",
-                },
-            },
+            lines: ["RSVP by", rsvp.deadline],
+            button: arrowLink("RSVP Now", "/rsvp"),
         },
     },
 };
 
-const welcome = {
-    welcomeWatermarkText: welcomeWatermarkText,
-};
+// #endregion ---
 
-// #endregion --------------------------------
-
-// #region --- Our Story --------------------------------
+// #region --- Our Story ---
 
 const ourStory: PhotoCollageProps = {
     header: "Our Story",
-    mainImage: DEFAULT_IMAGE_ENGAGEMENT,
-    leftSideImages: [DEFAULT_IMAGE_MaxAlexJules, DEFAULT_IMAGE_GRADUATION],
+    mainImage: IMAGES.engagement,
+    leftSideImages: [IMAGES.maxAlexJules, IMAGES.graduation],
     rightSideImages: [
         {
-            ...DEFAULT_IMAGE_MaxHoldingBucky,
+            ...IMAGES.maxHoldingBucky,
             imgPositionResponsive: {
                 desktop: "center 15%",
             },
         },
-        DEFAULT_IMAGE_DISNEY, //
+        IMAGES.disney,
     ],
 };
 
-// #endregion ----------------------------------------------------------
+// #endregion ---
 
-// ----- Quick Links -----------------------------------------------
-const qlCopyOnly: Omit<CopyOnlyProps, "className" | "styleOptions"> = {
-    // eyebrow: "We've got you covered",
-    // header: "Everything from the ceremony to where to stay, all in one place",
+// #region --- Quick Links ---
+
+const quickLinksIntro: CopyContent = {
     eyebrow: "quick links",
     header: "Everything you need, in one place",
 };
 
-const qlCardGrid: CardGridProps = {
+const quickLinkCard = (
+    eyebrow: string,
+    title: string,
+    body: string,
+    link: string,
+): CardGridProps["cards"][number] => ({
+    text: { eyebrow, title, body },
+    cardType: {
+        type: "link",
+        linkSettings: { link, target: "_self" },
+    },
+});
+
+const quickLinksCards: CardGridProps = {
     cards: [
-        {
-            text: {
-                eyebrow: "The Day",
-                title: "Details",
-                body: "Ceremony time, timeline, and what to expect on the day",
-            },
-            cardType: {
-                type: "link",
-                linkSettings: {
-                    link: "/details",
-                    target: "_self",
-                },
-            },
-        },
-        {
-            text: {
-                eyebrow: "Accommodations",
-                title: "Stay & Travel",
-                body: "Hotel blocks, parking, and getting to The Clay Theatre",
-                // letter: "A"
-            },
-            cardType: {
-                type: "link",
-                linkSettings: {
-                    link: "/accommodations",
-                    target: "_self",
-                },
-            },
-        },
-        {
-            text: {
-                eyebrow: "RSVP",
-                title: "You're Invited",
-                body: "Let us know if you are able to come!",
-                // letter: "i"
-            },
-            cardType: {
-                type: "link",
-                linkSettings: {
-                    link: "/rsvp",
-                    target: "_self",
-                },
-            },
-        },
+        quickLinkCard(
+            "The Day",
+            "Details",
+            "Ceremony time, timeline, and what to expect on the day",
+            "/details",
+        ),
+        quickLinkCard(
+            "Accommodations",
+            "Stay & Travel",
+            `Hotel blocks, parking, and getting to ${venue.name}`,
+            "/accommodations",
+        ),
+        quickLinkCard(
+            "RSVP",
+            "You're Invited",
+            "Let us know if you are able to come!",
+            "/rsvp",
+        ),
     ],
 };
 
-const quickLinks = {
-    copyOnly: qlCopyOnly,
-    cardGrid: qlCardGrid,
-};
+// #endregion ---
 
-// ----- Content -----------------------------------------------
+// #region --- Content ---
+
 const homeContent = {
-    hero: hero,
-    welcome: welcome,
-    ourStory: ourStory,
-    quickLinks: quickLinks,
+    hero,
+    welcome: {
+        watermark: welcomeWatermark,
+    },
+    ourStory,
+    quickLinks: {
+        intro: quickLinksIntro,
+        cards: quickLinksCards,
+    },
 };
 
 export default homeContent;
+
+// #endregion ---

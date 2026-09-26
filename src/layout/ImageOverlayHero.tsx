@@ -11,7 +11,7 @@ import {
 import { WithHTMLProps } from "../types/props";
 
 import ImageHolder from "@/components/ImageHolder";
-import { DEFAULT_IMAGE } from "@/data/defaultImage";
+import { DEFAULT_IMAGE } from "@/content/images";
 import mergeRefs from "@/hooks/mergeRefs";
 import { useFadeInChildren } from "@/hooks/useFadeIn";
 import { CustomImageProps } from "@/types/images";
