@@ -51,7 +51,9 @@ export default function WatermarkText({
     const captionCenterRef = useRef<HTMLParagraphElement>(null);
     const captionRightRef = useRef<HTMLParagraphElement>(null);
 
-    const { containerRef, textRef, headlineStyle, ready } = useFitHeadline();
+    const { containerRef, textRef, headlineStyle, ready } = useFitHeadline({
+        safetyMargin: 0.9,
+    });
 
     useLayoutEffect(() => {
         const el = wrapperRef.current;
@@ -109,7 +111,10 @@ export default function WatermarkText({
         <div
             {...htmlProps}
             ref={mergeRefs(ref, wrapperRef)}
-            className={cn("relative overflow-hidden flex flex-col gap-400", className)}
+            className={cn(
+                "relative overflow-hidden flex flex-col gap-400",
+                className,
+            )}
         >
             {subheader && (
                 <h3
@@ -122,7 +127,11 @@ export default function WatermarkText({
             )}
 
             <div ref={mergeRefs(watermarkTextRef, containerRef)}>
-                <h2 ref={textRef} style={headlineStyle} className="text-[color:var(--wine-650)] text-center md:whitespace-nowrap">
+                <h2
+                    ref={textRef}
+                    style={headlineStyle}
+                    className="text-[color:var(--wine-650)] text-center md:whitespace-nowrap"
+                >
                     {ready && watermarkText}
                 </h2>
             </div>
