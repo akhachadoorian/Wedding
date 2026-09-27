@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import type { CSSProperties, RefObject } from "react";
 import { useFitText } from "react-use-fittext";
 import type { FitMode, LineMode } from "react-use-fittext";
@@ -99,9 +99,34 @@ export function useFitHeadline({
 
     const ready = breakpointReady && fontsReady;
 
+    const appliedFontSize =
+        typeof fontSize === "number" ? fontSize * safetyMargin : fontSize;
+
+    // react-use-fittext writes the raw fitted size straight onto the text
+    // element (`el.style.fontSize = …`) whenever it re-fits, comparing
+    // against a stale copy of its own state. When the fitted size hasn't
+    // changed, its setState is a no-op, React never re-renders, and the
+    // unscaled size stays in the DOM — silently discarding `safetyMargin`.
+    // The text then fits flush to the container and can trip the
+    // single-line ellipsis (e.g. "October 31..." once the container hits
+    // its max width). Re-assert the scaled size after every such write.
+    useLayoutEffect(() => {
+        const el = textRef.current;
+        if (!el || typeof appliedFontSize !== "number") return;
+
+        const target = `${appliedFontSize}px`;
+        const apply = () => {
+            if (el.style.fontSize !== target) el.style.fontSize = target;
+        };
+
+        apply();
+        const observer = new MutationObserver(apply);
+        observer.observe(el, { attributes: true, attributeFilter: ["style"] });
+        return () => observer.disconnect();
+    }, [textRef, appliedFontSize]);
+
     const headlineStyle: CSSProperties = {
-        fontSize:
-            typeof fontSize === "number" ? fontSize * safetyMargin : fontSize,
+        fontSize: appliedFontSize,
         lineHeight: lineHeight,
         visibility: ready ? "visible" : "hidden",
     };
