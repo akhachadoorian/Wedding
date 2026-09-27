@@ -84,11 +84,9 @@ export function useFitHeadline({
     // before its font is ready.
     const [fontsReady, setFontsReady] = useState(false);
     useEffect(() => {
-        if (!document.fonts?.ready) {
-            setFontsReady(true);
-            return;
-        }
-        document.fonts.ready.then(() => setFontsReady(true));
+        (document.fonts?.ready ?? Promise.resolve()).then(() =>
+            setFontsReady(true),
+        );
     }, []);
 
     const { containerRef, textRef, fontSize } = useFitText({
