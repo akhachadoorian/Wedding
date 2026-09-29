@@ -5,9 +5,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { useLenis } from "lenis/react";
 import gsap from "gsap";
 
+import { cn } from "@/utils/cn";
+
 const COVER_DURATION = 0.6;
 const REVEAL_DURATION = 0.6;
 const REVEAL_DELAY = 0.15;
+// Vertical rise of the curtain's slanted edges, matching SlantedSection's large slant.
+const SLANT = "12vw";
 // If the new route never commits (e.g. a failed fetch), reveal anyway so the
 // page can't get stuck behind the curtain.
 const SAFETY_TIMEOUT = 3000;
@@ -104,11 +108,16 @@ export default function PageTransitionProvider({ children }: { children: React.R
         <PageTransitionContext.Provider value={{ navigate }}>
             {children}
 
+            {/* Parallelogram: extends SLANT past the viewport top and bottom so
+                the slanted edges are off-screen while it fully covers. */}
             <div
                 ref={curtainRef}
                 aria-hidden="true"
-                className="fixed inset-0 z-[9999] bg-black-bg pointer-events-none"
-                style={{ transform: "translateY(100%)" }}
+                className={cn(
+                    "fixed inset-x-0 top-[calc(-1*var(--slant))] z-[9999] h-[calc(100svh+2*var(--slant))] bg-cabernet pointer-events-none",
+                    "[clip-path:polygon(0_var(--slant),100%_0,100%_calc(100%-var(--slant)),0_100%)]",
+                )}
+                style={{ "--slant": SLANT, transform: "translateY(100%)" } as React.CSSProperties}
             />
         </PageTransitionContext.Provider>
     );
