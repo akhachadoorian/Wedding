@@ -5,8 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { useLenis } from "lenis/react";
 import gsap from "gsap";
 
-import Diamond from "@/components/Diamond";
-
 const COVER_DURATION = 0.6;
 const REVEAL_DURATION = 0.6;
 const REVEAL_DELAY = 0.15;
@@ -109,15 +107,9 @@ export default function PageTransitionProvider({ children }: { children: React.R
             <div
                 ref={curtainRef}
                 aria-hidden="true"
-                className="fixed inset-0 z-[9999] flex items-center justify-center bg-black-bg pointer-events-none"
+                className="fixed inset-0 z-[9999] bg-black-bg pointer-events-none"
                 style={{ transform: "translateY(100%)" }}
-            >
-                <Diamond
-                    color="--gold-500"
-                    size={{ size: { minSize: 32, desiredSize: 40, maxSize: 48 } }}
-                    className="animate-pulse"
-                />
-            </div>
+            />
         </PageTransitionContext.Provider>
     );
 }
