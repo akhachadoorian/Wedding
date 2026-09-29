@@ -9,6 +9,7 @@ import {
     TooltipProvider,
 } from "../layout/GlobalTooltip";
 import LenisProvider from "../utils/LenisProvider";
+import PageTransitionProvider from "@/layout/PageTransition";
 import Footer from "@/layout/Footer";
 import { EVENT } from "@/content/event";
 
@@ -69,11 +70,13 @@ export default function RootLayout({
             <body>
                 <TooltipProvider>
                     <LenisProvider>
-                        <Navigation />
+                        <PageTransitionProvider>
+                            <Navigation />
 
-                        <main className="min-h-svh">{children}</main>
+                            <main className="min-h-svh">{children}</main>
 
-                        <Footer />
+                            <Footer />
+                        </PageTransitionProvider>
                     </LenisProvider>
                     <GlobalTooltip />
                 </TooltipProvider>
