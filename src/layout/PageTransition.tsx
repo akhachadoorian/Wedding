@@ -3,9 +3,9 @@
 import { createContext, useCallback, useContext, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useLenis } from "lenis/react";
+import Image from "next/image";
 import gsap from "gsap";
 
-import { NAV_ITEMS } from "@/data/navItems";
 import { cn } from "@/utils/cn";
 
 const COVER_DURATION = 0.6;
@@ -17,15 +17,6 @@ const SLANT = "12vw";
 // page can't get stuck behind the curtain.
 const SAFETY_TIMEOUT = 3000;
 
-// Name shown on the curtain for the page being navigated to. Uses the nav
-// label when there is one, otherwise the capitalized first path segment.
-function pageLabel(pathname: string) {
-    if (pathname === "/") return "Home";
-    const navItem = NAV_ITEMS.find((item) => item.link === pathname);
-    if (navItem) return navItem.text;
-    const segment = pathname.split("/").filter(Boolean)[0] ?? "";
-    return segment.charAt(0).toUpperCase() + segment.slice(1);
-}
 
 type PageTransitionContextValue = {
     navigate: (href: string) => void;
@@ -43,7 +34,7 @@ export default function PageTransitionProvider({ children }: { children: React.R
     const lenis = useLenis();
 
     const curtainRef = useRef<HTMLDivElement>(null);
-    const labelRef = useRef<HTMLParagraphElement>(null);
+    const logoRef = useRef<HTMLDivElement>(null);
     const isTransitioning = useRef(false);
     const pending = useRef<{ pathname: string; hasHash: boolean } | null>(null);
     const safetyTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -94,14 +85,13 @@ export default function PageTransitionProvider({ children }: { children: React.R
 
         router.prefetch(href);
 
-        const label = labelRef.current;
-        if (label) {
-            label.textContent = pageLabel(url.pathname);
-            gsap.killTweensOf(label);
+        const logo = logoRef.current;
+        if (logo) {
+            gsap.killTweensOf(logo);
             gsap.fromTo(
-                label,
-                { yPercent: 110 },
-                { yPercent: 0, duration: COVER_DURATION, delay: COVER_DURATION * 0.5, ease: "power3.out" },
+                logo,
+                { opacity: 0, scale: 0.85, y: 30 },
+                { opacity: 1, scale: 1, y: 0, duration: COVER_DURATION, delay: COVER_DURATION * 0.5, ease: "power3.out" },
             );
         }
 
@@ -143,14 +133,13 @@ export default function PageTransitionProvider({ children }: { children: React.R
                 )}
                 style={{ "--slant": SLANT, transform: "translateY(100%)" } as React.CSSProperties}
             >
-                {/* Masked so the name rises up from behind an invisible line */}
-                <div className="overflow-hidden px-6">
-                    {/* Inline font size: .heading-xxl would override a utility class.
-                        Capped by viewport width so long names stay on one line. */}
-                    <p
-                        ref={labelRef}
-                        className="heading-xxl text-cream text-center leading-[1.1] whitespace-nowrap"
-                        style={{ fontSize: "min(var(--text-6xl), 11vw)" }}
+                <div ref={logoRef} className="opacity-0">
+                    <Image
+                        src="/assets/AM.svg"
+                        alt=""
+                        width={95}
+                        height={87}
+                        className="aspect-[95/87] h-auto w-[140px] md:w-[220px]"
                     />
                 </div>
             </div>
