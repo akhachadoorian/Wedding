@@ -30,7 +30,7 @@ export const EVENT = {
         ceremonyShort: "5pm",
         cocktailHour: "5:30 PM",
         reception: "6:30 PM",
-        end: "10:30 PM",
+        end: "11:00 PM",
     },
 
     venue: {
@@ -51,7 +51,9 @@ export const EVENT = {
         end: "10:30 PM",
         place: rehearsalPlace,
         area: rehearsalArea,
-        mapsUrl: mapsUrl(`${rehearsalPlace}, 10367 Mid Town Pkwy, Jacksonville, FL 32246`),
+        mapsUrl: mapsUrl(
+            `${rehearsalPlace}, 10367 Mid Town Pkwy, Jacksonville, FL 32246`,
+        ),
     },
 
     rsvp: {
