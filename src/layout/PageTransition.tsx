@@ -139,7 +139,7 @@ export default function PageTransitionProvider({ children }: { children: React.R
                         alt=""
                         width={95}
                         height={87}
-                        className="aspect-[95/87] h-auto w-[220px] md:w-[360px]"
+                        className="aspect-[95/87] h-auto w-[min(75vw,560px,60svh)]"
                     />
                 </div>
             </div>
