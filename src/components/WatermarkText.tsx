@@ -1,22 +1,13 @@
 "use client";
 
-import { WithHTMLProps } from "../types/props";
-
 import mergeRefs from "@/hooks/mergeRefs";
-import { ButtonSettingProps } from "@/types/buttons";
-import { NonEmptyArray } from "@/types/utility";
+import { useFitHeadline } from "@/hooks/useFitHeadline";
+import { WithHTMLProps } from "@/types/props";
 import { cn } from "@/utils/cn";
 import gsap from "gsap";
 import { useLayoutEffect, useRef } from "react";
-import Button from "./Buttons/Button";
-import { useFitHeadline } from "@/hooks/useFitHeadline";
-import ColumnRow from "./ColumnRow";
 import { ColumnProps } from "./Column";
-
-type Caption = {
-    lines: NonEmptyArray<string>;
-    button?: ButtonSettingProps;
-};
+import ColumnRow from "./ColumnRow";
 
 export type WatermarkTextProps = WithHTMLProps & {
     watermarkText: string;
@@ -28,10 +19,9 @@ export type WatermarkTextProps = WithHTMLProps & {
     };
 };
 
-const BUTTON_STYLE = {
-    colorScheme: "cream" as const,
-    variation: "outline" as const,
-};
+/** Captions are always center-aligned, whatever orientation they were given. */
+const centered = (column?: ColumnProps): ColumnProps | undefined =>
+    column && { ...column, orientation: "center" };
 
 export default function WatermarkText({
     watermarkText,
@@ -44,17 +34,13 @@ export default function WatermarkText({
 }: WatermarkTextProps) {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const subheaderRef = useRef<HTMLHeadingElement>(null);
-    const watermarkTextRef = useRef<HTMLDivElement>(null);
-    // const fitLongestWord = useFitLongestWord<HTMLHeadingElement>();
-    // const parallaxRef = useRef<HTMLDivElement>(null);
-    const captionLeftRef = useRef<HTMLParagraphElement>(null);
-    const captionCenterRef = useRef<HTMLParagraphElement>(null);
-    const captionRightRef = useRef<HTMLParagraphElement>(null);
+    const watermarkRef = useRef<HTMLDivElement>(null);
 
     const { containerRef, textRef, headlineStyle, ready } = useFitHeadline({
         safetyMargin: 0.9,
     });
 
+    // Captions fade in on their own via ColumnRow's useFadeInChildren.
     useLayoutEffect(() => {
         const el = wrapperRef.current;
         if (!el) return;
@@ -77,31 +63,12 @@ export default function WatermarkText({
                 );
             }
 
-            if (watermarkTextRef.current) {
-                tl.fromTo(
-                    watermarkTextRef.current,
-                    { opacity: 0, y: 20 },
-                    { opacity: 1, y: 0 },
-                    subheaderRef.current ? "-=0.4" : 0,
-                );
-            }
-
-            const captionEls = [
-                captionLeftRef,
-                captionCenterRef,
-                captionRightRef,
-            ]
-                .map((r) => r.current)
-                .filter(Boolean);
-
-            if (captionEls.length > 0) {
-                tl.fromTo(
-                    captionEls,
-                    { opacity: 0, y: 16 },
-                    { opacity: 1, y: 0, stagger: 0.15 },
-                    "-=0.3",
-                );
-            }
+            tl.fromTo(
+                watermarkRef.current,
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0 },
+                subheaderRef.current ? "-=0.4" : 0,
+            );
         }, el);
 
         return () => ctx.revert();
@@ -118,15 +85,15 @@ export default function WatermarkText({
         >
             {subheader && (
                 <h3
+                    ref={subheaderRef}
                     // `!` on the type styles beats the global `h3` heading rule.
                     className="text-cream uppercase tracking-[1.08px] text-center font-sans! font-semibold! leading-[120%]! text-md! md:text-xl!"
-                    ref={subheaderRef}
                 >
                     {subheader}
                 </h3>
             )}
 
-            <div ref={mergeRefs(watermarkTextRef, containerRef)}>
+            <div ref={mergeRefs(watermarkRef, containerRef)}>
                 <h2
                     ref={textRef}
                     style={headlineStyle}
@@ -138,9 +105,9 @@ export default function WatermarkText({
 
             {captions && (
                 <ColumnRow
-                    columnOne={{ ...captions.left, orientation: "center" }}
-                    columnTwo={{ ...captions.center, orientation: "center" }}
-                    columnThree={{ ...captions.right, orientation: "center" }}
+                    columnOne={centered(captions.left)}
+                    columnTwo={centered(captions.center)}
+                    columnThree={centered(captions.right)}
                 />
             )}
         </div>
