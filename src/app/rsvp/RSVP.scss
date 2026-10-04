@@ -26,23 +26,34 @@
     margin: 0;
 }
 
-// Copy left, countdown stack right (variation 3)
+// Copy left, countdown stack right (variation 3).
+// Column sizing mirrors ImageOverlayHero's `columns` variation.
 .rsvp-closed-split {
     display: flex;
     flex-direction: column;
-    gap: var(--space-600);
+    gap: var(--space-300);
 
-    @include big {
+    @include big($bp-desktop) {
         flex-direction: row;
+        justify-content: space-between;
         align-items: center;
         gap: var(--layout-column-gutter);
     }
+
+    @media (min-width: 109.375rem) {
+        gap: var(--space-1000);
+    }
 }
 
-.rsvp-closed-split-copy,
+.rsvp-closed-split-copy {
+    @include big($bp-desktop) {
+        flex: 2 1 710px;
+    }
+}
+
 .rsvp-closed-split-countdown {
-    @include big {
-        flex: 1 1 0;
+    @include big($bp-desktop) {
+        flex: 1 1 530px;
     }
 }
 
