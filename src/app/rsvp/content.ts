@@ -1,6 +1,7 @@
-import { heroImage } from "@/content/builders";
+import { arrowLink, heroImage } from "@/content/builders";
 import { EVENT } from "@/content/event";
 import { ComingSoonPageContent, HeroContent } from "@/content/types";
+import { ThreeButtonsArray } from "@/types/buttons";
 
 // Form step text lives with the form: src/components/RSVPForm/content.ts
 
@@ -27,11 +28,42 @@ const comingSoon = {
 
 // #endregion ---
 
+// #region --- RSVP Closed (countdown variations) ---
+
+const closedButtons: ThreeButtonsArray = [
+    arrowLink("View Details", "/details"),
+    arrowLink("Accommodations", "/accommodations"),
+];
+
+const closed = {
+    countdownLeads: {
+        eyebrow: "RSVP Closed",
+        header: "Reply received, revelry pending",
+        body: `Our guest list is officially closed. Thank you to everyone who sent in their reply. We can't wait to celebrate with you at ${EVENT.venue.name}.`,
+        buttons: closedButtons,
+    },
+    countdownSentence: {
+        eyebrow: "RSVP",
+        header: "Reply received, revelry pending",
+        body: `<p class="gold-italic">Our guest list is officially closed</p><p>Thank you to everyone who sent in their reply. We can't wait to celebrate with you at ${EVENT.venue.name}.</p>`,
+        buttons: closedButtons,
+    },
+    splitWithSeconds: {
+        eyebrow: "RSVP",
+        header: "Reply received, revelry pending",
+        body: `Our guest list is officially closed. Thank you for replying. We can't wait to celebrate with you on ${EVENT.wedding.date}.`,
+        buttons: closedButtons,
+    },
+};
+
+// #endregion ---
+
 // #region --- Content ---
 
 const rsvpContent = {
     hero,
     comingSoon,
+    closed,
 };
 
 export default rsvpContent;

@@ -1,1 +1,52 @@
-@use "@/styles/variables" as *;;
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+// ── RSVP closed: countdown variations ─────────────────────────
+
+// Centered stack: countdown / divider / copy (variations 1 & 2)
+.rsvp-closed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-500);
+}
+
+.rsvp-closed-countdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-300);
+}
+
+// Short centered hairline between the countdown and the copy
+.rsvp-closed-divider {
+    width: var(--space-800);
+    border: 0;
+    border-top: 1px solid var(--cream-700);
+    margin: 0;
+}
+
+// Copy left, countdown stack right (variation 3)
+.rsvp-closed-split {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-600);
+
+    @include big {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--layout-column-gutter);
+    }
+}
+
+.rsvp-closed-split-copy,
+.rsvp-closed-split-countdown {
+    @include big {
+        flex: 1 1 0;
+    }
+}
+
+// Space the italic lead-in from the paragraph that follows it (variation 2)
+.rsvp-closed-intro .body-l > p + p {
+    margin-top: var(--space-200);
+}
