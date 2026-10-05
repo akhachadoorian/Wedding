@@ -49,7 +49,7 @@ const closed = {
         buttons: closedButtons,
     },
     splitWithSeconds: {
-        eyebrow: "RSVP",
+        eyebrow: "RSVP Closed",
         header: "Reply received, revelry pending",
         body: `Our guest list is officially closed. Thank you for replying. We can't wait to celebrate with you on ${EVENT.wedding.date}.`,
         buttons: closedButtons,

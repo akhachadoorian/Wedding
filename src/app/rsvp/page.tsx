@@ -19,57 +19,62 @@ import CountdownStack from "@/components/Countdown/CountdownStack";
 const { closed } = content;
 
 export default function RSVP({ loaded = true }: { loaded?: boolean }) {
-    const rsvpRef = useFadeIn<HTMLDivElement>();
+    // const rsvpRef = useFadeIn<HTMLDivElement>();
+    const closedRSVPRef = useFadeIn<HTMLDivElement>();
 
     return (
         <PageGuard
             route="/rsvp"
-            fallback={
-                <ComingSoon {...content.comingSoon.page} />
-            }
+            fallback={<ComingSoon {...content.comingSoon.page} />}
         >
-            {/* <TextOnlyHero
-                loaded={loaded}
+            <ImageOverlayHero
                 {...content.hero}
-                styleOptions={{
-                    variation: "columns",
-                    theme: "black",
-                }}
-            /> */}
+                loaded={loaded}
+                styleOptions={{ variation: "columns" }}
+            />
 
-            {/* FIXME: add hero back */}
-            <ImageOverlayHero {...content.hero} loaded={loaded} styleOptions={{variation: 'columns'}}/>
-
-            <section ref={rsvpRef} className="base_section">
-                {/* <div className="mb-300 text-center">
-                    <h2>RSVP</h2>
-                </div> */}
-
+            {/* TURNED OFF RSVP FORM */}
+            {/* <section ref={rsvpRef} className="base_section">
                 <RSVPForm />
-            </section>
+            </section> */}
 
             {/* Variation 1 — countdown leads */}
-            <section className="rsvp-closed base_section">
-                <div className="rsvp-closed-countdown">
-                    <Eyebrow text={closed.countdownLeads.eyebrow} styleOptions={{ variation: "center", includeMargin: false }} />
-                    <CountdownRow />
-                </div>
-
-                <hr className="rsvp-closed-divider" />
-
+            {/* <section className="rsvp-closed base_section">
                 <CopyOnly
-                    styleOptions={{ variation: "center", headingLevel: "h2", headingClass: "heading-m" }}
+                    styleOptions={{
+                        variation: "center",
+                        headingLevel: "h2",
+                        headingClass: "heading-m",
+                    }}
+                    eyebrow={closed.countdownLeads.eyebrow}
                     header={closed.countdownLeads.header}
                     body={closed.countdownLeads.body}
                     buttons={closed.countdownLeads.buttons}
                 />
-            </section>
+
+                <hr className="rsvp-closed-divider" />
+
+                <div className="rsvp-closed-countdown">
+                    <Eyebrow
+                        text={"countdown"}
+                        styleOptions={{
+                            variation: "center",
+                            includeMargin: false,
+                        }}
+                    />
+                    <CountdownRow />
+                </div>
+            </section> */}
 
             {/* Variation 2 — countdown as a sentence */}
-            <section className="rsvp-closed base_section">
+            {/* <section className="rsvp-closed base_section">
                 <CopyOnly
                     className="rsvp-closed-intro"
-                    styleOptions={{ variation: "center", headingLevel: "h2", headingClass: "heading-m" }}
+                    styleOptions={{
+                        variation: "center",
+                        headingLevel: "h2",
+                        headingClass: "heading-m",
+                    }}
                     eyebrow={closed.countdownSentence.eyebrow}
                     header={closed.countdownSentence.header}
                     body={closed.countdownSentence.body}
@@ -84,19 +89,25 @@ export default function RSVP({ loaded = true }: { loaded?: boolean }) {
                     noDecorationMap={true}
                     buttons={closed.countdownSentence.buttons}
                 />
-            </section>
+            </section> */}
 
             {/* Variation 3 — split layout with seconds */}
-            <section className="rsvp-closed-split base_section">
+            <section
+                ref={closedRSVPRef}
+                className="rsvp-closed-split base_section"
+            >
                 <CopyOnly
                     className="rsvp-closed-split-copy"
-                    styleOptions={{ variation: "left", headingLevel: "h2", headingClass: "heading-m" }}
+                    styleOptions={{
+                        variation: "left",
+                        headingLevel: "h2",
+                        headingClass: "heading-m",
+                    }}
                     {...closed.splitWithSeconds}
                 />
 
                 <CountdownStack className="rsvp-closed-split-countdown" />
             </section>
-            
         </PageGuard>
     );
 }

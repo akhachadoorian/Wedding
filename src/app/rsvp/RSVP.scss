@@ -48,12 +48,15 @@
 .rsvp-closed-split-copy {
     @include big($bp-desktop) {
         flex: 2 1 710px;
+        max-width: 60vw;
     }
 }
 
 .rsvp-closed-split-countdown {
+    // max-width: 350px;
+    // margin: 0 auto;
     @include big($bp-desktop) {
-        flex: 1 1 530px;
+        flex: 1 1 200px;
     }
 }
 
