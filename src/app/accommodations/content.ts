@@ -3,7 +3,12 @@ import { arrowLink, heroImage, hotelCard } from "@/content/builders";
 import { EVENT } from "@/content/event";
 import { HOTELS } from "@/content/hotels";
 import { parkingModalButton, rideshareNote } from "@/content/shared";
-import { ComingSoonPageContent, ComingSoonSectionContent, CopyContent, HeroContent } from "@/content/types";
+import {
+    ComingSoonPageContent,
+    ComingSoonSectionContent,
+    CopyContent,
+    HeroContent,
+} from "@/content/types";
 import { BusIcon } from "@phosphor-icons/react";
 
 // #region --- Hero ---
@@ -59,11 +64,11 @@ const transportationIntro: CopyContent = {
                     },
                     {
                         title: "To the Venue",
-                        body: "The bus will start picking up guests at 3:30pm. The hotel pick up order will be available later.",
+                        body: `The bus will start by picking up guests from the ${HOTELS.homewoodSuites.name} at 3:25PM and followed by the ${HOTELS.hyattPlace.name} at 3:35pm.`,
                     },
                     {
                         title: "Return From the Venue",
-                        body: `The bus will depart from the venue at ${EVENT.wedding.end}. The hotel drop off order will be available later.`,
+                        body: `The bus will depart from the venue at ${EVENT.wedding.end}. The bus will start by dropping guests off at ${HOTELS.homewoodSuites.name} followed by the ${HOTELS.hyattPlace.name}.`,
                     },
                 ],
             },
@@ -87,7 +92,10 @@ const comingSoon = {
         title: "Transportation section coming soon!",
         body: "It will contain information regarding how to get to and from the venue, venue parking, and the arranged bus service.",
     },
-} satisfies { page: ComingSoonPageContent; transportation: ComingSoonSectionContent };
+} satisfies {
+    page: ComingSoonPageContent;
+    transportation: ComingSoonSectionContent;
+};
 
 // #endregion ---
 
