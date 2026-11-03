@@ -28,11 +28,25 @@ section.base_section {
 }
 
 .photos-section {
-    #wedibox-embed iframe {
+    #wedibox-embed {
         // `svh`, not `dvh` — dvh changes live as the mobile address bar
         // collapses during scroll, shifting this height mid-gesture.
-        min-height: 80svh;
+        height: 100svh;
+    }
+
+    #wedibox-embed iframe {
+        // The widget never posts resize messages, so the iframe gets a fixed
+        // height and its content scrolls internally. `!important` beats the
+        // inline height widget.js would set if it ever did.
+        height: 100% !important;
         width: 100%;
+
+        // lenis.css disables pointer events on every iframe while the page
+        // is smooth-scrolling, so the wheel kept scrolling the page instead
+        // of the gallery. Re-enable them so the widget can be scrolled.
+        .lenis.lenis-smooth & {
+            pointer-events: auto;
+        }
     }
 }
 
