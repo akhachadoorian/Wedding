@@ -19,6 +19,8 @@ const LINE_AFTER = "after:bg-cream after:h-px after:w-[0px] after:absolute after
 
 const NAV_TEXT = "font-sans text-base font-normal leading-[120%] tracking-[1.8px] uppercase text-cream transition-all duration-300 ease-in-out";
 
+const HIGHLIGHT_LINK = "group/highlight py-075 px-150 no-underline border border-cream transition-colors duration-300 ease-in-out hover:bg-cream";
+
 const CARET_WRAPPER = "flex items-center justify-center size-[18px] flex-[0_0_18px] aspect-square transition-all duration-300 ease-in-out";
 
 const MOBILE_NAV_LINK = "flex justify-between gap-100 px-100 no-underline";
@@ -53,6 +55,14 @@ function renderNavItem(
                     </div>
                 </LenisLink>
             </div>
+        );
+    }
+
+    if (item.highlight) {
+        return (
+            <LenisLink href={item.link} className={HIGHLIGHT_LINK} onClick={onNavigate}>
+                <p className={cn(NAV_TEXT, "group-hover/highlight:text-black")}>{item.text}</p>
+            </LenisLink>
         );
     }
 

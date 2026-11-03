@@ -9,6 +9,8 @@ export type NavLink = {
   body?: string
   /** Route path e.g. "/registry" or "/details#venue" */
   link: string
+  /** Render with an accent style so it stands out from the other links */
+  highlight?: boolean
 }
 
 /**
