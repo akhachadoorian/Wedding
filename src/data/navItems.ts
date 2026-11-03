@@ -22,5 +22,5 @@ export const NAV_ITEMS: NavItem[] = [
   { kind: "link" as const, text: "Details", link: "/details" },
   { kind: "link" as const, text: "Accommodations", link: "/accommodations" },
   { kind: "link" as const, text: "Registry", link: "/registry" },
-  { kind: "link" as const, text: "RSVP", link: "/rsvp" },
+  { kind: "link" as const, text: "Photos", link: "/photos" },
 ] satisfies NavItem[]

@@ -7,7 +7,7 @@ import { IMAGES } from "@/content/images";
 import { CopyContent } from "@/content/types";
 import { GothHeroProps } from "@/layout/GothHero";
 
-const { wedding, venue, rsvp } = EVENT;
+const { wedding, venue } = EVENT;
 
 // #region --- Hero ---
 
@@ -31,22 +31,20 @@ const hero: Omit<GothHeroProps, "loaded"> = {
 
 const welcomeWatermark: WatermarkTextProps = {
     watermarkText: wedding.date,
-    subheader: "We're getting married",
+    subheader: "Thank you for celebrating with us",
     captions: {
         left: {
             orientation: "center",
-            lines: [venue.name, venue.city],
-            button: arrowLink("View Venue Details", "/details#venue"),
-        },
-        center: {
-            orientation: "center",
-            lines: [`Doors open at ${wedding.doorsOpen}`, `Ceremony at ${wedding.ceremony}`],
-            button: arrowLink("View Timeline", "/details#timeline"),
+            lines: ["Thank you for being there", "to celebrate with us"],
         },
         right: {
             orientation: "center",
-            lines: ["RSVP by", rsvp.deadline],
-            button: arrowLink("RSVP Now", "/rsvp"),
+            lines: ["We're so grateful", "for your love and support"],
+        },
+        center: {
+            orientation: "center",
+            lines: ["Share your favorite moments", "and see everyone else's"],
+            button: arrowLink("View & Share Photos", "/photos"),
         },
     },
 };
